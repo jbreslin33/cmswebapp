@@ -1,26 +1,31 @@
-var State = new Class(
+'use strict';
+
+class State 
 {
+	constructor() 
+	{
+    		this.mStateLogs = false;
 
-initialize: function ()
-{
+                //states
+                //this.mStateMachine = new StateMachine(this);
 
-},
+                //this.mGLOBAL_APPLICATION  = new GLOBAL_APPLICATION       (this);
+                //this.mINIT_APPLICATION    = new INIT_APPLICATION         (this);
+                //this.mNORMAL_APPLICATION  = new NORMAL_APPLICATION         (this);
+	}
 
-enter: function(entity_type)
-{
+        enter(obj)
+        {
+        
+	}
 
-},
+        execute(obj)
+        {
+        
+	}
 
-execute: function(entity_type)
-{
-
-},
-
-exit: function(entity_type)
-{
-
+        exit(obj)
+        {
+        
+	}
 }
-
-
-});
-
