@@ -1,7 +1,7 @@
 
 'use strict';
 
-class GLOBAL_APPLICATION extends State
+class INIT_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -11,12 +11,12 @@ class GLOBAL_APPLICATION extends State
 
         enter(application)
         {
-		conole.log("GLOBAL_APPLICATION: ENTER");        
+		conole.log("INIT_APPLICATION_STATE: ENTER");        
 	}
 
         execute(application)
         {
-        
+		conole.log("INIT_APPLICATION_STATE: EXECUTE");        
 	}
 
         exit(application)

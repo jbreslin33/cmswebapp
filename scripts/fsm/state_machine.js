@@ -30,6 +30,7 @@ class StateMachine
 
 	update()
 	{
+		console.log('state_machine update');
 		if(this.mGlobalState)
 		{
 			this.mGlobalState.execute(this.mOwner);
@@ -40,7 +41,7 @@ class StateMachine
 		}
 	}	
 
-	changeStatep(pNewState)
+	changeState(pNewState)
 	{
 		this.mPreviousState = this.mCurrentState;
 
