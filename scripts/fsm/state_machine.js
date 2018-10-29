@@ -1,32 +1,35 @@
-var StateMachine = new Class(
+'use strict';
+
+class StateMachine
 {
+        constructor(owner)
+        {
+                this.mOwner = owner;
+	
+		this.mCurrentState = 0;
+		this.mPreviousState = 0;
+		this.mGlobalState = 0;
+        }
 
-initialize: function(owner)
-{
-	this.mOwner = owner;
-	this.mCurrentState = 0;
-	this.mPreviousState = 0;
-	this.mGlobalState = 0;
-},
-
-setCurrentState: function(s)
-{
-	this.mCurrentState = s;
-},
-
-
-setGlobalState: function(s)
-{
-	this.mGlobalState = s;
-},
+        setCurrentState(s)
+        {
+		this.mCurrentState = s;
+        }
 
 
-setPreviousState: function(s)
-{
-	this.mPreviousState = s;
-},
+	setGlobalState(s)
+	{
+		this.mGlobalState = s;
+	}
 
-update: function()
+	setPreviousState(s)
+	{
+		this.mPreviousState = s;
+	}
+
+}
+
+update()
 {
 	if(this.mGlobalState)
 	{
@@ -59,5 +62,6 @@ currentState: function()
 {
 	return this.mCurrentState;
 }
+
 
 });
