@@ -5,6 +5,8 @@ class GLOBAL_APPLICATION extends State
 {
 	constructor() 
 	{
+		super();
+
 	}
 
         enter(application)
