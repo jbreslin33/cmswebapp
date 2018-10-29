@@ -6,7 +6,7 @@ class Application
 	{
 		console.log("Application constructor");
 
-    		this.mStateLogs = false;
+    		this.mStateLogs = true;
 
                 //states
                 this.mStateMachine = new StateMachine(this);
