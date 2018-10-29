@@ -27,41 +27,37 @@ class StateMachine
 		this.mPreviousState = s;
 	}
 
+	update()
+	{
+		if(this.mGlobalState)
+		{
+			this.mGlobalState.execute(this.mOwner);
+		}
+		if (this.mCurrentState)
+		{
+			this.mCurrentState.execute(this.mOwner);
+		}
+	}	
+
+	changeStatep(pNewState)
+	{
+		this.mPreviousState = this.mCurrentState;
+
+		if(this.mCurrentState)
+		{
+       			this.mCurrentState.exit(this.mOwner);
+		}
+
+		this.mCurrentState = pNewState;
+
+		if(this.mCurrentState)
+		{
+        		this.mCurrentState.enter(this.mOwner);
+		}
+	}
+
+	currentState()
+	{
+		return this.mCurrentState;
+	}
 }
-
-update()
-{
-	if(this.mGlobalState)
-	{
-		this.mGlobalState.execute(this.mOwner);
-	}
-	if (this.mCurrentState)
-	{
-		this.mCurrentState.execute(this.mOwner);
-	}
-},
-
-changeState: function(pNewState)
-{
-	this.mPreviousState = this.mCurrentState;
-
-	if(this.mCurrentState)
-	{
-       		this.mCurrentState.exit(this.mOwner);
-	}
-
-	this.mCurrentState = pNewState;
-
-	if(this.mCurrentState)
-	{
-        	this.mCurrentState.enter(this.mOwner);
-	}
-},
-
-currentState: function()
-{
-	return this.mCurrentState;
-}
-
-
-});
