@@ -9,9 +9,9 @@ class Application
     		this.mStateLogs = true;
 
                 //states
-                this.mStateMachine = new StateMachine(this);
+		this.mStateMachine = 0;
 			
-                this.mGLOBAL_APPLICATION  = new GLOBAL_APPLICATION();
+                //this.mGLOBAL_APPLICATION  = new GLOBAL_APPLICATION();
                 this.mINIT_APPLICATION    = new INIT_APPLICATION  ();
 
 		
@@ -19,14 +19,15 @@ class Application
 
 	startTimer()
 	{
-                this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
+                this.mStateMachine = new StateMachine(this);
+                //this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
                 this.mStateMachine.changeState(this.mINIT_APPLICATION);
                 //START UPDATING
-                //var t=setInterval("update()",32)
+                var t=setInterval(this.update,32);
 	}
 
         update()
         {
-                this.mStateMachine.update();
+                this.mStateMachine;
         }
 }
