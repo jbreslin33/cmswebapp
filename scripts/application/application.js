@@ -10,24 +10,26 @@ class Application
 
                 //states
 		this.mStateMachine = 0;
+                
+		this.mStateMachine = new StateMachine(this);
 			
                 //this.mGLOBAL_APPLICATION  = new GLOBAL_APPLICATION();
                 this.mINIT_APPLICATION    = new INIT_APPLICATION  ();
+                
+		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
+                //var t=setInterval(this.update,32);
 		
 	}
 
-	startTimer()
-	{
-                this.mStateMachine = new StateMachine(this);
+	//startTimer()
+	//{
                 //this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
-                this.mStateMachine.changeState(this.mINIT_APPLICATION);
                 //START UPDATING
-                var t=setInterval(this.update,32);
-	}
+	//}
 
         update()
         {
-                this.mStateMachine;
+                //this.mStateMachine.update();
         }
 }
