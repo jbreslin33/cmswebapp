@@ -18,7 +18,7 @@ class Application
                 
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
-                //var t=setInterval(this.update,32);
+                var t=setInterval(this.update,32);
 		
 	}
 
@@ -30,6 +30,7 @@ class Application
 
         update()
         {
+		console.log('update called in application');
                 //this.mStateMachine.update();
         }
 }
