@@ -21,6 +21,6 @@ class Application
         update()
         {
 		console.log('update called in application');
-                this.mStateMachine.update();
+                //this.mStateMachine.update();
         }
 }
