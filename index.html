@@ -240,10 +240,11 @@
 
 
   	// TODO add startup code here
-	localStorage.selectedCities = 0;
+	//localStorage.selectedCities = 0;
   	APPLICATION.mWeekReport.selectedCities = localStorage.selectedCities;
   	if (APPLICATION.mWeekReport.selectedCities) 
 	{
+		console.log('if');
     		APPLICATION.mWeekReport.selectedCities = JSON.parse(APPLICATION.mWeekReport.selectedCities);
 		/*
     		APPLICATION.mWeekReport.selectedCities.forEach(function(city) 
@@ -254,6 +255,7 @@
   	} 
 	else 
 	{
+		console.log('else');
 		APPLICATION.mWeekReport.updateForecastCard(initialWeatherForecast);
     		APPLICATION.mWeekReport.selectedCities = 
 		[
