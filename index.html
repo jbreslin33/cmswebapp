@@ -188,10 +188,19 @@
 	<script src="scripts/application/application.js" ></script>
 
   	<script> 
+	function mytimer() 
+	{
+
+
+	}
+	let timerId = setInterval(() => mytimer(), 32);
 		var APPLICATION = new Application();
 		//APPLICATION.startTimer();
 		
-		var MYINTERVAL = setInterval(APPLICATION.update, 32);
+		//var MYINTERVAL = setInterval( () => APPLICATION.update(), 32);
+		
+		var POLYGON = new Polygon(10,10);
+		POLYGON.sayName();
 		
 	</script>
 
