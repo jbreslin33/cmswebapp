@@ -5,6 +5,7 @@ class Application
 
 	constructor() 
 	{
+		this.mName = 'yo';
 		/*
     		var mStateLogs = true;
 
@@ -17,7 +18,7 @@ class Application
                 
 		this.mStateMachine.update();
 		*/
-		this.mWeekReport = new Report();
+		this.mWeekReport = new Report(this);
 	}
 
 	update()
