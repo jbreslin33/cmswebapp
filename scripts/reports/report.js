@@ -180,7 +180,7 @@ class Report
 			{
         	
 			// Return the initial weather forecast since no data is available.
-        		this.updateForecastCard(this.initialWeatherForecast);
+        		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
       			}
     		};
     		request.open('GET', url);
@@ -194,7 +194,7 @@ class Report
     		keys.forEach(function(key) 
 		{
       			this.getForecast(key);
-    		})
+    		});
   	}
 
   
