@@ -80,6 +80,8 @@ class Report
 
     		card.querySelector('.description').textContent = current.text;
     		card.querySelector('.date').textContent = current.date;
+		console.log('current.date:' + current.date);
+		console.log('current.code:' + current.code);
     		card.querySelector('.current .icon').classList.add(this.getIconClass(current.code));
     		card.querySelector('.current .temperature .value').textContent =
       		Math.round(current.temp);
@@ -97,8 +99,12 @@ class Report
 		{
       			var nextDay = nextDays[i];
       			var daily = data.channel.item.forecast[i];
+			console.log('daily:' + daily);
+			console.log('nextDay:' + nextDay);
       			if (daily && nextDay) 
 			{
+				console.log('daily.code:' + daily.code);
+
         			nextDay.querySelector('.date').textContent =
           			this.daysOfWeek[(i + today) % 7];
         			nextDay.querySelector('.icon').classList.add(this.getIconClass(daily.code));
@@ -315,7 +321,16 @@ class Item
 	constructor()
 	{
 		this.condition = new Condition();
-		this.forecast = new Forecast();
+            	this.forecast = 
+		[
+                        {code: 44, high: 86, low: 70},
+                        {code: 44, high: 94, low: 73},
+                        {code: 4, high: 95, low: 78},
+                        {code: 24, high: 75, low: 89},
+                        {code: 24, high: 89, low: 77},
+                        {code: 44, high: 92, low: 79},
+                        {code: 44, high: 89, low: 77}
+                ];
 	}
 }
 class Condition 
@@ -326,21 +341,6 @@ class Condition
           	this.date = "Thu, 21 Jul 2016 09:00 PM EDT";
           	this.temp = 56;
           	this.code = 24;
-	}
-}
-class Forecast 
-{
-	constructor()
-	{
-        	forecast: [
-          		{code: 44, high: 86, low: 70},
-          		{code: 44, high: 94, low: 73},
-          		{code: 4, high: 95, low: 78},
-          		{code: 24, high: 75, low: 89},
-          		{code: 24, high: 89, low: 77},
-          		{code: 44, high: 92, low: 79},
-          		{code: 44, high: 89, low: 77}
-        		]
 	}
 }
 
