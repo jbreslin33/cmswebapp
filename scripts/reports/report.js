@@ -6,7 +6,6 @@ class Report
 	constructor(application)
 	{
 		this.mApplication = application;
-		console.log('Report Constructor: ' + this.mApplication.mName);
 
 		this.isLoading = true;
     		this.visibleCards = {};
@@ -80,8 +79,6 @@ class Report
 
     		card.querySelector('.description').textContent = current.text;
     		card.querySelector('.date').textContent = current.date;
-		console.log('current.date:' + current.date);
-		console.log('current.code:' + current.code);
     		card.querySelector('.current .icon').classList.add(this.getIconClass(current.code));
     		card.querySelector('.current .temperature .value').textContent =
       		Math.round(current.temp);
@@ -99,12 +96,8 @@ class Report
 		{
       			var nextDay = nextDays[i];
       			var daily = data.channel.item.forecast[i];
-			console.log('daily:' + daily);
-			console.log('nextDay:' + nextDay);
       			if (daily && nextDay) 
 			{
-				console.log('daily.code:' + daily.code);
-
         			nextDay.querySelector('.date').textContent =
           			this.daysOfWeek[(i + today) % 7];
         			nextDay.querySelector('.icon').classList.add(this.getIconClass(daily.code));
