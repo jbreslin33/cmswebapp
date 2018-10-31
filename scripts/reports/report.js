@@ -277,6 +277,71 @@ class Report
    	* or when the user has not saved any cities. See startup code for more
    	* discussion.
    	*/
+
+class WeatherForecast 
+{
+	constructor()
+	{
+    		this.key = '2459115';
+    		this.label = 'New York, NY';
+    		this.created = '2016-07-22T01:00:00Z';
+
+	}
+
+}
+class Channel 
+{
+	constructor()
+	{
+
+	}
+}
+class Astronomy 
+{
+	constructor()
+	{
+
+	}
+}
+class Item 
+{
+	constructor()
+	{
+
+	}
+}
+class Condition 
+{
+	constructor()
+	{
+
+	}
+}
+class Forecast 
+{
+	constructor()
+	{
+
+	}
+}
+
+class Atmosphere 
+{
+	constructor()
+	{
+		this.humidity = 56;
+	}
+}
+class Wind 
+{
+	constructor()
+	{
+		this.speed = 25;
+		this.direction = 195;
+	}
+}
+
+
   var initialWeatherForecast = {
     key: '2459115',
     label: 'New York, NY',
@@ -353,3 +418,6 @@ class Report
              .then(function() { console.log('Service Worker Registered'); });
   }
 })();
+
+
+
