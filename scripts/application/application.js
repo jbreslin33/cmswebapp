@@ -19,6 +19,10 @@ class Application
 		mStateMachine.update();
 	}
 
+	update()
+	{
+		console.log('application.update called');
+	}
 }
 /*
 class Application 
