@@ -226,17 +226,53 @@
     APPLICATION.mWeekReport.toggleAddDialog(false);
   });
 
+  /************************************************************************
+   *
+   * Code required to start the app
+   *
+   * NOTE: To simplify this codelab, we've used localStorage.
+   *   localStorage is a synchronous API and has serious performance
+   *   implications. It should not be used in production applications!
+   *   Instead, check out IDB (https://www.npmjs.com/package/idb) or
+   *   SimpleDB (https://gist.github.com/inexorabletash/c8069c042b734519680c)
+   ************************************************************************/
 
 
 
-/*
-	function mytimer() 
+  	// TODO add startup code here
+	localStorage.selectedCities = 0;
+  	APPLICATION.mWeekReport.selectedCities = localStorage.selectedCities;
+  	if (APPLICATION.mWeekReport.selectedCities) 
 	{
-		APPLICATION.update()
+    		APPLICATION.mWeekReport.selectedCities = JSON.parse(APPLICATION.mWeekReport.selectedCities);
+		/*
+    		APPLICATION.mWeekReport.selectedCities.forEach(function(city) 
+		{
+      			APPLICATION.mWeekReport.getForecast(city.key, city.label);
+    		});
+		*/
+  	} 
+	else 
+	{
+		APPLICATION.mWeekReport.updateForecastCard(initialWeatherForecast);
+    		APPLICATION.mWeekReport.selectedCities = 
+		[
+      			{key: initialWeatherForecast.key, label: initialWeatherForecast.label}
+    		];
+    		APPLICATION.mWeekReport.saveSelectedCities();
+  	}
+
+  	// TODO add service worker code here
+  	if ('serviceWorker' in navigator) 
+	{
+    		navigator.serviceWorker
+             	.register('./service-worker.js')
+             	.then(function() 
+		{ 
+			console.log('Service Worker Registered'); 
+		});
 	}
 
-	let timerId = setInterval(() => mytimer(), 32);
-*/		
 	</script>
 
 </body>
