@@ -192,7 +192,7 @@ class Report
     		var keys = Object.keys(this.visibleCards);
     		keys.forEach(function(key) 
 		{
-      			this.getForecast(key);
+      			APPLICATION.mWeekReport.getForecast(key);
     		});
   	}
 
