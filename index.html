@@ -188,16 +188,11 @@
 	<script src="scripts/application/application.js" ></script>
 
   	<script> 
-	var POLYGON = new Polygon(10,10);
-	POLYGON.sayName();
-
 	var APPLICATION = new Application();
 
 	function mytimer() 
 	{
-		console.log('update');
 		APPLICATION.update()
-
 	}
 
 	let timerId = setInterval(() => mytimer(), 32);
