@@ -7,6 +7,26 @@ class Report
 	{
 		this.mApplication = application;
 
+		//add buttons
+    		//<button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
+		this.mButtonRefresh = document.createElement("BUTTON");
+		//document.body.appendChild(this.mButtonRefresh);
+		
+		this.mButtonRefresh.setAttribute("class", "headerButton");
+		this.mButtonRefresh.setAttribute("aria-label", "Refresh");
+		this.mButtonRefresh.setAttribute("id", "butRefresh");
+		
+		var h = document.getElementsByClassName("header");
+		h[0].appendChild(this.mButtonRefresh);
+		
+/*
+		this.mButtonRefresh.className = "headerButton";
+		this.mButtonRefresh.aria-label = "Refresh";
+		this.mButtonRefresh.id = "butRefresh";
+*/
+
+
+
 		this.isLoading = true;
     		this.visibleCards = {};
     		this.selectedCities = [];
