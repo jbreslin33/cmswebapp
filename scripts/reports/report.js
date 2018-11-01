@@ -34,9 +34,19 @@ class Report
 		this.mButtonAdd.setAttribute("id", "butAdd");
 		this.mHeader.appendChild(this.mButtonAdd);
 
-		//divs
-	
+		//main class
+		var m = document.getElementsByClassName("main"); 	
+		
 
+		//divs
+/*	
+    //<div class="card cardTemplate weather-forecast" hidden>
+		this.mDivCardTemplateWeatherForecast = document.createElement("DIV");
+		this.mDivCardTemplateWeatherForecast.setAttribute("class", "card cardTemplate weather-forecast");
+		this.mDivCardTemplateWeatherForecast.style.visibility = "hidden";
+		//document.body.addChild(this.mDivCardTemplateWeatherForecast);
+		m[0].appendChild(this.mDivCardTemplateWeatherForecast);
+*/
 		//report vars
 		this.isLoading = true;
     		this.visibleCards = {};
