@@ -5,42 +5,38 @@ class Report
 
 	constructor(application)
 	{
+		//Application
 		this.mApplication = application;
 
+		//header
 		this.mHeader = document.createElement("header");
 		this.mHeader.setAttribute("class", "header");
 		document.body.appendChild(this.mHeader);
-
 
 		//h1
 		this.mHeaderTitle = document.createElement("H1");
 		this.mHeaderTitleText = document.createTextNode("Club Management System");
 		this.mHeaderTitle.setAttribute("class", "header__title");
 		this.mHeaderTitle.appendChild(this.mHeaderTitleText);
-		
 		this.mHeader.appendChild(this.mHeaderTitle);
 
-		
-		/*********** buttons **************/
-		
-		//refresh button
+		//refreshbutton
 		this.mButtonRefresh = document.createElement("BUTTON");
-		
 		this.mButtonRefresh.setAttribute("class", "headerButton");
 		this.mButtonRefresh.setAttribute("aria-label", "Refresh");
 		this.mButtonRefresh.setAttribute("id", "butRefresh");
-		
 		this.mHeader.appendChild(this.mButtonRefresh);
 
-		//button add
+		//addbutton
 		this.mButtonAdd = document.createElement("BUTTON");
 		this.mButtonAdd.setAttribute("class", "headerButton");
 		this.mButtonAdd.setAttribute("aria-label", "Add");
 		this.mButtonAdd.setAttribute("id", "butAdd");
-		
 		this.mHeader.appendChild(this.mButtonAdd);
 
-		
+		//divs
+	
+
 		//report vars
 		this.isLoading = true;
     		this.visibleCards = {};
