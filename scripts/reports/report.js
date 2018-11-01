@@ -11,18 +11,14 @@ class Report
 		this.mHeader.setAttribute("class", "header");
 		document.body.appendChild(this.mHeader);
 
-		//get header
 
-		var h = document.getElementsByClassName("header");
-
-   		//<h1 class="header__title">Club Management System</h1>
-
+		//h1
 		this.mHeaderTitle = document.createElement("H1");
 		this.mHeaderTitleText = document.createTextNode("Club Management System");
 		this.mHeaderTitle.setAttribute("class", "header__title");
 		this.mHeaderTitle.appendChild(this.mHeaderTitleText);
 		
-		h[0].appendChild(this.mHeaderTitle);
+		this.mHeader.appendChild(this.mHeaderTitle);
 
 		
 		/*********** buttons **************/
@@ -34,7 +30,7 @@ class Report
 		this.mButtonRefresh.setAttribute("aria-label", "Refresh");
 		this.mButtonRefresh.setAttribute("id", "butRefresh");
 		
-		h[0].appendChild(this.mButtonRefresh);
+		this.mHeader.appendChild(this.mButtonRefresh);
 
 		//button add
 		this.mButtonAdd = document.createElement("BUTTON");
@@ -42,11 +38,10 @@ class Report
 		this.mButtonAdd.setAttribute("aria-label", "Add");
 		this.mButtonAdd.setAttribute("id", "butAdd");
 		
-		h[0].appendChild(this.mButtonAdd);
+		this.mHeader.appendChild(this.mButtonAdd);
 
 		
-
-
+		//report vars
 		this.isLoading = true;
     		this.visibleCards = {};
     		this.selectedCities = [];
