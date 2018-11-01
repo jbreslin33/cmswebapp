@@ -51,8 +51,18 @@ class Report
                                 </div>
                         </div>
 */
-		var d = document.getElementsByClassName("temp-low"); 	
+		//one day
+		var od = document.getElementsByClassName("oneday"); 	
 
+		//temp-low
+		this.mDivTempLow = document.createElement("DIV");
+		this.mDivTempLow.setAttribute("class", "temp-low");
+		od[6].appendChild(this.mDivTempLow);
+
+		//div
+		var d = document.getElementsByClassName("temp-low");  	
+
+		//value
 		this.mSpanValue = document.createElement("SPAN");
 		this.mSpanValue.setAttribute("class", "value");
 		d[6].appendChild(this.mSpanValue);
