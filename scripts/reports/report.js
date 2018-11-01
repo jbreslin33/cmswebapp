@@ -7,7 +7,12 @@ class Report
 	{
 		this.mApplication = application;
 
+		this.mHeader = document.createElement("header");
+		this.mHeader.setAttribute("class", "header");
+		document.body.appendChild(this.mHeader);
+
 		//get header
+
 		var h = document.getElementsByClassName("header");
 
    		//<h1 class="header__title">Club Management System</h1>
