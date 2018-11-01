@@ -7,24 +7,29 @@ class Report
 	{
 		this.mApplication = application;
 
-		//add buttons
-    		//<button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
+		//get header
+		var h = document.getElementsByClassName("header");
+		
+		/*********** buttons **************/
+		
+		//refresh button
 		this.mButtonRefresh = document.createElement("BUTTON");
-		//document.body.appendChild(this.mButtonRefresh);
 		
 		this.mButtonRefresh.setAttribute("class", "headerButton");
 		this.mButtonRefresh.setAttribute("aria-label", "Refresh");
 		this.mButtonRefresh.setAttribute("id", "butRefresh");
 		
-		var h = document.getElementsByClassName("header");
 		h[0].appendChild(this.mButtonRefresh);
-		
-/*
-		this.mButtonRefresh.className = "headerButton";
-		this.mButtonRefresh.aria-label = "Refresh";
-		this.mButtonRefresh.id = "butRefresh";
-*/
 
+		//button add
+		this.mButtonAdd = document.createElement("BUTTON");
+		this.mButtonAdd.setAttribute("class", "headerButton");
+		this.mButtonAdd.setAttribute("aria-label", "Add");
+		this.mButtonAdd.setAttribute("id", "butAdd");
+		
+		h[0].appendChild(this.mButtonAdd);
+
+		
 
 
 		this.isLoading = true;
