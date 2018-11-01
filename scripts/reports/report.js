@@ -9,6 +9,16 @@ class Report
 
 		//get header
 		var h = document.getElementsByClassName("header");
+
+   		//<h1 class="header__title">Club Management System</h1>
+
+		this.mHeaderTitle = document.createElement("H1");
+		this.mHeaderTitleText = document.createTextNode("Club Management System");
+		this.mHeaderTitle.setAttribute("class", "header__title");
+		this.mHeaderTitle.appendChild(this.mHeaderTitleText);
+		
+		h[0].appendChild(this.mHeaderTitle);
+
 		
 		/*********** buttons **************/
 		
