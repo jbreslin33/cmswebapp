@@ -34,8 +34,6 @@ class Report
 		this.mButtonAdd.setAttribute("id", "butAdd");
 		this.mHeader.appendChild(this.mButtonAdd);
 
-		//main class
-		var m = document.getElementsByClassName("main"); 	
 		
 
 		//divs
@@ -51,27 +49,37 @@ class Report
                                 </div>
                         </div>
 */
+		
+		//main class
+		var m = document.getElementsByClassName("main"); 	
+
 		//one day
 		var divOneDay = document.getElementsByClassName("oneday"); 	
+
+
+                //temp-high
+                var divTempHigh = document.createElement("DIV");
+                divTempHigh.setAttribute("class", "temp-high");
+                divOneDay[6].appendChild(divTempHigh);
+
+                //value high
+                var spanValue = document.createElement("SPAN");
+                spanValue.setAttribute("class", "value");
+                divTempHigh.appendChild(spanValue);
+
 
 		//temp-low
 		var divTempLow = document.createElement("DIV");
 		divTempLow.setAttribute("class", "temp-low");
 		divOneDay[6].appendChild(divTempLow);
 
-		//value
+		//value low
 		var spanValue = document.createElement("SPAN");
 		spanValue.setAttribute("class", "value");
 		divTempLow.appendChild(spanValue);
 
-/*	
-    //<div class="card cardTemplate weather-forecast" hidden>
-		this.mDivCardTemplateWeatherForecast = document.createElement("DIV");
-		this.mDivCardTemplateWeatherForecast.setAttribute("class", "card cardTemplate weather-forecast");
-		this.mDivCardTemplateWeatherForecast.style.visibility = "hidden";
-		//document.body.addChild(this.mDivCardTemplateWeatherForecast);
-		m[0].appendChild(this.mDivCardTemplateWeatherForecast);
-*/
+		
+
 		//report vars
 		this.isLoading = true;
     		this.visibleCards = {};
