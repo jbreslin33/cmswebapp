@@ -55,7 +55,8 @@ class Report
 
 		//one day
 		var divOneDay = document.getElementsByClassName("oneday"); 	
-
+		
+		/////HIGH
 
                 //temp-high
                 var divTempHigh = document.createElement("DIV");
@@ -67,8 +68,10 @@ class Report
                 spanValue.setAttribute("class", "value");
                 divTempHigh.appendChild(spanValue);
 		
-		var degreeText = document.createTextNode('\xB0');
-                divTempHigh.appendChild(degreeText);
+		var degreeTextHigh = document.createTextNode('\xB0');
+                divTempHigh.appendChild(degreeTextHigh);
+
+		/////LOW
 
 		//temp-low
 		var divTempLow = document.createElement("DIV");
@@ -80,6 +83,8 @@ class Report
 		spanValue.setAttribute("class", "value");
 		divTempLow.appendChild(spanValue);
 
+		var degreeTextLow = document.createTextNode('\xB0');
+                divTempLow.appendChild(degreeTextLow);
 		
 
 		//report vars
