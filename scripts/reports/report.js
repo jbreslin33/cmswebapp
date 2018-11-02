@@ -53,25 +53,16 @@ class Report
 */
 		//one day
 		var divOneDay = document.getElementsByClassName("oneday"); 	
-/*
-                                <div class="temp-high">
-                                        <span class="value"></span>°
-                                </div>
-*/
-
 
 		//temp-low
-		this.mDivTempLow = document.createElement("DIV");
-		this.mDivTempLow.setAttribute("class", "temp-low");
-		divOneDay[6].appendChild(this.mDivTempLow);
-
-		//div
-		var divTempLow = document.getElementsByClassName("temp-low");  	
+		var divTempLow = document.createElement("DIV");
+		divTempLow.setAttribute("class", "temp-low");
+		divOneDay[6].appendChild(divTempLow);
 
 		//value
-		this.mSpanValue = document.createElement("SPAN");
-		this.mSpanValue.setAttribute("class", "value");
-		divTempLow[6].appendChild(this.mSpanValue);
+		var spanValue = document.createElement("SPAN");
+		spanValue.setAttribute("class", "value");
+		divTempLow.appendChild(spanValue);
 
 /*	
     //<div class="card cardTemplate weather-forecast" hidden>
