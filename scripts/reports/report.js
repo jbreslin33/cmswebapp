@@ -66,7 +66,9 @@ class Report
                 var spanValue = document.createElement("SPAN");
                 spanValue.setAttribute("class", "value");
                 divTempHigh.appendChild(spanValue);
-
+		
+		var degreeText = document.createTextNode('\xB0');
+                divTempHigh.appendChild(degreeText);
 
 		//temp-low
 		var divTempLow = document.createElement("DIV");
