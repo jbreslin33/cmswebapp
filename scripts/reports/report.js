@@ -52,26 +52,30 @@ class Report
 		
 		//main class
 		var m = document.getElementsByClassName("main"); 	
+	
+		//future	
+		var divFuture = document.getElementsByClassName("future"); 	
 
 		//one day
-		var divOneDay = document.getElementsByClassName("oneday"); 	
+		var divOneDay = document.createElement("DIV");
+                divOneDay.setAttribute("class", "oneday");
 		
 		//date	
 		var divDate = document.createElement("DIV");
                 divDate.setAttribute("class", "date");
-                divOneDay[6].appendChild(divDate);
+                divOneDay.appendChild(divDate);
 
 		//icon	
 		var divIcon = document.createElement("DIV");
                 divIcon.setAttribute("class", "icon");
-                divOneDay[6].appendChild(divIcon);
+                divOneDay.appendChild(divIcon);
 	
 		/////HIGH
 
                 //temp-high
                 var divTempHigh = document.createElement("DIV");
                 divTempHigh.setAttribute("class", "temp-high");
-                divOneDay[6].appendChild(divTempHigh);
+                divOneDay.appendChild(divTempHigh);
 
                 //value high
                 var spanValue = document.createElement("SPAN");
@@ -86,7 +90,7 @@ class Report
 		//temp-low
 		var divTempLow = document.createElement("DIV");
 		divTempLow.setAttribute("class", "temp-low");
-		divOneDay[6].appendChild(divTempLow);
+		divOneDay.appendChild(divTempLow);
 
 		//value low
 		var spanValue = document.createElement("SPAN");
