@@ -56,6 +56,16 @@ class Report
 		//one day
 		var divOneDay = document.getElementsByClassName("oneday"); 	
 		
+		//date	
+		var divDate = document.createElement("DIV");
+                divDate.setAttribute("class", "date");
+                divOneDay[6].appendChild(divDate);
+
+		//icon	
+		var divIcon = document.createElement("DIV");
+                divIcon.setAttribute("class", "icon");
+                divOneDay[6].appendChild(divIcon);
+	
 		/////HIGH
 
                 //temp-high
