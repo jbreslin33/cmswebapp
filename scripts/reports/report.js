@@ -56,50 +56,60 @@ class Report
 		//future	
 		var divFuture = document.getElementsByClassName("future"); 	
 
-		//one day
-		var divOneDay = document.createElement("DIV");
-                divOneDay.setAttribute("class", "oneday");
-		
-		//date	
-		var divDate = document.createElement("DIV");
-                divDate.setAttribute("class", "date");
-                divOneDay.appendChild(divDate);
 
-		//icon	
-		var divIcon = document.createElement("DIV");
-                divIcon.setAttribute("class", "icon");
-                divOneDay.appendChild(divIcon);
+		var divOneDayArray = new Array() 
+
+		for (var i = 0; i < 6; i++)
+		{
+			console.log("i:" + i);
+
+			//one day
+			var divOneDay = document.createElement("DIV");
+                	divOneDay.setAttribute("class", "oneday");
+			divOneDayArray.push(divOneDay);
+                	divFuture[0].appendChild(divOneDay);
+		
+			//date	
+			var divDate = document.createElement("DIV");
+                	divDate.setAttribute("class", "date");
+                	divOneDay.appendChild(divDate);
+		
+
+			//icon	
+			var divIcon = document.createElement("DIV");
+                	divIcon.setAttribute("class", "icon");
+                	divOneDay.appendChild(divIcon);
 	
-		/////HIGH
+			/////HIGH
 
-                //temp-high
-                var divTempHigh = document.createElement("DIV");
-                divTempHigh.setAttribute("class", "temp-high");
-                divOneDay.appendChild(divTempHigh);
+                	//temp-high
+                	var divTempHigh = document.createElement("DIV");
+                	divTempHigh.setAttribute("class", "temp-high");
+                	divOneDay.appendChild(divTempHigh);
 
-                //value high
-                var spanValue = document.createElement("SPAN");
-                spanValue.setAttribute("class", "value");
-                divTempHigh.appendChild(spanValue);
+                	//value high
+                	var spanValue = document.createElement("SPAN");
+                	spanValue.setAttribute("class", "value");
+                	divTempHigh.appendChild(spanValue);
 		
-		var degreeTextHigh = document.createTextNode('\xB0');
-                divTempHigh.appendChild(degreeTextHigh);
+			var degreeTextHigh = document.createTextNode('\xB0');
+                	divTempHigh.appendChild(degreeTextHigh);
 
-		/////LOW
+			/////LOW
 
-		//temp-low
-		var divTempLow = document.createElement("DIV");
-		divTempLow.setAttribute("class", "temp-low");
-		divOneDay.appendChild(divTempLow);
+			//temp-low
+			var divTempLow = document.createElement("DIV");
+			divTempLow.setAttribute("class", "temp-low");
+			divOneDay.appendChild(divTempLow);
 
-		//value low
-		var spanValue = document.createElement("SPAN");
-		spanValue.setAttribute("class", "value");
-		divTempLow.appendChild(spanValue);
+			//value low
+			var spanValue = document.createElement("SPAN");
+			spanValue.setAttribute("class", "value");
+			divTempLow.appendChild(spanValue);
 
-		var degreeTextLow = document.createTextNode('\xB0');
-                divTempLow.appendChild(degreeTextLow);
-		
+			var degreeTextLow = document.createTextNode('\xB0');
+                	divTempLow.appendChild(degreeTextLow);
+		}		
 
 		//report vars
 		this.isLoading = true;
