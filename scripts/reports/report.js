@@ -37,18 +37,6 @@ class Report
 		
 
 		//divs
-/*
-                        <div class="oneday">
-                                <div class="date"></div>
-                                <div class="icon"></div>
-                                <div class="temp-high">
-                                        <span class="value"></span>°
-                                </div>
-                                <div class="temp-low">
-                                        <span class="value"></span>°
-                                </div>
-                        </div>
-*/
 		
 		//main class
 		var m = document.getElementsByClassName("main"); 	
@@ -56,13 +44,10 @@ class Report
 		//future	
 		var divFuture = document.getElementsByClassName("future"); 	
 
-
 		var divOneDayArray = new Array() 
 
 		for (var i = 0; i < 6; i++)
 		{
-			console.log("i:" + i);
-
 			//one day
 			var divOneDay = document.createElement("DIV");
                 	divOneDay.setAttribute("class", "oneday");
@@ -73,7 +58,6 @@ class Report
 			var divDate = document.createElement("DIV");
                 	divDate.setAttribute("class", "date");
                 	divOneDay.appendChild(divDate);
-		
 
 			//icon	
 			var divIcon = document.createElement("DIV");
