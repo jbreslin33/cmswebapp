@@ -73,7 +73,7 @@ class Report
 		var spanScale = document.createElement("SPAN"); 	
                 spanScale.setAttribute("class", "scale");
 		divTemperature.appendChild(spanScale);
-		var degreeScale = document.createTextNode('\xB0');
+		var degreeScale = document.createTextNode('\xB0 F');
                 spanScale.appendChild(degreeScale);
 		
 		var divDescription = document.createElement("DIV"); 	
