@@ -44,6 +44,8 @@ class Report
 		//future	
 		var divFuture = document.createElement("DIV"); 	
                 divFuture.setAttribute("class", "future");
+		var c = document.getElementsByClassName("card cardTemplate weather-forecast");
+		c[0].appendChild(divFuture);
 
 		var divOneDayArray = new Array() 
 
