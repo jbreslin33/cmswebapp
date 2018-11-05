@@ -52,6 +52,27 @@ class Report
 		document.body.appendChild(divCardTemplate);
 */
 		var c = document.getElementsByClassName("current");
+		//var divCurrent = document.createElement("DIV"); 	
+
+		var divVisual = document.createElement("DIV"); 	
+                divVisual.setAttribute("class", "visual");
+		c[0].appendChild(divVisual);
+		
+		var divIcon = document.createElement("DIV"); 	
+                divIcon.setAttribute("class", "icon");
+		divVisual.appendChild(divIcon);
+		
+		var divTemperature = document.createElement("DIV"); 	
+                divTemperature.setAttribute("class", "temperature");
+		divVisual.appendChild(divTemperature);
+		
+		var spanValue = document.createElement("SPAN"); 	
+                spanValue.setAttribute("class", "value");
+		divTemperature.appendChild(spanValue);
+		
+		var spanScale = document.createElement("SPAN"); 	
+                spanScale.setAttribute("class", "scale");
+		divTemperature.appendChild(spanScale);
 		
 		var divDescription = document.createElement("DIV"); 	
                 divDescription.setAttribute("class", "description");
@@ -101,7 +122,8 @@ class Report
                         <div class="visual">
                                 <div class="icon"></div>
                                 <div class="temperature">
-                                        <span class="value"></span><span class="scale">°F</span>
+                                        <span class="value"></span>
+					<span class="scale">°F</span>
                                 </div>
                         </div>
                         <div class="description">
