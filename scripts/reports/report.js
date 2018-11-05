@@ -39,10 +39,25 @@ class Report
 		//divs
 		
 		//main class
-		//var m = document.getElementsByClassName("main"); 	
 		var divMain = document.createElement("DIV"); 	
                 divMain.setAttribute("class", "main");
 		document.body.appendChild(divMain);
+
+		//card
+/*
+	for later....
+		var divCardTemplate = document.createElement("DIV"); 	
+                divCardTemplate.setAttribute("class", "card cardTemplate weather-forecast");
+      		divCardTemplate.setAttribute('hidden', true);
+		document.body.appendChild(divCardTemplate);
+*/
+		var d = document.getElementsByClassName("description");
+
+		
+		var divSunrise = document.createElement("DIV"); 	
+                divSunrise.setAttribute("class", "sunrise");
+		d[1].appendChild(divSunrise);
+
 /*
 		        <div class="card cardTemplate weather-forecast" hidden>
                 <div class="city-key" hidden></div>
