@@ -57,6 +57,10 @@ class Report
 		var divSunrise = document.createElement("DIV"); 	
                 divSunrise.setAttribute("class", "sunrise");
 		d[1].appendChild(divSunrise);
+		
+		var divSunset = document.createElement("DIV"); 	
+                divSunset.setAttribute("class", "sunset");
+		d[1].appendChild(divSunset);
 
 /*
 		        <div class="card cardTemplate weather-forecast" hidden>
