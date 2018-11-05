@@ -51,12 +51,14 @@ class Report
       		divCardTemplate.setAttribute('hidden', true);
 		document.body.appendChild(divCardTemplate);
 */
-		var c = document.getElementsByClassName("current");
-		//var divCurrent = document.createElement("DIV"); 	
+		//var c = document.getElementsByClassName("current");
+		var a = document.getElementsByClassName("card cardTemplate weather-forecast");
+		var divCurrent = document.createElement("DIV"); 	
+		a[0].appendChild(divCurrent);
 
 		var divVisual = document.createElement("DIV"); 	
                 divVisual.setAttribute("class", "visual");
-		c[0].appendChild(divVisual);
+		divCurrent.appendChild(divVisual);
 		
 		var divIcon = document.createElement("DIV"); 	
                 divIcon.setAttribute("class", "icon");
@@ -78,7 +80,7 @@ class Report
 		
 		var divDescription = document.createElement("DIV"); 	
                 divDescription.setAttribute("class", "description");
-		c[0].appendChild(divDescription);
+		divCurrent.appendChild(divDescription);
 
 		var divHumidity = document.createElement("DIV"); 	
                 divHumidity.setAttribute("class", "humidity");
