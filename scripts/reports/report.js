@@ -53,15 +53,9 @@ class Report
 */
 		var d = document.getElementsByClassName("description");
 
-		
-		var divSunrise = document.createElement("DIV"); 	
-                divSunrise.setAttribute("class", "sunrise");
-		d[1].appendChild(divSunrise);
-		
-		var divSunset = document.createElement("DIV"); 	
-                divSunset.setAttribute("class", "sunset");
-		d[1].appendChild(divSunset);
-
+		var divHumidity = document.createElement("DIV"); 	
+                divHumidity.setAttribute("class", "humidity");
+		d[1].appendChild(divHumidity);
 		
 		var divWind = document.createElement("DIV"); 	
                 divWind.setAttribute("class", "wind");
@@ -83,6 +77,13 @@ class Report
 		var degreeDirection = document.createTextNode('\xB0');
                 divWind.appendChild(degreeDirection);
 		
+		var divSunrise = document.createElement("DIV"); 	
+                divSunrise.setAttribute("class", "sunrise");
+		d[1].appendChild(divSunrise);
+		
+		var divSunset = document.createElement("DIV"); 	
+                divSunset.setAttribute("class", "sunset");
+		d[1].appendChild(divSunset);
 
 /*
 		        <div class="card cardTemplate weather-forecast" hidden>
