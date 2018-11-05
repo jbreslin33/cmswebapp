@@ -39,7 +39,10 @@ class Report
 		//divs
 		
 		//main class
-		var m = document.getElementsByClassName("main"); 	
+		//var m = document.getElementsByClassName("main"); 	
+		var divMain = document.createElement("DIV"); 	
+                divMain.setAttribute("class", "main");
+		document.body.appendChild(divMain);
 	
 		//future	
 		var divFuture = document.createElement("DIV"); 	
@@ -105,13 +108,14 @@ class Report
     		this.spinner = document.querySelector('.loader');
     		this.cardTemplate = document.querySelector('.cardTemplate');
     		this.container = document.querySelector('.main');
-    		this.addDialog = document.querySelector('.dialog-container');
+ //   		this.addDialog = document.querySelector('.dialog-container');
     		this.daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 		this.initialWeatherForecast = new WeatherForecast();
 	}
   	
 	// Toggles the visibility of the add new city dialog.
+/*
   	toggleAddDialog(visible) 
 	{
     		if (visible) 
@@ -123,6 +127,7 @@ class Report
       			this.addDialog.classList.remove('dialog-container--visible');
     		}
   	}
+*/
 
   	/*****************************************************************************
    	*
