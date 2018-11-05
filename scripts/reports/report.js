@@ -62,6 +62,28 @@ class Report
                 divSunset.setAttribute("class", "sunset");
 		d[1].appendChild(divSunset);
 
+		
+		var divWind = document.createElement("DIV"); 	
+                divWind.setAttribute("class", "wind");
+		d[1].appendChild(divWind);
+
+		var spanValue = document.createElement("SPAN"); 	
+                spanValue.setAttribute("class", "value");
+		divWind.appendChild(spanValue);		
+		
+		var spanScale = document.createElement("SPAN"); 	
+                spanScale.setAttribute("class", "scale");
+		divWind.appendChild(spanScale);		
+		var textScale = document.createTextNode(' mph ');
+                divWind.appendChild(textScale);
+		
+		var spanDirection = document.createElement("SPAN"); 	
+                spanDirection.setAttribute("class", "direction");
+		divWind.appendChild(spanDirection);		
+		var degreeDirection = document.createTextNode('\xB0');
+                divWind.appendChild(degreeDirection);
+		
+
 /*
 		        <div class="card cardTemplate weather-forecast" hidden>
                 <div class="city-key" hidden></div>
