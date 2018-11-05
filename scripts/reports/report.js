@@ -42,7 +42,8 @@ class Report
 		var m = document.getElementsByClassName("main"); 	
 	
 		//future	
-		var divFuture = document.getElementsByClassName("future"); 	
+		var divFuture = document.createElement("DIV"); 	
+                divFuture.setAttribute("class", "future");
 
 		var divOneDayArray = new Array() 
 
@@ -52,7 +53,7 @@ class Report
 			var divOneDay = document.createElement("DIV");
                 	divOneDay.setAttribute("class", "oneday");
 			divOneDayArray.push(divOneDay);
-                	divFuture[0].appendChild(divOneDay);
+                	divFuture.appendChild(divOneDay);
 		
 			//date	
 			var divDate = document.createElement("DIV");
