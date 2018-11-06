@@ -51,8 +51,13 @@ class Report
       		divCardTemplate.setAttribute('hidden', true);
 		document.body.appendChild(divCardTemplate);
 */
-		//var c = document.getElementsByClassName("current");
+
+
+
 		var a = document.getElementsByClassName("card cardTemplate weather-forecast");
+
+
+
 		var divCurrent = document.createElement("DIV"); 	
                 divCurrent.setAttribute("class", "current");
 		a[0].appendChild(divCurrent);
