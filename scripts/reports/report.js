@@ -44,15 +44,6 @@ class Report
 		document.body.appendChild(divMain);
 
 		//card
-/*
-	for later....
-		var divCardTemplate = document.createElement("DIV"); 	
-                divCardTemplate.setAttribute("class", "card cardTemplate weather-forecast");
-      		divCardTemplate.setAttribute('hidden', true);
-		document.body.appendChild(divCardTemplate);
-*/
-
-
 
 		//var a = document.getElementsByClassName("card cardTemplate weather-forecast");
 		var divCardTemplate = document.createElement("DIV"); 	
@@ -60,12 +51,6 @@ class Report
       		divCardTemplate.setAttribute('hidden', true);
 		divMain.appendChild(divCardTemplate);
 		
-/*
-                <div class="city-key" hidden></div>
-                <div class="card-last-updated" hidden></div>
-                <div class="location"></div>
-                <div class="date"></div>
-*/
 		var divCityKey = document.createElement("DIV"); 	
                 divCityKey.setAttribute("class", "city-key");
       		divCityKey.setAttribute('hidden', true);
@@ -151,38 +136,6 @@ class Report
                 divSunset.setAttribute("class", "sunset");
 		divDescription.appendChild(divSunset);
 
-/*
-		        <div class="card cardTemplate weather-forecast" hidden>
-                <div class="city-key" hidden></div>
-                <div class="card-last-updated" hidden></div>
-                <div class="location"></div>
-                <div class="date"></div>
-                <div class="description"></div>
-
-                <div class="current">
-                        <div class="visual">
-                                <div class="icon"></div>
-                                <div class="temperature">
-                                        <span class="value"></span>
-					<span class="scale">°F</span>
-                                </div>
-                        </div>
-                        <div class="description">
-                                <div class="humidity"></div>
-                                <div class="wind">
-                                        <span class="value"></span>
-                                        <span class="scale">mph</span>
-                                        <span class="direction"></span>°
-                                </div>
-                                <div class="sunrise"></div>
-                                <div class="sunset"></div>
-                        </div>
-                </div>
-        </div>
-*/
-
-
-	
 		//future	
 		var divFuture = document.createElement("DIV"); 	
                 divFuture.setAttribute("class", "future");
