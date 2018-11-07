@@ -200,7 +200,6 @@ class Report
     		this.spinner = document.querySelector('.loader');
     		this.cardTemplate = document.querySelector('.cardTemplate');
     		this.container = document.querySelector('.main');
- //   		this.addDialog = document.querySelector('.dialog-container');
     		this.daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 		this.initialWeatherForecast = new WeatherForecast();
