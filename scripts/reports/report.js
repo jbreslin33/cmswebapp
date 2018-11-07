@@ -207,19 +207,6 @@ class Report
 	}
   	
 	// Toggles the visibility of the add new city dialog.
-/*
-  	toggleAddDialog(visible) 
-	{
-    		if (visible) 
-		{
-      			this.addDialog.classList.add('dialog-container--visible');
-    		} 
-		else 
-		{
-      			this.addDialog.classList.remove('dialog-container--visible');
-    		}
-  	}
-*/
 
   	/*****************************************************************************
    	*
