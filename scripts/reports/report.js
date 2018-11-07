@@ -54,7 +54,12 @@ class Report
 
 
 
-		var a = document.getElementsByClassName("card cardTemplate weather-forecast");
+		//var a = document.getElementsByClassName("card cardTemplate weather-forecast");
+		var divCardTemplate = document.createElement("DIV"); 	
+                divCardTemplate.setAttribute("class", "card cardTemplate weather-forecast");
+      		divCardTemplate.setAttribute('hidden', true);
+		divMain.appendChild(divCardTemplate);
+		
 /*
                 <div class="city-key" hidden></div>
                 <div class="card-last-updated" hidden></div>
@@ -64,29 +69,29 @@ class Report
 		var divCityKey = document.createElement("DIV"); 	
                 divCityKey.setAttribute("class", "city-key");
       		divCityKey.setAttribute('hidden', true);
-		a[0].appendChild(divCityKey);
+		divCardTemplate.appendChild(divCityKey);
 
 		var divCardLastUpdated = document.createElement("DIV"); 	
                 divCardLastUpdated.setAttribute("class", "card-last-updated");
       		divCardLastUpdated.setAttribute('hidden', true);
-		a[0].appendChild(divCardLastUpdated);
+		divCardTemplate.appendChild(divCardLastUpdated);
 
 		var divLocation = document.createElement("DIV"); 	
                 divLocation.setAttribute("class", "location");
-		a[0].appendChild(divLocation);
+		divCardTemplate.appendChild(divLocation);
 		
 		var divDate = document.createElement("DIV"); 	
                 divDate.setAttribute("class", "date");
-		a[0].appendChild(divDate);
+		divCardTemplate.appendChild(divDate);
 
 
 		var divDescription = document.createElement("DIV"); 	
                 divDescription.setAttribute("class", "description");
-		a[0].appendChild(divDescription);
+		divCardTemplate.appendChild(divDescription);
 
 		var divCurrent = document.createElement("DIV"); 	
                 divCurrent.setAttribute("class", "current");
-		a[0].appendChild(divCurrent);
+		divCardTemplate.appendChild(divCurrent);
 
 		var divVisual = document.createElement("DIV"); 	
                 divVisual.setAttribute("class", "visual");
