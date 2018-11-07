@@ -55,6 +55,29 @@ class Report
 
 
 		var a = document.getElementsByClassName("card cardTemplate weather-forecast");
+/*
+                <div class="city-key" hidden></div>
+                <div class="card-last-updated" hidden></div>
+                <div class="location"></div>
+                <div class="date"></div>
+*/
+		var divCityKey = document.createElement("DIV"); 	
+                divCityKey.setAttribute("class", "city-key");
+      		divCityKey.setAttribute('hidden', true);
+		a[0].appendChild(divCityKey);
+
+		var divCardLastUpdated = document.createElement("DIV"); 	
+                divCardLastUpdated.setAttribute("class", "card-last-updated");
+      		divCardLastUpdated.setAttribute('hidden', true);
+		a[0].appendChild(divCardLastUpdated);
+
+		var divLocation = document.createElement("DIV"); 	
+                divLocation.setAttribute("class", "location");
+		a[0].appendChild(divLocation);
+		
+		var divDate = document.createElement("DIV"); 	
+                divDate.setAttribute("class", "date");
+		a[0].appendChild(divDate);
 
 
 		var divDescription = document.createElement("DIV"); 	
