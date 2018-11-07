@@ -57,6 +57,9 @@ class Report
 		var a = document.getElementsByClassName("card cardTemplate weather-forecast");
 
 
+		var divDescription = document.createElement("DIV"); 	
+                divDescription.setAttribute("class", "description");
+		a[0].appendChild(divDescription);
 
 		var divCurrent = document.createElement("DIV"); 	
                 divCurrent.setAttribute("class", "current");
