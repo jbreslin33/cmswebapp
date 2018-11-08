@@ -55,7 +55,6 @@ DROP TABLE games CASCADE;
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
 DROP TABLE clubs CASCADE;
-DROP TABLE states CASCADE;
 --****************************************************************
 --***************************************************************
 --******************  POSTGRESQL SETTINGS *************************
@@ -102,22 +101,13 @@ CREATE TABLE error_log
 	PRIMARY KEY (id) 	
 );
 
-CREATE TABLE states (
-	id SERIAL,
-	name text,
-	PRIMARY KEY (id)	
-);
-
 -- a club should have admins in roles table
 CREATE TABLE clubs (
         id SERIAL,
         name text NOT NULL,
-        street_address text NOT NULL,
-        city text NOT NULL,
-        state_id integer NOT NULL,
-        zip text NOT NULL,
-	PRIMARY KEY (id),
-        FOREIGN KEY(state_id) REFERENCES states(id)
+        address text NOT NULL,
+        coordinates text NOT NULL,
+	PRIMARY KEY (id)
 );
 
 
@@ -195,13 +185,8 @@ CREATE TABLE practices (
         arrival_time timestamp, --only 1 arrival time leave it
         start_time timestamp, --only 1 start time leave it
         end_time timestamp,
-
-	--place for place just use what manager wants string, url, full field address or simply pitch id
-	address text, --this could be link or string 	
-	street_address text, 	
-	city text, 	
-	state_id integer, 	
-	zip text, 	
+        address text NOT NULL,
+        coordinates text NOT NULL,
 	pitch_id integer, --all you need for a practice	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
        
@@ -211,7 +196,6 @@ CREATE TABLE practices (
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (state_id) REFERENCES states(id),
 	PRIMARY KEY (id)
 );
 
@@ -222,13 +206,8 @@ CREATE TABLE games (
         arrival_time timestamp, --only 1 arrival time leave it
         start_time timestamp, --only 1 start time leave it
         end_time timestamp,
-	
-	--place for place just use what manager wants string, url, full field address or simply pitch id
 	address text, --this could be link or string 	
-	street_address text, 	
-	city text, 	
-	state_id integer, 	
-	zip text, 	
+	coordinates text, 	
 	pitch_id integer, --all you need for a practice, is this needed for games or just field name below?	
 	field_name text, --field 3, field A, 9v9 field etc
 	
@@ -236,8 +215,6 @@ CREATE TABLE games (
 	
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (state_id) REFERENCES states(id),
-
         PRIMARY KEY (id)
 );
 	
@@ -374,12 +351,9 @@ CREATE TABLE users (
     	last_name text,
     	email text,
     	phone text,
-    	street_address text,
-    	city text,
-    	state_id integer,
-    	zip text,
-	PRIMARY KEY (id),	
-	FOREIGN KEY (state_id) REFERENCES states(id)
+	address text,
+	coordinates text,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE clubs_users (
