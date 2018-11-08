@@ -61,24 +61,24 @@
   });
 
   	// TODO add startup code here
-  	APPLICATION.mWeekReport.selectedCities = localStorage.selectedCities;
-  	if (APPLICATION.mWeekReport.selectedCities) 
+  	APPLICATION.mWeekReport.mLocalStorage = localStorage.weekReport;
+  	if (APPLICATION.mWeekReport.mLocalStorage) 
 	{
-    		APPLICATION.mWeekReport.selectedCities = JSON.parse(APPLICATION.mWeekReport.selectedCities);
+    		APPLICATION.mWeekReport.mLocalStorage = JSON.parse(APPLICATION.mWeekReport.mLocalStorage);
     		
-		APPLICATION.mWeekReport.selectedCities.forEach(function(city) 
+		APPLICATION.mWeekReport.mLocalStorage.forEach(function(event_record) 
 		{
-      			APPLICATION.mWeekReport.getForecast(city.key, city.label);
+      			APPLICATION.mWeekReport.getForecast(event_record.key, event_record.label);
     		});
   	} 
 	else 
 	{
 		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
-    		APPLICATION.mWeekReport.selectedCities = 
+    		APPLICATION.mWeekReport.mLocalStorage = 
 		[
       			{key: APPLICATION.mWeekReport.initialWeatherForecast.key, label: APPLICATION.mWeekReport.initialWeatherForecast.label}
     		];
-    		APPLICATION.mWeekReport.saveSelectedCities();
+    		APPLICATION.mWeekReport.saveLocalStorage();
   	}
 
   	// TODO add service worker code here

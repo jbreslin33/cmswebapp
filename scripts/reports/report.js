@@ -196,7 +196,7 @@ class Report
 		//report vars
 		this.isLoading = true;
     		this.visibleCards = {};
-    		this.selectedCities = [];
+    		this.weeReport = null;
     		this.spinner = document.querySelector('.loader');
     		this.cardTemplate = document.querySelector('.cardTemplate');
     		this.container = document.querySelector('.main');
@@ -374,10 +374,10 @@ class Report
   
 	// TODO add saveSelectedCities function here
   	// Save list of cities to localStorage.
-  	saveSelectedCities()
+  	saveLocalStorage()
 	{
-    		var selectedCities = JSON.stringify(this.selectedCities);
-    		localStorage.selectedCities = selectedCities;
+    		var data = JSON.stringify(this.mLocalStorage);
+    		localStorage.weekReport = data;
   	}
 
  	getIconClass(weatherCode) 
