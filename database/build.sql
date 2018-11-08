@@ -183,17 +183,15 @@ CREATE TABLE practices (
         id SERIAL,
 
 	--time
-        arrival_time timestamp, --only 1 arrival time leave it
-        start_time timestamp, --only 1 start time leave it
-        end_time timestamp,
-        address text NOT NULL,
-        coordinates text NOT NULL,
+	event_date date NOT NULL,
+        arrival_time time, --only 1 arrival time leave it
+        start_time time, --only 1 start time leave it
+        end_time time,
+        address text,
+        coordinates text,
 	pitch_id integer, --all you need for a practice	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
-       
 	team_id integer,
-
-	--details
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
