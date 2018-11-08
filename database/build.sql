@@ -105,8 +105,8 @@ CREATE TABLE error_log
 CREATE TABLE clubs (
         id SERIAL,
         name text NOT NULL,
-        address text NOT NULL,
-        coordinates text NOT NULL,
+        address text,
+        coordinates text,
 	PRIMARY KEY (id)
 );
 
