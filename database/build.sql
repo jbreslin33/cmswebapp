@@ -125,7 +125,8 @@ CREATE TABLE teams (
 	name text UNIQUE,
         club_id integer,
         PRIMARY KEY (id),
-        FOREIGN KEY(club_id) REFERENCES clubs(id)
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	UNIQUE (name,club_id)
 );
 
 --FOR SESSIONS LATER
