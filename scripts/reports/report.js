@@ -316,6 +316,7 @@ class Report
                                 {
                                         console.log("update from database");
 					var data = JSON.parse(this.response);
+					console.log('data:' + data);
                                         //var response = JSON.parse(request.responsetext);
                                         //console.log('name:' + response.name);
                                         //results.key = key;
