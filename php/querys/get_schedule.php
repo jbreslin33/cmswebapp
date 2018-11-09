@@ -1,11 +1,10 @@
 <?php
-//just in case start session again????
-//session_start();
+session_start();
 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
 $database = new Database();
-$results = $database->query("select event_date, start_time, address from practices"); 
+$results = $database->query("select event_date, start_time, address from practices WHERE date >= NOW()"); 
 $myarray = array();
 while ($row = pg_fetch_row($results)) 
 {
