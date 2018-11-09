@@ -315,8 +315,9 @@ class Report
                                 if (request.status === 200)
                                 {
                                         console.log("update from database");
-                                        var response = JSON.parse(request.response);
-                                        var results = response.query.results;
+					var data = JSON.parse(this.response);
+                                        //var response = JSON.parse(request.responsetext);
+                                        //console.log('name:' + response.name);
                                         //results.key = key;
                                         //results.label = label;
                                         //results.created = response.query.created;
