@@ -341,6 +341,7 @@ class Report
   
 	getForecast(key, label) 
 	{
+		console.log('key:' + key);
     		var statement = 'select * from weather.forecast where woeid=' + key;
     		var url = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' +
         	statement;
