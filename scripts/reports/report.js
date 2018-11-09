@@ -304,6 +304,38 @@ class Report
    * request goes through, then the card gets updated a second time with the
    * freshest data.
    */
+	getSchedule(key, label) 
+	{
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        console.log("update from database");
+                                        var response = JSON.parse(request.response);
+                                        var results = response.query.results;
+                                        //results.key = key;
+                                        //results.label = label;
+                                        //results.created = response.query.created;
+                                        //APPLICATION.mWeekReport.updateForecastCard(results);
+                                }
+                        }
+                        else
+                        {
+
+                        // Return the initial weather forecast since no data is available.
+                        console.log("update from initial");
+                        APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
+                        }
+                };
+                request.open('GET', '/php/querys/get_schedule.php');
+                request.send();
+
+
+	}
   
 	getForecast(key, label) 
 	{
@@ -372,6 +404,7 @@ class Report
     		keys.forEach(function(key) 
 		{
       			APPLICATION.mWeekReport.getForecast(key);
+      			APPLICATION.mWeekReport.getSchedule(key);
     		});
   	}
 
