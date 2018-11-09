@@ -313,6 +313,7 @@ class Report
     		// TODO add cache logic here
     		if ('caches' in window) 
 		{
+			console.log("cached in window");
       			/*
        			* Check if the service worker has already cached this city's weather
        			* data. If the service worker has the data, then display the cached
@@ -324,6 +325,7 @@ class Report
 				{
           				response.json().then(function updateFromCache(json) 
 					{
+						console.log("update from cache");
             					var results = json.query.results;
             					results.key = key;
             					results.label = label;
@@ -342,6 +344,7 @@ class Report
 			{
         			if (request.status === 200) 
 				{
+					console.log("update from internet");
           				var response = JSON.parse(request.response);
           				var results = response.query.results;
           				results.key = key;
@@ -354,6 +357,7 @@ class Report
 			{
         	
 			// Return the initial weather forecast since no data is available.
+			console.log("update from initial");
         		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
       			}
     		};

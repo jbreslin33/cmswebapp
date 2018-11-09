@@ -64,6 +64,7 @@
   	APPLICATION.mWeekReport.mLocalStorage = localStorage.weekReport;
   	if (APPLICATION.mWeekReport.mLocalStorage) 
 	{
+		console.log("index from localStorage");
     		APPLICATION.mWeekReport.mLocalStorage = JSON.parse(APPLICATION.mWeekReport.mLocalStorage);
     		
 		APPLICATION.mWeekReport.mLocalStorage.forEach(function(event_record) 
@@ -73,6 +74,7 @@
   	} 
 	else 
 	{
+		console.log("update forecastCard from initial");
 		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
     		APPLICATION.mWeekReport.mLocalStorage = 
 		[
