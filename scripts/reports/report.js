@@ -458,9 +458,9 @@ class WeatherForecast
 {
 	constructor()
 	{
-    		this.key = '';
-    		this.label = '';
-    		this.created = '';
+    		this.key = '2459115';
+    		this.label = 'New York, NY';
+    		this.created = '2016-07-22T01:00:00Z';
 	
 		this.channel = new Channel();
 	}
@@ -480,8 +480,8 @@ class Astronomy
 {
 	constructor()
 	{
-        	this.sunrise = "";
-        	this.sunset = "";
+        	this.sunrise = "5:43 am";
+        	this.sunset = "8:21 pm";
 	}
 }
 class Item 
@@ -489,8 +489,15 @@ class Item
 	constructor()
 	{
 		this.condition = new Condition();
-            	this.forecast =  
+            	this.forecast = 
 		[
+                        {code: 44, high: 86, low: 70},
+                        {code: 44, high: 94, low: 73},
+                        {code: 4, high: 95, low: 78},
+                        {code: 24, high: 75, low: 89},
+                        {code: 24, high: 89, low: 77},
+                        {code: 44, high: 92, low: 79},
+                        {code: 44, high: 89, low: 77}
                 ];
 	}
 }
@@ -498,10 +505,10 @@ class Condition
 {
 	constructor()
 	{
-        	this.text = "";
-          	this.date = "";
-          	this.temp = "";
-          	this.code = "";
+        	this.text = "Windy";
+          	this.date = "Thu, 21 Jul 2016 09:00 PM EDT";
+          	this.temp = 56;
+          	this.code = 24;
 	}
 }
 
@@ -509,14 +516,14 @@ class Atmosphere
 {
 	constructor()
 	{
-		this.humidity = "";
+		this.humidity = 56;
 	}
 }
 class Wind 
 {
 	constructor()
 	{
-		this.speed = "";
-		this.direction = "";
+		this.speed = 25;
+		this.direction = 195;
 	}
 }
