@@ -14,7 +14,7 @@ while ($row = pg_fetch_row($results))
 	$myarray[] = $row;
 }
 $data = json_encode($myarray);
-error_log($data);
+//error_log($data);
 echo $data;
 
 
