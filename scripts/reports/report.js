@@ -215,6 +215,11 @@ class Report
 
 	// Updates a weather card with the latest weather forecast. If the card
   	// doesn't already exist, it's cloned from the template.
+  	updateScheduleCard(data) 
+	{
+
+	}
+
   	updateForecastCard(data) 
 	{
     		var dataLastUpdated = new Date(data.created);
@@ -307,6 +312,34 @@ class Report
 	getSchedule(key, label) 
 	{
 		var url = "/php/querys/get_schedule.php";
+              
+		// TODO add cache logic here
+                if ('caches' in window)
+                {
+                        console.log("cached schedule in window");
+                        /*
+                        * Check if the service worker has already cached this city's weather
+                        * data. If the service worker has the data, then display the cached
+                        * data while the app fetches the latest data.
+                        */
+                        caches.match(url).then(function(response)
+                        {
+                                if (response)
+                                {
+                                        response.json().then(function updateFromCache(json)
+                                        {
+                                                console.log("update schedule from cache");
+                                                var results = json.query.results;
+                                                results.key = key;
+                                                results.label = label;
+                                                results.created = json.query.created;
+                                                this.updateScheduleCard(results);
+                                        });
+                                }
+                        });
+                }
+
+
 		
                 // Fetch the latest data.
                 var request = new XMLHttpRequest();
@@ -316,7 +349,7 @@ class Report
                         {
                                 if (request.status === 200)
                                 {
-                                        console.log("update from database");
+                                        console.log("update schedule from database");
 					var data = JSON.parse(this.response);
 					console.log('data:' + data);
                                         //var response = JSON.parse(request.responsetext);
@@ -331,14 +364,12 @@ class Report
                         {
 
                         // Return the initial weather forecast since no data is available.
-                        console.log("update from initial");
+                        console.log("update schedule from initial");
                         APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
                         }
                 };
                 request.open('GET', url);
                 request.send();
-
-
 	}
   
 	getForecast(key, label) 
@@ -350,7 +381,7 @@ class Report
     		// TODO add cache logic here
     		if ('caches' in window) 
 		{
-			console.log("cached in window");
+			console.log("cached forecast in window");
       			/*
        			* Check if the service worker has already cached this city's weather
        			* data. If the service worker has the data, then display the cached
@@ -362,7 +393,7 @@ class Report
 				{
           				response.json().then(function updateFromCache(json) 
 					{
-						console.log("update from cache");
+						console.log("update forecast from cache");
             					var results = json.query.results;
             					results.key = key;
             					results.label = label;
@@ -381,7 +412,7 @@ class Report
 			{
         			if (request.status === 200) 
 				{
-					console.log("update from internet");
+					console.log("update forecast from internet");
           				var response = JSON.parse(request.response);
           				var results = response.query.results;
           				results.key = key;
@@ -394,7 +425,7 @@ class Report
 			{
         	
 			// Return the initial weather forecast since no data is available.
-			console.log("update from initial");
+			console.log("update forecast from initial");
         		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
       			}
     		};
