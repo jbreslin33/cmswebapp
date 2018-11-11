@@ -211,6 +211,7 @@ class Report
     		this.daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 		this.initialWeatherForecast = new WeatherForecast();
+		this.initialSchedule        = new Schedule();
 	}
   	
 	// Toggles the visibility of the add new city dialog.
@@ -376,7 +377,7 @@ class Report
 
                         // Return the initial weather forecast since no data is available.
                         console.log("update schedule from initial");
-                        APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
+                        APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialSchedule);
                         }
                 };
                 request.open('GET', url);
@@ -451,9 +452,18 @@ class Report
     		keys.forEach(function(key) 
 		{
       			APPLICATION.mWeekReport.getForecast(key);
-      			APPLICATION.mWeekReport.getSchedule(key);
     		});
   	}
+
+        updateSchedules()
+        {
+                var keys = Object.keys(this.visibleCards);
+                keys.forEach(function(key)
+                {
+                        APPLICATION.mWeekReport.getSchedule(key);
+                });
+        }
+
 
   
 	// TODO add saveSelectedCities function here
@@ -462,6 +472,12 @@ class Report
 	{
     		var data = JSON.stringify(this.mForecastData);
     		localStorage.mForecastData = data;
+  	}
+  	
+	saveScheduleToLocalStorage()
+	{
+    		var data = JSON.stringify(this.mScheduleData);
+    		localStorage.mScheduleData = data;
   	}
 
  	getIconClass(weatherCode) 
@@ -611,3 +627,19 @@ class Wind
 		this.direction = 195;
 	}
 }
+
+class Schedule
+{
+        constructor()
+        {
+                this.key = '13';
+                this.label = 'SCHEDULE LABEL';
+		/*
+                this.created = '2016-07-22T01:00:00Z';
+
+                this.channel = new Channel();
+		*/
+        }
+
+}
+

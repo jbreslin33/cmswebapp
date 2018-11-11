@@ -56,8 +56,9 @@
    ****************************************************************************/
 
   document.getElementById('butRefresh').addEventListener('click', function() {
-    // Refresh all of the forecasts
+    // Refresh all of the forecasts and schedules
     APPLICATION.mWeekReport.updateForecasts();
+    APPLICATION.mWeekReport.updateSchedules();
   });
 
   	// TODO add startup code here
@@ -71,7 +72,6 @@
 		APPLICATION.mWeekReport.mForecastData.forEach(function(event_record) 
 		{
       			APPLICATION.mWeekReport.getForecast(event_record.key, event_record.label);
-      			APPLICATION.mWeekReport.getSchedule(event_record.key, event_record.label);
     		});
   	} 
 	else 
@@ -84,6 +84,30 @@
     		];
     		APPLICATION.mWeekReport.saveForecastToLocalStorage();
   	}
+
+        //SCHEDULE
+        APPLICATION.mWeekReport.mScheduleData = localStorage.mScheduleData;
+        if (APPLICATION.mWeekReport.mScheduleData)
+        {
+                console.log("index schedule from localStorage");
+                APPLICATION.mWeekReport.mScheduleData = JSON.parse(APPLICATION.mWeekReport.mScheduleData);
+
+                APPLICATION.mWeekReport.mScheduleData.forEach(function(event_record)
+                {
+                        APPLICATION.mWeekReport.getForecast(event_record.key, event_record.label);
+                });
+        }
+        else
+        {
+                console.log("update scheduleCard from initial");
+                APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialSchedule);
+                APPLICATION.mWeekReport.mScheduleData =
+                [
+                        {key: APPLICATION.mWeekReport.initialSchedule.key, label: APPLICATION.mWeekReport.initialSchedule.label}
+                ];
+                APPLICATION.mWeekReport.saveScheduleToLocalStorage();
+        }
+
 
   	// TODO add service worker code here
   	if ('serviceWorker' in navigator) 
