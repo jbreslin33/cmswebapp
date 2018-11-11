@@ -135,6 +135,14 @@ class Report
                 					divSunset.setAttribute("class", "sunset");
 							divDescription.appendChild(divSunset);
 
+					/******
+					* schedule
+					*/ 
+					var divStartTime = document.createElement("DIV"); 	
+                			divStartTime.setAttribute("class", "time");
+					divCardTemplate.appendChild(divStartTime);
+					
+
 					//future	
 					var divFuture = document.createElement("DIV"); 	
                 			divFuture.setAttribute("class", "future");
@@ -217,12 +225,15 @@ class Report
   	// doesn't already exist, it's cloned from the template.
   	updateScheduleCard(data) 
 	{
+    		var dataLastUpdated = new Date(data.created);
+		console.log('schedule dataLastUpdated:' + dataLastUpdated);
 
 	}
 
   	updateForecastCard(data) 
 	{
     		var dataLastUpdated = new Date(data.created);
+		console.log('forecast dataLastUpdated:' + dataLastUpdated);
     		var sunrise = data.channel.astronomy.sunrise;
     		var sunset = data.channel.astronomy.sunset;
     		var current = data.channel.item.condition;
