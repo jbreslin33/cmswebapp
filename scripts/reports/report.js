@@ -333,7 +333,7 @@ class Report
                         APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
                         }
                 };
-                request.open('GET', '/php/querys/get_schedule.php');
+                request.open('GET', '/php/querys/get_schedule.php?');
                 request.send();
 
 
