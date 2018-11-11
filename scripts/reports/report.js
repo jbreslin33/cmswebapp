@@ -306,6 +306,8 @@ class Report
    */
 	getSchedule(key, label) 
 	{
+		var url = "/php/querys/get_schedule.php";
+		
                 // Fetch the latest data.
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -333,7 +335,7 @@ class Report
                         APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
                         }
                 };
-                request.open('GET', '/php/querys/get_schedule.php?');
+                request.open('GET', url);
                 request.send();
 
 
