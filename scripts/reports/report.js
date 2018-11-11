@@ -458,10 +458,10 @@ class Report
   
 	// TODO add saveSelectedCities function here
   	// Save list of cities to localStorage.
-  	saveLocalStorage()
+  	saveForecastToLocalStorage()
 	{
-    		var data = JSON.stringify(this.mLocalStorage);
-    		localStorage.weekReport = data;
+    		var data = JSON.stringify(this.mForecastData);
+    		localStorage.mForecastData = data;
   	}
 
  	getIconClass(weatherCode) 

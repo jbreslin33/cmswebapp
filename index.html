@@ -61,13 +61,14 @@
   });
 
   	// TODO add startup code here
-  	APPLICATION.mWeekReport.mLocalStorage = localStorage.weekReport;
-  	if (APPLICATION.mWeekReport.mLocalStorage) 
+	//FORECAST
+  	APPLICATION.mWeekReport.mForecastData = localStorage.mForecastData;
+  	if (APPLICATION.mWeekReport.mForecastData) 
 	{
-		console.log("index from localStorage");
-    		APPLICATION.mWeekReport.mLocalStorage = JSON.parse(APPLICATION.mWeekReport.mLocalStorage);
+		console.log("index forecast from localStorage");
+    		APPLICATION.mWeekReport.mForecastData = JSON.parse(APPLICATION.mWeekReport.mForecastData);
     		
-		APPLICATION.mWeekReport.mLocalStorage.forEach(function(event_record) 
+		APPLICATION.mWeekReport.mForecastData.forEach(function(event_record) 
 		{
       			APPLICATION.mWeekReport.getForecast(event_record.key, event_record.label);
       			APPLICATION.mWeekReport.getSchedule(event_record.key, event_record.label);
@@ -77,11 +78,11 @@
 	{
 		console.log("update forecastCard from initial");
 		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
-    		APPLICATION.mWeekReport.mLocalStorage = 
+    		APPLICATION.mWeekReport.mForecastData = 
 		[
       			{key: APPLICATION.mWeekReport.initialWeatherForecast.key, label: APPLICATION.mWeekReport.initialWeatherForecast.label}
     		];
-    		APPLICATION.mWeekReport.saveLocalStorage();
+    		APPLICATION.mWeekReport.saveForecastToLocalStorage();
   	}
 
   	// TODO add service worker code here
