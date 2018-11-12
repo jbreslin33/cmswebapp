@@ -8,6 +8,10 @@ class Report
 		//Application
 		this.mApplication = application;
 
+		//local Storate
+		this.mForecastData = null;
+		this.mScheduleData = null;
+
 		//header
 		this.mHeader = document.createElement("header");
 		this.mHeader.setAttribute("class", "header");
