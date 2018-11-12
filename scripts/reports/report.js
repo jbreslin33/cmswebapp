@@ -214,8 +214,8 @@ class Report
     		this.container = document.querySelector('.main');
     		this.daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-		this.initialWeatherForecast = new WeatherForecast();
-		this.initialSchedule        = new Schedule();
+		this.initialForecastData = new WeatherForecast();
+		this.initialScheduleData = new Schedule();
 	}
   	
 	// Toggles the visibility of the add new city dialog.
@@ -381,7 +381,7 @@ class Report
 
                         // Return the initial weather forecast since no data is available.
                         console.log("update schedule from initial");
-                        APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialSchedule);
+                        APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialScheduleData);
                         }
                 };
                 request.open('GET', url);
@@ -442,7 +442,7 @@ class Report
         	
 			// Return the initial weather forecast since no data is available.
 			console.log("update forecast from initial");
-        		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
+        		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialForecastData);
       			}
     		};
     		request.open('GET', url);

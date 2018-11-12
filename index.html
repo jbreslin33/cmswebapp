@@ -78,10 +78,10 @@
 	else 
 	{
 		console.log("update forecastCard from initial");
-		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialWeatherForecast);
+		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialForecastData);
     		APPLICATION.mWeekReport.mForecastData = 
 		[
-      			{key: APPLICATION.mWeekReport.initialWeatherForecast.key, label: APPLICATION.mWeekReport.initialWeatherForecast.label}
+      			{key: APPLICATION.mWeekReport.initialForecastData.key, label: APPLICATION.mWeekReport.initialForecastData.label}
     		];
     		APPLICATION.mWeekReport.saveForecastToLocalStorage();
   	}
@@ -101,10 +101,10 @@
         else
         {
                 console.log("update scheduleCard from initial");
-                APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialSchedule);
+                APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialScheduleData);
                 APPLICATION.mWeekReport.mScheduleData =
                 [
-                        {key: APPLICATION.mWeekReport.initialSchedule.key, label: APPLICATION.mWeekReport.initialSchedule.label}
+                        {key: APPLICATION.mWeekReport.initialScheduleData.key, label: APPLICATION.mWeekReport.initialScheduleData.label}
                 ];
                 APPLICATION.mWeekReport.saveScheduleToLocalStorage();
         }
