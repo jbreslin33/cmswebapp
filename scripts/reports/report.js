@@ -439,12 +439,12 @@ class Report
                                         console.log("update schedule from database");
 					var data = JSON.parse(this.response);
 					console.log('data:' + data);
-                                        //var response = JSON.parse(request.responsetext);
-                                        //console.log('name:' + response.name);
-                                        //results.key = key;
-                                        //results.label = label;
-                                        //results.created = response.query.created;
-                                        //APPLICATION.mWeekReport.updateScheduleCard(results);
+                                        var response = JSON.parse(request.responsetext);
+                                        console.log('name:' + response.name);
+                                        results.key = key;
+                                        results.label = label;
+                                        results.created = response.query.created;
+                                        APPLICATION.mWeekReport.updateScheduleCard(results);
                                 }
                         }
                         else
