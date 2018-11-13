@@ -443,9 +443,7 @@ class Report
 					{
 						console.log('data A:' + data[0][0]);
 						console.log('data B:' + data[1][0]);
-						console.log('data C:' + data[2][0]);
-						console.log('data D:' + data[3][0]);
-						console.log('data E:' + data[4][0]);
+						console.log('data C:' + data[0][2]);
 					}
 					else
 					{
