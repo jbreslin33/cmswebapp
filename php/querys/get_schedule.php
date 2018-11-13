@@ -6,9 +6,9 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 $database = new Database();
 
 $results = $database->query("select array_to_json(array_agg(row_to_json(t))) 
-	from (
-		select event_date, start_time, address from practices where event_date > now() - INTERVAL '1 days' AND event_date < NOW() + INTERVAL '7 days'
-	) t	
+			from (
+				select event_date, start_time, address from practices where event_date > now() - INTERVAL '1 days' AND event_date < NOW() + INTERVAL '7 days'
+			) t   
 ");
 
 $myarray = array();

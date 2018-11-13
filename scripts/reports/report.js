@@ -439,9 +439,6 @@ class Report
                                         console.log("update schedule from database");
 					var data = JSON.parse(this.response);
 					console.log('A:' + data[0][0]);
-					console.log('B:' + data[0][0][0]);
-					console.log('C:' + data[0][0][0][0]);
-					console.log('D:' + data[0][0][event_date])		
 					//console.log('data.event_date:' + data.event_date[0])		
 					//console.log('EV------------:' + data[0][0][event_date])		
                                         //var response = JSON.parse(request.responsetext);
