@@ -17,8 +17,16 @@ select row_to_json(t)
         ) t
 ";
 */
+/*
 $query = "
 select event_date, start_time, address from practices
+";
+*/
+$query = "
+select row_to_json(t)
+from (
+select event_date, start_time, address from practices
+) t
 ";
 $database = new Database();
 
