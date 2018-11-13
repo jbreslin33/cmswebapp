@@ -1,5 +1,13 @@
-select array_to_json(array_agg(row_to_json(t)))
-                        from (
-                                select event_date, start_time, address from practices where event_date > now() - INTERVAL '1 days' AND event_date < NOW() + INTERVAL '7 days'
-                        ) t
-
+select row_to_json(t)
+from (
+  select id, name,
+    (
+      select array_to_json(array_agg(row_to_json(d)))
+      from (
+        select event_date, start_time, address  
+        from practices
+        order by event_date asc
+      ) d
+    ) as definitions
+  from clubs
+) t
