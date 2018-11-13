@@ -1,8 +1,8 @@
 select row_to_json(t)
 	from 
 	(
-    		select 
-    		(
+--    		select 
+ --   		(
       			select array_to_json(array_agg(row_to_json(d)))
       			from 
 			(
@@ -10,6 +10,6 @@ select row_to_json(t)
         			from practices
         			order by event_date asc
       			) d
-    		) as definitions
-  		from clubs
+  --  		) as schedule
+--  		from clubs
 	) t

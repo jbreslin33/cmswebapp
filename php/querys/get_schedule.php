@@ -2,25 +2,24 @@
 session_start();
 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
-
+/*
 $query = "
 select row_to_json(t)
         from
         (
-                select
+        	select array_to_json(array_agg(row_to_json(d)))
+                from
                 (
-                        select array_to_json(array_agg(row_to_json(d)))
-                        from
-                        (
-                                select event_date, start_time, address
-                                from practices
-                                order by event_date asc
-                        ) d
-                ) as definitions
-                from clubs
+                	select event_date, start_time, address
+                        from practices
+                        order by event_date asc
+                ) d
         ) t
 ";
-
+*/
+$query = "
+select event_date, start_time, address from practices
+";
 $database = new Database();
 
 $results = $database->query($query);

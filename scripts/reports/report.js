@@ -436,19 +436,19 @@ class Report
                         {
                                 if (request.status === 200)
                                 {
-                                        console.log("update schedule from database");
-					var data = JSON.parse(this.response);
+					console.log('res:' + this.responseText);
+					var data = JSON.parse(this.responseText);
 					console.log('data:' + data);
-					console.log('A:' + data.event_date);
-					//console.log('A:' + data.[0][0].event_date);
-					//console.log('data.event_date:' + data.event_date[0])		
-					//console.log('EV------------:' + data[0][0][event_date])		
-                                        //var response = JSON.parse(request.responsetext);
-                                        //console.log('name:' + response.name);
-                                        //results.key = key;
-                                        //results.label = label;
-                                        //results.created = response.query.created;
-                                        //APPLICATION.mWeekReport.updateScheduleCard(results);
+					if (data)
+					{
+						console.log('data A:' + data[0][0]);
+						console.log('data B:' + data[1][0]);
+						console.log('data C:' + data[0][2]);
+					}
+					else
+					{
+						console.log('no schedule');
+					}	
                                 }
                         }
                         else
