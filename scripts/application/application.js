@@ -20,7 +20,7 @@ class Application
 		*/
 		//this.mWeekReport = new Report(this);
 		this.mHeader = new Header(this,"Club Management System");
-		this.mWeeklySchedule = new WeeklySchedule(this);
+		this.mDailySchedule = new DailySchedule(this);
 		//this.mWeekReport = new OldReport(this);
 	}
 
