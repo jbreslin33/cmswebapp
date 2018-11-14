@@ -46,112 +46,103 @@ class OldReport
                 divMain.setAttribute("class", "main");
 		document.body.appendChild(divMain);
 
-				//card
-				var divCardTemplate = document.createElement("DIV"); 	
-                		divCardTemplate.setAttribute("class", "card cardTemplate weather-forecast");
-      				divCardTemplate.setAttribute('hidden', true);
-				divMain.appendChild(divCardTemplate);
+			//card
+			var divCardTemplate = document.createElement("DIV"); 	
+                	divCardTemplate.setAttribute("class", "card cardTemplate weather-forecast");
+      			divCardTemplate.setAttribute('hidden', true);
+			divMain.appendChild(divCardTemplate);
 		
-					var divCityKey = document.createElement("DIV"); 	
-                			divCityKey.setAttribute("class", "city-key");
-      					divCityKey.setAttribute('hidden', true);
-					divCardTemplate.appendChild(divCityKey);
+				var divCityKey = document.createElement("DIV"); 	
+                		divCityKey.setAttribute("class", "city-key");
+      				divCityKey.setAttribute('hidden', true);
+				divCardTemplate.appendChild(divCityKey);
 
-					var divCardLastUpdated = document.createElement("DIV"); 	
-                			divCardLastUpdated.setAttribute("class", "card-last-updated");
-      					divCardLastUpdated.setAttribute('hidden', true);
-					divCardTemplate.appendChild(divCardLastUpdated);
+				var divCardLastUpdated = document.createElement("DIV"); 	
+                		divCardLastUpdated.setAttribute("class", "card-last-updated");
+      				divCardLastUpdated.setAttribute('hidden', true);
+				divCardTemplate.appendChild(divCardLastUpdated);
 
-					var divLocation = document.createElement("DIV"); 	
-                			divLocation.setAttribute("class", "location");
-					divCardTemplate.appendChild(divLocation);
+				var divLocation = document.createElement("DIV"); 	
+                		divLocation.setAttribute("class", "location");
+				divCardTemplate.appendChild(divLocation);
 		
-					var divDate = document.createElement("DIV"); 	
-                			divDate.setAttribute("class", "date");
-					divCardTemplate.appendChild(divDate);
+				var divDate = document.createElement("DIV"); 	
+                		divDate.setAttribute("class", "date");
+				divCardTemplate.appendChild(divDate);
 
+				var divDescription = document.createElement("DIV"); 	
+                		divDescription.setAttribute("class", "description");
+				divCardTemplate.appendChild(divDescription);
+
+				var divCurrent = document.createElement("DIV"); 	
+                		divCurrent.setAttribute("class", "current");
+				divCardTemplate.appendChild(divCurrent);
+
+					var divVisual = document.createElement("DIV"); 	
+                			divVisual.setAttribute("class", "visual");
+					divCurrent.appendChild(divVisual);
+		
+						var divIcon = document.createElement("DIV"); 	
+                				divIcon.setAttribute("class", "icon");
+						divVisual.appendChild(divIcon);
+		
+						var divTemperature = document.createElement("DIV"); 	
+                				divTemperature.setAttribute("class", "temperature");
+						divVisual.appendChild(divTemperature);
+		
+							var spanValue = document.createElement("SPAN"); 	
+                					spanValue.setAttribute("class", "value");
+							divTemperature.appendChild(spanValue);
+		
+							var spanScale = document.createElement("SPAN"); 	
+                					spanScale.setAttribute("class", "scale");
+							divTemperature.appendChild(spanScale);
+		
+								var degreeScale = document.createTextNode('\xB0 F');
+                						spanScale.appendChild(degreeScale);
+		
 					var divDescription = document.createElement("DIV"); 	
                 			divDescription.setAttribute("class", "description");
-					divCardTemplate.appendChild(divDescription);
+					divCurrent.appendChild(divDescription);
 
-					var divCurrent = document.createElement("DIV"); 	
-                			divCurrent.setAttribute("class", "current");
-					divCardTemplate.appendChild(divCurrent);
+						var divHumidity = document.createElement("DIV"); 	
+                				divHumidity.setAttribute("class", "humidity");
+						divDescription.appendChild(divHumidity);
+		
+						var divWind = document.createElement("DIV"); 	
+                				divWind.setAttribute("class", "wind");
+						divDescription.appendChild(divWind);
 
-						var divVisual = document.createElement("DIV"); 	
-                				divVisual.setAttribute("class", "visual");
-						divCurrent.appendChild(divVisual);
+							var spanValue = document.createElement("SPAN"); 	
+                					spanValue.setAttribute("class", "value");
+							divWind.appendChild(spanValue);		
 		
-							var divIcon = document.createElement("DIV"); 	
-                					divIcon.setAttribute("class", "icon");
-							divVisual.appendChild(divIcon);
-		
-							var divTemperature = document.createElement("DIV"); 	
-                					divTemperature.setAttribute("class", "temperature");
-							divVisual.appendChild(divTemperature);
-		
-								var spanValue = document.createElement("SPAN"); 	
-                						spanValue.setAttribute("class", "value");
-								divTemperature.appendChild(spanValue);
-		
-								var spanScale = document.createElement("SPAN"); 	
-                						spanScale.setAttribute("class", "scale");
-								divTemperature.appendChild(spanScale);
-		
-									var degreeScale = document.createTextNode('\xB0 F');
-                							spanScale.appendChild(degreeScale);
-		
-						var divDescription = document.createElement("DIV"); 	
-                				divDescription.setAttribute("class", "description");
-						divCurrent.appendChild(divDescription);
+							var spanScale = document.createElement("SPAN"); 	
+                					spanScale.setAttribute("class", "scale");
+							divWind.appendChild(spanScale);		
 
-							var divHumidity = document.createElement("DIV"); 	
-                					divHumidity.setAttribute("class", "humidity");
-							divDescription.appendChild(divHumidity);
+							var textScale = document.createTextNode(' mph ');
+                					divWind.appendChild(textScale);
 		
-							var divWind = document.createElement("DIV"); 	
-                					divWind.setAttribute("class", "wind");
-							divDescription.appendChild(divWind);
+							var spanDirection = document.createElement("SPAN"); 	
+                					spanDirection.setAttribute("class", "direction");
+							divWind.appendChild(spanDirection);		
 
-								var spanValue = document.createElement("SPAN"); 	
-                						spanValue.setAttribute("class", "value");
-								divWind.appendChild(spanValue);		
+							var degreeDirection = document.createTextNode('\xB0');
+                					divWind.appendChild(degreeDirection);
 		
-								var spanScale = document.createElement("SPAN"); 	
-                						spanScale.setAttribute("class", "scale");
-								divWind.appendChild(spanScale);		
-
-								var textScale = document.createTextNode(' mph ');
-                						divWind.appendChild(textScale);
+						var divSunrise = document.createElement("DIV"); 	
+                				divSunrise.setAttribute("class", "sunrise");
+						divDescription.appendChild(divSunrise);
 		
-								var spanDirection = document.createElement("SPAN"); 	
-                						spanDirection.setAttribute("class", "direction");
-								divWind.appendChild(spanDirection);		
-
-								var degreeDirection = document.createTextNode('\xB0');
-                						divWind.appendChild(degreeDirection);
-		
-							var divSunrise = document.createElement("DIV"); 	
-                					divSunrise.setAttribute("class", "sunrise");
-							divDescription.appendChild(divSunrise);
-		
-							var divSunset = document.createElement("DIV"); 	
-                					divSunset.setAttribute("class", "sunset");
-							divDescription.appendChild(divSunset);
-
-					/******
-					* schedule
-					*/ 
-					var divStartTime = document.createElement("DIV"); 	
-                			divStartTime.setAttribute("class", "time");
-					divCardTemplate.appendChild(divStartTime);
-					
+						var divSunset = document.createElement("DIV"); 	
+                				divSunset.setAttribute("class", "sunset");
+						divDescription.appendChild(divSunset);
 
 					//future	
 					var divFuture = document.createElement("DIV"); 	
                 			divFuture.setAttribute("class", "future");
-					var c = document.getElementsByClassName("card cardTemplate weather-forecast");
-					c[0].appendChild(divFuture);
+					divCardTemplate.appendChild(divFuture);
 
 					var divOneDayArray = new Array() 
 
