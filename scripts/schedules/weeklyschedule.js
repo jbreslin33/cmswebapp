@@ -4,7 +4,6 @@ class WeeklySchedule extends Schedule
 {
 	constructor(application)
 	{
-		//Application
-		this.mApplication = application;
+		super(application);
 	}
 }

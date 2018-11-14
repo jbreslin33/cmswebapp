@@ -4,7 +4,6 @@ class Schedule extends Report
 {
 	constructor(application)
 	{
-		//Application
-		this.mApplication = application;
+		super(application);
 	}
 }

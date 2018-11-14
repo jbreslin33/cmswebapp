@@ -215,7 +215,7 @@ class OldReport
     		this.daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 		this.initialForecastData = new WeatherForecast();
-		this.initialScheduleData = new Schedule();
+		this.initialScheduleData = new OldSchedule();
 	}
   	
 	// Toggles the visibility of the add new city dialog.
@@ -707,7 +707,7 @@ class Wind
 	}
 }
 
-class Schedule
+class OldSchedule
 {
         constructor()
         {
