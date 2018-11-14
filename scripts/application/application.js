@@ -19,11 +19,9 @@ class Application
 		this.mStateMachine.update();
 		*/
 		//this.mWeekReport = new Report(this);
-/*
 		this.mHeader = new Header(this,"Club Management System");
 		this.mWeeklySchedule = new WeeklySchedule(this);
-*/
-		this.mWeekReport = new OldReport(this);
+		//this.mWeekReport = new OldReport(this);
 	}
 
 	update()
