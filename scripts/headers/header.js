@@ -27,9 +27,8 @@ class Header
 		this.mButtonRefresh.setAttribute("class", "headerButton");
 		this.mButtonRefresh.setAttribute("aria-label", "Refresh");
 		this.mButtonRefresh.setAttribute("id", "butRefresh");
-		this.mHeader.appendChild(this.mButtonRefresh);
-		
 		this.mButtonRefresh.addEventListener("click",this.buttonRefreshClicked); 
+		this.mHeader.appendChild(this.mButtonRefresh);
 		
 		//addbutton
 		this.mButtonAdd = document.createElement("BUTTON");
@@ -43,15 +42,4 @@ class Header
 	{
 		console.log('buttonRefreshClicked');
 	}
-	
-
-/*
-        document.getElementById('butRefresh').addEventListener('click', function()
-        {
-                // Refresh all of the forecasts and schedules
-                APPLICATION.mWeekReport.updateForecasts();
-                APPLICATION.mWeekReport.updateSchedules();
-        });
-*/
-
 }
