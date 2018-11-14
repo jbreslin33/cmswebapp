@@ -41,5 +41,6 @@ class Header
 	buttonRefreshClicked()
 	{
 		console.log('buttonRefreshClicked');
+		//call some kind of update all function
 	}
 }

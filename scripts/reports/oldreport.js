@@ -1,6 +1,6 @@
 'use strict';
 
-class Report 
+class OldReport 
 {
 
 	constructor(application)
