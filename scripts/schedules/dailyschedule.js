@@ -25,7 +25,8 @@ class DailySchedule extends Report
                 	console.log("mPractice from localStorage");
                 	this.mPractice = JSON.parse(this.mPractice);
 
-			getData();	
+			//but lets get some new stuff from intertubes
+			this.getData();	
 		}
 		else
 		{
@@ -88,8 +89,13 @@ class DailySchedule extends Report
         {
 		console.log('saving data to local storage');
                 var data = JSON.stringify(practice);
-                localStorage.mScheduleData = data;
+                localStorage.mPractice = data;
         }
+	
+	updateCard(practice)
+	{
+		this.mDivDate.textContent = practice.mEventDate;
+	}
        
 	getData()
         {
@@ -149,17 +155,13 @@ class DailySchedule extends Report
 
                         // Return the initial weather forecast since no data is available.
                         console.log("update schedule from initial");
-                        APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialScheduleData);
+                        //this.updateCard(this.mInitialPractice);
                         }
                 };
                 request.open('GET', url);
                 request.send();
         }
 
-	updateCard(practice)
-	{
-		this.mDivDate.textContent = practice.mEventDate;
-	}
 }
 
 	
