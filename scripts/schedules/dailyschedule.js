@@ -31,8 +31,7 @@ class DailySchedule extends Report
 		{
                 	console.log("mPractice from initial");
 			this.updateCard(this.mInitialPractice);
-			
-				
+                	this.saveToLocalStorage(this.mInitialPractice);
 		}
 		
 /*
@@ -84,6 +83,13 @@ class DailySchedule extends Report
 
 
 	}
+
+        saveToLocalStorage(practice)
+        {
+		console.log('saving data to local storage');
+                var data = JSON.stringify(practice);
+                localStorage.mScheduleData = data;
+        }
        
 	getData()
         {
