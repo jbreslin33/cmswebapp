@@ -5,8 +5,17 @@ class DailySchedule extends Report
 	constructor(application)
 	{
 		super(application);
+                
+		this.mDivDate = document.createElement("DIV");
+                this.mDivDate.setAttribute("class", "date");
+                this.mDivCardTemplate.appendChild(this.mDivDate);
+		this.mDivDate.textContent = "yo";
 
-		this.mPractice = new Practice();
+          	var textScale = document.createTextNode(' mph ');
+               	this.mDivDate.appendChild(textScale);
+
+
+		this.mInitialPractice = new Practice();
 
 		/**********************************/
         	//SCHEDULE
@@ -21,7 +30,7 @@ class DailySchedule extends Report
 		else
 		{
                 	console.log("mPractice from initial");
-			this.updateCard(this.mPractice);
+			this.updateCard(this.mInitialPractice);
 			
 				
 		}
@@ -49,14 +58,6 @@ class DailySchedule extends Report
         }
 */
 
-
-                this.mDivDate = document.createElement("DIV");
-                this.mDivDate.setAttribute("class", "date");
-                this.mDivCardTemplate.appendChild(this.mDivDate);
-		this.mDivDate.textContent = "yo";
-
-          	var textScale = document.createTextNode(' mph ');
-               	this.mDivDate.appendChild(textScale);
 
 		console.log('DailySchedule constructor');
 
@@ -149,9 +150,9 @@ class DailySchedule extends Report
                 request.send();
         }
 
-	updateCard()
+	updateCard(practice)
 	{
-
+		this.mDivDate.textContent = practice.mEventDate;
 	}
 }
 
