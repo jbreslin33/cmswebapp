@@ -6,7 +6,8 @@ class DailySchedule extends Report
 	{
 		super(application);
 
-		this.mData = null;
+		this.mData = new Array();
+
 		/**********************************/
         	//SCHEDULE
         	this.mData = localStorage.mDailyScheduleData;
@@ -20,6 +21,7 @@ class DailySchedule extends Report
 		else
 		{
                 	console.log("mDailySceduleData from initial");
+			this.updateCard();
 		}
 		
 /*
@@ -144,4 +146,22 @@ class DailySchedule extends Report
                 request.open('GET', url);
                 request.send();
         }
+
+	updateCard()
+	{
+
+	}
 }
+
+	
+
+class Practices
+{
+        constructor()
+        {
+                this.mEventDate = 'NA';
+                this.mStartTime = 'NA';
+                this.mAddress   = 'NA';
+        }
+}
+
