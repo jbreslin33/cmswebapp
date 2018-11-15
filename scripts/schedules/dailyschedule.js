@@ -14,7 +14,8 @@ class DailySchedule extends Report
 		{
                 	console.log("mDailySceduleData from localStorage");
                 	this.mData = JSON.parse(this.mData);
-			
+
+			getSchedule();	
 		}
 		else
 		{
@@ -78,4 +79,69 @@ class DailySchedule extends Report
 
 
 	}
+       
+	getData()
+        {
+                var url = "/php/querys/get_schedule.php";
+
+                // TODO add cache logic here
+                if ('caches' in window)
+                {
+                        console.log("cached schedule in window");
+                        /*
+                        * Check if the service worker has already cached this city's weather
+                        * data. If the service worker has the data, then display the cached
+                        * data while the app fetches the latest data.
+                        */
+                        caches.match(url).then(function(response)
+                        {
+                                if (response)
+                                {
+                                        response.json().then(function updateFromCache(json)
+                                        {
+                                                console.log("update schedule from cache");
+                                                var results = json.query.results;
+                                                results.key = key;
+                                                results.label = label;
+                                                results.created = json.query.created;
+                                                this.updateScheduleCard(results);
+                                        });
+                                }
+                        });
+                }
+
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        console.log('res:' + this.responseText);
+                                        var data = JSON.parse(this.responseText);
+                                        console.log('data:' + data);
+                                        if (data)
+                                        {
+                                                console.log('data A:' + data[0][0]);
+                                                console.log('data B:' + data[1][0]);
+                                                console.log('data C:' + data[0][2]);
+                                        }
+                                        else
+                                        {
+                                                console.log('no schedule');
+                                        }
+                                }
+                        }
+                        else
+                        {
+
+                        // Return the initial weather forecast since no data is available.
+                        console.log("update schedule from initial");
+                        APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialScheduleData);
+                        }
+                };
+                request.open('GET', url);
+                request.send();
+        }
 }
