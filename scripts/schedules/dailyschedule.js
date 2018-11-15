@@ -6,22 +6,24 @@ class DailySchedule extends Report
 	{
 		super(application);
 
-		this.mData = new Array();
+		this.mPractice = new Practice();
 
 		/**********************************/
         	//SCHEDULE
-        	this.mData = localStorage.mDailyScheduleData;
-        	if (this.mData)
+        	this.mPractice = localStorage.mPractice;
+        	if (this.mPractice)
 		{
-                	console.log("mDailySceduleData from localStorage");
-                	this.mData = JSON.parse(this.mData);
+                	console.log("mPractice from localStorage");
+                	this.mPractice = JSON.parse(this.mPractice);
 
-			getSchedule();	
+			getData();	
 		}
 		else
 		{
-                	console.log("mDailySceduleData from initial");
-			this.updateCard();
+                	console.log("mPractice from initial");
+			this.updateCard(this.mPractice);
+			
+				
 		}
 		
 /*
@@ -155,7 +157,7 @@ class DailySchedule extends Report
 
 	
 
-class Practices
+class Practice
 {
         constructor()
         {
