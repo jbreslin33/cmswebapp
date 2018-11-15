@@ -156,6 +156,11 @@ class DailySchedule extends Report
                         // Return the initial weather forecast since no data is available.
                         console.log("update schedule from initial");
                         //this.updateCard(this.mInitialPractice);
+				if (APPLICATION)
+				{
+					console.log('APP:' + APPLICATION.mName)
+					APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice);
+				}
                         }
                 };
                 request.open('GET', url);
