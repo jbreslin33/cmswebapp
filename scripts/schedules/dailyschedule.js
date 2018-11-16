@@ -9,7 +9,7 @@ class DailySchedule extends Report
 		this.mDivDate = document.createElement("DIV");
                 this.mDivDate.setAttribute("class", "date");
                 this.mDivCardTemplate.appendChild(this.mDivDate);
-		this.mDivDate.textContent = "DEFAULT";
+		//this.mDivDate.textContent = "DEFAULT";
 
 		this.mInitialPractice = new Practice();
 
@@ -51,11 +51,6 @@ class DailySchedule extends Report
                 localStorage.mPractice = data;
         }
 	
-	updateCard(practice)
-	{
-		console.log('updateCard function:' + practice.mEventDate);
-		this.mDivDate.textContent = practice.mEventDate;
-	}
        
 	getData()
         {
@@ -105,6 +100,7 @@ class DailySchedule extends Report
 						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
 						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][0];
                                         	APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
+                                        	APPLICATION.mDailySchedule.mDivDate.textContent = "WHAT";
                                         }
                                         else
                                         {
@@ -125,6 +121,13 @@ class DailySchedule extends Report
                 request.open('GET', url);
                 request.send();
         }
+	updateCard(practice)
+	{
+		console.log('updateCard function:' + practice.mEventDate);
+		this.mDivDate.textContent = practice.mEventDate;
+		this.mDivDate.textContent = "WHY";
+		//APPLICATION.mDailySchedule.mDivDate.textContent = "WHY";
+	}
 
 }
 class Practice

@@ -28,14 +28,11 @@
       	<circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
     	</svg>
 </div>
-
 	
 	<!-- javascripts -->
 
 	<!-- reports and schedules -->
-	<script src="scripts/reports/oldreport.js"></script>
 	<script src="scripts/reports/report.js"></script>
-	<script src="scripts/schedules/schedule.js"></script>
 	<script src="scripts/schedules/dailyschedule.js"></script>
 
 	<!-- headers -->
@@ -55,55 +52,7 @@
 	
 	var APPLICATION = new Application();
 
-  	// TODO add startup code here
-	//FORECAST
-/*
-  	APPLICATION.mWeekReport.mForecastData = localStorage.mForecastData;
-  	if (APPLICATION.mWeekReport.mForecastData) 
-	{
-		console.log("index forecast from localStorage");
-    		APPLICATION.mWeekReport.mForecastData = JSON.parse(APPLICATION.mWeekReport.mForecastData);
-    		
-		APPLICATION.mWeekReport.mForecastData.forEach(function(event_record) 
-		{
-      			APPLICATION.mWeekReport.getForecast(event_record.key, event_record.label);
-    		});
-  	} 
-	else 
-	{
-		console.log("update forecastCard from initial");
-		APPLICATION.mWeekReport.updateForecastCard(APPLICATION.mWeekReport.initialForecastData);
-    		APPLICATION.mWeekReport.mForecastData = 
-		[
-      			{key: APPLICATION.mWeekReport.initialForecastData.key, label: APPLICATION.mWeekReport.initialForecastData.label}
-    		];
-    		APPLICATION.mWeekReport.saveForecastToLocalStorage();
-  	}
-
-        //SCHEDULE
-        APPLICATION.mWeekReport.mScheduleData = localStorage.mScheduleData;
-        if (APPLICATION.mWeekReport.mScheduleData)
-        {
-                console.log("index schedule from localStorage");
-                APPLICATION.mWeekReport.mScheduleData = JSON.parse(APPLICATION.mWeekReport.mScheduleData);
-
-                APPLICATION.mWeekReport.mScheduleData.forEach(function(event_record)
-                {
-                        APPLICATION.mWeekReport.getSchedule(event_record.key, event_record.label);
-                });
-        }
-        else
-        {
-                console.log("update scheduleCard from initial");
-                APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialScheduleData);
-                APPLICATION.mWeekReport.mScheduleData =
-                [
-                        {key: APPLICATION.mWeekReport.initialScheduleData.key, label: APPLICATION.mWeekReport.initialScheduleData.label}
-                ];
-                APPLICATION.mWeekReport.saveScheduleToLocalStorage();
-        }
-*/
-  	// TODO add service worker code here
+	// TODO add service worker code here
   	if ('serviceWorker' in navigator) 
 	{
     		navigator.serviceWorker
