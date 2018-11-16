@@ -94,6 +94,7 @@ class DailySchedule extends Report
 	
 	updateCard(practice)
 	{
+		console.log('updateCard function');
 		this.mDivDate.textContent = practice.mEventDate;
 	}
        
@@ -135,11 +136,28 @@ class DailySchedule extends Report
                         {
                                 if (request.status === 200)
                                 {
+                                        console.log("update forecast from internet");
                                         console.log('res:' + this.responseText);
                                         var data = JSON.parse(this.responseText);
+					APPLICATION.mDailySchedule.mPractice = new Practice();
+					APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
+					APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
+					APPLICATION.mDailySchedule.mPractice.mAddress = data [0][0];
+                                        APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
+					
                                         console.log('data:' + data);
                                         if (data)
                                         {
+/*
+                                        console.log("update forecast from internet");
+                                        var response = JSON.parse(request.response);
+                                        var results = response.query.results;
+                                        results.key = key;
+                                        results.label = label;
+                                        results.created = response.query.created;
+                                        APPLICATION.mWeekReport.updateForecastCard(results);
+
+*/
                                                 console.log('data A:' + data[0][0]);
                                                 console.log('data B:' + data[1][0]);
                                                 console.log('data C:' + data[0][2]);
