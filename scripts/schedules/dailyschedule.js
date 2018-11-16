@@ -9,10 +9,10 @@ class DailySchedule extends Report
 		this.mDivDate = document.createElement("DIV");
                 this.mDivDate.setAttribute("class", "date");
                 this.mDivCardTemplate.appendChild(this.mDivDate);
-		this.mDivDate.textContent = "yo";
+		this.mDivDate.textContent = "DEFAULT";
 
-          	var textScale = document.createTextNode(' mph ');
-               	this.mDivDate.appendChild(textScale);
+          	//var textScale = document.createTextNode(' mph ');
+               	//this.mDivDate.appendChild(textScale);
 
 
 		this.mInitialPractice = new Practice();
@@ -94,7 +94,7 @@ class DailySchedule extends Report
 	
 	updateCard(practice)
 	{
-		console.log('updateCard function');
+		console.log('updateCard function:' + practice.mEventDate);
 		this.mDivDate.textContent = practice.mEventDate;
 	}
        
@@ -170,13 +170,10 @@ class DailySchedule extends Report
                         }
                         else
                         {
-
-                        // Return the initial weather forecast since no data is available.
-                        console.log("update schedule from initial");
-                        //this.updateCard(this.mInitialPractice);
+                        	// Return the initial weather forecast since no data is available.
 				if (APPLICATION)
 				{
-					console.log('APP:' + APPLICATION.mName)
+					console.log('return initial data');
 					APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice);
 				}
                         }
