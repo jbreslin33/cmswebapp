@@ -18,7 +18,7 @@ class DailySchedule extends Report
         	this.mPractice = localStorage.mPractice;
         	if (this.mPractice)
 		{
-                	console.log("mPractice from localStorage");
+                	console.log("IN CONSTRUCTOR IF LOCAL STORAGE");
                 	this.mPractice = JSON.parse(this.mPractice);
 
 			//but lets get some new stuff from intertubes
@@ -26,7 +26,8 @@ class DailySchedule extends Report
 		}
 		else
 		{
-                	console.log("mPractice from initial");
+                	console.log("IN CONSTRUCTOR ELSE NO LOCAL STORAGE");
+			console.log('this.updateCard(this.mInitialPractice)');
 			this.updateCard(this.mInitialPractice);
                 	this.saveToLocalStorage(this.mInitialPractice);
 		}
@@ -51,7 +52,6 @@ class DailySchedule extends Report
                 localStorage.mPractice = data;
         }
 	
-       
 	getData()
         {
                 var url = "/php/querys/get_schedule.php";
@@ -93,13 +93,12 @@ class DailySchedule extends Report
                                         var data = JSON.parse(this.responseText);
                                         if (data)
 					{
-                                        	console.log("update from internet");
 						APPLICATION.mDailySchedule.mPractice = new Practice();
 						APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
 						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
 						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][0];
+                                        	console.log('APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice)');
                                         	APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
-                                        	APPLICATION.mDailySchedule.mDivDate.textContent = "WHAT";
                                         }
                                         else
                                         {
@@ -112,7 +111,7 @@ class DailySchedule extends Report
                         	// Return the initial weather forecast since no data is available.
 				if (APPLICATION)
 				{
-					console.log('return initial data');
+					console.log('APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice)');
 					APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice);
 				}
                         }
@@ -124,25 +123,11 @@ class DailySchedule extends Report
 	{
 		if (APPLICATION)
 		{
-			console.log('updateCard function:' + practice.mEventDate);
-			this.mDivDate.textContent = practice.mEventDate;
-			this.mDivDate.textContent = "WHY";
-			//APPLICATION.mDailySchedule.mDivDate.textContent = "WHY";
-			APPLICATION.mDailySchedule.mDivDate.textContent = "PLEASE";
-
-			var para = document.createElement("p");
-			var node = document.createTextNode("this is new");
-			para.appendChild(node);
-			
-			APPLICATION.mDailySchedule.mDivCardTemplate.appendChild(para);
-
 			APPLICATION.mDailySchedule.mCard.querySelector('.date').textContent = practice.mEventDate;
-
-
 		}
 		else
 		{
-			console.log('why no application');
+			console.log('NO APPLICATION');
 		}
 	}
 
