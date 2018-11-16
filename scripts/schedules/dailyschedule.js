@@ -32,16 +32,16 @@ class DailySchedule extends Report
 		}
 		
                 //report vars
-                this.isLoading = true;
-                this.visibleCards = {};
-                this.spinner = document.querySelector('.loader');
-                this.cardTemplate = document.querySelector('.cardTemplate');
-                this.container = document.querySelector('.main');
+                this.mIsLoading = true;
+                this.mVisibleCards = {};
+                this.mSpinner = document.querySelector('.loader');
+                this.mCardTemplate = document.querySelector('.cardTemplate');
+                this.mContainer = document.querySelector('.main');
 
-                 var card = this.cardTemplate.cloneNode(true);
-                 card.classList.remove('cardTemplate');
-                 card.removeAttribute('hidden');
-                 this.container.appendChild(card);
+                 this.mCard = this.mCardTemplate.cloneNode(true);
+                 this.mCard.classList.remove('cardTemplate');
+                 this.mCard.removeAttribute('hidden');
+                 this.mContainer.appendChild(this.mCard);
 	}
 
         saveToLocalStorage(practice)
@@ -94,7 +94,6 @@ class DailySchedule extends Report
                                         if (data)
 					{
                                         	console.log("update from internet");
-                                        	console.log('data:' + data);
 						APPLICATION.mDailySchedule.mPractice = new Practice();
 						APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
 						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
@@ -123,10 +122,28 @@ class DailySchedule extends Report
         }
 	updateCard(practice)
 	{
-		console.log('updateCard function:' + practice.mEventDate);
-		this.mDivDate.textContent = practice.mEventDate;
-		this.mDivDate.textContent = "WHY";
-		//APPLICATION.mDailySchedule.mDivDate.textContent = "WHY";
+		if (APPLICATION)
+		{
+			console.log('updateCard function:' + practice.mEventDate);
+			this.mDivDate.textContent = practice.mEventDate;
+			this.mDivDate.textContent = "WHY";
+			//APPLICATION.mDailySchedule.mDivDate.textContent = "WHY";
+			APPLICATION.mDailySchedule.mDivDate.textContent = "PLEASE";
+
+			var para = document.createElement("p");
+			var node = document.createTextNode("this is new");
+			para.appendChild(node);
+			
+			APPLICATION.mDailySchedule.mDivCardTemplate.appendChild(para);
+
+			APPLICATION.mDailySchedule.mCard.querySelector('.date').textContent = "CCCCC";
+
+
+		}
+		else
+		{
+			console.log('why no application');
+		}
 	}
 
 }
