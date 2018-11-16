@@ -5,15 +5,11 @@ class DailySchedule extends Report
 	constructor(application)
 	{
 		super(application);
-                
+               	console.log('DailySchedule Constructor'); 
 		this.mDivDate = document.createElement("DIV");
                 this.mDivDate.setAttribute("class", "date");
                 this.mDivCardTemplate.appendChild(this.mDivDate);
 		this.mDivDate.textContent = "DEFAULT";
-
-          	//var textScale = document.createTextNode(' mph ');
-               	//this.mDivDate.appendChild(textScale);
-
 
 		this.mInitialPractice = new Practice();
 
@@ -35,33 +31,6 @@ class DailySchedule extends Report
                 	this.saveToLocalStorage(this.mInitialPractice);
 		}
 		
-/*
-        if (APPLICATION.mWeekReport.mScheduleData)
-        {
-                console.log("index schedule from localStorage");
-                APPLICATION.mWeekReport.mScheduleData = JSON.parse(APPLICATION.mWeekReport.mScheduleData);
-
-                APPLICATION.mWeekReport.mScheduleData.forEach(function(event_record)
-                {
-                        APPLICATION.mWeekReport.getSchedule(event_record.key, event_record.label);
-                });
-        }
-        else
-        {
-                console.log("update scheduleCard from initial");
-                APPLICATION.mWeekReport.updateScheduleCard(APPLICATION.mWeekReport.initialScheduleData);
-                APPLICATION.mWeekReport.mScheduleData =
-                [
-                        {key: APPLICATION.mWeekReport.initialScheduleData.key, label: APPLICATION.mWeekReport.initialScheduleData.label}
-                ];
-                APPLICATION.mWeekReport.saveScheduleToLocalStorage();
-        }
-*/
-
-
-		console.log('DailySchedule constructor');
-
-
                 //report vars
                 this.isLoading = true;
                 this.visibleCards = {};
@@ -69,20 +38,10 @@ class DailySchedule extends Report
                 this.cardTemplate = document.querySelector('.cardTemplate');
                 this.container = document.querySelector('.main');
 
-                //var card = this.visibleCards[data.key];
-                //if (!card)
-                //{
-                        var card = this.cardTemplate.cloneNode(true);
-                        card.classList.remove('cardTemplate');
-                        //card.querySelector('.location').textContent = data.label;
-                        //card.querySelector('.location').textContent = "LABEL GOES HERE";
-                        card.removeAttribute('hidden');
-                        this.container.appendChild(card);
-                        //this.visibleCards[data.key] = card;
-                //}
-
-
-
+                 var card = this.cardTemplate.cloneNode(true);
+                 card.classList.remove('cardTemplate');
+                 card.removeAttribute('hidden');
+                 this.container.appendChild(card);
 	}
 
         saveToLocalStorage(practice)
@@ -136,31 +95,16 @@ class DailySchedule extends Report
                         {
                                 if (request.status === 200)
                                 {
-                                        console.log("update forecast from internet");
-                                        console.log('res:' + this.responseText);
                                         var data = JSON.parse(this.responseText);
-					APPLICATION.mDailySchedule.mPractice = new Practice();
-					APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
-					APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
-					APPLICATION.mDailySchedule.mPractice.mAddress = data [0][0];
-                                        APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
-					
-                                        console.log('data:' + data);
                                         if (data)
-                                        {
-/*
-                                        console.log("update forecast from internet");
-                                        var response = JSON.parse(request.response);
-                                        var results = response.query.results;
-                                        results.key = key;
-                                        results.label = label;
-                                        results.created = response.query.created;
-                                        APPLICATION.mWeekReport.updateForecastCard(results);
-
-*/
-                                                console.log('data A:' + data[0][0]);
-                                                console.log('data B:' + data[1][0]);
-                                                console.log('data C:' + data[0][2]);
+					{
+                                        	console.log("update from internet");
+                                        	console.log('data:' + data);
+						APPLICATION.mDailySchedule.mPractice = new Practice();
+						APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
+						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
+						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][0];
+                                        	APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
                                         }
                                         else
                                         {
@@ -183,9 +127,6 @@ class DailySchedule extends Report
         }
 
 }
-
-	
-
 class Practice
 {
         constructor()
@@ -195,4 +136,3 @@ class Practice
                 this.mAddress   = 'NA';
         }
 }
-
