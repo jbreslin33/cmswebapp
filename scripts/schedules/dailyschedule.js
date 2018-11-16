@@ -136,7 +136,7 @@ class DailySchedule extends Report
 			
 			APPLICATION.mDailySchedule.mDivCardTemplate.appendChild(para);
 
-			APPLICATION.mDailySchedule.mCard.querySelector('.date').textContent = "CCCCC";
+			APPLICATION.mDailySchedule.mCard.querySelector('.date').textContent = practice.mEventDate;
 
 
 		}
