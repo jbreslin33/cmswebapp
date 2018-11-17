@@ -100,8 +100,8 @@ class DailySchedule extends Report
 					{
 						APPLICATION.mDailySchedule.mPractice = new Practice();
 						APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
-						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][0];
-						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][0];
+						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][1];
+						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][2];
                                         	console.log('APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice)');
                                         	APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
                                         }
@@ -129,6 +129,7 @@ class DailySchedule extends Report
 		if (APPLICATION)
 		{
 			APPLICATION.mDailySchedule.mCard.querySelector('.eventDate').textContent = practice.mEventDate;
+			APPLICATION.mDailySchedule.mCard.querySelector('.startTime').textContent = practice.mStartTime;
 		}
 		else
 		{
