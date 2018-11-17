@@ -14,6 +14,10 @@ class DailySchedule extends Report
 		this.mDivStartTime = document.createElement("DIV");
                 this.mDivStartTime.setAttribute("class", "startTime");
                 this.mDivCardTemplate.appendChild(this.mDivStartTime);
+		
+		this.mDivAddress = document.createElement("DIV");
+                this.mDivAddress.setAttribute("class", "address");
+                this.mDivCardTemplate.appendChild(this.mDivAddress);
 
 
 		this.mInitialPractice = new Practice();
@@ -130,6 +134,7 @@ class DailySchedule extends Report
 		{
 			APPLICATION.mDailySchedule.mCard.querySelector('.eventDate').textContent = practice.mEventDate;
 			APPLICATION.mDailySchedule.mCard.querySelector('.startTime').textContent = practice.mStartTime;
+			APPLICATION.mDailySchedule.mCard.querySelector('.address').textContent = practice.mAddress;
 		}
 		else
 		{
