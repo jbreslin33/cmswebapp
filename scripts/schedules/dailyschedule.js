@@ -8,11 +8,11 @@ class DailySchedule extends Report
                	console.log('DailySchedule Constructor'); 
 
 		this.mDivEventDate = document.createElement("DIV");
-                this.mDivEventDate.setAttribute("class", "date");
+                this.mDivEventDate.setAttribute("class", "eventDate");
                 this.mDivCardTemplate.appendChild(this.mDivEventDate);
 
 		this.mDivStartTime = document.createElement("DIV");
-                this.mDivStartTime.setAttribute("class", "date");
+                this.mDivStartTime.setAttribute("class", "startTime");
                 this.mDivCardTemplate.appendChild(this.mDivStartTime);
 
 
@@ -128,7 +128,7 @@ class DailySchedule extends Report
 	{
 		if (APPLICATION)
 		{
-			APPLICATION.mDailySchedule.mCard.querySelector('.date').textContent = practice.mEventDate;
+			APPLICATION.mDailySchedule.mCard.querySelector('.eventDate').textContent = practice.mEventDate;
 		}
 		else
 		{
