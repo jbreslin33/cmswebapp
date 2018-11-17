@@ -6,10 +6,15 @@ class DailySchedule extends Report
 	{
 		super(application);
                	console.log('DailySchedule Constructor'); 
-		this.mDivDate = document.createElement("DIV");
-                this.mDivDate.setAttribute("class", "date");
-                this.mDivCardTemplate.appendChild(this.mDivDate);
-		//this.mDivDate.textContent = "DEFAULT";
+
+		this.mDivEventDate = document.createElement("DIV");
+                this.mDivEventDate.setAttribute("class", "date");
+                this.mDivCardTemplate.appendChild(this.mDivEventDate);
+
+		this.mDivStartTime = document.createElement("DIV");
+                this.mDivStartTime.setAttribute("class", "date");
+                this.mDivCardTemplate.appendChild(this.mDivStartTime);
+
 
 		this.mInitialPractice = new Practice();
 
