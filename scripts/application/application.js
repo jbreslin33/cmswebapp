@@ -12,8 +12,13 @@ class Application
                 this.mDivMain = document.createElement("DIV");
                 this.mDivMain.setAttribute("class", "main");
                 document.body.appendChild(this.mDivMain);
+
+
+		//login first
 		
-		this.mDailySchedule = new DailySchedule(this);
+		
+		//this.mDailySchedule = new DailySchedule(this);
+		
 	}
 
 	update()
