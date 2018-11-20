@@ -15,8 +15,10 @@ class Application
 
 
 		//login first
+		this.mLogin = new Login(this);
 		
-		
+	
+		//report
 		//this.mDailySchedule = new DailySchedule(this);
 		
 	}
