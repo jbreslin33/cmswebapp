@@ -8,10 +8,9 @@ class Report
 		this.mApplication = application;
 
                 //card
-                this.mDivCardTemplate = document.createElement("DIV");
-                this.mDivCardTemplate.setAttribute("class", "card cardTemplate weather-forecast");
-                //this.mDivCardTemplate.setAttribute("class", "card");
-                this.mDivCardTemplate.setAttribute('hidden', true);
-                this.mApplication.mDivMain.appendChild(this.mDivCardTemplate);
+                this.mDivCard = document.createElement("DIV");
+                this.mDivCard.setAttribute("class", "card cardTemplate weather-forecast");
+                this.mDivCard.setAttribute('hidden', true);
+                this.mApplication.mDivMain.appendChild(this.mDivCard);
 	}
 }

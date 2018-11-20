@@ -9,15 +9,15 @@ class DailySchedule extends Report
 
 		this.mDivEventDate = document.createElement("DIV");
                 this.mDivEventDate.setAttribute("class", "eventDate");
-                this.mDivCardTemplate.appendChild(this.mDivEventDate);
+                this.mDivCard.appendChild(this.mDivEventDate);
 
 		this.mDivStartTime = document.createElement("DIV");
                 this.mDivStartTime.setAttribute("class", "startTime");
-                this.mDivCardTemplate.appendChild(this.mDivStartTime);
+                this.mDivCard.appendChild(this.mDivStartTime);
 		
 		this.mDivAddress = document.createElement("DIV");
                 this.mDivAddress.setAttribute("class", "address");
-                this.mDivCardTemplate.appendChild(this.mDivAddress);
+                this.mDivCard.appendChild(this.mDivAddress);
 
 
 		this.mInitialPractice = new Practice();
@@ -45,11 +45,9 @@ class DailySchedule extends Report
                 this.mIsLoading = true;
                 this.mVisibleCards = {};
                 this.mSpinner = document.querySelector('.loader');
-                this.mCardTemplate = document.querySelector('.cardTemplate');
                 this.mContainer = document.querySelector('.main');
 
-                 this.mCard = this.mCardTemplate.cloneNode(true);
-                 this.mCard.classList.remove('cardTemplate');
+                 this.mCard = this.mDivCard.cloneNode(true);
                  this.mCard.removeAttribute('hidden');
                  this.mContainer.appendChild(this.mCard);
 	}
