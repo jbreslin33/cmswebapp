@@ -6,6 +6,10 @@ class DailySchedule extends Report
 	{
 		super(application);
                	console.log('DailySchedule Constructor'); 
+               
+		//add card to main
+		this.mContainer = document.querySelector('.main');
+                this.mContainer.appendChild(this.mDivCard);
 
 		this.mDivEventDate = document.createElement("DIV");
                 this.mDivEventDate.setAttribute("class", "eventDate");
@@ -45,8 +49,6 @@ class DailySchedule extends Report
                 this.mIsLoading = true;
                 this.mSpinner = document.querySelector('.loader');
 
-                this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivCard);
 	}
 
         saveToLocalStorage(practice)
