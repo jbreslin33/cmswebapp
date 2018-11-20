@@ -43,11 +43,10 @@ class DailySchedule extends Report
 		
                 //report vars
                 this.mIsLoading = true;
-                this.mVisibleCards = {};
                 this.mSpinner = document.querySelector('.loader');
-                this.mContainer = document.querySelector('.main');
 
-                 this.mContainer.appendChild(this.mDivCard);
+                this.mContainer = document.querySelector('.main');
+                this.mContainer.appendChild(this.mDivCard);
 	}
 
         saveToLocalStorage(practice)
