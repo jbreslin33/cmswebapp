@@ -23,10 +23,18 @@ class Login extends Report
 		this.mDivForm.appendChild(this.mDivLogin);
                 
 		this.mDivInputEmail = document.createElement("INPUT");
-                this.mDivInputEmail.setAttribute("type", "password");
-                this.mDivInputEmail.setAttribute("placeholder", "password");
-                this.mDivInputEmail.setAttribute("id", "password");
+                this.mDivInputEmail.setAttribute("type", "text");
+                this.mDivInputEmail.setAttribute("placeholder", "email");
+                this.mDivInputEmail.setAttribute("id", "username");
+                this.mDivInputEmail.setAttribute("name", "username");
 		this.mDivLogin.appendChild(this.mDivInputEmail);
+		
+		this.mDivInputPassword = document.createElement("INPUT");
+                this.mDivInputPassword.setAttribute("type", "password");
+                this.mDivInputPassword.setAttribute("placeholder", "password");
+                this.mDivInputPassword.setAttribute("id", "password");
+                this.mDivInputPassword.setAttribute("name", "password");
+		this.mDivLogin.appendChild(this.mDivInputPassword);
 
 
 		//DUMMY DIV
