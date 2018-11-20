@@ -47,9 +47,9 @@ class DailySchedule extends Report
                 this.mSpinner = document.querySelector('.loader');
                 this.mContainer = document.querySelector('.main');
 
-                 this.mCard = this.mDivCard.cloneNode(true);
-                 this.mCard.removeAttribute('hidden');
-                 this.mContainer.appendChild(this.mCard);
+                 //this.mCard = this.mDivCard.cloneNode(true);
+                 //this.mCard.removeAttribute('hidden');
+                 this.mContainer.appendChild(this.mDivCard);
 	}
 
         saveToLocalStorage(practice)
@@ -130,9 +130,9 @@ class DailySchedule extends Report
 	{
 		if (APPLICATION)
 		{
-			APPLICATION.mDailySchedule.mCard.querySelector('.eventDate').textContent = practice.mEventDate;
-			APPLICATION.mDailySchedule.mCard.querySelector('.startTime').textContent = practice.mStartTime;
-			APPLICATION.mDailySchedule.mCard.querySelector('.address').textContent = practice.mAddress;
+			APPLICATION.mDailySchedule.mDivCard.querySelector('.eventDate').textContent = practice.mEventDate;
+			APPLICATION.mDailySchedule.mDivCard.querySelector('.startTime').textContent = practice.mStartTime;
+			APPLICATION.mDailySchedule.mDivCard.querySelector('.address').textContent = practice.mAddress;
 		}
 		else
 		{
