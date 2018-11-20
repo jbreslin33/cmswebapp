@@ -22,7 +22,7 @@ class Login extends Report
                 this.mDivLogin.setAttribute("class", "login");
 		this.mDivForm.appendChild(this.mDivLogin);
                 
-		this.mDivInputEmail = document.createElement("DIV");
+		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "password");
                 this.mDivInputEmail.setAttribute("placeholder", "password");
                 this.mDivInputEmail.setAttribute("id", "password");
