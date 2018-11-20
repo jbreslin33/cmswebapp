@@ -47,8 +47,6 @@ class DailySchedule extends Report
                 this.mSpinner = document.querySelector('.loader');
                 this.mContainer = document.querySelector('.main');
 
-                 //this.mCard = this.mDivCard.cloneNode(true);
-                 //this.mCard.removeAttribute('hidden');
                  this.mContainer.appendChild(this.mDivCard);
 	}
 
