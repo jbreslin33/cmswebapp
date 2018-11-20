@@ -7,6 +7,8 @@ class Login
 		
 		this.mApplication = application;
 		console.log('Login Con');
+              
+		
 /*
 		//main class
                 this.mDivMain = document.createElement("DIV");

@@ -17,7 +17,7 @@ class Application
 
 
 		//login first
-		//this.mLogin = new Login(this);
+		this.mLogin = new Login(this);
 		
 		
 		//report
