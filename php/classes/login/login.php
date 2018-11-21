@@ -25,28 +25,31 @@ class Login
 	{
 		$this->mEcho = "";
 
-		//check for proper post
+		$this->mUsername = "";
+		$this->mPassword = "";
+
+		//check for proper post or get
 		if (isset($_POST['username']) && isset($_POST['password']))
 		{
-			$_SESSION['username'] = $_POST['username'];
-			$_SESSION['password'] = $_POST['password'];
+			$this->mUsername = $_POST['username'];
+			$this->mPassword = $_POST['password'];
 		}
 		if (isset($_GET['username']) && isset($_GET['password']))
 		{
-			$_SESSION['username'] = $_GET['username'];
-			$_SESSION['password'] = $_GET['password'];
+			$this->mUsername = $_GET['username'];
+			$this->mPassword = $_GET['password'];
 		}
 
 		//business rules check
-		if (!isset($_SESSION['username']) && !isset($_SESSION['password']))
+		if ($this->mUsername == "" && $this->mPassword == "")
 		{
 			$this->mEcho = 101; 
 		}	
-		else if (!isset($_SESSION['username']))
+		else if ($this->mUsername == "")
 		{
 			$this->mEcho = 102; 
 		}	
-		else if (!isset($_SESSION['password']))
+		else if ($this->mPassword == "")
 		{
 			$this->mEcho = 103; 
 		}	
@@ -61,16 +64,9 @@ class Login
 	public function processLogin()
 	{
 		$database = new Database;
-/*		
-		$query = "select id from users where username = '";
-		$query .= $_SESSION['username']; 
-		$query .= "' and password = '";
-		$query .= $_SESSION['password']; 
-		$query .= "';";
- */
 		
 		$query = "select id, password from users where username = '";
-		$query .= $_SESSION['username']; 
+		$query .= $this->mUsername; 
 		$query .= "';";
 		
 		$result = $database->query($query);
@@ -82,27 +78,25 @@ class Login
 			$_SESSION["user_id"] = $row[0];
 			$password = $row[1];
 
-			if ($_SESSION["password"] == $password)
+			if ($this->mPassword == $password)
 			{
 				error_log('successful login on server');
 				$this->mEcho = "100";
 			}
 			else
 			{
+				error_log('unsuccessful login on server');
 				$this->mEcho = "105";
 			}
 		}
 		else
 		{
 			error_log('unsuccessful login');
-			$_SESSION["logged_in"] = false;
-			$this->mEcho = "104";
 		}
 	}
 
 	public function sendResponse()
 	{
-		error_log("sending....");
 		error_log($this->mEcho);
 		echo $this->mEcho;
 	}
