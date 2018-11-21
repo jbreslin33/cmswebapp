@@ -25,6 +25,7 @@ class Login
 	{
 		$this->mEcho = "";
 
+		//check for proper post
 		if (isset($_POST['username']) && isset($_POST['password']))
 		{
 			$_SESSION['username'] = $_POST['username'];
@@ -36,22 +37,40 @@ class Login
 			$_SESSION['password'] = $_GET['password'];
 		}
 
+		//business rules check
 		if (!isset($_SESSION['username']) && !isset($_SESSION['password']))
 		{
-			//header("Location: http://elacore.org/index.php?code=101");
+			$this->mEcho = 101; 
 		}	
-		
-		$this->processLogin();
+		else if (!isset($_SESSION['username']))
+		{
+			$this->mEcho = 102; 
+		}	
+		else if (!isset($_SESSION['password']))
+		{
+			$this->mEcho = 103; 
+		}	
+		else
+		{
+			$this->processLogin();
+		}
+
+		$this->sendResponse();
 	}
 
 	public function processLogin()
 	{
 		$database = new Database;
-		
+/*		
 		$query = "select id from users where username = '";
 		$query .= $_SESSION['username']; 
 		$query .= "' and password = '";
 		$query .= $_SESSION['password']; 
+		$query .= "';";
+ */
+		
+		$query = "select id, password from users where username = '";
+		$query .= $_SESSION['username']; 
 		$query .= "';";
 		
 		$result = $database->query($query);
@@ -61,19 +80,31 @@ class Login
 
 			$row = pg_fetch_row($result);
 			$_SESSION["user_id"] = $row[0];
+			$password = $row[1];
 
-			error_log('successful login on server');
-
-			//header("Location: http://elacore.org/main/main.php");
-			echo "100";
-			die();
+			if ($_SESSION["password"] == $password)
+			{
+				error_log('successful login on server');
+				$this->mEcho = "100";
+			}
+			else
+			{
+				$this->mEcho = "105";
+			}
 		}
 		else
 		{
 			error_log('unsuccessful login');
 			$_SESSION["logged_in"] = false;
-			header("Location: http://elacore.org/index.php");
+			$this->mEcho = "104";
 		}
+	}
+
+	public function sendResponse()
+	{
+		error_log("sending....");
+		error_log($this->mEcho);
+		echo $this->mEcho;
 	}
 }
 

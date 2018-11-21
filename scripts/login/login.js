@@ -72,7 +72,7 @@ class Login extends Report
                                 if (request.status === 200)
                                 {
 					console.log('200');
-                                        var data = JSON.parse(this.responseText);
+                                        var data = this.responseText;
                                         if (data)
                                         {
 						APPLICATION.mLogin.processLogin(data);
