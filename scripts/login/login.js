@@ -12,7 +12,6 @@ class Login extends Report
                 this.mContainer.appendChild(this.mDivCard);
 
 		//login stuff
-		//FORM
                 this.mDivForm = document.createElement("FORM");
                 this.mDivForm.setAttribute("action", "/php/classes/login/login.php");
                 this.mDivForm.setAttribute("method", "post");
@@ -41,15 +40,16 @@ class Login extends Report
                 this.mDivA.setAttribute("class", "forgot");
 		this.mDivA.innerHTML = "forgot password";
 		this.mDivLogin.appendChild(this.mDivA);
-
+		
+		this.mDivInput = document.createElement("INPUT");
+                this.mDivInput.setAttribute("type", "submit");
+                this.mDivInput.setAttribute("value", "Sign In");
+		this.mDivLogin.appendChild(this.mDivInput);
 
 		//DUMMY DIV
                 this.mDivBreslin = document.createElement("DIV");
                 this.mDivBreslin.setAttribute("class", "breslin");
 		this.mDivCard.appendChild(this.mDivBreslin);
-
-
-	
 		
 	}
 }
