@@ -50,6 +50,54 @@ class Login extends Report
                 this.mDivBreslin = document.createElement("DIV");
                 this.mDivBreslin.setAttribute("class", "breslin");
 		this.mDivCard.appendChild(this.mDivBreslin);
+
 		
+	}
+
+	sendLogin(username,password)
+	{
+		var url = "/php/classes/login/login.php?username=" + usernmame + "&password=" + password; 
+		console.log('url:' + url);
+
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var data = JSON.parse(this.responseText);
+                                        if (data)
+                                        {
+						console.log('data:' + data);
+                                        }
+                                        else
+                                        {
+                                                console.log('got response with no data');
+                                        }
+                                }
+                        }
+                        else
+                        {
+                                // Return the initial weather forecast since no data is available.
+                                if (APPLICATION)
+                                {
+                                        console.log('no data yet but APPLICATION exists');
+                                }
+				else
+				{
+                                        console.log('no data yet and APPLICATION does not exist');
+                        	}
+			}
+					
+                };
+
+//		              xmlhttp.open("POST","../../src/php/application/core_application.php?code=117&username=" + username + "&password=" + password,true);
+
+                //request.open('GET', url);
+                request.open('POST', url);
+                request.send();
+
 	}
 }

@@ -23,6 +23,7 @@ class Login
 {
 	function __construct() 
 	{
+		$this->mEcho = "";
 
 		if (isset($_POST['username']) && isset($_POST['password']))
 		{
@@ -37,7 +38,7 @@ class Login
 
 		if (!isset($_SESSION['username']) && !isset($_SESSION['password']))
 		{
-			header("Location: http://elacore.org/index.php?code=101");
+			//header("Location: http://elacore.org/index.php?code=101");
 		}	
 		
 		$this->processLogin();
