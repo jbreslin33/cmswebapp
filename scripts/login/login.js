@@ -6,7 +6,9 @@ class Login extends Report
 	{
 		super(application);	
 		console.log('Login Con');
-               
+              
+		this.mLoggedIn = false;
+
 		//add card to main
 		this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivCard);
@@ -29,21 +31,28 @@ class Login extends Report
                 this.mDivInputPassword.setAttribute("id", "password");
                 this.mDivInputPassword.setAttribute("name", "password");
 		this.mDivLogin.appendChild(this.mDivInputPassword);
-	
+		
+		this.mButton = document.createElement("BUTTON");
+		this.mButton.addEventListener("click",this.sendLogin);
+		this.mDivLogin.appendChild(this.mButton);
+/*	
 		this.mDivA = document.createElement("A");
                 this.mDivA.setAttribute("href", "#");
                 this.mDivA.setAttribute("class", "forgot");
 		this.mDivA.innerHTML = "forgot password";
 		this.mDivLogin.appendChild(this.mDivA);
+		*/
 		
-		//DUMMY DIV
-                this.mDivBreslin = document.createElement("DIV");
-                this.mDivBreslin.setAttribute("class", "breslin");
-		this.mDivCard.appendChild(this.mDivBreslin);
+	}
 
-		this.mButton = document.createElement("BUTTON");
-		this.mButton.addEventListener("click",this.sendLogin);
-		this.mDivLogin.appendChild(this.mButton);
+	processLogin(code)
+	{
+		console.log("processLogin:" + code);
+		if (code == 100)
+		{
+			console.log("logged in is true");
+			this.mLoggedIn = true;	
+		}
 	}
 
 	sendLogin()
@@ -56,13 +65,17 @@ class Login extends Report
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
+			console.log('onready');
                         if (request.readyState === XMLHttpRequest.DONE)
                         {
+				console.log('DONE');
                                 if (request.status === 200)
                                 {
+					console.log('200');
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
+						APPLICATION.mLogin.processLogin(data);
 						console.log('data:' + data);
                                         }
                                         else
