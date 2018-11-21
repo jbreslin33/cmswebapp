@@ -1,11 +1,7 @@
 <?php 
-//just in case start session again????
-//session_start();
-
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
 /*
-
 codes
 ---------------
 100 success
@@ -16,7 +12,6 @@ codes
 105 wrong password
 
 everything else will be done on client
-
 */
 
 class Login 
@@ -80,18 +75,16 @@ class Login
 
 			if ($this->mPassword == $password)
 			{
-				error_log('successful login on server');
 				$this->mEcho = "100";
 			}
 			else
 			{
-				error_log('unsuccessful login on server');
 				$this->mEcho = "105";
 			}
 		}
 		else
 		{
-			error_log('unsuccessful login');
+			$this->mEcho = "104";
 		}
 	}
 
