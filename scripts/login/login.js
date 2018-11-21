@@ -12,14 +12,9 @@ class Login extends Report
                 this.mContainer.appendChild(this.mDivCard);
 
 		//login stuff
-                this.mDivForm = document.createElement("FORM");
-                this.mDivForm.setAttribute("action", "/php/classes/login/login.php");
-                this.mDivForm.setAttribute("method", "post");
-		this.mDivCard.appendChild(this.mDivForm);
-
                 this.mDivLogin = document.createElement("DIV");
                 this.mDivLogin.setAttribute("class", "login");
-		this.mDivForm.appendChild(this.mDivLogin);
+		this.mDivCard.appendChild(this.mDivLogin);
                 
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
@@ -41,22 +36,20 @@ class Login extends Report
 		this.mDivA.innerHTML = "forgot password";
 		this.mDivLogin.appendChild(this.mDivA);
 		
-		this.mDivInput = document.createElement("INPUT");
-                this.mDivInput.setAttribute("type", "submit");
-                this.mDivInput.setAttribute("value", "Sign In");
-		this.mDivLogin.appendChild(this.mDivInput);
-
 		//DUMMY DIV
                 this.mDivBreslin = document.createElement("DIV");
                 this.mDivBreslin.setAttribute("class", "breslin");
 		this.mDivCard.appendChild(this.mDivBreslin);
 
-		
+		this.mButton = document.createElement("BUTTON");
+		this.mButton.addEventListener("click",this.sendLogin);
+		this.mDivLogin.appendChild(this.mButton);
 	}
 
-	sendLogin(username,password)
+	sendLogin()
 	{
-		var url = "/php/classes/login/login.php?username=" + usernmame + "&password=" + password; 
+		console.log('username:' + APPLICATION.mLogin.mDivInputEmail.value); 
+		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mDivInputPassword.value; 
 		console.log('url:' + url);
 
                 // Fetch the latest data.
