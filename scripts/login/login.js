@@ -46,7 +46,6 @@ class Login extends Report
 
 	processLogin(code)
 	{
-		console.log("processLogin:" + code);
 		if (code == 100)
 		{
 			console.log("logged in is true");
@@ -56,10 +55,8 @@ class Login extends Report
 
 	sendLogin()
 	{
-		console.log('username:' + APPLICATION.mLogin.mDivInputEmail.value); 
 		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mDivInputPassword.value; 
 
-                // Fetch the latest data.
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
