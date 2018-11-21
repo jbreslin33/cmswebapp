@@ -28,11 +28,10 @@ class Application
 
 
 		//login first
-		this.mLogin = new Login(this);
-		
+		this.mLogin = null;
 		
 		//report
-		this.mDailySchedule = new DailySchedule(this);
+		//this.mDailySchedule = new DailySchedule(this);
 		
 	}
 
