@@ -35,6 +35,12 @@ class Login extends Report
                 this.mDivInputPassword.setAttribute("id", "password");
                 this.mDivInputPassword.setAttribute("name", "password");
 		this.mDivLogin.appendChild(this.mDivInputPassword);
+	
+		this.mDivA = document.createElement("A");
+                this.mDivA.setAttribute("href", "#");
+                this.mDivA.setAttribute("class", "forgot");
+		this.mDivA.innerHTML = "forgot password";
+		this.mDivLogin.appendChild(this.mDivA);
 
 
 		//DUMMY DIV
