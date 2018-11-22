@@ -14,7 +14,6 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
-		//application.update();
 	}
 
         execute(application)
@@ -23,7 +22,7 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
-		//application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+		application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 	}
 
         exit(application)

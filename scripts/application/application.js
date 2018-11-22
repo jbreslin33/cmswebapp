@@ -36,7 +36,7 @@ class Application
 
 	update(timestamp)
 	{
-		console.log('timestamp:' + timestamp);
+		//console.log('timestamp:' + timestamp);
 		this.mStateMachine.update();
 
 		//run again
