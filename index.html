@@ -52,12 +52,16 @@
 	<!-- Application states -->
   	<script src="scripts/application/states/global_application_state.js" ></script>
   	<script src="scripts/application/states/init_application_state.js" ></script>
+  	<script src="scripts/application/states/login_application_state.js" ></script>
   	
 	<script src="scripts/application/application.js" ></script>
 
   	<script> 
 	
 	var APPLICATION = new Application();
+
+        //update loop
+        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
 
 	// TODO add service worker code here
   	if ('serviceWorker' in navigator) 

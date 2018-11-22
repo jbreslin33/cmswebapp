@@ -14,7 +14,7 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION_STATE: ENTER");        
 		}
-		application.mLogin = new Login(application);	
+		//application.mLogin = new Login(application);	
 	}
 
         execute(application)

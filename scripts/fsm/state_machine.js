@@ -54,7 +54,12 @@ class StateMachine
 
 		if(this.mCurrentState)
 		{
+			console.log('enter');
         		this.mCurrentState.enter(this.mOwner);
+		}
+		else
+		{
+			console.log('nothign');
 		}
 	}
 

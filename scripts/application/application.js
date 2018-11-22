@@ -22,21 +22,21 @@ class Application
 		this.mStateMachine = new StateMachine(this);
 		this.mGLOBAL_APPLICATION = new GLOBAL_APPLICATION();
 		this.mINIT_APPLICATION = new INIT_APPLICATION();
+		this.mLOGIN_APPLICATION = new LOGIN_APPLICATION();
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
-
 
 		//login first
 		this.mLogin = null;
 		
 		//report
-		//this.mDailySchedule = new DailySchedule(this);
-		
+		this.mDailySchedule = null;
 	}
 
-	update()
+	update(timestamp)
 	{
+		console.log('timestamp:' + timestamp);
 		this.mStateMachine.update();
 	}
 }
