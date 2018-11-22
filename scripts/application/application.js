@@ -38,5 +38,9 @@ class Application
 	{
 		console.log('timestamp:' + timestamp);
 		this.mStateMachine.update();
+
+		//run again
+	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
+
 	}
 }
