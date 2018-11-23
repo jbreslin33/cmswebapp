@@ -1,7 +1,7 @@
 
 'use strict';
 
-class INIT_APPLICATION extends State
+class MAIN_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class INIT_APPLICATION extends State
         {
 		if (application.mStateLogs)
 		{
-			console.log("INIT_APPLICATION_STATE: ENTER");        
+			console.log("MAIN_APPLICATION: ENTER");        
 		}
 	}
 
@@ -20,16 +20,15 @@ class INIT_APPLICATION extends State
         {
 		if (application.mStateLogs)
 		{
-			console.log("INIT_APPLICATION_STATE: EXECUTE");        
+			console.log("MAIN_APPLICATION: EXECUTE");        
 		}
-		application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 	}
 
         exit(application)
         {
 		if (application.mStateLogs)
 		{
-			console.log("INIT_APPLICATION_STATE: EXIT");        
+			console.log("MAIN_APPLICATION: EXIT");        
 		}
 	}
 }

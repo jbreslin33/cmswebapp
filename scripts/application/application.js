@@ -22,7 +22,7 @@ class Application
 		this.mStateMachine = new StateMachine(this);
 		this.mGLOBAL_APPLICATION = new GLOBAL_APPLICATION();
 		this.mINIT_APPLICATION = new INIT_APPLICATION();
-		this.mLOGIN_APPLICATION = new LOGIN_APPLICATION();
+		this.mMAIN_APPLICATION = new MAIN_APPLICATION();
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
