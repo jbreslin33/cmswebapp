@@ -20,7 +20,6 @@ class Application
                 this.mDivMain.setAttribute("class", "main");
                 document.body.appendChild(this.mDivMain);
 
-
 		//states
 		this.mStateMachine = new StateMachine(this);
 		this.mGLOBAL_APPLICATION = new GLOBAL_APPLICATION();

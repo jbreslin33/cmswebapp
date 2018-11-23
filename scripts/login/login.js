@@ -26,7 +26,6 @@ class Login
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_LOGIN);
                 this.mStateMachine.changeState(this.mINIT_LOGIN);
-
 	}
 
 	update(timestamp)
@@ -34,27 +33,11 @@ class Login
 		this.mStateMachine.update();
 	}
 
-	processLogin(code)
-	{
-		if (code == 100)
-		{
-			console.log("logged in is true");
-			this.mLoggedIn = true;	
-		}
-	}
-
 	sendLogin()
 	{
 		//set username and password in case they are valid
 		var url = null;
-		if (APPLICATION.mLogin)
-		{
-			console.log('login exists');
-		}
-		else
-		{
-			console.log('login does not exists');
-		}
+
 		if (APPLICATION.mLogin.mLoginScreen)
 		{
 			APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
@@ -80,21 +63,30 @@ class Login
                 };
 		if (url)
 		{
-			console.log('url');
                 	request.open('POST', url);
                 	request.send();
 		}
 		else
 		{
-			console.log('no url');
+			console.log('no url in login');
+		}
+	}
+
+	processLogin(code)
+	{
+		if (code == 100)
+		{
+			console.log("logged in is true");
+			this.mLoggedIn = true;	
+			this.save(this.mUsername,this.mPassword);
 		}
 	}
 
 	// TODO add saveSelectedCities function here
         // Save list of cities to localStorage.
-        saveLoginCredentials()
+        save(username,password)
         {
-                //var data = JSON.stringify(this.mForecastData);
-                //localStorage.mForecastData = data;
+		localStorage.setItem("username",username);
+		localStorage.setItem("password",password);
         }
 }
