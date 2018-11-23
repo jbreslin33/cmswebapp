@@ -36,8 +36,12 @@ class Application
 
 	update(timestamp)
 	{
-		//console.log('timestamp:' + timestamp);
 		this.mStateMachine.update();
+
+		if (this.mLogin)
+		{
+			this.mLogin.update(timestamp);
+		}
 
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));

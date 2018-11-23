@@ -14,6 +14,8 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
+		//login
+		application.mLogin = new Login(application);
 	}
 
         execute(application)

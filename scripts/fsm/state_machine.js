@@ -30,7 +30,6 @@ class StateMachine
 
 	update()
 	{
-		console.log('state_machine update');
 		if(this.mGlobalState)
 		{
 			this.mGlobalState.execute(this.mOwner);
@@ -54,12 +53,7 @@ class StateMachine
 
 		if(this.mCurrentState)
 		{
-			console.log('enter');
         		this.mCurrentState.enter(this.mOwner);
-		}
-		else
-		{
-			console.log('nothign');
 		}
 	}
 

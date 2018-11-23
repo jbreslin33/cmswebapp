@@ -6,6 +6,7 @@ class Login extends Report
 	{
 		super(application);	
               
+		this.mStateLogs = true;
 		this.mLoggedIn = false;
 
 		//add card to main
@@ -35,6 +36,14 @@ class Login extends Report
 		this.mButton.addEventListener("click",this.sendLogin);
 		this.mDivLogin.appendChild(this.mButton);
 
+                //states
+                this.mStateMachine = new StateMachine(this);
+                this.mGLOBAL_LOGIN = new GLOBAL_LOGIN();
+                this.mINIT_LOGIN = new INIT_LOGIN();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_LOGIN);
+                this.mStateMachine.changeState(this.mINIT_LOGIN);
+
 		/*	
 		this.mDivA = document.createElement("A");
                 this.mDivA.setAttribute("href", "#");
@@ -42,6 +51,11 @@ class Login extends Report
 		this.mDivA.innerHTML = "forgot password";
 		this.mDivLogin.appendChild(this.mDivA);
 		*/
+	}
+
+	update(timestamp)
+	{
+		this.mStateMachine.update();
 	}
 
 	processLogin(code)
