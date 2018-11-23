@@ -12,7 +12,7 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateEnterLogs)
 		{
-			console.log("INIT_LOGIN: ENTER");        
+			console.log("CHECK_LOCALSTORAGE_LOGIN: ENTER");        
 		}
 		var username = localStorage.getItem("username");
 		var password = localStorage.getItem("password");
@@ -24,33 +24,30 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		}
 		else
 		{
-			console.log("no username so create screen");
-			//create login screen
-			login.mLoginScreen = new LoginScreen(login.mApplication,login);	
-			login.mLoginScreen.mButton.addEventListener("click",APPLICATION.mLogin.sendLogin);
-
+			console.log("no username so create screen state");
+			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
-		//check local storage....
-		//if local storage send login request...
-		//
-		//else show login screen
-
-
 	}
 
         execute(login)
         {
 		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
-			console.log("INIT_LOGIN: EXECUTE");        
+			console.log("CHECK_LOCALSTORAGE_LOGIN: EXECUTE");        
 		}
+		/*
+		if (login.mLoggedIn == true)
+		{
+			login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
+		}
+		*/
 	}
 
         exit(login)
         {
 		if (login.mStateLogs || login.mStateExitLogs)
 		{
-			console.log("INIT_LOGIN: EXIT");        
+			console.log("CHECK_LOCALSTORAGE_LOGIN: EXIT");        
 		}
 	}
 }
