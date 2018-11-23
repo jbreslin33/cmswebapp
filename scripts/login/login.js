@@ -1,44 +1,17 @@
 'use strict';
 
-class Login extends Report
+class Login
 {
 	constructor(application)
 	{
-		super(application);	
-              
+		this.mApplication = application;
+
 		this.mStateLogs = false;
 		this.mLoggedIn = false;
 
 		//credentials
 		this.mUsername = null;
 		this.mPassword = null;
-
-		//add card to main
-		this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivCard);
-
-		//login stuff
-                this.mDivLogin = document.createElement("DIV");
-                this.mDivLogin.setAttribute("class", "login");
-		this.mDivCard.appendChild(this.mDivLogin);
-                
-		this.mDivInputEmail = document.createElement("INPUT");
-                this.mDivInputEmail.setAttribute("type", "text");
-                this.mDivInputEmail.setAttribute("placeholder", "email");
-                this.mDivInputEmail.setAttribute("id", "username");
-                this.mDivInputEmail.setAttribute("name", "username");
-		this.mDivLogin.appendChild(this.mDivInputEmail);
-		
-		this.mDivInputPassword = document.createElement("INPUT");
-                this.mDivInputPassword.setAttribute("type", "password");
-                this.mDivInputPassword.setAttribute("placeholder", "password");
-                this.mDivInputPassword.setAttribute("id", "password");
-                this.mDivInputPassword.setAttribute("name", "password");
-		this.mDivLogin.appendChild(this.mDivInputPassword);
-		
-		this.mButton = document.createElement("BUTTON");
-		this.mButton.addEventListener("click",this.sendLogin);
-		this.mDivLogin.appendChild(this.mButton);
 
                 //states
                 this.mStateMachine = new StateMachine(this);
@@ -48,13 +21,7 @@ class Login extends Report
                 this.mStateMachine.setGlobalState(this.mGLOBAL_LOGIN);
                 this.mStateMachine.changeState(this.mINIT_LOGIN);
 
-		/*	
-		this.mDivA = document.createElement("A");
-                this.mDivA.setAttribute("href", "#");
-                this.mDivA.setAttribute("class", "forgot");
-		this.mDivA.innerHTML = "forgot password";
-		this.mDivLogin.appendChild(this.mDivA);
-		*/
+		this.mLoginScreen = null;
 	}
 
 	update(timestamp)
@@ -74,10 +41,14 @@ class Login extends Report
 	sendLogin()
 	{
 		//set username and password in case they are valid
-		APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mDivInputEmail.value;
-		APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mDivInputPassword.value;
+		var url = null;
+		if (APPLICATION.mLogin.mLoginScreen)
+		{
+			APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
+			APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
 
-		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mDivInputPassword.value; 
+			url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value; 
+		}
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -94,8 +65,16 @@ class Login extends Report
                                 }
                         }
                 };
-                request.open('POST', url);
-                request.send();
+		if (url)
+		{
+			console.log('url');
+                	request.open('POST', url);
+                	request.send();
+		}
+		else
+		{
+			console.log('no url');
+		}
 	}
 
 	// TODO add saveSelectedCities function here
