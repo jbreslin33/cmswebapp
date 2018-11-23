@@ -23,6 +23,10 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION_STATE: EXECUTE");        
 		}
+		if (application.mLogin.mLoggedIn == true)
+		{
+			application.mStateMachine.changeState()	
+		}
 	}
 
         exit(application)
