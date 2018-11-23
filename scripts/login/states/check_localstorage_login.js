@@ -15,7 +15,7 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 			console.log("INIT_LOGIN: ENTER");        
 		}
 		var username = localStorage.getItem("username");
-		var password = localStorage.getItem("pasword");
+		var password = localStorage.getItem("password");
 		if (username && password)
 		{
 			console.log("username and password in localstorage");
