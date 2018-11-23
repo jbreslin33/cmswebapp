@@ -5,7 +5,7 @@ class Application
 	constructor() 
 	{
 
-		this.mStateLogs = true;
+		this.mStateLogs = false;
 
 		/* this is the div container for all the cards. The cards hold the individual reports
 		*/
