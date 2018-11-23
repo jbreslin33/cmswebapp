@@ -22,7 +22,6 @@ class INIT_LOGIN extends State
 		{
 			console.log("INIT_LOGIN: EXECUTE");        
 		}
-		application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 	}
 
         exit(application)
