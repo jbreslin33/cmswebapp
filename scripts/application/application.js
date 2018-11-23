@@ -6,6 +6,9 @@ class Application
 	{
 
 		this.mStateLogs = false;
+		this.mStateEnterLogs = true;
+		this.mStateExecuteLogs = false;
+		this.mStateExitLogs = false;
 
 		/* this is the div container for all the cards. The cards hold the individual reports
 		*/

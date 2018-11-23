@@ -10,7 +10,7 @@ class GLOBAL_APPLICATION extends State
 
         enter(application)
         {
-                if (application.mStateLogs)
+                if (application.mStateLogs || application.mStateEnterLogs)
                 {
                         console.log("GLOBAL_APPLICATION: ENTER"); 
                 }
@@ -18,7 +18,7 @@ class GLOBAL_APPLICATION extends State
 
         execute(application)
         {
-                if (application.mStateLogs)
+                if (application.mStateLogs || application.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
                 }
@@ -26,8 +26,8 @@ class GLOBAL_APPLICATION extends State
 
         exit(application)
         {
-                if (application.mStateLogs)
-                {
+                if (application.mStateLogs || application.mStateExitLogs)
+		{
                         console.log("GLOBAL_APPLICATION: EXIT"); 
                 }
 	}

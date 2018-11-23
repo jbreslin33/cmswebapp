@@ -10,7 +10,7 @@ class MAIN_APPLICATION extends State
 
         enter(application)
         {
-		if (application.mStateLogs)
+		if (application.mStateLogs || application.mStateEnterLogs)
 		{
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
@@ -20,7 +20,7 @@ class MAIN_APPLICATION extends State
 
         execute(application)
         {
-		if (application.mStateLogs)
+		if (application.mStateLogs || application.mStateExecuteLogs)
 		{
 			console.log("MAIN_APPLICATION: EXECUTE");        
 		}
@@ -28,7 +28,7 @@ class MAIN_APPLICATION extends State
 
         exit(application)
         {
-		if (application.mStateLogs)
+		if (application.mStateLogs || application.mStateExitLogs)
 		{
 			console.log("MAIN_APPLICATION: EXIT");        
 		}

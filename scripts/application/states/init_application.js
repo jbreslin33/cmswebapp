@@ -10,7 +10,7 @@ class INIT_APPLICATION extends State
 
         enter(application)
         {
-		if (application.mStateLogs)
+		if (application.mStateLogs || application.mStateEnterLogs)
 		{
 			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
@@ -18,7 +18,7 @@ class INIT_APPLICATION extends State
 
         execute(application)
         {
-		if (application.mStateLogs)
+		if (application.mStateLogs || application.mStateExecuteLogs)
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
@@ -27,7 +27,7 @@ class INIT_APPLICATION extends State
 
         exit(application)
         {
-		if (application.mStateLogs)
+		if (application.mStateLogs || application.mStateExitLogs)
 		{
 			console.log("INIT_APPLICATION_STATE: EXIT");        
 		}

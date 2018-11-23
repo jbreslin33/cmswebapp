@@ -8,25 +8,25 @@ class INIT_LOGIN extends State
 		super();
 	}
 
-        enter(application)
+        enter(login)
         {
-		if (application.mStateLogs)
+		if (login.mStateLogs || login.mStateEnterLogs)
 		{
 			console.log("INIT_LOGIN: ENTER");        
 		}
 	}
 
-        execute(application)
+        execute(login)
         {
-		if (application.mStateLogs)
+		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
 			console.log("INIT_LOGIN: EXECUTE");        
 		}
 	}
 
-        exit(application)
+        exit(login)
         {
-		if (application.mStateLogs)
+		if (login.mStateLogs || login.mStateExitLogs)
 		{
 			console.log("INIT_LOGIN: EXIT");        
 		}

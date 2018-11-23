@@ -4,7 +4,6 @@ class StateMachine
 {
         constructor(owner)
         {
-		console.log("StateMachine Constructor");
                 this.mOwner = owner;
 	
 		this.mCurrentState = 0;

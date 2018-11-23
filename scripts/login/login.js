@@ -6,7 +6,7 @@ class Login extends Report
 	{
 		super(application);	
               
-		this.mStateLogs = true;
+		this.mStateLogs = false;
 		this.mLoggedIn = false;
 
 		//add card to main
