@@ -14,25 +14,6 @@ class INIT_LOGIN extends State
 		{
 			console.log("INIT_LOGIN: ENTER");        
 		}
-		var username = localStorage.getItem("username");
-		var password = localStorage.getItem("pasword");
-		if (username && password)
-		{
-			console.log("username and password in localstorage");
-			//processlogin
-		}
-		else
-		{
-			console.log("no username so create screen");
-			//create login screen
-			login.mLoginScreen = new LoginScreen(login.mApplication,login);	
-		}
-		//check local storage....
-		//if local storage send login request...
-		//
-		//else show login screen
-
-
 	}
 
         execute(login)
@@ -41,6 +22,7 @@ class INIT_LOGIN extends State
 		{
 			console.log("INIT_LOGIN: EXECUTE");        
 		}
+		login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE_LOGIN);
 	}
 
         exit(login)

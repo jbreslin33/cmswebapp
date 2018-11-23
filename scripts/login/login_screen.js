@@ -5,6 +5,7 @@ class LoginScreen extends Report
 	constructor(application,login)
 	{
 		super(application);	
+		console.log('CON LoginScreen');
 
 		this.mLogin = login;
               
@@ -32,7 +33,8 @@ class LoginScreen extends Report
 		this.mDivLogin.appendChild(this.mDivInputPassword);
 		
 		this.mButton = document.createElement("BUTTON");
-		this.mButton.addEventListener("click",this.mLogin.sendLogin);
+		//this.mButton.addEventListener("click",this.mLogin.sendLogin);
+		//this.mButton.addEventListener("click",APPLICATION.mLogin.sendLogin);
 		this.mDivLogin.appendChild(this.mButton);
 	}
 }
