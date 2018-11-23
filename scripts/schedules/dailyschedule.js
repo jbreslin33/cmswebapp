@@ -26,6 +26,15 @@ class DailySchedule extends Report
 
 		this.mInitialPractice = new Practice();
 
+		
+                //report vars
+                this.mIsLoading = true;
+                this.mSpinner = document.querySelector('.loader');
+
+	}
+
+	update()
+	{
 		/**********************************/
         	//SCHEDULE
         	this.mPractice = localStorage.mPractice;
@@ -44,11 +53,6 @@ class DailySchedule extends Report
 			this.updateCard(this.mInitialPractice);
                 	this.saveToLocalStorage(this.mInitialPractice);
 		}
-		
-                //report vars
-                this.mIsLoading = true;
-                this.mSpinner = document.querySelector('.loader');
-
 	}
 
         saveToLocalStorage(practice)

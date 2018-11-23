@@ -26,12 +26,12 @@ class SCREEN_LOGIN extends State
 		{
 			console.log("SCREEN_LOGIN: EXECUTE");        
 		}
-		/*
 		if (login.mLoggedIn == true)
 		{
 			login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
+			login.mApplication.update();
+			login.mStateMachine.changeState(login.mLOGGED_IN);
 		}
-		*/
 	}
 
         exit(login)
