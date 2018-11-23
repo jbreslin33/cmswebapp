@@ -9,6 +9,10 @@ class Login extends Report
 		this.mStateLogs = false;
 		this.mLoggedIn = false;
 
+		//credentials
+		this.mUsername = null;
+		this.mPassword = null;
+
 		//add card to main
 		this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivCard);
@@ -69,6 +73,10 @@ class Login extends Report
 
 	sendLogin()
 	{
+		//set username and password in case they are valid
+		APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mDivInputEmail.value;
+		APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mDivInputPassword.value;
+
 		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mDivInputPassword.value; 
 
                 var request = new XMLHttpRequest();
@@ -89,4 +97,12 @@ class Login extends Report
                 request.open('POST', url);
                 request.send();
 	}
+
+	// TODO add saveSelectedCities function here
+        // Save list of cities to localStorage.
+        saveLoginCredentials()
+        {
+                //var data = JSON.stringify(this.mForecastData);
+                //localStorage.mForecastData = data;
+        }
 }

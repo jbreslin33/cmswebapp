@@ -14,6 +14,12 @@ class INIT_LOGIN extends State
 		{
 			console.log("INIT_LOGIN: ENTER");        
 		}
+		//check local storage....
+		//if local storage send login request...
+		//
+		//else show login screen
+
+
 	}
 
         execute(login)
