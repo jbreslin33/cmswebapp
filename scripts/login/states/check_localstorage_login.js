@@ -18,8 +18,9 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		var password = localStorage.getItem("password");
 		if (username && password)
 		{
-			console.log("username and password in localstorage");
+			console.log("sendloginfrom localstorage");
 			//processlogin
+			login.sendLoginFromLocalStorage(username,password);
 		}
 		else
 		{

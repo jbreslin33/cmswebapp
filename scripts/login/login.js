@@ -33,6 +33,29 @@ class Login
 		this.mStateMachine.update();
 	}
 
+	sendLoginFromLocalStorage(username,password)
+	{
+                var url = "/php/classes/login/login.php?username=" + username + "&password=" + password;
+
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var data = this.responseText;
+                                        if (data)
+                                        {
+                                                APPLICATION.mLogin.processLogin(data);
+                                        }
+                                }
+                        }
+                };
+                request.open('POST', url);
+                request.send();
+	}
+
 	sendLogin()
 	{
 		//set username and password in case they are valid
