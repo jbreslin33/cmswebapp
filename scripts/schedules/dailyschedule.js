@@ -45,6 +45,7 @@ class DailySchedule extends Report
                 this.mGLOBAL_DAILY_SCHEDULE = new GLOBAL_DAILY_SCHEDULE();
                 this.mINIT_DAILY_SCHEDULE = new INIT_DAILY_SCHEDULE();
                 this.mCHECK_LOCAL_STORAGE_DAILY_SCHEDULE = new CHECK_LOCAL_STORAGE_DAILY_SCHEDULE();
+                this.mGET_INTERNET_DATA_DAILY_SCHEDULE = new GET_INTERNET_DATA_DAILY_SCHEDULE();
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_DAILY_SCHEDULE);
                 this.mStateMachine.changeState(this.mINIT_DAILY_SCHEDULE);

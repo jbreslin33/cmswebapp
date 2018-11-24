@@ -26,7 +26,11 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 			daily_schedule.mDivEventDate.textContent = daily_schedule.mInitialPractice.mEventDate;
 			daily_schedule.mDivStartTime.textContent = daily_schedule.mInitialPractice.mStartTime;
 			daily_schedule.mDivAddress.textContent = daily_schedule.mInitialPractice.mAddress;
+			daily_schedule.saveToLocalStorage(daily_schedule.mIntialPractice);
+			//go to getInternetData state
+			daily_schedule.mStateMachine.changeState(daily_schedule.mGET_INTERNET_DATA_DAILY_SCHEDULE);
 		}
+
 /*
                 if (this.mPractice)
                 {
