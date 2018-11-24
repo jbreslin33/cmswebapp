@@ -15,6 +15,7 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: ENTER");        
 		}
 		console.log("GET DATA FROM INTERNET");
+		daily_schedule.getData();
 	}
 
         execute(daily_schedule)

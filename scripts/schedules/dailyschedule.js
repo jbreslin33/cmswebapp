@@ -134,18 +134,11 @@ class DailySchedule extends Report
                                         }
                                 }
                         }
-                        else
-                        {
-                        	// Return the initial weather forecast since no data is available.
-				if (APPLICATION)
-				{
-					APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice);
-				}
-                        }
                 };
                 request.open('GET', url);
                 request.send();
         }
+
 	updateCard(practice)
 	{
 		if (APPLICATION)
