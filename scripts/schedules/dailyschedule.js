@@ -5,7 +5,6 @@ class DailySchedule extends Report
 	constructor(application)
 	{
 		super(application);
-               	console.log('DailySchedule Constructor'); 
 
                	//logs
                 this.mStateLogs = false;
@@ -54,7 +53,6 @@ class DailySchedule extends Report
         	this.mPractice = localStorage.mPractice;
         	if (this.mPractice)
 		{
-                	console.log("IN CONSTRUCTOR IF LOCAL STORAGE");
                 	this.mPractice = JSON.parse(this.mPractice);
 
 			//but lets get some new stuff from intertubes
@@ -62,8 +60,6 @@ class DailySchedule extends Report
 		}
 		else
 		{
-                	console.log("IN CONSTRUCTOR ELSE NO LOCAL STORAGE");
-			console.log('this.updateCard(this.mInitialPractice)');
 			this.updateCard(this.mInitialPractice);
                 	this.saveToLocalStorage(this.mInitialPractice);
 		}
@@ -71,7 +67,6 @@ class DailySchedule extends Report
 
         saveToLocalStorage(practice)
         {
-		console.log('saving data to local storage');
                 var data = JSON.stringify(practice);
                 localStorage.mPractice = data;
         }
@@ -83,7 +78,6 @@ class DailySchedule extends Report
                 // TODO add cache logic here
                 if ('caches' in window)
                 {
-                        console.log("cached schedule in window");
                         /*
                         * Check if the service worker has already cached this city's weather
                         * data. If the service worker has the data, then display the cached
@@ -95,7 +89,6 @@ class DailySchedule extends Report
                                 {
                                         response.json().then(function updateFromCache(json)
                                         {
-                                                console.log("update schedule from cache");
                                                 var results = json.query.results;
                                                 results.key = key;
                                                 results.label = label;
@@ -121,7 +114,6 @@ class DailySchedule extends Report
 						APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
 						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][1];
 						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][2];
-                                        	console.log('APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice)');
                                         	APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
                                         }
                                         else
@@ -135,7 +127,6 @@ class DailySchedule extends Report
                         	// Return the initial weather forecast since no data is available.
 				if (APPLICATION)
 				{
-					console.log('APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice)');
 					APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mInitialPractice);
 				}
                         }

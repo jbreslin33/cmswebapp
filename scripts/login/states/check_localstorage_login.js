@@ -18,13 +18,11 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		var password = localStorage.getItem("password");
 		if (username && password)
 		{
-			console.log("sendloginfrom localstorage");
 			//processlogin
 			login.sendLoginFromLocalStorage(username,password);
 		}
 		else
 		{
-			console.log("no username so create screen state");
 			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
 	}
@@ -37,7 +35,6 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		}
 		if (login.mLoggedIn == true)
 		{
-			console.log('loged in true in CHECK_LOCALSTORAGE_LOGIN state');
                         login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
                         login.mApplication.mDailySchedule.update();
                         login.mStateMachine.changeState(login.mLOGGED_IN_LOGIN);

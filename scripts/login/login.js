@@ -4,7 +4,6 @@ class Login
 {
 	constructor(application)
 	{
-		console.log('CON Login');
 		this.mLoginScreen = null;
 		this.mApplication = application;
 
@@ -102,7 +101,6 @@ class Login
 	{
 		if (code == 100)
 		{
-			console.log("logged in is true");
 			this.mLoggedIn = true;	
 			this.save(this.mUsername,this.mPassword);
 		}

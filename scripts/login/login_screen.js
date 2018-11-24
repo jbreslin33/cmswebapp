@@ -5,7 +5,6 @@ class LoginScreen extends Report
 	constructor(application,login)
 	{
 		super(application);	
-		console.log('CON LoginScreen');
 
 		this.mLogin = login;
               
