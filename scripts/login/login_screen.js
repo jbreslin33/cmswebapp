@@ -37,4 +37,13 @@ class LoginScreen extends Report
 		//this.mButton.addEventListener("click",APPLICATION.mLogin.sendLogin);
 		this.mDivLogin.appendChild(this.mButton);
 	}
+
+	show()
+	{
+		this.mDivCard.style.display = "block";	
+	}
+	hide()
+	{
+		this.mDivCard.style.display = "none";	
+	}
 }
