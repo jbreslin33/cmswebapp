@@ -14,7 +14,10 @@ class LOGGED_IN_LOGIN extends State
 		{
 			console.log("LOGGED_IN_LOGIN: ENTER");        
 		}
-		login.mLoginScreen.hide();
+		if (login.mLoginScreen)
+		{
+			login.mLoginScreen.hide();
+		}
 	}
 
         execute(login)
