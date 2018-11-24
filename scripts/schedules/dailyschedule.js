@@ -164,8 +164,8 @@ class Practice
 {
         constructor()
         {
-                this.mEventDate = 'NA';
-                this.mStartTime = 'NA';
-                this.mAddress   = 'NA';
+                this.mEventDate = 'JAN 01 2000';
+                this.mStartTime = '12AM';
+                this.mAddress   = 'NOWHERE';
         }
 }
