@@ -14,10 +14,16 @@ class LOGGED_IN_LOGIN extends State
 		{
 			console.log("LOGGED_IN_LOGIN: ENTER");        
 		}
+
+		//if there is a login screen hide it
 		if (login.mLoginScreen)
 		{
 			login.mLoginScreen.hide();
 		}
+
+		//lets fire up a report since we are logged in
+                login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
+                login.mApplication.mDailySchedule.update();
 	}
 
         execute(login)

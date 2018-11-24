@@ -27,8 +27,6 @@ class SCREEN_LOGIN extends State
 		}
 		if (login.mLoggedIn == true)
 		{
-			login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
-			login.mApplication.mDailySchedule.update();
 			login.mStateMachine.changeState(login.mLOGGED_IN_LOGIN);
 		}
 	}
