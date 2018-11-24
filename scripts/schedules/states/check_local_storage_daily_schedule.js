@@ -18,31 +18,14 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
                 daily_schedule.mPractice = localStorage.mPractice;
 		if (daily_schedule.mPractice)
 		{
-			console.log("practice");
+			//we have some local stored data go to that state
 		}
 		else
 		{
-			console.log("no practice");
-			//daily_schedule.updateCard(daily_schedule.mInitialPractice);
-	                if (APPLICATION)
-                	{
-				if (daily_schedule)
-				{
-					console.log('daily_schedule exists');
-				}
-				if (daily_schedule.mDivCard)
-				{
-					console.log('div card exists');
-				}
-				daily_schedule.mDivEventDate.textContent = "DFDDDD";
-                        	//daily_schedule.mDivCard.querySelector('.eventDate').textContent = daily_schedule.mInitialPractice.mEventDate;
-                        	//APPLICATION.mDailySchedule.mDivCard.querySelector('.startTime').textContent = practice.mStartTime;
-                        	//APPLICATION.mDailySchedule.mDivCard.querySelector('.address').textContent = practice.mAddress;
-                	}
-                	else
-                	{
-                        	console.log('NO APPLICATION');
-                	}
+			//we have nothing. post up default
+			daily_schedule.mDivEventDate.textContent = daily_schedule.mInitialPractice.mEventDate;
+			daily_schedule.mDivStartTime.textContent = daily_schedule.mInitialPractice.mStartTime;
+			daily_schedule.mDivAddress.textContent = daily_schedule.mInitialPractice.mAddress;
 		}
 /*
                 if (this.mPractice)
