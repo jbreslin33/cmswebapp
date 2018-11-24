@@ -17,7 +17,14 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
                 daily_schedule.mPractice = localStorage.mPractice;
 		if (daily_schedule.mPractice)
 		{
+			console.log('got local mPractice');
 			//we have some local stored data go to that state
+			console.log('mPractice:' + daily_schedule.mPractice);
+			var data = JSON.parse(daily_schedule.mPractice);
+
+			daily_schedule.mDivEventDate.textContent = data.mEventDate;
+			daily_schedule.mDivStartTime.textContent = data.mStartTime;
+			daily_schedule.mDivAddress.textContent = data.mAddress;
 		}
 		else
 		{
