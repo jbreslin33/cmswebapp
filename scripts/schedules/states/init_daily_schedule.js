@@ -8,26 +8,26 @@ class INIT_DAILY_SCHEDULE extends State
 		super();
 	}
 
-        enter(login)
+        enter(daily_schedule)
         {
-		if (login.mStateLogs || login.mStateEnterLogs)
+		if (daily_schedule.mStateLogs || daily_schedule.mStateEnterLogs)
 		{
 			console.log("INIT_DAILY_SCHEDULE: ENTER");        
 		}
+		daily_schedule.mStateMachine.changeState(daily_schedule.mCHECK_LOCAL_STORAGE_DAILY_SCHEDULE);
 	}
 
-        execute(login)
+        execute(daily_schedule)
         {
-		if (login.mStateLogs || login.mStateExecuteLogs)
+		if (daily_schedule.mStateLogs || daily_schedule.mStateExecuteLogs)
 		{
 			console.log("INIT_DAILY_SCHEDULE: EXECUTE");        
 		}
-		//login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE_DAILY_SCHEDULE);
 	}
 
-        exit(login)
+        exit(daily_schedule)
         {
-		if (login.mStateLogs || login.mStateExitLogs)
+		if (daily_schedule.mStateLogs || daily_schedule.mStateExitLogs)
 		{
 			console.log("INIT_DAILY_SCHEDULE: EXIT");        
 		}

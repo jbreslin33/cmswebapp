@@ -22,8 +22,11 @@ class LOGGED_IN_LOGIN extends State
 		}
 
 		//lets fire up a report since we are logged in
+		if (login.mApplication)
+		{
+			console.log("mAppliation exists");
+		}
                 login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
-                login.mApplication.mDailySchedule.update();
 	}
 
         execute(login)

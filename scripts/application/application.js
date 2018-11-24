@@ -44,6 +44,10 @@ class Application
 		{
 			this.mLogin.update(timestamp);
 		}
+		if (this.mDailySchedule)
+		{
+			this.mDailySchedule.update(timestamp);
+		}
 
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));

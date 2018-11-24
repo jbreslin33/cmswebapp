@@ -12,14 +12,13 @@ class DailySchedule extends Report
                 this.mStateExecuteLogs = false;
                 this.mStateExitLogs = false;
                 this.mLoggedIn = false;
+		
+		console.log('create mInitialPractice');
+		this.mInitialPractice = new Practice();
 
-		//states
-                this.mGLOBAL_DAILY_SCHEDULE = new GLOBAL_DAILY_SCHEDULE();
-                this.mINIT_DAILY_SCHEDULE = new INIT_DAILY_SCHEDULE();
+		//data
+		this.mPractice = null;
 
-                this.mStateMachine.setGlobalState(this.mGLOBAL_DAILY_SCHEDULE);
-                this.mStateMachine.changeState(this.mINIT_DAILY_SCHEDULE);
-               
 		//add card to main
 		this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivCard);
@@ -36,17 +35,28 @@ class DailySchedule extends Report
                 this.mDivAddress.setAttribute("class", "address");
                 this.mDivCard.appendChild(this.mDivAddress);
 
-
-		this.mInitialPractice = new Practice();
-
-		
                 //report vars
                 this.mIsLoading = true;
                 this.mSpinner = document.querySelector('.loader');
+		
+		//states
+                this.mStateMachine = new StateMachine(this);
+
+                this.mGLOBAL_DAILY_SCHEDULE = new GLOBAL_DAILY_SCHEDULE();
+                this.mINIT_DAILY_SCHEDULE = new INIT_DAILY_SCHEDULE();
+                this.mCHECK_LOCAL_STORAGE_DAILY_SCHEDULE = new CHECK_LOCAL_STORAGE_DAILY_SCHEDULE();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_DAILY_SCHEDULE);
+                this.mStateMachine.changeState(this.mINIT_DAILY_SCHEDULE);
+               
+
+	}
+	update(timestamp)
+	{
 
 	}
 
-	update()
+	updateData()
 	{
 		/**********************************/
         	//SCHEDULE
@@ -58,6 +68,7 @@ class DailySchedule extends Report
 			//but lets get some new stuff from intertubes
 			this.getData();	
 		}
+		//first run ever
 		else
 		{
 			this.updateCard(this.mInitialPractice);
