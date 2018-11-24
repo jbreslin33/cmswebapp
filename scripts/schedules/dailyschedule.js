@@ -6,6 +6,13 @@ class DailySchedule extends Report
 	{
 		super(application);
                	console.log('DailySchedule Constructor'); 
+
+		//states
+                this.mGLOBAL_DAILY_SCHEDULE = new GLOBAL_DAILY_SCHEDULE();
+                this.mINIT_DAILY_SCHEDULE = new INIT_DAILY_SCHEDULE();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_DAILY_SCHEDULE);
+                this.mStateMachine.changeState(this.mINIT_DAILY_SCHEDULE);
                
 		//add card to main
 		this.mContainer = document.querySelector('.main');
