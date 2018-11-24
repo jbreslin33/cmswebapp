@@ -112,33 +112,6 @@ class DailySchedule extends Report
                                 }
                         });
                 }
-
-                // Fetch the latest data.
-                request= new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        var data = JSON.parse(this.responseText);
-                                        if (data)
-					{
-						APPLICATION.mDailySchedule.mPractice = new Practice();
-						APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
-						APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][1];
-						APPLICATION.mDailySchedule.mPractice.mAddress = data [0][2];
-                                        	APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
-                                        }
-                                        else
-                                        {
-                                                console.log('no schedule');
-                                        }
-                                }
-                        }
-                };
-                request.open('GET', url);
-                request.send();
         }
 
 	updateCard(practice)

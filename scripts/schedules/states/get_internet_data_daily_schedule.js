@@ -28,7 +28,7 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
-                                                APPLICATION.mDailySchedule.mPractice = new Practice();
+                                                daily_schedule.mPractice = new Practice();
                                                 APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
                                                 APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][1];
                                                 APPLICATION.mDailySchedule.mPractice.mAddress = data [0][2];
