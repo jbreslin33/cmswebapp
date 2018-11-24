@@ -35,6 +35,8 @@ class DailySchedule extends Report
                 this.mDivAddress.setAttribute("class", "address");
                 this.mDivCard.appendChild(this.mDivAddress);
 
+		this.mRequest = null;
+
                 //report vars
                 this.mIsLoading = true;
                 this.mSpinner = document.querySelector('.loader');
@@ -112,7 +114,7 @@ class DailySchedule extends Report
                 }
 
                 // Fetch the latest data.
-                var request = new XMLHttpRequest();
+                request= new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
                         if (request.readyState === XMLHttpRequest.DONE)
