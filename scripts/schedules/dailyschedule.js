@@ -85,7 +85,7 @@ class DailySchedule extends Report
                 localStorage.mPractice = data;
         }
 	
-	getData()
+	getCache()
         {
                 var url = "/php/querys/get_schedule.php";
 

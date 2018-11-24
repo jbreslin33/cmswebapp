@@ -33,6 +33,7 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
                                                 APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][1];
                                                 APPLICATION.mDailySchedule.mPractice.mAddress = data [0][2];
                                                 APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
+						APPLICATION.mDailySchedule.saveToLocalStorage(daily_schedule.mPractice);
                                         }
                                         else
                                         {

@@ -14,7 +14,6 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 		{
 			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: ENTER");        
 		}
-		//daily_schedule.updateData();
                 daily_schedule.mPractice = localStorage.mPractice;
 		if (daily_schedule.mPractice)
 		{
@@ -30,23 +29,6 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 			//go to getInternetData state
 			daily_schedule.mStateMachine.changeState(daily_schedule.mGET_INTERNET_DATA_DAILY_SCHEDULE);
 		}
-
-/*
-                if (this.mPractice)
-                {
-                        this.mPractice = JSON.parse(this.mPractice);
-
-                        //but lets get some new stuff from intertubes
-                        this.getData();
-                }
-                //first run ever
-                else
-                {
-                        this.updateCard(this.mInitialPractice);
-                        this.saveToLocalStorage(this.mInitialPractice);
-                }
-		*/
-
 	}
 
         execute(daily_schedule)
