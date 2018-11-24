@@ -8,6 +8,7 @@ class Login
 		this.mLoginScreen = null;
 		this.mApplication = application;
 
+		//logs
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true; 
 		this.mStateExecuteLogs = false;

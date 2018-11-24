@@ -1,7 +1,7 @@
 
 'use strict';
 
-class INIT_LOGIN extends State
+class INIT_DAILY_SCHEDULE extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class INIT_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateEnterLogs)
 		{
-			console.log("INIT_LOGIN: ENTER");        
+			console.log("INIT_DAILY_SCHEDULE: ENTER");        
 		}
 	}
 
@@ -20,16 +20,16 @@ class INIT_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
-			console.log("INIT_LOGIN: EXECUTE");        
+			console.log("INIT_DAILY_SCHEDULE: EXECUTE");        
 		}
-		login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE_LOGIN);
+		//login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE_DAILY_SCHEDULE);
 	}
 
         exit(login)
         {
 		if (login.mStateLogs || login.mStateExitLogs)
 		{
-			console.log("INIT_LOGIN: EXIT");        
+			console.log("INIT_DAILY_SCHEDULE: EXIT");        
 		}
 	}
 }

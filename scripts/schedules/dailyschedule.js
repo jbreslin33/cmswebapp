@@ -7,6 +7,13 @@ class DailySchedule extends Report
 		super(application);
                	console.log('DailySchedule Constructor'); 
 
+               	//logs
+                this.mStateLogs = false;
+                this.mStateEnterLogs = true;
+                this.mStateExecuteLogs = false;
+                this.mStateExitLogs = false;
+                this.mLoggedIn = false;
+
 		//states
                 this.mGLOBAL_DAILY_SCHEDULE = new GLOBAL_DAILY_SCHEDULE();
                 this.mINIT_DAILY_SCHEDULE = new INIT_DAILY_SCHEDULE();

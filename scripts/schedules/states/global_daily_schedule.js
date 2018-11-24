@@ -1,7 +1,7 @@
 
 'use strict';
 
-class GLOBAL_LOGIN extends State
+class GLOBAL_DAILY_SCHEDULE extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class GLOBAL_LOGIN extends State
         {
                 if (login.mStateLogs || login.mStateEnterLogs)
                 {
-                        console.log("GLOBAL_LOGIN_STATE: ENTER"); 
+                        console.log("GLOBAL_DAILY_SCHEDULE: ENTER"); 
                 }
 	}
 
@@ -20,7 +20,7 @@ class GLOBAL_LOGIN extends State
         {
                 if (login.mStateLogs || login.mStateExecuteLogs)
                 {
-                        console.log("GLOBAL_LOGIN_STATE: EXECUTE"); 
+                        console.log("GLOBAL_DAILY_SCHEDULE: EXECUTE"); 
                 }
 	}
 
@@ -28,7 +28,7 @@ class GLOBAL_LOGIN extends State
         {
                 if (login.mStateLogs || login.mStateExitLogs)
                 {
-                        console.log("GLOBAL_LOGIN_STATE: EXIT"); 
+                        console.log("GLOBAL_DAILY_SCHEDULE: EXIT"); 
                 }
 	}
 }
