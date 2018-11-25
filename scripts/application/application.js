@@ -4,14 +4,17 @@ class Application
 {
 	constructor() 
 	{
-
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true;
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
+		
+		//login first
+		this.mLogin = null;
+		
+		//report
+		this.mDailySchedule = null;
 
-		/* this is the div container for all the cards. The cards hold the individual reports
-		*/
 		//header	
 		this.mHeader = new Header(this,"Club Management System");
                 
@@ -28,12 +31,6 @@ class Application
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
-
-		//login first
-		this.mLogin = null;
-		
-		//report
-		this.mDailySchedule = null;
 	}
 
 	update(timestamp)
@@ -51,6 +48,5 @@ class Application
 
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
-
 	}
 }
