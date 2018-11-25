@@ -16,4 +16,11 @@ insert into practices (event_date,start_time,address,team_id) values ('11/09/201
 insert into practices (event_date,start_time,address,team_id) values ('11/12/2018','20:00:00','4666 bristol road feasterville pa',1);
 insert into practices (event_date,start_time,address,team_id) values ('11/14/2018','20:00:00','4666 bristol road feasterville pa',1);
 insert into practices (event_date,start_time,address,team_id) values ('11/15/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/24/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/25/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/26/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/27/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/28/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/29/2018','20:00:00','4666 bristol road feasterville pa',1);
+insert into practices (event_date,start_time,address,team_id) values ('11/30/2018','20:00:00','4666 bristol road feasterville pa',1);
 
