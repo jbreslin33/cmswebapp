@@ -29,11 +29,11 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                         if (data)
                                         {
                                                 schedule.mPractice = new Practice();
-                                                APPLICATION.mDailySchedule.mPractice.mEventDate = data[0][0];
-                                                APPLICATION.mDailySchedule.mPractice.mStartTime = data[0][1];
-                                                APPLICATION.mDailySchedule.mPractice.mAddress = data [0][2];
-                                                APPLICATION.mDailySchedule.updateCard(APPLICATION.mDailySchedule.mPractice);
-						APPLICATION.mDailySchedule.saveToLocalStorage(schedule.mPractice);
+                                                APPLICATION.mSchedule.mPractice.mEventDate = data[0][0];
+                                                APPLICATION.mSchedule.mPractice.mStartTime = data[0][1];
+                                                APPLICATION.mSchedule.mPractice.mAddress = data [0][2];
+                                                APPLICATION.mSchedule.updateCard(APPLICATION.mSchedule.mPractice);
+						APPLICATION.mSchedule.saveToLocalStorage(schedule.mPractice);
                                         }
                                         else
                                         {

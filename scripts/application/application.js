@@ -41,9 +41,9 @@ class Application
 		{
 			this.mLogin.update(timestamp);
 		}
-		if (this.mDailySchedule)
+		if (this.mSchedule)
 		{
-			this.mDailySchedule.update(timestamp);
+			this.mSchedule.update(timestamp);
 		}
 
 		//run again

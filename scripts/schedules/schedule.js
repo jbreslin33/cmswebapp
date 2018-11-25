@@ -44,13 +44,13 @@ class Schedule extends Report
 		//states
                 this.mStateMachine = new StateMachine(this);
 
-                this.mGLOBAL_DAILY_SCHEDULE = new GLOBAL_DAILY_SCHEDULE();
-                this.mINIT_DAILY_SCHEDULE = new INIT_DAILY_SCHEDULE();
-                this.mCHECK_LOCAL_STORAGE_DAILY_SCHEDULE = new CHECK_LOCAL_STORAGE_DAILY_SCHEDULE();
-                this.mGET_INTERNET_DATA_DAILY_SCHEDULE = new GET_INTERNET_DATA_DAILY_SCHEDULE();
+                this.mGLOBAL_SCHEDULE = new GLOBAL_SCHEDULE();
+                this.mINIT_SCHEDULE = new INIT_SCHEDULE();
+                this.mCHECK_LOCAL_STORAGE_SCHEDULE = new CHECK_LOCAL_STORAGE_SCHEDULE();
+                this.mGET_INTERNET_DATA_SCHEDULE = new GET_INTERNET_DATA_SCHEDULE();
 
-                this.mStateMachine.setGlobalState(this.mGLOBAL_DAILY_SCHEDULE);
-                this.mStateMachine.changeState(this.mINIT_DAILY_SCHEDULE);
+                this.mStateMachine.setGlobalState(this.mGLOBAL_SCHEDULE);
+                this.mStateMachine.changeState(this.mINIT_SCHEDULE);
                
 
 	}
@@ -118,9 +118,9 @@ class Schedule extends Report
 	{
 		if (APPLICATION)
 		{
-			APPLICATION.mDailySchedule.mDivCard.querySelector('.eventDate').textContent = practice.mEventDate;
-			APPLICATION.mDailySchedule.mDivCard.querySelector('.startTime').textContent = practice.mStartTime;
-			APPLICATION.mDailySchedule.mDivCard.querySelector('.address').textContent = practice.mAddress;
+			APPLICATION.mSchedule.mDivCard.querySelector('.eventDate').textContent = practice.mEventDate;
+			APPLICATION.mSchedule.mDivCard.querySelector('.startTime').textContent = practice.mStartTime;
+			APPLICATION.mSchedule.mDivCard.querySelector('.address').textContent = practice.mAddress;
 		}
 		else
 		{
