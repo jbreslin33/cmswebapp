@@ -16,7 +16,7 @@ class Application
 		this.mDailySchedule = null;
 
 		//header	
-		this.mHeader = new Header(this,"Club Management System");
+		this.mHeader = new Header(this,"CMS");
                 
 		//main class
                 this.mDivMain = document.createElement("DIV");
