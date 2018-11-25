@@ -30,12 +30,47 @@ class Header
 		this.mButtonRefresh.addEventListener("click",this.buttonRefreshClicked); 
 		this.mHeader.appendChild(this.mButtonRefresh);
 		
-		//addbutton
-		this.mButtonAdd = document.createElement("BUTTON");
-		this.mButtonAdd.setAttribute("class", "headerButton");
-		this.mButtonAdd.setAttribute("aria-label", "Add");
-		this.mButtonAdd.setAttribute("id", "butAdd");
-		this.mHeader.appendChild(this.mButtonAdd);
+		//addbutton 1
+		this.mButtonAddA = document.createElement("BUTTON");
+		this.mButtonAddA.setAttribute("class", "headerButton");
+		this.mButtonAddA.setAttribute("aria-label", "Add");
+		this.mButtonAddA.setAttribute("id", "butAdd");
+		this.mHeader.appendChild(this.mButtonAddA);
+		
+		//addbutton 1
+		this.mButtonAddB = document.createElement("BUTTON");
+		this.mButtonAddB.setAttribute("class", "headerButton");
+		this.mButtonAddB.setAttribute("aria-label", "Add");
+		this.mButtonAddB.setAttribute("id", "butAdd");
+		this.mHeader.appendChild(this.mButtonAddB);
+		
+		//addbutton 1
+		this.mButtonAddC = document.createElement("BUTTON");
+		this.mButtonAddC.setAttribute("class", "headerButton");
+		this.mButtonAddC.setAttribute("aria-label", "Add");
+		this.mButtonAddC.setAttribute("id", "butAdd");
+		this.mHeader.appendChild(this.mButtonAddC);
+		
+		//addbutton 1
+		this.mButtonAddD = document.createElement("BUTTON");
+		this.mButtonAddD.setAttribute("class", "headerButton");
+		this.mButtonAddD.setAttribute("aria-label", "Add");
+		this.mButtonAddD.setAttribute("id", "butAdd");
+		this.mHeader.appendChild(this.mButtonAddD);
+		
+		//addbutton 1
+		this.mButtonAddE = document.createElement("BUTTON");
+		this.mButtonAddE.setAttribute("class", "headerButton");
+		this.mButtonAddE.setAttribute("aria-label", "Add");
+		this.mButtonAddE.setAttribute("id", "butAdd");
+		this.mHeader.appendChild(this.mButtonAddE);
+		
+		//addbutton 1
+		this.mButtonAddF = document.createElement("BUTTON");
+		this.mButtonAddF.setAttribute("class", "headerButton");
+		this.mButtonAddF.setAttribute("aria-label", "Add");
+		this.mButtonAddF.setAttribute("id", "butAdd");
+		this.mHeader.appendChild(this.mButtonAddF);
 	}
 
 	buttonRefreshClicked()
