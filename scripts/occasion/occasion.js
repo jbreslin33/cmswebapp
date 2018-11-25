@@ -7,9 +7,8 @@ class Occasion
 		
 		this.mApplication = application;
 
-                //card
-                this.mDivCard = document.createElement("DIV");
-                this.mDivCard.setAttribute("class", "card");
-                this.mApplication.mDivMain.appendChild(this.mDivCard);
+               	this.mEventDate = 'JAN 01 2000';
+                this.mStartTime = '12AM';
+                this.mAddress   = 'NOWHERE';
 	}
 }

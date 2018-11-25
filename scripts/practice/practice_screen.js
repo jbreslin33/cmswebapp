@@ -1,6 +1,6 @@
 'use strict';
 
-class Practice extends Occasion
+class PracticeScreen extends Report
 {
 	constructor(application)
 	{
