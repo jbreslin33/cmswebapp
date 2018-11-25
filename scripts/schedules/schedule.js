@@ -19,10 +19,6 @@ class Schedule extends Report
 		//data
 		this.mPractice = null;
 
-		//add card to main
-		this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivCard);
-
 		this.mDivEventDate = document.createElement("DIV");
                 this.mDivEventDate.setAttribute("class", "eventDate");
                 this.mDivCard.appendChild(this.mDivEventDate);
