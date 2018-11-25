@@ -36,6 +36,12 @@ class LoginScreen extends Report
 		
                 this.mButton.setAttribute("class", "btn");
 		this.mDivLogin.appendChild(this.mButton);
+	
+		//shadow
+                this.mDivShadow = document.createElement("DIV");
+                this.mDivShadow.setAttribute("class", "shadow");
+		this.mDivCard.appendChild(this.mDivShadow);
+		//<div class="shadow"></div>
 	}
 
 	show()
