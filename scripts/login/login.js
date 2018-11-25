@@ -93,7 +93,6 @@ class Login
 		}
 	}
 
-	// TODO add saveSelectedCities function here
         // Save list of cities to localStorage.
         save(username,password)
         {
