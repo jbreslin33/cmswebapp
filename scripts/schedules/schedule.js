@@ -55,61 +55,12 @@ class Schedule extends Report
 
 	}
 
-	updateData()
-	{
-		/**********************************/
-        	//SCHEDULE
-        	this.mPractice = localStorage.mPractice;
-        	if (this.mPractice)
-		{
-                	this.mPractice = JSON.parse(this.mPractice);
-
-			//but lets get some new stuff from intertubes
-			this.getData();	
-		}
-		//first run ever
-		else
-		{
-			this.updateCard(this.mInitialPractice);
-                	this.saveToLocalStorage(this.mInitialPractice);
-		}
-	}
-
         saveToLocalStorage(practice)
         {
                 var data = JSON.stringify(practice);
                 localStorage.mPractice = data;
         }
 	
-	getCache()
-        {
-                var url = "/php/querys/get_schedule.php";
-
-                // TODO add cache logic here
-                if ('caches' in window)
-                {
-                        /*
-                        * Check if the service worker has already cached this city's weather
-                        * data. If the service worker has the data, then display the cached
-                        * data while the app fetches the latest data.
-                        */
-                        caches.match(url).then(function(response)
-                        {
-                                if (response)
-                                {
-                                        response.json().then(function updateFromCache(json)
-                                        {
-                                                var results = json.query.results;
-                                                results.key = key;
-                                                results.label = label;
-                                                results.created = json.query.created;
-                                                this.updateScheduleCard(results);
-                                        });
-                                }
-                        });
-                }
-        }
-
 	updateCard(practice)
 	{
 		if (APPLICATION)
