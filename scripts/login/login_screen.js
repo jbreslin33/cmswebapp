@@ -32,8 +32,9 @@ class LoginScreen extends Report
 		this.mDivLogin.appendChild(this.mDivInputPassword);
 		
 		this.mButton = document.createElement("BUTTON");
-		//this.mButton.addEventListener("click",this.mLogin.sendLogin);
-		//this.mButton.addEventListener("click",APPLICATION.mLogin.sendLogin);
+		this.mButton.innerHTML = "LOGIN";
+		
+                //this.mDivLogin.setAttribute("class", "button");
 		this.mDivLogin.appendChild(this.mButton);
 	}
 
