@@ -82,6 +82,7 @@ class Login
                                         if (data)
                                         {
 						APPLICATION.mLogin.processLogin(data);
+						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername,APPLICATION.mLogin.mPassword);
                                         }
                                 }
                         }
@@ -102,7 +103,7 @@ class Login
 		if (code == 100)
 		{
 			this.mLoggedIn = true;	
-			this.save(this.mUsername,this.mPassword);
+			//this.save(this.mUsername,this.mPassword);
 		}
 	}
 
