@@ -41,7 +41,6 @@ class LoginScreen extends Report
                 this.mDivShadow = document.createElement("DIV");
                 this.mDivShadow.setAttribute("class", "shadow");
 		this.mDivCard.appendChild(this.mDivShadow);
-		//<div class="shadow"></div>
 	}
 
 	show()
