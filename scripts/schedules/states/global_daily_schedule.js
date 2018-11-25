@@ -8,25 +8,25 @@ class GLOBAL_DAILY_SCHEDULE extends State
 		super();
 	}
 
-        enter(login)
+        enter(daily_schedule)
         {
-                if (login.mStateLogs || login.mStateEnterLogs)
+                if (daily_schedule.mStateLogs || daily_schedule.mStateEnterLogs)
                 {
                         console.log("GLOBAL_DAILY_SCHEDULE: ENTER"); 
                 }
 	}
 
-        execute(login)
+        execute(daily_schedule)
         {
-                if (login.mStateLogs || login.mStateExecuteLogs)
+                if (daily_schedule.mStateLogs || daily_schedule.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_DAILY_SCHEDULE: EXECUTE"); 
                 }
 	}
 
-        exit(login)
+        exit(daily_schedule)
         {
-                if (login.mStateLogs || login.mStateExitLogs)
+                if (daily_schedule.mStateLogs || daily_schedule.mStateExitLogs)
                 {
                         console.log("GLOBAL_DAILY_SCHEDULE: EXIT"); 
                 }

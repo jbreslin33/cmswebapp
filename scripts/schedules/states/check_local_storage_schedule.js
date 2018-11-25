@@ -1,58 +1,58 @@
 
 'use strict';
 
-class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
+class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 {
 	constructor() 
 	{
 		super();
 	}
 
-        enter(daily_schedule)
+        enter(schedule)
         {
-		if (daily_schedule.mStateLogs || daily_schedule.mStateEnterLogs)
+		if (schedule.mStateLogs || schedule.mStateEnterLogs)
 		{
-			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: ENTER");        
+			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: ENTER");        
 		}
 
 		//basically we are either using initial or localstorage then regardless we are going to internet state
 
-                daily_schedule.mPractice = localStorage.mPractice;
-		if (daily_schedule.mPractice)
+                schedule.mPractice = localStorage.mPractice;
+		if (schedule.mPractice)
 		{
 			//local storage
-			var data = JSON.parse(daily_schedule.mPractice);
+			var data = JSON.parse(schedule.mPractice);
 
-			daily_schedule.mDivEventDate.textContent = data.mEventDate;
-			daily_schedule.mDivStartTime.textContent = data.mStartTime;
-			daily_schedule.mDivAddress.textContent = data.mAddress;
+			schedule.mDivEventDate.textContent = data.mEventDate;
+			schedule.mDivStartTime.textContent = data.mStartTime;
+			schedule.mDivAddress.textContent = data.mAddress;
 		}
 		else
 		{
 			//initial
-			daily_schedule.mDivEventDate.textContent = daily_schedule.mInitialPractice.mEventDate;
-			daily_schedule.mDivStartTime.textContent = daily_schedule.mInitialPractice.mStartTime;
-			daily_schedule.mDivAddress.textContent = daily_schedule.mInitialPractice.mAddress;
-			daily_schedule.saveToLocalStorage(daily_schedule.mIntialPractice);
+			schedule.mDivEventDate.textContent = schedule.mInitialPractice.mEventDate;
+			schedule.mDivStartTime.textContent = schedule.mInitialPractice.mStartTime;
+			schedule.mDivAddress.textContent = schedule.mInitialPractice.mAddress;
+			schedule.saveToLocalStorage(schedule.mIntialPractice);
 		}
 
 		//go to getInternetData state
-		daily_schedule.mStateMachine.changeState(daily_schedule.mGET_INTERNET_DATA_DAILY_SCHEDULE);
+		schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
 	}
 
-        execute(daily_schedule)
+        execute(schedule)
         {
-		if (daily_schedule.mStateLogs || daily_schedule.mStateExecuteLogs)
+		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
 		{
-			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: EXECUTE");        
+			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: EXECUTE");        
 		}
 	}
 
-        exit(daily_schedule)
+        exit(schedule)
         {
-		if (daily_schedule.mStateLogs || daily_schedule.mStateExitLogs)
+		if (schedule.mStateLogs || schedule.mStateExitLogs)
 		{
-			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: EXIT");        
+			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: EXIT");        
 		}
 	}
 }
