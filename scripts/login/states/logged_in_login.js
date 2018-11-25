@@ -26,7 +26,7 @@ class LOGGED_IN_LOGIN extends State
 		{
 			console.log("mAppliation exists");
 		}
-                login.mApplication.mDailySchedule = new DailySchedule(login.mApplication);
+                login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}
 
         execute(login)
