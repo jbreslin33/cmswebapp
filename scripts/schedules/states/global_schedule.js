@@ -1,34 +1,34 @@
 
 'use strict';
 
-class GLOBAL_DAILY_SCHEDULE extends State
+class GLOBAL_SCHEDULE extends State
 {
 	constructor() 
 	{
 		super();
 	}
 
-        enter(login)
+        enter(schedule)
         {
-                if (login.mStateLogs || login.mStateEnterLogs)
+                if (schedule.mStateLogs || schedule.mStateEnterLogs)
                 {
-                        console.log("GLOBAL_DAILY_SCHEDULE: ENTER"); 
+                        console.log("GLOBAL_SCHEDULE: ENTER"); 
                 }
 	}
 
-        execute(login)
+        execute(schedule)
         {
-                if (login.mStateLogs || login.mStateExecuteLogs)
+                if (schedule.mStateLogs || schedule.mStateExecuteLogs)
                 {
-                        console.log("GLOBAL_DAILY_SCHEDULE: EXECUTE"); 
+                        console.log("GLOBAL_SCHEDULE: EXECUTE"); 
                 }
 	}
 
-        exit(login)
+        exit(schedule)
         {
-                if (login.mStateLogs || login.mStateExitLogs)
+                if (schedule.mStateLogs || schedule.mStateExitLogs)
                 {
-                        console.log("GLOBAL_DAILY_SCHEDULE: EXIT"); 
+                        console.log("GLOBAL_SCHEDULE: EXIT"); 
                 }
 	}
 }
