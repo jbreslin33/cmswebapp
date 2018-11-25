@@ -8,10 +8,6 @@ class LoginScreen extends Report
 
 		this.mLogin = login;
               
-		//add card to main
-		this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivCard);
-
 		//login stuff
                 this.mDivLogin = document.createElement("DIV");
                 this.mDivLogin.setAttribute("class", "login");
