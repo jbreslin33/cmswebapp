@@ -2,10 +2,10 @@
 
 class Occasion
 {
-	constructor(application)
+	constructor(schedule)
 	{
 		
-		this.mApplication = application;
+		this.mSchedule = schedule;
 
                	this.mEventDate = 'JAN 01 2000';
                 this.mStartTime = '12AM';

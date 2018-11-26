@@ -1,10 +1,9 @@
 'use strict';
 
-class PracticeScreen extends OccasionScreen
+class PracticeScreen 
 {
 	constructor(practice)
 	{
-		super(practice.mApplication);
 		this.mPractice = practice;
 	}
 
