@@ -58,9 +58,6 @@ body {
     text-indent: -30000px;
     overflow: hidden;
     opacity: 0.54;
-    /*
-    -webkit-transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
-    */
     transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
     border: none;
     outline: none;
@@ -74,23 +71,23 @@ body {
   font-weight: 400;
   font-size: 20px;
   margin: 0;
+  flex: 1; 
+}
+
+.main {
+  padding-top: 60px;
   /*
   -webkit-box-flex: 1;
   -webkit-flex: 1;
       -ms-flex: 1;
       */
-          flex: 1; 
-}
-
-.main {
-  padding-top: 60px;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
           flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; }
+ /* 
+  -webkit-overflow-scrolling: touch; 
+  */
+}
 
 .dialog-container {
   background: rgba(0, 0, 0, 0.57);
@@ -102,8 +99,11 @@ body {
   opacity: 0;
   pointer-events: none;
   will-change: opacity;
+  /*
   -webkit-transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
-  transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1); }
+  */
+  transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
+} 
 
 .dialog-container--visible {
   opacity: 1;
@@ -117,12 +117,15 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
+  /*
   -webkit-transform: translate(-50%, -50%) translateY(30px);
           transform: translate(-50%, -50%) translateY(30px);
   -webkit-transition: -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
   transition: -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
+  */
   transition: transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
-  transition: transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s, -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s; }
+  transition: transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s, -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s; 
+}
 
 .dialog > div {
   padding-left: 24px;
