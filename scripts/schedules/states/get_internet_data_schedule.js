@@ -28,12 +28,23 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
-                                                schedule.mPractice = new Practice();
-                                                APPLICATION.mSchedule.mPractice.mEventDate = data[0][0];
-                                                APPLICATION.mSchedule.mPractice.mStartTime = data[0][1];
-                                                APPLICATION.mSchedule.mPractice.mAddress = data [0][2];
-                                                APPLICATION.mSchedule.updateCard(APPLICATION.mSchedule.mPractice);
-						APPLICATION.mSchedule.saveToLocalStorage(schedule.mPractice);
+						console.log('size:' + data.length);
+						var i = 0;
+						while (data[i])
+						{
+							console.log('data[' + i + '] ='   + data[i][0]);
+                                                	
+							var practice = new Practice(APPLICATION);
+
+                                                	practice.mEventDate = data[i][0];
+                                                	practice.mStartTime = data[i][1];
+                                                	practice.mAddress   = data[i][2];
+                                                	APPLICATION.mSchedule.updateCard(APPLICATION.mSchedule.mPractice);
+							APPLICATION.mSchedule.saveToLocalStorage(schedule.mPractice);
+
+							APPLICATION.mPracticeArray.push(practice);
+							i++;
+						}
                                         }
                                         else
                                         {

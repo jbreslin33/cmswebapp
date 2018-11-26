@@ -4,7 +4,7 @@ session_start();
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
 $query = "
-select event_date, start_time, address from practices where event_date = current_date 
+select event_date, start_time, address from practices order by event_date asc 
 ";
 $database = new Database();
 

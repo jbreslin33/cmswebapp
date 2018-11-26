@@ -1,6 +1,6 @@
 'use strict';
 
-class LoginScreen extends Report
+class LoginScreen extends ReportScreen
 {
 	constructor(application,login)
 	{

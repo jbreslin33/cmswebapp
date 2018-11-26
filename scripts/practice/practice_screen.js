@@ -1,14 +1,9 @@
 'use strict';
 
-class PracticeScreen extends Report
+class PracticeScreen extends OccasionScreen
 {
 	constructor(application)
 	{
 		super(application);
-		
-                //card
-                this.mDivCard = document.createElement("DIV");
-                this.mDivCard.setAttribute("class", "card");
-                this.mApplication.mDivMain.appendChild(this.mDivCard);
 	}
 }

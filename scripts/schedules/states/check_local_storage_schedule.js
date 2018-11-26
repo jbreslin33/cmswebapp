@@ -30,10 +30,11 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		else
 		{
 			//initial
-			schedule.mDivEventDate.textContent = schedule.mInitialPractice.mEventDate;
-			schedule.mDivStartTime.textContent = schedule.mInitialPractice.mStartTime;
-			schedule.mDivAddress.textContent = schedule.mInitialPractice.mAddress;
-			schedule.saveToLocalStorage(schedule.mIntialPractice);
+			schedule.mInitialPractice = new Practice(schedule.mApplication);
+			schedule.mInitialPractice.mPracticeScreen.mDivEventDate.textContent = schedule.mInitialPractice.mEventDate;
+			schedule.mInitialPractice.mPracticeScreen.mDivStartTime.textContent = schedule.mInitialPractice.mStartTime;
+			schedule.mInitialPractice.mPracticeScreen.mDivAddress.textContent = schedule.mInitialPractice.mAddress;
+			schedule.saveToLocalStorage(schedule.mInitialPractice);
 		}
 
 		//go to getInternetData state

@@ -1,10 +1,10 @@
 'use strict';
 
-class Schedule extends Report
+class Schedule 
 {
 	constructor(application)
 	{
-		super(application);
+		this.mApplication = application;
 
                	//logs
                 this.mStateLogs = false;
@@ -12,31 +12,17 @@ class Schedule extends Report
                 this.mStateExecuteLogs = false;
                 this.mStateExitLogs = false;
                 this.mLoggedIn = false;
-		
-		console.log('create mInitialPractice');
-		this.mInitialPractice = new Practice();
+	
+		//initial
+		this.mInitialPractice = new Practice(this.mApplication);
 
 		//data
-		this.mPractice = null;
-
-		this.mDivEventDate = document.createElement("DIV");
-                this.mDivEventDate.setAttribute("class", "eventDate");
-                this.mDivCard.appendChild(this.mDivEventDate);
-
-		this.mDivStartTime = document.createElement("DIV");
-                this.mDivStartTime.setAttribute("class", "startTime");
-                this.mDivCard.appendChild(this.mDivStartTime);
-		
-		this.mDivAddress = document.createElement("DIV");
-                this.mDivAddress.setAttribute("class", "address");
-                this.mDivCard.appendChild(this.mDivAddress);
-
 		this.mRequest = null;
 
-                //report vars
-                this.mIsLoading = true;
-                this.mSpinner = document.querySelector('.loader');
-		
+		//data storage classes
+		this.mPracticeArray = new Array();
+		this.mGameArray = new Array();
+
 		//states
                 this.mStateMachine = new StateMachine(this);
 
@@ -47,8 +33,6 @@ class Schedule extends Report
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_SCHEDULE);
                 this.mStateMachine.changeState(this.mINIT_SCHEDULE);
-               
-
 	}
 	update(timestamp)
 	{
@@ -57,8 +41,8 @@ class Schedule extends Report
 
         saveToLocalStorage(practice)
         {
-                var data = JSON.stringify(practice);
-                localStorage.mPractice = data;
+                //var data = JSON.stringify(practice);
+                //localStorage.mPractice = data;
         }
 	
 	updateCard(practice)

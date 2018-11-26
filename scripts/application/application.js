@@ -13,7 +13,7 @@ class Application
 		this.mLogin = null;
 		
 		//report
-		this.mDailySchedule = null;
+		this.mSchedule = null;
 
 		//header	
 		this.mHeader = new Header(this,"CMS");
