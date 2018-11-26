@@ -35,6 +35,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 							console.log('data[' + i + '] ='   + data[i][0]);
                                                 	
 							var practice = new Practice(schedule);
+							practice.mPracticeScreen = new PracticeScreen(practice);
 
 							//set practice member vars
                                                 	practice.mEventDate = data[i][0];

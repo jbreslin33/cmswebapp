@@ -4,6 +4,10 @@ class Schedule
 {
 	constructor(application)
 	{
+		if (application)
+		{
+			console.log("app exists");
+		}
 		this.mApplication = application;
 
                	//logs
@@ -14,7 +18,7 @@ class Schedule
                 this.mLoggedIn = false;
 	
 		//initial
-		this.mInitialPractice = new Practice(this.mApplication);
+		this.mInitialPractice = null;
 
 		//data
 		this.mRequest = null;
