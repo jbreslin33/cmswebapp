@@ -39,10 +39,17 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                                 	practice.mEventDate = data[i][0];
                                                 	practice.mStartTime = data[i][1];
                                                 	practice.mAddress   = data[i][2];
-                                                	APPLICATION.mSchedule.updateCard(APPLICATION.mSchedule.mPractice);
+                                                	//APPLICATION.mSchedule.updateCard(APPLICATION.mSchedule.mPractice);
+					
+							practice.mPracticeScreen.mDivCard.querySelector('.eventDate').textContent = practice.mEventDate;
+
+							//APPLICATION.mSchedule.mDivCard.querySelector('.eventDate').textContent = practice.mEventDate;
+                        				//APPLICATION.mSchedule.mDivCard.querySelector('.startTime').textContent = practice.mStartTime;
+                        				//APPLICATION.mSchedule.mDivCard.querySelector('.address').textContent = practice.mAddress;
+
 							APPLICATION.mSchedule.saveToLocalStorage(schedule.mPractice);
 
-							APPLICATION.mPracticeArray.push(practice);
+							APPLICATION.mSchedule.mPracticeArray.push(practice);
 							i++;
 						}
                                         }
