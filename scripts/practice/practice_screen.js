@@ -15,13 +15,6 @@ class PracticeScreen
                 this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivCard);
 
-
-                //card
-                this.mDivCard = document.createElement("DIV");
-                this.mDivCard.setAttribute("class", "card");
-                this.mPractice.mSchedule.mApplication.mDivMain.appendChild(this.mDivCard);
-
-
                 this.mDivEventDate = document.createElement("DIV");
                 this.mDivEventDate.setAttribute("class", "eventDate");
                 this.mDivCard.appendChild(this.mDivEventDate);
