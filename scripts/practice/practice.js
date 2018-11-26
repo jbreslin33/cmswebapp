@@ -5,6 +5,6 @@ class Practice extends Occasion
 	constructor(application)
 	{
 		super(application);
-		this.mPracticeScreen = new PracticeScreen(application,this);
+		this.mPracticeScreen = new PracticeScreen(this);
 	}
 }

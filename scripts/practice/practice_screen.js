@@ -2,9 +2,9 @@
 
 class PracticeScreen extends OccasionScreen
 {
-	constructor(application,practice)
+	constructor(practice)
 	{
-		super(application);
+		super(practice.mApplication);
 		this.mPractice = practice;
 	}
 
