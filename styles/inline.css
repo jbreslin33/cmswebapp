@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 * {
   box-sizing: border-box; }
 
@@ -121,7 +120,7 @@ body {
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1; }
-
+/*
 .loader {
   left: 50%;
   top: 50%;
@@ -180,7 +179,7 @@ body {
     stroke-dashoffset: -65.973;
     -webkit-transform: rotate(90deg);
             transform: rotate(90deg); } }
-
+*/
 .main {
   padding-top: 60px;
   -webkit-box-flex: 1;
@@ -260,7 +259,7 @@ body {
   border-radius: 2px;
   margin: 16px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
-
+/*
 .weather-forecast .location {
   font-size: 1.75em; }
 
@@ -427,3 +426,4 @@ body {
   .mdl-button--primary.mdl-button--primary.mdl-button--raised, .mdl-button--primary.mdl-button--primary.mdl-button--fab {
     color: white;
     background-color: #3f51b5; }
+    */
