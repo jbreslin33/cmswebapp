@@ -20,7 +20,7 @@ class LoginScreen
                 this.mDivLogin = document.createElement("DIV");
                 this.mDivLogin.setAttribute("class", "login");
 		//this.mDivCard.appendChild(this.mDivLogin);
-		this.mDivMain.appendChild(this.mDivLogin);
+		this.mApplication.mDivMain.appendChild(this.mDivLogin);
                 
 		//add card to main
                 this.mContainer = document.querySelector('.main');
@@ -49,15 +49,15 @@ class LoginScreen
 		//shadow
                 this.mDivShadow = document.createElement("DIV");
                 this.mDivShadow.setAttribute("class", "shadow");
-		this.mDivCard.appendChild(this.mDivShadow);
+		this.mDivLogin.appendChild(this.mDivShadow);
 	}
 
 	show()
 	{
-		this.mDivCard.style.display = "block";	
+		this.mDivLogin.style.display = "block";	
 	}
 	hide()
 	{
-		this.mDivCard.style.display = "none";	
+		this.mDivLogin.style.display = "none";	
 	}
 }
