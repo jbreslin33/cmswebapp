@@ -8,19 +8,23 @@ class LoginScreen
 		this.mApplication = application;
 
                 //card
+/*
                 this.mDivCard = document.createElement("DIV");
                 this.mDivCard.setAttribute("class", "card");
                 this.mApplication.mDivMain.appendChild(this.mDivCard);
+*/
 
-                //add card to main
-                this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivCard);
 
               
 		//login stuff
                 this.mDivLogin = document.createElement("DIV");
                 this.mDivLogin.setAttribute("class", "login");
-		this.mDivCard.appendChild(this.mDivLogin);
+		//this.mDivCard.appendChild(this.mDivLogin);
+		this.mDivMain.appendChild(this.mDivLogin);
+                
+		//add card to main
+                this.mContainer = document.querySelector('.main');
+                this.mContainer.appendChild(this.mDivLogin);
                 
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
