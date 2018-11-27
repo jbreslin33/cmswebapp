@@ -30,7 +30,9 @@ body
         will-change: transform;
         display: flex;
         transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+	/*
         transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s, -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+	*/
         z-index: 1000;
 }
 .header .headerButton
