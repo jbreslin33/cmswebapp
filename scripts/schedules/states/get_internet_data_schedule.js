@@ -28,12 +28,9 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
-						console.log('size:' + data.length);
 						var i = 0;
 						while (data[i])
 						{
-							console.log('data[' + i + '] ='   + data[i][0]);
-                                                	
 							var practice = new Practice(schedule);
 							practice.mPracticeScreen = new PracticeScreen(practice);
 

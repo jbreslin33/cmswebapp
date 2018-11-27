@@ -30,11 +30,25 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		}
 		else
 		{
+                	var fakePractice = new Practice(schedule);
+                        fakePractice.mPracticeScreen = new PracticeScreen(fakePractice);
+
+                        //update screen card
+                        fakePractice.mPracticeScreen.update();
+
+                        //save for later
+                        schedule.saveToLocalStorage(fakePractice);
+
+                        //push to array
+                       	schedule.mPracticeArray.push(fakePractice);
+
 			//initial
+			/*
 			schedule.mInitialPractice = new Practice(schedule);
 			schedule.mInitialPractice.mPracticeScreen = new PracticeScreen(schedule.mInitialPractice);
 			schedule.mInitialPractice.mPracticeScreen.update();
 			schedule.saveToLocalStorage(schedule.mInitialPractice);
+			*/
 		}
 
 		//go to getInternetData state
