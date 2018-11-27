@@ -43,6 +43,8 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 							practice.mPracticeScreen = new PracticeScreen(practice);
 
 							//set practice member vars
+							var time = new Time();
+							time.convertFromMilitaryToHuman(data[i][1]);
                                                 	practice.mEventDate = data[i][0];
                                                 	practice.mStartTime = data[i][1];
                                                 	practice.mAddress   = data[i][2];
