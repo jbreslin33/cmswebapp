@@ -82,7 +82,7 @@ body
         margin: 16px;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
-
+/*
 ::-moz-selection 
 { 
 	background: #fe57a1; color: #fff; text-shadow: none; 
@@ -92,7 +92,7 @@ body
 { 
 	background: #fe57a1; color: #fff; text-shadow: none; 
 }
-
+*/
 body 
 { 
 	background-image: radial-gradient( cover, rgba(92,100,111,1) 0%,rgba(31,35,40,1) 100%), url('http://i.minus.com/io97fW9I0NqJq.png') 
