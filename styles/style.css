@@ -13,9 +13,6 @@ html, body
         color: #444;
 }
 
-html {
-  overflow: hidden;
-}
 body
 {
         display: flex;
