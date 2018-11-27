@@ -28,7 +28,15 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
+						//lets clear array....
 						var i = 0;
+						for (i = 0; i < APPLICATION.mSchedule.mPracticeArray.length; i++)
+						{
+							var practice = APPLICATION.mSchedule.mPracticeArray.shift();
+							practice.mPracticeScreen.mDivCard.style.display = "none";
+						}
+						
+						i = 0;
 						while (data[i])
 						{
 							var practice = new Practice(schedule);

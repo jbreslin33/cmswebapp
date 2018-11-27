@@ -41,14 +41,6 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 
                         //push to array
                        	schedule.mPracticeArray.push(fakePractice);
-
-			//initial
-			/*
-			schedule.mInitialPractice = new Practice(schedule);
-			schedule.mInitialPractice.mPracticeScreen = new PracticeScreen(schedule.mInitialPractice);
-			schedule.mInitialPractice.mPracticeScreen.update();
-			schedule.saveToLocalStorage(schedule.mInitialPractice);
-			*/
 		}
 
 		//go to getInternetData state
