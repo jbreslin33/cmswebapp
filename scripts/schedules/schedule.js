@@ -16,6 +16,9 @@ class Schedule
                 this.mStateExecuteLogs = false;
                 this.mStateExitLogs = false;
                 this.mLoggedIn = false;
+
+		//utilities
+		this.mTime = new Time();
 	
 		//initial
 		this.mInitialPractice = null;
