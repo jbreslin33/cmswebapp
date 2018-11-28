@@ -45,7 +45,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 							//set practice member vars
 
                                                 	practice.mEventDate = data[i][0];
-							practice.mStartTime = schedule.mTime.convertFromMilitaryToHuman(data[i][1]);
+							practice.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][1]);
                                                 	practice.mAddress   = data[i][2];
 
 							//update screen card
