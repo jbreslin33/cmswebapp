@@ -11,6 +11,10 @@ codes
 104 user does not exist
 105 wrong password
 
+300 return schedule 
+301 some other report
+
+
 everything else will be done on client
 */
 
@@ -76,7 +80,8 @@ class Login
 
 			if ($this->mPassword == $password)
 			{
-				$this->mEcho = "100," . $user_id;
+				//$this->mEcho = "100," . $user_id;
+				$this->mEcho = "100";
 			}
 			else
 			{
