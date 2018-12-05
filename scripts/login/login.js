@@ -17,6 +17,7 @@ class Login
 		//credentials
 		this.mUsername = null;
 		this.mPassword = null;
+		this.mUserID   = null;
 
                 //states
                 this.mStateMachine = new StateMachine(this);
@@ -75,8 +76,10 @@ class Login
                                         var data = this.responseText;
                                         if (data)
                                         {
-						APPLICATION.mLogin.processLogin(data);
-						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername,APPLICATION.mLogin.mPassword);
+						var dataArray = data.split(",");
+						APPLICATION.mLogin.processLogin(dataArray[0]);
+						APPLICATION.mLogin.mUserID = dataArray[1];
+						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername,APPLICATION.mLogin.mPassword,APPLICATION.mLogin.mUserID);
                                         }
                                 }
                         }
@@ -94,9 +97,11 @@ class Login
 	}
 
         // Save list of cities to localStorage.
-        save(username,password)
+        save(username,password,user_id)
         {
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
+		localStorage.setItem("user_id",user_id);
+		//localStorage.setItem("team_id",team_id);
         }
 }

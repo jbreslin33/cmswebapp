@@ -70,12 +70,13 @@ class Login
 			$_SESSION["logged_in"] = true;
 
 			$row = pg_fetch_row($result);
-			$_SESSION["user_id"] = $row[0];
+			$user_id = $row[0];
+			$_SESSION["user_id"] = $user_id;
 			$password = $row[1];
 
 			if ($this->mPassword == $password)
 			{
-				$this->mEcho = "100";
+				$this->mEcho = "100," . $user_id;
 			}
 			else
 			{
