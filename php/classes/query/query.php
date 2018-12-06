@@ -32,22 +32,19 @@ class Query
 		$this->mEcho = "";
 
 		$this->mUsername = "";
-		$this->mPassword = "";
 
 		//check for proper post or get
-		if (isset($_POST['username']) && isset($_POST['password']))
+		if (isset($_POST['username']))
 		{
 			$this->mUsername = $_POST['username'];
-			$this->mPassword = $_POST['password'];
 		}
-		if (isset($_GET['username']) && isset($_GET['password']))
+		if (isset($_GET['username']))
 		{
 			$this->mUsername = $_GET['username'];
-			$this->mPassword = $_GET['password'];
 		}
 
 		//business rules check
-		if ($this->mUsername == "" && $this->mPassword == "")
+		if ($this->mUsername == "")
 		{
 			$this->mEcho = 101; 
 		}	
@@ -55,13 +52,9 @@ class Query
 		{
 			$this->mEcho = 102; 
 		}	
-		else if ($this->mPassword == "")
-		{
-			$this->mEcho = 103; 
-		}	
 		else
 		{
-			$this->processLogin();
+			$this->getSchedule();
 		}
 
 		$this->sendResponse();
