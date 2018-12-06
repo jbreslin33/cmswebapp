@@ -15,7 +15,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 			console.log("GET_INTERNET_DATA_SCHEDULE: ENTER");        
 		}
 		console.log("GET DATA FROM INTERNET");
-                var url = "/php/classes/query/query.php?username=" + APPLICATION.mLogin.mUsername;
+                var url = "/php/classes/query/schedule_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
                 schedule.mRequest= new XMLHttpRequest();
