@@ -16,6 +16,9 @@ codes
 
 
 everything else will be done on client
+
+So views should only need email address
+only updates and inserts should check for password
 */
 
 class Login 
