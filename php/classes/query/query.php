@@ -55,7 +55,27 @@ abstract class Query
 
 		$this->sendResponse();
 	}
+
 	abstract protected function query();
+
+	public function runQuery($query)
+	{
+                $database = new Database();
+
+                $results = $database->query($query);
+
+                $myarray = array();
+
+                $resultArray = pg_fetch_all($results);
+
+                while ($row = pg_fetch_row($results))
+                {
+                        $myarray[] = $row;
+                }
+                $data = json_encode($myarray);
+                error_log($data);
+                echo $data;
+	}
 
 	public function sendResponse()
 	{
