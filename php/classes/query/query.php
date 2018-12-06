@@ -46,10 +46,6 @@ class Query
 		//business rules check
 		if ($this->mUsername == "")
 		{
-			$this->mEcho = 101; 
-		}	
-		else if ($this->mUsername == "")
-		{
 			$this->mEcho = 102; 
 		}	
 		else
@@ -58,40 +54,6 @@ class Query
 		}
 
 		$this->sendResponse();
-	}
-
-	public function processLogin()
-	{
-		$database = new Database;
-		
-		$query = "select id, password from users where username = '";
-		$query .= $this->mUsername; 
-		$query .= "';";
-		
-		$result = $database->query($query);
-		if (pg_num_rows($result) > 0)
-		{
-			$_SESSION["logged_in"] = true;
-
-			$row = pg_fetch_row($result);
-			$user_id = $row[0];
-			$_SESSION["user_id"] = $user_id;
-			$password = $row[1];
-
-			if ($this->mPassword == $password)
-			{
-				//$this->mEcho = "100," . $user_id;
-				$this->mEcho = "100";
-			}
-			else
-			{
-				$this->mEcho = "105";
-			}
-		}
-		else
-		{
-			$this->mEcho = "104";
-		}
 	}
 
 	public function sendResponse()

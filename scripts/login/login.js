@@ -102,6 +102,5 @@ class Login
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
 		localStorage.setItem("user_id",user_id);
-		//localStorage.setItem("team_id",team_id);
         }
 }

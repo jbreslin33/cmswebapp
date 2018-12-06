@@ -7,40 +7,8 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 	{
 		super();
 	}
-	/*
-	 
-	        sendLogin()
-        {
-                APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
-                APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
-
-                var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-                                                var dataArray = data.split(",");
-                                                APPLICATION.mLogin.processLogin(dataArray[0]);
-                                                APPLICATION.mLogin.mUserID = dataArray[1];
-                                                APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername,APPLICATION.mLogin.mPassword,APPLICATION.mLogin.mUserID);
-                                        }
-                                }
-                        }
-                };
-                request.open('POST', url);
-                request.send();
-        }
-	
-		*/
-
-        enter(schedule)
+        
+	enter(schedule)
         {
 		if (schedule.mStateLogs || schedule.mStateEnterLogs)
 		{
