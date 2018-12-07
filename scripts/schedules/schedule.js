@@ -4,10 +4,6 @@ class Schedule
 {
 	constructor(application)
 	{
-		if (application)
-		{
-			console.log("app exists");
-		}
 		this.mApplication = application;
 
                	//logs

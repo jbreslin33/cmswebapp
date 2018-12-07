@@ -21,11 +21,6 @@ class LOGGED_IN_LOGIN extends State
 			login.mLoginScreen.hide();
 		}
 
-		//lets fire up a report since we are logged in
-		if (login.mApplication)
-		{
-			console.log("mAppliation exists");
-		}
                 login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}
 
