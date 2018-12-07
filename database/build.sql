@@ -2,7 +2,17 @@
 --***************************************************************
 --******************  DROP TABLES *************************
 --**************************************************************
+--OLD DROPS
+--DROP TABLE games CASCADE; 
+--DROP TABLE practices CASCADE; 
+--DROP TABLE practices_sessions CASCADE; 
+--DROP TABLE practices_users_attendance CASCADE; 
+--DROP TABLE practices_users_availability CASCADE; 
+--DROP TABLE games_users_attendance CASCADE; 
+--DROP TABLE games_users_availability CASCADE; 
+--DROP TABLE uniforms_games CASCADE; 
 
+--LIVE DROPS
 DROP TABLE error_log CASCADE; 
 
 DROP TABLE sessions_media CASCADE; 
@@ -22,18 +32,15 @@ DROP TABLE possessions CASCADE;
 DROP TABLE zones CASCADE;
 DROP TABLE formations CASCADE;
 
-DROP TABLE practices_users_attendance CASCADE;
-DROP TABLE practices_users_availability CASCADE;
-DROP TABLE games_users_attendance CASCADE;
-DROP TABLE games_users_availability CASCADE;
+DROP TABLE events_users_attendance CASCADE;
+DROP TABLE events_users_availability CASCADE;
 
-DROP TABLE practices_sessions CASCADE;
+DROP TABLE events_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
-DROP TABLE uniforms_games CASCADE;
+DROP TABLE uniforms_events CASCADE;
 DROP TABLE uniforms_order CASCADE;
 DROP TABLE uniforms CASCADE;
-
 
 DROP TABLE users_system_roles CASCADE; --admin, data-entry
 DROP TABLE users_clubs_roles CASCADE; -- techninal director, cfo, coordinator, cms-admin, board member, president, ceo 
@@ -49,8 +56,7 @@ DROP TABLE users CASCADE;
 DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
 
-DROP TABLE practices CASCADE;
-DROP TABLE games CASCADE;
+DROP TABLE events CASCADE;
 
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
@@ -179,7 +185,7 @@ CREATE TABLE uniforms (
 );
 
 
-CREATE TABLE practices (
+CREATE TABLE events (
         id SERIAL,
 
 	--time
@@ -198,40 +204,19 @@ CREATE TABLE practices (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE games (
-        id SERIAL,
-	
-	--time
-        arrival_time timestamp, --only 1 arrival time leave it
-        start_time timestamp, --only 1 start time leave it
-        end_time timestamp,
-	address text, --this could be link or string 	
-	coordinates text, 	
-	pitch_id integer, --all you need for a practice, is this needed for games or just field name below?	
-	field_name text, --field 3, field A, 9v9 field etc
-	
-	team_id integer, --the team who has the game for join. for a more global system??? we need another table and this one would draw from that as this is for scheduling. that is why it has arrival time. an official game from a league db would not have arrival time.
-	
-	FOREIGN KEY (team_id) REFERENCES teams(id),
-	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-        PRIMARY KEY (id)
-);
-	
-
-
 CREATE TABLE uniforms_order (
 	id SERIAL,
 	name text, --primary, secondary, tertiary
         PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_games (
+CREATE TABLE uniforms_events (
 	id SERIAL,
 	uniform_id integer,
 	uniforms_order_id integer,
-	game_id integer,
+	event_id integer,
         PRIMARY KEY (id),
-	FOREIGN KEY (game_id) REFERENCES games(id),
+	FOREIGN KEY (event_id) REFERENCES events(id),
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
 
@@ -259,14 +244,14 @@ CREATE TABLE sessions_media (
         PRIMARY KEY (id)
 );
 
-CREATE TABLE practices_sessions (
+CREATE TABLE events_sessions (
         id SERIAL,
-        practice_id integer NOT NULL,
+        event_id integer NOT NULL,
         session_id integer NOT NULL,
         start_time timestamp, --if you want for each session
         end_time timestamp, --if you want for efficiency
         PRIMARY KEY (id),
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (event_id) REFERENCES events(id),
 	FOREIGN KEY (session_id) REFERENCES sessions(id)
 );
 
@@ -420,49 +405,24 @@ CREATE TABLE users_teams_roles (
 	FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
-
-
-CREATE TABLE practices_users_availability (
+CREATE TABLE events_users_availability (
         id SERIAL,
-        practice_id integer NOT NULL,
+        event_id integer NOT NULL,
        	users_id integer NOT NULL,
 	availability_id integer NOT NULL,
         PRIMARY KEY (id),
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (event_id) REFERENCES events(id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id)
 );
 
-CREATE TABLE practices_users_attendance (
+CREATE TABLE events_users_attendance (
         id SERIAL,
-        practice_id integer NOT NULL,
+        event_id integer NOT NULL,
        	users_id integer NOT NULL,
 	attendance_id integer NOT NULL,
         PRIMARY KEY (id),
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (event_id) REFERENCES events(id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id)
 );
-
-CREATE TABLE games_users_availability (
-        id SERIAL,
-        game_id integer NOT NULL,
-       	users_id integer NOT NULL,
-	availability_id integer NOT NULL,
-        PRIMARY KEY (id),
-	FOREIGN KEY (game_id) REFERENCES games(id),
-	FOREIGN KEY (users_id) REFERENCES users(id),
-	FOREIGN KEY (availability_id) REFERENCES availability(id)
-);
-
-CREATE TABLE games_users_attendance (
-        id SERIAL,
-        game_id integer NOT NULL,
-       	users_id integer NOT NULL,
-	attendance_id integer NOT NULL,
-        PRIMARY KEY (id),
-	FOREIGN KEY (game_id) REFERENCES games(id),
-	FOREIGN KEY (users_id) REFERENCES users(id),
-	FOREIGN KEY (attendance_id) REFERENCES attendance(id)
-);
-
