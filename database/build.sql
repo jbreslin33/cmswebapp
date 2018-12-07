@@ -57,6 +57,7 @@ DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
 
 DROP TABLE events CASCADE;
+DROP TABLE event_type CASCADE;
 
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
@@ -108,7 +109,8 @@ CREATE TABLE error_log
 );
 
 -- a club should have admins in roles table
-CREATE TABLE clubs (
+CREATE TABLE clubs 
+(
         id SERIAL,
         name text NOT NULL,
         address text,
@@ -117,7 +119,8 @@ CREATE TABLE clubs (
 );
 
 
-CREATE TABLE pitches (
+CREATE TABLE pitches 
+(
         id SERIAL,
         name text NOT NULL,
         club_id integer NOT NULL,
@@ -126,7 +129,8 @@ CREATE TABLE pitches (
 );
 
 --TEAM
-CREATE TABLE teams (
+CREATE TABLE teams 
+(
         id SERIAL,
 	name text UNIQUE,
         club_id integer,
@@ -136,7 +140,8 @@ CREATE TABLE teams (
 );
 
 --FOR SESSIONS LATER
-CREATE TABLE genders (
+CREATE TABLE genders 
+(
         id SERIAL,
 	name text UNIQUE,
         PRIMARY KEY (id)
@@ -144,43 +149,55 @@ CREATE TABLE genders (
 
 
 --442 433 451
-CREATE TABLE formations (
+CREATE TABLE formations 
+(
 	id SERIAL,
     	name text UNIQUE, 
 	PRIMARY KEY (id)
 );
 
 --u3 u4 u19  
-CREATE TABLE ages (
+CREATE TABLE ages 
+(
 	id SERIAL,
     	name text UNIQUE, 
 	PRIMARY KEY (id)
 );
 
 --a b c  
-CREATE TABLE levels (
+CREATE TABLE levels 
+(
 	id SERIAL,
     	name text UNIQUE, 
 	PRIMARY KEY (id)
 );
 
 -- possessions 
-CREATE TABLE possessions (
+CREATE TABLE possessions 
+(
 	id SERIAL,
     	name text UNIQUE, 
 	PRIMARY KEY (id)
 );
 
 --  zones
-CREATE TABLE zones (
+CREATE TABLE zones 
+(
 	id SERIAL,
     	name text UNIQUE, 
 	PRIMARY KEY (id)
 );
 
 
+CREATE TABLE event_type
+(
+	id SERIAL,
+	name text,
+	PRIMARY KEY (id)
+);
 
-CREATE TABLE events (
+CREATE TABLE events 
+(
         id SERIAL,
 
 	--time
@@ -193,25 +210,30 @@ CREATE TABLE events (
 	pitch_id integer, --all you need for a practice	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
+	event_type_id integer,
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
+	FOREIGN KEY (event_type_id) REFERENCES event_type(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms (
+CREATE TABLE uniforms 
+(
 	id SERIAL,
     	name text UNIQUE, 
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_order (
+CREATE TABLE uniforms_order 
+(
 	id SERIAL,
 	name text, --primary, secondary, tertiary
         PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_events (
+CREATE TABLE uniforms_events 
+(
 	id SERIAL,
 	uniform_id integer,
 	uniforms_order_id integer,
@@ -223,20 +245,23 @@ CREATE TABLE uniforms_events (
 );
 
 
-CREATE TABLE sessions (
+CREATE TABLE sessions 
+(
         id SERIAL,
 	url text UNIQUE, --link
         PRIMARY KEY (id)
 );
 
-CREATE TABLE media (
+CREATE TABLE media 
+(
 	id SERIAL,
 	name text, --pic, text, video, link
         PRIMARY KEY (id)
 );
 
 
-CREATE TABLE sessions_media (
+CREATE TABLE sessions_media 
+(
 	id SERIAL,
 	sessions_id integer,
 	media_id integer, --picture, text, video, link
@@ -246,7 +271,8 @@ CREATE TABLE sessions_media (
         PRIMARY KEY (id)
 );
 
-CREATE TABLE events_sessions (
+CREATE TABLE events_sessions 
+(
         id SERIAL,
         event_id integer NOT NULL,
         session_id integer NOT NULL,
@@ -257,13 +283,15 @@ CREATE TABLE events_sessions (
 	FOREIGN KEY (session_id) REFERENCES sessions(id)
 );
 
-CREATE TABLE availability (
+CREATE TABLE availability 
+(
 	id SERIAL,
 	name text,
         PRIMARY KEY (id)
 );
 
-CREATE TABLE attendance (
+CREATE TABLE attendance 
+(
 	id SERIAL,
 	name text,
         PRIMARY KEY (id)
@@ -271,7 +299,8 @@ CREATE TABLE attendance (
 
 --search fields for sessions
 
-CREATE TABLE genders_sessions (
+CREATE TABLE genders_sessions 
+(
         id SERIAL,
 	gender_id integer,
 	session_id integer,
@@ -280,7 +309,8 @@ CREATE TABLE genders_sessions (
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
-CREATE TABLE formations_sessions (
+CREATE TABLE formations_sessions 
+(
         id SERIAL,
 	formation_id integer,
 	session_id integer,
@@ -291,7 +321,8 @@ CREATE TABLE formations_sessions (
 
 
 
-CREATE TABLE ages_sessions (
+CREATE TABLE ages_sessions 
+(
         id SERIAL,
 	age_id integer,
 	session_id integer,
@@ -300,7 +331,8 @@ CREATE TABLE ages_sessions (
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
-CREATE TABLE levels_sessions (
+CREATE TABLE levels_sessions 
+(
         id SERIAL,
 	level_id integer,
 	session_id integer,
@@ -309,7 +341,8 @@ CREATE TABLE levels_sessions (
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
-CREATE TABLE possesions_sessions (
+CREATE TABLE possesions_sessions 
+(
         id SERIAL,
 	possession_id integer,
 	session_id integer,
@@ -318,7 +351,8 @@ CREATE TABLE possesions_sessions (
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
-CREATE TABLE zones_sessions (
+CREATE TABLE zones_sessions 
+(
         id SERIAL,
 	zones_id integer,
 	session_id integer,
@@ -328,7 +362,8 @@ CREATE TABLE zones_sessions (
 );
 
 -- we are going with a single user table so we do not need multiple logins instead you just need one and choose what role you want to view. 
-CREATE TABLE users (
+CREATE TABLE users 
+(
 	id SERIAL,
     	username text NOT NULL UNIQUE, 
     	password text,
@@ -342,7 +377,8 @@ CREATE TABLE users (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE clubs_users (
+CREATE TABLE clubs_users 
+(
 	id SERIAL,
 	user_id integer NOT NULL,
 	club_id integer NOT NULL,
@@ -351,7 +387,8 @@ CREATE TABLE clubs_users (
 	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE teams_users (
+CREATE TABLE teams_users 
+(
 	user_id integer NOT NULL,
 	team_id integer NOT NULL,
 	PRIMARY KEY (user_id, team_id),	
@@ -359,7 +396,8 @@ CREATE TABLE teams_users (
 	FOREIGN KEY (team_id) REFERENCES teams(id)
 );
 
-CREATE TABLE system_users (
+CREATE TABLE system_users 
+(
 	id SERIAL,
 	user_id integer NOT NULL,
 	PRIMARY KEY (id),	
@@ -369,14 +407,16 @@ CREATE TABLE system_users (
 	
 	
 	
-CREATE TABLE roles (
+CREATE TABLE roles 
+(
 	id SERIAL,
 	name text,
 	PRIMARY KEY (id)
 );
 
 -- you choose what role you want to be at any time and that redoes gui
-CREATE TABLE users_system_roles (
+CREATE TABLE users_system_roles 
+(
         id SERIAL,
         user_id integer NOT NULL,
         role_id integer NOT NULL,
@@ -385,7 +425,8 @@ CREATE TABLE users_system_roles (
 	FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
-CREATE TABLE users_clubs_roles (
+CREATE TABLE users_clubs_roles 
+(
         id SERIAL,
         users_id integer NOT NULL,
        	club_id integer NOT NULL,
@@ -396,7 +437,8 @@ CREATE TABLE users_clubs_roles (
 	FOREIGN KEY (roles_id) REFERENCES roles(id)
 );
 
-CREATE TABLE users_teams_roles (
+CREATE TABLE users_teams_roles 
+(
         id SERIAL,
         user_id integer NOT NULL,
         team_id integer NOT NULL,
@@ -407,7 +449,8 @@ CREATE TABLE users_teams_roles (
 	FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
-CREATE TABLE events_users_availability (
+CREATE TABLE events_users_availability 
+(
         id SERIAL,
         event_id integer NOT NULL,
        	users_id integer NOT NULL,
@@ -418,7 +461,8 @@ CREATE TABLE events_users_availability (
 	FOREIGN KEY (availability_id) REFERENCES availability(id)
 );
 
-CREATE TABLE events_users_attendance (
+CREATE TABLE events_users_attendance 
+(
         id SERIAL,
         event_id integer NOT NULL,
        	users_id integer NOT NULL,
