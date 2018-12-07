@@ -178,11 +178,6 @@ CREATE TABLE zones (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms (
-	id SERIAL,
-    	name text UNIQUE, 
-	PRIMARY KEY (id)
-);
 
 
 CREATE TABLE events (
@@ -204,6 +199,12 @@ CREATE TABLE events (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE uniforms (
+	id SERIAL,
+    	name text UNIQUE, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE uniforms_order (
 	id SERIAL,
 	name text, --primary, secondary, tertiary
@@ -217,6 +218,7 @@ CREATE TABLE uniforms_events (
 	event_id integer,
         PRIMARY KEY (id),
 	FOREIGN KEY (event_id) REFERENCES events(id),
+	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
 
