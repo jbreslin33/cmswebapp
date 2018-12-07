@@ -1,13 +1,16 @@
 <?php 
 class Database 
 {
-	private $mConnection 	   = NULL;
-	private $mConnectionString = "host=localhost dbname=cms user=postgres password=mibesfat";
-	private $mResult 	   = NULL;		 
-	
-	function __construct() 
+	function __construct($host,$dbname,$user,$password) 
 	{
-		$this->setConnectionString($this->mConnectionString);
+		$this->mConnection = NULL;
+		$this->mResult = NULL;
+		$this->mHost = $host;
+		$this->mDBName = $dbname;
+		$this->mUser = $user;
+		$this->mPassword = $password;
+
+		$this->mConnectionString = "host=" . $host . " dbname=" . $dbname . " user=" . $user . " password=" . $password;
         	$this->mConnection = pg_connect($this->mConnectionString);
 	}
 

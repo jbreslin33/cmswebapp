@@ -65,7 +65,7 @@ class Login
 
 	public function processLogin()
 	{
-		$database = new Database;
+		$database = new Database("localhost","cms","postgres","mibesfat");
 		
 		$query = "select id, password from users where username = '";
 		$query .= $this->mUsername; 

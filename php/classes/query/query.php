@@ -36,7 +36,7 @@ abstract class Query
 
 	public function runQuery($query)
 	{
-                $database = new Database();
+		$database = new Database("localhost","cms","postgres","mibesfat");
 
                 $results = $database->query($query);
 
