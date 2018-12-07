@@ -1,0 +1,25 @@
+
+/*
+codes
+---------------
+100 success
+101 please provide a username and a password  
+102 please provide a username  
+103 please provide a password  
+104 user does not exist
+105 wrong password
+
+300 return schedule 
+301 some other report
+
+
+everything else will be done on client
+
+So views should only need email address
+only updates and inserts should check for password
+
+so for a query all i need is a saved username which will be an email address if I have that 
+there is no reason for user to login. if however they try to update or insert i will check but that will be in update and insert class to be made later.
+so this class just needs to parse username and some parameters and a code.
+*/
+
