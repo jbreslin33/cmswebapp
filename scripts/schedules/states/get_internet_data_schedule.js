@@ -66,6 +66,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                 }
                         }
                 };
+		console.log('url:' + url);
                 schedule.mRequest.open('GET', url);
                 schedule.mRequest.send();
 	}
