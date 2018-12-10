@@ -3,6 +3,7 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
+--DROP TABLE event_type CASCADE; 
 --DROP TABLE games CASCADE; 
 --DROP TABLE practices CASCADE; 
 --DROP TABLE practices_sessions CASCADE; 
@@ -57,7 +58,7 @@ DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
 
 DROP TABLE events CASCADE;
-DROP TABLE event_type CASCADE;
+DROP TABLE event_types CASCADE;
 
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
@@ -189,7 +190,7 @@ CREATE TABLE zones
 );
 
 
-CREATE TABLE event_type
+CREATE TABLE event_types
 (
 	id SERIAL,
 	name text,
@@ -210,11 +211,11 @@ CREATE TABLE events
 	pitch_id integer, --all you need for a practice	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
-	event_type_id integer,
+	event_types_id integer,
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (event_type_id) REFERENCES event_type(id),
+	FOREIGN KEY (event_types_id) REFERENCES event_types(id),
 	PRIMARY KEY (id)
 );
 

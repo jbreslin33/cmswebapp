@@ -1,14 +1,33 @@
 --clubs
 insert into clubs (name,address) values ('RC CELTA', '4666 bristol road feasterville pa'); 
+insert into clubs (name,address) values ('Kensington Soccer Club', '4666 bristol road feasterville pa'); 
 
 --users
-insert into users (username,password) values ('j','j');
+insert into users (username,password) values ('l','l'); --luke player
+insert into users (username,password) values ('lo','lo'); --louise manager
+insert into users (username,password) values ('joe','joe'); --joe admin of whole site
+insert into users (username,password) values ('s','s'); --stelian technical director 
 
 --teams
 insert into teams (name,club_id) values ('u15boys',1);
+insert into teams (name,club_id) values ('u15girls',1);
+
+--clubs_users
+insert into clubs_users (user_id,club_id) values (1,1); --luke
+insert into clubs_users (user_id,club_id) values (2,1); --loise
+insert into clubs_users (user_id,club_id) values (3,1); --joe
+insert into clubs_users (user_id,club_id) values (4,1); --stelian
+
 
 --teams_users
 insert into teams_users (user_id,team_id) values (1,1);
+insert into teams_users (user_id,team_id) values (2,1); --louise manager 
+							--joe and stelian need not be associated with a team
+
+--event_types
+insert into event_types (name) values ('Practice');
+insert into event_types (name) values ('Game');
+insert into event_types (name) values ('Meeting');
 
 --events
 insert into events (event_date,start_time,address,team_id) values ('11/08/2018','20:00:00','4666 bristol road, feasterville pa',1);

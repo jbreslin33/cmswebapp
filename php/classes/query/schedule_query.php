@@ -17,7 +17,11 @@ class ScheduleQuery extends Query
 	public function query()
 	{
 		$query = "
-		select event_date, start_time, events.address from events join teams on teams.id=events.team_id join teams_users on teams_users.team_id=teams.id join users on users.id=teams_users.user_id where users.username = 'j' order by event_date asc";
+		select event_date, start_time, events.address from events join teams on teams.id=events.team_id join teams_users on teams_users.team_id=teams.id join users on users.id=teams_users.user_id where users.username = '" .
+		$this->mUsername .
+		"' order by event_date asc";
+		error_log('$this->mUsername = ' . $this->mUsername);
+
 
 		$this->runQuery($query);
 	}
