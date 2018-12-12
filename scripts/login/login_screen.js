@@ -50,14 +50,56 @@ class LoginScreen
                 this.mDivShadow = document.createElement("DIV");
                 this.mDivShadow.setAttribute("class", "shadow");
 		this.mDivLogin.appendChild(this.mDivShadow);
+
+
+                if (navigator.appName == "Microsoft Internet Explorer")
+                {
+                        this.mDivInputEmail.attachEvent('onkeypress',this.usernameTextBoxMicrosoftHit);
+                }
+                else
+                {
+                       // this.mDivInputEmail.addEventListener("keypress",this.usernameTextBoxFirefoxHit);
+                        this.mDivInputEmail.addEventListener
+			(
+				"keypress",
+				function () 
+				{
+                			console.log('key pressed in function')		
+				}
+			)
+		}
+
 	}
 
 	show()
 	{
 		this.mDivLogin.style.display = "block";	
 	}
+
 	hide()
 	{
 		this.mDivLogin.style.display = "none";	
 	}
+
+        //***tab to next
+
+        //username
+        usernameTextBoxMicrosoftHit(e)
+        {
+                if (e.keyCode == 13)
+                {
+                        //APPLICATION.mGame.mPasswordTextBox.mMesh.focus();
+			console.log('hit enter');
+                }
+        }
+
+        usernameTextBoxFirefoxHit(e)
+        {
+                if (e.key == 'enter')
+                {
+                        //APPLICATION.mGame.mPasswordTextBox.mMesh.focus();
+			console.log('hit enter');
+                }
+        }
+
 }
