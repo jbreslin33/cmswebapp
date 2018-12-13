@@ -32,6 +32,7 @@ class LoginScreen
                 this.mDivInputEmail.setAttribute("id", "username");
                 this.mDivInputEmail.setAttribute("name", "username");
 		this.mDivLogin.appendChild(this.mDivInputEmail);
+                this.mDivInputEmail.addEventListener("keydown",this.divInputEmailKeyDown);
 		
 		this.mDivInputPassword = document.createElement("INPUT");
                 this.mDivInputPassword.setAttribute("type", "password");
@@ -52,23 +53,16 @@ class LoginScreen
 		this.mDivLogin.appendChild(this.mDivShadow);
 
 
-                if (navigator.appName == "Microsoft Internet Explorer")
-                {
-                        this.mDivInputEmail.attachEvent('onkeypress',this.usernameTextBoxMicrosoftHit);
-                }
-                else
-                {
-                       // this.mDivInputEmail.addEventListener("keypress",this.usernameTextBoxFirefoxHit);
-                        this.mDivInputEmail.addEventListener
-			(
-				"keypress",
-				function () 
-				{
-                			console.log('key pressed in function')		
-				}
-			)
-		}
+	}
 
+	divInputEmailKeyDown(e)
+	{
+		console.log('in function divInputEmailKeyDown:' + e.key);
+		if (e.key == 'Enter')	
+		{
+			console.log('in function divInputEmailKeyDown:' + e.key);
+			APPLICATION.mLogin.mLoginScreen.mDivInputPassword.focus();
+		}
 	}
 
 	show()
