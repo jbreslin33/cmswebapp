@@ -23,6 +23,7 @@ class LoginScreen
                 this.mDivInputEmail.setAttribute("name", "username");
                 this.mDivInputEmail.addEventListener("keydown",this.divInputEmailKeyDown);
 		this.mDivLogin.appendChild(this.mDivInputEmail);
+                this.mDivInputEmail.focus();
 		
 		this.mDivInputPassword = document.createElement("INPUT");
                 this.mDivInputPassword.setAttribute("type", "password");
