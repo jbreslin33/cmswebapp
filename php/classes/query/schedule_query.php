@@ -8,12 +8,6 @@ class ScheduleQuery extends Query
 		parent::__construct();
 	}
 
-	public function sendResponse()
-	{
-		error_log($this->mEcho);
-		echo $this->mEcho;
-	}
-
 	public function query()
 	{
 		$query = "

@@ -32,8 +32,10 @@ abstract class Query
 		$this->sendResponse();
 	}
 
+	//query is the sql line
 	abstract protected function query();
 
+	//run query is the machinations of running it from php to sql to return dataset
 	public function runQuery($query)
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
@@ -49,13 +51,11 @@ abstract class Query
                         $myarray[] = $row;
                 }
                 $data = json_encode($myarray);
-                error_log($data);
                 echo $data;
 	}
 
 	public function sendResponse()
 	{
-		error_log($this->mEcho);
 		echo $this->mEcho;
 	}
 }
