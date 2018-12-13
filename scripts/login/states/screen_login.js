@@ -16,7 +16,7 @@ class SCREEN_LOGIN extends State
 		}
 		//create login screen
 		login.mLoginScreen = new LoginScreen(login.mApplication,login);	
-		login.mLoginScreen.mButton.addEventListener("click",APPLICATION.mLogin.sendLogin);
+		//login.mLoginScreen.mButton.addEventListener("click",APPLICATION.mLogin.sendLogin);
 	}
 
         execute(login)
