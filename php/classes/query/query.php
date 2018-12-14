@@ -5,9 +5,9 @@ abstract class Query
 {
 	function __construct() 
 	{
-		$this->mData = "";
-
 		$this->mUsername = "";
+		$this->mQuery = "";
+		$this->mData = "";
 
 		//check for proper post or get
 		if (isset($_POST['username']))
@@ -27,6 +27,7 @@ abstract class Query
 		else
 		{
 			$this->query();
+			$this->runQuery();
 		}
 
 		//return result to client
@@ -37,11 +38,11 @@ abstract class Query
 	abstract protected function query();
 
 	//run query is the machinations of running it from php to sql to return dataset
-	public function runQuery($query)
+	public function runQuery()
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
 
-                $results = $database->query($query);
+                $results = $database->query($this->mQuery);
 
                 $myarray = array();
 
