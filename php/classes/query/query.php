@@ -5,7 +5,7 @@ abstract class Query
 {
 	function __construct() 
 	{
-		$this->mEcho = "";
+		$this->mData = "";
 
 		$this->mUsername = "";
 
@@ -22,14 +22,15 @@ abstract class Query
 		//business rules check
 		if ($this->mUsername == "")
 		{
-			$this->mEcho = 102; 
+			$this->mData = 102; 
 		}	
 		else
 		{
 			$this->query();
 		}
 
-		$this->sendResponse();
+		//return result to client
+		$this->sendData();
 	}
 
 	//query is the sql line
@@ -50,13 +51,12 @@ abstract class Query
                 {
                         $myarray[] = $row;
                 }
-                $data = json_encode($myarray);
-                echo $data;
+                $this->mData = json_encode($myarray);
 	}
 
-	public function sendResponse()
+	public function sendData()
 	{
-		echo $this->mEcho;
+		echo $this->mData;
 	}
 }
 ?>
