@@ -34,7 +34,7 @@ abstract class Query
 		$this->sendData();
 	}
 
-	//query is the sql line
+	//query is the sql line do we need to pass in anything?
 	abstract protected function query();
 
 	//run query is the machinations of running it from php to sql to return dataset
