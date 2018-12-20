@@ -24,7 +24,6 @@ class Schedule
 
 		//data storage classes
 		this.mAffairArray = new Array();
-		this.mGameArray = new Array();
 
 		//states
                 this.mStateMachine = new StateMachine(this);
