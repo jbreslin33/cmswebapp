@@ -1,15 +1,15 @@
 'use strict';
 
-class PracticeScreen
+class EventScreen
 {
-	constructor(practice)
+	constructor(event)
 	{
-		this.mPractice = practice;
+		this.mEvent = event;
 
                	//card
                 this.mDivCard = document.createElement("DIV");
                 this.mDivCard.setAttribute("class", "card");
-                this.mPractice.mSchedule.mApplication.mDivMain.appendChild(this.mDivCard);
+                this.mEvent.mSchedule.mApplication.mDivMain.appendChild(this.mDivCard);
 
                 //add card to main
                 this.mContainer = document.querySelector('.main');
@@ -31,8 +31,8 @@ class PracticeScreen
 
 	update()
 	{
-         	this.mDivCard.querySelector('.eventDate').textContent = this.mPractice.mEventDate;
-         	this.mDivCard.querySelector('.startTime').textContent = this.mPractice.mStartTime;
-         	this.mDivCard.querySelector('.address').textContent = this.mPractice.mAddress;
+         	this.mDivCard.querySelector('.eventDate').textContent = this.mEvent.mEventDate;
+         	this.mDivCard.querySelector('.startTime').textContent = this.mEvent.mStartTime;
+         	this.mDivCard.querySelector('.address').textContent = this.mEvent.mAddress;
 	}
 }

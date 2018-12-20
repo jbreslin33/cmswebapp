@@ -17,13 +17,13 @@ class Schedule
 		this.mTime = new Time();
 	
 		//initial
-		this.mInitialPractice = null;
+		this.mInitialAffair = null;
 
 		//data
 		this.mRequest = null;
 
 		//data storage classes
-		this.mPracticeArray = new Array();
+		this.mAffairArray = new Array();
 		this.mGameArray = new Array();
 
 		//states
@@ -42,19 +42,19 @@ class Schedule
 
 	}
 
-        saveToLocalStorage(practice)
+        saveToLocalStorage(affair)
         {
-                //var data = JSON.stringify(practice);
-                //localStorage.mPractice = data;
+                //var data = JSON.stringify(affair);
+                //localStorage.mAffair = data;
         }
 	
-	updateCard(practice)
+	updateCard(affair)
 	{
 		if (APPLICATION)
 		{
-			APPLICATION.mSchedule.mDivCard.querySelector('.eventDate').textContent = practice.mEventDate;
-			APPLICATION.mSchedule.mDivCard.querySelector('.startTime').textContent = practice.mStartTime;
-			APPLICATION.mSchedule.mDivCard.querySelector('.address').textContent = practice.mAddress;
+			APPLICATION.mSchedule.mDivCard.querySelector('.affairDate').textContent = affair.mAffairDate;
+			APPLICATION.mSchedule.mDivCard.querySelector('.startTime').textContent = affair.mStartTime;
+			APPLICATION.mSchedule.mDivCard.querySelector('.address').textContent = affair.mAddress;
 		}
 		else
 		{

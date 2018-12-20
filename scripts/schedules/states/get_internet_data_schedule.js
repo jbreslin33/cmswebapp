@@ -30,32 +30,32 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                         {
 						//lets clear array....
 						var i = 0;
-						for (i = 0; i < APPLICATION.mSchedule.mPracticeArray.length; i++)
+						for (i = 0; i < APPLICATION.mSchedule.mAffairArray.length; i++)
 						{
-							var practice = APPLICATION.mSchedule.mPracticeArray.shift();
-							practice.mPracticeScreen.mDivCard.style.display = "none";
+							var affair = APPLICATION.mSchedule.mAffairArray.shift();
+							affair.mAffairScreen.mDivCard.style.display = "none";
 						}
 						
 						i = 0;
 						while (data[i])
 						{
-							var practice = new Practice(schedule);
-							practice.mPracticeScreen = new PracticeScreen(practice);
+							var affair = new Affair(schedule);
+							affair.mAffairScreen = new AffairScreen(affair);
 
-							//set practice member vars
+							//set affair member vars
 
-                                                	practice.mEventDate = data[i][0];
-							practice.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][1]);
-                                                	practice.mAddress   = data[i][2];
+                                                	affair.mAffairDate = data[i][0];
+							affair.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][1]);
+                                                	affair.mAddress   = data[i][2];
 
 							//update screen card
-                                                	practice.mPracticeScreen.update();
+                                                	affair.mAffairScreen.update();
 				
 							//save for later
-							APPLICATION.mSchedule.saveToLocalStorage(schedule.mPractice);
+							APPLICATION.mSchedule.saveToLocalStorage(schedule.mAffair);
 
 							//push to array
-							APPLICATION.mSchedule.mPracticeArray.push(practice);
+							APPLICATION.mSchedule.mAffairArray.push(affair);
 							i++;
 						}
                                         }

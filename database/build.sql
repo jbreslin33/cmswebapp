@@ -4,6 +4,8 @@
 --**************************************************************
 --OLD DROPS
 --DROP TABLE event_type CASCADE; 
+--DROP TABLE events CASCADE; 
+--DROP TABLE affair_type CASCADE; 
 --DROP TABLE games CASCADE; 
 --DROP TABLE practices CASCADE; 
 --DROP TABLE practices_sessions CASCADE; 
@@ -33,13 +35,13 @@ DROP TABLE possessions CASCADE;
 DROP TABLE zones CASCADE;
 DROP TABLE formations CASCADE;
 
-DROP TABLE events_users_attendance CASCADE;
-DROP TABLE events_users_availability CASCADE;
+DROP TABLE affairs_users_attendance CASCADE;
+DROP TABLE affairs_users_availability CASCADE;
 
-DROP TABLE events_sessions CASCADE;
+DROP TABLE affairs_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
-DROP TABLE uniforms_events CASCADE;
+DROP TABLE uniforms_affairs CASCADE;
 DROP TABLE uniforms_order CASCADE;
 DROP TABLE uniforms CASCADE;
 
@@ -57,8 +59,8 @@ DROP TABLE users CASCADE;
 DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
 
-DROP TABLE events CASCADE;
-DROP TABLE event_types CASCADE;
+DROP TABLE affairs CASCADE;
+DROP TABLE affair_types CASCADE;
 
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
@@ -190,19 +192,19 @@ CREATE TABLE zones
 );
 
 
-CREATE TABLE event_types
+CREATE TABLE affair_types
 (
 	id SERIAL,
 	name text,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE events 
+CREATE TABLE affairs 
 (
         id SERIAL,
 
 	--time
-	event_date date NOT NULL,
+	affair_date date NOT NULL,
         arrival_time time, --only 1 arrival time leave it
         start_time time, --only 1 start time leave it
         end_time time,
@@ -211,11 +213,11 @@ CREATE TABLE events
 	pitch_id integer, --all you need for a practice	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
-	event_types_id integer,
+	affair_types_id integer,
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (event_types_id) REFERENCES event_types(id),
+	FOREIGN KEY (affair_types_id) REFERENCES affair_types(id),
 	PRIMARY KEY (id)
 );
 
@@ -233,14 +235,14 @@ CREATE TABLE uniforms_order
         PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_events 
+CREATE TABLE uniforms_affairs 
 (
 	id SERIAL,
 	uniform_id integer,
 	uniforms_order_id integer,
-	event_id integer,
+	affair_id integer,
         PRIMARY KEY (id),
-	FOREIGN KEY (event_id) REFERENCES events(id),
+	FOREIGN KEY (affair_id) REFERENCES affairs(id),
 	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
@@ -272,15 +274,15 @@ CREATE TABLE sessions_media
         PRIMARY KEY (id)
 );
 
-CREATE TABLE events_sessions 
+CREATE TABLE affairs_sessions 
 (
         id SERIAL,
-        event_id integer NOT NULL,
+        affair_id integer NOT NULL,
         session_id integer NOT NULL,
         start_time timestamp, --if you want for each session
         end_time timestamp, --if you want for efficiency
         PRIMARY KEY (id),
-	FOREIGN KEY (event_id) REFERENCES events(id),
+	FOREIGN KEY (affair_id) REFERENCES affairs(id),
 	FOREIGN KEY (session_id) REFERENCES sessions(id)
 );
 
@@ -450,26 +452,26 @@ CREATE TABLE users_teams_roles
 	FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
-CREATE TABLE events_users_availability 
+CREATE TABLE affairs_users_availability 
 (
         id SERIAL,
-        event_id integer NOT NULL,
+        affair_id integer NOT NULL,
        	users_id integer NOT NULL,
 	availability_id integer NOT NULL,
         PRIMARY KEY (id),
-	FOREIGN KEY (event_id) REFERENCES events(id),
+	FOREIGN KEY (affair_id) REFERENCES affairs(id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id)
 );
 
-CREATE TABLE events_users_attendance 
+CREATE TABLE affairs_users_attendance 
 (
         id SERIAL,
-        event_id integer NOT NULL,
+        affair_id integer NOT NULL,
        	users_id integer NOT NULL,
 	attendance_id integer NOT NULL,
         PRIMARY KEY (id),
-	FOREIGN KEY (event_id) REFERENCES events(id),
+	FOREIGN KEY (affair_id) REFERENCES affairs(id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id)
 );

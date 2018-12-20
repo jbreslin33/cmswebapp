@@ -1,6 +1,6 @@
 'use strict';
 
-class Practice
+class Event
 {
 	constructor(schedule)
 	{
@@ -10,7 +10,7 @@ class Practice
                 this.mStartTime = '12AM';
                 this.mAddress   = 'NOWHERE';
 		
-		this.mPracticeScreen = null;
+		this.mEventScreen = null;
 
 	}
 }
