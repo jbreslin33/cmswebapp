@@ -26,6 +26,10 @@ class AffairScreen
                 this.mDivStartTime = document.createElement("DIV");
                 this.mDivStartTime.setAttribute("class", "startTime");
                 this.mDivCard.appendChild(this.mDivStartTime);
+                
+		this.mDivArrivalTime = document.createElement("DIV");
+                this.mDivArrivalTime.setAttribute("class", "arrivalTime");
+                this.mDivCard.appendChild(this.mDivArrivalTime);
 
                 this.mDivAddress = document.createElement("DIV");
                 this.mDivAddress.setAttribute("class", "address");
@@ -38,6 +42,7 @@ class AffairScreen
          	this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
          	this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mAffairDate;
          	this.mDivCard.querySelector('.startTime').textContent = this.mAffair.mStartTime;
+         	this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
          	this.mDivCard.querySelector('.address').textContent = this.mAffair.mAddress;
 	}
 }

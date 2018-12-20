@@ -30,16 +30,16 @@ insert into affair_types (name) values ('Game');
 insert into affair_types (name) values ('Meeting');
 
 --affairs
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/08/2018','20:00:00','4666 bristol road, feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/09/2018','20:05:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/12/2018','20:10:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/14/2018','20:20:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/15/2018','20:30:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/24/2018','20:45:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/25/2018','20:55:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/26/2018','20:45:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/27/2018','20:00:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/28/2018','20:00:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/29/2018','20:00:00','4666 bristol road feasterville pa',1,1);
-insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/30/2018','20:00:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/08/2018','20:00:00','19:50:00','4666 bristol road, feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/09/2018','20:05:00','19:55:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/12/2018','20:10:00','20:00:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/14/2018','20:20:00','20:10:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/15/2018','20:30:00','20:20:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/24/2018','20:45:00','20:35:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/25/2018','20:55:00','20:45:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/26/2018','20:45:00','20:35:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/27/2018','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/28/2018','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/29/2018','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/30/2018','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 

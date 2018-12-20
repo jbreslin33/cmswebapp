@@ -70,20 +70,4 @@ class Schedule
                 //var data = JSON.stringify(affair);
                 //localStorage.mAffair = data;
         }
-	
-	updateCard(affair)
-	{
-		if (APPLICATION)
-		{
-			APPLICATION.mSchedule.mDivCard.querySelector('.affairType').textContent = affair.mAffairType;
-			APPLICATION.mSchedule.mDivCard.querySelector('.affairDate').textContent = affair.mAffairDate;
-			APPLICATION.mSchedule.mDivCard.querySelector('.startTime').textContent = affair.mStartTime;
-			APPLICATION.mSchedule.mDivCard.querySelector('.address').textContent = affair.mAddress;
-		}
-		else
-		{
-			console.log('NO APPLICATION');
-		}
-	}
-
 }

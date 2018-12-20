@@ -48,11 +48,13 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                                 	var date = new Date(data[i][1]);
 							var dayElement = date.getDay();
 							var monthElement = date.getMonth();
-                                                	
 							affair.mAffairDate = schedule.mDayArray[dayElement] + ' ' + schedule.mMonthArray[monthElement] + ' ' + date.getDate();
 							
 							affair.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][2]);
-                                                	affair.mAddress   = data[i][3];
+							
+							affair.mArrivalTime = "Arrival Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][3]);
+
+                                                	affair.mAddress   = data[i][4];
 
 							//update screen card
                                                 	affair.mAffairScreen.update();
