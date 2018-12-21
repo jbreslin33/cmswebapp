@@ -50,13 +50,27 @@ class AffairScreen
 		}
 
 		//mAffairDate
-                var date = new Date(this.mAffair.mAffairDate);
-                var dayElement = date.getDay();
-                var monthElement = date.getMonth();
-         	this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + date.getDate();
+		if (this.mAffair.mAffairDate == null)
+		{
+         		this.mDivCard.querySelector('.affairDate').style.display == "none";
+		}
+		else
+		{
+                	var date = new Date(this.mAffair.mAffairDate);
+                	var dayElement = date.getDay();
+                	var monthElement = date.getMonth();
+         		this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + date.getDate();
+		}
 
 		//mStartTime
-         	this.mDivCard.querySelector('.startTime').textContent =  "Start Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mStartTime);;
+		if (this.mAffair.mStartTime == null)
+		{
+         		this.mDivCard.querySelector('.startTime').style.display == "none";
+		}
+		else
+		{
+         		this.mDivCard.querySelector('.startTime').textContent =  "Start Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mStartTime);;
+		}
 
 		//mArrivalTime
 		if (this.mAffair.mArrivalTime == null)
@@ -69,37 +83,13 @@ class AffairScreen
 		}
 
 		//mAddress
-         	this.mDivCard.querySelector('.address').textContent = this.mAffair.mAddress;
+		if (this.mAffair.mAddress == null)
+		{
+         		this.mDivCard.querySelector('.address').style.display == "none";
+		}
+		else
+		{
+         		this.mDivCard.querySelector('.address').textContent = this.mAffair.mAddress;
+		}
 	}
 }
-/*
- *
- *
-                            var affair = new Affair(schedule);
-                                                        affair.mAffairScreen = new AffairScreen(affair);
-
-                                                        //set affair member vars
-                                                        affair.mAffairType = data[i][0];
-
-                                                        var date = new Date(data[i][1]);
-                                                        var dayElement = date.getDay();
-                                                        var monthElement = date.getMonth();
-                                                        affair.mAffairDate = schedule.mDayArray[dayElement] + ' ' + schedule.mMonthArray[monthElement] + ' ' + date.getDate();
-
-                                                        affair.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][2]);
-
-                                                        affair.mArrivalTime = "Arrival Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][3]);
-
-                                                        affair.mAddress   = data[i][4];
-
-                                                        //update screen card
-                                                        affair.mAffairScreen.update();
-
-                                                        //save for later
-                                                        APPLICATION.mSchedule.saveToLocalStorage(schedule.mAffair);
-
-                                                        //push to array
-                                                        APPLICATION.mSchedule.mAffairArray.push(affair);
-                                                        i++;
-*
- */
