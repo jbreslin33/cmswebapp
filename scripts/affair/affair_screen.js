@@ -59,7 +59,8 @@ class AffairScreen
                 	var date = new Date(this.mAffair.mAffairDate);
                 	var dayElement = date.getDay();
                 	var monthElement = date.getMonth();
-         		this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + date.getDate();
+			var dayOfMonth = date.getDate() + 1;
+         		this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + dayOfMonth;
 		}
 
 		//mStartTime
