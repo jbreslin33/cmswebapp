@@ -42,11 +42,16 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 							var affair = new Affair(schedule);
 
 							//set affair member vars
-                                                	affair.mAffairType = data[i][0];
-                                                	affair.mAffairDate = data[i][1];
-							affair.mStartTime = data[i][2];
-							affair.mArrivalTime = data[i][3];
-                                                	affair.mAddress   = data[i][4];
+                                                	affair.mAffairDate  = data[i][0];
+							affair.mArrivalTime = data[i][1];
+							affair.mStartTime   = data[i][2];
+							affair.mEndTime     = data[i][3];
+                                                	affair.mAddress     = data[i][4];
+                                                	affair.mCoordinates = data[i][5];
+                                                	affair.mPitch       = data[i][6];
+                                                	affair.mFieldName   = data[i][7];
+                                                	affair.mTeam        = data[i][8];
+                                                	affair.mAffairType  = data[i][9];
 						
 							//create screen to display data
 							affair.mAffairScreen = new AffairScreen(affair);
