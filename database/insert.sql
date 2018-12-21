@@ -29,7 +29,14 @@ insert into affair_types (name) values ('Practice');
 insert into affair_types (name) values ('Game');
 insert into affair_types (name) values ('Meeting');
 
+--pitches
+insert into pitches (name,club_id) values ('Field 1',1);
+insert into pitches (name,club_id) values ('Field 2',1);
+insert into pitches (name,club_id) values ('Field 3',1);
+insert into pitches (name,club_id) values ('Field 4',1);
+
 --affairs
+insert into affairs (affair_date,arrival_time,start_time,end_time,address,coordinates,pitch_id,field_name,team_id,affair_types_id) values ('11/03/2018','17:45:00','18:00:00','19:45:00','3201 Richmond St, Philadelphia, PA 19134','https://www.google.com/maps/place/Monkiewicz+Playground/@39.9830128,-75.1029957,17z/data=!3m1!4b1!4m5!3m4!1s0x89c6c9d18e52815b:0x3c2c6de3ece805ca!8m2!3d39.9830128!4d-75.100807',1,'',1,1);
 insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/08/2018','20:00:00','4666 bristol road, feasterville pa',1,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/09/2018','20:05:00','19:55:00','4666 bristol road feasterville pa',1,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('11/12/2018','20:10:00','20:00:00','4666 bristol road feasterville pa',1,1);
