@@ -39,6 +39,7 @@ class AffairScreen
 
 	update()
 	{
+		//mAffairType
 		if (this.mAffair.mAffairType == null)
 		{
          		this.mDivCard.querySelector('.affairType').style.display == "none";
@@ -48,10 +49,16 @@ class AffairScreen
          		this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
 		}
 
-         	this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mAffairDate;
+		//mAffairDate
+                var date = new Date(this.mAffair.mAffairDate);
+                var dayElement = date.getDay();
+                var monthElement = date.getMonth();
+         	this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + date.getDate();
 
+		//mStartTime
          	this.mDivCard.querySelector('.startTime').textContent = this.mAffair.mStartTime;
 
+		//mArrivalTime
          	//this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
 		console.log('mArrivalTime:' + this.mAffair.mArrivalTime);
 		if (this.mAffair.mArrivalTime == null)
@@ -65,6 +72,7 @@ class AffairScreen
          		this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
 		}
 
+		//mAddress
          	this.mDivCard.querySelector('.address').textContent = this.mAffair.mAddress;
 	}
 }

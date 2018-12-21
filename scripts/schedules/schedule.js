@@ -24,18 +24,8 @@ class Schedule
 
 		//data storage classes
 		this.mAffairArray = new Array();
-
-		//states
-                this.mStateMachine = new StateMachine(this);
-
-                this.mGLOBAL_SCHEDULE = new GLOBAL_SCHEDULE();
-                this.mINIT_SCHEDULE = new INIT_SCHEDULE();
-                this.mCHECK_LOCAL_STORAGE_SCHEDULE = new CHECK_LOCAL_STORAGE_SCHEDULE();
-                this.mGET_INTERNET_DATA_SCHEDULE = new GET_INTERNET_DATA_SCHEDULE();
-
-                this.mStateMachine.setGlobalState(this.mGLOBAL_SCHEDULE);
-                this.mStateMachine.changeState(this.mINIT_SCHEDULE);
-
+	
+		//day and month
 		this.mDayArray = new Array();
 		this.mDayArray.push('Sunday');
 		this.mDayArray.push('Monday');
@@ -58,6 +48,18 @@ class Schedule
 		this.mMonthArray.push('October');
 		this.mMonthArray.push('November');
 		this.mMonthArray.push('December');
+
+		//states
+                this.mStateMachine = new StateMachine(this);
+
+                this.mGLOBAL_SCHEDULE = new GLOBAL_SCHEDULE();
+                this.mINIT_SCHEDULE = new INIT_SCHEDULE();
+                this.mCHECK_LOCAL_STORAGE_SCHEDULE = new CHECK_LOCAL_STORAGE_SCHEDULE();
+                this.mGET_INTERNET_DATA_SCHEDULE = new GET_INTERNET_DATA_SCHEDULE();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_SCHEDULE);
+                this.mStateMachine.changeState(this.mINIT_SCHEDULE);
+
 	}
 	update(timestamp)
 	{
