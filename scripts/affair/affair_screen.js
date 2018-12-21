@@ -56,20 +56,16 @@ class AffairScreen
          	this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + date.getDate();
 
 		//mStartTime
-         	this.mDivCard.querySelector('.startTime').textContent = this.mAffair.mStartTime;
+         	this.mDivCard.querySelector('.startTime').textContent =  "Start Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mStartTime);;
 
 		//mArrivalTime
-         	//this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
-		console.log('mArrivalTime:' + this.mAffair.mArrivalTime);
 		if (this.mAffair.mArrivalTime == null)
 		{
-			console.log("A");
          		this.mDivCard.querySelector('.arrivalTime').style.display == "none";
 		}
 		else
 		{
-			console.log("B");
-         		this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
+         		this.mDivCard.querySelector('.arrivalTime').textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mArrivalTime);;
 		}
 
 		//mAddress
