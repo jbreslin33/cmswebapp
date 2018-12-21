@@ -39,10 +39,63 @@ class AffairScreen
 
 	update()
 	{
-         	this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
+		if (this.mAffair.mAffairType == null)
+		{
+         		this.mDivCard.querySelector('.affairType').style.display == "none";
+		}
+		else
+		{
+         		this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
+		}
+
          	this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mAffairDate;
+
          	this.mDivCard.querySelector('.startTime').textContent = this.mAffair.mStartTime;
-         	this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
+
+         	//this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
+		console.log('mArrivalTime:' + this.mAffair.mArrivalTime);
+		if (this.mAffair.mArrivalTime == null)
+		{
+			console.log("A");
+         		this.mDivCard.querySelector('.arrivalTime').style.display == "none";
+		}
+		else
+		{
+			console.log("B");
+         		this.mDivCard.querySelector('.arrivalTime').textContent = this.mAffair.mArrivalTime;
+		}
+
          	this.mDivCard.querySelector('.address').textContent = this.mAffair.mAddress;
 	}
 }
+/*
+ *
+ *
+                            var affair = new Affair(schedule);
+                                                        affair.mAffairScreen = new AffairScreen(affair);
+
+                                                        //set affair member vars
+                                                        affair.mAffairType = data[i][0];
+
+                                                        var date = new Date(data[i][1]);
+                                                        var dayElement = date.getDay();
+                                                        var monthElement = date.getMonth();
+                                                        affair.mAffairDate = schedule.mDayArray[dayElement] + ' ' + schedule.mMonthArray[monthElement] + ' ' + date.getDate();
+
+                                                        affair.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][2]);
+
+                                                        affair.mArrivalTime = "Arrival Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][3]);
+
+                                                        affair.mAddress   = data[i][4];
+
+                                                        //update screen card
+                                                        affair.mAffairScreen.update();
+
+                                                        //save for later
+                                                        APPLICATION.mSchedule.saveToLocalStorage(schedule.mAffair);
+
+                                                        //push to array
+                                                        APPLICATION.mSchedule.mAffairArray.push(affair);
+                                                        i++;
+*
+ */

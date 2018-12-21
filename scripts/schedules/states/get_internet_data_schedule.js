@@ -40,21 +40,16 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 						while (data[i])
 						{
 							var affair = new Affair(schedule);
-							affair.mAffairScreen = new AffairScreen(affair);
 
 							//set affair member vars
                                                 	affair.mAffairType = data[i][0];
-
-                                                	var date = new Date(data[i][1]);
-							var dayElement = date.getDay();
-							var monthElement = date.getMonth();
-							affair.mAffairDate = schedule.mDayArray[dayElement] + ' ' + schedule.mMonthArray[monthElement] + ' ' + date.getDate();
-							
-							affair.mStartTime = "Start Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][2]);
-							
-							affair.mArrivalTime = "Arrival Time: " + schedule.mTime.convertFromMilitaryToHuman(data[i][3]);
-
+                                                	affair.mAffairDate = data[i][1];
+							affair.mStartTime = data[i][2];
+							affair.mArrivalTime = data[i][3];
                                                 	affair.mAddress   = data[i][4];
+						
+							//create screen to display data
+							affair.mAffairScreen = new AffairScreen(affair);
 
 							//update screen card
                                                 	affair.mAffairScreen.update();
