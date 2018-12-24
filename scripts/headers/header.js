@@ -48,5 +48,10 @@ class Header
 	{
 		console.log('buttonInsertAffairScreenClicked');
 		//show insert affair screen	
+		if (APPLICATION.mSchedule)
+		{
+               		APPLICATION.mSchedule.mStateMachine.changeState(APPLICATION.mSchedule.mINSERT_AFFAIR_SCREEN_SCHEDULE);
+		}
+
 	}
 }
