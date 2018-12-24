@@ -23,3 +23,9 @@ there is no reason for user to login. if however they try to update or insert i 
 so this class just needs to parse username and some parameters and a code.
 */
 
+RONDO GAMES
+PHILOSOPHY
+we are training tactics and not technical
+
+LOOKING AROUND
+touch screen or click to simulate looking around

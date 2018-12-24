@@ -38,7 +38,15 @@ class AffairScreen
 		this.mDivCoordinates = document.createElement("DIV");
                 this.mDivCoordinates.setAttribute("class", "coordinates");
                 this.mDivCard.appendChild(this.mDivCoordinates);
-		
+
+		//link for coordinates
+		this.mCoordinateA = document.createElement("a");	
+		this.mCoordinateText = document.createTextNode("map");
+		this.mCoordinateA.appendChild(this.mCoordinateText);
+		this.mCoordinateA.title = "map";
+		this.mCoordinateA.href = null;
+		this.mDivCoordinates.appendChild(this.mCoordinateA);	
+
 		this.mDivPitch = document.createElement("DIV");
                 this.mDivPitch.setAttribute("class", "pitch");
                 this.mDivCard.appendChild(this.mDivPitch);
@@ -54,6 +62,8 @@ class AffairScreen
 		this.mDivAffairType = document.createElement("DIV");
                 this.mDivAffairType.setAttribute("class", "affairType");
                 this.mDivCard.appendChild(this.mDivAffairType);
+
+
 	}
 
 	update()
@@ -119,7 +129,7 @@ class AffairScreen
 		}
 		else
 		{
-         		this.mDivCard.querySelector('.coordinates').textContent = this.mAffair.mCoordinates;
+			this.mCoordinateA.href = this.mAffair.mCoordinates;
 		}
 		
 		//mPitch
