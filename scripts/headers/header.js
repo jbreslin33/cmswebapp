@@ -31,16 +31,22 @@ class Header
 		this.mHeader.appendChild(this.mButtonRefresh);
 		
 		//addbutton 1
-		this.mButtonAddA = document.createElement("BUTTON");
-		this.mButtonAddA.setAttribute("class", "headerButton");
-		this.mButtonAddA.setAttribute("aria-label", "Add");
-		this.mButtonAddA.setAttribute("id", "butAdd");
-		this.mHeader.appendChild(this.mButtonAddA);
+		this.mButtonInsertAffairScreen = document.createElement("BUTTON");
+		this.mButtonInsertAffairScreen.setAttribute("class", "headerButton");
+		this.mButtonInsertAffairScreen.setAttribute("aria-label", "Add");
+		this.mButtonInsertAffairScreen.setAttribute("id", "butAdd");
+		this.mButtonInsertAffairScreen.addEventListener("click",this.buttonInsertAffairScreenClicked); 
+		this.mHeader.appendChild(this.mButtonInsertAffairScreen);
 	}
 
 	buttonRefreshClicked()
 	{
 		console.log('buttonRefreshClicked');
 		//call some kind of update all function
+	}
+	buttonInsertAffairScreenClicked()
+	{
+		console.log('buttonInsertAffairScreenClicked');
+		//show insert affair screen	
 	}
 }
