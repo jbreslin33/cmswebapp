@@ -19,4 +19,10 @@ class Affair
 		
 		this.mAffairScreen = null;
 	}
+	destructor()
+	{
+		this.mAffairScreen.destructor();
+		this.mAffairScreen = null;
+		delete this.mAffairScreen;
+	}
 }

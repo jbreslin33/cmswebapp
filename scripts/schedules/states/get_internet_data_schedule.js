@@ -95,8 +95,9 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		}
 		for (var i=0; i < schedule.mAffairArray.length; i++)
 		{
-			console.log('i:' + i);
-			schedule.mAffairArray[i].mAffairScreen.destructor();
+			schedule.mAffairArray[i].destructor();
+			schedule.mAffairArray[i] = null;
+			delete schedule.mAffairArray[i];
 		}
 	}
 }
