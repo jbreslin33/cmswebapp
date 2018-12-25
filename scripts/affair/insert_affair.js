@@ -1,0 +1,9 @@
+'use strict';
+
+class InsertAffair extends Affair
+{
+	constructor(schedule)
+	{
+		super(schedule);
+	}
+}

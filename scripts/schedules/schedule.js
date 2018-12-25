@@ -16,14 +16,13 @@ class Schedule
 		//utilities
 		this.mTime = new Time();
 	
-		//initial
-		this.mInitialAffair = null;
-
 		//data
 		this.mRequest = null;
 
 		//data storage classes
-		this.mAffairArray = new Array();
+		this.mInitialAffair = null;
+		this.mSelectAffairArray = new Array();
+		this.mInsertAffair = null;
 	
 		//day and month
 		this.mDayArray = new Array();

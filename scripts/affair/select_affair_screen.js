@@ -1,6 +1,6 @@
 'use strict';
 
-class AffairScreen
+class SelectAffairScreen
 {
 	constructor(affair)
 	{

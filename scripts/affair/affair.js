@@ -17,12 +17,12 @@ class Affair
                 this.mTeam         = null;
                 this.mAffairType   = 'Practice';
 		
-		this.mAffairScreen = null;
+		this.mScreen = null;
 	}
 	destructor()
 	{
-		this.mAffairScreen.destructor();
-		this.mAffairScreen = null;
-		delete this.mAffairScreen;
+		this.mScreen.destructor();
+		this.mScreen = null;
+		delete this.mScreen;
 	}
 }

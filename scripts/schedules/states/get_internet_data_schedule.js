@@ -30,16 +30,16 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                         {
 						//lets clear array....
 						var i = 0;
-						for (i = 0; i < APPLICATION.mSchedule.mAffairArray.length; i++)
+						for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
 						{
-							var affair = APPLICATION.mSchedule.mAffairArray.shift();
-							affair.mAffairScreen.mDivCard.style.display = "none";
+							var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
+							affair.mScreen.mDivCard.style.display = "none";
 						}
 						
 						i = 0;
 						while (data[i])
 						{
-							var affair = new Affair(schedule);
+							var affair = new SelectAffair(schedule);
 
 							//set affair member vars
                                                 	affair.mAffairDate  = data[i][0];
@@ -54,16 +54,16 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                                 	affair.mAffairType  = data[i][9];
 						
 							//create screen to display data
-							affair.mAffairScreen = new AffairScreen(affair);
+							affair.mScreen = new SelectAffairScreen(affair);
 
 							//update screen card
-                                                	affair.mAffairScreen.update();
+                                                	affair.mScreen.update();
 				
 							//save for later
-							APPLICATION.mSchedule.saveToLocalStorage(schedule.mAffair);
+							APPLICATION.mSchedule.saveToLocalStorage(affair);
 
 							//push to array
-							APPLICATION.mSchedule.mAffairArray.push(affair);
+							APPLICATION.mSchedule.mSelectAffairArray.push(affair);
 							i++;
 						}
                                         }
@@ -93,11 +93,11 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: EXIT");        
 		}
-		for (var i=0; i < schedule.mAffairArray.length; i++)
+		for (var i=0; i < schedule.mSelectAffairArray.length; i++)
 		{
-			schedule.mAffairArray[i].destructor();
-			schedule.mAffairArray[i] = null;
-			delete schedule.mAffairArray[i];
+			schedule.mSelectAffairArray[i].destructor();
+			schedule.mSelectAffairArray[i] = null;
+			delete schedule.mSelectAffairArray[i];
 		}
 	}
 }

@@ -30,17 +30,17 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		}
 		else
 		{
-                	var fakeAffair = new Affair(schedule);
-                        fakeAffair.mAffairScreen = new AffairScreen(fakeAffair);
+                	var fakeAffair = new SelectAffair(schedule);
+                        fakeAffair.mScreen = new SelectAffairScreen(fakeAffair);
 
                         //update screen card
-                        fakeAffair.mAffairScreen.update();
+                        fakeAffair.mScreen.update();
 
                         //save for later
                         schedule.saveToLocalStorage(fakeAffair);
 
                         //push to array
-                       	schedule.mAffairArray.push(fakeAffair);
+                       	schedule.mSelectAffairArray.push(fakeAffair);
 		}
 
 		//go to getInternetData state
