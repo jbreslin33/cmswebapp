@@ -7,12 +7,9 @@ class AffairScreen
 		this.mAffair = affair;
 
                	//card
+                this.mContainer = document.querySelector('.main');
                 this.mDivCard = document.createElement("DIV");
                 this.mDivCard.setAttribute("class", "card");
-                this.mAffair.mSchedule.mApplication.mDivMain.appendChild(this.mDivCard);
-
-                //add card to main
-                this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivCard);
 
                 this.mDivAffairDate = document.createElement("DIV");
@@ -62,8 +59,28 @@ class AffairScreen
 		this.mDivAffairType = document.createElement("DIV");
                 this.mDivAffairType.setAttribute("class", "affairType");
                 this.mDivCard.appendChild(this.mDivAffairType);
+	}
 
+	destructor()
+	{
+		//this.mContainer.removeChild
+		console.log('desctructor called on: ' + this.mDivCard.querySelector('.affairDate').textContent); 
+	
+		this.mDivCard.removeChild(this.mDivAffairType);
+		this.mDivCard.removeChild(this.mDivTeam);
+		this.mDivCard.removeChild(this.mDivFieldName);
+		this.mDivCard.removeChild(this.mDivPitch);
 
+		this.mDivCoordinates.removeChild(this.mCoordinateA);
+		this.mCoordinateA.removeChild(this.mCoordinateText);
+                
+		this.mDivCard.removeChild(this.mDivCoordinates);
+                this.mDivCard.removeChild(this.mDivAddress);
+                this.mDivCard.removeChild(this.mDivEndTime);
+                this.mDivCard.removeChild(this.mDivStartTime);
+                this.mDivCard.removeChild(this.mDivArrivalTime);
+                this.mDivCard.removeChild(this.mDivAffairDate);
+                this.mContainer.removeChild(this.mDivCard);
 	}
 
 	update()
@@ -171,9 +188,5 @@ class AffairScreen
 		{
          		this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
 		}
-
-
-
-
 	}
 }
