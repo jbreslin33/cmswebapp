@@ -6,18 +6,41 @@ class InsertAffairScreen
 	{
 		console.log('constructor InsertAffairScreen');
 		/*
-		this.mLogin = login;
-		this.mApplication = application;
-
-		//login stuff
-                this.mDivLogin = document.createElement("DIV");
-                this.mDivLogin.setAttribute("class", "login");
-		this.mApplication.mDivMain.appendChild(this.mDivLogin);
+		 *                 this.mAffairDate   = 'JAN 01 2000';
+                this.mArrivalTime  = '11PM';
+                this.mStartTime    = '12AM';
+                this.mEndTime      = null;
+                this.mAddress      = 'NOWHERE';
+                this.mCoordinates  = null;
+                this.mPitch        = null;
+                this.mFieldName    = null;
+                this.mTeam         = null;
+                this.mAffairType   = 'Practice';
+*/
+                this.mDiv = document.createElement("DIV");
+                this.mDiv.setAttribute("class", "card");
                 
 		//add card to main
                 this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivLogin);
+                this.mContainer.appendChild(this.mDiv);
                 
+
+		//affairDate
+		this.mAffairDate = document.createElement("INPUT");
+		this.mAffairDate.setAttribute("type","date"); 
+                this.mAffairDate.setAttribute("id", "affairdate");
+                this.mAffairDate.setAttribute("name", "affairdate");
+                this.mAffairDate.focus();
+		
+		//affairDateLabel
+                this.mAffairDateLabel = document.createElement("LABEL");
+                this.mAffairDateLabel.setAttribute("class", "affairDateLabel");
+                this.mAffairDateLabel.setAttribute("for", "affairdate");
+                this.mAffairDateLabel.innerHTML = "Date:";
+                this.mDiv.appendChild(this.mAffairDateLabel);
+		this.mDiv.appendChild(this.mAffairDate);
+		
+		/*
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
                 this.mDivInputEmail.setAttribute("placeholder", "email");
