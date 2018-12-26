@@ -14,6 +14,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 		{
 			console.log("INSERT_AFFAIR_SCREEN_SCHEDULE: ENTER");        
 		}
+		schedule.mInsertAffair = new InsertAffair(schedule);
 	}
 
         execute(schedule)
