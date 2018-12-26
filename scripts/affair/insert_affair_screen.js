@@ -40,6 +40,14 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mAffairDateLabel);
 		this.mDiv.appendChild(this.mAffairDate);
 		
+		//arrivalTime
+		this.mArrivalTime = document.createElement("INPUT");
+		this.mArrivalTime.setAttribute("type","time"); 
+                this.mArrivalTime.setAttribute("id", "arrivaltime");
+                this.mArrivalTime.setAttribute("name", "arrivaltime");
+                this.mArrivalTime.focus();
+		this.mDiv.appendChild(this.mArrivalTime);
+		
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
