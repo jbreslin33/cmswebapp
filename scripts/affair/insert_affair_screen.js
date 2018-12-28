@@ -17,6 +17,8 @@ class InsertAffairScreen
                 this.mTeam         = null;
                 this.mAffairType   = 'Practice';
 */
+		this.mInputArray = new Array();
+
                 this.mDiv = document.createElement("DIV");
                 this.mDiv.setAttribute("class", "card");
                 
@@ -28,9 +30,10 @@ class InsertAffairScreen
 		this.mH1.innerHTML = "Add Event";
 
 		//affairDate
-		this.mAffairDate = document.createElement("INPUT");
-		this.mAffairDate.setAttribute("type","date"); 
-                this.mAffairDate.focus();
+		var input = document.createElement("INPUT");
+		input.setAttribute("type","date"); 
+                input.focus();
+		this.mInputArray.push(input);
 		
 		//arrivalTime
 		this.mArrivalTime = document.createElement("INPUT");
@@ -70,10 +73,10 @@ class InsertAffairScreen
 
 		//affairDate
                 this.mAffairDateLabel = document.createElement("LABEL");
-                this.mAffairDateLabel.setAttribute("for", this.mAffairDate);
+                this.mAffairDateLabel.setAttribute("for", this.mInputArray[0]);
                 this.mAffairDateLabel.innerHTML = "Date: ";
                 this.mDiv.appendChild(this.mAffairDateLabel);
-		this.mDiv.appendChild(this.mAffairDate);
+		this.mDiv.appendChild(this.mInputArray[0]);
 		
 		//breakA
 		this.mBrA = document.createElement("BR");
