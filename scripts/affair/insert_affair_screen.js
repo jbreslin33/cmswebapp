@@ -88,6 +88,21 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mAddressLabel);
                 this.mDiv.appendChild(this.mAddress);
 
+                //breakD
+                this.mBrD = document.createElement("BR");
+                this.mDiv.appendChild(this.mBrD);
+
+                //coordinatesaddress
+                this.mCoordinates = document.createElement("INPUT");
+                this.mDiv.appendChild(this.mCoordinates);
+
+                //coordinatesLabel
+                this.mCoordinatesLabel = document.createElement("LABEL");
+                this.mCoordinatesLabel.setAttribute("for", "coordinates");
+                this.mCoordinatesLabel.innerHTML = "Coordinates: ";
+                this.mDiv.appendChild(this.mCoordinatesLabel);
+                this.mDiv.appendChild(this.mCoordinates);
+
 
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
