@@ -36,8 +36,9 @@ class InsertAffairScreen
 		this.mInputArray.push(input);
 		
 		//arrivalTime
-		this.mArrivalTime = document.createElement("INPUT");
-		this.mArrivalTime.setAttribute("type","time"); 
+		var input = document.createElement("INPUT");
+		input.setAttribute("type","time"); 
+		this.mInputArray.push(input);
 		
 		//endTime
 		this.mEndTime = document.createElement("INPUT");
@@ -84,10 +85,10 @@ class InsertAffairScreen
 
 		//arrivalTime
                 this.mArrivalTimeLabel = document.createElement("LABEL");
-                this.mArrivalTimeLabel.setAttribute("for", this.mArrivalTime);
+                this.mArrivalTimeLabel.setAttribute("for", this.mInputArray[1]);
                 this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
 		this.mDiv.appendChild(this.mArrivalTimeLabel);
-		this.mDiv.appendChild(this.mArrivalTime);
+		this.mDiv.appendChild(this.mInputArray[1]);
 
 		this.mBrB = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrB);
