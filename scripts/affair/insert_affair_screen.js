@@ -22,12 +22,10 @@ class InsertAffairScreen
                 
 		//add card to main
                 this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDiv);
                
 		//H1
                 this.mH1 = document.createElement("H1");
 		this.mH1.innerHTML = "Add Event";
-		this.mDiv.appendChild(this.mH1);
 
 		//affairDate
 		this.mAffairDate = document.createElement("INPUT");
@@ -38,86 +36,96 @@ class InsertAffairScreen
                 this.mAffairDateLabel = document.createElement("LABEL");
                 this.mAffairDateLabel.setAttribute("for", this.mAffairDate);
                 this.mAffairDateLabel.innerHTML = "Date: ";
-                this.mDiv.appendChild(this.mAffairDateLabel);
-		this.mDiv.appendChild(this.mAffairDate);
                
 		//breakA
 		this.mBrA = document.createElement("BR");
-		this.mDiv.appendChild(this.mBrA);
 		
 		//arrivalTime
 		this.mArrivalTime = document.createElement("INPUT");
 		this.mArrivalTime.setAttribute("type","time"); 
-		this.mDiv.appendChild(this.mArrivalTime);
 		
 		//arrivalTimeLabel
                 this.mArrivalTimeLabel = document.createElement("LABEL");
                 this.mArrivalTimeLabel.setAttribute("for", this.mArrivalTime);
                 this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
-                this.mDiv.appendChild(this.mArrivalTimeLabel);
-		this.mDiv.appendChild(this.mArrivalTime);
 		
 		//breakB
 		this.mBrB = document.createElement("BR");
-		this.mDiv.appendChild(this.mBrB);
 		
 		//endTime
 		this.mEndTime = document.createElement("INPUT");
 		this.mEndTime.setAttribute("type","time"); 
-		this.mDiv.appendChild(this.mEndTime);
 		
 		//endTimeLabel
                 this.mEndTimeLabel = document.createElement("LABEL");
                 this.mEndTimeLabel.setAttribute("for", this.mEndTime);
                 this.mEndTimeLabel.innerHTML = "End Time: ";
-                this.mDiv.appendChild(this.mEndTimeLabel);
-		this.mDiv.appendChild(this.mEndTime);
 		
 		//breakC
 		this.mBrC = document.createElement("BR");
-		this.mDiv.appendChild(this.mBrC);
 
 		//address
                 this.mAddress = document.createElement("INPUT");
-                this.mDiv.appendChild(this.mAddress);
 
                 //endTimeLabel
                 this.mAddressLabel = document.createElement("LABEL");
                 this.mAddressLabel.setAttribute("for", this.mAddress);
                 this.mAddressLabel.innerHTML = "Address: ";
-                this.mDiv.appendChild(this.mAddressLabel);
-                this.mDiv.appendChild(this.mAddress);
 
                 //breakD
                 this.mBrD = document.createElement("BR");
-                this.mDiv.appendChild(this.mBrD);
 
                 //coordinatesaddress
                 this.mCoordinates = document.createElement("INPUT");
-                this.mDiv.appendChild(this.mCoordinates);
 
                 //coordinatesLabel
                 this.mCoordinatesLabel = document.createElement("LABEL");
                 this.mCoordinatesLabel.setAttribute("for", this.mCoordinates);
                 this.mCoordinatesLabel.innerHTML = "Coordinates: ";
-                this.mDiv.appendChild(this.mCoordinatesLabel);
-                this.mDiv.appendChild(this.mCoordinates);
 
                 //breakE
                 this.mBrE = document.createElement("BR");
-                this.mDiv.appendChild(this.mBrE);
 
                 //coordinatesaddress
                 this.mFieldName = document.createElement("INPUT");
-                this.mDiv.appendChild(this.mFieldName);
 
                 //coordinatesLabel
                 this.mFieldNameLabel = document.createElement("LABEL");
                 this.mFieldNameLabel.setAttribute("for", this.mFieldName);
                 this.mFieldNameLabel.innerHTML = "Field Name: ";
-                this.mDiv.appendChild(this.mFieldNameLabel);
-                this.mDiv.appendChild(this.mFieldName);
 
+		//add to div
+                this.mContainer.appendChild(this.mDiv);
+		
+		this.mDiv.appendChild(this.mH1);
+
+                this.mDiv.appendChild(this.mAffairDateLabel);
+		this.mDiv.appendChild(this.mAffairDate);
+		
+		this.mDiv.appendChild(this.mBrA);
+
+		this.mDiv.appendChild(this.mArrivalTimeLabel);
+		this.mDiv.appendChild(this.mArrivalTime);
+
+		this.mDiv.appendChild(this.mBrB);
+		
+                this.mDiv.appendChild(this.mEndTimeLabel);
+		this.mDiv.appendChild(this.mEndTime);
+		
+		this.mDiv.appendChild(this.mBrC);
+                
+		this.mDiv.appendChild(this.mAddressLabel);
+		this.mDiv.appendChild(this.mAddress);
+                
+		this.mDiv.appendChild(this.mBrD);
+                
+                this.mDiv.appendChild(this.mCoordinatesLabel);
+		this.mDiv.appendChild(this.mCoordinates);
+
+                this.mDiv.appendChild(this.mBrE);
+                
+		this.mDiv.appendChild(this.mFieldNameLabel);
+		this.mDiv.appendChild(this.mFieldName);
 
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
