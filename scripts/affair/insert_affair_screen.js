@@ -103,6 +103,21 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mCoordinatesLabel);
                 this.mDiv.appendChild(this.mCoordinates);
 
+                //breakE
+                this.mBrE = document.createElement("BR");
+                this.mDiv.appendChild(this.mBrE);
+
+                //coordinatesaddress
+                this.mFieldName = document.createElement("INPUT");
+                this.mDiv.appendChild(this.mFieldName);
+
+                //coordinatesLabel
+                this.mFieldNameLabel = document.createElement("LABEL");
+                this.mFieldNameLabel.setAttribute("for", this.mFieldName);
+                this.mFieldNameLabel.innerHTML = "Field Name: ";
+                this.mDiv.appendChild(this.mFieldNameLabel);
+                this.mDiv.appendChild(this.mFieldName);
+
 
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
