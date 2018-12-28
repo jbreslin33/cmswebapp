@@ -36,9 +36,6 @@ class InsertAffairScreen
                 this.mAffairDateLabel = document.createElement("LABEL");
                 this.mAffairDateLabel.setAttribute("for", this.mAffairDate);
                 this.mAffairDateLabel.innerHTML = "Date: ";
-               
-		//breakA
-		this.mBrA = document.createElement("BR");
 		
 		//arrivalTime
 		this.mArrivalTime = document.createElement("INPUT");
@@ -49,9 +46,6 @@ class InsertAffairScreen
                 this.mArrivalTimeLabel.setAttribute("for", this.mArrivalTime);
                 this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
 		
-		//breakB
-		this.mBrB = document.createElement("BR");
-		
 		//endTime
 		this.mEndTime = document.createElement("INPUT");
 		this.mEndTime.setAttribute("type","time"); 
@@ -61,9 +55,6 @@ class InsertAffairScreen
                 this.mEndTimeLabel.setAttribute("for", this.mEndTime);
                 this.mEndTimeLabel.innerHTML = "End Time: ";
 		
-		//breakC
-		this.mBrC = document.createElement("BR");
-
 		//address
                 this.mAddress = document.createElement("INPUT");
 
@@ -72,9 +63,6 @@ class InsertAffairScreen
                 this.mAddressLabel.setAttribute("for", this.mAddress);
                 this.mAddressLabel.innerHTML = "Address: ";
 
-                //breakD
-                this.mBrD = document.createElement("BR");
-
                 //coordinatesaddress
                 this.mCoordinates = document.createElement("INPUT");
 
@@ -82,9 +70,6 @@ class InsertAffairScreen
                 this.mCoordinatesLabel = document.createElement("LABEL");
                 this.mCoordinatesLabel.setAttribute("for", this.mCoordinates);
                 this.mCoordinatesLabel.innerHTML = "Coordinates: ";
-
-                //breakE
-                this.mBrE = document.createElement("BR");
 
                 //coordinatesaddress
                 this.mFieldName = document.createElement("INPUT");
@@ -102,26 +87,32 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mAffairDateLabel);
 		this.mDiv.appendChild(this.mAffairDate);
 		
+		//breakA
+		this.mBrA = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrA);
 
 		this.mDiv.appendChild(this.mArrivalTimeLabel);
 		this.mDiv.appendChild(this.mArrivalTime);
 
+		this.mBrB = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrB);
 		
                 this.mDiv.appendChild(this.mEndTimeLabel);
 		this.mDiv.appendChild(this.mEndTime);
 		
+		this.mBrC = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrC);
                 
 		this.mDiv.appendChild(this.mAddressLabel);
 		this.mDiv.appendChild(this.mAddress);
                 
+		this.mBrD = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrD);
                 
                 this.mDiv.appendChild(this.mCoordinatesLabel);
 		this.mDiv.appendChild(this.mCoordinates);
 
+		this.mBrE = document.createElement("BR");
                 this.mDiv.appendChild(this.mBrE);
                 
 		this.mDiv.appendChild(this.mFieldNameLabel);
