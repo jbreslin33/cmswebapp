@@ -114,6 +114,14 @@ class SelectAffairScreen
 				{
          				this.mDivArray[i].textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
 				}
+				else if (i == 1) //time
+				{
+         				this.mDivArray[i].textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
+				}
+				else if (i == 2) //time
+				{
+         				this.mDivArray[i].textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
+				}
 				else
 				{
          				this.mDivArray[i].textContent = this.mAffair.mData[i];
