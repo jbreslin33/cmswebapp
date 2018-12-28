@@ -45,9 +45,18 @@ class InsertAffairScreen
 
                 //coordinatesaddress
                 this.mCoordinates = document.createElement("INPUT");
+                
+		//pitch
+                this.mPitch = document.createElement("INPUT");
 
                 //fieldName
                 this.mFieldName = document.createElement("INPUT");
+		
+		//team
+                this.mTeam = document.createElement("INPUT");
+		
+		//affairType
+                this.mAffairType = document.createElement("INPUT");
 
 		/***************
 		 *
