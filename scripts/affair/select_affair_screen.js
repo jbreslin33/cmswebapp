@@ -12,61 +12,22 @@ class SelectAffairScreen
                 this.mContainer.appendChild(this.mDivCard);
 
 		this.mDivArray = new Array();
-		//this.mA = null;
-/*
-		for (var i = 0; i < 10; i++)
-		{
-                	var div = document.createElement("DIV");
-			this.mDivArray.push(div);
-                	div.setAttribute("class", "selectAffairText");
-                	this.mDivCard.appendChild(div);
-		}
-		*/
 	}
 
 	destructor()
 	{
-		for (var i = 0; i < 10; i++)
+		for (var i = 0; i < this.mDivArray.length; i++)
 		{
 			this.mDivCard.removeChild(this.mDivArray[i]);
 		}
                 this.mContainer.removeChild(this.mDivCard);
-		//this.mContainer.removeChild
-		/*
-		this.mDivCard.removeChild(this.mDivAffairType);
-		this.mDivCard.removeChild(this.mDivTeam);
-		this.mDivCard.removeChild(this.mDivFieldName);
-		this.mDivCard.removeChild(this.mDivPitch);
-
-		this.mDivCoordinates.removeChild(this.mCoordinateA);
-		this.mCoordinateA.removeChild(this.mCoordinateText);
-                
-		this.mDivCard.removeChild(this.mDivCoordinates);
-                this.mDivCard.removeChild(this.mDivAddress);
-                this.mDivCard.removeChild(this.mDivEndTime);
-                this.mDivCard.removeChild(this.mDivStartTime);
-                this.mDivCard.removeChild(this.mDivArrivalTime);
-                this.mDivCard.removeChild(this.mDivAffairDate);
-                this.mContainer.removeChild(this.mDivCard);
-		*/
 	}
-/*
-       var div = document.createElement("DIV");
-                        this.mDivArray.push(div); 
-                        div.setAttribute("class", "selectAffairText");
-                        this.mDivCard.appendChild(div);
-*
- * */
+	
 	update()
 	{
 		for (var i = 0; i < 10; i++)
 		{
-			if (this.mAffair.mData[i] == null)
-			{
-				//do nothing
-         			//this.mDivArray[i].style.display == "none";
-			}
-			else
+			if (this.mAffair.mData[i] != null)
 			{
        				var div = document.createElement("DIV");
                         	this.mDivArray.push(div); 
