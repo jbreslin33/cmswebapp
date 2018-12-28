@@ -23,20 +23,19 @@ class InsertAffairScreen
 		//add card to main
                 this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDiv);
-                
-                this.mLabel = document.createElement("LABEL");
-		this.mLabel.set
+               
+		//H1
+                this.mH1 = document.createElement("H1");
+		this.mH1.innerHTML = "Add Event";
+		this.mDiv.appendChild(this.mH1);
 
 		//affairDate
 		this.mAffairDate = document.createElement("INPUT");
 		this.mAffairDate.setAttribute("type","date"); 
-                this.mAffairDate.setAttribute("id", "affairdate");
-                this.mAffairDate.setAttribute("name", "affairdate");
                 this.mAffairDate.focus();
 		
 		//affairDateLabel
                 this.mAffairDateLabel = document.createElement("LABEL");
-                this.mAffairDateLabel.setAttribute("class", "affairDateLabel");
                 this.mAffairDateLabel.setAttribute("for", "affairdate");
                 this.mAffairDateLabel.innerHTML = "Date: ";
                 this.mDiv.appendChild(this.mAffairDateLabel);
@@ -49,14 +48,10 @@ class InsertAffairScreen
 		//arrivalTime
 		this.mArrivalTime = document.createElement("INPUT");
 		this.mArrivalTime.setAttribute("type","time"); 
-                this.mArrivalTime.setAttribute("id", "arrivaltime");
-                this.mArrivalTime.setAttribute("name", "arrivaltime");
-                this.mArrivalTime.focus();
 		this.mDiv.appendChild(this.mArrivalTime);
 		
 		//arrivalTimeLabel
                 this.mArrivalTimeLabel = document.createElement("LABEL");
-                this.mArrivalTimeLabel.setAttribute("class", "arrivalTimeLabel");
                 this.mArrivalTimeLabel.setAttribute("for", "arrivalTime");
                 this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
                 this.mDiv.appendChild(this.mArrivalTimeLabel);
@@ -69,18 +64,30 @@ class InsertAffairScreen
 		//endTime
 		this.mEndTime = document.createElement("INPUT");
 		this.mEndTime.setAttribute("type","time"); 
-                this.mEndTime.setAttribute("id", "arrivaltime");
-                this.mEndTime.setAttribute("name", "arrivaltime");
-                this.mEndTime.focus();
 		this.mDiv.appendChild(this.mEndTime);
 		
 		//endTimeLabel
                 this.mEndTimeLabel = document.createElement("LABEL");
-                this.mEndTimeLabel.setAttribute("class", "endTimeLabel");
                 this.mEndTimeLabel.setAttribute("for", "endTime");
                 this.mEndTimeLabel.innerHTML = "End Time: ";
                 this.mDiv.appendChild(this.mEndTimeLabel);
 		this.mDiv.appendChild(this.mEndTime);
+		
+		//breakC
+		this.mBrC = document.createElement("BR");
+		this.mDiv.appendChild(this.mBrC);
+
+		//address
+                this.mAddress = document.createElement("INPUT");
+                this.mDiv.appendChild(this.mAddress);
+
+                //endTimeLabel
+                this.mAddressLabel = document.createElement("LABEL");
+                this.mAddressLabel.setAttribute("for", "endTime");
+                this.mAddressLabel.innerHTML = "Address: ";
+                this.mDiv.appendChild(this.mAddressLabel);
+                this.mDiv.appendChild(this.mAddress);
+
 
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");

@@ -1,3 +1,4 @@
+
 html, body
 {
         padding: 0;
@@ -17,6 +18,22 @@ body
         background: #ececec;
 	background-image: radial-gradient( cover, rgba(92,100,111,1) 0%,rgba(31,35,40,1) 100%), url('http://i.minus.com/io97fW9I0NqJq.png') 
 }
+/******************************
+ *
+ * BASIC ELEMENTS
+ *
+ *******************************/
+
+H1 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #006600;
+    letter-spacing: 1.4px;
+    border-bottom: solid 1px #006600;
+    text-transform: uppercase;
+}
+
 /******************************
  *
  * HEADER
