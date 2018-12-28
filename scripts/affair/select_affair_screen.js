@@ -13,11 +13,11 @@ class SelectAffairScreen
                 this.mContainer.appendChild(this.mDivCard);
 
                 this.mDivAffairDate = document.createElement("DIV");
-                this.mDivAffairDate.setAttribute("class", "affairDate");
+                this.mDivAffairDate.setAttribute("class", "selectAffairText");
                 this.mDivCard.appendChild(this.mDivAffairDate);
 		
 		this.mDivArrivalTime = document.createElement("DIV");
-                this.mDivArrivalTime.setAttribute("class", "arrivalTime");
+                this.mDivArrivalTime.setAttribute("class", "selectAffairText");
                 this.mDivCard.appendChild(this.mDivArrivalTime);
                 
 		this.mDivStartTime = document.createElement("DIV");
@@ -64,8 +64,6 @@ class SelectAffairScreen
 	destructor()
 	{
 		//this.mContainer.removeChild
-		console.log('desctructor called on: ' + this.mDivCard.querySelector('.affairDate').textContent); 
-	
 		this.mDivCard.removeChild(this.mDivAffairType);
 		this.mDivCard.removeChild(this.mDivTeam);
 		this.mDivCard.removeChild(this.mDivFieldName);
@@ -88,7 +86,7 @@ class SelectAffairScreen
 		//mAffairDate
 		if (this.mAffair.mAffairDate == null)
 		{
-         		this.mDivCard.querySelector('.affairDate').style.display == "none";
+         		this.mDivAffairDate.style.display == "none";
 		}
 		else
 		{
@@ -96,17 +94,17 @@ class SelectAffairScreen
                 	var dayElement = date.getDay();
                 	var monthElement = date.getMonth();
 			var dayOfMonth = date.getDate() + 1;
-         		this.mDivCard.querySelector('.affairDate').textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + dayOfMonth;
+         		this.mDivAffairDate.textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + dayOfMonth;
 		}
 
 		//mArrivalTime
 		if (this.mAffair.mArrivalTime == null)
 		{
-         		this.mDivCard.querySelector('.arrivalTime').style.display == "none";
+         		this.mDivArrivalTime.style.display == "none";
 		}
 		else
 		{
-         		this.mDivCard.querySelector('.arrivalTime').textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mArrivalTime);;
+         		this.mDivArrivalTime.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mArrivalTime);;
 		}
 
 		//mStartTime
