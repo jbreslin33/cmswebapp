@@ -24,6 +24,8 @@ class InsertAffairScreen
                 this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDiv);
                 
+                this.mLabel = document.createElement("LABEL");
+		this.mLabel.set
 
 		//affairDate
 		this.mAffairDate = document.createElement("INPUT");
@@ -39,6 +41,10 @@ class InsertAffairScreen
                 this.mAffairDateLabel.innerHTML = "Date: ";
                 this.mDiv.appendChild(this.mAffairDateLabel);
 		this.mDiv.appendChild(this.mAffairDate);
+               
+		//breakA
+		this.mBrA = document.createElement("BR");
+		this.mDiv.appendChild(this.mBrA);
 		
 		//arrivalTime
 		this.mArrivalTime = document.createElement("INPUT");
@@ -56,6 +62,26 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mArrivalTimeLabel);
 		this.mDiv.appendChild(this.mArrivalTime);
 		
+		//breakB
+		this.mBrB = document.createElement("BR");
+		this.mDiv.appendChild(this.mBrB);
+		
+		//endTime
+		this.mEndTime = document.createElement("INPUT");
+		this.mEndTime.setAttribute("type","time"); 
+                this.mEndTime.setAttribute("id", "arrivaltime");
+                this.mEndTime.setAttribute("name", "arrivaltime");
+                this.mEndTime.focus();
+		this.mDiv.appendChild(this.mEndTime);
+		
+		//endTimeLabel
+                this.mEndTimeLabel = document.createElement("LABEL");
+                this.mEndTimeLabel.setAttribute("class", "endTimeLabel");
+                this.mEndTimeLabel.setAttribute("for", "endTime");
+                this.mEndTimeLabel.innerHTML = "End Time: ";
+                this.mDiv.appendChild(this.mEndTimeLabel);
+		this.mDiv.appendChild(this.mEndTime);
+
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
