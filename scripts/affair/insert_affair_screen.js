@@ -36,7 +36,7 @@ class InsertAffairScreen
 		
 		//affairDateLabel
                 this.mAffairDateLabel = document.createElement("LABEL");
-                this.mAffairDateLabel.setAttribute("for", "affairdate");
+                this.mAffairDateLabel.setAttribute("for", this.mAffairDate);
                 this.mAffairDateLabel.innerHTML = "Date: ";
                 this.mDiv.appendChild(this.mAffairDateLabel);
 		this.mDiv.appendChild(this.mAffairDate);
@@ -52,7 +52,7 @@ class InsertAffairScreen
 		
 		//arrivalTimeLabel
                 this.mArrivalTimeLabel = document.createElement("LABEL");
-                this.mArrivalTimeLabel.setAttribute("for", "arrivalTime");
+                this.mArrivalTimeLabel.setAttribute("for", this.mArrivalTime);
                 this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
                 this.mDiv.appendChild(this.mArrivalTimeLabel);
 		this.mDiv.appendChild(this.mArrivalTime);
@@ -68,7 +68,7 @@ class InsertAffairScreen
 		
 		//endTimeLabel
                 this.mEndTimeLabel = document.createElement("LABEL");
-                this.mEndTimeLabel.setAttribute("for", "endTime");
+                this.mEndTimeLabel.setAttribute("for", this.mEndTime);
                 this.mEndTimeLabel.innerHTML = "End Time: ";
                 this.mDiv.appendChild(this.mEndTimeLabel);
 		this.mDiv.appendChild(this.mEndTime);
@@ -83,7 +83,7 @@ class InsertAffairScreen
 
                 //endTimeLabel
                 this.mAddressLabel = document.createElement("LABEL");
-                this.mAddressLabel.setAttribute("for", "endTime");
+                this.mAddressLabel.setAttribute("for", this.mAddress);
                 this.mAddressLabel.innerHTML = "Address: ";
                 this.mDiv.appendChild(this.mAddressLabel);
                 this.mDiv.appendChild(this.mAddress);
@@ -98,7 +98,7 @@ class InsertAffairScreen
 
                 //coordinatesLabel
                 this.mCoordinatesLabel = document.createElement("LABEL");
-                this.mCoordinatesLabel.setAttribute("for", "coordinates");
+                this.mCoordinatesLabel.setAttribute("for", this.mCoordinates);
                 this.mCoordinatesLabel.innerHTML = "Coordinates: ";
                 this.mDiv.appendChild(this.mCoordinatesLabel);
                 this.mDiv.appendChild(this.mCoordinates);
