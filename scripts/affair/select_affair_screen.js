@@ -12,8 +12,8 @@ class SelectAffairScreen
                 this.mContainer.appendChild(this.mDivCard);
 
 		this.mDivArray = new Array();
-		this.mA = null;
-
+		//this.mA = null;
+/*
 		for (var i = 0; i < 10; i++)
 		{
                 	var div = document.createElement("DIV");
@@ -21,6 +21,7 @@ class SelectAffairScreen
                 	div.setAttribute("class", "selectAffairText");
                 	this.mDivCard.appendChild(div);
 		}
+		*/
 	}
 
 	destructor()
@@ -49,44 +50,56 @@ class SelectAffairScreen
                 this.mContainer.removeChild(this.mDivCard);
 		*/
 	}
-
+/*
+       var div = document.createElement("DIV");
+                        this.mDivArray.push(div); 
+                        div.setAttribute("class", "selectAffairText");
+                        this.mDivCard.appendChild(div);
+*
+ * */
 	update()
 	{
 		for (var i = 0; i < 10; i++)
 		{
 			if (this.mAffair.mData[i] == null)
 			{
-         			this.mDivArray[i].style.display == "none";
+				//do nothing
+         			//this.mDivArray[i].style.display == "none";
 			}
 			else
 			{
+       				var div = document.createElement("DIV");
+                        	this.mDivArray.push(div); 
+                        	div.setAttribute("class", "selectAffairText");
+                        	this.mDivCard.appendChild(div);
+				
 				if (i == 0) //date
 				{
-         				this.mDivArray[i].textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
+         				div.textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
 				}
 				else if (i == 1) //time
 				{
-         				this.mDivArray[i].textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
+         				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 				}
 				else if (i == 2) //time
 				{
-         				this.mDivArray[i].textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
+         				div.textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 				}
 				else if (i == 5) //coordinates
 				{
 					//ok we have coordinates from server lets create elements
-					this.mA = document.createElement("a"); 
+					var a = document.createElement("a"); 
 					var text = document.createTextNode("map"); 
-					this.mA.appendChild(text);
-					this.mA.title = "map";
-					this.mA.href = null;
-					this.mDivArray[i].appendChild(this.mA);
+					a.appendChild(text);
+					a.title = "map";
+					a.href = null;
+					div.appendChild(a);
 
-					this.mA.href = this.mAffair.mData[i];
+					a.href = this.mAffair.mData[i];
 				}
 				else
 				{
-         				this.mDivArray[i].textContent = this.mAffair.mData[i];
+         				div.textContent = this.mAffair.mData[i];
 				}
 			}
 		}
