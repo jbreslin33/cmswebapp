@@ -36,7 +36,7 @@ class InsertAffairScreen
                 this.mAffairDateLabel = document.createElement("LABEL");
                 this.mAffairDateLabel.setAttribute("class", "affairDateLabel");
                 this.mAffairDateLabel.setAttribute("for", "affairdate");
-                this.mAffairDateLabel.innerHTML = "Date:";
+                this.mAffairDateLabel.innerHTML = "Date: ";
                 this.mDiv.appendChild(this.mAffairDateLabel);
 		this.mDiv.appendChild(this.mAffairDate);
 		
@@ -46,6 +46,14 @@ class InsertAffairScreen
                 this.mArrivalTime.setAttribute("id", "arrivaltime");
                 this.mArrivalTime.setAttribute("name", "arrivaltime");
                 this.mArrivalTime.focus();
+		this.mDiv.appendChild(this.mArrivalTime);
+		
+		//arrivalTimeLabel
+                this.mArrivalTimeLabel = document.createElement("LABEL");
+                this.mArrivalTimeLabel.setAttribute("class", "arrivalTimeLabel");
+                this.mArrivalTimeLabel.setAttribute("for", "arrivalTime");
+                this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
+                this.mDiv.appendChild(this.mArrivalTimeLabel);
 		this.mDiv.appendChild(this.mArrivalTime);
 		
 		/*
