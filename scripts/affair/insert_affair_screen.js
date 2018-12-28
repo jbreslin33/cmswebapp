@@ -115,10 +115,20 @@ class InsertAffairScreen
                 this.mCoordinatesLabel.innerHTML = "Coordinates: ";
                 this.mDiv.appendChild(this.mCoordinatesLabel);
 		this.mDiv.appendChild(this.mCoordinates);
-
+		
 		this.mBrE = document.createElement("BR");
                 this.mDiv.appendChild(this.mBrE);
-                
+               
+                //pitch
+                this.mPitchLabel = document.createElement("LABEL");
+                this.mPitchLabel.setAttribute("for", this.mPitch);
+                this.mPitchLabel.innerHTML = "Pitch: ";
+		this.mDiv.appendChild(this.mPitchLabel);
+		this.mDiv.appendChild(this.mPitch);
+
+		this.mBrF = document.createElement("BR");
+                this.mDiv.appendChild(this.mBrF);
+               
                 //fieldName
                 this.mFieldNameLabel = document.createElement("LABEL");
                 this.mFieldNameLabel.setAttribute("for", this.mFieldName);
