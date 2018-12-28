@@ -6,6 +6,8 @@ class Affair
 	{
 		this.mSchedule = schedule;
 
+		this.mData = new Array();
+/*
                 this.mAffairDate   = 'JAN 01 2000';
                 this.mArrivalTime  = '11PM';
                 this.mStartTime    = '12AM';
@@ -16,7 +18,7 @@ class Affair
                 this.mFieldName    = null;
                 this.mTeam         = null;
                 this.mAffairType   = 'Practice';
-		
+*/		
 		this.mScreen = null;
 	}
 	destructor()

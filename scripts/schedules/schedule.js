@@ -71,4 +71,13 @@ class Schedule
                 //var data = JSON.stringify(affair);
                 //localStorage.mAffair = data;
         }
+        convertDate(data)
+        {
+                var date = new Date(data);
+                var dayElement = date.getDay();
+                var monthElement = date.getMonth();
+                var dayOfMonth = date.getDate() + 1;
+
+                return this.mDayArray[dayElement] + ' ' + this.mMonthArray[monthElement] + ' ' + dayOfMonth;
+        }
 }

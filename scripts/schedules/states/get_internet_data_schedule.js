@@ -40,8 +40,13 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 						while (data[i])
 						{
 							var affair = new SelectAffair(schedule);
+							for (var b = 0; b < 10; b++)
+							{
+								affair.mData.push(data[i][b]);
+							}
 
 							//set affair member vars
+							/*
                                                 	affair.mAffairDate  = data[i][0];
 							affair.mArrivalTime = data[i][1];
 							affair.mStartTime   = data[i][2];
@@ -52,6 +57,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                                                 	affair.mFieldName   = data[i][7];
                                                 	affair.mTeam        = data[i][8];
                                                 	affair.mAffairType  = data[i][9];
+							*/
 						
 							//create screen to display data
 							affair.mScreen = new SelectAffairScreen(affair);

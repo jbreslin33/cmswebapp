@@ -5,8 +5,24 @@ class SelectAffairScreen
 	constructor(affair)
 	{
 		this.mAffair = affair;
+                
+		this.mContainer = document.querySelector('.main');
+                this.mDivCard = document.createElement("DIV");
+                this.mDivCard.setAttribute("class", "card");
+                this.mContainer.appendChild(this.mDivCard);
+
+		this.mDivArray = new Array();
+
+		for (var i = 0; i < 10; i++)
+		{
+                	var div = document.createElement("DIV");
+			this.mDivArray.push(div);
+                	div.setAttribute("class", "selectAffairText");
+                	this.mDivCard.appendChild(div);
+		}
 
                	//card
+		/*
                 this.mContainer = document.querySelector('.main');
                 this.mDivCard = document.createElement("DIV");
                 this.mDivCard.setAttribute("class", "card");
@@ -59,11 +75,13 @@ class SelectAffairScreen
 		this.mDivAffairType = document.createElement("DIV");
                 this.mDivAffairType.setAttribute("class", "affairType");
                 this.mDivCard.appendChild(this.mDivAffairType);
+		*/
 	}
 
 	destructor()
 	{
 		//this.mContainer.removeChild
+		/*
 		this.mDivCard.removeChild(this.mDivAffairType);
 		this.mDivCard.removeChild(this.mDivTeam);
 		this.mDivCard.removeChild(this.mDivFieldName);
@@ -79,11 +97,32 @@ class SelectAffairScreen
                 this.mDivCard.removeChild(this.mDivArrivalTime);
                 this.mDivCard.removeChild(this.mDivAffairDate);
                 this.mContainer.removeChild(this.mDivCard);
+		*/
 	}
 
 	update()
 	{
+		for (var i = 0; i < 10; i++)
+		{
+			if (this.mAffair.mData[i] == null)
+			{
+         			this.mDivArray[i].style.display == "none";
+			}
+			else
+			{
+				if (i == 0) //date
+				{
+         				this.mDivArray[i].textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
+				}
+				else
+				{
+         				this.mDivArray[i].textContent = this.mAffair.mData[i];
+				}
+			}
+		}
+
 		//mAffairDate
+		/*
 		if (this.mAffair.mAffairDate == null)
 		{
          		this.mDivAffairDate.style.display == "none";
@@ -186,5 +225,6 @@ class SelectAffairScreen
 		{
          		this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
 		}
+		*/
 	}
 }
