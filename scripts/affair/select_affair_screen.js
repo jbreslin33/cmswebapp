@@ -80,6 +80,11 @@ class SelectAffairScreen
 
 	destructor()
 	{
+		for (var i = 0; i < 10; i++)
+		{
+			this.mDivCard.removeChild(this.mDivArray[i]);
+		}
+                this.mContainer.removeChild(this.mDivCard);
 		//this.mContainer.removeChild
 		/*
 		this.mDivCard.removeChild(this.mDivAffairType);
@@ -128,111 +133,5 @@ class SelectAffairScreen
 				}
 			}
 		}
-
-		//mAffairDate
-		/*
-		if (this.mAffair.mAffairDate == null)
-		{
-         		this.mDivAffairDate.style.display == "none";
-		}
-		else
-		{
-                	var date = new Date(this.mAffair.mAffairDate);
-                	var dayElement = date.getDay();
-                	var monthElement = date.getMonth();
-			var dayOfMonth = date.getDate() + 1;
-         		this.mDivAffairDate.textContent = this.mAffair.mSchedule.mDayArray[dayElement] + ' ' + this.mAffair.mSchedule.mMonthArray[monthElement] + ' ' + dayOfMonth;
-		}
-
-		//mArrivalTime
-		if (this.mAffair.mArrivalTime == null)
-		{
-         		this.mDivArrivalTime.style.display == "none";
-		}
-		else
-		{
-         		this.mDivArrivalTime.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mArrivalTime);;
-		}
-
-		//mStartTime
-		if (this.mAffair.mStartTime == null)
-		{
-         		this.mDivCard.querySelector('.startTime').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.startTime').textContent =  "Start Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mStartTime);;
-		}
-		
-		//mEndTime
-		if (this.mAffair.mEndTime == null)
-		{
-         		this.mDivCard.querySelector('.endTime').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.endTime').textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mStartTime);;
-		}
-		
-		//mAddress
-		if (this.mAffair.mAddress == null)
-		{
-         		this.mDivCard.querySelector('.address').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.address').textContent = this.mAffair.mAddress;
-		}
-		
-		//mCoordinates
-		if (this.mAffair.mCoordinates == null)
-		{
-         		this.mDivCard.querySelector('.coordinates').style.display == "none";
-		}
-		else
-		{
-			this.mCoordinateA.href = this.mAffair.mCoordinates;
-		}
-		
-		//mPitch
-		if (this.mAffair.mPitch == null)
-		{
-         		this.mDivCard.querySelector('.pitch').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.pitch').textContent = this.mAffair.mPitch;
-		}
-		
-		//mFieldName
-		if (this.mAffair.mFieldName == null)
-		{
-         		this.mDivCard.querySelector('.fieldName').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.fieldName').textContent = this.mAffair.mFieldName;
-		}
-
-		//mTeam
-		if (this.mAffair.mTeam == null)
-		{
-         		this.mDivCard.querySelector('.team').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.team').textContent = this.mAffair.mTeam;
-		}
-
-		//mAffairType
-		if (this.mAffair.mAffairType == null)
-		{
-         		this.mDivCard.querySelector('.affairType').style.display == "none";
-		}
-		else
-		{
-         		this.mDivCard.querySelector('.affairType').textContent = this.mAffair.mAffairType;
-		}
-		*/
 	}
 }
