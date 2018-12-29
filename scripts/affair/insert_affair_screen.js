@@ -30,15 +30,10 @@ class InsertAffairScreen
 		this.mH1.innerHTML = "Add Event";
 
 		//affairDate
-		var input = document.createElement("INPUT");
-		input.setAttribute("type","date"); 
-                input.focus();
-		this.mInputArray.push(input);
+		this.mAffairDate = document.createElement("INPUT");
 		
 		//arrivalTime
-		var input = document.createElement("INPUT");
-		input.setAttribute("type","time"); 
-		this.mInputArray.push(input);
+		this.mArrivalTime = document.createElement("INPUT");
 		
 		//endTime
 		this.mEndTime = document.createElement("INPUT");
@@ -69,15 +64,16 @@ class InsertAffairScreen
 		 */
 
                 this.mContainer.appendChild(this.mDiv);
-		
 		this.mDiv.appendChild(this.mH1);
 
 		//affairDate
                 this.mAffairDateLabel = document.createElement("LABEL");
-                this.mAffairDateLabel.setAttribute("for", this.mInputArray[0]);
+		this.mAffairDate.setAttribute("type","date"); 
+                this.mAffairDate.focus();
+                this.mAffairDateLabel.setAttribute("for", this.mAffairDate);
                 this.mAffairDateLabel.innerHTML = "Date: ";
                 this.mDiv.appendChild(this.mAffairDateLabel);
-		this.mDiv.appendChild(this.mInputArray[0]);
+		this.mDiv.appendChild(this.mAffairDate);
 		
 		//breakA
 		this.mBrA = document.createElement("BR");
@@ -85,10 +81,11 @@ class InsertAffairScreen
 
 		//arrivalTime
                 this.mArrivalTimeLabel = document.createElement("LABEL");
-                this.mArrivalTimeLabel.setAttribute("for", this.mInputArray[1]);
+		this.mArrivalTime.setAttribute("type","time"); 
+                this.mArrivalTimeLabel.setAttribute("for", this.mArrivalTime);
                 this.mArrivalTimeLabel.innerHTML = "Arrive by: ";
 		this.mDiv.appendChild(this.mArrivalTimeLabel);
-		this.mDiv.appendChild(this.mInputArray[1]);
+		this.mDiv.appendChild(this.mArrivalTime);
 
 		this.mBrB = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrB);
