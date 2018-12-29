@@ -15,6 +15,11 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 			console.log("INSERT_AFFAIR_SCREEN_SCHEDULE: ENTER");        
 		}
 		schedule.mInsertAffair = new InsertAffair(schedule);
+
+		/*******
+		 *
+		 * PITCH
+		 */
 		var url = "/php/classes/query/pitch_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
@@ -34,6 +39,41 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 							option.value = data[i][0];
 							option.text = data[i][1];
 							APPLICATION.mSchedule.mInsertAffair.mScreen.mPitch.appendChild(option);
+                                                }
+                                        }
+                                        else
+                                        {
+                                                console.log('no pitch data');
+                                        }
+                                }
+                        }
+                };
+                schedule.mRequest.open('GET', url);
+                schedule.mRequest.send();
+
+		/*******
+                 *
+                 * TEAM 
+                 ****/
+                var url = "/php/classes/query/team_query.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                schedule.mRequest= new XMLHttpRequest();
+                schedule.mRequest.onreadystatechange = function()
+                {
+                        if (schedule.mRequest.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (schedule.mRequest.status === 200)
+                                {
+                                        var data = JSON.parse(this.responseText);
+                                        if (data)
+                                        {
+                                                for (var i = 0; i < data.length; i++)
+                                                {
+                                                        var option = document.createElement("option");
+                                                        option.value = data[i][0];
+                                                        option.text = data[i][1];
+                                                        APPLICATION.mSchedule.mInsertAffair.mScreen.mTeam.appendChild(option);
                                                 }
                                         }
                                         else
