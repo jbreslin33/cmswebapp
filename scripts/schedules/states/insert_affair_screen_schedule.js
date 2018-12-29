@@ -28,14 +28,12 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
-                                                var i = 0;
-                                                while (data[i])
+                                                for (var i = 0; i < data.length; i++)
                                                 {
 							var option = document.createElement("option");
 							option.value = data[i][0];
 							option.text = data[i][1];
 							APPLICATION.mSchedule.mInsertAffair.mScreen.mPitch.appendChild(option);
-                                                        i++;
                                                 }
                                         }
                                         else
