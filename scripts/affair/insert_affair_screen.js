@@ -5,19 +5,10 @@ class InsertAffairScreen
 	constructor(schedule)
 	{
 		console.log('constructor InsertAffairScreen');
-		/*
-		 *                 this.mAffairDate   = 'JAN 01 2000';
-                this.mArrivalTime  = '11PM';
-                this.mStartTime    = '12AM';
-                this.mEndTime      = null;
-                this.mAddress      = 'NOWHERE';
-                this.mCoordinates  = null;
-                this.mPitch        = null;
-                this.mFieldName    = null;
-                this.mTeam         = null;
-                this.mAffairType   = 'Practice';
-*/
+		
 		this.mInputArray = new Array();
+
+		this.mBreak = document.createElement("BR");
 
                 this.mDiv = document.createElement("DIV");
                 this.mDiv.setAttribute("class", "card");
@@ -37,7 +28,6 @@ class InsertAffairScreen
 		
 		//endTime
 		this.mEndTime = document.createElement("INPUT");
-		this.mEndTime.setAttribute("type","time"); 
 		
 		//address
                 this.mAddress = document.createElement("INPUT");
@@ -75,7 +65,7 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mAffairDateLabel);
 		this.mDiv.appendChild(this.mAffairDate);
 		
-		//breakA
+		//BR
 		this.mBrA = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrA);
 
@@ -87,16 +77,19 @@ class InsertAffairScreen
 		this.mDiv.appendChild(this.mArrivalTimeLabel);
 		this.mDiv.appendChild(this.mArrivalTime);
 
+		//BR
 		this.mBrB = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrB);
 	
 		//endTime
                 this.mEndTimeLabel = document.createElement("LABEL");
+		this.mEndTime.setAttribute("type","time"); 
                 this.mEndTimeLabel.setAttribute("for", this.mEndTime);
                 this.mEndTimeLabel.innerHTML = "End Time: ";
                 this.mDiv.appendChild(this.mEndTimeLabel);
 		this.mDiv.appendChild(this.mEndTime);
-		
+	
+		//BR
 		this.mBrC = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrC);
                
@@ -106,7 +99,8 @@ class InsertAffairScreen
                 this.mAddressLabel.innerHTML = "Address: ";
 		this.mDiv.appendChild(this.mAddressLabel);
 		this.mDiv.appendChild(this.mAddress);
-                
+               
+		//BR
 		this.mBrD = document.createElement("BR");
 		this.mDiv.appendChild(this.mBrD);
                 
@@ -116,7 +110,8 @@ class InsertAffairScreen
                 this.mCoordinatesLabel.innerHTML = "Coordinates: ";
                 this.mDiv.appendChild(this.mCoordinatesLabel);
 		this.mDiv.appendChild(this.mCoordinates);
-		
+	
+		//BR
 		this.mBrE = document.createElement("BR");
                 this.mDiv.appendChild(this.mBrE);
                
@@ -127,6 +122,7 @@ class InsertAffairScreen
 		this.mDiv.appendChild(this.mPitchLabel);
 		this.mDiv.appendChild(this.mPitch);
 
+		//BR
 		this.mBrF = document.createElement("BR");
                 this.mDiv.appendChild(this.mBrF);
                
