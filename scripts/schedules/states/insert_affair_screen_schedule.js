@@ -20,15 +20,15 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 		 *
 		 * PITCH
 		 */
-		var url = "/php/classes/query/pitch_query.php?username=" + APPLICATION.mLogin.mUsername;
+		var pitchUrl = "/php/classes/query/pitch_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
-                schedule.mRequest= new XMLHttpRequest();
-                schedule.mRequest.onreadystatechange = function()
+                var pitchRequest= new XMLHttpRequest();
+                pitchRequest.onreadystatechange = function()
                 {
-                        if (schedule.mRequest.readyState === XMLHttpRequest.DONE)
+                        if (pitchRequest.readyState === XMLHttpRequest.DONE)
                         {
-                                if (schedule.mRequest.status === 200)
+                                if (pitchRequest.status === 200)
                                 {
                                         var data = JSON.parse(this.responseText);
                                         if (data)
@@ -48,22 +48,20 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                 }
                         }
                 };
-                schedule.mRequest.open('GET', url);
-                schedule.mRequest.send();
 
 		/*******
                  *
                  * TEAM 
                  ****/
-                var url = "/php/classes/query/team_query.php?username=" + APPLICATION.mLogin.mUsername;
+                var teamUrl = "/php/classes/query/team_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
-                schedule.mRequest= new XMLHttpRequest();
-                schedule.mRequest.onreadystatechange = function()
+                var teamRequest = new XMLHttpRequest();
+                teamRequest.onreadystatechange = function()
                 {
-                        if (schedule.mRequest.readyState === XMLHttpRequest.DONE)
+                        if (teamRequest.readyState === XMLHttpRequest.DONE)
                         {
-                                if (schedule.mRequest.status === 200)
+                                if (teamRequest.status === 200)
                                 {
                                         var data = JSON.parse(this.responseText);
                                         if (data)
@@ -78,14 +76,15 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                         }
                                         else
                                         {
-                                                console.log('no pitch data');
+                                                console.log('no team data');
                                         }
                                 }
                         }
                 };
-                schedule.mRequest.open('GET', url);
-                schedule.mRequest.send();
-
+                pitchRequest.open('GET', pitchUrl);
+                teamRequest.open('GET', teamUrl);
+                pitchRequest.send();
+                teamRequest.send();
 	}
 
         execute(schedule)

@@ -11,14 +11,13 @@ class TeamQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-			select team.id, team.name
+			select teams.id, teams.name
 			from users
-			full outer join clubs_users on clubs_users.user_id=users.id
-			full outer join clubs on clubs.id=clubs_users.club_id
-			full outer join pitches on pitches.club_id=clubs.id
+			full outer join teams_users on teams_users.user_id=users.id
+			full outer join teams on teams.id=teams_users.team_id
 			where users.username = '" .
 			$this->mUsername .
-			"' order by pitches.name asc";
+			"' order by teams.name asc";
 			error_log($this->mQuery);
 	}
 }
