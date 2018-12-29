@@ -135,7 +135,7 @@ CREATE TABLE pitches
 CREATE TABLE teams 
 (
         id SERIAL,
-	name text UNIQUE,
+	name text,
         club_id integer,
         PRIMARY KEY (id),
         FOREIGN KEY(club_id) REFERENCES clubs(id),

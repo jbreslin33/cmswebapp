@@ -9,8 +9,12 @@ insert into users (username,password) values ('joe','joe'); --joe admin of whole
 insert into users (username,password) values ('s','s'); --stelian technical director 
 
 --teams
+insert into teams (name,club_id) values ('u11boys',1);
+insert into teams (name,club_id) values ('u13boys',1);
 insert into teams (name,club_id) values ('u15boys',1);
 insert into teams (name,club_id) values ('u15girls',1);
+insert into teams (name,club_id) values ('u14boys',2);
+insert into teams (name,club_id) values ('u15boys',2);
 
 --clubs_users
 insert into clubs_users (user_id,club_id) values (1,1); --luke
