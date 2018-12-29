@@ -55,14 +55,6 @@ insert into clubs_users (user_id,club_id) values (1,2); --luke kenso
 insert into clubs_users (user_id,club_id) values (2,2); --carlos jr kenso
 insert into clubs_users (user_id,club_id) values (6,2); --carlos sr kenso
 
---teams_users
-insert into teams_users (user_id,team_id) values (1,3); --luke u15 boys celta
-insert into teams_users (user_id,team_id) values (1,5); --luke u14 boys kenso 
-insert into teams_users (user_id,team_id) values (3,3); --louise manager u15 boys celta
-insert into teams_users (user_id,team_id) values (6,5); --carlos sr manager u14 boys kenso
-insert into teams_users (user_id,team_id) values (6,6); --carlos sr manager u15 boys kenso
-							--joe and stelian need not be associated with a team
-
 --affair_types
 insert into affair_types (name) values ('Practice');
 insert into affair_types (name) values ('Game');

@@ -3,6 +3,7 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
+--DROP TABLE teams_users CASCADE;
 --DROP TABLE event_type CASCADE; 
 --DROP TABLE events CASCADE; 
 --DROP TABLE affair_type CASCADE; 
@@ -53,7 +54,6 @@ DROP TABLE roles CASCADE;
 
 DROP TABLE system_users CASCADE;
 DROP TABLE clubs_users CASCADE;
-DROP TABLE teams_users CASCADE;
 DROP TABLE users CASCADE;
 
 DROP TABLE availability CASCADE;
@@ -388,15 +388,6 @@ CREATE TABLE clubs_users
 	UNIQUE (user_id, club_id),	
 	FOREIGN KEY (club_id) REFERENCES clubs(id),
 	FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-CREATE TABLE teams_users 
-(
-	user_id integer NOT NULL,
-	team_id integer NOT NULL,
-	PRIMARY KEY (user_id, team_id),	
-	FOREIGN KEY (user_id) REFERENCES users(id),
-	FOREIGN KEY (team_id) REFERENCES teams(id)
 );
 
 CREATE TABLE system_users 
