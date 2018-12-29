@@ -132,6 +132,28 @@ class InsertAffairScreen
                 this.mFieldNameLabel.innerHTML = "Field Name: ";
 		this.mDiv.appendChild(this.mFieldNameLabel);
 		this.mDiv.appendChild(this.mFieldName);
+		
+		//BR
+		this.mBrG = document.createElement("BR");
+                this.mDiv.appendChild(this.mBrG);
+                
+		//pitch
+                this.mTeamLabel = document.createElement("LABEL");
+                this.mTeamLabel.setAttribute("for", this.mTeam);
+                this.mTeamLabel.innerHTML = "Team: ";
+		this.mDiv.appendChild(this.mTeamLabel);
+		this.mDiv.appendChild(this.mTeam);
+		
+		//BR
+		this.mBrH = document.createElement("BR");
+                this.mDiv.appendChild(this.mBrH);
+
+		//affairType
+                this.mAffairTypeLabel = document.createElement("LABEL");
+                this.mAffairTypeLabel.setAttribute("for", this.mAffairType);
+                this.mAffairTypeLabel.innerHTML = "Event Type: ";
+		this.mDiv.appendChild(this.mAffairTypeLabel);
+		this.mDiv.appendChild(this.mAffairType);
 
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
