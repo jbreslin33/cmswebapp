@@ -14,8 +14,8 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 		{
 			console.log("INSERT_AFFAIR_SCREEN_SCHEDULE: ENTER");        
 		}
-		//schedule.mInsertAffair = new InsertAffair(schedule);
-		var url = "/php/classes/query/get_pitch.php?username=" + APPLICATION.mLogin.mUsername;
+		schedule.mInsertAffair = new InsertAffair(schedule);
+		var url = "/php/classes/query/pitch_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
                 schedule.mRequest= new XMLHttpRequest();
@@ -28,45 +28,23 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                         var data = JSON.parse(this.responseText);
                                         if (data)
                                         {
-                                                //lets clear array....
                                                 var i = 0;
-                                                for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
-                                                {
-                                                        var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
-                                                        affair.mScreen.mDivCard.style.display = "none";
-                                                }
-
-                                                i = 0;
                                                 while (data[i])
                                                 {
-                                                        var affair = new SelectAffair(schedule);
-                                                        for (var b = 0; b < 10; b++)
-                                                        {
-                                                                affair.mData.push(data[i][b]);
-                                                        }
-
-                                                        //create screen to display data
-                                                        affair.mScreen = new SelectAffairScreen(affair);
-
-                                                        //update screen card
-                                                        affair.mScreen.update();
-
-                                                        //save for later
-                                                        APPLICATION.mSchedule.saveToLocalStorage(affair);
-
-                                                        //push to array
-                                                        APPLICATION.mSchedule.mSelectAffairArray.push(affair);
+							var option = document.createElement("option");
+							option.value = data[i][0];
+							option.text = data[i][1];
+							APPLICATION.mSchedule.mInsertAffair.mScreen.mPitch.appendChild(option);
                                                         i++;
                                                 }
                                         }
                                         else
                                         {
-                                                console.log('no schedule');
+                                                console.log('no pitch data');
                                         }
                                 }
                         }
                 };
-                console.log('url:' + url);
                 schedule.mRequest.open('GET', url);
                 schedule.mRequest.send();
 
