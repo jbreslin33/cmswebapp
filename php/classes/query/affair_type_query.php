@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/query/query.php");
 
-class PitchQuery extends Query
+class AffairTypeQuery extends Query
 {
 	function __construct() 
 	{
@@ -23,6 +23,6 @@ class PitchQuery extends Query
 	}
 }
 
-$pitchQuery = new PitchQuery();
+$affairTypeQuery = new AffairTypeQuery();
 
 ?>

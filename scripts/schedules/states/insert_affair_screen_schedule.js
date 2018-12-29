@@ -81,10 +81,46 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                 }
                         }
                 };
+
+                /*******
+                 *
+                 * AFFAIR TYPE 
+                ****/
+                var affairTypeUrl = "/php/classes/query/affair_type_query.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                var affairTypeRequest = new XMLHttpRequest();
+                affairTypeRequest.onreadystatechange = function()
+                {
+                        if (affairTypeRequest.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (affairTypeRequest.status === 200)
+                                {
+                                        var data = JSON.parse(this.responseText);
+                                        if (data)
+                                        {
+                                                for (var i = 0; i < data.length; i++)
+                                                {
+                                                        var option = document.createElement("option");
+                                                        option.value = data[i][0];
+                                                        option.text = data[i][1];
+                                                        APPLICATION.mSchedule.mInsertAffair.mScreen.mAffairType.appendChild(option);
+                                                }
+                                        }
+                                        else
+                                        {
+                                                console.log('no affairType data');
+                                        }
+                                }
+                        }
+                };
+
                 pitchRequest.open('GET', pitchUrl);
                 teamRequest.open('GET', teamUrl);
+                teamRequest.open('GET', affairTypeUrl);
                 pitchRequest.send();
                 teamRequest.send();
+                affairTypeRequest.send();
 	}
 
         execute(schedule)
