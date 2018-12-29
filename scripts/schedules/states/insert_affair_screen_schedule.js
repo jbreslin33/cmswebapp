@@ -117,7 +117,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 
                 pitchRequest.open('GET', pitchUrl);
                 teamRequest.open('GET', teamUrl);
-                teamRequest.open('GET', affairTypeUrl);
+                affairTypeRequest.open('GET', affairTypeUrl);
                 pitchRequest.send();
                 teamRequest.send();
                 affairTypeRequest.send();
