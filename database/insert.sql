@@ -4,9 +4,12 @@ insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin 
 
 --users
 insert into users (username,password) values ('l','l'); --luke player
+insert into users (username,password) values ('cjr','cjr'); --carlos jr player
 insert into users (username,password) values ('lo','lo'); --louise manager
 insert into users (username,password) values ('joe','joe'); --joe admin of whole site
 insert into users (username,password) values ('s','s'); --stelian technical director 
+
+insert into users (username,password) values ('csr','csr'); -- carlos sr 
 
 --teams
 insert into teams (name,club_id) values ('u11boys',1);
@@ -18,14 +21,21 @@ insert into teams (name,club_id) values ('u15boys',2);
 
 --clubs_users
 insert into clubs_users (user_id,club_id) values (1,1); --luke
-insert into clubs_users (user_id,club_id) values (2,1); --loise
-insert into clubs_users (user_id,club_id) values (3,1); --joe
-insert into clubs_users (user_id,club_id) values (4,1); --stelian
+insert into clubs_users (user_id,club_id) values (2,1); --carlos jr
+insert into clubs_users (user_id,club_id) values (3,1); --loise
+insert into clubs_users (user_id,club_id) values (4,1); --joe
+insert into clubs_users (user_id,club_id) values (5,1); --stelian
 
+insert into clubs_users (user_id,club_id) values (1,2); --luke kenso
+insert into clubs_users (user_id,club_id) values (2,2); --carlos jr kenso
+insert into clubs_users (user_id,club_id) values (6,2); --carlos sr kenso
 
 --teams_users
-insert into teams_users (user_id,team_id) values (1,1);
-insert into teams_users (user_id,team_id) values (2,1); --louise manager 
+insert into teams_users (user_id,team_id) values (1,3); --luke u15 boys celta
+insert into teams_users (user_id,team_id) values (1,5); --luke u14 boys kenso 
+insert into teams_users (user_id,team_id) values (3,3); --louise manager u15 boys celta
+insert into teams_users (user_id,team_id) values (6,5); --carlos sr manager u14 boys kenso
+insert into teams_users (user_id,team_id) values (6,6); --carlos sr manager u15 boys kenso
 							--joe and stelian need not be associated with a team
 
 --affair_types

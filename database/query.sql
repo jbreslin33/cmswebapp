@@ -1,7 +1,6 @@
-select pitches.id, pitches.name
+select teams.id, teams.name
 from 
 users
-full outer join clubs_users on clubs_users.user_id=users.id 
-full outer join clubs on clubs.id=clubs_users.club_id 
-full outer join pitches on pitches.club_id=clubs.id
+full outer join teams_users on teams_users.user_id=users.id 
+full outer join teams on teams.id=teams_users.team_id 
 where users.username = 'l';
