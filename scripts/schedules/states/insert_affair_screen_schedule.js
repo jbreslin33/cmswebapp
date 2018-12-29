@@ -15,7 +15,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 			console.log("INSERT_AFFAIR_SCREEN_SCHEDULE: ENTER");        
 		}
 		//schedule.mInsertAffair = new InsertAffair(schedule);
-		var url = "/php/classes/query/get_pitch_team_eventtype_query.php?username=" + APPLICATION.mLogin.mUsername;
+		var url = "/php/classes/query/get_pitch.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
                 schedule.mRequest= new XMLHttpRequest();

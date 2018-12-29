@@ -1,1 +1,5 @@
-select event_date, start_time, practices.address from practices join teams on teams.id=practices.team_id join teams_users on teams_users.team_id=teams.id join users on users.id=teams_users.user_id where users.username = 'j' order by event_date asc 
+select users.id, clubs_users.user_id
+from 
+users
+FULL OUTER JOIN clubs_users on clubs_users.user_id=users.id
+where users.username = 'l';
