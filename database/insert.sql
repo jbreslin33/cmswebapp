@@ -1,6 +1,6 @@
 --clubs
-insert into clubs (name,address) values ('RC CELTA', '4666 bristol road feasterville pa'); 
-insert into clubs (name,address) values ('Kensington Soccer Club', '4666 bristol road feasterville pa'); 
+insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
+insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
 
 --users
 insert into users (username,password) values ('l','l'); --luke player
@@ -30,10 +30,17 @@ insert into affair_types (name) values ('Game');
 insert into affair_types (name) values ('Meeting');
 
 --pitches
-insert into pitches (name,club_id) values ('Field 1',1);
-insert into pitches (name,club_id) values ('Field 2',1);
-insert into pitches (name,club_id) values ('Field 3',1);
-insert into pitches (name,club_id) values ('Field 4',1);
+insert into pitches (name,club_id) values ('Bensalem Field 1',1);
+insert into pitches (name,club_id) values ('Bensalem Field 2',1);
+insert into pitches (name,club_id) values ('Bensalem Field 3',1);
+insert into pitches (name,club_id) values ('Bensalem Field 4',1);
+insert into pitches (name,club_id) values ('Monkiewicsz Field 1',1);
+insert into pitches (name,club_id) values ('Monkiewicsz Field 2',1);
+insert into pitches (name,club_id) values ('Monkiewicsz Field 3',1);
+insert into pitches (name,club_id) values ('Monkiewicsz Field 4',1);
+insert into pitches (name,club_id) values ('Casiano Field 1',2);
+insert into pitches (name,club_id) values ('Casiano Field 2',2);
+insert into pitches (name,club_id) values ('Towey Playground',2);
 
 --affairs
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('12/14/2018','20:20:00','20:10:00','4666 bristol road feasterville pa',1,1);
