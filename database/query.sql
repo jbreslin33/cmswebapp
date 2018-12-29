@@ -1,4 +1,4 @@
-select users.id, clubs_users.user_id, pitches.name
+select pitches.id, pitches.name
 from 
 users
 full outer join clubs_users on clubs_users.user_id=users.id 
