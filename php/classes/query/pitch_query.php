@@ -19,7 +19,6 @@ class PitchQuery extends Query
 			where users.username = '" .
 			$this->mUsername .
 			"' order by pitches.name asc";
-			error_log($this->mQuery);
 	}
 }
 

@@ -12,7 +12,6 @@ class AffairTypeQuery extends Query
 	{
 		$this->mQuery = "
 			select id, name from affair_types order by name asc";
-			error_log($this->mQuery);
 	}
 }
 

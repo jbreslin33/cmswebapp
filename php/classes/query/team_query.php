@@ -18,7 +18,6 @@ class TeamQuery extends Query
 			where users.username = '" .
 			$this->mUsername .
 			"' order by teams.name asc";
-			error_log($this->mQuery);
 	}
 }
 
