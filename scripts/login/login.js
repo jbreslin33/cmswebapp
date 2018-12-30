@@ -79,7 +79,6 @@ class Login
         // Save list of cities to localStorage.
         save(username,password,user_id,club_id,roles_id,team_id)
         {
-		console.log('username:' + username + ' password:' + password + ' user_id:' + user_id + ' club_id:' + club_id + ' roles_id:' + roles_id + ' team_id:' + team_id);
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
 		localStorage.setItem("user_id",user_id);
