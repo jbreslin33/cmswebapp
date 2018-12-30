@@ -35,3 +35,14 @@ full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_r
 where users.username = 'l'
 order by users_clubs_roles.default_timestamp desc LIMIT 1;
 
+select team_id, users_clubs_roles.users_id, users.username 
+from users_clubs_roles_teams
+full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
+full outer join users on users.id=users_clubs_roles.users_id
+; 
+
+select team_id, users_clubs_roles.users_id, users.username 
+from users_clubs_roles_teams
+full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
+full outer join users on users.id=users_clubs_roles.users_id
+where team_id = 3; 
