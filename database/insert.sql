@@ -27,7 +27,9 @@ insert into teams (name,club_id) values ('u14boys',2);
 insert into teams (name,club_id) values ('u15boys',2);
 
 --these are instantiated roles, should it be linked to users_clubs_roles????
+--if so fields would be (id,team_id,users_clubs_roles_id,default_timestamp)
 --users_teams_roles
+
 insert into users_teams_roles (user_id,team_id,role_id,default_timestamp) values (1,3,1,current_timestamp); --luke celta u15 player
 insert into users_teams_roles (user_id,team_id,role_id,default_timestamp) values (1,5,1,current_timestamp); --luke kenso u14 player
 insert into users_teams_roles (user_id,team_id,role_id,default_timestamp) values (3,3,4,current_timestamp); --louise celta u15 manager
