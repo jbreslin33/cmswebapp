@@ -15,3 +15,11 @@ where users.username = 'l'
 order by users_clubs_roles.default_timestamp desc;
 
 select * from users_clubs_roles;
+
+select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name 
+from affairs 
+full outer join teams on teams.id=affairs.team_id 
+full outer join affair_types on affair_types.id=affairs.affair_types_id 
+full outer join pitches      on pitches.id=affairs.pitch_id 
+where affair_date >= now() 
+AND teams.id = 3;

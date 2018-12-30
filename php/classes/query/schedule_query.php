@@ -11,10 +11,17 @@ class ScheduleQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-		select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name from affairs FULL OUTER JOIN teams on teams.id=affairs.team_id FULL OUTER JOIN users_teams_roles on users_teams_roles.team_id=teams.id FULL OUTER JOIN users on users.id=users_teams_roles.user_id FULL OUTER JOIN affair_types on affair_types.id=affairs.affair_types_id FULL OUTER JOIN pitches on pitches.id=affairs.pitch_id where affair_date >= now() AND users.username = '" .
-		$this->mUsername .
-		"' order by affair_date asc";
-		error_log($this->mQuery);
+			select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name
+			from affairs
+			full outer join teams on teams.id=affairs.team_id
+			full outer join affair_types on affair_types.id=affairs.affair_types_id
+			full outer join pitches      on pitches.id=affairs.pitch_id
+			where affair_date >= now()
+			AND teams.id = 3" .
+			//$this->mUsername .
+			//"' order by affair_date asc";
+			" order by affair_date asc";
+			error_log($this->mQuery);
 	}
 }
 
