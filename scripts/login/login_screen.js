@@ -37,7 +37,7 @@ class LoginScreen
 		this.mButton.innerHTML = "LOGIN";
 		
                 this.mButton.setAttribute("class", "btn");
-               	this.mButton.addEventListener("click",this.mLogin.sendLogin);
+               	this.mButton.addEventListener("click",this.sendLogin);
 
 		this.mDivLogin.appendChild(this.mButton);
 	
@@ -45,6 +45,14 @@ class LoginScreen
                 this.mDivShadow = document.createElement("DIV");
                 this.mDivShadow.setAttribute("class", "shadow");
 		this.mDivLogin.appendChild(this.mDivShadow);
+	}
+
+	sendLogin()
+	{
+                APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
+                APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
+	
+		APPLICATION.mLogin.sendLogin();
 	}
 
 	divInputEmailKeyDown(e)

@@ -65,6 +65,7 @@ class Login
 
 	public function processLogin()
 	{
+		error_log("calling process login");
 		$database = new Database("localhost","cms","postgres","mibesfat");
 		$query = "select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles.default_timestamp
 			from users

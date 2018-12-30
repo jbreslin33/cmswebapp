@@ -14,12 +14,14 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		{
 			console.log("CHECK_LOCALSTORAGE_LOGIN: ENTER");        
 		}
+		
+		//set login credentials from local storage
 		login.mUsername = localStorage.getItem("username");
 		login.mPassword = localStorage.getItem("password");
+
 		if (login.mUsername && login.mPassword)
 		{
-			//processlogin
-			login.sendLoginFromLocalStorage(login.mUsername,login.mPassword);
+			login.sendLogin();
 		}
 		else
 		{
