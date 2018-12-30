@@ -74,17 +74,13 @@ class Login
 		$result = $database->query($query);
 		if (pg_num_rows($result) > 0)
 		{
-			$_SESSION["logged_in"] = true;
-
 			$row = pg_fetch_row($result);
-			$user_id = $row[0];
-			$_SESSION["user_id"] = $user_id;
+			$user_id  = $row[0];
 			$password = $row[1];
 
 			if ($this->mPassword == $password)
 			{
-				//$this->mEcho = "100," . $user_id;
-				$this->mEcho = "100";
+				$this->mEcho = "100," . $user_id;
 			}
 			else
 			{
@@ -99,7 +95,6 @@ class Login
 
 	public function sendResponse()
 	{
-		error_log($this->mEcho);
 		echo $this->mEcho;
 	}
 }

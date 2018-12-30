@@ -77,9 +77,9 @@ class Login
                                         if (data)
                                         {
 						var dataArray = data.split(",");
-						APPLICATION.mLogin.processLogin(dataArray[0]);
+						APPLICATION.mLogin.processLogin(dataArray[0]); //should recieve 100 for good login
 						APPLICATION.mLogin.mUserID = dataArray[1];
-						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername,APPLICATION.mLogin.mPassword,APPLICATION.mLogin.mUserID);
+						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword, APPLICATION.mLogin.mUserID);
                                         }
                                 }
                         }
@@ -99,6 +99,7 @@ class Login
         // Save list of cities to localStorage.
         save(username,password,user_id)
         {
+		console.log('username:' + username + ' password:' + password + ' user_id:' + user_id);
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
 		localStorage.setItem("user_id",user_id);
