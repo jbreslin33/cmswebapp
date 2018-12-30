@@ -18,6 +18,9 @@ class Login
 		this.mUsername = null;
 		this.mPassword = null;
 		this.mUserID   = null;
+		this.mClubID   = null;
+		this.mTeamID   = null;
+		this.mRolesID  = null;
 
                 //states
                 this.mStateMachine = new StateMachine(this);
@@ -78,8 +81,11 @@ class Login
                                         {
 						var dataArray = data.split(",");
 						APPLICATION.mLogin.processLogin(dataArray[0]); //should recieve 100 for good login
-						APPLICATION.mLogin.mUserID = dataArray[1];
-						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword, APPLICATION.mLogin.mUserID);
+						APPLICATION.mLogin.mUserID  = dataArray[1];
+						APPLICATION.mLogin.mClubID  = dataArray[2];
+						APPLICATION.mLogin.mRolesID = dataArray[3];
+						APPLICATION.mLogin.mTeamID  = dataArray[4];
+						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword, APPLICATION.mLogin.mUserID, APPLICATION.mLogin.mClubID, APPLICATION.mLogin.mRolesID, APPLICATION.mLogin.mTeamID);
                                         }
                                 }
                         }
@@ -97,15 +103,15 @@ class Login
 	}
 
         // Save list of cities to localStorage.
-        save(username,password,user_id)
+        save(username,password,user_id,club_id,roles_id,team_id)
         {
-		console.log('username:' + username + ' password:' + password + ' user_id:' + user_id);
+		console.log('username:' + username + ' password:' + password + ' user_id:' + user_id + ' club_id:' + club_id + ' roles_id:' + roles_id + ' team_id:' + team_id);
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
 		localStorage.setItem("user_id",user_id);
 		//defaults
-		localStorage.setItem("club_id",user_id); 
-		localStorage.setItem("team_id",user_id);
-		localStorage.setItem("role_id",user_id);
+		localStorage.setItem("club_id",club_id);
+		localStorage.setItem("roles_id",roles_id);
+		localStorage.setItem("team_id",team_id); 
         }
 }

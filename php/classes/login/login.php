@@ -66,7 +66,7 @@ class Login
 	public function processLogin()
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
-		$query = "select users.id, users.password, users_clubs_roles_teams.team_id, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles.default_timestamp
+		$query = "select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles.default_timestamp
 			from users
 			full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
 			full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
@@ -81,10 +81,14 @@ class Login
 			$row = pg_fetch_row($result);
 			$user_id  = $row[0];
 			$password = $row[1];
+			$club_id  = $row[2];
+			$roles_id = $row[3];
+			$team_id  = $row[4];
 
 			if ($this->mPassword == $password)
 			{
-				$this->mEcho = "100," . $user_id;
+				$this->mEcho = "100," . $user_id . "," . $club_id . "," . $roles_id . "," . $team_id;
+				error_log($this->mEcho);
 			}
 			else
 			{
