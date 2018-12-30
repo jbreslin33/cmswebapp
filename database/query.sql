@@ -12,7 +12,7 @@ select users.id, users_clubs_roles.club_id, users_clubs_roles.default_timestamp
 from users 
 full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
 where users.username = 'l'
-order by users_clubs_roles.default_timestamp desc;
+order by users_clubs_roles.default_timestamp desc LIMIT 1;
 
 select * from users_clubs_roles;
 
@@ -23,3 +23,15 @@ full outer join affair_types on affair_types.id=affairs.affair_types_id
 full outer join pitches      on pitches.id=affairs.pitch_id 
 where affair_date >= now() 
 AND teams.id = 3;
+
+select users.id, users.password
+from users
+where users.username = 'l';
+
+select users.id, users.password, users_clubs_roles_teams.team_id, users_clubs_roles.club_id, users_clubs_roles.default_timestamp
+from users
+full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
+full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+where users.username = 'l'
+order by users_clubs_roles.default_timestamp desc LIMIT 1;
+

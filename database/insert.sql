@@ -29,9 +29,9 @@ insert into teams (name,club_id) values ('u15boys',2);
 
 --this is used so that you dont lose a coach when you take him off a team, same for players and managers this is who you consider in what roles but they may not be instantiated in that role currently
 --users_clubs_roles
-insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke celta  player
 insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke kenso  player
 insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,2,3,current_timestamp); --luke kenso  coach
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke celta  player
 
 insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (3,1,2,current_timestamp); --loise parent celta
 insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (3,1,4,current_timestamp); --loise manager celta
@@ -42,8 +42,8 @@ insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) valu
 --if so fields would be (id,team_id,users_clubs_roles_id,default_timestamp)
 --users_teams_roles
 
-insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (1,3,current_timestamp); --luke celta u15 player
-insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (2,5,current_timestamp); --luke kenso u14 player
+insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (1,5,current_timestamp); --luke kenso u14 player
+insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (3,3,current_timestamp); --luke celta u15 player
 insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (5,3,current_timestamp); --louise celta u15 manager
 
 
