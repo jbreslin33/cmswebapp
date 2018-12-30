@@ -28,20 +28,20 @@ insert into teams (name,club_id) values ('u15boys',2);
 
 
 --users_teams_roles
-insert into users_teams_roles (user_id,team_id,role_id) values (1,3,1); --luke celta u15 player
-insert into users_teams_roles (user_id,team_id,role_id) values (1,5,1); --luke kenso u14 player
-insert into users_teams_roles (user_id,team_id,role_id) values (3,3,4); --louise celta u15 manager
+insert into users_teams_roles (user_id,team_id,role_id,default_timestamp) values (1,3,1,current_timestamp); --luke celta u15 player
+insert into users_teams_roles (user_id,team_id,role_id,default_timestamp) values (1,5,1,current_timestamp); --luke kenso u14 player
+insert into users_teams_roles (user_id,team_id,role_id,default_timestamp) values (3,3,4,current_timestamp); --louise celta u15 manager
 
 
 --users_clubs_roles
-insert into users_clubs_roles (users_id,club_id,roles_id) values (1,1,1); --luke celta  player
-insert into users_clubs_roles (users_id,club_id,roles_id) values (1,1,1); --luke kenso  player
-insert into users_clubs_roles (users_id,club_id,roles_id) values (1,2,3); --luke kenso  coach
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke celta  player
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke kenso  player
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,2,3,current_timestamp); --luke kenso  coach
 
-insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,2); --loise parent celta
-insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,4); --loise manager celta
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (3,1,2,current_timestamp); --loise parent celta
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (3,1,4,current_timestamp); --loise manager celta
 
-insert into users_clubs_roles (users_id,club_id,roles_id) values (5,1,5); --stelian director celta
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (5,1,5,current_timestamp); --stelian director celta
 
 
 --clubs_users

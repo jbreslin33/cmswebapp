@@ -385,6 +385,7 @@ CREATE TABLE clubs_users
 	id SERIAL,
 	user_id integer NOT NULL,
 	club_id integer NOT NULL,
+	--default_timestamp timestamp NOT NULL,
 	UNIQUE (user_id, club_id),	
 	FOREIGN KEY (club_id) REFERENCES clubs(id),
 	FOREIGN KEY (user_id) REFERENCES users(id)
@@ -414,6 +415,7 @@ CREATE TABLE users_system_roles
         id SERIAL,
         user_id integer NOT NULL,
         role_id integer NOT NULL,
+	default_timestamp timestamp NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (role_id) REFERENCES roles(id)
@@ -425,6 +427,7 @@ CREATE TABLE users_clubs_roles
         users_id integer NOT NULL,
        	club_id integer NOT NULL,
         roles_id integer NOT NULL,
+	default_timestamp timestamp NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (club_id) REFERENCES clubs(id),
@@ -437,6 +440,7 @@ CREATE TABLE users_teams_roles
         user_id integer NOT NULL,
         team_id integer NOT NULL,
         role_id integer NOT NULL,
+	default_timestamp timestamp NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
