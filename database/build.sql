@@ -3,6 +3,7 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
+--DROP TABLE users_teams_roles CASCADE; --player, coach, manager, liason, parent
 --DROP TABLE teams_users CASCADE;
 --DROP TABLE event_type CASCADE; 
 --DROP TABLE events CASCADE; 
@@ -47,8 +48,8 @@ DROP TABLE uniforms_order CASCADE;
 DROP TABLE uniforms CASCADE;
 
 DROP TABLE users_system_roles CASCADE; --admin, data-entry
+DROP TABLE users_clubs_roles_teams CASCADE; --instantiation of player, coach, manager, liason, parent for a specific team tied to users_clubs_roles class type table
 DROP TABLE users_clubs_roles CASCADE; -- techninal director, cfo, coordinator, cms-admin, board member, president, ceo 
-DROP TABLE users_teams_roles CASCADE; --player, coach, manager, liason, parent
 
 DROP TABLE roles CASCADE;
 
@@ -434,17 +435,15 @@ CREATE TABLE users_clubs_roles
 	FOREIGN KEY (roles_id) REFERENCES roles(id)
 );
 
-CREATE TABLE users_teams_roles 
+CREATE TABLE users_clubs_roles_teams
 (
         id SERIAL,
-        user_id integer NOT NULL,
+        users_clubs_roles_id integer NOT NULL,
         team_id integer NOT NULL,
-        role_id integer NOT NULL,
 	default_timestamp timestamp NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_id) REFERENCES users(id),
-	FOREIGN KEY (team_id) REFERENCES teams(id),
-	FOREIGN KEY (role_id) REFERENCES roles(id)
+	FOREIGN KEY (users_clubs_roles_id) REFERENCES users_clubs_roles(id),
+	FOREIGN KEY (team_id) REFERENCES teams(id)
 );
 
 CREATE TABLE affairs_users_availability 
