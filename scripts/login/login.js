@@ -39,61 +39,6 @@ class Login
 		this.mStateMachine.update();
 	}
 
-	send(username,password)
-	{
-		APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
-		APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
-
-		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value + "&password=" + APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value; 
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-						var dataArray = data.split(",");
-						APPLICATION.mLogin.processLogin(dataArray[0]); //should recieve 100 for good login
-						APPLICATION.mLogin.mUserID  = dataArray[1];
-						APPLICATION.mLogin.mClubID  = dataArray[2];
-						APPLICATION.mLogin.mRolesID = dataArray[3];
-						APPLICATION.mLogin.mTeamID  = dataArray[4];
-						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword, APPLICATION.mLogin.mUserID, APPLICATION.mLogin.mClubID, APPLICATION.mLogin.mRolesID, APPLICATION.mLogin.mTeamID);
-                                        }
-                                }
-                        }
-                };
-                request.open('POST', url);
-                request.send();
-	}
-
-	sendLoginFromLocalStorage(username,password)
-	{
-                var url = "/php/classes/login/login.php?username=" + username + "&password=" + password;
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-                                                APPLICATION.mLogin.processLogin(data);
-                                        }
-                                }
-                        }
-                };
-                request.open('POST', url);
-                request.send();
-	}
-
 	sendLogin()
 	{
 		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword; 
