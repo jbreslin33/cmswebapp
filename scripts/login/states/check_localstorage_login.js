@@ -19,6 +19,7 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		login.mUsername = localStorage.getItem("username");
 		login.mPassword = localStorage.getItem("password");
 
+		//this checks if you have credentials saved local if so it sends login credentials to reference against db, if not it takes you to login screen.
 		if (login.mUsername && login.mPassword)
 		{
 			login.sendLogin();
