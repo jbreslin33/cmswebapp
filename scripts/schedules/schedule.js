@@ -11,7 +11,6 @@ class Schedule
                 this.mStateEnterLogs = true;
                 this.mStateExecuteLogs = false;
                 this.mStateExitLogs = false;
-                this.mLoggedIn = false;
 
 		//utilities
 		this.mTime = new Time();
