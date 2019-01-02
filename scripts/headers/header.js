@@ -37,6 +37,13 @@ class Header
 		this.mButtonInsertAffairScreen.setAttribute("id", "butAdd");
 		this.mButtonInsertAffairScreen.addEventListener("click",this.buttonInsertAffairScreenClicked); 
 		this.mHeader.appendChild(this.mButtonInsertAffairScreen);
+		
+		this.mSelectRole = document.createElement("SELECT");
+		//this.mSelectRole.setAttribute("class", "headerButton");
+		this.mHeader.appendChild(this.mSelectRole);
+		
+		this.mSelectTeam = document.createElement("SELECT");
+		this.mHeader.appendChild(this.mSelectTeam);
 	}
 
 	buttonRefreshClicked()
