@@ -6,10 +6,24 @@ class PitchQuery extends Query
 	function __construct() 
 	{
 		parent::__construct();
+	/*	
+		$this->mClubID = "";
+
+                //check for proper post or get
+                if (isset($_POST['club_id']))
+                {
+                        $this->mClubID = $_POST['club_id'];
+                }
+                if (isset($_GET['club_id']))
+                {
+                        $this->mClubID = $_GET['club_id'];
+                }
+	 */
 	}
 
 	public function query()
 	{
+		$tempClubID = 1;
 		$this->mQuery = "
 			select pitches.id, pitches.name
 			from users
@@ -18,7 +32,10 @@ class PitchQuery extends Query
 			full outer join pitches on pitches.club_id=clubs.id
 			where users.username = '" .
 			$this->mUsername .
-			"' order by pitches.name asc";
+			"' and clubs.id = " . 
+			//$this->mClubID .
+			$tempClubID .
+			" order by pitches.name asc";
 	}
 }
 
