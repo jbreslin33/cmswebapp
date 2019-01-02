@@ -46,3 +46,11 @@ from users_clubs_roles_teams
 full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
 full outer join users on users.id=users_clubs_roles.users_id
 where team_id = 3; 
+
+select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, teams.name, users_clubs_roles.default_timestamp
+from users
+full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
+full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+full outer join teams on teams.id=users_clubs_roles_teams.team_id
+where users.username = 'l'
+order by users_clubs_roles_teams.team_id asc;
