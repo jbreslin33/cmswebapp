@@ -5,6 +5,13 @@
 --OLD DROPS
 --DROP TABLE users_teams_roles CASCADE; --player, coach, manager, liason, parent
 --DROP TABLE teams_users CASCADE;
+--DROP TABLE event_types CASCADE; 
+--DROP TABLE events_sessions CASCADE; 
+--DROP TABLE events_users_attendance CASCADE; 
+--DROP TABLE events_users_availability CASCADE; 
+--DROP TABLE teams_users CASCADE; 
+--DROP TABLE uniforms_events CASCADE; 
+--DROP TABLE users_teams_roles CASCADE; 
 --DROP TABLE event_type CASCADE; 
 --DROP TABLE events CASCADE; 
 --DROP TABLE affair_type CASCADE; 
