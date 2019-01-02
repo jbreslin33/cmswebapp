@@ -439,7 +439,8 @@ CREATE TABLE users_clubs_roles
 	PRIMARY KEY (id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (club_id) REFERENCES clubs(id),
-	FOREIGN KEY (roles_id) REFERENCES roles(id)
+	FOREIGN KEY (roles_id) REFERENCES roles(id),
+	unique (users_id,club_id,roles_id)
 );
 
 CREATE TABLE users_clubs_roles_teams
@@ -450,7 +451,8 @@ CREATE TABLE users_clubs_roles_teams
 	default_timestamp timestamp NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (users_clubs_roles_id) REFERENCES users_clubs_roles(id),
-	FOREIGN KEY (team_id) REFERENCES teams(id)
+	FOREIGN KEY (team_id) REFERENCES teams(id),
+	unique (users_clubs_roles_id,team_id)
 );
 
 CREATE TABLE affairs_users_availability 

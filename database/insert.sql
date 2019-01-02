@@ -29,7 +29,7 @@ insert into teams (name,club_id) values ('u15boys',2);
 
 --this is used so that you dont lose a coach when you take him off a team, same for players and managers this is who you consider in what roles but they may not be instantiated in that role currently
 --users_clubs_roles
-insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke kenso  player
+insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,2,1,current_timestamp); --luke kenso  player
 insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,2,3,current_timestamp); --luke kenso  coach
 insert into users_clubs_roles (users_id,club_id,roles_id,default_timestamp) values (1,1,1,current_timestamp); --luke celta  player
 
