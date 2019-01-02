@@ -54,3 +54,5 @@ full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_r
 full outer join teams on teams.id=users_clubs_roles_teams.team_id
 where users.username = 'l'
 order by users_clubs_roles_teams.team_id asc;
+
+

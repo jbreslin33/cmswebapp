@@ -41,9 +41,6 @@ class InsertAffairScreen
                 //fieldName
                 this.mFieldName = document.createElement("INPUT");
 		
-		//team
-                this.mTeam = document.createElement("SELECT");
-		
 		//affairType
                 this.mAffairType = document.createElement("SELECT");
 
@@ -137,17 +134,6 @@ class InsertAffairScreen
 		this.mBrG = document.createElement("BR");
                 this.mDiv.appendChild(this.mBrG);
                 
-		//pitch
-                this.mTeamLabel = document.createElement("LABEL");
-                this.mTeamLabel.setAttribute("for", this.mTeam);
-                this.mTeamLabel.innerHTML = "Team: ";
-		this.mDiv.appendChild(this.mTeamLabel);
-		this.mDiv.appendChild(this.mTeam);
-		
-		//BR
-		this.mBrH = document.createElement("BR");
-                this.mDiv.appendChild(this.mBrH);
-
 		//affairType
                 this.mAffairTypeLabel = document.createElement("LABEL");
                 this.mAffairTypeLabel.setAttribute("for", this.mAffairType);

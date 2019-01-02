@@ -49,39 +49,6 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                         }
                 };
 
-		/*******
-                 *
-                 * TEAM 
-                 ****/
-                var teamUrl = "/php/classes/query/team_query.php?username=" + APPLICATION.mLogin.mUsername;
-
-                // Fetch the latest data.
-                var teamRequest = new XMLHttpRequest();
-                teamRequest.onreadystatechange = function()
-                {
-                        if (teamRequest.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (teamRequest.status === 200)
-                                {
-                                        var data = JSON.parse(this.responseText);
-                                        if (data)
-                                        {
-                                                for (var i = 0; i < data.length; i++)
-                                                {
-                                                        var option = document.createElement("option");
-                                                        option.value = data[i][0];
-                                                        option.text = data[i][1];
-                                                        APPLICATION.mSchedule.mInsertAffair.mScreen.mTeam.appendChild(option);
-                                                }
-                                        }
-                                        else
-                                        {
-                                                console.log('no team data');
-                                        }
-                                }
-                        }
-                };
-
                 /*******
                  *
                  * AFFAIR TYPE 
@@ -116,10 +83,8 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                 };
 
                 pitchRequest.open('GET', pitchUrl);
-                teamRequest.open('GET', teamUrl);
                 affairTypeRequest.open('GET', affairTypeUrl);
                 pitchRequest.send();
-                teamRequest.send();
                 affairTypeRequest.send();
 	}
 
