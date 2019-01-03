@@ -30,14 +30,6 @@ class Header
 		this.mButtonRefresh.addEventListener("click",this.buttonRefreshClicked); 
 		this.mHeader.appendChild(this.mButtonRefresh);
 		
-		//addbutton 1
-		this.mButtonInsertAffairScreen = document.createElement("BUTTON");
-		this.mButtonInsertAffairScreen.setAttribute("class", "headerButton");
-		this.mButtonInsertAffairScreen.setAttribute("aria-label", "Add");
-		this.mButtonInsertAffairScreen.setAttribute("id", "butAdd");
-		this.mButtonInsertAffairScreen.addEventListener("click",this.buttonInsertAffairScreenClicked); 
-		this.mHeader.appendChild(this.mButtonInsertAffairScreen);
-		
 		this.mSelectRole = document.createElement("SELECT");
 		//this.mSelectRole.setAttribute("class", "headerButton");
 		this.mHeader.appendChild(this.mSelectRole);
@@ -50,15 +42,5 @@ class Header
 	{
 		console.log('buttonRefreshClicked');
 		//call some kind of update all function
-	}
-	buttonInsertAffairScreenClicked()
-	{
-		console.log('buttonInsertAffairScreenClicked');
-		//show insert affair screen	
-		if (APPLICATION.mSchedule)
-		{
-               		APPLICATION.mSchedule.mStateMachine.changeState(APPLICATION.mSchedule.mINSERT_AFFAIR_SCREEN_SCHEDULE);
-		}
-
 	}
 }
