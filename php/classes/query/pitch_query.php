@@ -23,7 +23,8 @@ class PitchQuery extends Query
         		(
         			SELECT club_id
         			from users_clubs_roles
-        			order by users_clubs_roles.default_timestamp desc limit 1
+				full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+        			order by users_clubs_roles_teams.default_timestamp desc limit 1
         		)
 			order by pitches.name asc";
 	}

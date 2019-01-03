@@ -435,7 +435,6 @@ CREATE TABLE users_clubs_roles
         users_id integer NOT NULL,
        	club_id integer NOT NULL,
         roles_id integer NOT NULL,
-	default_timestamp timestamp NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (club_id) REFERENCES clubs(id),
