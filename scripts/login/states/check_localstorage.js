@@ -26,7 +26,7 @@ class CHECK_LOCALSTORAGE extends State
 		}
 		else
 		{
-			login.mStateMachine.changeState(login.mSCREEN);
+			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
 	}
 

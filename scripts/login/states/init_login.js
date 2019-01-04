@@ -1,7 +1,7 @@
 
 'use strict';
 
-class INIT extends State
+class INIT_LOGIN extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class INIT extends State
         {
 		if (login.mStateLogs || login.mStateEnterLogs)
 		{
-			console.log("INIT: ENTER");        
+			console.log("INIT_LOGIN: ENTER");        
 		}
 	}
 
@@ -20,7 +20,7 @@ class INIT extends State
         {
 		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
-			console.log("INIT: EXECUTE");        
+			console.log("INIT_LOGIN: EXECUTE");        
 		}
 		login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE);
 	}
@@ -29,7 +29,7 @@ class INIT extends State
         {
 		if (login.mStateLogs || login.mStateExitLogs)
 		{
-			console.log("INIT: EXIT");        
+			console.log("INIT_LOGIN: EXIT");        
 		}
 	}
 }
