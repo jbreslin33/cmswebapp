@@ -1,7 +1,7 @@
 
 'use strict';
 
-class CHECK_LOCALSTORAGE_LOGIN extends State
+class CHECK_LOCALSTORAGE extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateEnterLogs)
 		{
-			console.log("CHECK_LOCALSTORAGE_LOGIN: ENTER");        
+			console.log("CHECK_LOCALSTORAGE: ENTER");        
 		}
 		
 		//set login credentials from local storage
@@ -26,7 +26,7 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
 		}
 		else
 		{
-			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
+			login.mStateMachine.changeState(login.mSCREEN);
 		}
 	}
 
@@ -34,12 +34,12 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
-			console.log("CHECK_LOCALSTORAGE_LOGIN: EXECUTE");        
+			console.log("CHECK_LOCALSTORAGE: EXECUTE");        
 		}
 
 		if (login.mLoggedIn == true)
 		{
-                        login.mStateMachine.changeState(login.mLOGGED_IN_LOGIN);
+                        login.mStateMachine.changeState(login.mLOGGED_IN);
 		}
 	}
 
@@ -47,7 +47,7 @@ class CHECK_LOCALSTORAGE_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExitLogs)
 		{
-			console.log("CHECK_LOCALSTORAGE_LOGIN: EXIT");        
+			console.log("CHECK_LOCALSTORAGE: EXIT");        
 		}
 	}
 }

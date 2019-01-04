@@ -24,14 +24,14 @@ class Login
 
                 //states
                 this.mStateMachine = new StateMachine(this);
-                this.mGLOBAL_LOGIN = new GLOBAL_LOGIN();
-                this.mINIT_LOGIN = new INIT_LOGIN();
-                this.mCHECK_LOCALSTORAGE_LOGIN = new CHECK_LOCALSTORAGE_LOGIN();
-                this.mSCREEN_LOGIN = new SCREEN_LOGIN();
-                this.mLOGGED_IN_LOGIN = new LOGGED_IN_LOGIN();
+                this.mGLOBAL = new GLOBAL();
+                this.mINIT = new INIT();
+                this.mCHECK_LOCALSTORAGE = new CHECK_LOCALSTORAGE();
+                this.mSCREEN = new SCREEN();
+                this.mLOGGED_IN = new LOGGED_IN();
 
-                this.mStateMachine.setGlobalState(this.mGLOBAL_LOGIN);
-                this.mStateMachine.changeState(this.mINIT_LOGIN);
+                this.mStateMachine.setGlobalState(this.mGLOBAL);
+                this.mStateMachine.changeState(this.mINIT);
 	}
 
 	update(timestamp)

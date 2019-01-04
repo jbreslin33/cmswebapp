@@ -1,7 +1,7 @@
 
 'use strict';
 
-class SCREEN_LOGIN extends State
+class SCREEN extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class SCREEN_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateEnterLogs)
 		{
-			console.log("SCREEN_LOGIN: ENTER");        
+			console.log("SCREEN: ENTER");        
 		}
 		//create login screen
 		login.mLoginScreen = new LoginScreen(login.mApplication,login);	
@@ -22,11 +22,11 @@ class SCREEN_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
-			console.log("SCREEN_LOGIN: EXECUTE");        
+			console.log("SCREEN: EXECUTE");        
 		}
 		if (login.mLoggedIn == true)
 		{
-			login.mStateMachine.changeState(login.mLOGGED_IN_LOGIN);
+			login.mStateMachine.changeState(login.mLOGGED_IN);
 		}
 	}
 
@@ -34,7 +34,7 @@ class SCREEN_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExitLogs)
 		{
-			console.log("SCREEN_LOGIN: EXIT");        
+			console.log("SCREEN: EXIT");        
 		}
 	}
 }

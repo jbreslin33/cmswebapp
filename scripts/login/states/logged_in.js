@@ -1,7 +1,7 @@
 
 'use strict';
 
-class LOGGED_IN_LOGIN extends State
+class LOGGED_IN extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class LOGGED_IN_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateEnterLogs)
 		{
-			console.log("LOGGED_IN_LOGIN: ENTER");        
+			console.log("LOGGED_IN: ENTER");        
 		}
 
 		//if there is a login screen hide it
@@ -28,7 +28,7 @@ class LOGGED_IN_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
-			console.log("LOGGED_IN_LOGIN: EXECUTE");        
+			console.log("LOGGED_IN: EXECUTE");        
 		}
 		if (login.mLoggedIn == false)
 		{
@@ -40,7 +40,7 @@ class LOGGED_IN_LOGIN extends State
         {
 		if (login.mStateLogs || login.mStateExitLogs)
 		{
-			console.log("LOGGED_IN_LOGIN: EXIT");        
+			console.log("LOGGED_IN: EXIT");        
 		}
 	}
 }
