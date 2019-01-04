@@ -15,13 +15,6 @@ class LOGGED_IN extends State
 			console.log("LOGGED_IN: ENTER");        
 		}
 
-		//if there is a login screen hide it
-		if (login.mLoginScreen)
-		{
-			login.mLoginScreen.hide();
-		}
-
-                login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}
 
         execute(login)
@@ -30,9 +23,22 @@ class LOGGED_IN extends State
 		{
 			console.log("LOGGED_IN: EXECUTE");        
 		}
+		if (login.mRolesID == 1)
+		{
+			login.mStateMachine.changeState(login.mPLAYER_LOGGED_IN);
+		}
+		if (login.mRolesID == 2)
+		{
+			login.mStateMachine.changeState(login.mMANAGER_LOGGED_IN);
+		}
+		if (login.mRolesID == 3)
+		{
+			login.mStateMachine.changeState(login.mDIRECTOR_LOGGED_IN);
+		}
 		if (login.mLoggedIn == false)
 		{
 			//you should relaunch or goto intial login state	
+			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
 	}
 
