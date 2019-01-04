@@ -74,7 +74,7 @@ class Login
 			$query .= $this->mUsername; 
 			$query .= "' order by users_clubs_roles_teams.default_timestamp desc LIMIT 1;";
 
-		
+
 		$result = $database->query($query);
 		if (pg_num_rows($result) > 0)
 		{
@@ -93,6 +93,7 @@ class Login
 			{
 				$this->mEcho = "105";
 			}
+			error_log($this->mEcho);	
 		}
 		else
 		{

@@ -64,23 +64,18 @@ where users.username = 'lo'
 and clubs.id = 1 
 order by pitches.name asc;
 
+select * from users;
+select * from clubs;
+select * from teams;
+select * from roles;
+select * from users_clubs_roles;
+select * from users_clubs_roles_teams order by default_timestamp desc;
 
-select pitches.id, pitches.name
-from users
-full outer join clubs_users on clubs_users.user_id=users.id
-full outer join clubs on clubs.id=clubs_users.club_id
-full outer join pitches on pitches.club_id=clubs.id
-where users.username = 'lo'
-and clubs.id = 
-	(
-	SELECT club_id 
-	from users_clubs_roles 
-	order by users_clubs_roles.default_timestamp desc limit 1 
-	)
-order by pitches.name asc;
-
-
-
-
-
+select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles_teams.default_timestamp
+                        from users
+                        full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
+                        full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+			and users.username = 'l'
+			and users_clubs_roles_teams.default_timestamp is null
+                        order by users_clubs_roles_teams.default_timestamp desc;
 
