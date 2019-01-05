@@ -74,8 +74,8 @@ select * from users_clubs_roles_teams order by default_timestamp desc;
 select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles_teams.default_timestamp
                         from users
                         full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
-                        full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+                        join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
 			and users.username = 'l'
-			and users_clubs_roles_teams.default_timestamp is null
+			and users_clubs_roles_teams.default_timestamp is NOT NULL 
                         order by users_clubs_roles_teams.default_timestamp desc;
 
