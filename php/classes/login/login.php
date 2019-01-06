@@ -69,11 +69,10 @@ class Login
 		$query = "select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles_teams.default_timestamp
 			from users
 			full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
-			full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+			join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
 			where users.username = '"; 
 			$query .= $this->mUsername; 
 			$query .= "' order by users_clubs_roles_teams.default_timestamp desc LIMIT 1;";
-
 
 		$result = $database->query($query);
 		if (pg_num_rows($result) > 0)
