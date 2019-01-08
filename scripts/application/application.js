@@ -16,7 +16,8 @@ class Application
 		this.mSchedule = null;
 
 		//header	
-		this.mPlayerHeader = new Header(this,"CMS");
+		//this.mPlayerHeader = new Header(this,"CMS");
+		this.mPlayHeader = new Header(this,"CMS");
                 
 		//main class
                 this.mDivMain = document.createElement("DIV");
