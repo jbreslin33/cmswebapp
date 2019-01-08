@@ -22,6 +22,9 @@ class Login
 		this.mTeamID   = null;
 		this.mRolesID  = null;
 
+                //header
+                this.mHeader = null;
+
                 //states
                 this.mStateMachine = new StateMachine(this);
                 this.mGLOBAL_LOGIN = new GLOBAL_LOGIN();
