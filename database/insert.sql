@@ -1,8 +1,8 @@
 --roles
 insert into roles (name) values ('Player'); 
 insert into roles (name) values ('Parent'); --also grandparents aunts friends etc
-insert into roles (name) values ('Coach'); 
 insert into roles (name) values ('Manager'); 
+insert into roles (name) values ('Coach'); 
 insert into roles (name) values ('Director'); 
 
 --users
@@ -30,11 +30,11 @@ insert into teams (name,club_id) values ('u15boys',2);
 --this is used so that you dont lose a coach when you take him off a team, same for players and managers this is who you consider in what roles but they may not be instantiated in that role currently
 --users_clubs_roles
 insert into users_clubs_roles (users_id,club_id,roles_id)values (1,2,1); --luke kenso  player
-insert into users_clubs_roles (users_id,club_id,roles_id) values (1,2,3); --luke kenso  coach
+insert into users_clubs_roles (users_id,club_id,roles_id) values (1,2,4); --luke kenso  coach
 insert into users_clubs_roles (users_id,club_id,roles_id) values (1,1,1); --luke celta  player
 
 insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,2); --loise parent celta
-insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,4); --loise manager celta
+insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,3); --loise manager celta
 
 insert into users_clubs_roles (users_id,club_id,roles_id) values (5,1,5); --stelian director celta
 
