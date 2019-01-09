@@ -49,6 +49,7 @@ class Login
 
 	sendLogin()
 	{
+		//need to handle not having a team yet...
 		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword; 
 
                 var request = new XMLHttpRequest();
