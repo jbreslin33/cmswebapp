@@ -11,13 +11,16 @@ class UserClubsRolesTeamsQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-			select teams.id, teams.name
-			from users
-			full outer join teams_users on teams_users.user_id=users.id
-			full outer join teams on teams.id=teams_users.team_id
+			select users_clubs_roles_teams.id, clubs.name, roles.name, roles.id, teams.name, users_clubs_roles_teams.default_timestamp
+                        from users
+                        full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
+                        join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+                        join clubs on clubs.id=users_clubs_roles.club_id
+                        join roles on roles.id=users_clubs_roles.roles_id
+                        join teams on teams.id=users_clubs_roles_teams.team_id
 			where users.username = '" .
 			$this->mUsername .
-			"' order by teams.name asc";
+                        "' order by users_clubs_roles_teams.default_timestamp desc";
 	}
 }
 

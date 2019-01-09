@@ -85,7 +85,7 @@ select users_clubs_roles_teams.id, clubs.name, roles.name, roles.id, teams.name,
                         join clubs on clubs.id=users_clubs_roles.club_id 
                         join roles on roles.id=users_clubs_roles.roles_id 
                         join teams on teams.id=users_clubs_roles_teams.team_id 
-			and users.username = 'l'
+			where users.username = 'l'
                         order by users_clubs_roles_teams.default_timestamp desc;
 
 
