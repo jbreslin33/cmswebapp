@@ -25,31 +25,15 @@ class LOGGED_IN extends State
 		}
 		//yeah so right here i need to send you somewhere like a default schedule screeen for player/parents but it should be used by everyone on initial load just to give them the upcoming events
 		//so basically send them to schedule state
-		if (login.mRolesID == 1)
-		{
-			login.mStateMachine.changeState(login.mPLAYER_LOGGED_IN);
-		}
-		if (login.mRolesID == 2)
-		{
-			login.mStateMachine.changeState(login.mPARENT_LOGGED_IN);
-		}
-		if (login.mRolesID == 3)
-		{
-			login.mStateMachine.changeState(login.mMANAGER_LOGGED_IN);
-		}
-		if (login.mRolesID == 4)
-		{
-			login.mStateMachine.changeState(login.mCOACH_LOGGED_IN);
-		}
-		if (login.mRolesID == 5)
-		{
-			login.mStateMachine.changeState(login.mDIRECTOR_LOGGED_IN);
-		}
 		if (login.mLoggedIn == false)
 		{
 			//you should relaunch or goto intial login state	
 			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
+               
+		//display schedule since this a player
+                login.mApplication.mSchedule = new Schedule(login.mApplication);
+
 	}
 
         exit(login)
