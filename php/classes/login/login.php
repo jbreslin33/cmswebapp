@@ -66,13 +66,10 @@ class Login
 	public function processLogin()
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
-		$query = "select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles_teams.default_timestamp
-			from users
-			full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
-			join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+		$query = "select users.id, users.password from users
 			where users.username = '"; 
 			$query .= $this->mUsername; 
-			$query .= "' order by users_clubs_roles_teams.default_timestamp desc LIMIT 1;";
+			$query .= "';";
 
 		$result = $database->query($query);
 		if (pg_num_rows($result) > 0)
@@ -80,34 +77,21 @@ class Login
 			$row = pg_fetch_row($result);
 			$user_id  = $row[0];
 			$password = $row[1];
-			$club_id  = $row[2];
-			$roles_id = $row[3];
-			$team_id  = $row[4];
 
 			if ($this->mPassword == $password)
 			{
-				$this->mEcho = "100," . $user_id . "," . $club_id . "," . $roles_id . "," . $team_id;
+				$this->mEcho = "100"; //good username and password, yeah
 			}
 			else
 			{
-				$this->mEcho = "105";
+				$this->mEcho = "105"; //good username no password match
 			}
 			error_log($this->mEcho);	
 		}
 		else
 		{
-			//maybe they just dont have a team assigned but they have the next best thing of being assigned a role at club
+			//no username match
 			$this->mEcho = "104";
-			/*
-			$queryB = select users.id, users.username, clubs.id, clubs.name, roles.id, roles.name
-				from users_clubs_roles_teams
-				full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
-				full outer join users on users.id=users_clubs_roles.users_id
-				join clubs on clubs.id=users_clubs_roles.club_id
-				join roles on roles.id=users_clubs_roles.roles_id
-				where username = 's';
-			 */
-
 		}
 	}
 

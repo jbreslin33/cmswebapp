@@ -23,6 +23,8 @@ class LOGGED_IN extends State
 		{
 			console.log("LOGGED_IN: EXECUTE");        
 		}
+		//yeah so right here i need to send you somewhere like a default schedule screeen for player/parents but it should be used by everyone on initial load just to give them the upcoming events
+		//so basically send them to schedule state
 		if (login.mRolesID == 1)
 		{
 			login.mStateMachine.changeState(login.mPLAYER_LOGGED_IN);

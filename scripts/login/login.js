@@ -62,14 +62,11 @@ class Login
                                         var data = this.responseText;
                                         if (data)
                                         {
-						var dataArray = data.split(",");
-						APPLICATION.mLogin.processLogin(dataArray[0]); //should recieve 100 for good login
-						APPLICATION.mLogin.mUserID  = dataArray[1];
-						APPLICATION.mLogin.mClubID  = dataArray[2];
-						APPLICATION.mLogin.mRolesID = dataArray[3];
-						APPLICATION.mLogin.mTeamID  = dataArray[4];
-						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword, APPLICATION.mLogin.mUserID, APPLICATION.mLogin.mClubID, APPLICATION.mLogin.mRolesID, APPLICATION.mLogin.mTeamID);
-						console.log('code:' + dataArray[0]);
+						if (data == 100)
+						{
+							APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
+						}
+						console.log('code:' + data);
                                         }
                                 }
                         }
@@ -82,19 +79,16 @@ class Login
 	{
 		if (code == 100)
 		{
+			console.log('looged in true and save');
 			this.mLoggedIn = true;	
+			APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword);
 		}
 	}
 
         // Save list of cities to localStorage.
-        save(username,password,user_id,club_id,roles_id,team_id)
+        save(username,password)
         {
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
-		localStorage.setItem("user_id",user_id);
-		//defaults
-		localStorage.setItem("club_id",club_id);
-		localStorage.setItem("roles_id",roles_id);
-		localStorage.setItem("team_id",team_id); 
         }
 }

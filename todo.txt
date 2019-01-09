@@ -54,3 +54,15 @@ coaches can:
 view schedule
 insert/update session plans
 interact with other coaches and see their sessions.
+ So going to start the above changes so login will be simpler
+Here is old login sql that will be used possibly later:
+                $query = "select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, users_clubs_roles_teams.default_timestamp
+                        from users
+                        full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
+                        join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+                        where users.username = '";
+                        $query .= $this->mUsername;
+                        $query .= "' order by users_clubs_roles_teams.default_timestamp desc LIMIT 1;";
+
+Also right now I will have you login with username and passsword but will have quick check option for view only if you only know your username!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!IMPORTAnT
+
