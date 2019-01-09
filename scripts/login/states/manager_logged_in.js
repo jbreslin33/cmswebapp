@@ -20,6 +20,7 @@ class MANAGER_LOGGED_IN extends State
 		{
 			login.mLoginScreen.hide();
 		}
+                login.mHeader = new ManagerHeader(this,"Manager CMS");
 
                 login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}

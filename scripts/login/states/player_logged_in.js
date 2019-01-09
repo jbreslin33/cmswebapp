@@ -21,7 +21,7 @@ class PLAYER_LOGGED_IN extends State
 			login.mLoginScreen.hide();
 		}
 		//create header
-		login.mHeader = new PlayerHeader(this,"CMS");
+		login.mHeader = new PlayerHeader(this,"PLAYER CMS");
 
 
                 login.mApplication.mSchedule = new Schedule(login.mApplication);
