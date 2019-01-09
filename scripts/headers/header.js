@@ -70,9 +70,11 @@ class Header
                                         {
                                                 for (var i = 0; i < data.length; i++)
                                                 {
+							//        select users_clubs_roles_teams.id, clubs.name, teams.name, roles.name, roles.id, users_clubs_roles_teams.default_timestamp
+
                                                         var option = document.createElement("option");
                                                         option.value = data[i][0];
-                                                        option.text = data[i][1];
+                                                        option.text = data[i][1] + ' ' + data[i][2] + ' ' + data[i][3];
                                                         APPLICATION.mLogin.mHeader.mSelectClubTeamRole.appendChild(option);
                                                 }
                                         }
