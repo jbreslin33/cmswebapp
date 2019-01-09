@@ -21,7 +21,11 @@ class MANAGER_LOGGED_IN extends State
 			login.mLoginScreen.hide();
 		}
                 login.mHeader = new ManagerHeader(this,"Manager CMS");
+                
+		//fill select from db for choosing a different role in club with a particular team
+                login.mHeader.getClubTeamRole();
 
+		//display schedule for manager
                 login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}
 
