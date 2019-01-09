@@ -69,6 +69,7 @@ class Login
 						APPLICATION.mLogin.mRolesID = dataArray[3];
 						APPLICATION.mLogin.mTeamID  = dataArray[4];
 						APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword, APPLICATION.mLogin.mUserID, APPLICATION.mLogin.mClubID, APPLICATION.mLogin.mRolesID, APPLICATION.mLogin.mTeamID);
+						console.log('code:' + dataArray[0]);
                                         }
                                 }
                         }

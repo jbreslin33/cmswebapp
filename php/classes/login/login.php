@@ -96,6 +96,7 @@ class Login
 		}
 		else
 		{
+			//maybe they just dont have a team assigned or they are a director
 			$this->mEcho = "104";
 		}
 	}

@@ -47,14 +47,6 @@ full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_team
 full outer join users on users.id=users_clubs_roles.users_id
 where team_id = 3; 
 
-select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.roles_id, users_clubs_roles_teams.team_id, teams.name, users_clubs_roles.default_timestamp
-from users
-full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
-full outer join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
-full outer join teams on teams.id=users_clubs_roles_teams.team_id
-where users.username = 'l'
-order by users_clubs_roles_teams.team_id asc;
-
 select pitches.id, pitches.name
 from users
 full outer join clubs_users on clubs_users.user_id=users.id
@@ -85,7 +77,15 @@ select users_clubs_roles_teams.id, clubs.name, roles.name, roles.id, teams.name,
                         join clubs on clubs.id=users_clubs_roles.club_id 
                         join roles on roles.id=users_clubs_roles.roles_id 
                         join teams on teams.id=users_clubs_roles_teams.team_id 
-			where users.username = 'l'
+			where users.username = 's'
                         order by users_clubs_roles_teams.default_timestamp desc;
 
+--insert into users_clubs_roles (users_id,club_id,roles_id) values (5,1,5); --stelian director celta
 
+select users.id, users.username, clubs.id, clubs.name, roles.id, roles.name
+from users_clubs_roles_teams
+full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
+full outer join users on users.id=users_clubs_roles.users_id
+join clubs on clubs.id=users_clubs_roles.club_id 
+join roles on roles.id=users_clubs_roles.roles_id 
+where username = 's'; 
