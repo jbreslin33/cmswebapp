@@ -39,12 +39,8 @@ class Header
 		this.mButtonRefresh.addEventListener("click",this.buttonRefreshClicked); 
 		this.mHeader.appendChild(this.mButtonRefresh);
 		
-		this.mSelectRole = document.createElement("SELECT");
-		//this.mSelectRole.setAttribute("class", "headerButton");
-		this.mHeader.appendChild(this.mSelectRole);
-		
-		this.mSelectTeam = document.createElement("SELECT");
-		this.mHeader.appendChild(this.mSelectTeam);
+		this.mSelectClubTeamRole = document.createElement("SELECT");
+		this.mHeader.appendChild(this.mSelectClubTeamRole);
 	}
 
 	buttonRefreshClicked()
@@ -52,4 +48,43 @@ class Header
 		console.log('buttonRefreshClicked');
 		//call some kind of update all function
 	}
+
+	getClubTeamRole()
+        {
+                /*******
+                 *
+                 * AFFAIR TYPE
+                ****/
+                var url = "/php/classes/query/users_clubs_roles_teams_query.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var data = JSON.parse(this.responseText);
+                                        if (data)
+                                        {
+                                                for (var i = 0; i < data.length; i++)
+                                                {
+                                                        var option = document.createElement("option");
+                                                        option.value = data[i][0];
+                                                        option.text = data[i][1];
+                                                        APPLICATION.mLogin.mHeader.mSelectClubTeamRole.appendChild(option);
+                                                }
+                                        }
+                                        else
+                                        {
+                                                console.log('no clubTeamRole data');
+                                        }
+                                }
+                        }
+                };
+
+                request.open('GET', url);
+                request.send();
+        }
 }

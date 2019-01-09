@@ -23,7 +23,10 @@ class PLAYER_LOGGED_IN extends State
 		//create header
 		login.mHeader = new PlayerHeader(this,"PLAYER CMS");
 
+		//fill select from db for choosing a different role in club with a particular team
+		login.mHeader.getClubTeamRole();
 
+		//display schedule since this a player
                 login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}
 
