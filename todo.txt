@@ -29,3 +29,28 @@ we are training tactics and not technical
 
 LOOKING AROUND
 touch screen or click to simulate looking around
+-------------------------------------------
+roles issue
+
+should we have a player/parent button(default) 
+manager button, coach button, director button
+this way if you are a player/parent you are automagically taken to that screen.
+
+It's like an area.  ....also if you are not even listed in db as coach dont really then need to have that button OR could just check when you click it and then bounce you back.
+
+so after you click an area you may or may not be asked to select a team......depends on context
+
+players/parents can do player parent things in that area:
+view schedule --schedule will have link to session plan by coach
+update availability
+make payments
+view macro/meso/micro cycles 
+
+managers can:
+view schedule
+insert/update schedule
+
+coaches can:
+view schedule
+insert/update session plans
+interact with other coaches and see their sessions.
