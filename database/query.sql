@@ -78,3 +78,14 @@ select users.id, users.password, users_clubs_roles.club_id, users_clubs_roles.ro
 			and users.username = 'l'
                         order by users_clubs_roles_teams.default_timestamp desc;
 
+select users_clubs_roles_teams.id, clubs.name, roles.name, teams.name, users_clubs_roles_teams.default_timestamp 
+                        from users
+                        full outer join users_clubs_roles on users_clubs_roles.users_id=users.id
+                        join users_clubs_roles_teams on users_clubs_roles_teams.users_clubs_roles_id=users_clubs_roles.id
+                        join clubs on clubs.id=users_clubs_roles.club_id 
+                        join roles on roles.id=users_clubs_roles.roles_id 
+                        join teams on teams.id=users_clubs_roles_teams.team_id 
+			and users.username = 'lo'
+                        order by users_clubs_roles_teams.default_timestamp desc;
+
+
