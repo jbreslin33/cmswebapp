@@ -33,13 +33,13 @@ class LOGGED_IN extends State
 		}
 		if (login.mRolesID == 3)
 		{
-			login.mStateMachine.changeState(login.mCOACH_LOGGED_IN);
-		}
-		if (login.mRolesID == 4)
-		{
 			login.mStateMachine.changeState(login.mMANAGER_LOGGED_IN);
 		}
 		if (login.mRolesID == 4)
+		{
+			login.mStateMachine.changeState(login.mCOACH_LOGGED_IN);
+		}
+		if (login.mRolesID == 5)
 		{
 			login.mStateMachine.changeState(login.mDIRECTOR_LOGGED_IN);
 		}
