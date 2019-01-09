@@ -96,8 +96,18 @@ class Login
 		}
 		else
 		{
-			//maybe they just dont have a team assigned or they are a director
+			//maybe they just dont have a team assigned but they have the next best thing of being assigned a role at club
 			$this->mEcho = "104";
+			/*
+			$queryB = select users.id, users.username, clubs.id, clubs.name, roles.id, roles.name
+				from users_clubs_roles_teams
+				full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
+				full outer join users on users.id=users_clubs_roles.users_id
+				join clubs on clubs.id=users_clubs_roles.club_id
+				join roles on roles.id=users_clubs_roles.roles_id
+				where username = 's';
+			 */
+
 		}
 	}
 
