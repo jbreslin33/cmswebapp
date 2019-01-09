@@ -55,7 +55,7 @@ class Header
                  *
                  * AFFAIR TYPE
                 ****/
-                var url = "/php/classes/query/users_clubs_roles_teams_query.php?username=" + APPLICATION.mLogin.mUsername;
+                var url = "/php/classes/query/clubs_teams_roles_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
                 var request = new XMLHttpRequest();

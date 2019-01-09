@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/query/query.php");
 
-class ClubsRolesTeamsQuery extends Query
+class ClubsTeamsRolesQuery extends Query
 {
 	function __construct() 
 	{
@@ -24,6 +24,6 @@ class ClubsRolesTeamsQuery extends Query
 	}
 }
 
-$ClubsRolesTeamsQuery = new ClubsRolesTeamsQuery();
+$ClubsTeamsRolesQuery = new ClubsTeamsRolesQuery();
 
 ?>
