@@ -40,6 +40,7 @@ class Header
 		this.mHeader.appendChild(this.mButtonRefresh);
 		
 		this.mSelectClubTeamRole = document.createElement("SELECT");
+		this.mSelectYourRoles    = document.createElement("SELECT");
 		this.mHeader.appendChild(this.mSelectClubTeamRole);
 	}
 
@@ -47,6 +48,43 @@ class Header
 	{
 		console.log('buttonRefreshClicked');
 		//call some kind of update all function
+	}
+	getYourRoles()
+	{
+                var url = "/php/classes/query/get_your_roles_query.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var code = this.responseText.slice(0,4);
+                                        var data = this.responseText.slice(4,this.responseText.length);
+                                        var jsondata = JSON.parse(data);
+
+                                        if (jsondata)
+                                        {
+                                                for (var i = 0; i < jsondata.length; i++)
+                                                {
+                                                        var option = document.createElement("option");
+                                                        option.value = jsondata[i][0];
+                                                        option.text  = jsondata[i][1];
+                                                        APPLICATION.mLogin.mHeader.mSelectYourRoles.appendChild(option);
+                                                }
+                                        }
+                                        else
+                                        {
+                                                console.log('no clubTeamRole data');
+                                        }
+                                }
+                        }
+                };
+
+                request.open('GET', url);
+                request.send();
 	}
 
 	getClubTeamRole()
