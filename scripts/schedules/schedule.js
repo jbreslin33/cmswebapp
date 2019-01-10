@@ -79,4 +79,63 @@ class Schedule
 
                 return this.mDayArray[dayElement] + ' ' + this.mMonthArray[monthElement] + ' ' + dayOfMonth;
         }
+	getSchedule()
+	{
+                var url = "/php/classes/query/schedule_query.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                APPLICATION.mSchedule.mRequest = new XMLHttpRequest();
+                this.mRequest.onreadystatechange = function()
+                {
+                        if (this.mRequest.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (this.mRequest.status === 200)
+                                {
+                                        var code = this.responseText.slice(0,4);
+                                        var data = this.responseText.slice(4,this.responseText.length);
+                                        var jsondata = JSON.parse(data);
+
+                                        if (jsondata)
+                                        {
+                                                //lets clear array....
+                                                var i = 0;
+                                                for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
+                                                {
+                                                        var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
+                                                        affair.mScreen.mDivCard.style.display = "none";
+                                                }
+
+                                                i = 0;
+                                                while (jsondata[i])
+                                                {
+                                                        var affair = new SelectAffair(schedule);
+                                                        for (var b = 0; b < 10; b++)
+                                                        {
+                                                                affair.mData.push(jsondata[i][b]);
+                                                        }
+
+                                                        //create screen to display data
+                                                        affair.mScreen = new SelectAffairScreen(affair);
+
+                                                        //update screen card
+                                                        affair.mScreen.update();
+
+                                                        //save for later
+                                                        APPLICATION.mSchedule.saveToLocalStorage(affair);
+
+                                                        //push to array
+                                                        APPLICATION.mSchedule.mSelectAffairArray.push(affair);
+                                                        i++;
+                                                }
+                                        }
+                                        else
+                                        {
+                                                console.log('no schedule');
+                                        }
+                                }
+                        }
+                };
+                this.mRequest.open('GET', url);
+                this.mRequest.send();
+	}
 }
