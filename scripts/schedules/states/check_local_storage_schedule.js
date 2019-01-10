@@ -28,7 +28,7 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 			schedule.mDivStartTime.textContent = data.mStartTime;
 			schedule.mDivAddress.textContent = data.mAddress;
 		}
-		else
+		else //put up fake data
 		{
                 	var fakeAffair = new SelectAffair(schedule);
                         fakeAffair.mScreen = new SelectAffairScreen(fakeAffair);
@@ -43,7 +43,7 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
                        	schedule.mSelectAffairArray.push(fakeAffair);
 		}
 
-		//go to getInternetData state
+		//either way go for fresh data from getInternetData state
 		schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
 	}
 

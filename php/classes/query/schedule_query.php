@@ -17,8 +17,9 @@ class ScheduleQuery extends Query
 			full outer join affair_types on affair_types.id=affairs.affair_types_id
 			full outer join pitches      on pitches.id=affairs.pitch_id
 			where affair_date >= now()
-			AND teams.id = 3" .
-			" order by affair_date asc";
+                        and users.username = '" .
+                        $this->mUsername .
+			"' order by affair_date asc";
 	}
 }
 
