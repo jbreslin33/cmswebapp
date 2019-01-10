@@ -124,7 +124,7 @@ join users on users.id=users_clubs_roles.users_id
 join roles on roles.id=users_clubs_roles.id
 where username = 'l';
 
-select roles.id, roles.name 
+select distinct roles.id, roles.name 
 from 
 roles
 join users_clubs_roles on users_clubs_roles.roles_id=roles.id

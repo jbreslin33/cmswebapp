@@ -42,6 +42,7 @@ class Header
 		this.mSelectClubTeamRole = document.createElement("SELECT");
 		this.mSelectYourRoles    = document.createElement("SELECT");
 		this.mHeader.appendChild(this.mSelectClubTeamRole);
+		this.mHeader.appendChild(this.mSelectYourRoles);
 	}
 
 	buttonRefreshClicked()
@@ -65,6 +66,9 @@ class Header
                                         var code = this.responseText.slice(0,4);
                                         var data = this.responseText.slice(4,this.responseText.length);
                                         var jsondata = JSON.parse(data);
+					console.log('code:' + code);
+					console.log('data:' + data);
+					console.log('jsondata:' + jsondata);
 
                                         if (jsondata)
                                         {
