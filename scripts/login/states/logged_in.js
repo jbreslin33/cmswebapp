@@ -14,7 +14,19 @@ class LOGGED_IN extends State
 		{
 			console.log("LOGGED_IN: ENTER");        
 		}
+                //if there is a login screen hide it
+                if (login.mLoginScreen)
+                {
+                        login.mLoginScreen.hide();
+                }
+                //create header
+                login.mHeader = new PlayerHeader(this,"PLAYER CMS");
 
+                //fill select from db for choosing a different role in club with a particular team
+                login.mHeader.getClubTeamRole();
+
+                //display schedule since this a player
+                login.mApplication.mSchedule = new Schedule(login.mApplication);
 	}
 
         execute(login)
@@ -30,9 +42,8 @@ class LOGGED_IN extends State
 			//you should relaunch or goto intial login state	
 			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
+	
                
-		//display schedule since this a player
-                login.mApplication.mSchedule = new Schedule(login.mApplication);
 
 	}
 
