@@ -24,13 +24,8 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                         {
                                 if (schedule.mRequest.status === 200)
                                 {
-					//var rawdata = this.responseText.split(",");
-					//console.log('rawdata first element:' + rawdata[0]);
-					console.log('raw:' + this.responseText);
 					var code = this.responseText.slice(0,4);
-					console.log('code from slice:' + code);
 					var data = this.responseText.slice(4,this.responseText.length);
-					console.log('data from slice:' + data);
                                         var jsondata = JSON.parse(data);
 					
                                         if (jsondata)

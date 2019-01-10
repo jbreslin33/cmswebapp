@@ -65,16 +65,19 @@ class Header
                         {
                                 if (request.status === 200)
                                 {
-                                        var data = JSON.parse(this.responseText);
-                                        if (data)
+                                      	var code = this.responseText.slice(0,4);
+                                        var data = this.responseText.slice(4,this.responseText.length);
+                                        var jsondata = JSON.parse(data);
+
+                                        if (jsondata)
                                         {
-                                                for (var i = 0; i < data.length; i++)
+                                                for (var i = 0; i < jsondata.length; i++)
                                                 {
 							//        select users_clubs_roles_teams.id, clubs.name, teams.name, roles.name, roles.id, users_clubs_roles_teams.default_timestamp
 
                                                         var option = document.createElement("option");
-                                                        option.value = data[i][0];
-                                                        option.text = data[i][1] + ' ' + data[i][2] + ' ' + data[i][3];
+                                                        option.value = jsondata[i][0];
+                                                        option.text = jsondata[i][1] + ' ' + jsondata[i][2] + ' ' + jsondata[i][3];
                                                         APPLICATION.mLogin.mHeader.mSelectClubTeamRole.appendChild(option);
                                                 }
                                         }
