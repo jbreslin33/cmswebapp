@@ -61,6 +61,7 @@ class Header
                         {
                                 if (request.status === 200)
                                 {
+					console.log('yes');
                                         var code = this.responseText.slice(0,4);
                                         var data = this.responseText.slice(4,this.responseText.length);
                                         var jsondata = JSON.parse(data);

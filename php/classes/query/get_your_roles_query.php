@@ -24,6 +24,6 @@ class GetYourRolesQuery extends Query
 	}
 }
 
-$ClubsTeamsRolesQuery = new ClubsTeamsRolesQuery();
+$getYourRolesQuery = new GetYourRolesQuery();
 
 ?>

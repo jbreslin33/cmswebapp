@@ -116,3 +116,23 @@ where username = 's';
                         where users.username = 'l'
                         order by users_clubs_roles_teams.default_timestamp desc;
 
+
+select roles.id, roles.name 
+from 
+users_clubs_roles
+join users on users.id=users_clubs_roles.users_id
+join roles on roles.id=users_clubs_roles.id
+where username = 'l';
+
+select roles.id, roles.name 
+from 
+roles
+join users_clubs_roles on users_clubs_roles.roles_id=roles.id
+join users on users.id=users_clubs_roles.users_id
+where username = 'l';
+
+
+
+
+
+
