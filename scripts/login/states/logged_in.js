@@ -23,7 +23,7 @@ class LOGGED_IN extends State
                 login.mHeader = new PlayerHeader(this,"PLAYER CMS");
 
                 //fill select from db for choosing a different role in club with a particular team
-                login.mHeader.getClubTeamRole();
+                //login.mHeader.getClubTeamRole();
                 login.mHeader.getYourRoles();
 
                 //display schedule since this a player
