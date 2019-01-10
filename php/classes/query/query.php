@@ -52,7 +52,8 @@ abstract class Query
                 {
                         $myarray[] = $row;
                 }
-                $this->mData = json_encode($myarray);
+                $data = json_encode($myarray);
+		$this->mData = 110 . $data; //110 query success
 	}
 
 	public function sendData()

@@ -24,8 +24,16 @@ class GET_INTERNET_DATA_SCHEDULE extends State
                         {
                                 if (schedule.mRequest.status === 200)
                                 {
-                                        var data = JSON.parse(this.responseText);
-                                        if (data)
+					//var rawdata = this.responseText.split(",");
+					//console.log('rawdata first element:' + rawdata[0]);
+					console.log('raw:' + this.responseText);
+					var code = this.responseText.slice(0,4);
+					console.log('code from slice:' + code);
+					var data = this.responseText.slice(4,this.responseText.length);
+					console.log('data from slice:' + data);
+                                        var jsondata = JSON.parse(data);
+					
+                                        if (jsondata)
                                         {
 						//lets clear array....
 						var i = 0;
@@ -36,12 +44,12 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 						}
 						
 						i = 0;
-						while (data[i])
+						while (jsondata[i])
 						{
 							var affair = new SelectAffair(schedule);
 							for (var b = 0; b < 10; b++)
 							{
-								affair.mData.push(data[i][b]);
+								affair.mData.push(jsondata[i][b]);
 							}
 
 							//create screen to display data
