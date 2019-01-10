@@ -15,7 +15,10 @@ class ScheduleQuery extends Query
 			from affairs
 			full outer join teams on teams.id=affairs.team_id
 			full outer join affair_types on affair_types.id=affairs.affair_types_id
-			full outer join pitches      on pitches.id=affairs.pitch_id
+			full outer join pitches on pitches.id=affairs.pitch_id
+                        full outer join users_clubs_roles_teams on users_clubs_roles_teams.team_id=teams.id
+                        full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
+                        full outer join users on users.id=users_clubs_roles.users_id
 			where affair_date >= now()
                         and users.username = '" .
                         $this->mUsername .
