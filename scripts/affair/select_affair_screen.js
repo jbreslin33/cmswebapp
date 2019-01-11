@@ -107,5 +107,64 @@ class SelectAffairScreen
 	updateAvailability()
 	{
 		console.log('called upa');
-	}
+	        var url = "/php/classes/query/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+					console.log('got 200');
+					/*
+                                        var code = this.responseText.slice(0,4);
+                                        var data = this.responseText.slice(4,this.responseText.length);
+                                        var jsondata = JSON.parse(data);
+
+                                        if (jsondata)
+                                        {
+                                                //lets clear array....
+                                                var i = 0;
+                                                for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
+                                                {
+                                                        var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
+                                                        affair.mScreen.mDivCard.style.display = "none";
+                                                }
+
+                                                i = 0;
+                                                while (jsondata[i])
+                                                {
+                                                        var affair = new SelectAffair(APPLICATION.mSchedule);
+                                                        for (var b = 0; b < 11; b++)
+                                                        {
+                                                                affair.mData.push(jsondata[i][b]);
+                                                        }
+
+                                                        //create screen to display data
+                                                        affair.mScreen = new SelectAffairScreen(affair);
+
+                                                        //update screen card
+                                                        affair.mScreen.update();
+
+                                                        //save for later
+                                                        APPLICATION.mSchedule.saveToLocalStorage(affair);
+
+                                                        //push to array
+                                                        APPLICATION.mSchedule.mSelectAffairArray.push(affair);
+                                                        i++;
+                                                }
+                                        }
+                                        else
+                                        {
+                                                console.log('no schedule');
+                                        }
+					*/
+                                }
+                        }
+                };
+                request.open('GET', url);
+                request.send();
+        }
 }
