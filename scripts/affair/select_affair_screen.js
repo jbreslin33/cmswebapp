@@ -132,7 +132,7 @@ class SelectAffairScreen
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
-                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mAffairsUsersAvailabilityID;
+                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_users_availability_id=" + this.mAffairsUsersAvailabilityID;
 
                 	// Fetch the latest data.
                 	var request = new XMLHttpRequest();
@@ -152,7 +152,7 @@ class SelectAffairScreen
 		}
 		else //do update
 		{
-                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mAffairsUsersAvailabilityID;
+                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&availability_id=" + this.mSelectAvailability.options[this.mSelectAvailability.selectedIndex].value + "&affairs_users_availability_id=" + "&affairs_id=" + this.mAffairsUsersAvailabilityID;
 
                         // Fetch the latest data.
                         var request = new XMLHttpRequest();

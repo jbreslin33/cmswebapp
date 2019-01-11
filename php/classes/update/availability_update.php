@@ -7,9 +7,9 @@ class AvailabilityUpdate extends Update
 	{
 		parent::__construct();
 		
-		if (isset($_GET['affairs_id']))
+		if (isset($_GET['affairs_users_availability_id']))
                 {
-                        $this->mAffairsID = $_GET['affairs_id'];
+                        $this->mAffairsUsersAvailabilityID = $_GET['affairs_users_availability_id'];
                 }
 
 		if (isset($_GET['availability_id']))
@@ -24,19 +24,9 @@ class AvailabilityUpdate extends Update
 		$this->mSQL = "
 				update affairs_users_availability set availability_id = " . 
 				$this->mAvailabilityID .
-				" where affairs_id = " .
-				$this->mAffairsID .
-				" and $
-3 where affair_id = 5 and users_id = 1;";
-
-
-
-
-		           join users on users.id=users_clubs_roles.users_id
-                        where username = '" .
-                        $this->mUsername .
-                        "';";
-
+				" where affairs_users_availability_id = " .
+				$this->mAffairsUsersAvailabilityID .
+				";";
 	}
 }
 
