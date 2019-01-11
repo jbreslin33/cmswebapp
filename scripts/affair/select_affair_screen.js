@@ -90,6 +90,7 @@ class SelectAffairScreen
 				}
 				else if (i == 10)
 				{
+					//dont need the default option because we have a db entry
 					this.mSelectAvailability.remove(this.mOption);
 
                                         this.mDivCard.appendChild(this.mSelectAvailability);
@@ -110,7 +111,6 @@ class SelectAffairScreen
 				{
          				div.textContent = this.mAffair.mData[i];
 				}
-				
 			}
 
 			if (this.mAffair.mData[10] == null)
@@ -122,6 +122,12 @@ class SelectAffairScreen
 	}
 	updateAvailability()
 	{
+		//first lets remove default option so user cant mess up but dont remove if you already did
+		if (this.length > 3)
+		{
+			this.remove(this[0]);
+		}
+
 		console.log('called upa');
 	        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
 
