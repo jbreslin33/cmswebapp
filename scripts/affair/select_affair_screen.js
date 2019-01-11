@@ -107,7 +107,7 @@ class SelectAffairScreen
 	updateAvailability()
 	{
 		console.log('called upa');
-	        var url = "/php/classes/query/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
+	        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
                 var request = new XMLHttpRequest();
