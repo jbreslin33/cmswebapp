@@ -15,6 +15,7 @@ class SelectAffairScreen
 
 		//select
                 this.mSelectAvailability = document.createElement("SELECT");
+                this.mSelectAvailability.setAttribute("class", "dropdown");
 		this.mSelectAvailability.onchange=this.updateAvailability;
 		
 
