@@ -128,10 +128,46 @@ class SelectAffairScreen
 	updateAvailability()
 	{
 		//first lets remove default option so user cant mess up but dont remove if you already did
+		//and then do insert
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
+                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mID;
 
+                	// Fetch the latest data.
+                	var request = new XMLHttpRequest();
+                	request.onreadystatechange = function()
+                	{
+                        	if (request.readyState === XMLHttpRequest.DONE)
+                        	{
+                                	if (request.status === 200)
+                                	{
+                                        	console.log('got 200');
+                                	}
+                        	}
+                	};
+                	request.open('GET', url);
+                	request.send();
+
+		}
+		else //do update
+		{
+                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mID;
+
+                        // Fetch the latest data.
+                        var request = new XMLHttpRequest();
+                        request.onreadystatechange = function()
+                        {
+                                if (request.readyState === XMLHttpRequest.DONE)
+                                {
+                                        if (request.status === 200)
+                                        {       
+                                                console.log('got 200');
+                                        }
+                                }
+                        };
+                        request.open('GET', url);
+                        request.send();
 		}
 
 		console.log('called upa');
