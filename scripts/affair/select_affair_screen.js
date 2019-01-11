@@ -16,7 +16,7 @@ class SelectAffairScreen
 		//select
                 this.mSelectAvailability = document.createElement("SELECT");
                 this.mSelectAvailability.setAttribute("class", "dropdown");
-		this.mSelectAvailability.onchange=this.updateAvailability;
+		this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
 
                 //div.textContent = "Set Availability:";
                 this.option  = document.createElement("option");
@@ -128,12 +128,21 @@ class SelectAffairScreen
 	updateAvailability()
 	{
 		//first lets remove default option so user cant mess up but dont remove if you already did
+		/*
 		if (this.length > 3)
 		{
 			this.remove(this[0]);
 		}
+		*/
+		if (this.mSelectAvailability.length > 3)
+		{
+			this.mSelectAvailability.remove(this.mSelectAvailability[0])
+
+		}
 
 		console.log('called upa');
+		//console.log(this);
+	        //var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + ;
 	        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
