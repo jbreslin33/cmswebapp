@@ -52,6 +52,8 @@ class SelectAffairScreen
 		{
 			//make dropdowns for availabilitys not yet set	
 			//either way we need drop down
+			this.mAffair.mID = this.mAffair.mData[0];
+			console.log('mID:' + this.mAffair.mID);
 
 			if (this.mAffair.mData[i] != null)
 			{
@@ -60,19 +62,19 @@ class SelectAffairScreen
                         	div.setAttribute("class", "selectAffairText");
                         	this.mDivCard.appendChild(div);
 				
-				if (i == 0) //date
+				if (i == 1) //date
 				{
          				div.textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
 				}
-				else if (i == 1) //time
+				else if (i == 2) //time
 				{
          				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 				}
-				else if (i == 2) //time
+				else if (i == 3) //time
 				{
          				div.textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 				}
-				else if (i == 5) //coordinates
+				else if (i == 6) //coordinates
 				{
 					//ok we have coordinates from server lets create elements
 					var a = document.createElement("a"); 
@@ -84,11 +86,11 @@ class SelectAffairScreen
 
 					a.href = this.mAffair.mData[i];
 				}
-				else if (i == 6) //coordinates
+				else if (i == 7) //coordinates
 				{
          				div.textContent = this.mAffair.mData[i];
 				}
-				else if (i == 10)
+				else if (i == 11)
 				{
 					//dont need the default option because we have a db entry
 					this.mSelectAvailability.remove(this.mOption);
@@ -107,13 +109,16 @@ class SelectAffairScreen
 						this.optionC.selected = 'selected';
 					}
 				}
-				else
+				else 
 				{
-         				div.textContent = this.mAffair.mData[i];
+					if (i != 0)
+					{
+         					div.textContent = this.mAffair.mData[i];
+					}
 				}
 			}
 
-			if (this.mAffair.mData[10] == null)
+			if (this.mAffair.mData[11] == null)
 			{
                         	this.mDivCard.appendChild(this.mSelectAvailability);
 			}

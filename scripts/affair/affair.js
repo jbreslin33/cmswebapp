@@ -6,6 +6,7 @@ class Affair
 	{
 		this.mSchedule = schedule;
 
+		this.mID = null;
 		this.mData = new Array();
 		this.mScreen = null;
 	}

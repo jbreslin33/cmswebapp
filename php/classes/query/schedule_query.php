@@ -11,7 +11,7 @@ class ScheduleQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-			select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, availability.id
+			select affairs.id, affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, availability.id
 			from affairs
 			full outer join teams on teams.id=affairs.team_id
 			full outer join affair_types on affair_types.id=affairs.affair_types_id
