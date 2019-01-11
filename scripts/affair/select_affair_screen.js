@@ -83,6 +83,18 @@ class SelectAffairScreen
 					this.mSelectAvailability.appendChild(optionA);
 					this.mSelectAvailability.appendChild(optionB);
 					this.mSelectAvailability.appendChild(optionC);
+					if (this.mAffair.mData[i] == 1)
+					{
+						optionA.selected = 'selected';
+					}
+					if (this.mAffair.mData[i] == 2)
+					{
+						optionB.selected = 'selected';
+					}
+					if (this.mAffair.mData[i] == 3)
+					{
+						optionC.selected = 'selected';
+					}
 				}
 				else
 				{
