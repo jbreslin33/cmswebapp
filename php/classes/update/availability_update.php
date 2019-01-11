@@ -6,13 +6,25 @@ class AvailabilityUpdate extends Update
 	function __construct() 
 	{
 		parent::__construct();
+		
+		if (isset($_GET['affairs_id']))
+                {
+                        $this->mAffairsID = $_GET['affairs_id'];
+                }
+
+		if (isset($_GET['availability_id']))
+                {
+                        $this->mAvailabilityID = $_GET['availability_id'];
+                }
 	}
 
 	public function update()
 	{
 		error_log('calling update');
 		$this->mSQL = "
-				update affairs_users_availability set availability_id = 3 where affair_id = 5 and users_id = 1;";
+				update affairs_users_availability set availability_id = "
+
+3 where affair_id = 5 and users_id = 1;";
 	}
 }
 

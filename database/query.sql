@@ -147,5 +147,10 @@ where username = 'l';
                         order by affair_date asc;
 
 
+select * from affairs_users_availability;
+
+update affairs_users_availability set availability_id = 1 where affairs_users_availability.id = 1;   
+
+select * from affairs_users_availability;
 
 

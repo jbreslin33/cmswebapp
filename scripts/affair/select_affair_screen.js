@@ -128,12 +128,6 @@ class SelectAffairScreen
 	updateAvailability()
 	{
 		//first lets remove default option so user cant mess up but dont remove if you already did
-		/*
-		if (this.length > 3)
-		{
-			this.remove(this[0]);
-		}
-		*/
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
@@ -142,8 +136,8 @@ class SelectAffairScreen
 
 		console.log('called upa');
 		//console.log(this);
-	        //var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + ;
-	        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
+	        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mID;
+	        //var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
                 var request = new XMLHttpRequest();

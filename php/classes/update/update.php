@@ -9,11 +9,6 @@ abstract class Update
 		$this->mSQL = "";
 		$this->mData = "";
 
-		//check for proper post or get
-		if (isset($_POST['username']))
-		{
-			$this->mUsername = $_POST['username'];
-		}
 		if (isset($_GET['username']))
 		{
 			$this->mUsername = $_GET['username'];
