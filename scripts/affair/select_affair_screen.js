@@ -67,10 +67,26 @@ class SelectAffairScreen
 				{
          				div.textContent = this.mAffair.mData[i];
 				}
-				else
+				else if (i == 10)
 				{
          				div.textContent = this.mAffair.mData[i];
 					this.mDivCard.appendChild(this.mSelectAvailability);
+					var optionA = document.createElement("option");
+					var optionB = document.createElement("option");
+					var optionC = document.createElement("option");
+					optionA.value = 1;
+					optionB.value = 2;
+					optionC.value = 3;
+					optionA.innerHTML = 'Yes';
+					optionB.innerHTML = 'Maybe';
+					optionC.innerHTML = 'No';
+					this.mSelectAvailability.appendChild(optionA);
+					this.mSelectAvailability.appendChild(optionB);
+					this.mSelectAvailability.appendChild(optionC);
+				}
+				else
+				{
+         				div.textContent = this.mAffair.mData[i];
 				}
 			}
 		}
