@@ -27,7 +27,7 @@ class AvailabilityUpdate extends Update
 		$this->mSQL = "
 				update affairs_users_availability set availability_id = " . 
 				$this->mAvailabilityID .
-				" where affairs_users_availability_id = " .
+				" where affairs_users_availability.id = " .
 				$this->mAffairsUsersAvailabilityID .
 				";";
 	}
