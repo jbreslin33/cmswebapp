@@ -97,4 +97,6 @@ insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/29/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/30/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 
-
+insert into affairs_users_availability (affair_id,users_id,availability_id) values (5,1,1);
+insert into affairs_users_availability (affair_id,users_id,availability_id) values (5,1,3);
+insert into affairs_users_availability (affair_id,users_id,availability_id) values (5,1,2);
