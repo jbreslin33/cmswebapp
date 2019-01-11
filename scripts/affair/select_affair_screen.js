@@ -69,7 +69,7 @@ class SelectAffairScreen
 				}
 				else if (i == 10)
 				{
-         				div.textContent = this.mAffair.mData[i];
+         				div.textContent = "Set Availability:";
 					this.mDivCard.appendChild(this.mSelectAvailability);
 					var optionA = document.createElement("option");
 					var optionB = document.createElement("option");
