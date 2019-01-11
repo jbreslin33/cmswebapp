@@ -17,8 +17,24 @@ class SelectAffairScreen
                 this.mSelectAvailability = document.createElement("SELECT");
                 this.mSelectAvailability.setAttribute("class", "dropdown");
 		this.mSelectAvailability.onchange=this.updateAvailability;
-		
 
+                //div.textContent = "Set Availability:";
+                this.option  = document.createElement("option");
+                this.optionA = document.createElement("option");
+                this.optionB = document.createElement("option");
+                this.optionC = document.createElement("option");
+                this.option.value  = 0;
+                this.optionA.value = 1;
+                this.optionB.value = 2;
+                this.optionC.value = 3;
+                this.option.innerHTML  = 'SET AVAILABILITY';
+                this.optionA.innerHTML = 'Going';
+                this.optionB.innerHTML = 'Maybe Going';
+                this.optionC.innerHTML = 'Not Going';
+                this.mSelectAvailability.appendChild(this.option);
+                this.mSelectAvailability.appendChild(this.optionA);
+                this.mSelectAvailability.appendChild(this.optionB);
+                this.mSelectAvailability.appendChild(this.optionC);
 	}
 
 	destructor()
@@ -34,6 +50,9 @@ class SelectAffairScreen
 	{
 		for (var i = 0; i < this.mAffair.mData.length; i++)
 		{
+			//make dropdowns for availabilitys not yet set	
+			//either way we need drop down
+
 			if (this.mAffair.mData[i] != null)
 			{
        				var div = document.createElement("DIV");
@@ -71,38 +90,32 @@ class SelectAffairScreen
 				}
 				else if (i == 10)
 				{
-         				div.textContent = "Set Availability:";
-					this.mDivCard.appendChild(this.mSelectAvailability);
-					var optionA = document.createElement("option");
-					var optionB = document.createElement("option");
-					var optionC = document.createElement("option");
-					optionA.value = 1;
-					optionB.value = 2;
-					optionC.value = 3;
-					optionA.innerHTML = 'Yes';
-					optionB.innerHTML = 'Maybe';
-					optionC.innerHTML = 'No';
-					this.mSelectAvailability.appendChild(optionA);
-					this.mSelectAvailability.appendChild(optionB);
-					this.mSelectAvailability.appendChild(optionC);
+                                        this.mDivCard.appendChild(this.mSelectAvailability);
 					if (this.mAffair.mData[i] == 1)
 					{
-						optionA.selected = 'selected';
+						this.optionA.selected = 'selected';
 					}
 					if (this.mAffair.mData[i] == 2)
 					{
-						optionB.selected = 'selected';
+						this.optionB.selected = 'selected';
 					}
 					if (this.mAffair.mData[i] == 3)
 					{
-						optionC.selected = 'selected';
+						this.optionC.selected = 'selected';
 					}
 				}
 				else
 				{
          				div.textContent = this.mAffair.mData[i];
 				}
+				
 			}
+
+			if (this.mAffair.mData[10] == null)
+			{
+                        	this.mDivCard.appendChild(this.mSelectAvailability);
+			}
+
 		}
 	}
 	updateAvailability()
