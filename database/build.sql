@@ -298,6 +298,7 @@ CREATE TABLE availability
 (
 	id SERIAL,
 	name text,
+	notes text,
         PRIMARY KEY (id)
 );
 

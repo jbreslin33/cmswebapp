@@ -63,6 +63,11 @@ insert into affair_types (name) values ('Practice');
 insert into affair_types (name) values ('Game');
 insert into affair_types (name) values ('Meeting');
 
+--availability
+insert into availability (name) values('Yes');
+insert into availability (name) values('Maybe');
+insert into availability (name) values('No');
+
 --pitches
 insert into pitches (name,club_id) values ('Bensalem Field 1',1);
 insert into pitches (name,club_id) values ('Bensalem Field 2',1);
@@ -91,4 +96,5 @@ insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/28/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/29/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/30/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
+
 
