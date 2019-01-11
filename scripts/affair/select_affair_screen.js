@@ -52,8 +52,8 @@ class SelectAffairScreen
 		{
 			//make dropdowns for availabilitys not yet set	
 			//either way we need drop down
-			this.mAffair.mID = this.mAffair.mData[0];
-			console.log('mID:' + this.mAffair.mID);
+			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[0];
+			console.log('mAffairsUsersAvailabilityID:' + this.mAffair.mAffairsUsersAvailabilityID);
 
 			if (this.mAffair.mData[i] != null)
 			{
@@ -132,7 +132,7 @@ class SelectAffairScreen
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
-                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mID;
+                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mAffairsUsersAvailabilityID;
 
                 	// Fetch the latest data.
                 	var request = new XMLHttpRequest();
@@ -152,7 +152,7 @@ class SelectAffairScreen
 		}
 		else //do update
 		{
-                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mID;
+                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mAffairsUsersAvailabilityID;
 
                         // Fetch the latest data.
                         var request = new XMLHttpRequest();
@@ -169,68 +169,5 @@ class SelectAffairScreen
                         request.open('GET', url);
                         request.send();
 		}
-
-		console.log('called upa');
-		//console.log(this);
-	        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_id=" + this.mID;
-	        //var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername;
-
-                // Fetch the latest data.
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-					console.log('got 200');
-					/*
-                                        var code = this.responseText.slice(0,4);
-                                        var data = this.responseText.slice(4,this.responseText.length);
-                                        var jsondata = JSON.parse(data);
-
-                                        if (jsondata)
-                                        {
-                                                //lets clear array....
-                                                var i = 0;
-                                                for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
-                                                {
-                                                        var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
-                                                        affair.mScreen.mDivCard.style.display = "none";
-                                                }
-
-                                                i = 0;
-                                                while (jsondata[i])
-                                                {
-                                                        var affair = new SelectAffair(APPLICATION.mSchedule);
-                                                        for (var b = 0; b < 11; b++)
-                                                        {
-                                                                affair.mData.push(jsondata[i][b]);
-                                                        }
-
-                                                        //create screen to display data
-                                                        affair.mScreen = new SelectAffairScreen(affair);
-
-                                                        //update screen card
-                                                        affair.mScreen.update();
-
-                                                        //save for later
-                                                        APPLICATION.mSchedule.saveToLocalStorage(affair);
-
-                                                        //push to array
-                                                        APPLICATION.mSchedule.mSelectAffairArray.push(affair);
-                                                        i++;
-                                                }
-                                        }
-                                        else
-                                        {
-                                                console.log('no schedule');
-                                        }
-					*/
-                                }
-                        }
-                };
-                request.open('GET', url);
-                request.send();
         }
 }
