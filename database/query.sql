@@ -132,7 +132,7 @@ join users on users.id=users_clubs_roles.users_id
 where username = 'l';
 
 
-                        select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, affairs_users_availability.id
+                        select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, affairs_users_availability.id, availability.name
                         from affairs
                         full outer join teams on teams.id=affairs.team_id
                         full outer join affair_types on affair_types.id=affairs.affair_types_id
@@ -141,6 +141,7 @@ where username = 'l';
                         full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
                         full outer join users on users.id=users_clubs_roles.users_id
                         full outer join affairs_users_availability on affairs_users_availability.affair_id=affairs.id
+                        full outer join availability on availability.id=affairs_users_availability.availability_id
                         where affair_date >= now()
                         and users.username = 'l'
                         order by affair_date asc;
