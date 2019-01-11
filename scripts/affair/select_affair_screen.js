@@ -58,6 +58,10 @@ class SelectAffairScreen
 
 					a.href = this.mAffair.mData[i];
 				}
+				else if (i == 6) //coordinates
+				{
+         				div.textContent = this.mAffair.mData[i];
+				}
 				else
 				{
          				div.textContent = this.mAffair.mData[i];
