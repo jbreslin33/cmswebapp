@@ -298,7 +298,6 @@ CREATE TABLE availability
 (
 	id SERIAL,
 	name text,
-	notes text,
         PRIMARY KEY (id)
 );
 
@@ -461,10 +460,12 @@ CREATE TABLE affairs_users_availability
         affair_id integer NOT NULL,
        	users_id integer NOT NULL,
 	availability_id integer NOT NULL,
+	notes text,
         PRIMARY KEY (id),
 	FOREIGN KEY (affair_id) REFERENCES affairs(id),
 	FOREIGN KEY (users_id) REFERENCES users(id),
-	FOREIGN KEY (availability_id) REFERENCES availability(id)
+	FOREIGN KEY (availability_id) REFERENCES availability(id),
+	unique (affair_id,users_id)
 );
 
 CREATE TABLE affairs_users_attendance 

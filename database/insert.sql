@@ -87,7 +87,7 @@ insert into affairs (affair_date,arrival_time,start_time,end_time,address,coordi
 insert into affairs (affair_date,start_time,address,team_id,affair_types_id) values ('11/08/2018','20:00:00','4666 bristol road, feasterville pa',1,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/09/2019','20:05:00','19:55:00','4666 bristol road feasterville pa',3,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/12/2019','20:10:00','20:00:00','4666 bristol road feasterville pa',3,1);
-insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/12/2019','17:30:00','18:30:00','Towey Playgroundl',5,1);
+insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/12/2019','17:30:00','18:30:00','Towey Playground',5,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/15/2019','20:30:00','20:20:00','4666 bristol road feasterville pa',3,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/24/2019','20:45:00','20:35:00','4666 bristol road feasterville pa',3,1);
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/25/2019','20:55:00','20:45:00','4666 bristol road feasterville pa',3,1);
@@ -98,5 +98,5 @@ insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_
 insert into affairs (affair_date,start_time,arrival_time,address,team_id,affair_types_id) values ('01/30/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 
 insert into affairs_users_availability (affair_id,users_id,availability_id) values (5,1,1);
-insert into affairs_users_availability (affair_id,users_id,availability_id) values (5,1,3);
-insert into affairs_users_availability (affair_id,users_id,availability_id) values (5,1,2);
+insert into affairs_users_availability (affair_id,users_id,availability_id) values (6,1,2);
+insert into affairs_users_availability (affair_id,users_id,availability_id) values (7,1,3);
