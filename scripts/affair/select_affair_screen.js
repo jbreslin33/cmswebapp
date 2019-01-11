@@ -15,6 +15,7 @@ class SelectAffairScreen
 
 		//select
                 this.mSelectAvailability = document.createElement("SELECT");
+		this.mSelectAvailability.onchange=this.updateAvailability;
 		
 
 	}
@@ -102,5 +103,9 @@ class SelectAffairScreen
 				}
 			}
 		}
+	}
+	updateAvailability()
+	{
+		console.log('called upa');
 	}
 }
