@@ -12,6 +12,11 @@ class SelectAffairScreen
                 this.mContainer.appendChild(this.mDivCard);
 
 		this.mDivArray = new Array();
+
+		//select
+                this.mSelectAvailability = document.createElement("SELECT");
+		
+
 	}
 
 	destructor()
@@ -65,6 +70,7 @@ class SelectAffairScreen
 				else
 				{
          				div.textContent = this.mAffair.mData[i];
+					this.mDivCard.appendChild(this.mSelectAvailability);
 				}
 			}
 		}
