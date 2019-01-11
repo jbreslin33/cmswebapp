@@ -90,6 +90,8 @@ class SelectAffairScreen
 				}
 				else if (i == 10)
 				{
+					this.mSelectAvailability.remove(this.mOption);
+
                                         this.mDivCard.appendChild(this.mSelectAvailability);
 					if (this.mAffair.mData[i] == 1)
 					{
