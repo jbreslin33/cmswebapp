@@ -52,8 +52,8 @@ class SelectAffairScreen
 		{
 			//make dropdowns for availabilitys not yet set	
 			//either way we need drop down
-			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[0];
-			console.log('mAffairsUsersAvailabilityID:' + this.mAffair.mAffairsUsersAvailabilityID);
+			this.mAffair.mID = this.mAffair.mData[0];
+			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[1];
 
 			if (this.mAffair.mData[i] != null)
 			{
@@ -62,19 +62,19 @@ class SelectAffairScreen
                         	div.setAttribute("class", "selectAffairText");
                         	this.mDivCard.appendChild(div);
 				
-				if (i == 1) //date
+				if (i == 2) //date
 				{
          				div.textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
 				}
-				else if (i == 2) //time
+				else if (i == 3) //time
 				{
          				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 				}
-				else if (i == 3) //time
+				else if (i == 4) //time
 				{
          				div.textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 				}
-				else if (i == 6) //coordinates
+				else if (i == 7) //coordinates
 				{
 					//ok we have coordinates from server lets create elements
 					var a = document.createElement("a"); 
@@ -86,11 +86,11 @@ class SelectAffairScreen
 
 					a.href = this.mAffair.mData[i];
 				}
-				else if (i == 7) //coordinates
+				else if (i == 8) //coordinates
 				{
          				div.textContent = this.mAffair.mData[i];
 				}
-				else if (i == 11)
+				else if (i == 12)
 				{
 					//dont need the default option because we have a db entry
 					this.mSelectAvailability.remove(this.mOption);
@@ -118,7 +118,7 @@ class SelectAffairScreen
 				}
 			}
 
-			if (this.mAffair.mData[11] == null)
+			if (this.mAffair.mData[12] == null)
 			{
                         	this.mDivCard.appendChild(this.mSelectAvailability);
 			}
@@ -132,6 +132,7 @@ class SelectAffairScreen
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
+			//going to need user_id, affair_id
                 	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_users_availability_id=" + this.mAffairsUsersAvailabilityID;
 
                 	// Fetch the latest data.
