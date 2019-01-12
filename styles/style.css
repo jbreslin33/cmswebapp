@@ -225,41 +225,21 @@ input[type="password"]:focus, input[type="text"]:focus
  *
  * SELECTS
  */
-/*
-select {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  height: 28px;
-  width: 150px;
-  background: #f7f7f7;
-  border: 1px solid;
-  border-color: white #f7f7f7 whitesmoke;
-  border-radius: 3px;
-  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-}
-*/
-/* -------------------- Page Styles (not required) */
-/*
-div { margin: 20px; }
-*/
-/* -------------------- Select Box Styles: bavotasan.com Method (with special adaptations by ericrasch.com) */
-/* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
+
 select 
 {
+   	font-size: 14px;
 	overflow: hidden;
 	background-color: #3b8ec2; 
+   	border: none;
+   	border-radius: 5px;
    	-webkit-border-radius: 5px;
    	-moz-border-radius: 5px;
-   	border-radius: 5px;
-   border: none;
-   font-size: 14px;
-
-   overflow: hidden;
+  	background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  	background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  	background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+ 	 background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+  	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
 
