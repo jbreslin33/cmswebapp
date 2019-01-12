@@ -15,7 +15,6 @@ class SelectAffairScreen
 
 		//select
                 this.mSelectAvailability = document.createElement("SELECT");
-                //this.mSelectAvailability.setAttribute("class", "styled-select green rounded");
                 this.mSelectAvailability.setAttribute("class", "styled-select blue semi-square");
 		this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
 

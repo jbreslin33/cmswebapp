@@ -39,15 +39,11 @@ class Header
 		this.mHeaderTitle.appendChild(this.mHeaderTitleText);
 		this.mHeader.appendChild(this.mHeaderTitle);
 
-
-
 		//roles
 		this.mDivSelect = document.createElement("DIV");
-		//this.mDivSelect.setAttribute("class", "select-style");
+              	this.mDivSelect.setAttribute("class", "styled-select blue semi-square");
 
-		//this.mSelectClubTeamRole = document.createElement("SELECT");
 		this.mSelectYourRoles    = document.createElement("SELECT");
-		//this.mHeader.appendChild(this.mSelectClubTeamRole);
 		this.mHeader.appendChild(this.mDivSelect);
 		this.mDivSelect.appendChild(this.mSelectYourRoles);
 
