@@ -54,7 +54,7 @@ LABEL {
         width: 100%;
         height: 56px;
         color: #FFF;
-        background: #0ED15D;
+        background: #33FCFF;
         position: fixed;
         font-size: 20px;
         box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
@@ -225,7 +225,7 @@ input[type="password"]:focus, input[type="text"]:focus
  *
  * SELECTS
  */
-
+/*
 select {
   display: inline-block;
   position: relative;
@@ -243,4 +243,37 @@ select {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
+*/
+/* -------------------- Page Styles (not required) */
+/*
+div { margin: 20px; }
+*/
+/* -------------------- Select Box Styles: bavotasan.com Method (with special adaptations by ericrasch.com) */
+/* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
+.styled-select {
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
 
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+/* -------------------- Colors: Background */
+.blue    { background-color: #3b8ec2; }
+
+/* -------------------- Colors: Text */
+.blue select    { color: #fff; }
