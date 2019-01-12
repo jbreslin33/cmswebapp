@@ -21,7 +21,7 @@ class ScheduleQuery extends Query
                         full outer join users on users.id=users_clubs_roles.users_id
                        	full outer join affairs_users_availability on affairs_users_availability.affair_id=affairs.id
                         full outer join availability on availability.id=affairs_users_availability.availability_id
-			where affair_date >= now()
+			where affair_date >= now() - INTERVAL '1 DAY'  
                         and users.username = '" .
                         $this->mUsername .
 			"' order by affair_date asc";

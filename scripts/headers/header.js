@@ -24,6 +24,14 @@ class Header
 		this.mHeader.setAttribute("class", "header");
 		document.body.appendChild(this.mHeader);
 
+		//header image
+		this.mIcon = document.createElement("img");
+		this.mIcon.setAttribute('src', '/images/icons/celta-icon-32x32.png');
+		this.mIcon.setAttribute('alt', 'na');
+		//this.mIcon.setAttribute('height', '1px');
+		//this.mIcon.setAttribute('width', '1px');
+		this.mHeader.appendChild(this.mIcon);
+
 		//h1
 		this.mHeaderTitle = document.createElement("H1");
 		this.mHeaderTitleText = document.createTextNode(this.mText);
