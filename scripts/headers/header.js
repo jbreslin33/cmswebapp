@@ -40,12 +40,9 @@ class Header
 		this.mHeader.appendChild(this.mHeaderTitle);
 
 		//roles
-		this.mDivSelect = document.createElement("DIV");
-              	this.mDivSelect.setAttribute("class", "styled-select blue semi-square");
-
 		this.mSelectYourRoles    = document.createElement("SELECT");
-		this.mHeader.appendChild(this.mDivSelect);
-		this.mDivSelect.appendChild(this.mSelectYourRoles);
+              	this.mSelectYourRoles.setAttribute("class", "styled-select blue semi-square");
+		this.mHeader.appendChild(this.mSelectYourRoles);
 
 		//refreshbutton
 		this.mButtonRefresh = document.createElement("BUTTON");
