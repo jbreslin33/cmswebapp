@@ -16,7 +16,10 @@ class SelectAffairScreen
 		//select
                 this.mRadioGoing = document.createElement("RADIO");
                 this.mRadioGoing.innerHTML = "Going";
+                this.mRadioGoing.setAttribute("name", "availability");
+                this.mRadioGoing.setAttribute("id", "1");
 		this.mRadioGoing.onchange=this.updateAvailability.bind(this);
+                this.mDivCard.appendChild(this.mRadioGoing);
 
 	}
 
@@ -76,7 +79,7 @@ class SelectAffairScreen
 				else if (i == 12)
 				{
 
-                                        this.mDivCard.appendChild(this.mRadioGoing);
+                                        //this.mDivCard.appendChild(this.mRadioGoing);
 					/*
 					if (this.mAffair.mData[i] == 1)
 					{
