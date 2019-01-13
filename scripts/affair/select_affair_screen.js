@@ -21,6 +21,7 @@ class SelectAffairScreen
                 //div.textContent = "Set Availability:";
                 this.option  = document.createElement("option");
                 this.optionA = document.createElement("option");
+                this.optionA.setAttribute("class", "isgoing");
                 this.optionB = document.createElement("option");
                 this.optionC = document.createElement("option");
                 this.option.value  = 0;
