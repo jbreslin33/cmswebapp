@@ -14,28 +14,10 @@ class SelectAffairScreen
 		this.mDivArray = new Array();
 
 		//select
-                this.mSelectAvailability = document.createElement("SELECT");
-                this.mSelectAvailability.setAttribute("class", "styled-select blue semi-square");
-		this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
+                this.mRadioGoing = document.createElement("RADIO");
+                this.mRadioGoing.innerHTML = "Going";
+		this.mRadioGoing.onchange=this.updateAvailability.bind(this);
 
-                //div.textContent = "Set Availability:";
-                this.option  = document.createElement("option");
-                this.optionA = document.createElement("option");
-                this.optionA.setAttribute("class", "isgoing");
-                this.optionB = document.createElement("option");
-                this.optionC = document.createElement("option");
-                this.option.value  = 0;
-                this.optionA.value = 1;
-                this.optionB.value = 2;
-                this.optionC.value = 3;
-                this.option.innerHTML  = 'SET AVAILABILITY';
-                this.optionA.innerHTML = 'Going';
-                this.optionB.innerHTML = 'Maybe Going';
-                this.optionC.innerHTML = 'Not Going';
-                this.mSelectAvailability.appendChild(this.option);
-                this.mSelectAvailability.appendChild(this.optionA);
-                this.mSelectAvailability.appendChild(this.optionB);
-                this.mSelectAvailability.appendChild(this.optionC);
 	}
 
 	destructor()
@@ -93,10 +75,9 @@ class SelectAffairScreen
 				}
 				else if (i == 12)
 				{
-					//dont need the default option because we have a db entry
-					this.mSelectAvailability.remove(this.mOption);
 
-                                        this.mDivCard.appendChild(this.mSelectAvailability);
+                                        this.mDivCard.appendChild(this.mRadioGoing);
+					/*
 					if (this.mAffair.mData[i] == 1)
 					{
 						this.optionA.selected = 'selected';
@@ -109,6 +90,7 @@ class SelectAffairScreen
 					{
 						this.optionC.selected = 'selected';
 					}
+					*/
 				}
 				else 
 				{
@@ -121,7 +103,7 @@ class SelectAffairScreen
 
 			if (this.mAffair.mData[12] == null)
 			{
-                        	this.mDivCard.appendChild(this.mSelectAvailability);
+                        	//this.mDivCard.appendChild(this.mSelectAvailability);
 			}
 
 		}
