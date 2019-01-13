@@ -1,0 +1,26 @@
+{
+  "name": "cmswebapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "service-worker.js",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery.js": "^0.0.2-security",
+    "popper.js": "^1.14.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbreslin33/cmswebapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbreslin33/cmswebapp/issues"
+  },
+  "homepage": "https://github.com/jbreslin33/cmswebapp#readme"
+}
