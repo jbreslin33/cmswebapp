@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  		<meta charset="utf-8">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  		<link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  		
+		<title>CMS</title>
+  
+    		<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+  		<!-- TODO add manifest here -->
+  		<link rel="manifest" href="/manifest.json">
+  		
+		<!-- Add to home screen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+  		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  		<meta name="apple-mobile-web-app-title" content="Weather PWA">
+  		<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+  		<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  		<meta name="msapplication-TileColor" content="#2F3BA2">
+	</head>
+<body>
+
+<div class="loader">
+	<svg viewBox="0 0 32 32" width="32" height="32">
+      	<circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+    	</svg>
+</div>
+	
+	<!-- javascripts -->
+
+	<!-- utilities -->
+	<script src="scripts/utilities/time.js"></script>
+
+	<!-- headers -->
+	<script src="scripts/headers/header.js"></script>
+	<script src="scripts/headers/player_header.js"></script>
+	<script src="scripts/headers/parent_header.js"></script>
+	<script src="scripts/headers/manager_header.js"></script>
+	<script src="scripts/headers/coach_header.js"></script>
+	<script src="scripts/headers/director_header.js"></script>
+	
+	<!-- login -->
+	<script src="scripts/login/login.js"></script>
+	<script src="scripts/login/login_screen.js"></script>
+
+	<!-- screens -->
+	<script src="scripts/affair/select_affair_screen.js"></script>
+	<script src="scripts/affair/insert_affair_screen.js"></script>
+	
+	<!-- occasions -->
+	<script src="scripts/affair/affair.js"></script>
+	<script src="scripts/affair/select_affair.js"></script>
+	<script src="scripts/affair/insert_affair.js"></script>
+	
+	<!-- schedules -->
+	<script src="scripts/schedules/schedule.js"></script>
+
+	<!-- state machine -->
+  	<script src="scripts/fsm/state.js" ></script>
+  	<script src="scripts/fsm/state_machine.js" ></script>
+	
+	<!-- Application states -->
+  	<script src="scripts/application/states/global_application.js" ></script>
+  	<script src="scripts/application/states/init_application.js" ></script>
+  	<script src="scripts/application/states/main_application.js" ></script>
+	
+	<!-- Login states -->
+  	<script src="scripts/login/states/global_login.js" ></script>
+  	<script src="scripts/login/states/init_login.js" ></script>
+  	<script src="scripts/login/states/check_localstorage.js" ></script>
+  	<script src="scripts/login/states/screen_login.js" ></script>
+  	<script src="scripts/login/states/logged_in.js" ></script>
+  	<script src="scripts/login/states/player_logged_in.js" ></script>
+  	<script src="scripts/login/states/parent_logged_in.js" ></script>
+  	<script src="scripts/login/states/manager_logged_in.js" ></script>
+  	<script src="scripts/login/states/coach_logged_in.js" ></script>
+  	<script src="scripts/login/states/director_logged_in.js" ></script>
+  
+	<!-- Schedule states -->
+        <script src="scripts/schedules/states/global_schedule.js" ></script>
+        <script src="scripts/schedules/states/init_schedule.js" ></script>
+        <script src="scripts/schedules/states/check_local_storage_schedule.js" ></script>
+        <script src="scripts/schedules/states/get_internet_data_schedule.js" ></script>
+        <script src="scripts/schedules/states/insert_affair_screen_schedule.js" ></script>
+
+	<!-- APPLICATION -->
+	<script src="scripts/application/application.js" ></script>
+
+  	<script> 
+	
+	var APPLICATION = new Application();
+
+        //update loop
+        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
+
+	// TODO add service worker code here
+  	if ('serviceWorker' in navigator) 
+	{
+    		navigator.serviceWorker
+             	.register('./service-worker.js')
+             	.then(function() 
+		{ 
+			console.log('Service Worker Registered'); 
+		});
+	}
+
+	</script>
+</body>
+</html>
