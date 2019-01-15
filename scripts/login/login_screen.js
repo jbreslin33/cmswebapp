@@ -15,6 +15,9 @@ class LoginScreen
 		//add card to main
                 this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivLogin);
+
+		this.mDivFormGroup
+
                 
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
