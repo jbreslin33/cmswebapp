@@ -56,6 +56,11 @@ class LoginScreen
 				this.mPasswordInputGroup.appendChild(this.mPasswordInputGroupAddon);
 					this.mPasswordInputGroupAddon.appendChild(this.mGlyphiconLock);
 				this.mPasswordInputGroup.appendChild(this.mPassword);
+
+		//event listeners
+		//document.getElementById("login-button").addEventListenter("click",this.sendLogin);
+		//document.getElementById("login-button").addEventListener("click",this.sendLogin);
+		document.getElementById("login-button");
 	}
 
 	sendLogin()

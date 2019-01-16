@@ -16,6 +16,8 @@ class SCREEN_LOGIN extends State
 		}
 		//create login screen
 		login.mLoginScreen = new LoginScreen(login.mApplication,login);	
+  		document.getElementById("login-html").style.display = "block";
+
 	}
 
         execute(login)
@@ -36,5 +38,6 @@ class SCREEN_LOGIN extends State
 		{
 			console.log("SCREEN_LOGIN: EXIT");        
 		}
+  		document.getElementById("login-html").style.display = "none";
 	}
 }
