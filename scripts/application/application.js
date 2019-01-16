@@ -8,7 +8,10 @@ class Application
 		this.mStateEnterLogs = true;
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
-		
+
+		//state changed
+		window.onhashchange = this.locationHashChanged;
+
 		//login first
 		this.mLogin = null;
 		
@@ -28,6 +31,19 @@ class Application
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
+	}
+
+	locationHashChanged() 
+	{
+  		if (location.hash === '#cool-feature') 
+		{
+    			console.log("You're visiting a cool feature!");
+  		}
+	}
+
+	hashchanged()
+	{
+		console.log('hash changed yo');
 	}
 
 	update(timestamp)

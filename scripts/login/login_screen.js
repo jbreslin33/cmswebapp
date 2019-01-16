@@ -7,6 +7,8 @@ class LoginScreen
 		this.mLogin = login;
 		this.mApplication = application;
 
+		location.hash = "cool-feature";
+
 		//login stuff
 		//container
                 this.mContainer = document.createElement("DIV");
