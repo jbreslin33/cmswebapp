@@ -58,41 +58,35 @@ class LoginScreen
 
 	sendLogin()
 	{
-		/*
-                APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
-                APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
+                APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mEmail.value;
+                APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mPassword.value;
 	
 		APPLICATION.mLogin.sendLogin();
-		*/
 	}
 
 	divInputEmailKeyDown(e)
 	{
-		/*
 		if (e.key == 'Enter')	
 		{
-			APPLICATION.mLogin.mLoginScreen.mDivInputPassword.focus();
+			APPLICATION.mLogin.mLoginScreen.mPassword.focus();
 		}
-		*/
 	}
 
 	divInputPasswordKeyDown(e)
 	{
-		/*
 		if (e.key == 'Enter')	
 		{
-			APPLICATION.mLogin.mLoginScreen.mButton.focus();
+			//APPLICATION.mLogin.mLoginScreen.mButton.focus();
 		}
-		*/
 	}
 
 	show()
 	{
-		//this.mDivLogin.style.display = "block";	
+		this.mContainer.style.display = "block";	
 	}
 
 	hide()
 	{
-		//this.mDivLogin.style.display = "none";	
+		this.mContainer.style.display = "none";	
 	}
 }
