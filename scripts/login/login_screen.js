@@ -8,88 +8,58 @@ class LoginScreen
 		this.mApplication = application;
 
 		//login stuff
-                this.mDivLogin = document.createElement("DIV");
-                this.mDivLogin.setAttribute("class", "login");
-		this.mApplication.mDivMain.appendChild(this.mDivLogin);
-                
-		//add card to main
-                this.mContainer = document.querySelector('.main');
-                this.mContainer.appendChild(this.mDivLogin);
+                this.mContainer = document.createElement("DIV");
+                this.mContainer.setAttribute("class", "container");
 
-		//container	
-		this.mDivContainer  = document.createElement("DIV");
-		this.mDivContainer.setAttribute("class","contaner");
-		this.mContainer.appendChild(this.mDivContainer);
+		//email
+		this.mEmail = document.createElement("INPUT");
+		this.mEmail.setAttribute("type","text");
+		this.mEmail.setAttribute("class","form-control");
+		this.mEmail.setAttribute("name","email");
+		this.mEmail.setAttribute("placeholder","Email");
 
-		this.mButtonSuccess = document.createElement("BUTTON");
-		this.mButtonSuccess.setAttribute("class","btn btn-success");
-		this.mButtonSuccess.innerHTML = "Success Button";
-		this.mDivContainer.appendChild(this.mButtonSuccess);
-
-
-               	//email 
-		this.mDivInputEmail = document.createElement("INPUT");
-                this.mDivInputEmail.setAttribute("type", "text");
-                this.mDivInputEmail.setAttribute("placeholder", "email");
-                this.mDivInputEmail.setAttribute("id", "username");
-                this.mDivInputEmail.setAttribute("name", "username");
-                this.mDivInputEmail.addEventListener("keydown",this.divInputEmailKeyDown);
-		this.mDivLogin.appendChild(this.mDivInputEmail);
-                this.mDivInputEmail.focus();
-		
-		this.mDivInputPassword = document.createElement("INPUT");
-                this.mDivInputPassword.setAttribute("type", "password");
-                this.mDivInputPassword.setAttribute("placeholder", "password");
-                this.mDivInputPassword.setAttribute("id", "password");
-                this.mDivInputPassword.setAttribute("name", "password");
-                this.mDivInputPassword.addEventListener("keydown",this.divInputPasswordKeyDown);
-		this.mDivLogin.appendChild(this.mDivInputPassword);
-		
-		this.mButton = document.createElement("BUTTON");
-		this.mButton.innerHTML = "LOGIN";
-		
-                this.mButton.setAttribute("class", "btn");
-               	this.mButton.addEventListener("click",this.sendLogin);
-
-		this.mDivLogin.appendChild(this.mButton);
-	
-		//shadow
-                this.mDivShadow = document.createElement("DIV");
-                this.mDivShadow.setAttribute("class", "shadow");
-		this.mDivLogin.appendChild(this.mDivShadow);
+		//attach elements
+		document.body.appendChild(this.mContainer);
+		this.mContainer.appendChild(this.mEmail);
 	}
 
 	sendLogin()
 	{
+		/*
                 APPLICATION.mLogin.mUsername = APPLICATION.mLogin.mLoginScreen.mDivInputEmail.value;
                 APPLICATION.mLogin.mPassword = APPLICATION.mLogin.mLoginScreen.mDivInputPassword.value;
 	
 		APPLICATION.mLogin.sendLogin();
+		*/
 	}
 
 	divInputEmailKeyDown(e)
 	{
+		/*
 		if (e.key == 'Enter')	
 		{
 			APPLICATION.mLogin.mLoginScreen.mDivInputPassword.focus();
 		}
+		*/
 	}
 
 	divInputPasswordKeyDown(e)
 	{
+		/*
 		if (e.key == 'Enter')	
 		{
 			APPLICATION.mLogin.mLoginScreen.mButton.focus();
 		}
+		*/
 	}
 
 	show()
 	{
-		this.mDivLogin.style.display = "block";	
+		//this.mDivLogin.style.display = "block";	
 	}
 
 	hide()
 	{
-		this.mDivLogin.style.display = "none";	
+		//this.mDivLogin.style.display = "none";	
 	}
 }
