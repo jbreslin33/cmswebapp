@@ -16,9 +16,18 @@ class LoginScreen
                 this.mContainer = document.querySelector('.main');
                 this.mContainer.appendChild(this.mDivLogin);
 
-		this.mDivFormGroup
+		//container	
+		this.mDivContainer  = document.createElement("DIV");
+		this.mDivContainer.setAttribute("class","contaner");
+		this.mContainer.appendChild(this.mDivContainer);
 
-                
+		this.mButtonSuccess = document.createElement("BUTTON");
+		this.mButtonSuccess.setAttribute("class","btn btn-success");
+		this.mButtonSuccess.innerHTML = "Success Button";
+		this.mDivContainer.appendChild(this.mButtonSuccess);
+
+
+               	//email 
 		this.mDivInputEmail = document.createElement("INPUT");
                 this.mDivInputEmail.setAttribute("type", "text");
                 this.mDivInputEmail.setAttribute("placeholder", "email");

@@ -155,7 +155,7 @@ input[type="password"]:focus, input[type="text"]:focus
   	margin: 26px 0 0 28px;
   	width: 87px;
 }
-
+/*
 .btn 
 {
 	width:240px;
@@ -182,7 +182,7 @@ input[type="password"]:focus, input[type="text"]:focus
   	border-bottom-left-radius:5px;
   	box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #497a78, 0px 10px 5px #999;
 }
-
+*/
 .shadow 
 {
 	background: #000;
