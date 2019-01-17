@@ -59,7 +59,7 @@ class LoginScreen
 
 		//event listeners
 		//document.getElementById("login-button").addEventListenter("click",this.sendLogin);
-		document.getElementById("login-button").addEventListener("click",this.sendLogin);
+		document.getElementById("loginbuttonid").addEventListener("click",this.sendLogin);
 		//document.getElementById("login-button");
 	}
 
