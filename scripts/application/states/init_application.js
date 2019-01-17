@@ -15,7 +15,7 @@ class INIT_APPLICATION extends State
 			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
 		//hide evertthing
-		document.getElementById("loginhtmlid").style.display = "none";
+		document.getElementById("loginscreenhtmlid").style.display = "none";
 	}
 
         execute(application)
