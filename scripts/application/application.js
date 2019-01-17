@@ -35,9 +35,9 @@ class Application
 
 	locationHashChanged() 
 	{
-  		if (location.hash === '#cool-feature') 
+  		if (location.hash === '#login-screen') 
 		{
-    			console.log("You're visiting a cool feature!");
+    			console.log("You're in login screen");
   		}
 	}
 

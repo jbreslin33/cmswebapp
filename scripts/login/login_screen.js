@@ -7,7 +7,7 @@ class LoginScreen
 		this.mLogin = login;
 		this.mApplication = application;
 
-		location.hash = "cool-feature";
+		location.hash = "login-screen";
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.sendLogin);
 
 		this.mEmail    = document.getElementById("loginscreenemailid");
