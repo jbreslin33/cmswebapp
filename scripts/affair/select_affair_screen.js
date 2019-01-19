@@ -24,6 +24,12 @@ class SelectAffairScreen
 			this.mAffair.mID = this.mAffair.mData[0];
 			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[1];
 
+			var cardOriginal = document.getElementById("cardid");
+			var card2 = cardOriginal.cloneNode(true);
+			//card2.after(cardOriginal);
+			document.body.appendChild(card2);
+
+
 			if (this.mAffair.mData[i] != null)
 			{
 				if (i == 2) //date
