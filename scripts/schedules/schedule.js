@@ -103,7 +103,7 @@ class Schedule
                                                 for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
                                                 {
                                                         var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
-                                                        affair.mScreen.mDivCard.style.display = "none";
+                                                        //affair.mScreen.mDivCard.style.display = "none";
                                                 }
 
                                                 i = 0;

@@ -18,6 +18,7 @@ class SelectAffairScreen
 	{
 		for (var i = 0; i < this.mAffair.mData.length; i++)
 		{
+			console.log('date:' + this.mAffair.mData[i]);
 			//make dropdowns for availabilitys not yet set	
 			//either way we need drop down
 			this.mAffair.mID = this.mAffair.mData[0];
@@ -25,11 +26,6 @@ class SelectAffairScreen
 
 			if (this.mAffair.mData[i] != null)
 			{
-       				var div = document.createElement("DIV");
-                        	this.mDivArray.push(div); 
-                        	div.setAttribute("class", "selectAffairText");
-                        	this.mDivCard.appendChild(div);
-				
 				if (i == 2) //date
 				{
 					/*
