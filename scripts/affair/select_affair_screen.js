@@ -5,45 +5,13 @@ class SelectAffairScreen
 	constructor(affair)
 	{
 		this.mAffair = affair;
-                
-		this.mContainer = document.querySelector('.main');
-                this.mDivCard = document.createElement("DIV");
-                this.mDivCard.setAttribute("class", "card");
-                this.mContainer.appendChild(this.mDivCard);
+		//this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
 
-		this.mDivArray = new Array();
-
-		//select
-                this.mSelectAvailability = document.createElement("SELECT");
-                this.mSelectAvailability.setAttribute("class", "styled-select blue semi-square");
-		this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
-
-                //div.textContent = "Set Availability:";
-                this.option  = document.createElement("option");
-                this.optionA = document.createElement("option");
-                this.optionB = document.createElement("option");
-                this.optionC = document.createElement("option");
-                this.option.value  = 0;
-                this.optionA.value = 1;
-                this.optionB.value = 2;
-                this.optionC.value = 3;
-                this.option.innerHTML  = 'SET AVAILABILITY';
-                this.optionA.innerHTML = 'Going';
-                this.optionB.innerHTML = 'Maybe Going';
-                this.optionC.innerHTML = 'Not Going';
-                this.mSelectAvailability.appendChild(this.option);
-                this.mSelectAvailability.appendChild(this.optionA);
-                this.mSelectAvailability.appendChild(this.optionB);
-                this.mSelectAvailability.appendChild(this.optionC);
 	}
 
 	destructor()
 	{
-		for (var i = 0; i < this.mDivArray.length; i++)
-		{
-			this.mDivCard.removeChild(this.mDivArray[i]);
-		}
-                this.mContainer.removeChild(this.mDivCard);
+	
 	}
 	
 	update()
@@ -64,19 +32,26 @@ class SelectAffairScreen
 				
 				if (i == 2) //date
 				{
+					/*
          				div.textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
+					*/
 				}
 				else if (i == 3) //time
 				{
+					/*/
          				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
+					*/
 				}
 				else if (i == 4) //time
 				{
+					/*
          				div.textContent =  "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
+					*/
 				}
 				else if (i == 7) //coordinates
 				{
 					//ok we have coordinates from server lets create elements
+					/*
 					var a = document.createElement("a"); 
 					var text = document.createTextNode("map"); 
 					a.appendChild(text);
@@ -85,14 +60,18 @@ class SelectAffairScreen
 					div.appendChild(a);
 
 					a.href = this.mAffair.mData[i];
+					*/
 				}
 				else if (i == 8) //coordinates
 				{
+					/*
          				div.textContent = this.mAffair.mData[i];
+					*/
 				}
 				else if (i == 12)
 				{
 					//dont need the default option because we have a db entry
+					/*
 					this.mSelectAvailability.remove(this.mOption);
 
                                         this.mDivCard.appendChild(this.mSelectAvailability);
@@ -108,19 +87,24 @@ class SelectAffairScreen
 					{
 						this.optionC.selected = 'selected';
 					}
+					*/
 				}
 				else 
 				{
+					/*
 					if (i != 0)
 					{
          					div.textContent = this.mAffair.mData[i];
 					}
+					*/
 				}
 			}
 
 			if (this.mAffair.mData[12] == null)
 			{
+				/*
                         	this.mDivCard.appendChild(this.mSelectAvailability);
+				*/
 			}
 
 		}
@@ -129,6 +113,7 @@ class SelectAffairScreen
 	{
 		//first lets remove default option so user cant mess up but dont remove if you already did
 		//and then do insert
+		/*
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
@@ -172,5 +157,6 @@ class SelectAffairScreen
                         request.open('GET', url);
                         request.send();
 		}
+		*/
         }
 }
