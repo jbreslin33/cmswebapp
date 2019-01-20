@@ -24,7 +24,7 @@ class LOGGED_IN extends State
 
                 //fill select from db for choosing a different role in club with a particular team
                 //login.mHeader.getClubTeamRole();
-                login.mHeader.getYourRoles();
+                //login.mHeader.getYourRoles();
 
                 //display schedule since this a player
                 login.mApplication.mSchedule = new Schedule(login.mApplication);
