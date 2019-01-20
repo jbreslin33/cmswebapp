@@ -1,18 +1,17 @@
 'use strict';
 
+		//this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
+
 class SelectAffairScreen
 {
 	constructor(affair)
 	{
 		this.mAffair = affair;
-		//this.mSelectAvailability.onchange=this.updateAvailability.bind(this);
-
-		var cardOriginal = document.getElementById("cardoriginalid");
-		var card2 = cardOriginal.cloneNode(true);
-		//card2.after(cardOriginal);
-		document.body.appendChild(card2);
-	        card2.style.display = "block";
-
+		console.log("clone card");
+		this.mOriginalCard = document.getElementById("cardoriginalid");
+		this.mCard = this.mOriginalCard.cloneNode(true);
+		document.body.appendChild(this.mCard);
+	        this.mCard.style.display = "block";
 	}
 
 	destructor()
@@ -24,18 +23,18 @@ class SelectAffairScreen
 	{
 		for (var i = 0; i < this.mAffair.mData.length; i++)
 		{
-			console.log('date:' + this.mAffair.mData[i]);
 			//make dropdowns for availabilitys not yet set	
 			//either way we need drop down
 			this.mAffair.mID = this.mAffair.mData[0];
 			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[1];
 
-
-
 			if (this.mAffair.mData[i] != null)
 			{
 				if (i == 2) //date
 				{
+					console.log("inner html to i 2");
+					//document.getElementById("card_date_id").innerHTML = this.mAffair.mData[i];
+					this.mCard.childNodes[1].innerHTML = this.mAffair.mData[i];
 					/*
          				div.textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
 					*/
