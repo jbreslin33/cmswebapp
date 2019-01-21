@@ -16,6 +16,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 			console.log("GET_INTERNET_DATA_SCHEDULE: ENTER");        
 		}
 		//delete previous data
+/*
 		for (var i=0; i < schedule.mSelectAffairArray.length; i++)
 		{
 			schedule.mSelectAffairArray[i].destructor();
@@ -27,6 +28,8 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		//schedule.getSchedule();
 		console.log('AFTER');
 		console.log('AFTER2');
+*/
+ 		schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
 	}
 
         execute(schedule)
@@ -36,7 +39,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: EXECUTE");        
 		}
- 		  schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+ 		  //schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
  		//schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
 
 	}

@@ -46,8 +46,8 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 
 		//either way go for fresh data from getInternetData state
 */
-		//schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
-		schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+		schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
+		//schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
 	}
 
         execute(schedule)
