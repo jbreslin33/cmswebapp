@@ -109,7 +109,7 @@ class Schedule
                                                 while (jsondata[i])
                                                 {
                                                         var affair = new SelectAffair(APPLICATION.mSchedule);
-                                                        for (var b = 0; b < 13; b++)
+                                                        for (var b = 0; b < 14; b++)
                                                         {
                                                                 affair.mData.push(jsondata[i][b]);
                                                         }

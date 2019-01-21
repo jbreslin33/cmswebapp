@@ -68,7 +68,7 @@ class SelectAffairScreen
 				}
 				if (this.mAffair.mData[10]) //team
 				{
-					this.mCard.children[1].children[8].innerHTML = "" + this.mAffair.mData[10];  
+					this.mCard.children[1].children[8].innerHTML = this.mAffair.mData[13] + ' ' + this.mAffair.mData[10];  
 				}
 				else if (i == 4) //time
 				{
