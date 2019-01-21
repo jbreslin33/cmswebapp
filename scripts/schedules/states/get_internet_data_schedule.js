@@ -34,7 +34,13 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: EXECUTE");        
 		}
- 		schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+		console.log("in exe length of array:" + schedule.mSelectAffairArray.length);
+		//do we have something to display???
+		if (schedule.mSelectAffairArray.length > 0)
+		{
+			console.log("in exe length of array should be bigger:" + schedule.mSelectAffairArray.length);
+ 			schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+		}
 	}
 
         exit(schedule)
