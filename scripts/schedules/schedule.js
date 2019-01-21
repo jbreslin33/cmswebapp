@@ -135,9 +135,12 @@ class Schedule
 
 	displaySchedule()
 	{
+		console.log('disp sched fu');
                 for (var i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
 		{
+			console.log('i:' + i);
                         //create screen to display data
+
 			var affair = APPLICATION.mSchedule.mSelectAffairArray[i];	
 			var screen = new SelectAffairScreen(affair);	
 
