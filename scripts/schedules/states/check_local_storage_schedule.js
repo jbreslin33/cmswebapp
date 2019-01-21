@@ -16,6 +16,7 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		}
 
 		//basically we are either using initial or localstorage then regardless we are going to internet state
+/*
 
                 schedule.mAffair = localStorage.mAffair;
 		if (schedule.mAffair)
@@ -44,7 +45,9 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		}
 
 		//either way go for fresh data from getInternetData state
-		schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
+*/
+		//schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
+		schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
 	}
 
         execute(schedule)

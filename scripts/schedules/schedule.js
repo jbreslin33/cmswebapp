@@ -50,10 +50,11 @@ class Schedule
 		//states
                 this.mStateMachine = new StateMachine(this);
 
-                this.mGLOBAL_SCHEDULE = new GLOBAL_SCHEDULE();
-                this.mINIT_SCHEDULE = new INIT_SCHEDULE();
-                this.mCHECK_LOCAL_STORAGE_SCHEDULE = new CHECK_LOCAL_STORAGE_SCHEDULE();
-                this.mGET_INTERNET_DATA_SCHEDULE = new GET_INTERNET_DATA_SCHEDULE();
+                this.mGLOBAL_SCHEDULE               = new GLOBAL_SCHEDULE();
+                this.mINIT_SCHEDULE                 = new INIT_SCHEDULE();
+                this.mCHECK_LOCAL_STORAGE_SCHEDULE  = new CHECK_LOCAL_STORAGE_SCHEDULE();
+                this.mGET_INTERNET_DATA_SCHEDULE    = new GET_INTERNET_DATA_SCHEDULE();
+                this.mDISPLAY_SCHEDULE 		    = new DISPLAY_SCHEDULE();
                 this.mINSERT_AFFAIR_SCREEN_SCHEDULE = new INSERT_AFFAIR_SCREEN_SCHEDULE();
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_SCHEDULE);
@@ -98,15 +99,13 @@ class Schedule
 
                                         if (jsondata)
                                         {
-                                                //lets clear array....
-                                                var i = 0;
-                                                for (i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
+                                                //lets clear array of select affairs....
+                                                for (var d = 0; d < APPLICATION.mSchedule.mSelectAffairArray.length; d++)
                                                 {
                                                         var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
-                                                        //affair.mScreen.mDivCard.style.display = "none";
                                                 }
 
-                                                i = 0;
+                                                var i = 0;
                                                 while (jsondata[i])
                                                 {
                                                         var affair = new SelectAffair(APPLICATION.mSchedule);
@@ -114,12 +113,6 @@ class Schedule
                                                         {
                                                                 affair.mData.push(jsondata[i][b]);
                                                         }
-
-                                                        //create screen to display data
-                                                        affair.mScreen = new SelectAffairScreen(affair);
-
-                                                        //update screen card
-                                                        affair.mScreen.update();
 
                                                         //save for later
                                                         APPLICATION.mSchedule.saveToLocalStorage(affair);
@@ -139,4 +132,18 @@ class Schedule
                 request.open('GET', url);
                 request.send();
         }
+
+	displaySchedule()
+	{
+                for (var i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
+		{
+                        //create screen to display data
+			var affair = APPLICATION.mSchedule.mSelectAffairArray[i];	
+			var screen = new SelectAffairScreen(affair);	
+
+			APPLICATION.mSchedule.mSelectAffairArray[i].mScreen = screen;
+
+			screen.update();
+		}
+	}
 }
