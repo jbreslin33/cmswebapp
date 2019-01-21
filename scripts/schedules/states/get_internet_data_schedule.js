@@ -22,6 +22,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 			schedule.mSelectAffairArray[i].destructor();
 			schedule.mSelectAffairArray[i] = null;
 			delete schedule.mSelectAffairArray[i];
+			console.log('delete mSelectAffairArray:' + i);
 		}
 		//get new data from internets
 		schedule.getSchedule();

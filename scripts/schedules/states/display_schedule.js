@@ -32,13 +32,5 @@ class DISPLAY_SCHEDULE extends State
 		{
 			console.log("DISPLAY_SCHEDULE: EXIT");        
 		}
-/*
-		for (var i=0; i < schedule.mSelectAffairArray.length; i++)
-		{
-			schedule.mSelectAffairArray[i].destructor();
-			schedule.mSelectAffairArray[i] = null;
-			delete schedule.mSelectAffairArray[i];
-		}
-*/
 	}
 }

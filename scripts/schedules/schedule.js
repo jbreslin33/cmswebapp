@@ -118,6 +118,7 @@ class Schedule
                                                         APPLICATION.mSchedule.saveToLocalStorage(affair);
 
                                                         //push to array
+							console.log("add to arr");
                                                         APPLICATION.mSchedule.mSelectAffairArray.push(affair);
                                                         i++;
                                                 }
@@ -136,6 +137,7 @@ class Schedule
 	displaySchedule()
 	{
 		console.log('disp sched fu');
+                console.log('length:' + APPLICATION.mSchedule.mSelectAffairArray.length);
                 for (var i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
 		{
 			console.log('i:' + i);
