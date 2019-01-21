@@ -25,60 +25,17 @@ class SelectAffairScreen
 		{
 			//make dropdowns for availabilitys not yet set	
 			//either way we need drop down
-			this.mAffair.mID = this.mAffair.mData[0];
-			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[1];
+			this.mAffair.mID = this.mAffair.mData[12];
+			this.mAffair.mAffairsUsersAvailabilityID = this.mAffair.mData[11];
 
 			if (this.mAffair.mData[i] != null)
 			{
-				if (i == 2) //date
+//select affairs.id, affairs_users_availability.id, affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, availability.id
+				this.mCard.children[0].innerHTML = this.mAffair.mData[10] + ' ' + this.mAffair.mData[11] + ' ' + this.mAffair.mData[2];
+				
+				if (this.mAffair.mData[4]) //time
 				{
-/*
-
-        <div id="cardoriginalid" class="card text-center">
-
-                <div class="card-header">Featured</div>
-
-                <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-                <div class="card-footer text-muted"> 2 days ago </div>
-
-        </div>
-*/
-					for (var n=0; n < this.mCard.childNodes.length; n++)
-					{
-						console.log(this.mCard.childNodes[n]);
-					}
-					console.log("inner html to i 2");
-					//document.getElementById("card_date_id").innerHTML = this.mAffair.mData[i];
-					this.mCard.children[0].innerHTML = "0";
-					this.mCard.children[1].children[0].innerHTML = "10";
-					this.mCard.children[1].children[1].innerHTML = "11";
-					this.mCard.children[1].children[2].innerHTML = "12";
-					this.mCard.children[2].innerHTML = "2";
-					this.mCard.children[3].innerHTML = "3";
-					console.log("length of child nodes:" + this.mCard.childNodes.length);
-					//var card_body = this.mCard.childNodes[2];
-/*
-					this.mCard.children[3].innerHTML = "H5";
-					this.mCard.childNodes[4].innerHTML = "P";
-					this.mCard.childNodes[5].innerHTML = "HREF";
-					this.mCard.childNodes[6].innerHTML = "FOOTER";
-*/
-					//this.mCard.childNodes[3].innerHTML = "C3";
-					//this.mCard.childNodes[4].innerHTML = "D4";
-					//this.mCard.childNodes[5].innerHTML = "E5";
-					//this.mCard.childNodes[6].innerHTML = "F6";
-					//this.mCard.childNodes[7].innerHTML = "G7";
-					/*
-         				div.textContent = this.mAffair.mSchedule.convertDate(this.mAffair.mData[i]);
-					*/
-				}
-				else if (i == 3) //time
-				{
+					this.mCard.children[1].children[0].innerHTML = "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[4]);  
 					/*/
          				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 					*/
