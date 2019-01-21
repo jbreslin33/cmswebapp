@@ -38,12 +38,21 @@ class SelectAffairScreen
 				//big title				
 				this.mCard.children[1].children[0].innerHTML = this.mAffair.mData[11];  
 
+				if (this.mAffair.mData[3]) //time
+				{
+					this.mCard.children[1].children[1].innerHTML = "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[3]);  
+				}
 				if (this.mAffair.mData[4]) //time
 				{
-					this.mCard.children[1].children[1].innerHTML = "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[4]);  
-					/*/
-         				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
-					*/
+					this.mCard.children[1].children[2].innerHTML = "Start Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[4]);  
+				}
+				if (this.mAffair.mData[5]) //time
+				{
+					this.mCard.children[1].children[3].innerHTML = "End Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[5]);  
+				}
+				if (this.mAffair.mData[6]) //address
+				{
+					this.mCard.children[1].children[4].innerHTML = "" + this.mAffair.mData[6];  
 				}
 				else if (i == 4) //time
 				{
