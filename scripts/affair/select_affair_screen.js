@@ -31,11 +31,16 @@ class SelectAffairScreen
 			if (this.mAffair.mData[i] != null)
 			{
 //select affairs.id, affairs_users_availability.id, affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, availability.id
-				this.mCard.children[0].innerHTML = this.mAffair.mData[10] + ' ' + this.mAffair.mData[11] + ' ' + this.mAffair.mData[2];
+
+				//date in header
+				this.mCard.children[0].innerHTML = this.mAffair.mSchedule.convertDate(this.mAffair.mData[2]);
 				
+				//big title				
+				this.mCard.children[1].children[0].innerHTML = this.mAffair.mData[11];  
+
 				if (this.mAffair.mData[4]) //time
 				{
-					this.mCard.children[1].children[0].innerHTML = "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[4]);  
+					this.mCard.children[1].children[1].innerHTML = "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[4]);  
 					/*/
          				div.textContent =  "Arrival Time: " + this.mAffair.mSchedule.mTime.convertFromMilitaryToHuman(this.mAffair.mData[i]);
 					*/
