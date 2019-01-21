@@ -63,7 +63,7 @@ class Schedule
 	}
 	update(timestamp)
 	{
-
+ 		this.mStateMachine.update();
 	}
 
         saveToLocalStorage(affair)

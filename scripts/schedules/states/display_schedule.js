@@ -15,7 +15,7 @@ class DISPLAY_SCHEDULE extends State
 		{
 			console.log("DISPLAY_SCHEDULE: ENTER");        
 		}
-		//schedule.displaySchedule();
+		schedule.displaySchedule();
 	}
 
         execute(schedule)
