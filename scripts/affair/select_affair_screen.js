@@ -54,6 +54,22 @@ class SelectAffairScreen
 				{
 					this.mCard.children[1].children[4].innerHTML = "" + this.mAffair.mData[6];  
 				}
+				if (this.mAffair.mData[7]) //coord
+				{
+					this.mCard.children[1].children[5].innerHTML = "" + this.mAffair.mData[7];  
+				}
+				if (this.mAffair.mData[8]) //pitchname
+				{
+					this.mCard.children[1].children[6].innerHTML = "" + this.mAffair.mData[8];  
+				}
+				if (this.mAffair.mData[9]) //fieldname
+				{
+					this.mCard.children[1].children[7].innerHTML = "" + this.mAffair.mData[9];  
+				}
+				if (this.mAffair.mData[10]) //team
+				{
+					this.mCard.children[1].children[8].innerHTML = "" + this.mAffair.mData[10];  
+				}
 				else if (i == 4) //time
 				{
 					/*
