@@ -8,40 +8,40 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		super();
 	}
         
-	enter(schedule)
+	enter(app)
         {
-		if (schedule.mStateLogs || schedule.mStateEnterLogs)
+		if (app.mStateLogs || app.mStateEnterLogs)
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: ENTER");        
 		}
 		//delete previous data
 
-		for (var i=0; i < schedule.mSelectAffairArray.length; i++)
+		for (var i=0; i < app.mSchedule.mSelectAffairArray.length; i++)
 		{
-			schedule.mSelectAffairArray[i].destructor();
-			schedule.mSelectAffairArray[i] = null;
-			delete schedule.mSelectAffairArray[i];
+			app.mSchedule.mSelectAffairArray[i].destructor();
+			app.mSchedule.mSelectAffairArray[i] = null;
+			delete app.mSchedule.mSelectAffairArray[i];
 		}
 		//get new data from internets
-		schedule.getSchedule();
+		app.mSchedule.getSchedule();
 	}
 
-        execute(schedule)
+        execute(app)
         {
-		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
+		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: EXECUTE");        
 		}
 		//do we have something to display???
-		if (schedule.mSelectAffairArray.length > 0)
+		if (app.mSchedule.mSelectAffairArray.length > 0)
 		{
- 			schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+ 			app.mStateMachine.changeState(app.mDISPLAY_SCHEDULE);
 		}
 	}
 
-        exit(schedule)
+        exit(app)
         {
-		if (schedule.mStateLogs || schedule.mStateExitLogs)
+		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: EXIT");        
 		}

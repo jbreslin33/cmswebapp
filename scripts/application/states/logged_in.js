@@ -35,14 +35,16 @@ class LOGGED_IN extends State
 		}
 		//yeah so right here i need to send you somewhere like a default schedule screeen for player/parents but it should be used by everyone on initial load just to give them the upcoming events
 		//so basically send them to schedule state
-		if (app.mLogin.mLoggedIn == false)
+		if (app.mLogin.mLoggedIn == true)
+		{
+            		app.mStateMachine.changeState(app.mCHECK_LOCAL_STORAGE_SCHEDULE);
+
+		}
+		else
 		{
 			//you should relaunch or goto intial login state	
 			app.mStateMachine.changeState(app.mSCREEN_LOGIN);
 		}
-	
-               
-
 	}
 
         exit(app)
