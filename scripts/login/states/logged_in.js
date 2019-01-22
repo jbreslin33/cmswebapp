@@ -19,12 +19,9 @@ class LOGGED_IN extends State
                 {
                         login.mLoginScreen.hide();
                 }
-                //create header
-                login.mHeader = new PlayerHeader(this,"PLAYER CMS");
 
-                //fill select from db for choosing a different role in club with a particular team
-                //login.mHeader.getClubTeamRole();
-                //login.mHeader.getYourRoles();
+		//show navbar
+		document.getElementById("nav_bar_id").style.display = "block";
 
                 //display schedule since this a player
                 login.mApplication.mSchedule = new Schedule(login.mApplication);

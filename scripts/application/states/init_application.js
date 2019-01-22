@@ -15,6 +15,7 @@ class INIT_APPLICATION extends State
 			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
 		//hide evertthing
+		document.getElementById("nav_bar_id").style.display = "none";
 		document.getElementById("loginscreenhtmlid").style.display = "none";
 		document.getElementById("cardoriginalid").style.display = "none";
 	}
