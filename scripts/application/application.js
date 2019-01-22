@@ -29,6 +29,15 @@ class Application
 		this.mINIT_APPLICATION = new INIT_APPLICATION();
 		this.mMAIN_APPLICATION = new MAIN_APPLICATION();
 
+              	this.mCHECK_LOCALSTORAGE = new CHECK_LOCALSTORAGE();
+                this.mSCREEN_LOGIN = new SCREEN_LOGIN();
+                this.mLOGGED_IN = new LOGGED_IN();
+
+                this.mCHECK_LOCAL_STORAGE_SCHEDULE  = new CHECK_LOCAL_STORAGE_SCHEDULE();
+                this.mGET_INTERNET_DATA_SCHEDULE    = new GET_INTERNET_DATA_SCHEDULE();
+                this.mDISPLAY_SCHEDULE              = new DISPLAY_SCHEDULE();
+                this.mINSERT_AFFAIR_SCREEN_SCHEDULE = new INSERT_AFFAIR_SCREEN_SCHEDULE();
+
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 	}

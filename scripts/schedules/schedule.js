@@ -52,10 +52,6 @@ class Schedule
 
                 this.mGLOBAL_SCHEDULE               = new GLOBAL_SCHEDULE();
                 this.mINIT_SCHEDULE                 = new INIT_SCHEDULE();
-                this.mCHECK_LOCAL_STORAGE_SCHEDULE  = new CHECK_LOCAL_STORAGE_SCHEDULE();
-                this.mGET_INTERNET_DATA_SCHEDULE    = new GET_INTERNET_DATA_SCHEDULE();
-                this.mDISPLAY_SCHEDULE 		    = new DISPLAY_SCHEDULE();
-                this.mINSERT_AFFAIR_SCREEN_SCHEDULE = new INSERT_AFFAIR_SCREEN_SCHEDULE();
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_SCHEDULE);
                 this.mStateMachine.changeState(this.mINIT_SCHEDULE);

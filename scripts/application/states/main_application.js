@@ -8,27 +8,28 @@ class MAIN_APPLICATION extends State
 		super();
 	}
 
-        enter(application)
+        enter(app)
         {
-		if (application.mStateLogs || application.mStateEnterLogs)
+		if (app.mStateLogs || app.mStateEnterLogs)
 		{
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
 		//login
-		application.mLogin = new Login(application);
+		app.mLogin = new Login(app);
+		app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
 	}
 
-        execute(application)
+        execute(app)
         {
-		if (application.mStateLogs || application.mStateExecuteLogs)
+		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
 			console.log("MAIN_APPLICATION: EXECUTE");        
 		}
 	}
 
-        exit(application)
+        exit(app)
         {
-		if (application.mStateLogs || application.mStateExitLogs)
+		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("MAIN_APPLICATION: EXIT");        
 		}

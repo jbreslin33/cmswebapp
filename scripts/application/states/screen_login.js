@@ -8,33 +8,33 @@ class SCREEN_LOGIN extends State
 		super();
 	}
 
-        enter(login)
+        enter(app)
         {
-		if (login.mStateLogs || login.mStateEnterLogs)
+		if (app.mStateLogs || app.mStateEnterLogs)
 		{
 			console.log("SCREEN_LOGIN: ENTER");        
 		}
 		//create login screen
-		login.mLoginScreen = new LoginScreen(login.mApplication,login);	
+		app.mLogin.mLoginScreen = new LoginScreen(app,app.mLogin);	
   		document.getElementById("loginscreenhtmlid").style.display = "block";
 
 	}
 
-        execute(login)
+        execute(app)
         {
-		if (login.mStateLogs || login.mStateExecuteLogs)
+		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
 			console.log("SCREEN_LOGIN: EXECUTE");        
 		}
-		if (login.mLoggedIn == true)
+		if (app.mLogin.mLoggedIn == true)
 		{
-			login.mStateMachine.changeState(login.mLOGGED_IN);
+			app.mStateMachine.changeState(app.mLOGGED_IN);
 		}
 	}
 
-        exit(login)
+        exit(app)
         {
-		if (login.mStateLogs || login.mStateExitLogs)
+		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("SCREEN_LOGIN: EXIT");        
 		}

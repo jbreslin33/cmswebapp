@@ -8,9 +8,9 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		super();
 	}
 
-        enter(schedule)
+        enter(app)
         {
-		if (schedule.mStateLogs || schedule.mStateEnterLogs)
+		if (app.mStateLogs || app.mStateEnterLogs)
 		{
 			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: ENTER");        
 		}
@@ -46,21 +46,21 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 
 		//either way go for fresh data from getInternetData state
 */
-		schedule.mStateMachine.changeState(schedule.mGET_INTERNET_DATA_SCHEDULE);
+		app.mStateMachine.changeState(app.mGET_INTERNET_DATA_SCHEDULE);
 		//schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
 	}
 
-        execute(schedule)
+        execute(app)
         {
-		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
+		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
 			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: EXECUTE");        
 		}
 	}
 
-        exit(schedule)
+        exit(app)
         {
-		if (schedule.mStateLogs || schedule.mStateExitLogs)
+		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: EXIT");        
 		}
