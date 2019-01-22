@@ -45,6 +45,11 @@ class Application
     			console.log("change state to insert affair");
 			APPLICATION.mSchedule.mStateMachine.changeState(APPLICATION.mSchedule.mINSERT_AFFAIR_SCREEN_SCHEDULE);
   		}
+  		if (location.hash === '#schedule') 
+		{
+    			console.log("change state to schedule");
+			APPLICATION.mSchedule.mStateMachine.changeState(APPLICATION.mSchedule.mINIT_SCHEDULE);
+  		}
 	}
 
 	hashchanged()
