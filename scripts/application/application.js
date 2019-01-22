@@ -37,7 +37,11 @@ class Application
 	{
   		if (location.hash === '#login-screen') 
 		{
-    			console.log("You're in login screen");
+    			console.log("change state to login");
+  		}
+  		if (location.hash === '#add-event') 
+		{
+    			console.log("change state to insert affair");
   		}
 	}
 
