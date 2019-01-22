@@ -7,7 +7,6 @@ class SelectAffairScreen
 	constructor(affair)
 	{
 		this.mAffair = affair;
-		console.log("clone card");
 		this.mOriginalCard = document.getElementById("cardoriginalid");
 		this.mCard = this.mOriginalCard.cloneNode(true);
 		document.body.appendChild(this.mCard);

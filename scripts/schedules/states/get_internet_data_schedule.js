@@ -5,7 +5,6 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 {
 	constructor() 
 	{
-		console.log("con get");
 		super();
 	}
         
@@ -22,7 +21,6 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 			schedule.mSelectAffairArray[i].destructor();
 			schedule.mSelectAffairArray[i] = null;
 			delete schedule.mSelectAffairArray[i];
-			console.log('delete mSelectAffairArray:' + i);
 		}
 		//get new data from internets
 		schedule.getSchedule();
@@ -34,11 +32,9 @@ class GET_INTERNET_DATA_SCHEDULE extends State
 		{
 			console.log("GET_INTERNET_DATA_SCHEDULE: EXECUTE");        
 		}
-		console.log("in exe length of array:" + schedule.mSelectAffairArray.length);
 		//do we have something to display???
 		if (schedule.mSelectAffairArray.length > 0)
 		{
-			console.log("in exe length of array should be bigger:" + schedule.mSelectAffairArray.length);
  			schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
 		}
 	}

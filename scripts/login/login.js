@@ -66,7 +66,6 @@ class Login
 						{
 							APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
 						}
-						console.log('code:' + data);
                                         }
                                 }
                         }
@@ -79,7 +78,6 @@ class Login
 	{
 		if (code == 100)
 		{
-			console.log('looged in true and save');
 			this.mLoggedIn = true;	
 			APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword);
 		}

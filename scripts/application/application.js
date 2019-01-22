@@ -43,7 +43,14 @@ class Application
 
 	hashchanged()
 	{
-		console.log('hash changed yo');
+		if (location.hash == "login-screen")
+		{
+			console.log('goto login state');
+		}
+		if (location.hash == "add-event")
+		{
+			console.log('goto insert affair state');
+		}
 	}
 
 	update(timestamp)

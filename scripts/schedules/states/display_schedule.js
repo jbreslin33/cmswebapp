@@ -5,7 +5,6 @@ class DISPLAY_SCHEDULE extends State
 {
 	constructor() 
 	{
-		console.log("CONSt dis");
 		super();
 	}
         
