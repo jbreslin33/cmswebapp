@@ -36,37 +36,6 @@ class Application
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 	}
 
-	locationHashChanged() 
-	{
-  		if (location.hash === '#login-screen') 
-		{
-    			console.log("change state to login");
-			//APPLICATION.mLogin.mStateMachine.changeState(APPLICATION.mLogin.INIT_LOGIN);
-  		}
-  		if (location.hash === '#add-event') 
-		{
-    			console.log("change state to insert affair");
-			APPLICATION.mSchedule.mStateMachine.changeState(APPLICATION.mSchedule.mINSERT_AFFAIR_SCREEN_SCHEDULE);
-  		}
-  		if (location.hash === '#schedule') 
-		{
-    			console.log("change state to schedule");
-			APPLICATION.mSchedule.mStateMachine.changeState(APPLICATION.mSchedule.mINIT_SCHEDULE);
-  		}
-	}
-
-	hashchanged()
-	{
-		if (location.hash == "login-screen")
-		{
-			console.log('goto login state');
-		}
-		if (location.hash == "add-event")
-		{
-			console.log('goto insert affair state');
-		}
-	}
-
 	update(timestamp)
 	{
 		this.mStateMachine.update();
