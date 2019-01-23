@@ -15,8 +15,9 @@ class MAIN_APPLICATION extends State
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
 		//login
-		app.mLogin = new Login(app);
-		app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
+		//app.mLogin = new Login(app);
+		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
+		app.mStateMachine.changeState(app.mLOGIN_APPLICATION);
 	}
 
         execute(app)

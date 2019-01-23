@@ -17,6 +17,16 @@ class LOGIN_APPLICATION extends State
 		//login
 		//app.mLogin = new Login(app);
 		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
+		//
+		if (app.mLogin)
+		{
+			//do nothing right now	
+		}
+		else
+		{
+			//start the login subsystem
+			app.mLogin = new Login(app);
+		}
 	}
 
         execute(app)

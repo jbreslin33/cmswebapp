@@ -1,4 +1,3 @@
-
 'use strict';
 
 class LOGGED_IN extends State
@@ -8,48 +7,48 @@ class LOGGED_IN extends State
 		super();
 	}
 
-        enter(app)
+        enter(login)
         {
-		if (app.mStateLogs || app.mStateEnterLogs)
+		if (login.mStateLogs || login.mStateEnterLogs)
 		{
 			console.log("LOGGED_IN: ENTER");        
 		}
                 //if there is a login screen hide it
-                if (app.mLogin.mLoginScreen)
+                if (login.mLoginScreen)
                 {
-                        app.mLogin.mLoginScreen.hide();
+                        login.mLoginScreen.hide();
                 }
 
 		//show navbar
 		document.getElementById("nav_bar_id").style.display = "block";
 
                 //display schedule since this a player
-                app.mSchedule = new Schedule(app);
+                //login.app.mSchedule = new Schedule(app);
 	}
 
-        execute(app)
+        execute(login)
         {
-		if (app.mStateLogs || app.mStateExecuteLogs)
+		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
 			console.log("LOGGED_IN: EXECUTE");        
 		}
 		//yeah so right here i need to send you somewhere like a default schedule screeen for player/parents but it should be used by everyone on initial load just to give them the upcoming events
 		//so basically send them to schedule state
-		if (app.mLogin.mLoggedIn == true)
+		if (login.mLoggedIn == true)
 		{
-            		app.mStateMachine.changeState(app.mCHECK_LOCAL_STORAGE_SCHEDULE);
+            		//login.mStateMachine.changeState(app.mCHECK_LOCAL_STORAGE_SCHEDULE);
 
 		}
 		else
 		{
 			//you should relaunch or goto intial login state	
-			app.mStateMachine.changeState(app.mSCREEN_LOGIN);
+			//login.mStateMachine.changeState(app.mSCREEN_LOGIN);
 		}
 	}
 
-        exit(app)
+        exit(login)
         {
-		if (app.mStateLogs || app.mStateExitLogs)
+		if (login.mStateLogs || login.mStateExitLogs)
 		{
 			console.log("LOGGED_IN: EXIT");        
 		}

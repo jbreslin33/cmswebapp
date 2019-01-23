@@ -8,44 +8,44 @@ class CHECK_LOCALSTORAGE extends State
 		super();
 	}
 
-        enter(app)
+        enter(login)
         {
-		if (app.mStateLogs || app.mStateEnterLogs)
+		if (login.mStateLogs || login.mStateEnterLogs)
 		{
 			console.log("CHECK_LOCALSTORAGE: ENTER");        
 		}
 		
 		//set login credentials from local storage
-		app.mLogin.mUsername = localStorage.getItem("username");
-		app.mLogin.mPassword = localStorage.getItem("password");
+		login.mUsername = localStorage.getItem("username");
+		login.mPassword = localStorage.getItem("password");
 
 		//this checks if you have credentials saved local if so it sends login credentials to reference against db, if not it takes you to login screen.
-		if (app.mLogin.mUsername && app.mLogin.mPassword)
+		if (login.mUsername && login.mPassword)
 		{
-			app.mLogin.sendLogin();
+			login.sendLogin();
 		}
 		else
 		{
-			app.mStateMachine.changeState(app.mSCREEN_LOGIN);
+			login.mStateMachine.changeState(login.mSCREEN_LOGIN);
 		}
 	}
 
-        execute(app)
+        execute(login)
         {
-		if (app.mStateLogs || app.mStateExecuteLogs)
+		if (login.mStateLogs || login.mStateExecuteLogs)
 		{
 			console.log("CHECK_LOCALSTORAGE: EXECUTE");        
 		}
 
-		if (app.mLogin.mLoggedIn == true)
+		if (login.mLoggedIn == true)
 		{
-                        app.mStateMachine.changeState(app.mLOGGED_IN);
+                        login.mStateMachine.changeState(login.mLOGGED_IN);
 		}
 	}
 
-        exit(app)
+        exit(login)
         {
-		if (app.mStateLogs || app.mStateExitLogs)
+		if (login.mStateLogs || login.mStateExitLogs)
 		{
 			console.log("CHECK_LOCALSTORAGE: EXIT");        
 		}

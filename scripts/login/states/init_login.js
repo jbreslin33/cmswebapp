@@ -22,7 +22,7 @@ class INIT_LOGIN extends State
 		{
 			console.log("INIT_LOGIN: EXECUTE");        
 		}
-		//login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE);
+		login.mStateMachine.changeState(login.mCHECK_LOCALSTORAGE);
 	}
 
         exit(login)
