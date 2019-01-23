@@ -16,12 +16,12 @@ order by users_clubs_roles.default_timestamp desc LIMIT 1;
 
 select * from users_clubs_roles;
 
-select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name 
-from affairs 
-full outer join teams on teams.id=affairs.team_id 
-full outer join affair_types on affair_types.id=affairs.affair_types_id 
-full outer join pitches      on pitches.id=affairs.pitch_id 
-where affair_date >= now() 
+select eventos_date, arrival_time, start_time, end_time, eventoss.address, eventoss.coordinates, pitches.name, field_name, teams.name, eventos_types.name 
+from eventoss 
+full outer join teams on teams.id=eventoss.team_id 
+full outer join eventos_types on eventos_types.id=eventoss.eventos_types_id 
+full outer join pitches      on pitches.id=eventoss.pitch_id 
+where eventos_date >= now() 
 AND teams.id = 3;
 
 select users.id, users.password
@@ -92,17 +92,17 @@ where username = 's';
 
 
 
-                        select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name
-                        from affairs
-                        full outer join teams on teams.id=affairs.team_id
-                        full outer join affair_types on affair_types.id=affairs.affair_types_id
-                        full outer join pitches on pitches.id=affairs.pitch_id
+                        select eventos_date, arrival_time, start_time, end_time, eventoss.address, eventoss.coordinates, pitches.name, field_name, teams.name, eventos_types.name
+                        from eventoss
+                        full outer join teams on teams.id=eventoss.team_id
+                        full outer join eventos_types on eventos_types.id=eventoss.eventos_types_id
+                        full outer join pitches on pitches.id=eventoss.pitch_id
                         full outer join users_clubs_roles_teams on users_clubs_roles_teams.team_id=teams.id
                         full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
                         full outer join users on users.id=users_clubs_roles.users_id
-                        where affair_date >= now()
+                        where eventos_date >= now()
                         and users.username = 'l'
-                        order by affair_date asc;
+                        order by eventos_date asc;
 
 
 
@@ -132,25 +132,25 @@ join users on users.id=users_clubs_roles.users_id
 where username = 'l';
 
 
-                        select affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, availability.id 
-                        from affairs
-                        full outer join teams on teams.id=affairs.team_id
-                        full outer join affair_types on affair_types.id=affairs.affair_types_id
-                        full outer join pitches on pitches.id=affairs.pitch_id
+                        select eventos_date, arrival_time, start_time, end_time, eventoss.address, eventoss.coordinates, pitches.name, field_name, teams.name, eventos_types.name, availability.id 
+                        from eventoss
+                        full outer join teams on teams.id=eventoss.team_id
+                        full outer join eventos_types on eventos_types.id=eventoss.eventos_types_id
+                        full outer join pitches on pitches.id=eventoss.pitch_id
                         full outer join users_clubs_roles_teams on users_clubs_roles_teams.team_id=teams.id
                         full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
                         full outer join users on users.id=users_clubs_roles.users_id
-                        full outer join affairs_users_availability on affairs_users_availability.affair_id=affairs.id
-                        full outer join availability on availability.id=affairs_users_availability.availability_id
-                        where affair_date >= now()
+                        full outer join eventoss_users_availability on eventoss_users_availability.eventos_id=eventoss.id
+                        full outer join availability on availability.id=eventoss_users_availability.availability_id
+                        where eventos_date >= now()
                         and users.username = 'l'
-                        order by affair_date asc;
+                        order by eventos_date asc;
 
 
-select * from affairs_users_availability;
+select * from eventoss_users_availability;
 
-update affairs_users_availability set availability_id = 1 where affairs_users_availability.id = 1;   
+update eventoss_users_availability set availability_id = 1 where eventoss_users_availability.id = 1;   
 
-select * from affairs_users_availability;
+select * from eventoss_users_availability;
 
 

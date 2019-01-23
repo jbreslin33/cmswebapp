@@ -53,15 +53,15 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                  *
                  * AFFAIR TYPE 
                 ****/
-                var affairTypeUrl = "/php/classes/query/affair_type_query.php?username=" + APPLICATION.mLogin.mUsername;
+                var eventoTypeUrl = "/php/classes/query/evento_type_query.php?username=" + APPLICATION.mLogin.mUsername;
 
                 // Fetch the latest data.
-                var affairTypeRequest = new XMLHttpRequest();
-                affairTypeRequest.onreadystatechange = function()
+                var eventoTypeRequest = new XMLHttpRequest();
+                eventoTypeRequest.onreadystatechange = function()
                 {
-                        if (affairTypeRequest.readyState === XMLHttpRequest.DONE)
+                        if (eventoTypeRequest.readyState === XMLHttpRequest.DONE)
                         {
-                                if (affairTypeRequest.status === 200)
+                                if (eventoTypeRequest.status === 200)
                                 {
                                         var data = JSON.parse(this.responseText);
                                         if (data)
@@ -76,16 +76,16 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                         }
                                         else
                                         {
-                                                console.log('no affairType data');
+                                                console.log('no eventoType data');
                                         }
                                 }
                         }
                 };
 
                 pitchRequest.open('GET', pitchUrl);
-                affairTypeRequest.open('GET', affairTypeUrl);
+                eventoTypeRequest.open('GET', eventoTypeUrl);
                 pitchRequest.send();
-                affairTypeRequest.send();
+                eventoTypeRequest.send();
 	}
 
         execute(schedule)

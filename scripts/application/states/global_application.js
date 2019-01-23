@@ -24,7 +24,7 @@ class GLOBAL_APPLICATION extends State
                 }
                 if (location.hash == '#add-event' && app.mStateMachine.mCurrentState != app.mINSERT_SCHEDULE_APPLICATION)
                 {
-                        console.log("change state to insert affair");
+                        console.log("change state to insert eventos");
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_SCHEDULE_APPLICATION);
                 }
 	}

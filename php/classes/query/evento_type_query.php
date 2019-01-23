@@ -11,10 +11,10 @@ class AffairTypeQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-			select id, name from affair_types order by name asc";
+			select id, name from eventos_types order by name asc";
 	}
 }
 
-$affairTypeQuery = new AffairTypeQuery();
+$eventosTypeQuery = new AffairTypeQuery();
 
 ?>

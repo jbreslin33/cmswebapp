@@ -70,9 +70,9 @@ class Schedule
  		this.mStateMachine.update();
 	}
 
-        saveToLocalStorage(affair)
+        saveToLocalStorage(evento)
         {
-                //var data = JSON.stringify(affair);
+                //var data = JSON.stringify(evento);
                 //localStorage.mAffair = data;
         }
         convertDate(data)
@@ -103,26 +103,26 @@ class Schedule
 
                                         if (jsondata)
                                         {
-                                                //lets clear array of select affairs....
+                                                //lets clear array of select eventos....
                                                 for (var d = 0; d < APPLICATION.mSchedule.mSelectAffairArray.length; d++)
                                                 {
-                                                        var affair = APPLICATION.mSchedule.mSelectAffairArray.shift();
+                                                        var evento = APPLICATION.mSchedule.mSelectAffairArray.shift();
                                                 }
 
                                                 var i = 0;
                                                 while (jsondata[i])
                                                 {
-                                                        var affair = new SelectAffair(APPLICATION.mSchedule);
+                                                        var evento = new SelectAffair(APPLICATION.mSchedule);
                                                         for (var b = 0; b < 14; b++)
                                                         {
-                                                                affair.mData.push(jsondata[i][b]);
+                                                                evento.mData.push(jsondata[i][b]);
                                                         }
 
                                                         //save for later
-                                                        APPLICATION.mSchedule.saveToLocalStorage(affair);
+                                                        APPLICATION.mSchedule.saveToLocalStorage(evento);
 
                                                         //push to array
-                                                        APPLICATION.mSchedule.mSelectAffairArray.push(affair);
+                                                        APPLICATION.mSchedule.mSelectAffairArray.push(evento);
                                                         i++;
                                                 }
                                         }
@@ -143,8 +143,8 @@ class Schedule
 		{
                         //create screen to display data
 
-			var affair = APPLICATION.mSchedule.mSelectAffairArray[i];	
-			var screen = new SelectAffairScreen(affair);	
+			var evento = APPLICATION.mSchedule.mSelectAffairArray[i];	
+			var screen = new SelectAffairScreen(evento);	
 
 			APPLICATION.mSchedule.mSelectAffairArray[i].mScreen = screen;
 

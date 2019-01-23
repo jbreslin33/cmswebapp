@@ -6,9 +6,9 @@ class AvailabilityUpdate extends Update
 	function __construct() 
 	{
 		
-		if (isset($_GET['affairs_users_availability_id']))
+		if (isset($_GET['eventoss_users_availability_id']))
                 {
-                        $this->mAffairsUsersAvailabilityID = $_GET['affairs_users_availability_id'];
+                        $this->mAffairsUsersAvailabilityID = $_GET['eventoss_users_availability_id'];
 			error_log('got 1');
                 }
 
@@ -25,9 +25,9 @@ class AvailabilityUpdate extends Update
 	{
 		error_log('calling update');
 		$this->mSQL = "
-				update affairs_users_availability set availability_id = " . 
+				update eventoss_users_availability set availability_id = " . 
 				$this->mAvailabilityID .
-				" where affairs_users_availability.id = " .
+				" where eventoss_users_availability.id = " .
 				$this->mAffairsUsersAvailabilityID .
 				";";
 	}

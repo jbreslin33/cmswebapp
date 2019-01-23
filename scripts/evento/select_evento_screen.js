@@ -4,9 +4,9 @@
 
 class SelectAffairScreen
 {
-	constructor(affair)
+	constructor(evento)
 	{
-		this.mAffair = affair;
+		this.mAffair = evento;
 		this.mOriginalCard = document.getElementById("cardoriginalid");
 		this.mCard = this.mOriginalCard.cloneNode(true);
 		document.body.appendChild(this.mCard);
@@ -29,7 +29,7 @@ class SelectAffairScreen
 
 			if (this.mAffair.mData[i] != null)
 			{
-//select affairs.id, affairs_users_availability.id, affair_date, arrival_time, start_time, end_time, affairs.address, affairs.coordinates, pitches.name, field_name, teams.name, affair_types.name, availability.id
+//select eventos.id, eventos_users_availability.id, evento_date, arrival_time, start_time, end_time, eventos.address, eventos.coordinates, pitches.name, field_name, teams.name, evento_types.name, availability.id
 
 				//date in header
 				this.mCard.children[0].innerHTML = this.mAffair.mSchedule.convertDate(this.mAffair.mData[2]);
@@ -144,8 +144,8 @@ class SelectAffairScreen
 		if (this.mSelectAvailability.length > 3)
 		{
 			this.mSelectAvailability.remove(this.mSelectAvailability[0])
-			//going to need user_id, affair_id
-                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&affairs_users_availability_id=" + this.mAffairsUsersAvailabilityID;
+			//going to need user_id, evento_id
+                	var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&eventos_users_availability_id=" + this.mAffairsUsersAvailabilityID;
 
                 	// Fetch the latest data.
                 	var request = new XMLHttpRequest();
@@ -166,7 +166,7 @@ class SelectAffairScreen
 		else //do update
 		{
 			console.log("ID:" + this.mSelectAvailability.options[this.mSelectAvailability.selectedIndex].value);
-                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&availability_id=" + this.mSelectAvailability.options[this.mSelectAvailability.selectedIndex].value + "&affairs_users_availability_id=" + this.mAffair.mAffairsUsersAvailabilityID;
+                        var url = "/php/classes/update/availability_update.php?username=" + APPLICATION.mLogin.mUsername + "&availability_id=" + this.mSelectAvailability.options[this.mSelectAvailability.selectedIndex].value + "&eventos_users_availability_id=" + this.mAffair.mAffairsUsersAvailabilityID;
 			console.log('url:' + url);
 
                         // Fetch the latest data.

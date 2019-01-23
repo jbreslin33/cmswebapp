@@ -20,7 +20,7 @@ class InsertAffairScreen
                 this.mH1 = document.createElement("H1");
 		this.mH1.innerHTML = "Add Event";
 
-		//affairDate
+		//eventoDate
 		this.mAffairDate = document.createElement("INPUT");
 		
 		//arrivalTime
@@ -41,7 +41,7 @@ class InsertAffairScreen
                 //fieldName
                 this.mFieldName = document.createElement("INPUT");
 		
-		//affairType
+		//eventoType
                 this.mAffairType = document.createElement("SELECT");
 
 		/***************
@@ -53,7 +53,7 @@ class InsertAffairScreen
                 this.mContainer.appendChild(this.mDiv);
 		this.mDiv.appendChild(this.mH1);
 
-		//affairDate
+		//eventoDate
                 this.mAffairDateLabel = document.createElement("LABEL");
 		this.mAffairDate.setAttribute("type","date"); 
                 this.mAffairDate.focus();
@@ -134,7 +134,7 @@ class InsertAffairScreen
 		this.mBrG = document.createElement("BR");
                 this.mDiv.appendChild(this.mBrG);
                 
-		//affairType
+		//eventoType
                 this.mAffairTypeLabel = document.createElement("LABEL");
                 this.mAffairTypeLabel.setAttribute("for", this.mAffairType);
                 this.mAffairTypeLabel.innerHTML = "Event Type: ";
