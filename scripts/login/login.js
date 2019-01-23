@@ -30,6 +30,10 @@ class Login
                 this.mGLOBAL_LOGIN = new GLOBAL_LOGIN();
                 this.mINIT_LOGIN = new INIT_LOGIN();
 
+                this.mCHECK_LOCALSTORAGE = new CHECK_LOCALSTORAGE();
+                this.mSCREEN_LOGIN = new SCREEN_LOGIN();
+                this.mLOGGED_IN = new LOGGED_IN();
+
                 this.mStateMachine.setGlobalState(this.mGLOBAL_LOGIN);
                 this.mStateMachine.changeState(this.mINIT_LOGIN);
 	}
