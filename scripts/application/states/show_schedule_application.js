@@ -1,7 +1,7 @@
 
 'use strict';
 
-class MAIN_APPLICATION extends State
+class SHOW_SCHEDULE_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -12,18 +12,18 @@ class MAIN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("MAIN_APPLICATION: ENTER");        
+			console.log("SHOW_SCHEDULE_APPLICATION: ENTER");        
 		}
 		//login
-		app.mLogin = new Login(app);
-		app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
+		//app.mLogin = new Login(app);
+		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
 	}
 
         execute(app)
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("MAIN_APPLICATION: EXECUTE");        
+			console.log("SHOW_SCHEDULE_APPLICATION: EXECUTE");        
 		}
 	}
 
@@ -31,7 +31,7 @@ class MAIN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("MAIN_APPLICATION: EXIT");        
+			console.log("SHOW_SCHEDULE_APPLICATION: EXIT");        
 		}
 	}
 }
