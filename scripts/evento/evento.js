@@ -1,13 +1,13 @@
 'use strict';
 
-class Affair
+class Evento
 {
 	constructor(schedule)
 	{
 		this.mSchedule = schedule;
 
 		this.mID = null;
-		this.mAffairsUsersAvailabilityID = null;
+		this.mEventosUsersAvailabilityID = null;
 		this.mData = new Array();
 		this.mScreen = null;
 	}

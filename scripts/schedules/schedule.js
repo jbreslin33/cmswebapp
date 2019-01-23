@@ -19,9 +19,9 @@ class Schedule
 		this.mRequest = null;
 
 		//data storage classes
-		this.mInitialAffair = null;
-		this.mSelectAffairArray = new Array();
-		this.mInsertAffair = null;
+		this.mInitialEvento = null;
+		this.mSelectEventoArray = new Array();
+		this.mInsertEvento = null;
 	
 		//day and month
 		this.mDayArray = new Array();
@@ -73,7 +73,7 @@ class Schedule
         saveToLocalStorage(evento)
         {
                 //var data = JSON.stringify(evento);
-                //localStorage.mAffair = data;
+                //localStorage.mEvento = data;
         }
         convertDate(data)
         {
@@ -104,15 +104,15 @@ class Schedule
                                         if (jsondata)
                                         {
                                                 //lets clear array of select eventos....
-                                                for (var d = 0; d < APPLICATION.mSchedule.mSelectAffairArray.length; d++)
+                                                for (var d = 0; d < APPLICATION.mSchedule.mSelectEventoArray.length; d++)
                                                 {
-                                                        var evento = APPLICATION.mSchedule.mSelectAffairArray.shift();
+                                                        var evento = APPLICATION.mSchedule.mSelectEventoArray.shift();
                                                 }
 
                                                 var i = 0;
                                                 while (jsondata[i])
                                                 {
-                                                        var evento = new SelectAffair(APPLICATION.mSchedule);
+                                                        var evento = new SelectEvento(APPLICATION.mSchedule);
                                                         for (var b = 0; b < 14; b++)
                                                         {
                                                                 evento.mData.push(jsondata[i][b]);
@@ -122,7 +122,7 @@ class Schedule
                                                         APPLICATION.mSchedule.saveToLocalStorage(evento);
 
                                                         //push to array
-                                                        APPLICATION.mSchedule.mSelectAffairArray.push(evento);
+                                                        APPLICATION.mSchedule.mSelectEventoArray.push(evento);
                                                         i++;
                                                 }
                                         }
@@ -139,14 +139,14 @@ class Schedule
 
 	displaySchedule()
 	{
-                for (var i = 0; i < APPLICATION.mSchedule.mSelectAffairArray.length; i++)
+                for (var i = 0; i < APPLICATION.mSchedule.mSelectEventoArray.length; i++)
 		{
                         //create screen to display data
 
-			var evento = APPLICATION.mSchedule.mSelectAffairArray[i];	
-			var screen = new SelectAffairScreen(evento);	
+			var evento = APPLICATION.mSchedule.mSelectEventoArray[i];	
+			var screen = new SelectEventoScreen(evento);	
 
-			APPLICATION.mSchedule.mSelectAffairArray[i].mScreen = screen;
+			APPLICATION.mSchedule.mSelectEventoArray[i].mScreen = screen;
 
 			screen.update();
 		}

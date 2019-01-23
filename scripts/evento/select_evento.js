@@ -1,6 +1,6 @@
 'use strict';
 
-class SelectAffair extends Affair
+class SelectEvento extends Evento
 {
 	constructor(schedule)
 	{

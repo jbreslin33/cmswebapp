@@ -1,10 +1,10 @@
 'use strict';
 
-class InsertAffairScreen
+class InsertEventoScreen
 {
 	constructor(schedule)
 	{
-		console.log('constructor InsertAffairScreen');
+		console.log('constructor InsertEventoScreen');
 		
 		this.mInputArray = new Array();
 
@@ -21,7 +21,7 @@ class InsertAffairScreen
 		this.mH1.innerHTML = "Add Event";
 
 		//eventoDate
-		this.mAffairDate = document.createElement("INPUT");
+		this.mEventoDate = document.createElement("INPUT");
 		
 		//arrivalTime
 		this.mArrivalTime = document.createElement("INPUT");
@@ -42,7 +42,7 @@ class InsertAffairScreen
                 this.mFieldName = document.createElement("INPUT");
 		
 		//eventoType
-                this.mAffairType = document.createElement("SELECT");
+                this.mEventoType = document.createElement("SELECT");
 
 		/***************
 		 *
@@ -54,13 +54,13 @@ class InsertAffairScreen
 		this.mDiv.appendChild(this.mH1);
 
 		//eventoDate
-                this.mAffairDateLabel = document.createElement("LABEL");
-		this.mAffairDate.setAttribute("type","date"); 
-                this.mAffairDate.focus();
-                this.mAffairDateLabel.setAttribute("for", this.mAffairDate);
-                this.mAffairDateLabel.innerHTML = "Date: ";
-                this.mDiv.appendChild(this.mAffairDateLabel);
-		this.mDiv.appendChild(this.mAffairDate);
+                this.mEventoDateLabel = document.createElement("LABEL");
+		this.mEventoDate.setAttribute("type","date"); 
+                this.mEventoDate.focus();
+                this.mEventoDateLabel.setAttribute("for", this.mEventoDate);
+                this.mEventoDateLabel.innerHTML = "Date: ";
+                this.mDiv.appendChild(this.mEventoDateLabel);
+		this.mDiv.appendChild(this.mEventoDate);
 		
 		//BR
 		this.mBrA = document.createElement("BR");
@@ -135,11 +135,11 @@ class InsertAffairScreen
                 this.mDiv.appendChild(this.mBrG);
                 
 		//eventoType
-                this.mAffairTypeLabel = document.createElement("LABEL");
-                this.mAffairTypeLabel.setAttribute("for", this.mAffairType);
-                this.mAffairTypeLabel.innerHTML = "Event Type: ";
-		this.mDiv.appendChild(this.mAffairTypeLabel);
-		this.mDiv.appendChild(this.mAffairType);
+                this.mEventoTypeLabel = document.createElement("LABEL");
+                this.mEventoTypeLabel.setAttribute("for", this.mEventoType);
+                this.mEventoTypeLabel.innerHTML = "Event Type: ";
+		this.mDiv.appendChild(this.mEventoTypeLabel);
+		this.mDiv.appendChild(this.mEventoType);
 
 		/*
 		this.mDivInputEmail = document.createElement("INPUT");
