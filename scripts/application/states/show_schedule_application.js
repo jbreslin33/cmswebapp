@@ -14,9 +14,14 @@ class SHOW_SCHEDULE_APPLICATION extends State
 		{
 			console.log("SHOW_SCHEDULE_APPLICATION: ENTER");        
 		}
-		//login
-		//app.mLogin = new Login(app);
-		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
+		if (app.mSchedule)
+		{
+
+		}
+		else
+		{
+			app.mSchedule = new Schedule(app);
+		}
 	}
 
         execute(app)
