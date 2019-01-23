@@ -8,26 +8,26 @@ class DISPLAY_SCHEDULE extends State
 		super();
 	}
         
-	enter(app)
+	enter(schedule)
         {
-		if (app.mStateLogs || app.mStateEnterLogs)
+		if (schedule.mStateLogs || schedule.mStateEnterLogs)
 		{
 			console.log("DISPLAY_SCHEDULE: ENTER");        
 		}
-		app.mSchedule.displaySchedule();
+		schedule.displaySchedule();
 	}
 
-        execute(app)
+        execute(schedule)
         {
-		if (app.mStateLogs || app.mStateExecuteLogs)
+		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
 		{
 			console.log("DISPLAY_SCHEDULE: EXECUTE");        
 		}
 	}
 
-        exit(app)
+        exit(schedule)
         {
-		if (app.mStateLogs || app.mStateExitLogs)
+		if (schedule.mStateLogs || schedule.mStateExitLogs)
 		{
 			console.log("DISPLAY_SCHEDULE: EXIT");        
 		}

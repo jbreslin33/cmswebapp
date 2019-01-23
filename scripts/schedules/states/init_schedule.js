@@ -14,7 +14,7 @@ class INIT_SCHEDULE extends State
 		{
 			console.log("INIT_SCHEDULE: ENTER");        
 		}
-		//schedule.mStateMachine.changeState(schedule.mCHECK_LOCAL_STORAGE_SCHEDULE);
+		schedule.mStateMachine.changeState(schedule.mCHECK_LOCAL_STORAGE_SCHEDULE);
 	}
 
         execute(schedule)

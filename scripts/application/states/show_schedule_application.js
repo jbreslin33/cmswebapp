@@ -20,6 +20,7 @@ class SHOW_SCHEDULE_APPLICATION extends State
 		}
 		else
 		{
+			console.log('new sc ??');
 			app.mSchedule = new Schedule(app);
 		}
 	}
