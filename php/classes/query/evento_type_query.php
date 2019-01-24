@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/query/query.php");
 
-class AffairTypeQuery extends Query
+class EventoTypeQuery extends Query
 {
 	function __construct() 
 	{
@@ -15,6 +15,6 @@ class AffairTypeQuery extends Query
 	}
 }
 
-$eventosTypeQuery = new AffairTypeQuery();
+$eventosTypeQuery = new EventoTypeQuery();
 
 ?>

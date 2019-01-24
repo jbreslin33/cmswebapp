@@ -14,7 +14,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 		{
 			console.log("INSERT_AFFAIR_SCREEN_SCHEDULE: ENTER");        
 		}
-		schedule.mInsertAffair = new InsertAffair(schedule);
+		schedule.mInsertEvento = new InsertEvento(schedule);
 
 		/*******
 		 *
@@ -38,7 +38,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 							var option = document.createElement("option");
 							option.value = data[i][0];
 							option.text = data[i][1];
-							APPLICATION.mSchedule.mInsertAffair.mScreen.mPitch.appendChild(option);
+							APPLICATION.mSchedule.mInsertEvento.mScreen.mPitch.appendChild(option);
                                                 }
                                         }
                                         else
@@ -71,7 +71,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                                         var option = document.createElement("option");
                                                         option.value = data[i][0];
                                                         option.text = data[i][1];
-                                                        APPLICATION.mSchedule.mInsertAffair.mScreen.mAffairType.appendChild(option);
+                                                        APPLICATION.mSchedule.mInsertEvento.mScreen.mEventoType.appendChild(option);
                                                 }
                                         }
                                         else

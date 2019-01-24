@@ -18,30 +18,30 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 		//basically we are either using initial or localstorage then regardless we are going to internet state
 /*
 
-                schedule.mAffair = localStorage.mAffair;
-		if (schedule.mAffair)
+                schedule.mEvento = localStorage.mEvento;
+		if (schedule.mEvento)
 		{
 			//local storage
-			var data = JSON.parse(schedule.mAffair);
-			schedule.mAffair.mAffairScreen.update();
+			var data = JSON.parse(schedule.mEvento);
+			schedule.mEvento.mEventoScreen.update();
 
-			schedule.mDivAffairDate.textContent = data.mAffairDate;
+			schedule.mDivEventoDate.textContent = data.mEventoDate;
 			schedule.mDivStartTime.textContent = data.mStartTime;
 			schedule.mDivAddress.textContent = data.mAddress;
 		}
 		else //put up fake data
 		{
-                	var fakeAffair = new SelectAffair(schedule);
-                        fakeAffair.mScreen = new SelectAffairScreen(fakeAffair);
+                	var fakeEvento = new SelectEvento(schedule);
+                        fakeEvento.mScreen = new SelectEventoScreen(fakeEvento);
 
                         //update screen card
-                        fakeAffair.mScreen.update();
+                        fakeEvento.mScreen.update();
 
                         //save for later
-                        schedule.saveToLocalStorage(fakeAffair);
+                        schedule.saveToLocalStorage(fakeEvento);
 
                         //push to array
-                       	schedule.mSelectAffairArray.push(fakeAffair);
+                       	schedule.mSelectEventoArray.push(fakeEvento);
 		}
 
 		//either way go for fresh data from getInternetData state

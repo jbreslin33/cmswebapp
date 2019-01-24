@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
 
-class InsertAffair extends Insert
+class InsertEvento extends Insert
 {
 	function __construct() 
 	{
@@ -17,6 +17,6 @@ class InsertAffair extends Insert
 	}
 }
 
-$insertAffair = new InsertAffair();
+$insertEvento = new InsertEvento();
 
 ?>
