@@ -17,9 +17,12 @@ class Application
 
 		//login first
 		this.mLogin = null;
-		
-		//report
+	
+		//daily schedule
 		this.mDailySchedule = null;
+
+		//insert evento
+		this.mInsertEvento = null;
 
 		//main class
                 this.mDivMain = document.createElement("DIV");

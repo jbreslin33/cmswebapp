@@ -1,11 +1,10 @@
 'use strict';
 
-class InsertEvento extends Evento
+class InsertEvento
 {
-	constructor(schedule)
+	constructor(application)
 	{
-		super(schedule);
-
+		this.mApplication = application;
 		this.mScreen = new InsertEventoScreen(this);
 	}
 
