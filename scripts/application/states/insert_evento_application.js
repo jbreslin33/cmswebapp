@@ -19,7 +19,10 @@ class INSERT_EVENTO_APPLICATION extends State
 		{
 
 		}
-		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
+		else
+		{
+			app.mInsertEvento = new InsertEvento(app);
+		}
 	}
 
         execute(app)
