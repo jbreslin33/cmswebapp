@@ -38,5 +38,7 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 		{
 			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: EXIT");        
 		}
+		//hide it for now maybe delete later
+		app.mDailySchedule.hideSchedule();
 	}
 }

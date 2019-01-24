@@ -113,12 +113,9 @@ class DailySchedule
 	}
 	hideSchedule()
 	{
-		/*
-        	for (var i = 0; i < APPLICATION.mDailySchedule.mEventoArray.length; i++)
+        	for (var i = 0; i < this.mScreenArray.length; i++)
 		{
-              		this.mCard.style.display = "block";
+			this.mScreenArray[i].hide();
 		}
-		*/
-
 	}
 }

@@ -17,6 +17,16 @@ class SelectEventoScreen
 	{
 	
 	}
+
+	show()
+	{
+  		this.mCard.style.display = "block";
+	}
+
+	hide()
+	{
+  		this.mCard.style.display = "none";
+	}
 	
 	update()
 	{
