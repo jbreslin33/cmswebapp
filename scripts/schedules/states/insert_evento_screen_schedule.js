@@ -38,7 +38,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
 							var option = document.createElement("option");
 							option.value = data[i][0];
 							option.text = data[i][1];
-							APPLICATION.mSchedule.mInsertEvento.mScreen.mPitch.appendChild(option);
+							//APPLICATION.mSchedule.mInsertEvento.mScreen.mPitch.appendChild(option);
                                                 }
                                         }
                                         else
@@ -71,7 +71,7 @@ class INSERT_AFFAIR_SCREEN_SCHEDULE extends State
                                                         var option = document.createElement("option");
                                                         option.value = data[i][0];
                                                         option.text = data[i][1];
-                                                        APPLICATION.mSchedule.mInsertEvento.mScreen.mEventoType.appendChild(option);
+                                                        //APPLICATION.mSchedule.mInsertEvento.mScreen.mEventoType.appendChild(option);
                                                 }
                                         }
                                         else

@@ -14,7 +14,7 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 		{
 			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: ENTER");        
 		}
-		if (app.mSchedule)
+		if (app.mDailySchedule)
 		{
 
 		}
