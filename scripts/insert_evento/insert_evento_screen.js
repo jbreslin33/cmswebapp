@@ -30,11 +30,12 @@ class InsertEventoScreen
 
 	show()
 	{
-		//this.mDivLogin.style.display = "block";	
+		document.getElementById("insert_evento_html_id").style.display = "block";
+
 	}
 
 	hide()
 	{
-		//this.mDivLogin.style.display = "none";	
+		document.getElementById("insert_evento_html_id").style.display = "none";
 	}
 }

@@ -23,6 +23,10 @@ class INSERT_EVENTO_APPLICATION extends State
 		{
 			app.mInsertEvento = new InsertEvento(app);
 		}
+
+		//show
+				
+		app.mInsertEvento.mScreen.show();	
 	}
 
         execute(app)
