@@ -12,6 +12,9 @@ class Application
 		//state changed
 		window.onhashchange = this.locationHashChanged;
 
+		//calendar
+		this.mCalendar = new Calendar();
+
 		//login first
 		this.mLogin = null;
 		

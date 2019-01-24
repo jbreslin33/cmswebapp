@@ -2,10 +2,8 @@
 
 class Evento
 {
-	constructor(schedule)
+	constructor()
 	{
-		this.mSchedule = schedule;
-
 		this.mID = null;
 		this.mEventosUsersAvailabilityID = null;
 		this.mData = new Array();

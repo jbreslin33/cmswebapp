@@ -1,11 +1,9 @@
 'use strict';
 
-class Schedule 
+class Calendar 
 {
-	constructor(application)
+	constructor()
 	{
-		this.mApplication = application;
-
 		//utilities
 		this.mTime = new Time();
 	

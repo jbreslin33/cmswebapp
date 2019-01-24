@@ -32,22 +32,22 @@ class SelectEventoScreen
 //select eventos.id, eventos_users_availability.id, evento_date, arrival_time, start_time, end_time, eventos.address, eventos.coordinates, pitches.name, field_name, teams.name, evento_types.name, availability.id
 
 				//date in header
-				this.mCard.children[0].innerHTML = this.mEvento.mSchedule.convertDate(this.mEvento.mData[2]);
+				this.mCard.children[0].innerHTML = APPLICATION.mCalendar.convertDate(this.mEvento.mData[2]);
 				
 				//big title				
 				this.mCard.children[1].children[0].innerHTML = this.mEvento.mData[11];  
 
 				if (this.mEvento.mData[3]) //time
 				{
-					this.mCard.children[1].children[1].innerHTML = "Arrival Time: " + this.mEvento.mSchedule.mTime.convertFromMilitaryToHuman(this.mEvento.mData[3]);  
+					this.mCard.children[1].children[1].innerHTML = "Arrival Time: " + APPLICATION.mCalendar.mTime.convertFromMilitaryToHuman(this.mEvento.mData[3]);  
 				}
 				if (this.mEvento.mData[4]) //time
 				{
-					this.mCard.children[1].children[2].innerHTML = "Start Time: " + this.mEvento.mSchedule.mTime.convertFromMilitaryToHuman(this.mEvento.mData[4]);  
+					this.mCard.children[1].children[2].innerHTML = "Start Time: " + APPLICATION.mCalendar.mTime.convertFromMilitaryToHuman(this.mEvento.mData[4]);  
 				}
 				if (this.mEvento.mData[5]) //time
 				{
-					this.mCard.children[1].children[3].innerHTML = "End Time: " + this.mEvento.mSchedule.mTime.convertFromMilitaryToHuman(this.mEvento.mData[5]);  
+					this.mCard.children[1].children[3].innerHTML = "End Time: " + APPLICATION.mCalendar.mTime.convertFromMilitaryToHuman(this.mEvento.mData[5]);  
 				}
 				if (this.mEvento.mData[6]) //address
 				{
