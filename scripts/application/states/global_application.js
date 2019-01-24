@@ -27,6 +27,14 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EVENTO_APPLICATION);
                 }
+		else if (location.hash == '#schedule' && app.mStateMachine.mCurrentState != app.mSHOW_DAILY_SCHEDULE_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mSHOW_DAILY_SCHEDULE_APPLICATION);
+                }
+		if (location.hash == '#schedule')
+		{
+			console.log("sch d");
+		}
 	}
 
         exit(application)
