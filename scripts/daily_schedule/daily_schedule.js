@@ -105,9 +105,17 @@ class DailySchedule
 			var evento = APPLICATION.mDailySchedule.mEventoArray[i];	
 			var screen = new SelectEventoScreen(evento);	
 
-			APPLICATION.mDailySchedule.mEventoArray[i].mScreen = screen;
-
 			screen.update();
 		}
+	}
+	hideSchedule()
+	{
+		/*
+        	for (var i = 0; i < APPLICATION.mDailySchedule.mEventoArray.length; i++)
+		{
+              		this.mCard.style.display = "block";
+		}
+		*/
+
 	}
 }
