@@ -16,8 +16,8 @@ class INIT_APPLICATION extends State
 		}
 		//hide evertthing
 		document.getElementById("nav_bar_id").style.display = "none";
-		document.getElementById("loginscreenhtmlid").style.display = "none";
-		document.getElementById("cardoriginalid").style.display = "none";
+		document.getElementById("login_screen_html_id").style.display = "none";
+		document.getElementById("card_original_id").style.display = "none";
 		document.getElementById("insert_evento_html_id").style.display = "none";
 	}
 

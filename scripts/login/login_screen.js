@@ -40,11 +40,11 @@ class LoginScreen
 
 	show()
 	{
-		document.getElementById("loginscreenhtmlid").style.display = "block";
+		document.getElementById("login_screen_html_id").style.display = "block";
 	}
 
 	hide()
 	{
-		document.getElementById("loginscreenhtmlid").style.display = "none";
+		document.getElementById("login_screen_html_id").style.display = "none";
 	}
 }

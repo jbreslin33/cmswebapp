@@ -7,7 +7,7 @@ class SelectEventoScreen
 	constructor(evento)
 	{
 		this.mEvento = evento;
-		this.mOriginalCard = document.getElementById("cardoriginalid");
+		this.mOriginalCard = document.getElementById("card_original_id");
 		this.mCard = this.mOriginalCard.cloneNode(true);
 		document.body.appendChild(this.mCard);
 	        this.mCard.style.display = "block";
