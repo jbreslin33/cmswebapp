@@ -38,7 +38,7 @@ class LOGIN_APPLICATION extends State
 
 		if (app.mLogin.mLoggedIn == true)
 		{
-			app.mStateMachine.changeState(app.mSHOW_SCHEDULE_APPLICATION);
+			app.mStateMachine.changeState(app.mSHOW_DAILY_SCHEDULE_APPLICATION);
 		}
 	}
 

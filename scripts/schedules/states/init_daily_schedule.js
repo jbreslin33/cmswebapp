@@ -1,27 +1,27 @@
 
 'use strict';
 
-class DISPLAY_SCHEDULE extends State
+class INIT_DAILY_SCHEDULE extends State
 {
 	constructor() 
 	{
 		super();
 	}
-        
-	enter(schedule)
+
+        enter(schedule)
         {
 		if (schedule.mStateLogs || schedule.mStateEnterLogs)
 		{
-			console.log("DISPLAY_SCHEDULE: ENTER");        
+			console.log("INIT_DAILY_SCHEDULE: ENTER");        
 		}
-		schedule.displaySchedule();
+		schedule.mStateMachine.changeState(schedule.mCHECK_LOCAL_STORAGE_DAILY_SCHEDULE);
 	}
 
         execute(schedule)
         {
 		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
 		{
-			console.log("DISPLAY_SCHEDULE: EXECUTE");        
+			console.log("INIT_DAILY_SCHEDULE: EXECUTE");        
 		}
 	}
 
@@ -29,7 +29,7 @@ class DISPLAY_SCHEDULE extends State
         {
 		if (schedule.mStateLogs || schedule.mStateExitLogs)
 		{
-			console.log("DISPLAY_SCHEDULE: EXIT");        
+			console.log("INIT_DAILY_SCHEDULE: EXIT");        
 		}
 	}
 }

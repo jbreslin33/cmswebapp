@@ -1,7 +1,7 @@
 
 'use strict';
 
-class SHOW_SCHEDULE_APPLICATION extends State
+class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class SHOW_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("SHOW_SCHEDULE_APPLICATION: ENTER");        
+			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: ENTER");        
 		}
 		if (app.mSchedule)
 		{
@@ -21,7 +21,7 @@ class SHOW_SCHEDULE_APPLICATION extends State
 		else
 		{
 			console.log('new sc ??');
-			app.mSchedule = new Schedule(app);
+			app.mDailySchedule = new DailySchedule(app);
 		}
 	}
 
@@ -29,7 +29,7 @@ class SHOW_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("SHOW_SCHEDULE_APPLICATION: EXECUTE");        
+			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: EXECUTE");        
 		}
 	}
 
@@ -37,7 +37,7 @@ class SHOW_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("SHOW_SCHEDULE_APPLICATION: EXIT");        
+			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: EXIT");        
 		}
 	}
 }

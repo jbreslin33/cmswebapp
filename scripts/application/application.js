@@ -16,7 +16,7 @@ class Application
 		this.mLogin = null;
 		
 		//report
-		this.mSchedule = null;
+		this.mDailySchedule = null;
 
 		//main class
                 this.mDivMain = document.createElement("DIV");
@@ -29,7 +29,7 @@ class Application
 		this.mINIT_APPLICATION            = new INIT_APPLICATION();
 		this.mMAIN_APPLICATION            = new MAIN_APPLICATION();
 		this.mLOGIN_APPLICATION           = new LOGIN_APPLICATION();
-		this.mSHOW_SCHEDULE_APPLICATION   = new SHOW_SCHEDULE_APPLICATION();
+		this.mSHOW_DAILY_SCHEDULE_APPLICATION   = new SHOW_DAILY_SCHEDULE_APPLICATION();
 		this.mINSERT_SCHEDULE_APPLICATION = new INSERT_SCHEDULE_APPLICATION();
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
@@ -46,7 +46,7 @@ class Application
 		}
 		if (this.mSchedule)
 		{
-			this.mSchedule.update(timestamp);
+			this.mDailySchedule.update(timestamp);
 		}
 
 		//run again

@@ -1,7 +1,7 @@
 
 'use strict';
 
-class GLOBAL_SCHEDULE extends State
+class GLOBAL_DAILY_SCHEDULE extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class GLOBAL_SCHEDULE extends State
         {
                 if (schedule.mStateLogs || schedule.mStateEnterLogs)
                 {
-                        console.log("GLOBAL_SCHEDULE: ENTER"); 
+                        console.log("GLOBAL_DAILY_SCHEDULE: ENTER"); 
                 }
 	}
 
@@ -20,7 +20,7 @@ class GLOBAL_SCHEDULE extends State
         {
                 if (schedule.mStateLogs || schedule.mStateExecuteLogs)
                 {
-                        console.log("GLOBAL_SCHEDULE: EXECUTE"); 
+                        console.log("GLOBAL_DAILY_SCHEDULE: EXECUTE"); 
                 }
 	}
 
@@ -28,7 +28,7 @@ class GLOBAL_SCHEDULE extends State
         {
                 if (schedule.mStateLogs || schedule.mStateExitLogs)
                 {
-                        console.log("GLOBAL_SCHEDULE: EXIT"); 
+                        console.log("GLOBAL_DAILY_SCHEDULE: EXIT"); 
                 }
 	}
 }

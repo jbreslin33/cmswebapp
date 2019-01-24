@@ -1,7 +1,7 @@
 
 'use strict';
 
-class CHECK_LOCAL_STORAGE_SCHEDULE extends State
+class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: ENTER");        
+			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: ENTER");        
 		}
 
 		//basically we are either using initial or localstorage then regardless we are going to internet state
@@ -46,15 +46,15 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
 
 		//either way go for fresh data from getInternetData state
 */
-		app.mStateMachine.changeState(app.mGET_INTERNET_DATA_SCHEDULE);
-		//schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+		app.mStateMachine.changeState(app.mGET_INTERNET_DATA_DAILY_SCHEDULE);
+		//schedule.mStateMachine.changeState(schedule.mDISPLAY_DAILY_SCHEDULE);
 	}
 
         execute(app)
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: EXECUTE");        
+			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: EXECUTE");        
 		}
 	}
 
@@ -62,7 +62,7 @@ class CHECK_LOCAL_STORAGE_SCHEDULE extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("CHECK_LOCAL_STORAGE_SCHEDULE: EXIT");        
+			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: EXIT");        
 		}
 	}
 }

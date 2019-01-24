@@ -1,7 +1,7 @@
 
 'use strict';
 
-class GET_INTERNET_DATA_SCHEDULE extends State
+class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
         {
 		if (schedule.mStateLogs || schedule.mStateEnterLogs)
 		{
-			console.log("GET_INTERNET_DATA_SCHEDULE: ENTER");        
+			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: ENTER");        
 		}
 		//delete previous data
 
@@ -30,12 +30,12 @@ class GET_INTERNET_DATA_SCHEDULE extends State
         {
 		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
 		{
-			console.log("GET_INTERNET_DATA_SCHEDULE: EXECUTE");        
+			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: EXECUTE");        
 		}
 		//do we have something to display???
 		if (schedule.mSelectEventoArray.length > 0)
 		{
- 			schedule.mStateMachine.changeState(schedule.mDISPLAY_SCHEDULE);
+ 			schedule.mStateMachine.changeState(schedule.mDISPLAY_DAILY_SCHEDULE);
 		}
 	}
 
@@ -43,7 +43,7 @@ class GET_INTERNET_DATA_SCHEDULE extends State
         {
 		if (schedule.mStateLogs || schedule.mStateExitLogs)
 		{
-			console.log("GET_INTERNET_DATA_SCHEDULE: EXIT");        
+			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: EXIT");        
 		}
 	}
 }
