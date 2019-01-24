@@ -28,7 +28,6 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 
         execute(schedule)
         {
-		console.log('execute g');
 		if (schedule.mStateLogs || schedule.mStateExecuteLogs)
 		{
 			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: EXECUTE");        

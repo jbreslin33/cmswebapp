@@ -20,7 +20,6 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 		}
 		else
 		{
-			console.log('new sc ??');
 			app.mDailySchedule = new DailySchedule(app);
 		}
 	}
