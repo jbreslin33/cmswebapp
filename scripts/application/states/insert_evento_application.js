@@ -1,7 +1,7 @@
 
 'use strict';
 
-class INSERT_SCHEDULE_APPLICATION extends State
+class INSERT_EVENTO_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -12,7 +12,7 @@ class INSERT_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("INSERT_SCHEDULE_APPLICATION: ENTER");        
+			console.log("INSERT_EVENTO_APPLICATION: ENTER");        
 		}
 		//login
 		//app.mLogin = new Login(app);
@@ -23,7 +23,7 @@ class INSERT_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("INSERT_SCHEDULE_APPLICATION: EXECUTE");        
+			console.log("INSERT_EVENTO_APPLICATION: EXECUTE");        
 		}
 	}
 
@@ -31,7 +31,7 @@ class INSERT_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("INSERT_SCHEDULE_APPLICATION: EXIT");        
+			console.log("INSERT_EVENTO_APPLICATION: EXIT");        
 		}
 	}
 }

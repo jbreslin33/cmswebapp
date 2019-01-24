@@ -22,10 +22,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
                 }
-                if (location.hash == '#add-event' && app.mStateMachine.mCurrentState != app.mINSERT_SCHEDULE_APPLICATION)
+
+                if (location.hash == '#add-event' && app.mStateMachine.mCurrentState != app.mINSERT_EVENTO_APPLICATION)
                 {
-                        console.log("change state to insert eventos");
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_SCHEDULE_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EVENTO_APPLICATION);
                 }
 	}
 
