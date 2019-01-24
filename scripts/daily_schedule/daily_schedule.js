@@ -17,7 +17,7 @@ class DailySchedule
 
 		//data storage classes
 		this.mInitialEvento = null;
-		this.mSelectEventoArray = new Array();
+		this.mEventoArray = new Array();
 	
 		//states
                 this.mStateMachine = new StateMachine(this);
@@ -63,9 +63,9 @@ class DailySchedule
                                         if (jsondata)
                                         {
                                                 //lets clear array of select eventos....
-                                                for (var d = 0; d < APPLICATION.mDailySchedule.mSelectEventoArray.length; d++)
+                                                for (var d = 0; d < APPLICATION.mDailySchedule.mEventoArray.length; d++)
                                                 {
-                                                        var evento = APPLICATION.mDailySchedule.mSelectEventoArray.shift();
+                                                        var evento = APPLICATION.mDailySchedule.mEventoArray.shift();
                                                 }
 
                                                 var i = 0;
@@ -81,7 +81,7 @@ class DailySchedule
                                                         APPLICATION.mDailySchedule.saveToLocalStorage(evento);
 
                                                         //push to array
-                                                        APPLICATION.mDailySchedule.mSelectEventoArray.push(evento);
+                                                        APPLICATION.mDailySchedule.mEventoArray.push(evento);
                                                         i++;
                                                 }
                                         }
@@ -98,14 +98,14 @@ class DailySchedule
 
 	displaySchedule()
 	{
-                for (var i = 0; i < APPLICATION.mDailySchedule.mSelectEventoArray.length; i++)
+                for (var i = 0; i < APPLICATION.mDailySchedule.mEventoArray.length; i++)
 		{
                         //create screen to display data
 
-			var evento = APPLICATION.mDailySchedule.mSelectEventoArray[i];	
+			var evento = APPLICATION.mDailySchedule.mEventoArray[i];	
 			var screen = new SelectEventoScreen(evento);	
 
-			APPLICATION.mDailySchedule.mSelectEventoArray[i].mScreen = screen;
+			APPLICATION.mDailySchedule.mEventoArray[i].mScreen = screen;
 
 			screen.update();
 		}

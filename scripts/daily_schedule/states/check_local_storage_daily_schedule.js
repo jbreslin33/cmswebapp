@@ -41,7 +41,7 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
                         schedule.saveToLocalStorage(fakeEvento);
 
                         //push to array
-                       	schedule.mSelectEventoArray.push(fakeEvento);
+                       	schedule.mEventoArray.push(fakeEvento);
 		}
 
 		//either way go for fresh data from getInternetData state

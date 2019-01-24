@@ -16,11 +16,11 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 		}
 		//delete previous data
 
-		for (var i=0; i < schedule.mSelectEventoArray.length; i++)
+		for (var i=0; i < schedule.mEventoArray.length; i++)
 		{
-			schedule.mSelectEventoArray[i].destructor();
-			schedule.mSelectEventoArray[i] = null;
-			delete schedule.mSelectEventoArray[i];
+			schedule.mEventoArray[i].destructor();
+			schedule.mEventoArray[i] = null;
+			delete schedule.mEventoArray[i];
 		}
 		//get new data from internets
 		schedule.getSchedule();
@@ -33,7 +33,7 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: EXECUTE");        
 		}
 		//do we have something to display???
-		if (schedule.mSelectEventoArray.length > 0)
+		if (schedule.mEventoArray.length > 0)
 		{
  			schedule.mStateMachine.changeState(schedule.mDISPLAY_DAILY_SCHEDULE);
 		}
