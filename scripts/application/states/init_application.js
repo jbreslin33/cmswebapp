@@ -18,6 +18,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("nav_bar_id").style.display = "none";
 		document.getElementById("loginscreenhtmlid").style.display = "none";
 		document.getElementById("cardoriginalid").style.display = "none";
+		document.getElementById("insert_evento_html_id").style.display = "none";
 	}
 
         execute(application)
