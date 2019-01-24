@@ -14,8 +14,8 @@ class INSERT_EVENTO_APPLICATION extends State
 		{
 			console.log("INSERT_EVENTO_APPLICATION: ENTER");        
 		}
-		//login
-		//app.mLogin = new Login(app);
+
+		//if (app.mInser
 		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
 	}
 
