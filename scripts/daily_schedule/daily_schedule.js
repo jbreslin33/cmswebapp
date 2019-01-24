@@ -71,7 +71,7 @@ class DailySchedule
                                                 var i = 0;
                                                 while (jsondata[i])
                                                 {
-                                                        var evento = new SelectEvento(APPLICATION.mDailySchedule);
+                                                        var evento = new Evento();
                                                         for (var b = 0; b < 14; b++)
                                                         {
                                                                 evento.mData.push(jsondata[i][b]);

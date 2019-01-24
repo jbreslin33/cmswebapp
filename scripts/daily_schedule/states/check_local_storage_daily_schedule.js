@@ -31,7 +31,7 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 		}
 		else //put up fake data
 		{
-                	var fakeEvento = new SelectEvento(schedule);
+                	var fakeEvento = new Evento(schedule);
                         fakeEvento.mScreen = new SelectEventoScreen(fakeEvento);
 
                         //update screen card
