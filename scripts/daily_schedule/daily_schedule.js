@@ -18,6 +18,8 @@ class DailySchedule
 		//data storage classes
 		this.mInitialEvento = null;
 		this.mEventoArray = new Array();
+
+		this.mScreenArray = new Array();
 	
 		//states
                 this.mStateMachine = new StateMachine(this);
@@ -104,6 +106,7 @@ class DailySchedule
 
 			var evento = APPLICATION.mDailySchedule.mEventoArray[i];	
 			var screen = new SelectEventoScreen(evento);	
+			this.mScreenArray.push(screen);
 
 			screen.update();
 		}

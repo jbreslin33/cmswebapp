@@ -69,71 +69,7 @@ class SelectEventoScreen
 				{
 					this.mCard.children[1].children[8].innerHTML = this.mEvento.mData[13] + ' ' + this.mEvento.mData[10];  
 				}
-				else if (i == 4) //time
-				{
-					/*
-         				div.textContent =  "End Time: " + this.mEvento.mSchedule.mTime.convertFromMilitaryToHuman(this.mEvento.mData[i]);
-					*/
-				}
-				else if (i == 7) //coordinates
-				{
-					//ok we have coordinates from server lets create elements
-					/*
-					var a = document.createElement("a"); 
-					var text = document.createTextNode("map"); 
-					a.appendChild(text);
-					a.title = "map";
-					a.href = null;
-					div.appendChild(a);
-
-					a.href = this.mEvento.mData[i];
-					*/
-				}
-				else if (i == 8) //coordinates
-				{
-					/*
-         				div.textContent = this.mEvento.mData[i];
-					*/
-				}
-				else if (i == 12)
-				{
-					//dont need the default option because we have a db entry
-					/*
-					this.mSelectAvailability.remove(this.mOption);
-
-                                        this.mDivCard.appendChild(this.mSelectAvailability);
-					if (this.mEvento.mData[i] == 1)
-					{
-						this.optionA.selected = 'selected';
-					}
-					if (this.mEvento.mData[i] == 2)
-					{
-						this.optionB.selected = 'selected';
-					}
-					if (this.mEvento.mData[i] == 3)
-					{
-						this.optionC.selected = 'selected';
-					}
-					*/
-				}
-				else 
-				{
-					/*
-					if (i != 0)
-					{
-         					div.textContent = this.mEvento.mData[i];
-					}
-					*/
-				}
 			}
-
-			if (this.mEvento.mData[12] == null)
-			{
-				/*
-                        	this.mDivCard.appendChild(this.mSelectAvailability);
-				*/
-			}
-
 		}
 	}
 	updateAvailability()
