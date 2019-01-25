@@ -21,7 +21,5 @@ class InsertEvento
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_EVENTO);
                 this.mStateMachine.changeState(this.mINIT_INSERT_EVENTO);
-
 	}
-
 }
