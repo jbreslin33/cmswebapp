@@ -2,11 +2,11 @@
 
 class InsertEventoScreen
 {
-	constructor(schedule)
+	constructor(insertEvento)
 	{
-		this.mDailySchedule
+		this.mInsertEvento = insertEvento;
 		//set button event listner
-		document.getElementById("insert_evento_button_id").onclick = this.buttonClicked;
+		document.getElementById("insert_evento_button_id").onclick = this.buttonClicked.bind(this);
 
 
 	}
@@ -14,7 +14,7 @@ class InsertEventoScreen
 	buttonClicked()
 	{
 		console.log('clicked');
-		this.mDailySchedule.send();
+		this.mInsertEvento.send();
 	}
 
 	divInputEmailKeyDown(e)
