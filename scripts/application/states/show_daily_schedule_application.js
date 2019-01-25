@@ -16,6 +16,8 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 		}
 		if (app.mDailySchedule)
 		{
+			//also maybe some clean up as well, so just leaving this if statement here.
+			app.mDailySchedule = new DailySchedule(app);
 
 		}
 		else

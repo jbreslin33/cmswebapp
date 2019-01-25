@@ -43,5 +43,6 @@ class INSERT_EVENTO_APPLICATION extends State
 		{
 			console.log("INSERT_EVENTO_APPLICATION: EXIT");        
 		}
+		app.mInsertEvento.mScreen.hide();	
 	}
 }
