@@ -27,7 +27,9 @@ class InsertEvento
         send()
         {
                 //need to handle not having a team yet...
-                var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword;
+		// php/classes/insert/insert_evento.php
+
+                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -41,7 +43,8 @@ class InsertEvento
                                         {
                                                 if (data == 100)
                                                 {
-                                                        APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
+                                                        //APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
+							//we should for user sanity ask for password when they go to an insert type screen
                                                 }
                                         }
                                 }
