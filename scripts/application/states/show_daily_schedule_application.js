@@ -24,6 +24,7 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 		{
 			app.mDailySchedule = new DailySchedule(app);
 		}
+		document.getElementById("daily_schedule_nav_id").className += " active";
 	}
 
         execute(app)
@@ -42,5 +43,7 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
 		}
 		//hide it for now maybe delete later
 		app.mDailySchedule.hideSchedule();
+
+		document.getElementById("daily_schedule_nav_id").className = document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
 	}
 }

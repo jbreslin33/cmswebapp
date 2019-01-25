@@ -27,6 +27,9 @@ class INSERT_EVENTO_APPLICATION extends State
 		//show
 				
 		app.mInsertEvento.mScreen.show();	
+             
+		document.getElementById("add_event_nav_id").className += " active";
+
 	}
 
         execute(app)
@@ -44,5 +47,8 @@ class INSERT_EVENTO_APPLICATION extends State
 			console.log("INSERT_EVENTO_APPLICATION: EXIT");        
 		}
 		app.mInsertEvento.mScreen.hide();	
+	
+		document.getElementById("add_event_nav_id").className = document.getElementById("add_event_nav_id").className.replace(" active", "");
+
 	}
 }

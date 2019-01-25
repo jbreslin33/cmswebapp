@@ -23,18 +23,19 @@ class GLOBAL_APPLICATION extends State
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
                 }
 
-                if (location.hash == '#add-event' && app.mStateMachine.mCurrentState != app.mINSERT_EVENTO_APPLICATION)
+                if (location.hash == '#add_event' && app.mStateMachine.mCurrentState != app.mINSERT_EVENTO_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EVENTO_APPLICATION);
                 }
-		else if (location.hash == '#schedule' && app.mStateMachine.mCurrentState != app.mSHOW_DAILY_SCHEDULE_APPLICATION)
+		else if (location.hash == '#daily_schedule' && app.mStateMachine.mCurrentState != app.mSHOW_DAILY_SCHEDULE_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mSHOW_DAILY_SCHEDULE_APPLICATION);
                 }
-		if (location.hash == '#schedule')
-		{
-			console.log("sch d");
-		}
+
+		//set all tabs to not active
+		document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
+		document.getElementById("add_event_nav_id").className.replace(" active", "");
+
 	}
 
         exit(application)
