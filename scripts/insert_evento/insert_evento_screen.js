@@ -9,6 +9,11 @@ class InsertEventoScreen
 
 
 	}
+	
+	buttonClicked()
+	{
+		console.log('clicked');
+	}
 
 	divInputEmailKeyDown(e)
 	{
@@ -20,10 +25,6 @@ class InsertEventoScreen
 		*/
 	}
 
-	buttonClicked()
-	{
-		console.log('clicked');
-	}
 
 	divInputPasswordKeyDown(e)
 	{
@@ -38,7 +39,6 @@ class InsertEventoScreen
 	show()
 	{
 		document.getElementById("insert_evento_html_id").style.display = "block";
-
 	}
 
 	hide()

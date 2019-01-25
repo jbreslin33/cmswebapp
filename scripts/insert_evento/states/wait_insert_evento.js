@@ -1,6 +1,6 @@
 'use strict';
 
-class INIT_INSERT_EVENTO extends State
+class WAIT_INSERT_EVENTO extends State
 {
 	constructor() 
 	{
@@ -11,7 +11,7 @@ class INIT_INSERT_EVENTO extends State
         {
 		if (insertEvento.mStateLogs || insertEvento.mStateEnterLogs)
 		{
-			console.log("INIT_INSERT_EVENTO: ENTER");        
+			console.log("WAIT_INSERT_EVENTO: ENTER");        
 		}
 	}
 
@@ -19,16 +19,15 @@ class INIT_INSERT_EVENTO extends State
         {
 		if (insertEvento.mStateLogs || insertEvento.mStateExecuteLogs)
 		{
-			console.log("INIT_INSERT_EVENTO: EXECUTE");        
+			console.log("WAIT_INSERT_EVENTO: EXECUTE");        
 		}
-		insertEvent.mStateMachine.changeState(insertEvent.mWAIT_INSERT_EVENTO);
 	}
 
         exit(insertEvento)
         {
 		if (insertEvento.mStateLogs || insertEvento.mStateExitLogs)
 		{
-			console.log("INIT_INSERT_EVENTO: EXIT");        
+			console.log("WAIT_INSERT_EVENTO: EXIT");        
 		}
 	}
 }
