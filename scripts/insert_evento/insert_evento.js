@@ -23,4 +23,32 @@ class InsertEvento
                 this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_EVENTO);
                 this.mStateMachine.changeState(this.mINIT_INSERT_EVENTO);
 	}
+
+        send()
+        {
+                //need to handle not having a team yet...
+                var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword;
+
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var data = this.responseText;
+                                        if (data)
+                                        {
+                                                if (data == 100)
+                                                {
+                                                        APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
+                                                }
+                                        }
+                                }
+                        }
+                };
+                request.open('POST', url);
+                request.send();
+        }
+
 }
