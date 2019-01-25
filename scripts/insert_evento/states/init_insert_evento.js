@@ -1,4 +1,3 @@
-
 'use strict';
 
 class INIT_INSERT_EVENTO extends State

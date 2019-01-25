@@ -4,8 +4,10 @@ class InsertEventoScreen
 {
 	constructor(schedule)
 	{
-		console.log('constructor InsertEventoScreen');
-	
+		//set button event listner
+		document.getElementById("insert_evento_button_id").onclick = this.buttonClicked;
+
+
 	}
 
 	divInputEmailKeyDown(e)
@@ -16,6 +18,11 @@ class InsertEventoScreen
 			APPLICATION.mLogin.mLoginScreen.mDivInputPassword.focus();
 		}
 		*/
+	}
+
+	buttonClicked()
+	{
+		console.log('clicked');
 	}
 
 	divInputPasswordKeyDown(e)
