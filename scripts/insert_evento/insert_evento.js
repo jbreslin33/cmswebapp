@@ -7,6 +7,19 @@ class InsertEvento
 		this.mApplication = application;
 		this.mScreen = new InsertEventoScreen(this);
 
+		//fields
+		this.mEventoDate = null;
+		this.mArrivalTime = null;
+		this.mStartTime = null;
+		this.mEndTime = null;
+		this.mAddress = null;
+		this.mCoordinates = null;
+		this.mCoordinates = null;
+		this.mPitchID = null;
+		this.mFieldName = null;
+		this.mTeamID = null;
+		this.mEventoTypesID = null;
+
                 //logs
                 this.mStateLogs = false;
                 this.mStateEnterLogs = true;
@@ -26,10 +39,8 @@ class InsertEvento
 
         send()
         {
-                //need to handle not having a team yet...
-		// php/classes/insert/insert_evento.php
-
-                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword;
+console.log('in send:' + APPLICATION.mInsertEvento.mEventoDate); 
+                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword + "&evento_date=" + APPLICATION.mInsertEvento.mEventoDate;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
