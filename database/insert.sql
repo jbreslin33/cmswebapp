@@ -91,6 +91,8 @@ insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/15/2019','20:30:00','20:20:00','4666 bristol road feasterville pa',3,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/24/2019','20:45:00','20:35:00','4666 bristol road feasterville pa',3,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/25/2019','20:55:00','20:45:00','4666 bristol road feasterville pa',3,1);
+insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/30/2019','20:55:00','20:45:00','4666 bristol road feasterville pa',3,1);
+insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('02/03/2019','20:55:00','20:45:00','4666 bristol road feasterville pa',3,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/26/2019','20:45:00','20:35:00','4666 bristol road feasterville pa',1,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/27/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/28/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
