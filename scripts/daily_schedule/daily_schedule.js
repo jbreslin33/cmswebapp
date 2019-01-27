@@ -66,7 +66,7 @@ class DailySchedule
                                                 }
 
                                                 var i = 0;
-                                                while (jsondata[i])
+                                                while (jsondata.length)
                                                 {
                                                         var evento = new Evento();
                                                         for (var b = 0; b < jsondata.length; b++)
@@ -75,7 +75,7 @@ class DailySchedule
 								evento.mAvailabilityID = jsondata[i][1]; 
 								evento.mDate           = jsondata[i][2]; 
 								evento.mArrivalTime    = jsondata[i][3]; 
-								evento.mStarTime       = jsondata[i][4]; 
+								evento.mStartTime      = jsondata[i][4]; 
 								evento.mEndTime        = jsondata[i][5]; 
 								evento.mAddress        = jsondata[i][6]; 
 								evento.mCoordinates    = jsondata[i][7]; 
@@ -86,6 +86,10 @@ class DailySchedule
 								
 								evento.mAvailabilityID = jsondata[i][12]; 
 								evento.mClub           = jsondata[i][13]; 
+								console.log('xxxxxxxxxxxxxxxx');
+								console.log('at:' + evento.mArrivalTime);
+								console.log('st:' + evento.mStartTime);
+								console.log('et:' + evento.mEndTime);
                                                         }
                                                         
 							//push to array

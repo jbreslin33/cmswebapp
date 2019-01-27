@@ -30,6 +30,74 @@ class SelectEventoScreen
 	
 	update()
 	{
+		if (this.mEvento.mDate)
+		{
+			this.mCard.children[0].innerHTML = APPLICATION.mCalendar.convertDate(this.mEvento.mDate);
+		}
+		if (this.mEvento.mEventoTypes)
+		{
+			this.mCard.children[1].children[0].innerHTML = this.mEvento.mEventoTypes;  
+		}
+		if (this.mEvento.mArrivalTime)
+		{
+			this.mCard.children[1].children[1].innerHTML = "Arrival Time: " + APPLICATION.mCalendar.mTime.convertFromMilitaryToHuman(this.mEvento.mArrivalTime);  
+		}
+		if (this.mEvento.mStartTime)
+		{
+			this.mCard.children[1].children[2].innerHTML = "Start Time: " + APPLICATION.mCalendar.mTime.convertFromMilitaryToHuman(this.mEvento.mStartTime);  
+		}
+		if (this.mEvento.mEndTime)
+		{
+			this.mCard.children[1].children[3].innerHTML = "End Time: " + APPLICATION.mCalendar.mTime.convertFromMilitaryToHuman(this.mEvento.mEndTime);  
+		}
+		if (this.mEvento.mAddress)
+		{		
+			this.mCard.children[1].children[4].innerHTML = "" + this.mEvento.mAddress;  
+		}
+		if (this.mEvento.mCoordinates)
+		{
+			this.mCard.children[1].children[5].innerHTML = "" + this.mEvento.mCoordinates;  
+		}
+		if (this.mEvento.mPitch)
+		{
+			this.mCard.children[1].children[6].innerHTML = "" + this.mEvento.mPitch;  
+		}
+		if (this.mEvento.mFieldName)
+		{
+			this.mCard.children[1].children[7].innerHTML = "" + this.mEvento.mFieldName;  
+		}
+		if (this.mEvento.mTeam)
+		{
+			this.mCard.children[1].children[8].innerHTML = this.mEvento.mClub + ' ' + this.mEvento.mTeam;  
+		}	
+
+		//this.mEvento.mID = this.mEvento.mData[12];
+/*
+                                                                evento.mID             = jsondata[i][0];
+                                                                evento.mAvailabilityID = jsondata[i][1];
+                                                                evento.mDate           = jsondata[i][2];
+                                                                evento.mArrivalTime    = jsondata[i][3];
+                                                                evento.mStarTime       = jsondata[i][4];
+                                                                evento.mEndTime        = jsondata[i][5];
+                                                                evento.mAddress        = jsondata[i][6];
+                                                                evento.mCoordinates    = jsondata[i][7];
+                                                                evento.mPitch          = jsondata[i][8];
+                                                                evento.mFieldName      = jsondata[i][9];
+                                                                evento.mTeam           = jsondata[i][10];
+                                                                evento.mEventoTypes    = jsondata[i][11];
+
+                                                                evento.mAvailabilityID = jsondata[i][12];
+                                                                evento.mClub           = jsondata[i][13];
+
+                var eventoArray = JSON.parse(localStorage.getItem('mEventoArrayLocal'));
+                for(var i = 0; i < eventoArray.length; i++)
+                {
+                        console.log('mID:' + eventoArray[i].mID);
+                        console.log('mDate:' + eventoArray[i].mDate);
+                        console.log('mTeam:' + eventoArray[i].mTeam);
+                }
+*/
+/*
 		for (var i = 0; i < this.mEvento.mData.length; i++)
 		{
 			//make dropdowns for availabilitys not yet set	
@@ -81,6 +149,7 @@ class SelectEventoScreen
 				}
 			}
 		}
+*/
 	}
 	updateAvailability()
 	{
