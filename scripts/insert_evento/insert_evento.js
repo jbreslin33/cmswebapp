@@ -14,7 +14,6 @@ class InsertEvento
 		this.mEndTime = null;
 		this.mAddress = null;
 		this.mCoordinates = null;
-		this.mCoordinates = null;
 		this.mPitchID = null;
 		this.mFieldName = null;
 		this.mTeamID = null;

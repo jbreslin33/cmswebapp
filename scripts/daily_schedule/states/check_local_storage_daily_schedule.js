@@ -14,6 +14,7 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 		{
 			console.log("CHECK_LOCAL_STORAGE_DAILY_SCHEDULE: ENTER");        
 		}
+/*
 		if (localStorage.mEventoArray)
 		{
 			dailySchedule.mEventoArrayLocalStorage = localStorage.mEventoArray;
@@ -39,6 +40,7 @@ class CHECK_LOCAL_STORAGE_DAILY_SCHEDULE extends State
 			console.log('mEventoArrayLocalStorage:' + dailySchedule.mEventoArrayLocalStorage);
 			console.log('mEventoArrayLocalStorage:' + dailySchedule.mEventoArrayLocalStorage.mData);
 		}
+*/
 
 
 		//basically we are either using initial or localstorage then regardless we are going to internet state

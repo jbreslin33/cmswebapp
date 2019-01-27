@@ -38,8 +38,8 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
  			schedule.mStateMachine.changeState(schedule.mDISPLAY_DAILY_SCHEDULE);
 		}
 
-		//and lets save our findings to local storage
-		localStorage.setItem('mEventoArray', JSON.stringify(schedule.mEventoArray));
+
+               
 	}
 
         exit(schedule)
@@ -48,5 +48,16 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 		{
 			console.log("GET_INTERNET_DATA_DAILY_SCHEDULE: EXIT");        
 		}
+		//and lets save our findings to local storage
+		localStorage.setItem('mEventoArrayLocal', JSON.stringify(schedule.mEventoArray));
+/*
+		var eventoArray = JSON.parse(localStorage.getItem('mEventoArrayLocal'));
+		for(var i = 0; i < eventoArray.length; i++)
+		{
+			console.log('mID:' + eventoArray[i].mID);
+			console.log('mDate:' + eventoArray[i].mDate);
+			console.log('mTeam:' + eventoArray[i].mTeam);
+		}
+*/
 	}
 }

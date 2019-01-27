@@ -41,12 +41,6 @@ class DailySchedule
  		this.mStateMachine.update();
 	}
 
-        saveToLocalStorage(evento)
-        {
-                //var data = JSON.stringify(evento);
-                //localStorage.mEvento = data;
-        }
-	
 	getSchedule()
         {
                 var url = "/php/classes/query/schedule_query.php?username=" + APPLICATION.mLogin.mUsername;
@@ -75,15 +69,26 @@ class DailySchedule
                                                 while (jsondata[i])
                                                 {
                                                         var evento = new Evento();
-                                                        for (var b = 0; b < 14; b++)
+                                                        for (var b = 0; b < jsondata.length; b++)
                                                         {
-                                                                evento.mData.push(jsondata[i][b]);
+								evento.mID             = jsondata[i][0]; 
+								evento.mAvailabilityID = jsondata[i][1]; 
+								evento.mDate           = jsondata[i][2]; 
+								evento.mArrivalTime    = jsondata[i][3]; 
+								evento.mStarTime       = jsondata[i][4]; 
+								evento.mEndTime        = jsondata[i][5]; 
+								evento.mAddress        = jsondata[i][6]; 
+								evento.mCoordinates    = jsondata[i][7]; 
+								evento.mPitch          = jsondata[i][8]; 
+								evento.mFieldName      = jsondata[i][9]; 
+								evento.mTeam           = jsondata[i][10]; 
+								evento.mEventoTypes    = jsondata[i][11]; 
+								
+								evento.mAvailabilityID = jsondata[i][12]; 
+								evento.mClub           = jsondata[i][13]; 
                                                         }
-
-                                                        //save for later
-                                                        APPLICATION.mDailySchedule.saveToLocalStorage(evento);
-
-                                                        //push to array
+                                                        
+							//push to array
                                                         APPLICATION.mDailySchedule.mEventoArray.push(evento);
                                                         i++;
                                                 }
