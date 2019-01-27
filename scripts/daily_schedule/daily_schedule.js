@@ -65,36 +65,31 @@ class DailySchedule
                                                         var evento = APPLICATION.mDailySchedule.mEventoArray.shift();
                                                 }
 
-                                                var i = 0;
-                                                while (jsondata.length)
+                                                for (var i = 0; i < jsondata.length; i++)
                                                 {
                                                         var evento = new Evento();
-                                                        for (var b = 0; b < jsondata.length; b++)
-                                                        {
-								evento.mID             = jsondata[i][0]; 
-								evento.mAvailabilityID = jsondata[i][1]; 
-								evento.mDate           = jsondata[i][2]; 
-								evento.mArrivalTime    = jsondata[i][3]; 
-								evento.mStartTime      = jsondata[i][4]; 
-								evento.mEndTime        = jsondata[i][5]; 
-								evento.mAddress        = jsondata[i][6]; 
-								evento.mCoordinates    = jsondata[i][7]; 
-								evento.mPitch          = jsondata[i][8]; 
-								evento.mFieldName      = jsondata[i][9]; 
-								evento.mTeam           = jsondata[i][10]; 
-								evento.mEventoTypes    = jsondata[i][11]; 
+							evento.mID             = jsondata[i][0]; 
+							evento.mAvailabilityID = jsondata[i][1]; 
+							evento.mDate           = jsondata[i][2]; 
+							evento.mArrivalTime    = jsondata[i][3]; 
+							evento.mStartTime      = jsondata[i][4]; 
+							evento.mEndTime        = jsondata[i][5]; 
+							evento.mAddress        = jsondata[i][6]; 
+							evento.mCoordinates    = jsondata[i][7]; 
+							evento.mPitch          = jsondata[i][8]; 
+							evento.mFieldName      = jsondata[i][9]; 
+							evento.mTeam           = jsondata[i][10]; 
+							evento.mEventoTypes    = jsondata[i][11]; 
 								
-								evento.mAvailabilityID = jsondata[i][12]; 
-								evento.mClub           = jsondata[i][13]; 
-								console.log('xxxxxxxxxxxxxxxx');
-								console.log('at:' + evento.mArrivalTime);
-								console.log('st:' + evento.mStartTime);
-								console.log('et:' + evento.mEndTime);
-                                                        }
+							evento.mAvailabilityID = jsondata[i][12]; 
+							evento.mClub           = jsondata[i][13]; 
+							console.log('xxxxxxxxxxxxxxxx');
+							console.log('at:' + evento.mArrivalTime);
+							console.log('st:' + evento.mStartTime);
+							console.log('et:' + evento.mEndTime);
                                                         
 							//push to array
                                                         APPLICATION.mDailySchedule.mEventoArray.push(evento);
-                                                        i++;
                                                 }
                                         }
                                         else
