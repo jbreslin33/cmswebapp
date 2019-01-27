@@ -61,8 +61,10 @@ class InsertEvento extends Insert
 	{
 		$this->mSQL = "
 		
-		insert into eventos (evento_date) values('" . 
+		insert into eventos (evento_date, arrival_time) values('" . 
 		$this->mEventoDate .
+		"','" .
+		$this->mArrivalTime .
 		"');";
 
 		error_log($this->mSQL);
