@@ -40,7 +40,7 @@ class InsertEvento
         send()
         {
 console.log('in send:' + APPLICATION.mInsertEvento.mEventoDate); 
-                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword + "&evento_date=" + APPLICATION.mInsertEvento.mEventoDate;
+                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword + "&evento_date=" + APPLICATION.mInsertEvento.mEventoDate + "&arrival_time=" + APPLICATION.mInsertEvento.mArrivalTime + "&start_time=" + APPLICATION.mInsertEvento.mStartTime + "&end_time=" + APPLICATION.mInsertEvento.mEndTime + "&address=" + APPLICATION.mInsertEvento.mAddress + "&coordinates=" + APPLICATION.mInsertEvento.mCoordinates + "&pitch=" + APPLICATION.mInsertEvento.mPitch + "&field_name=" + APPLICATION.mInsertEvento.mFieldName + "&Team=" + APPLICATION.mInsertEvento.mTeam + "&event_type=" + APPLICATION.mInsertEvento.mEventTypesID;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
