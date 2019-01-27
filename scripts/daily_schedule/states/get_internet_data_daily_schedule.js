@@ -37,6 +37,9 @@ class GET_INTERNET_DATA_DAILY_SCHEDULE extends State
 		{
  			schedule.mStateMachine.changeState(schedule.mDISPLAY_DAILY_SCHEDULE);
 		}
+
+		//and lets save our findings to local storage
+		localStorage.setItem('mEventoArray', JSON.stringify(schedule.mEventoArray));
 	}
 
         exit(schedule)

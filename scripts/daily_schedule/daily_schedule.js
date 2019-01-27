@@ -18,6 +18,7 @@ class DailySchedule
 		//data storage classes
 		this.mInitialEvento = null;
 		this.mEventoArray = new Array();
+		this.mEventoArrayLocalStorage = new Array();
 
 		this.mScreenArray = new Array();
 	
