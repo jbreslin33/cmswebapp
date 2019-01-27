@@ -14,7 +14,7 @@ class InsertEventoScreen
 	buttonClicked()
 	{
 		//set vars
-		this.mInsertEvento.mEventoTypeID  = document.getElementById("insert_evento_evento_type_id").value;	
+		this.mInsertEvento.mEventoTypesID  = document.getElementById("insert_evento_evento_types_id").value;	
 		this.mInsertEvento.mEventoDate    = document.getElementById("insert_evento_date_id").value;	
 		this.mInsertEvento.mArrivalTime   = document.getElementById("insert_evento_arrival_time_id").value;	
 		this.mInsertEvento.mStartTime     = document.getElementById("insert_evento_start_time_id").value;	
@@ -25,8 +25,6 @@ class InsertEventoScreen
 		this.mInsertEvento.mFieldName     = document.getElementById("insert_evento_field_name_id").value;	
 		this.mInsertEvento.mTeamID        = document.getElementById("insert_evento_team_id").value;	
 
-
-		console.log('clicked:' + this.mInsertEvento.mEventoDate);
 		this.mInsertEvento.send();
 	}
 
