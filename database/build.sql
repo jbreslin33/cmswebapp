@@ -24,6 +24,12 @@
 --DROP TABLE games_users_availability CASCADE; 
 --DROP TABLE uniforms_games CASCADE; 
 
+--DROP TABLE affairs CASCADE; 
+--DROP TABLE affairs_types CASCADE; 
+--DROP TABLE affairs_users_attendance CASCADE; 
+--DROP TABLE affairs_users_availability CASCADE; 
+--DROP TABLE uniforms_affairs CASCADE; 
+
 --LIVE DROPS
 DROP TABLE error_log CASCADE; 
 
