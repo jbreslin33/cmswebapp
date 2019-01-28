@@ -394,6 +394,14 @@ CREATE TABLE users
 	PRIMARY KEY (id)
 );
 
+
+CREATE TABLE players 
+{
+	id SERIAL,
+	dob date,
+	PRIMARY KEY (id)
+};
+
 CREATE TABLE clubs_users 
 (
 	id SERIAL,
