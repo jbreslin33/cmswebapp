@@ -11,6 +11,7 @@ class InsertEvento
 
 		this.mReceivedEventoTypes = false;
 		this.mReceivedPitches = false;
+		this.mReceivedTeams = false;
 
                 //logs
                 this.mStateLogs = false;
@@ -145,6 +146,49 @@ console.log('in send:' + APPLICATION.mInsertEvento.mEventoDate);
                 request.send();
         }
 
+        getTeams()
+        {
+                var url = "/php/classes/query/team_query.php?username=" + APPLICATION.mLogin.mUsername;
+
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var code = this.responseText.slice(0,4);
+                                        var data = this.responseText.slice(4,this.responseText.length);
+                                        var jsondata = JSON.parse(data);
+
+                                        if (jsondata)
+                                        {
+                                                var s = document.getElementById("insert_evento_team_id");
+
+                                                //lets clear select
+                                                APPLICATION.mUtility.removeOptions(s);
+
+                                                for (var i = 0; i < jsondata.length; i++)
+                                                {
+                                                        var opt = document.createElement('option');
+                                                        opt.value = jsondata[i][0];
+                                                        opt.innerHTML = jsondata[i][1];
+                                                        s.appendChild(opt);
+                                                }
+
+                                                APPLICATION.mInsertEvento.mReceivedTeams = true;
+                                        }
+                                        else
+                                        {
+                                                console.log('no data');
+                                        }
+                                }
+                        }
+                };
+                request.open('GET', url);
+                request.send();
+        }
 
 
 

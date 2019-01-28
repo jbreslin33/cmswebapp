@@ -16,6 +16,7 @@ class INIT_INSERT_EVENTO extends State
 
 		insertEvento.getEventoTypes();
 		insertEvento.getPitches();
+		insertEvento.getTeams();
 	}
 
         execute(insertEvento)
