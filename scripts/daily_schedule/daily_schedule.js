@@ -83,10 +83,6 @@ class DailySchedule
 								
 							evento.mAvailabilityID = jsondata[i][12]; 
 							evento.mClub           = jsondata[i][13]; 
-							console.log('xxxxxxxxxxxxxxxx');
-							console.log('at:' + evento.mArrivalTime);
-							console.log('st:' + evento.mStartTime);
-							console.log('et:' + evento.mEndTime);
                                                         
 							//push to array
                                                         APPLICATION.mDailySchedule.mEventoArray.push(evento);

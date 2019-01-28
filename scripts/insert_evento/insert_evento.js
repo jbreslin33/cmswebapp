@@ -9,6 +9,8 @@ class InsertEvento
 		this.mEvento = new Evento();
 		this.mScreen = new InsertEventoScreen(this);
 
+		this.mReceivedEventoTypes = false;
+
                 //logs
                 this.mStateLogs = false;
                 this.mStateEnterLogs = true;
@@ -19,7 +21,7 @@ class InsertEvento
                 this.mStateMachine = new StateMachine(this);
 
                 this.mGLOBAL_INSERT_EVENTO = new GLOBAL_INSERT_EVENTO();
-                this.mINIT_INSERT_EVENTO   = new INIT_INSERT_EVENTO();
+                this.mINIT_INSERT_EVENTO   = new INIT_INSERT_EVENTO(); //init should get internet stuff
                 this.mWAIT_INSERT_EVENTO   = new WAIT_INSERT_EVENTO();
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_EVENTO);
@@ -53,5 +55,48 @@ console.log('in send:' + APPLICATION.mInsertEvento.mEventoDate);
                 request.open('POST', url);
                 request.send();
         }
+        
+	getEventoTypes()
+        {
+                var url = "/php/classes/query/evento_type_query.php?username=" + APPLICATION.mLogin.mUsername;
 
+                // Fetch the latest data.
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var code = this.responseText.slice(0,4);
+                                        var data = this.responseText.slice(4,this.responseText.length);
+                                        var jsondata = JSON.parse(data);
+
+                                        if (jsondata)
+                                        {
+						var s = document.getElementById("insert_evento_evento_types_id");
+
+                                                //lets clear select
+						APPLICATION.mUtility.removeOptions(s);
+
+                                               	for (var i = 0; i < jsondata.length; i++)
+                                                {
+							var opt = document.createElement('option');
+    							opt.value = jsondata[i][0];
+    							opt.innerHTML = jsondata[i][1];
+    							s.appendChild(opt);
+                                                }
+
+                                        	APPLICATION.mInsertEvento.mReceivedEventoTypes = true;
+                                        }
+                                        else
+                                        {
+                                                console.log('no data');
+                                        }
+                                }
+                        }
+                };
+                request.open('GET', url);
+                request.send();
+        }
 }

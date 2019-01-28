@@ -13,6 +13,8 @@ class INIT_INSERT_EVENTO extends State
 		{
 			console.log("INIT_INSERT_EVENTO: ENTER");        
 		}
+
+		insertEvento.getEventoTypes();
 	}
 
         execute(insertEvento)

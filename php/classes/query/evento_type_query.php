@@ -11,7 +11,7 @@ class EventoTypeQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-			select id, name from eventos_types order by name asc";
+			select id, name from evento_types order by name asc";
 	}
 }
 
