@@ -53,10 +53,8 @@ abstract class Query
                         $myarray[] = $row;
                 }
                 $data = json_encode($myarray);
-		error_log('pure data:' . $data);
 
 		$this->mData = 110 . $data; //110 query success
-		error_log('mData:' . $this->mData);
 	}
 
 	public function sendData()

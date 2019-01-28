@@ -26,7 +26,6 @@ class ScheduleQuery extends Query
                         and users.username = '" .
                         $this->mUsername .
 			"' order by evento_date asc";
-		error_log('schedule query');
 	}
 }
 
