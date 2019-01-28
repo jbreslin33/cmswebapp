@@ -5,19 +5,9 @@ class InsertEvento
 	constructor(application)
 	{
 		this.mApplication = application;
-		this.mScreen = new InsertEventoScreen(this);
 
-		//fields
-		this.mEventoDate = null;
-		this.mArrivalTime = null;
-		this.mStartTime = null;
-		this.mEndTime = null;
-		this.mAddress = null;
-		this.mCoordinates = null;
-		this.mPitchID = null;
-		this.mFieldName = null;
-		this.mTeamID = null;
-		this.mEventoTypesID = null;
+		this.mEvento = new Evento();
+		this.mScreen = new InsertEventoScreen(this);
 
                 //logs
                 this.mStateLogs = false;
@@ -39,7 +29,7 @@ class InsertEvento
         send()
         {
 console.log('in send:' + APPLICATION.mInsertEvento.mEventoDate); 
-                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword + "&evento_date=" + APPLICATION.mInsertEvento.mEventoDate + "&arrival_time=" + APPLICATION.mInsertEvento.mArrivalTime + "&start_time=" + APPLICATION.mInsertEvento.mStartTime + "&end_time=" + APPLICATION.mInsertEvento.mEndTime + "&address=" + APPLICATION.mInsertEvento.mAddress + "&coordinates=" + APPLICATION.mInsertEvento.mCoordinates + "&pitch_id=" + APPLICATION.mInsertEvento.mPitchID + "&field_name=" + APPLICATION.mInsertEvento.mFieldName + "&team_id=" + APPLICATION.mInsertEvento.mTeamID + "&evento_types_id=" + APPLICATION.mInsertEvento.mEventoTypesID;
+                var url = "/php/classes/insert/insert_evento.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword + "&evento_date=" + APPLICATION.mInsertEvento.mEvento.mEventoDate + "&arrival_time=" + APPLICATION.mInsertEvento.mEvento.mArrivalTime + "&start_time=" + APPLICATION.mInsertEvento.mEvento.mStartTime + "&end_time=" + APPLICATION.mInsertEvento.mEvento.mEndTime + "&address=" + APPLICATION.mInsertEvento.mEvento.mAddress + "&coordinates=" + APPLICATION.mInsertEvento.mEvento.mCoordinates + "&pitch_id=" + APPLICATION.mInsertEvento.mEvento.mPitchID + "&field_name=" + APPLICATION.mInsertEvento.mEvento.mFieldName + "&team_id=" + APPLICATION.mInsertEvento.mEvento.mTeamID + "&evento_types_id=" + APPLICATION.mInsertEvento.mEvento.mEventoTypesID;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
