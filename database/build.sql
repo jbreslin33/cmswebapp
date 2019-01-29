@@ -400,7 +400,6 @@ CREATE TABLE users
 	id SERIAL,
 	username text not null unique, --this needs to be unique and can be username or password matter of fact can I check memmber email as well during login check?
     	password text NOT NULL UNIQUE, 
-        --FOREIGN KEY(email_id) REFERENCES emails(id), 
 	PRIMARY KEY (id)
 );
 
@@ -417,9 +416,8 @@ CREATE TABLE members
     	phone text,
 	address text,
 	coordinates text,
-	users_id integer, --if this points to jbreslin33@gmail.com no biggie becuase updates can be sent to jbreslin33@gmail.com and lbreslin6Gmail.com
+	users_id integer not null, --if this points to jbreslin33@gmail.com no biggie because updates can be sent to jbreslin33@gmail.com and lbreslin6Gmail.com
         FOREIGN KEY(users_id) REFERENCES users(id), 
-        --FOREIGN KEY(email_id) REFERENCES emails(id), 
 	PRIMARY KEY (id)
 );
 
@@ -432,7 +430,7 @@ CREATE TABLE player
 (
 	id SERIAL,
 	dob date,
-	members_id integer,
+	members_id integer not null,
         FOREIGN KEY(members_id) REFERENCES members(id), --luke member
 	PRIMARY KEY (id)
 );
@@ -441,7 +439,7 @@ CREATE TABLE player
 CREATE TABLE parent 
 (
 	id SERIAL,
-	members_id integer,
+	members_id integer not null,
         FOREIGN KEY(members_id) REFERENCES members(id), --louis member
 	PRIMARY KEY (id)
 );
@@ -449,7 +447,7 @@ CREATE TABLE parent
 CREATE TABLE manager 
 (
 	id SERIAL,
-	members_id integer,
+	members_id integer not null,
         FOREIGN KEY(members_id) REFERENCES members(id), --luke member
 	PRIMARY KEY (id)
 );
@@ -457,7 +455,7 @@ CREATE TABLE manager
 CREATE TABLE coach 
 (
 	id SERIAL,
-	members_id integer,
+	members_id integer not null,
         FOREIGN KEY(members_id) REFERENCES members(id), --louis member
 	PRIMARY KEY (id)
 );
