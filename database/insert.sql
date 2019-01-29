@@ -7,12 +7,13 @@ insert into roles (name) values ('Director');
 
 --users
 insert into users (username,password) values ('l','l'); --luke player
-insert into users (username,password) values ('cjr','cjr'); --carlos jr player
 insert into users (username,password) values ('lo','lo'); --louise manager
-insert into users (username,password) values ('joe','joe'); --joe admin of whole site
-insert into users (username,password) values ('s','s'); --stelian technical director 
 
-insert into users (username,password) values ('csr','csr'); -- carlos sr 
+--members
+insert into site_members (first_name, middle_name, last_name, email, phone, address, users_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
+
+--players
+insert into players (dob,site_members_id) values ('2005-08-17',1);
 
 --clubs
 insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
@@ -25,26 +26,6 @@ insert into teams (name,club_id) values ('u15boys',1);
 insert into teams (name,club_id) values ('u15girls',1);
 insert into teams (name,club_id) values ('u14boys',2);
 insert into teams (name,club_id) values ('u15boys',2);
-
-
---this is used so that you dont lose a coach when you take him off a team, same for players and managers this is who you consider in what roles but they may not be instantiated in that role currently
---users_clubs_roles
-insert into users_clubs_roles (users_id,club_id,roles_id)values (1,2,1); --luke kenso  player
-insert into users_clubs_roles (users_id,club_id,roles_id) values (1,2,4); --luke kenso  coach
-insert into users_clubs_roles (users_id,club_id,roles_id) values (1,1,1); --luke celta  player
-
-insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,2); --loise parent celta
-insert into users_clubs_roles (users_id,club_id,roles_id) values (3,1,3); --loise manager celta
-
-insert into users_clubs_roles (users_id,club_id,roles_id) values (5,1,5); --stelian director celta
-
---these are instantiated roles, should it be linked to users_clubs_roles????
---if so fields would be (id,team_id,users_clubs_roles_id,default_timestamp)
---users_teams_roles
-
-insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (1,5,current_timestamp); --luke kenso u14 player
-insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (3,3,current_timestamp); --luke celta u15 player
-insert into users_clubs_roles_teams (users_clubs_roles_id,team_id,default_timestamp) values (5,3,current_timestamp); --louise celta u15 manager
 
 
 --clubs_users
@@ -99,6 +80,6 @@ insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/29/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/30/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 
-insert into eventos_users_availability (evento_id,users_id,availability_id) values (5,1,1);
-insert into eventos_users_availability (evento_id,users_id,availability_id) values (6,1,2);
-insert into eventos_users_availability (evento_id,users_id,availability_id) values (7,1,3);
+insert into eventos_players_availability (evento_id,player_id,availability_id) values (5,1,1);
+insert into eventos_players_availability (evento_id,player_id,availability_id) values (6,1,2);
+insert into eventos_players_availability (evento_id,player_id,availability_id) values (7,1,3);

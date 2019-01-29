@@ -31,6 +31,21 @@
 --DROP TABLE uniforms_affairs CASCADE; 
 --DROP TABLE players CASCADE; 
 
+--DROP TABLE eventos_users_attendance CASCADE;
+--DROP TABLE eventos_users_availability CASCADE;
+
+--DROP TABLE members CASCADE;
+--DROP TABLE users_system_roles CASCADE; --admin, data-entry
+--DROP TABLE users_clubs_roles_teams CASCADE; --instantiation of player, coach, manager, liason, parent for a specific team tied to users_clubs_roles class type table
+--DROP TABLE users_clubs_roles CASCADE; -- techninal director, cfo, coordinator, cms-admin, board member, president, ceo 
+
+--DROP TABLE roles CASCADE;
+
+--DROP TABLE system_users CASCADE;
+--DROP TABLE clubs_users CASCADE;
+--DROP TABLE emails CASCADE;
+
+
 --LIVE DROPS
 DROP TABLE error_log CASCADE; 
 
@@ -51,33 +66,32 @@ DROP TABLE possessions CASCADE;
 DROP TABLE zones CASCADE;
 DROP TABLE formations CASCADE;
 
-DROP TABLE eventos_users_attendance CASCADE;
-DROP TABLE eventos_users_availability CASCADE;
+DROP TABLE eventos_players_attendance CASCADE;
+DROP TABLE eventos_players_availability CASCADE;
+
 
 DROP TABLE eventos_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
+
+
+DROP TABLE players CASCADE;
+DROP TABLE teams_players CASCADE;
+
+DROP TABLE parents CASCADE;
+DROP TABLE managers CASCADE;
+DROP TABLE coaches CASCADE;
+
+DROP TABLE club_members CASCADE;
+
+DROP TABLE site_members CASCADE;
+
+DROP TABLE users CASCADE;
+
 DROP TABLE uniforms_eventos CASCADE;
 DROP TABLE uniforms_order CASCADE;
+DROP TABLE uniforms_sizes CASCADE;
 DROP TABLE uniforms CASCADE;
-
-DROP TABLE users_system_roles CASCADE; --admin, data-entry
-DROP TABLE users_clubs_roles_teams CASCADE; --instantiation of player, coach, manager, liason, parent for a specific team tied to users_clubs_roles class type table
-DROP TABLE users_clubs_roles CASCADE; -- techninal director, cfo, coordinator, cms-admin, board member, president, ceo 
-
-DROP TABLE roles CASCADE;
-
-DROP TABLE system_users CASCADE;
-DROP TABLE clubs_users CASCADE;
-
-DROP TABLE player CASCADE;
-DROP TABLE parent CASCADE;
-DROP TABLE manager CASCADE;
-DROP TABLE coach CASCADE;
-
-DROP TABLE members CASCADE;
-DROP TABLE users CASCADE;
---DROP TABLE emails CASCADE;
 
 DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
@@ -88,6 +102,7 @@ DROP TABLE evento_types CASCADE;
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
 DROP TABLE clubs CASCADE;
+
 --****************************************************************
 --***************************************************************
 --******************  POSTGRESQL SETTINGS *************************
@@ -251,6 +266,13 @@ CREATE TABLE uniforms
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE uniforms_sizes
+(
+	id SERIAL,
+	name text, 
+        PRIMARY KEY (id)
+);
+
 CREATE TABLE uniforms_order 
 (
 	id SERIAL,
@@ -345,8 +367,6 @@ CREATE TABLE formations_sessions
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
-
-
 CREATE TABLE ages_sessions 
 (
         id SERIAL,
@@ -386,15 +406,7 @@ CREATE TABLE zones_sessions
         FOREIGN KEY(zones_id) REFERENCES zones(id),
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
-
---use it for what you want but this is where emails will exist
---CREATE TABLE emails
---(
---	id SERIAL,
---	email text NOT NULL UNIQUE,
---	PRIMARY KEY (id)
---);
-
+--jbreslin33@gmail.com
 CREATE TABLE users 
 (
 	id SERIAL,
@@ -402,11 +414,8 @@ CREATE TABLE users
     	password text NOT NULL UNIQUE, 
 	PRIMARY KEY (id)
 );
-
-
--- we are going with a single user table so we do not need multiple logins instead you just need one and choose what role you want to view. 
---jbreslin33@gmail.com
-CREATE TABLE members 
+--Luke Breslin
+CREATE TABLE site_members 
 (
 	id SERIAL,
     	first_name text,
@@ -421,133 +430,87 @@ CREATE TABLE members
 	PRIMARY KEY (id)
 );
 
---alter table users add constraint username_email foreign key (username) references members (email);
-
---2 siblings 1 user above and a parent below
---Luke 
---Grace
-CREATE TABLE player 
+--Luke Breslin, Celta Vigo
+CREATE TABLE club_members 
+(
+	id SERIAL,
+	club_id integer,
+	site_member_id integer,
+        FOREIGN KEY(site_member_id) REFERENCES site_members(id), 
+        FOREIGN KEY(club_id) REFERENCES clubs(id), 
+	PRIMARY KEY (id)
+);
+--this only gets deleted when player leaves club if you want to
+--Luke Breslin is a player at Celta Vigo
+CREATE TABLE players 
 (
 	id SERIAL,
 	dob date,
-	members_id integer not null,
-        FOREIGN KEY(members_id) REFERENCES members(id), --luke member
+	uniform_number integer,
+	uniforms_sizes_id integer,
+	club_members_id integer not null,
+        FOREIGN KEY(club_members_id) REFERENCES club_members(id),
+        FOREIGN KEY(uniforms_sizes_id) REFERENCES uniforms_sizes(id), 
 	PRIMARY KEY (id)
 );
---Jim
---Colleen
-CREATE TABLE parent 
+--this gets deleted if player goes from a team to b team within club
+--Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
+CREATE TABLE teams_players 
+(
+	player_id integer not null,
+	team_id integer not null,
+        FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+	PRIMARY KEY (player_id,team_id)
+
+);
+
+CREATE TABLE parents 
 (
 	id SERIAL,
-	members_id integer not null,
-        FOREIGN KEY(members_id) REFERENCES members(id), --louis member
+	club_members_id integer not null,
+        FOREIGN KEY(club_members_id) REFERENCES club_members(id), --louis member
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE manager 
+CREATE TABLE managers 
 (
 	id SERIAL,
-	members_id integer not null,
-        FOREIGN KEY(members_id) REFERENCES members(id), --luke member
+	club_members_id integer not null,
+        FOREIGN KEY(club_members_id) REFERENCES club_members(id), --luke member
 	PRIMARY KEY (id)
 );
 --Coach->user jbreslin33@gmail.com
-CREATE TABLE coach 
+CREATE TABLE coaches 
 (
 	id SERIAL,
-	members_id integer not null,
-        FOREIGN KEY(members_id) REFERENCES members(id), --louis member
+	club_members_id integer not null,
+        FOREIGN KEY(club_members_id) REFERENCES club_members(id), --louis member
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE clubs_users 
-(
-	id SERIAL,
-	user_id integer NOT NULL,
-	club_id integer NOT NULL,
-	--default_timestamp timestamp NOT NULL,
-	UNIQUE (user_id, club_id),	
-	FOREIGN KEY (club_id) REFERENCES clubs(id),
-	FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-CREATE TABLE system_users 
-(
-	id SERIAL,
-	user_id integer NOT NULL,
-	PRIMARY KEY (id),	
-	FOREIGN KEY (user_id) REFERENCES users(id)
-);
-	
-	
-	
-	
-CREATE TABLE roles 
-(
-	id SERIAL,
-	name text,
-	PRIMARY KEY (id)
-);
-
--- you choose what role you want to be at any time and that redoes gui
-CREATE TABLE users_system_roles 
-(
-        id SERIAL,
-        user_id integer NOT NULL,
-        role_id integer NOT NULL,
-	default_timestamp timestamp NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (user_id) REFERENCES users(id),
-	FOREIGN KEY (role_id) REFERENCES roles(id)
-);
-
-CREATE TABLE users_clubs_roles 
-(
-        id SERIAL,
-        users_id integer NOT NULL,
-       	club_id integer NOT NULL,
-        roles_id integer NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (users_id) REFERENCES users(id),
-	FOREIGN KEY (club_id) REFERENCES clubs(id),
-	FOREIGN KEY (roles_id) REFERENCES roles(id),
-	unique (users_id,club_id,roles_id)
-);
-
-CREATE TABLE users_clubs_roles_teams
-(
-        id SERIAL,
-        users_clubs_roles_id integer NOT NULL,
-        team_id integer NOT NULL,
-	default_timestamp timestamp NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (users_clubs_roles_id) REFERENCES users_clubs_roles(id),
-	FOREIGN KEY (team_id) REFERENCES teams(id),
-	unique (users_clubs_roles_id,team_id)
-);
-
-CREATE TABLE eventos_users_availability 
+CREATE TABLE eventos_players_availability 
 (
         id SERIAL,
         evento_id integer NOT NULL,
-       	users_id integer NOT NULL,
+       	player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
         PRIMARY KEY (id),
 	FOREIGN KEY (evento_id) REFERENCES eventos(id),
-	FOREIGN KEY (users_id) REFERENCES users(id),
+	FOREIGN KEY (player_id) REFERENCES players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
-	unique (evento_id,users_id)
+	unique (evento_id,player_id)
 );
 
-CREATE TABLE eventos_users_attendance 
+CREATE TABLE eventos_players_attendance 
 (
         id SERIAL,
         evento_id integer NOT NULL,
-       	users_id integer NOT NULL,
+       	player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
         PRIMARY KEY (id),
 	FOREIGN KEY (evento_id) REFERENCES eventos(id),
-	FOREIGN KEY (users_id) REFERENCES users(id),
+	FOREIGN KEY (player_id) REFERENCES players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id)
 );
