@@ -75,6 +75,7 @@ DROP TABLE parent CASCADE;
 DROP TABLE manager CASCADE;
 DROP TABLE coach CASCADE;
 
+DROP TABLE members CASCADE;
 DROP TABLE users CASCADE;
 
 DROP TABLE availability CASCADE;
@@ -385,20 +386,30 @@ CREATE TABLE zones_sessions
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
--- we are going with a single user table so we do not need multiple logins instead you just need one and choose what role you want to view. 
---jbreslin33@gmail.com
 CREATE TABLE users 
 (
 	id SERIAL,
-    	username text NOT NULL UNIQUE, 
-    	password text,
+    	--members_email text NOT NULL UNIQUE, --jbreslin33
+	email text,
+    	password text NOT NULL UNIQUE, --jbreslin33
+        --FOREIGN KEY(members_email) REFERENCES members(email), 
+	PRIMARY KEY (id)
+);
+
+-- we are going with a single user table so we do not need multiple logins instead you just need one and choose what role you want to view. 
+--jbreslin33@gmail.com
+CREATE TABLE members 
+(
+	id SERIAL,
     	first_name text,
     	middle_name text,
     	last_name text,
-    	email text,
+    	email text, --lbreslin6
     	phone text,
 	address text,
 	coordinates text,
+	users_id integer, --if this points to jbreslin33@gmail.com no biggie becuase updates can be sent to jbreslin33@gmail.com and lbreslin6Gmail.com
+        FOREIGN KEY(users_id) REFERENCES users(id), 
 	PRIMARY KEY (id)
 );
 
@@ -409,8 +420,8 @@ CREATE TABLE player
 (
 	id SERIAL,
 	dob date,
-	users_id integer,
-        FOREIGN KEY(users_id) REFERENCES users(id),
+	members_id integer,
+        FOREIGN KEY(members_id) REFERENCES members(id), --luke member
 	PRIMARY KEY (id)
 );
 --Jim
@@ -418,24 +429,24 @@ CREATE TABLE player
 CREATE TABLE parent 
 (
 	id SERIAL,
-	users_id integer,
-        FOREIGN KEY(users_id) REFERENCES users(id),
+	members_id integer,
+        FOREIGN KEY(members_id) REFERENCES members(id), --louis member
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE manager 
 (
 	id SERIAL,
-	users_id integer,
-        FOREIGN KEY(users_id) REFERENCES users(id),
+	members_id integer,
+        FOREIGN KEY(members_id) REFERENCES members(id), --luke member
 	PRIMARY KEY (id)
 );
 --Coach->user jbreslin33@gmail.com
 CREATE TABLE coach 
 (
 	id SERIAL,
-	users_id integer,
-        FOREIGN KEY(users_id) REFERENCES users(id),
+	members_id integer,
+        FOREIGN KEY(members_id) REFERENCES members(id), --louis member
 	PRIMARY KEY (id)
 );
 
