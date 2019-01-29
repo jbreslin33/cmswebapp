@@ -74,9 +74,10 @@ DROP TABLE eventos_players_availability CASCADE;
 DROP TABLE eventos_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
+
 --USERS
-DROP TABLE players CASCADE;
 DROP TABLE team_players CASCADE;
+DROP TABLE players CASCADE;
 
 DROP TABLE parents CASCADE;
 DROP TABLE managers CASCADE;
@@ -444,7 +445,7 @@ CREATE TABLE site_members_players
 	uniform_size_id integer,
 	FOREIGN KEY(site_member_id) REFERENCES site_members(id),
         FOREIGN KEY(uniform_size_id) REFERENCES uniforms_sizes(id), 
-	PRIMARY KEY (site_member_id)
+	PRIMARY KEY (id)
 );
 
 --Luke Breslin, Celta Vigo
