@@ -389,12 +389,11 @@ CREATE TABLE zones_sessions
 CREATE TABLE users 
 (
 	id SERIAL,
-    	--members_email text NOT NULL UNIQUE, --jbreslin33
-	email text,
-    	password text NOT NULL UNIQUE, --jbreslin33
-        --FOREIGN KEY(members_email) REFERENCES members(email), 
+	username text NOT NULL UNIQUE,
+    	password text NOT NULL UNIQUE, 
 	PRIMARY KEY (id)
 );
+
 
 -- we are going with a single user table so we do not need multiple logins instead you just need one and choose what role you want to view. 
 --jbreslin33@gmail.com
@@ -404,7 +403,7 @@ CREATE TABLE members
     	first_name text,
     	middle_name text,
     	last_name text,
-    	email text, --lbreslin6
+    	email text NOt NULL UNIQUE, --lbreslin6
     	phone text,
 	address text,
 	coordinates text,
@@ -412,6 +411,8 @@ CREATE TABLE members
         FOREIGN KEY(users_id) REFERENCES users(id), 
 	PRIMARY KEY (id)
 );
+
+--alter table users add constraint username_email foreign key (username) references members (email);
 
 --2 siblings 1 user above and a parent below
 --Luke 
