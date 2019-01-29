@@ -77,6 +77,7 @@ DROP TABLE coach CASCADE;
 
 DROP TABLE members CASCADE;
 DROP TABLE users CASCADE;
+DROP TABLE emails CASCADE;
 
 DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
@@ -386,11 +387,20 @@ CREATE TABLE zones_sessions
         FOREIGN KEY(session_id) REFERENCES sessions(id)
 );
 
+--use it for what you want but this is where emails will exist
+CREATE TABLE emails
+(
+	id SERIAL,
+	email text NOT NULL UNIQUE,
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE users 
 (
 	id SERIAL,
-	username text NOT NULL UNIQUE,
+	email_id integer not null unique,
     	password text NOT NULL UNIQUE, 
+        FOREIGN KEY(email_id) REFERENCES emails(id), 
 	PRIMARY KEY (id)
 );
 
@@ -403,12 +413,13 @@ CREATE TABLE members
     	first_name text,
     	middle_name text,
     	last_name text,
-    	email text NOt NULL UNIQUE, --lbreslin6
+    	email_id integer, --lbreslin6
     	phone text,
 	address text,
 	coordinates text,
 	users_id integer, --if this points to jbreslin33@gmail.com no biggie becuase updates can be sent to jbreslin33@gmail.com and lbreslin6Gmail.com
         FOREIGN KEY(users_id) REFERENCES users(id), 
+        FOREIGN KEY(email_id) REFERENCES emails(id), 
 	PRIMARY KEY (id)
 );
 
