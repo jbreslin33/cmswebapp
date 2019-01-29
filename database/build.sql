@@ -29,6 +29,7 @@
 --DROP TABLE affairs_users_attendance CASCADE; 
 --DROP TABLE affairs_users_availability CASCADE; 
 --DROP TABLE uniforms_affairs CASCADE; 
+--DROP TABLE players CASCADE; 
 
 --LIVE DROPS
 DROP TABLE error_log CASCADE; 
@@ -68,9 +69,13 @@ DROP TABLE roles CASCADE;
 
 DROP TABLE system_users CASCADE;
 DROP TABLE clubs_users CASCADE;
-DROP TABLE users CASCADE;
 
-DROP TABLE players CASCADE;
+DROP TABLE player CASCADE;
+DROP TABLE parent CASCADE;
+DROP TABLE manager CASCADE;
+DROP TABLE coach CASCADE;
+
+DROP TABLE users CASCADE;
 
 DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
@@ -381,6 +386,7 @@ CREATE TABLE zones_sessions
 );
 
 -- we are going with a single user table so we do not need multiple logins instead you just need one and choose what role you want to view. 
+--jbreslin33@gmail.com
 CREATE TABLE users 
 (
 	id SERIAL,
@@ -396,11 +402,40 @@ CREATE TABLE users
 	PRIMARY KEY (id)
 );
 
-
-CREATE TABLE players 
+--2 siblings 1 user above and a parent below
+--Luke 
+--Grace
+CREATE TABLE player 
 (
 	id SERIAL,
 	dob date,
+	users_id integer,
+        FOREIGN KEY(users_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+--Jim
+--Colleen
+CREATE TABLE parent 
+(
+	id SERIAL,
+	users_id integer,
+        FOREIGN KEY(users_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE manager 
+(
+	id SERIAL,
+	users_id integer,
+        FOREIGN KEY(users_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+--Coach->user jbreslin33@gmail.com
+CREATE TABLE coach 
+(
+	id SERIAL,
+	users_id integer,
+        FOREIGN KEY(users_id) REFERENCES users(id),
 	PRIMARY KEY (id)
 );
 
