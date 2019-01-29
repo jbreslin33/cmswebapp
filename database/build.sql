@@ -70,6 +70,8 @@ DROP TABLE system_users CASCADE;
 DROP TABLE clubs_users CASCADE;
 DROP TABLE users CASCADE;
 
+DROP TABLE players CASCADE;
+
 DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
 
@@ -396,11 +398,11 @@ CREATE TABLE users
 
 
 CREATE TABLE players 
-{
+(
 	id SERIAL,
 	dob date,
 	PRIMARY KEY (id)
-};
+);
 
 CREATE TABLE clubs_users 
 (
