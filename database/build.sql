@@ -472,9 +472,7 @@ CREATE TABLE club_players
 (
 	id SERIAL,
 	uniform_number integer,
-	club_id integer,
 	club_member_id integer,
-        FOREIGN KEY(club_id) REFERENCES clubs(id), 
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
