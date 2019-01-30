@@ -44,6 +44,9 @@
 --DROP TABLE system_users CASCADE;
 --DROP TABLE clubs_users CASCADE;
 --DROP TABLE emails CASCADE;
+--DROP TABLE members CASCADE;
+--DROP TABLE site_members_players CASCADE;
+--DROP TABLE club_members_players CASCADE;
 
 
 --LIVE DROPS
@@ -77,6 +80,7 @@ DROP TABLE sessions CASCADE;
 
 --USERS
 DROP TABLE team_players CASCADE;
+DROP TABLE club_players CASCADE;
 DROP TABLE players CASCADE;
 
 DROP TABLE parents CASCADE;
@@ -84,9 +88,7 @@ DROP TABLE managers CASCADE;
 DROP TABLE coaches CASCADE;
 
 DROP TABLE club_members CASCADE;
-DROP TABLE club_members_players CASCADE;
 
-DROP TABLE site_members_players CASCADE;
 DROP TABLE site_members CASCADE;
 
 DROP TABLE users CASCADE;
@@ -436,18 +438,6 @@ CREATE TABLE site_members
 	PRIMARY KEY (id)
 );
 
---offshoot to handle player specific fields
-CREATE TABLE site_members_players
-(
-	id SERIAL,
-	site_member_id integer not null,
-	dob date not null,
-	uniform_size_id integer,
-	FOREIGN KEY(site_member_id) REFERENCES site_members(id),
-        FOREIGN KEY(uniform_size_id) REFERENCES uniforms_sizes(id), 
-	PRIMARY KEY (id)
-);
-
 --Luke Breslin, Celta Vigo
 CREATE TABLE club_members 
 (
@@ -458,35 +448,38 @@ CREATE TABLE club_members
         FOREIGN KEY(club_id) REFERENCES clubs(id), 
 	PRIMARY KEY (id)
 );
-CREATE TABLE club_members_players
-(
-	id SERIAL,
-	club_id integer,
-	site_member_player_id integer,
-        FOREIGN KEY(site_member_player_id) REFERENCES site_members_players(id), 
-        FOREIGN KEY(club_id) REFERENCES clubs(id), 
-	PRIMARY KEY (id)
-);
 
 --this only gets deleted when player leaves club if you want to
 --Luke Breslin is a player at Celta Vigo
 CREATE TABLE players 
 (
 	id SERIAL,
-	uniform_number integer,
-	club_member_player_id integer not null,
-        FOREIGN KEY(club_member_player_id) REFERENCES club_members_players(id),
+	dob date not null,
+	site_member_id integer,
+        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
 	PRIMARY KEY (id)
 );
+
+
+CREATE TABLE club_players 
+(
+	id SERIAL,
+	uniform_number integer,
+	club_id integer,
+        FOREIGN KEY(club_id) REFERENCES clubs(id), 
+	PRIMARY KEY (id)
+);
+
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 CREATE TABLE team_players 
 (
-	player_id integer not null,
+	id SERIAL,
+	club_players_id integer not null,
 	team_id integer not null,
-        FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(club_players_id) REFERENCES club_players(id),
         FOREIGN KEY(team_id) REFERENCES teams(id),
-	PRIMARY KEY (player_id,team_id)
+	PRIMARY KEY (id)
 
 );
 
