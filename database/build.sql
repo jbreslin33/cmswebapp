@@ -24,12 +24,12 @@
 --DROP TABLE games_users_availability CASCADE; 
 --DROP TABLE uniforms_games CASCADE; 
 
-DROP TABLE affairs CASCADE; 
-DROP TABLE affairs_types CASCADE; 
-DROP TABLE affairs_users_attendance CASCADE; 
-DROP TABLE affairs_users_availability CASCADE; 
-DROP TABLE uniforms_affairs CASCADE; 
-DROP TABLE players CASCADE; 
+--DROP TABLE affairs CASCADE; 
+--DROP TABLE affairs_types CASCADE; 
+--DROP TABLE affairs_users_attendance CASCADE; 
+--DROP TABLE affairs_users_availability CASCADE; 
+--DROP TABLE uniforms_affairs CASCADE; 
+--DROP TABLE players CASCADE; 
 
 --DROP TABLE eventos_users_attendance CASCADE;
 --DROP TABLE eventos_users_availability CASCADE;
@@ -47,13 +47,13 @@ DROP TABLE players CASCADE;
 --DROP TABLE members CASCADE;
 --DROP TABLE site_members_players CASCADE;
 --DROP TABLE club_members_players CASCADE;
-DROP TABLE members CASCADE;
-DROP TABLE player CASCADE;
-DROP TABLE parent CASCADE;
-DROP TABLE manager CASCADE;
-DROP TABLE coach CASCADE;
-DROP TABLE users_clubs_roles CASCADE;
-DROP TABLE users_clubs_roles_teams CASCADE;
+--DROP TABLE members CASCADE;
+--DROP TABLE player CASCADE;
+--DROP TABLE parent CASCADE;
+--DROP TABLE manager CASCADE;
+--DROP TABLE coach CASCADE;
+--DROP TABLE users_clubs_roles CASCADE;
+--DROP TABLE users_clubs_roles_teams CASCADE;
 
 
 --LIVE DROPS
@@ -473,7 +473,9 @@ CREATE TABLE club_players
 	id SERIAL,
 	uniform_number integer,
 	club_id integer,
+	club_member_id integer,
         FOREIGN KEY(club_id) REFERENCES clubs(id), 
+        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
 
