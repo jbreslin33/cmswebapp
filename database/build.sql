@@ -87,12 +87,16 @@ DROP TABLE sessions CASCADE;
 
 --USERS
 DROP TABLE team_players CASCADE;
-DROP TABLE club_players CASCADE;
-DROP TABLE players CASCADE;
+DROP TABLE team_coaches CASCADE;
 
-DROP TABLE parents CASCADE;
-DROP TABLE managers CASCADE;
+DROP TABLE club_players CASCADE;
+DROP TABLE club_coaches CASCADE;
+
+DROP TABLE players CASCADE;
 DROP TABLE coaches CASCADE;
+
+--DROP TABLE parents CASCADE;
+--DROP TABLE managers CASCADE;
 
 DROP TABLE club_members CASCADE;
 
@@ -467,11 +471,29 @@ CREATE TABLE players
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE coaches 
+(
+	id SERIAL,
+	--dob date not null,
+	site_member_id integer,
+        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	PRIMARY KEY (id)
+);
+
 
 CREATE TABLE club_players 
 (
 	id SERIAL,
 	uniform_number integer,
+	club_member_id integer,
+        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE club_coaches 
+(
+	id SERIAL,
+	--uniform_number integer,
 	club_member_id integer,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
@@ -490,29 +512,33 @@ CREATE TABLE team_players
 
 );
 
-CREATE TABLE parents 
+CREATE TABLE team_coaches 
 (
 	id SERIAL,
-	club_members_id integer not null,
-        FOREIGN KEY(club_members_id) REFERENCES club_members(id), --louis member
+	club_coaches_id integer not null,
+	team_id integer not null,
+        FOREIGN KEY(club_coaches_id) REFERENCES club_coaches(id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE managers 
-(
-	id SERIAL,
-	club_members_id integer not null,
-        FOREIGN KEY(club_members_id) REFERENCES club_members(id), --luke member
-	PRIMARY KEY (id)
-);
+--CREATE TABLE parents 
+--(
+--	id SERIAL,
+--	club_members_id integer not null,
+ --       FOREIGN KEY(club_members_id) REFERENCES club_members(id), --louis member
+--	PRIMARY KEY (id)
+--);
+
+--CREATE TABLE managers 
+--(
+--	id SERIAL,
+--	club_members_id integer not null,
+ --       FOREIGN KEY(club_members_id) REFERENCES club_members(id), --luke member
+--	PRIMARY KEY (id)
+--);
 --Coach->user jbreslin33@gmail.com
-CREATE TABLE coaches 
-(
-	id SERIAL,
-	club_members_id integer not null,
-        FOREIGN KEY(club_members_id) REFERENCES club_members(id), --louis member
-	PRIMARY KEY (id)
-);
+
 
 CREATE TABLE eventos_players_availability 
 (
