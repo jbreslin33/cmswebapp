@@ -504,6 +504,17 @@ CREATE TABLE site_parents
 	PRIMARY KEY (id)
 );
 
+--PARENT PLAYER
+CREATE TABLE site_parents_site_player
+(
+	id SERIAL,
+	site_parent_id integer not null,
+	site_player_id integer not null,
+        FOREIGN KEY(site_parent_id) REFERENCES site_parents(id),
+        FOREIGN KEY(site_player_id) REFERENCES site_players(id),
+	unique (site_parent_id, site_player_id),
+	PRIMARY KEY (id)
+);
 
 
 
