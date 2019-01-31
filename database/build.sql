@@ -54,6 +54,10 @@
 --DROP TABLE coach CASCADE;
 --DROP TABLE users_clubs_roles CASCADE;
 --DROP TABLE users_clubs_roles_teams CASCADE;
+--DROP TABLE players CASCADE;
+--DROP TABLE coaches CASCADE;
+--DROP TABLE managers CASCADE;
+--DROP TABLE parents CASCADE;
 
 
 --LIVE DROPS
@@ -88,15 +92,18 @@ DROP TABLE sessions CASCADE;
 --USERS
 DROP TABLE team_players CASCADE;
 DROP TABLE team_coaches CASCADE;
+DROP TABLE team_managers CASCADE;
+DROP TABLE team_parents CASCADE;
 
 DROP TABLE club_players CASCADE;
 DROP TABLE club_coaches CASCADE;
+DROP TABLE club_managers CASCADE;
+DROP TABLE club_parents CASCADE;
 
-DROP TABLE players CASCADE;
-DROP TABLE coaches CASCADE;
-
---DROP TABLE parents CASCADE;
---DROP TABLE managers CASCADE;
+DROP TABLE site_players CASCADE;
+DROP TABLE site_coaches CASCADE;
+DROP TABLE site_managers CASCADE;
+DROP TABLE site_parents CASCADE;
 
 DROP TABLE club_members CASCADE;
 
@@ -462,7 +469,7 @@ CREATE TABLE club_members
 
 --this only gets deleted when player leaves club if you want to
 --Luke Breslin is a player at Celta Vigo
-CREATE TABLE players 
+CREATE TABLE site_players 
 (
 	id SERIAL,
 	dob date not null,
@@ -471,7 +478,7 @@ CREATE TABLE players
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE coaches 
+CREATE TABLE site_coaches 
 (
 	id SERIAL,
 	--dob date not null,
@@ -479,6 +486,25 @@ CREATE TABLE coaches
         FOREIGN KEY(site_member_id) REFERENCES site_members(id),
 	PRIMARY KEY (id)
 );
+
+CREATE TABLE site_managers 
+(
+	id SERIAL,
+	--dob date not null,
+	site_member_id integer,
+        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	PRIMARY KEY (id)
+);
+CREATE TABLE site_parents 
+(
+	id SERIAL,
+	--dob date not null,
+	site_member_id integer,
+        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	PRIMARY KEY (id)
+);
+
+
 
 
 CREATE TABLE club_players 
@@ -499,6 +525,25 @@ CREATE TABLE club_coaches
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE club_managers 
+(
+	id SERIAL,
+	--uniform_number integer,
+	club_member_id integer,
+        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE club_parents 
+(
+	id SERIAL,
+	--uniform_number integer,
+	club_member_id integer,
+        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+	PRIMARY KEY (id)
+);
+
+
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 CREATE TABLE team_players 
@@ -518,6 +563,26 @@ CREATE TABLE team_coaches
 	club_coaches_id integer not null,
 	team_id integer not null,
         FOREIGN KEY(club_coaches_id) REFERENCES club_coaches(id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE team_managers 
+(
+	id SERIAL,
+	club_managers_id integer not null,
+	team_id integer not null,
+        FOREIGN KEY(club_managers_id) REFERENCES club_managers(id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE team_parents 
+(
+	id SERIAL,
+	club_parents_id integer not null,
+	team_id integer not null,
+        FOREIGN KEY(club_parents_id) REFERENCES club_parents(id),
         FOREIGN KEY(team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
 );
@@ -544,24 +609,23 @@ CREATE TABLE eventos_players_availability
 (
         id SERIAL,
         evento_id integer NOT NULL,
-       	player_id integer NOT NULL,
+       	team_player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
-        PRIMARY KEY (id),
 	FOREIGN KEY (evento_id) REFERENCES eventos(id),
-	FOREIGN KEY (player_id) REFERENCES players(id),
+	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
-	unique (evento_id,player_id)
+        PRIMARY KEY (id)
 );
 
 CREATE TABLE eventos_players_attendance 
 (
         id SERIAL,
         evento_id integer NOT NULL,
-       	player_id integer NOT NULL,
+       	team_player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
-        PRIMARY KEY (id),
 	FOREIGN KEY (evento_id) REFERENCES eventos(id),
-	FOREIGN KEY (player_id) REFERENCES players(id),
-	FOREIGN KEY (attendance_id) REFERENCES attendance(id)
+	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
+	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
+        PRIMARY KEY (id)
 );
