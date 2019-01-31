@@ -90,6 +90,8 @@ DROP TABLE sessions CASCADE;
 
 
 --USERS
+DROP TABLE site_parents_site_players CASCADE;
+
 DROP TABLE team_players CASCADE;
 DROP TABLE team_coaches CASCADE;
 DROP TABLE team_managers CASCADE;
@@ -505,7 +507,7 @@ CREATE TABLE site_parents
 );
 
 --PARENT PLAYER
-CREATE TABLE site_parents_site_player
+CREATE TABLE site_parents_site_players
 (
 	id SERIAL,
 	site_parent_id integer not null,
