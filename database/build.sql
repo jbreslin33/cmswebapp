@@ -80,6 +80,11 @@ DROP TABLE possessions CASCADE;
 DROP TABLE zones CASCADE;
 DROP TABLE formations CASCADE;
 
+--PAYMENTS
+DROP TABLE club_payment_systems CASCADE;
+DROP TABLE payments CASCADE;
+
+
 --EVENTS
 DROP TABLE eventos_players_attendance CASCADE;
 DROP TABLE eventos_players_availability CASCADE;
@@ -186,6 +191,15 @@ CREATE TABLE clubs
         coordinates text,
 	PRIMARY KEY (id)
 );
+
+--team flat fee(2300 per player), individual team flat fee(u9 1000 per player, u15 2300 per player) club flat fee, team average fee(40,000/num players, club average fee(expected club wide expenses/number of players), 
+CREATE TABLE club_payment_systems
+(
+        id SERIAL,
+	name text,
+        PRIMARY KEY (id)
+);
+
 
 
 CREATE TABLE pitches 
@@ -642,3 +656,18 @@ CREATE TABLE eventos_players_attendance
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
         PRIMARY KEY (id)
 );
+
+
+--payments
+CREATE TABLE payments 
+(
+        id SERIAL,
+	payment money,
+	payment_timestamp timestamp,
+	club_player_id integer, --or should it be team player???? what if player is not assigned a team yet? is that possible 
+	--or better yet the club_player is where payment is made but amount due total can be taken from other sources
+	FOREIGN KEY (club_player_id) REFERENCES club_players(id),
+        PRIMARY KEY (id)
+);
+
+
