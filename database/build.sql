@@ -648,14 +648,28 @@ CREATE TABLE eventos_players_attendance
 );
 
 
---u15 boys spring season, u15 boys 2018/2019 season, 15 boys abreviated season
+--magnets, shirts
 CREATE TABLE products 
 (
         id SERIAL,
 	name text,
-	price money,
+	--price money,
         PRIMARY KEY (id)
 );
+
+CREATE TABLE products 
+
+
+--join products and team products
+--this is cost of joining a team
+create table team_products
+	id serial,
+	--price money,
+	team_id integer,
+	FOREIGN KEY (order_id) REFERENCES orders(id),
+        PRIMARY KEY (id)
+);
+need discounts table or something 
 
 CREATE TABLE orders 
 (
@@ -675,6 +689,16 @@ CREATE TABLE order_products
 	FOREIGN KEY (product_id) REFERENCES products(id),
         PRIMARY KEY (id)
 
+);
+
+CREATE TABLE order_team_products 
+(
+	id SERIAL,
+	order_id integer,
+	product_id integer,
+	FOREIGN KEY (order_id) REFERENCES orders(id),
+	FOREIGN KEY (team_product_id) REFERENCES team_products(id),
+        PRIMARY KEY (id)
 );
 
 
