@@ -16,6 +16,7 @@
 			full outer join club_players on club_players.id=team_players.club_players_id
 			full outer join club_members on club_members.id=club_players.club_member_id
 			full outer join site_members on site_members.id=club_members.site_member_id
+			full outer join users on users.id=site_members.user_id 
 
                         where evento_date >= now()
                         --and users.username = 'l'
