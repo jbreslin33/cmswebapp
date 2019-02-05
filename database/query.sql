@@ -12,6 +12,9 @@
                         full outer join availability on availability.id=eventos_players_availability.availability_id
 			
 			full outer join teams on teams.id=eventos.team_id
+			full outer join team_players on team_players.team_id=teams.id
+			full outer join club_players on club_players.id=team_players.club_players_id
+			full outer join club_members on club_members.id=club_players.club_member_id
 
                         where evento_date >= now()
                         --and users.username = 'l'
