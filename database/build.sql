@@ -748,8 +748,8 @@ CREATE TABLE orders
 (
 	id SERIAL,
 	create_time timestamp,
-	club_member_id integer,
-	FOREIGN KEY (club_member_id) REFERENCES club_members(id),
+	site_member_id integer,
+	FOREIGN KEY (site_member_id) REFERENCES site_members(id),
         PRIMARY KEY (id)
 );
 
