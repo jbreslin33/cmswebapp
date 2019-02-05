@@ -19,7 +19,7 @@
 			full outer join users on users.id=site_members.user_id 
 
                         where evento_date >= now()
-                        --and users.username = 'l'
+                        and users.username = 'l'
                         order by evento_date asc;
 
 

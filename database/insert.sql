@@ -3,9 +3,17 @@
 insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
 insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
 
+--teams
+insert into teams (name,club_id) values ('u11boys',1);
+insert into teams (name,club_id) values ('u13boys',1);
+insert into teams (name,club_id) values ('u15boys',1);
+insert into teams (name,club_id) values ('u15girls',1);
+insert into teams (name,club_id) values ('u14boys',2);
+insert into teams (name,club_id) values ('u15boys',2);
+
 --users
-insert into users (username,password) values ('j','j'); --jim breslin
 insert into users (username,password) values ('l','l'); --luke
+insert into users (username,password) values ('j','j'); --jim breslin
 insert into users (username,password) values ('lo','lo'); --louise 
 
 --site_members
@@ -20,14 +28,9 @@ insert into site_players (dob,site_member_id) values ('2005-08-17',1);
 --club_players
 insert into club_players (uniform_number,club_member_id) values (26,1);
 
+--team_players
+insert into team_players (club_players_id,team_id) values (1,3);
 
---teams
-insert into teams (name,club_id) values ('u11boys',1);
-insert into teams (name,club_id) values ('u13boys',1);
-insert into teams (name,club_id) values ('u15boys',1);
-insert into teams (name,club_id) values ('u15girls',1);
-insert into teams (name,club_id) values ('u14boys',2);
-insert into teams (name,club_id) values ('u15boys',2);
 
 --evento_types
 insert into evento_types (name) values ('Practice');
