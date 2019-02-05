@@ -737,6 +737,7 @@ create table product_type_discount
 	minimum_order_value integer,
 	maximum_discount_amount integer,
 	is_redeem_allowed boolean,
+	FOREIGN KEY (product_type_id) REFERENCES product_types(id),
 	FOREIGN KEY (discount_unit_id) REFERENCES discount_units(id),
         PRIMARY KEY (id)
 );
@@ -746,7 +747,7 @@ create table product_type_discount
 CREATE TABLE orders 
 (
 	id SERIAL,
-	order_date date,
+	create_time timestamp,
 	club_member_id integer,
 	FOREIGN KEY (club_member_id) REFERENCES club_members(id),
         PRIMARY KEY (id)
