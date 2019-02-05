@@ -11,27 +11,25 @@ class ScheduleQuery extends Query
 	public function query()
 	{
 		$this->mQuery = "
-			select eventos.id, eventos_users_availability.id, evento_date, arrival_time, start_time, end_time, eventos.address, eventos.coordinates, pitches.name, field_name, teams.name, evento_types.name, availability.id, clubs.name
-			from eventos
-			full outer join teams on teams.id=eventos.team_id
-			full outer join evento_types on evento_types.id=eventos.evento_types_id
-			full outer join pitches on pitches.id=eventos.pitch_id
+                        select evento_date, arrival_time, start_time, end_time, eventos.address, eventos.coordinates, pitches.name, field_name, teams.name, evento_types.name, availability.id
 
-			full outer join team_players on team_players.team_id=teams.id
-			full outer join team_coaches on team_coaches.team_id=teams.id
-			full outer join team_managers on team_managers.team_id=teams.id
-			full outer join team_parents on team_parents.team_id=teams.id
 
-			full outer join club_players on club_players.id=team_players.club_players_id
 
-                        full outer join users_clubs_roles_teams on users_clubs_roles_teams.team_id=teams.id
-                        full outer join users_clubs_roles on users_clubs_roles.id=users_clubs_roles_teams.users_clubs_roles_id
+                        from eventos
 
-                        full outer join users on users.id=users_clubs_roles.users_id
+                        full outer join pitches on pitches.id=eventos.pitch_id
+                        full outer join evento_types on evento_types.id=eventos.evento_types_id
 
-                        full outer join clubs on clubs.id=users_clubs_roles.club_id
-                       	full outer join eventos_users_availability on eventos_users_availability.evento_id=eventos.id
-                        full outer join availability on availability.id=eventos_users_availability.availability_id
+                        full outer join eventos_players_availability on eventos_players_availability.evento_id=eventos.id
+                        full outer join availability on availability.id=eventos_players_availability.availability_id
+
+                        full outer join teams on teams.id=eventos.team_id
+                        full outer join team_players on team_players.team_id=teams.id
+                        full outer join club_players on club_players.id=team_players.club_players_id
+                        full outer join club_members on club_members.id=club_players.club_member_id
+                        full outer join site_members on site_members.id=club_members.site_member_id
+                        full outer join users on users.id=site_members.user_id
+
 			where evento_date >= now() - INTERVAL '1 DAY'  
                         and users.username = '" .
                         $this->mUsername .
