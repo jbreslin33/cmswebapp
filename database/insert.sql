@@ -1,19 +1,13 @@
---roles
-insert into roles (name) values ('Player'); 
-insert into roles (name) values ('Parent'); --also grandparents aunts friends etc
-insert into roles (name) values ('Manager'); 
-insert into roles (name) values ('Coach'); 
-insert into roles (name) values ('Director'); 
-
 --users
-insert into users (username,password) values ('l','l'); --luke player
-insert into users (username,password) values ('lo','lo'); --louise manager
+insert into users (username,password) values ('j','j'); --jim breslin
+insert into users (username,password) values ('l','l'); --luke
+insert into users (username,password) values ('lo','lo'); --louise 
 
 --members
-insert into site_members (first_name, middle_name, last_name, email, phone, address, users_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
+insert into site_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
 
 --players
-insert into players (dob,site_members_id) values ('2005-08-17',1);
+insert into site_players (dob,site_member_id) values ('2005-08-17',1);
 
 --clubs
 insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
@@ -26,18 +20,6 @@ insert into teams (name,club_id) values ('u15boys',1);
 insert into teams (name,club_id) values ('u15girls',1);
 insert into teams (name,club_id) values ('u14boys',2);
 insert into teams (name,club_id) values ('u15boys',2);
-
-
---clubs_users
-insert into clubs_users (user_id,club_id) values (1,1); --luke
-insert into clubs_users (user_id,club_id) values (2,1); --carlos jr
-insert into clubs_users (user_id,club_id) values (3,1); --loise
-insert into clubs_users (user_id,club_id) values (4,1); --joe
-insert into clubs_users (user_id,club_id) values (5,1); --stelian
-
-insert into clubs_users (user_id,club_id) values (1,2); --luke kenso
-insert into clubs_users (user_id,club_id) values (2,2); --carlos jr kenso
-insert into clubs_users (user_id,club_id) values (6,2); --carlos sr kenso
 
 --evento_types
 insert into evento_types (name) values ('Practice');
@@ -80,6 +62,3 @@ insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/29/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('01/30/2019','20:00:00','19:50:00','4666 bristol road feasterville pa',1,1);
 
-insert into eventos_players_availability (evento_id,player_id,availability_id) values (5,1,1);
-insert into eventos_players_availability (evento_id,player_id,availability_id) values (6,1,2);
-insert into eventos_players_availability (evento_id,player_id,availability_id) values (7,1,3);
