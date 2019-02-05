@@ -1,17 +1,25 @@
+
+--clubs
+insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
+insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
+
 --users
 insert into users (username,password) values ('j','j'); --jim breslin
 insert into users (username,password) values ('l','l'); --luke
 insert into users (username,password) values ('lo','lo'); --louise 
 
---members
+--site_members
 insert into site_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
 
---players
+--club_members
+insert into club_members (club_id, site_member_id) values (1,1);
+
+--site_players
 insert into site_players (dob,site_member_id) values ('2005-08-17',1);
 
---clubs
-insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
-insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
+--club_players
+insert into club_players (uniform_number,club_member_id) values (26,1);
+
 
 --teams
 insert into teams (name,club_id) values ('u11boys',1);
