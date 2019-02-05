@@ -69,20 +69,19 @@ class DailySchedule
                                                 {
                                                         var evento = new Evento();
 							evento.mID             = jsondata[i][0]; 
-							evento.mAvailabilityID = jsondata[i][1]; 
-							evento.mDate           = jsondata[i][2]; 
-							evento.mArrivalTime    = jsondata[i][3]; 
-							evento.mStartTime      = jsondata[i][4]; 
-							evento.mEndTime        = jsondata[i][5]; 
-							evento.mAddress        = jsondata[i][6]; 
-							evento.mCoordinates    = jsondata[i][7]; 
-							evento.mPitch          = jsondata[i][8]; 
-							evento.mFieldName      = jsondata[i][9]; 
-							evento.mTeam           = jsondata[i][10]; 
-							evento.mEventoTypes    = jsondata[i][11]; 
+							evento.mDate           = jsondata[i][1]; 
+							evento.mArrivalTime    = jsondata[i][2]; 
+							evento.mStartTime      = jsondata[i][3]; 
+							evento.mEndTime        = jsondata[i][4]; 
+							evento.mAddress        = jsondata[i][5]; 
+							evento.mCoordinates    = jsondata[i][6]; 
+							evento.mPitch          = jsondata[i][7]; 
+							evento.mFieldName      = jsondata[i][8]; 
+							evento.mTeam           = jsondata[i][9]; 
+							evento.mEventoTypes    = jsondata[i][10]; 
 								
-							evento.mAvailabilityID = jsondata[i][12]; 
-							evento.mClub           = jsondata[i][13]; 
+							evento.mAvailabilityID = jsondata[i][11]; 
+							evento.mClub           = jsondata[i][12]; 
                                                         
 							//push to array
                                                         APPLICATION.mDailySchedule.mEventoArray.push(evento);
