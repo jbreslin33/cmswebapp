@@ -81,9 +81,19 @@ DROP TABLE zones CASCADE;
 DROP TABLE formations CASCADE;
 
 --ORDER SYSTEM
-DROP TABLE order_products CASCADE;
+DROP TABLE order_items CASCADE;
 DROP TABLE orders CASCADE;
+
+DROP TABLE product_pricing CASCADE;
+
+DROP TABLE product_types_products CASCADE;
+DROP TABLE product_discount CASCADE;
+DROP TABLE product_type_discount CASCADE;
+DROP TABLE product_types CASCADE;
+
+
 DROP TABLE products CASCADE;
+DROP TABLE discount_units CASCADE;
 
 --EVENTS
 DROP TABLE eventos_players_attendance CASCADE;
@@ -648,29 +658,91 @@ CREATE TABLE eventos_players_attendance
 );
 
 
---magnets, shirts
-CREATE TABLE products 
+--magnets, shirts, fall/spring season for u15 boys, full season for u15, winter season, 
+create table products 
 (
         id SERIAL,
 	name text,
-	--price money,
+	description text, 
         PRIMARY KEY (id)
 );
 
-CREATE TABLE products 
 
+create table product_pricing 
+(
+        id SERIAL,
+	product_id text,
+	base_price money,
+	create_date timestamp,
+	start_date timestamp, --order by create_date desc limit 1 to get just the latest price, if there is not valid price than the product is still with company in theory but not for sale currently
+	end_date timestamp,
+	active boolean,
+        PRIMARY KEY (id)
+);
 
---join products and team products
---this is cost of joining a team
-create table team_products
+create table product_types
+(
+        id SERIAL,
+	name text,
+	description text,
+        PRIMARY KEY (id)
+);
+
+--teams, shirts, these are basically tags
+create table product_types_products
+(
+        id SERIAL,
+	product_type_id integer,
+	product_id integer,
+	FOREIGN KEY (product_type_id) REFERENCES product_types(id),
+	FOREIGN KEY (product_id) REFERENCES products(id),
+        PRIMARY KEY (id)
+);
+
+create table discount_units
+(
 	id serial,
-	--price money,
-	team_id integer,
-	FOREIGN KEY (order_id) REFERENCES orders(id),
+	name text,
+	primary key(id)
+);
+
+--discounts
+create table product_discount
+(
+	id serial,
+	product_id integer,
+	discount_value integer,
+	discount_unit_id integer,
+	create_date timestamp,
+	start_date timestamp,
+	end_date timestamp,
+	coupon_code text,
+	minimum_order_value integer,
+	maximum_discount_amount integer,
+	is_redeem_allowed boolean,
+	FOREIGN KEY (discount_unit_id) REFERENCES discount_units(id),
         PRIMARY KEY (id)
 );
-need discounts table or something 
 
+create table product_type_discount
+(
+	id serial,
+	product_type_id integer,
+	discount_value integer,
+	discount_unit_id integer,
+	create_date timestamp,
+	start_date timestamp,
+	end_date timestamp,
+	coupon_code text,
+	minimum_order_value integer,
+	maximum_discount_amount integer,
+	is_redeem_allowed boolean,
+	FOREIGN KEY (discount_unit_id) REFERENCES discount_units(id),
+        PRIMARY KEY (id)
+);
+
+
+--ORDERS
 CREATE TABLE orders 
 (
 	id SERIAL,
@@ -680,26 +752,14 @@ CREATE TABLE orders
         PRIMARY KEY (id)
 );
 
-CREATE TABLE order_products 
+CREATE TABLE order_items
 (
 	id SERIAL,
 	order_id integer,
 	product_id integer,
+	price money, --this is calced frozen in at time of order.....
 	FOREIGN KEY (order_id) REFERENCES orders(id),
 	FOREIGN KEY (product_id) REFERENCES products(id),
         PRIMARY KEY (id)
-
 );
-
-CREATE TABLE order_team_products 
-(
-	id SERIAL,
-	order_id integer,
-	product_id integer,
-	FOREIGN KEY (order_id) REFERENCES orders(id),
-	FOREIGN KEY (team_product_id) REFERENCES team_products(id),
-        PRIMARY KEY (id)
-);
-
-
 
