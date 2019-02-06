@@ -25,7 +25,7 @@
                         full outer join users on users.id=site_members.user_id
 
                         where evento_date >= now() - INTERVAL '1 DAY'  
-                        and users.username = 'l'
+                        and users.username = 'j'
                         order by evento_date asc;
 
 

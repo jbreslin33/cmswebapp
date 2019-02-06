@@ -33,10 +33,15 @@ insert into site_parents (site_member_id) values (2);
 --club_players
 insert into club_players (uniform_number,club_member_id) values (26,1); --luke number for celta
 insert into club_players (uniform_number,club_member_id) values (4,2); --luke number for kenso
+--club_parents
+insert into club_parents (club_member_id) values (3); --jim parent at celta
 
 --team_players
 insert into team_players (club_players_id,team_id) values (1,3); --luke on u15 celta
 insert into team_players (club_players_id,team_id) values (1,5); --luke on u14 kenso
+--team_parents
+insert into team_parents (club_parents_id,team_id) values (1,5); --luke on u14 kenso
+
 
 --site_parents_site_players
 insert into site_parents_site_players (site_parent_id,site_player_id) values (1,1);
