@@ -12,21 +12,14 @@
                         full outer join teams on teams.id=eventos.team_id
                         full outer join clubs on clubs.id=teams.club_id
 
-                        full outer join team_players on team_players.team_id=teams.id
+                        full outer join team_members on team_members.team_id=teams.id
 
-                        full outer join team_parents on team_players.team_id=teams.id
-                        full outer join team_managers on team_players.team_id=teams.id
-                        full outer join team_coaches on team_players.team_id=teams.id
-
-                        full outer join club_players on club_players.id=team_players.club_players_id
-
-                        full outer join club_members on club_members.id=club_players.club_member_id
+                        full outer join club_members on club_members.id=team_members.club_members_id
                         full outer join site_members on site_members.id=club_members.site_member_id
                         full outer join users on users.id=site_members.user_id
 
-			captiveportal-login.philasd.org
                         where evento_date >= now() - INTERVAL '1 DAY'  
-                        and users.username = 'j'
+                        and users.username = 'l'
                         order by evento_date asc;
 
 

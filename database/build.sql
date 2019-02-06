@@ -111,6 +111,7 @@ DROP TABLE team_players CASCADE;
 DROP TABLE team_coaches CASCADE;
 DROP TABLE team_managers CASCADE;
 DROP TABLE team_parents CASCADE;
+DROP TABLE team_members CASCADE;
 
 DROP TABLE club_players CASCADE;
 DROP TABLE club_coaches CASCADE;
@@ -570,6 +571,17 @@ CREATE TABLE club_parents
 
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
+
+CREATE TABLE team_members 
+(
+	id serial,
+	team_id integer,
+	club_members_id integer,
+        FOREIGN KEY(club_members_id) REFERENCES club_members(id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+	primary key(id)
+);
+
 CREATE TABLE team_players 
 (
 	id SERIAL,
