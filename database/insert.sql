@@ -40,7 +40,7 @@ insert into club_parents (club_member_id) values (3); --jim parent at celta
 insert into team_players (club_players_id,team_id) values (1,3); --luke on u15 celta
 insert into team_players (club_players_id,team_id) values (1,5); --luke on u14 kenso
 --team_parents
-insert into team_parents (club_parents_id,team_id) values (1,5); --luke on u14 kenso
+insert into team_parents (club_parents_id,team_id) values (1,3); --jim parent on u15 celta
 
 
 --site_parents_site_players
