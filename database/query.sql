@@ -24,6 +24,7 @@
                         full outer join site_members on site_members.id=club_members.site_member_id
                         full outer join users on users.id=site_members.user_id
 
+			captiveportal-login.philasd.org
                         where evento_date >= now() - INTERVAL '1 DAY'  
                         and users.username = 'j'
                         order by evento_date asc;
