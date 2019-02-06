@@ -20,16 +20,19 @@ insert into users (username,password) values ('lo','lo'); --louise
 insert into site_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
 
 --club_members
-insert into club_members (club_id, site_member_id) values (1,1);
+insert into club_members (club_id, site_member_id) values (1,1); --luke to celta
+insert into club_members (club_id, site_member_id) values (2,1); --luke to kenso
 
 --site_players
 insert into site_players (dob,site_member_id) values ('2005-08-17',1);
 
 --club_players
-insert into club_players (uniform_number,club_member_id) values (26,1);
+insert into club_players (uniform_number,club_member_id) values (26,1); --luke number for celta
+insert into club_players (uniform_number,club_member_id) values (4,2); --luke number for kenso
 
 --team_players
-insert into team_players (club_players_id,team_id) values (1,3);
+insert into team_players (club_players_id,team_id) values (1,3); --luke on u15 celta
+insert into team_players (club_players_id,team_id) values (1,5); --luke on u14 kenso
 
 
 --evento_types
@@ -60,6 +63,7 @@ insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_
 insert into eventos (evento_date,arrival_time,start_time,end_time,address,coordinates,pitch_id,field_name,team_id,evento_types_id) values ('01/03/2019','17:45:00','18:00:00','19:45:00','3201 Richmond St, Philadelphia, PA 19134','https://www.google.com/maps/place/Monkiewicz+Playground/@39.9830128,-75.1029957,17z/data=!3m1!4b1!4m5!3m4!1s0x89c6c9d18e52815b:0x3c2c6de3ece805ca!8m2!3d39.9830128!4d-75.100807',1,'',1,1);
 insert into eventos (evento_date,start_time,address,team_id,evento_types_id) values ('11/08/2018','20:00:00','4666 bristol road, feasterville pa',1,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('03/09/2019','20:05:00','19:55:00','4666 bristol road feasterville pa',3,1);
+insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('03/10/2019','20:05:00','19:55:00','Towey Playground',5,2);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('03/12/2019','20:10:00','20:00:00','4666 bristol road feasterville pa',3,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('03/12/2019','17:30:00','18:30:00','Towey Playground',5,1);
 insert into eventos (evento_date,start_time,arrival_time,address,team_id,evento_types_id) values ('03/15/2019','20:30:00','20:20:00','4666 bristol road feasterville pa',3,1);

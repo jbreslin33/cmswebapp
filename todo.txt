@@ -1,3 +1,16 @@
+--users
+anyone can be a user just sign up on the site like facebook or twitter or gmail
+this will in cases be a parent whos email will be username and the kids and possibly the spouse will use it.
+
+-- a site member 
+is anyone who will be on the site of importance to the club
+so a player, parent, coach, manager but it's possible that a grandparent or spouse is just using the user persona of parent and is a ghost and that is ok we dont need their info
+
+--Handling sibling to sibling
+luke would have a checkbox to see grace schedule or not 
+
+
+---------------------------------
 How do I handle emails? First email contact will be with parent-- will that hold significance and be primary or do we treat everyone as separate entitites?
 What about netflix model with one email and multiple accounts? Could we then still branch out from with some having ind
 idiot we are going to join the players and managers table but what if your both????? 
