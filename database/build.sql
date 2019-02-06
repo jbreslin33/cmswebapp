@@ -497,7 +497,6 @@ CREATE TABLE site_players
 CREATE TABLE site_coaches 
 (
 	id SERIAL,
-	--dob date not null,
 	site_member_id integer,
         FOREIGN KEY(site_member_id) REFERENCES site_members(id),
 	PRIMARY KEY (id)
@@ -506,7 +505,6 @@ CREATE TABLE site_coaches
 CREATE TABLE site_managers 
 (
 	id SERIAL,
-	--dob date not null,
 	site_member_id integer,
         FOREIGN KEY(site_member_id) REFERENCES site_members(id),
 	PRIMARY KEY (id)
@@ -514,7 +512,6 @@ CREATE TABLE site_managers
 CREATE TABLE site_parents 
 (
 	id SERIAL,
-	--dob date not null,
 	site_member_id integer,
         FOREIGN KEY(site_member_id) REFERENCES site_members(id),
 	PRIMARY KEY (id)
