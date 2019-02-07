@@ -457,6 +457,22 @@ CREATE TABLE users
     	password text NOT NULL UNIQUE, 
 	PRIMARY KEY (id)
 );
+
+--just extra logins that dont pay and won't be managers or anything but need to be linked to users for schedules they dont even need names really
+CREATE TABLE user_guardians
+(
+	id SERIAL,
+	username text not null unique, --this needs to be unique and can be username or password matter of fact can I check memmber email as well during login check?
+    	password text NOT NULL UNIQUE, 
+	name text, --mom mom, poppy, uncle brian
+	email text, --email to send schedule updates to.
+	user_id integer NOT NULL,
+        FOREIGN KEY(user_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+
+
+
 --Luke Breslin
 CREATE TABLE user_members 
 (
