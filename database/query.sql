@@ -1,5 +1,5 @@
 
-                        select eventos.id, evento_date, arrival_time, start_time, end_time, eventos.address, eventos.coordinates, pitches.name, field_name, teams.name, evento_types.name, availability.id, clubs.name  
+                        select distinct eventos.id, evento_date, arrival_time, start_time, end_time, eventos.address, eventos.coordinates, pitches.name, field_name, teams.name, evento_types.name, availability.id, clubs.name  
 
                         from eventos
 
