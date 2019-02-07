@@ -588,7 +588,6 @@ CREATE TABLE team_players
 	team_member_id integer not null,
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
-
 );
 
 CREATE TABLE team_coaches 
@@ -614,24 +613,6 @@ CREATE TABLE team_parents
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
-
---CREATE TABLE parents 
---(
---	id SERIAL,
---	club_members_id integer not null,
- --       FOREIGN KEY(club_members_id) REFERENCES club_members(id), --louis member
---	PRIMARY KEY (id)
---);
-
---CREATE TABLE managers 
---(
---	id SERIAL,
---	club_members_id integer not null,
- --       FOREIGN KEY(club_members_id) REFERENCES club_members(id), --luke member
---	PRIMARY KEY (id)
---);
---Coach->user jbreslin33@gmail.com
-
 
 CREATE TABLE eventos_players_availability 
 (
