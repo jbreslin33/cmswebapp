@@ -1,3 +1,13 @@
+--signup
+you get an email from admin 
+it has link  to signup to cmswebapp with a code attached that will get you in as a club member.
+
+
+the only person that can add players, managers or coaches to a team is manager or admin. 
+anyone can jump in as a parent????
+anyone can be a club member....
+
+
 --users
 anyone can be a user just sign up on the site like facebook or twitter or gmail
 this will in cases be a parent whos email will be username and the kids and possibly the spouse will use it.
