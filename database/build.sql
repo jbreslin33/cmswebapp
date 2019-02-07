@@ -45,7 +45,7 @@
 --DROP TABLE clubs_users CASCADE;
 --DROP TABLE emails CASCADE;
 --DROP TABLE members CASCADE;
---DROP TABLE site_members_players CASCADE;
+--DROP TABLE user_members_players CASCADE;
 --DROP TABLE club_members_players CASCADE;
 --DROP TABLE members CASCADE;
 --DROP TABLE player CASCADE;
@@ -105,7 +105,7 @@ DROP TABLE sessions CASCADE;
 
 
 --USERS
-DROP TABLE site_parents_site_players CASCADE;
+DROP TABLE user_parents_user_players CASCADE;
 
 DROP TABLE team_players CASCADE;
 DROP TABLE team_coaches CASCADE;
@@ -118,14 +118,14 @@ DROP TABLE club_coaches CASCADE;
 DROP TABLE club_managers CASCADE;
 DROP TABLE club_parents CASCADE;
 
-DROP TABLE site_players CASCADE;
-DROP TABLE site_coaches CASCADE;
-DROP TABLE site_managers CASCADE;
-DROP TABLE site_parents CASCADE;
+DROP TABLE user_players CASCADE;
+DROP TABLE user_coaches CASCADE;
+DROP TABLE user_managers CASCADE;
+DROP TABLE user_parents CASCADE;
 
 DROP TABLE club_members CASCADE;
 
-DROP TABLE site_members CASCADE;
+DROP TABLE user_members CASCADE;
 
 DROP TABLE users CASCADE;
 
@@ -458,7 +458,7 @@ CREATE TABLE users
 	PRIMARY KEY (id)
 );
 --Luke Breslin
-CREATE TABLE site_members 
+CREATE TABLE user_members 
 (
 	id SERIAL,
     	first_name text,
@@ -478,55 +478,55 @@ CREATE TABLE club_members
 (
 	id SERIAL,
 	club_id integer,
-	site_member_id integer,
-        FOREIGN KEY(site_member_id) REFERENCES site_members(id), 
+	user_member_id integer,
+        FOREIGN KEY(user_member_id) REFERENCES user_members(id), 
         FOREIGN KEY(club_id) REFERENCES clubs(id), 
 	PRIMARY KEY (id)
 );
 
 --this only gets deleted when player leaves club if you want to
 --Luke Breslin is a player at Celta Vigo
-CREATE TABLE site_players 
+CREATE TABLE user_players 
 (
 	id SERIAL,
 	dob date not null,
-	site_member_id integer,
-        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	user_member_id integer,
+        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE site_coaches 
+CREATE TABLE user_coaches 
 (
 	id SERIAL,
-	site_member_id integer,
-        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	user_member_id integer,
+        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE site_managers 
+CREATE TABLE user_managers 
 (
 	id SERIAL,
-	site_member_id integer,
-        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	user_member_id integer,
+        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
 	PRIMARY KEY (id)
 );
-CREATE TABLE site_parents 
+CREATE TABLE user_parents 
 (
 	id SERIAL,
-	site_member_id integer,
-        FOREIGN KEY(site_member_id) REFERENCES site_members(id),
+	user_member_id integer,
+        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
 	PRIMARY KEY (id)
 );
 
 --PARENT PLAYER
-CREATE TABLE site_parents_site_players
+CREATE TABLE user_parents_user_players
 (
 	id SERIAL,
-	site_parent_id integer not null,
-	site_player_id integer not null,
-        FOREIGN KEY(site_parent_id) REFERENCES site_parents(id),
-        FOREIGN KEY(site_player_id) REFERENCES site_players(id),
-	unique (site_parent_id, site_player_id),
+	user_parent_id integer not null,
+	user_player_id integer not null,
+        FOREIGN KEY(user_parent_id) REFERENCES user_parents(id),
+        FOREIGN KEY(user_player_id) REFERENCES user_players(id),
+	unique (user_parent_id, user_player_id),
 	PRIMARY KEY (id)
 );
 
@@ -730,8 +730,8 @@ CREATE TABLE orders
 (
 	id SERIAL,
 	create_time timestamp,
-	site_member_id integer,
-	FOREIGN KEY (site_member_id) REFERENCES site_members(id),
+	user_member_id integer,
+	FOREIGN KEY (user_member_id) REFERENCES user_members(id),
         PRIMARY KEY (id)
 );
 

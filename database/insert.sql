@@ -16,19 +16,19 @@ insert into users (username,password) values ('l','l'); --luke
 insert into users (username,password) values ('j','j'); --jim breslin
 insert into users (username,password) values ('lo','lo'); --louise 
 
---site_members
-insert into site_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
-insert into site_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('James', 'Anthony', 'Breslin', 'jbreslin33@gmail.com', '215-828-4924', '804 East Girard Avenue, Philadelphia PA 19125', 2); 
+--user_members
+insert into user_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
+insert into user_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('James', 'Anthony', 'Breslin', 'jbreslin33@gmail.com', '215-828-4924', '804 East Girard Avenue, Philadelphia PA 19125', 2); 
 
 --club_members
-insert into club_members (club_id, site_member_id) values (1,1); --luke to celta
-insert into club_members (club_id, site_member_id) values (2,1); --luke to kenso
-insert into club_members (club_id, site_member_id) values (1,1); --jim to celta
+insert into club_members (club_id, user_member_id) values (1,1); --luke to celta
+insert into club_members (club_id, user_member_id) values (2,1); --luke to kenso
+insert into club_members (club_id, user_member_id) values (1,1); --jim to celta
 
---site_players
-insert into site_players (dob,site_member_id) values ('2005-08-17',1);
---site_parents
-insert into site_parents (site_member_id) values (2);
+--user_players
+insert into user_players (dob,user_member_id) values ('2005-08-17',1);
+--user_parents
+insert into user_parents (user_member_id) values (2);
 
 --club_players
 insert into club_players (uniform_number,club_member_id) values (26,1); --luke number for celta
@@ -48,8 +48,8 @@ insert into team_players (team_member_id) values (2); --luke on u14 kenso
 insert into team_parents (team_member_id) values (3); --jim parent on u15 celta
 
 
---site_parents_site_players
-insert into site_parents_site_players (site_parent_id,site_player_id) values (1,1);
+--user_parents_user_players
+insert into user_parents_user_players (user_parent_id,user_player_id) values (1,1);
 
 
 --evento_types
