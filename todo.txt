@@ -1,6 +1,12 @@
 --signup
 you get an email from admin 
-it has link  to signup to cmswebapp with a code attached that will get you in as a club member.
+it has link  to signup to cmswebapp with a code attached that will get you in as user  
+
+once you are a user you may add site_members that belong to you
+
+user--jbreslin33
+
+site_members--Luke Breslin, 
 
 
 the only person that can add players, managers or coaches to a team is manager or admin. 
