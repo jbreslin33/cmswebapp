@@ -37,15 +37,15 @@ insert into club_players (uniform_number,club_member_id) values (4,2); --luke nu
 insert into club_parents (club_member_id) values (3); --jim parent at celta
 
 --team_members
-insert into team_members (team_id,club_members_id) values (3,1);
-insert into team_members (team_id,club_members_id) values (5,1);
-insert into team_members (team_id,club_members_id) values (3,3);
+insert into team_members (club_members_id,team_id) values (1,3);
+insert into team_members (club_members_id,team_id) values (1,5);
+insert into team_members (club_members_id,team_id) values (3,3);
 
 --team_players
-insert into team_players (club_players_id,team_id) values (1,3); --luke on u15 celta
-insert into team_players (club_players_id,team_id) values (1,5); --luke on u14 kenso
+insert into team_players (team_member_id) values (1); --luke on u15 celta
+insert into team_players (team_member_id) values (2); --luke on u14 kenso
 --team_parents
-insert into team_parents (club_parents_id,team_id) values (1,3); --jim parent on u15 celta
+insert into team_parents (team_member_id) values (3); --jim parent on u15 celta
 
 
 --site_parents_site_players

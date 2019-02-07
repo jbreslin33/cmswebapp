@@ -585,10 +585,8 @@ CREATE TABLE team_members
 CREATE TABLE team_players 
 (
 	id SERIAL,
-	club_players_id integer not null,
-	team_id integer not null,
-        FOREIGN KEY(club_players_id) REFERENCES club_players(id),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+	team_member_id integer not null,
+        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 
 );
@@ -596,30 +594,24 @@ CREATE TABLE team_players
 CREATE TABLE team_coaches 
 (
 	id SERIAL,
-	club_coaches_id integer not null,
-	team_id integer not null,
-        FOREIGN KEY(club_coaches_id) REFERENCES club_coaches(id),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+	team_member_id integer not null,
+        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE team_managers 
 (
 	id SERIAL,
-	club_managers_id integer not null,
-	team_id integer not null,
-        FOREIGN KEY(club_managers_id) REFERENCES club_managers(id),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+	team_member_id integer not null,
+        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE team_parents 
 (
 	id SERIAL,
-	club_parents_id integer not null,
-	team_id integer not null,
-        FOREIGN KEY(club_parents_id) REFERENCES club_parents(id),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+	team_member_id integer not null,
+        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
 
