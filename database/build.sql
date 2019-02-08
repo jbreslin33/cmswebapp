@@ -129,6 +129,7 @@ DROP TABLE user_members CASCADE;
 
 DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
+drop table login_credentials cascade;
 
 --UNIFORMS
 DROP TABLE uniforms_eventos CASCADE;
@@ -446,16 +447,32 @@ CREATE TABLE zones_sessions
         id SERIAL,
 	zones_id integer,
 	session_id integer,
-        PRIMARY KEY (id),
         FOREIGN KEY(zones_id) REFERENCES zones(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id)
+        FOREIGN KEY(session_id) REFERENCES sessions(id),
+        PRIMARY KEY (id)
 );
+
+create table login_credentials
+(
+	id SERIAL,
+	username text not null unique, 
+    	password text not null unique, 
+        PRIMARY KEY (id)
+);
+
 --jbreslin33@gmail.com
 CREATE TABLE users 
 (
 	id SERIAL,
-	username text not null unique, --this needs to be unique and can be username or password matter of fact can I check memmber email as well during login check?
-    	password text NOT NULL UNIQUE, 
+	login_credentials_id integer,
+    	first_name text,
+    	middle_name text,
+    	last_name text,
+    	email text not null, --jbreslin33
+    	phone text,
+	address text,
+	coordinates text,
+        FOREIGN KEY(login_credentials_id) REFERENCES login_credentials(id),
 	PRIMARY KEY (id)
 );
 
@@ -463,21 +480,23 @@ CREATE TABLE users
 CREATE TABLE user_guardians
 (
 	id SERIAL,
+	login_credentials_id integer,
 	username text not null unique, --this needs to be unique and can be username or password matter of fact can I check memmber email as well during login check?
     	password text NOT NULL UNIQUE, 
 	name text, --mom mom, poppy, uncle brian
 	email text, --email to send schedule updates to.
 	user_id integer NOT NULL,
         FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(login_credentials_id) REFERENCES login_credentials(id),
 	PRIMARY KEY (id)
 );
-
 
 
 --Luke Breslin
 CREATE TABLE user_members 
 (
 	id SERIAL,
+	login_credentials_id integer,
     	first_name text,
     	middle_name text,
     	last_name text,
@@ -485,10 +504,12 @@ CREATE TABLE user_members
     	phone text,
 	address text,
 	coordinates text,
-	user_id integer not null, --if this points to jbreslin33@gmail.com no biggie because updates can be sent to jbreslin33@gmail.com and lbreslin6Gmail.com
+	user_id integer not null, 
+        FOREIGN KEY(login_credentials_id) REFERENCES login_credentials(id),
         FOREIGN KEY(user_id) REFERENCES users(id), 
 	PRIMARY KEY (id)
 );
+
 
 --Luke Breslin, Celta Vigo
 CREATE TABLE club_members 
