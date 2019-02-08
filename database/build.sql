@@ -130,7 +130,6 @@ drop table families cascade;
 
 DROP TABLE user_members CASCADE;
 
-drop table user_login_credentials cascade;
 drop table login_credentials cascade;
 DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
@@ -481,17 +480,6 @@ create table login_credentials
         FOREIGN KEY(user_id) REFERENCES users(id),
         PRIMARY KEY (id)
 );
-
-create table user_login_credentials
-(
-	id SERIAL,
-	user_id integer, --owner
-	login_credential_id integer,
-        FOREIGN KEY(user_id) REFERENCES users(id),
-        FOREIGN KEY(login_credential_id) REFERENCES login_credentials(id),
-        PRIMARY KEY (id)
-);
-
 
 CREATE TABLE families 
 (
