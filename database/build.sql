@@ -125,11 +125,16 @@ DROP TABLE user_parents CASCADE;
 
 DROP TABLE club_members CASCADE;
 
+drop table users_families cascade;
+drop table families cascade;
+
 DROP TABLE user_members CASCADE;
 
+drop table user_login_credentials cascade;
+drop table login_credentials cascade;
 DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
-drop table login_credentials cascade;
+
 
 --UNIFORMS
 DROP TABLE uniforms_eventos CASCADE;
@@ -452,19 +457,11 @@ CREATE TABLE zones_sessions
         PRIMARY KEY (id)
 );
 
-create table login_credentials
-(
-	id SERIAL,
-	username text not null unique, 
-    	password text not null unique, 
-        PRIMARY KEY (id)
-);
 
 --jbreslin33@gmail.com
 CREATE TABLE users 
 (
 	id SERIAL,
-	login_credentials_id integer,
     	first_name text,
     	middle_name text,
     	last_name text,
@@ -472,7 +469,45 @@ CREATE TABLE users
     	phone text,
 	address text,
 	coordinates text,
-        FOREIGN KEY(login_credentials_id) REFERENCES login_credentials(id),
+	PRIMARY KEY (id)
+);
+
+create table login_credentials
+(
+	id SERIAL,
+	user_id integer, --owner
+	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
+    	password text not null,  --Iggles_13           , toy_bot_6 
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        PRIMARY KEY (id)
+);
+
+create table user_login_credentials
+(
+	id SERIAL,
+	user_id integer, --owner
+	login_credential_id integer,
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(login_credential_id) REFERENCES login_credentials(id),
+        PRIMARY KEY (id)
+);
+
+
+CREATE TABLE families 
+(
+	id SERIAL,
+	head_of_family_id integer,
+        FOREIGN KEY(head_of_family_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE users_families 
+(
+	id SERIAL,
+	user_id integer,
+	family_id integer,
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(family_id) REFERENCES families(id),
 	PRIMARY KEY (id)
 );
 
@@ -480,14 +515,12 @@ CREATE TABLE users
 CREATE TABLE user_guardians
 (
 	id SERIAL,
-	login_credentials_id integer,
 	username text not null unique, --this needs to be unique and can be username or password matter of fact can I check memmber email as well during login check?
     	password text NOT NULL UNIQUE, 
 	name text, --mom mom, poppy, uncle brian
 	email text, --email to send schedule updates to.
 	user_id integer NOT NULL,
         FOREIGN KEY(user_id) REFERENCES users(id),
-        FOREIGN KEY(login_credentials_id) REFERENCES login_credentials(id),
 	PRIMARY KEY (id)
 );
 
@@ -496,7 +529,6 @@ CREATE TABLE user_guardians
 CREATE TABLE user_members 
 (
 	id SERIAL,
-	login_credentials_id integer,
     	first_name text,
     	middle_name text,
     	last_name text,
@@ -505,7 +537,6 @@ CREATE TABLE user_members
 	address text,
 	coordinates text,
 	user_id integer not null, 
-        FOREIGN KEY(login_credentials_id) REFERENCES login_credentials(id),
         FOREIGN KEY(user_id) REFERENCES users(id), 
 	PRIMARY KEY (id)
 );
