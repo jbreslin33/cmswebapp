@@ -127,6 +127,7 @@ DROP TABLE club_members CASCADE;
 
 DROP TABLE user_members CASCADE;
 
+DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
 
 --UNIFORMS
