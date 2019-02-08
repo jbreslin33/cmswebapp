@@ -1,3 +1,11 @@
+--users
+are jbreslin33 which then branches to me giving invite to momom or colleen as guardians
+
+underneath as well are user_members like netflix model
+this table contains bio information and ...
+can even contain email and password for a seperate login
+the advantage of seperate login is it bypasses having to click luke and still keeps relation to user.
+
 --signup
 you get an email from admin 
 it has link  to signup to cmswebapp with a code attached that will get you in as user  
