@@ -1,6 +1,10 @@
 i think what we are modelling is real people who may be using another persons login.
 so this needs to be kept seperate and the way to do that may be families
 
+and thus club level stuff is separate and controlled by club
+parents should decide what to suscribe to and be auto suscribed.:wq
+
+
 if you use another persons login you are that person!!!! then show netflix screen for user members
 --users
 are jbreslin33 which then branches to me giving invite to momom or colleen as guardians
