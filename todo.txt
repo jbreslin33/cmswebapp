@@ -4,6 +4,9 @@ so this needs to be kept seperate and the way to do that may be families
 and thus club level stuff is separate and controlled by club
 parents should decide what to suscribe to and be auto suscribed.:wq
 
+so viewing doesnt matter so show schedule which is 90% of what they will do won't ask who you are
+but when you go to post or something it will ask
+
 
 if you use another persons login you are that person!!!! then show netflix screen for user members
 --users

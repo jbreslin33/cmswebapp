@@ -130,7 +130,7 @@ drop table families cascade;
 
 DROP TABLE user_members CASCADE;
 
-drop table user_login_credentials cascade;
+drop table login_credentials cascade;
 DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
 
@@ -471,7 +471,7 @@ CREATE TABLE users
 	PRIMARY KEY (id)
 );
 
-create table user_login_credentials
+create table login_credentials
 (
 	id SERIAL,
 	user_id integer, --owner
