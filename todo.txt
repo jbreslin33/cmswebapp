@@ -1,6 +1,8 @@
 i think what we are modelling is real people who may be using another persons login.
 so this needs to be kept seperate and the way to do that may be families
 
+on that note what if there is a people table or something like it and then a user/login entry is made when you want your own login.
+
 and thus club level stuff is separate and controlled by club
 parents should decide what to suscribe to and be auto suscribed.:wq
 
