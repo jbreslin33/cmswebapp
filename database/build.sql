@@ -458,15 +458,6 @@ CREATE TABLE zones_sessions
 );
 
 
---jbreslin33@gmail.com this is if you want a login???
---some person needs to own this????
-CREATE TABLE users 
-(
-	id SERIAL,
-	password text not null,
-	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
-	PRIMARY KEY (id)
-);
 
 CREATE TABLE persons 
 (
@@ -478,6 +469,18 @@ CREATE TABLE persons
     	phone text,
 	address text,
 	coordinates text,
+	PRIMARY KEY (id)
+);
+
+--jbreslin33@gmail.com this is if you want a login???
+--some person needs to own this????
+CREATE TABLE users 
+(
+	id SERIAL,
+	person_id integer not null,
+	password text not null,
+	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
