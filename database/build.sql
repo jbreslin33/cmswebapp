@@ -462,13 +462,6 @@ CREATE TABLE zones_sessions
 CREATE TABLE users 
 (
 	id SERIAL,
-    	first_name text,
-    	middle_name text,
-    	last_name text,
-    	email text not null, --jbreslin33
-    	phone text,
-	address text,
-	coordinates text,
 	PRIMARY KEY (id)
 );
 
