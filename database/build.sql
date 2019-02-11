@@ -133,6 +133,7 @@ DROP TABLE user_members CASCADE;
 drop table login_credentials cascade;
 DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
+DROP TABLE persons CASCADE;
 
 
 --UNIFORMS
@@ -459,6 +460,19 @@ CREATE TABLE zones_sessions
 
 --jbreslin33@gmail.com
 CREATE TABLE users 
+(
+	id SERIAL,
+    	first_name text,
+    	middle_name text,
+    	last_name text,
+    	email text not null, --jbreslin33
+    	phone text,
+	address text,
+	coordinates text,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE persons 
 (
 	id SERIAL,
     	first_name text,
