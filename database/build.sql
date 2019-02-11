@@ -800,8 +800,8 @@ CREATE TABLE orders
 (
 	id SERIAL,
 	create_time timestamp,
-	member_id integer,
-	FOREIGN KEY (member_id) REFERENCES members(id),
+	person_id integer,
+	FOREIGN KEY (person_id) REFERENCES persons(id),
         PRIMARY KEY (id)
 );
 
