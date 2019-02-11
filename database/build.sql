@@ -59,6 +59,22 @@
 --DROP TABLE managers CASCADE;
 --DROP TABLE parents CASCADE;
 
+--DROP TABLE site_members CASCADE;
+
+--DROP TABLE site_parents_site_playerss CASCADE;
+--DROP TABLE user_parents_user_players CASCADE;
+
+--DROP TABLE site_coaches CASCADE;
+--DROP TABLE site_players CASCADE;
+--DROP TABLE site_managers CASCADE;
+--DROP TABLE site_parents CASCADE;
+
+--DROP TABLE user_coaches CASCADE;
+--DROP TABLE user_players CASCADE;
+--DROP TABLE user_managers CASCADE;
+--DROP TABLE user_parents CASCADE;
+
+
 
 --LIVE DROPS
 DROP TABLE error_log CASCADE; 
