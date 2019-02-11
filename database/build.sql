@@ -105,7 +105,7 @@ DROP TABLE sessions CASCADE;
 
 
 --USERS
-DROP TABLE user_parents_user_players CASCADE;
+DROP TABLE parents_players CASCADE;
 
 DROP TABLE team_players CASCADE;
 DROP TABLE team_coaches CASCADE;
@@ -118,17 +118,17 @@ DROP TABLE club_coaches CASCADE;
 DROP TABLE club_managers CASCADE;
 DROP TABLE club_parents CASCADE;
 
-DROP TABLE user_players CASCADE;
-DROP TABLE user_coaches CASCADE;
-DROP TABLE user_managers CASCADE;
-DROP TABLE user_parents CASCADE;
+DROP TABLE players CASCADE;
+DROP TABLE coaches CASCADE;
+DROP TABLE managers CASCADE;
+DROP TABLE parents CASCADE;
 
 DROP TABLE club_members CASCADE;
 
 drop table users_families cascade;
 drop table families cascade;
 
-DROP TABLE user_members CASCADE;
+DROP TABLE members CASCADE;
 
 drop table login_credentials cascade;
 DROP TABLE user_guardians CASCADE;
@@ -527,7 +527,7 @@ CREATE TABLE user_guardians
 
 
 --Luke Breslin
-CREATE TABLE user_members 
+CREATE TABLE members 
 (
 	id SERIAL,
     	first_name text,
@@ -548,55 +548,55 @@ CREATE TABLE club_members
 (
 	id SERIAL,
 	club_id integer,
-	user_member_id integer,
-        FOREIGN KEY(user_member_id) REFERENCES user_members(id), 
+	person_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id), 
         FOREIGN KEY(club_id) REFERENCES clubs(id), 
 	PRIMARY KEY (id)
 );
 
 --this only gets deleted when player leaves club if you want to
 --Luke Breslin is a player at Celta Vigo
-CREATE TABLE user_players 
+CREATE TABLE players 
 (
 	id SERIAL,
 	dob date not null,
-	user_member_id integer,
-        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
+	person_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE user_coaches 
+CREATE TABLE coaches 
 (
 	id SERIAL,
-	user_member_id integer,
-        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
+	person_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE user_managers 
+CREATE TABLE managers 
 (
 	id SERIAL,
-	user_member_id integer,
-        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
+	person_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
-CREATE TABLE user_parents 
+CREATE TABLE parents 
 (
 	id SERIAL,
-	user_member_id integer,
-        FOREIGN KEY(user_member_id) REFERENCES user_members(id),
+	person_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
 --PARENT PLAYER
-CREATE TABLE user_parents_user_players
+CREATE TABLE parents_players
 (
 	id SERIAL,
-	user_parent_id integer not null,
-	user_player_id integer not null,
-        FOREIGN KEY(user_parent_id) REFERENCES user_parents(id),
-        FOREIGN KEY(user_player_id) REFERENCES user_players(id),
-	unique (user_parent_id, user_player_id),
+	parent_id integer not null,
+	player_id integer not null,
+        FOREIGN KEY(parent_id) REFERENCES parents(id),
+        FOREIGN KEY(player_id) REFERENCES players(id),
+	unique (parent_id, player_id),
 	PRIMARY KEY (id)
 );
 
@@ -800,8 +800,8 @@ CREATE TABLE orders
 (
 	id SERIAL,
 	create_time timestamp,
-	user_member_id integer,
-	FOREIGN KEY (user_member_id) REFERENCES user_members(id),
+	member_id integer,
+	FOREIGN KEY (member_id) REFERENCES members(id),
         PRIMARY KEY (id)
 );
 
