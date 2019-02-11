@@ -458,10 +458,13 @@ CREATE TABLE zones_sessions
 );
 
 
---jbreslin33@gmail.com
+--jbreslin33@gmail.com this is if you want a login???
+--some person needs to own this????
 CREATE TABLE users 
 (
 	id SERIAL,
+	password text not null,
+	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
 	PRIMARY KEY (id)
 );
 
