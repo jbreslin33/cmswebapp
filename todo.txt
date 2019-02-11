@@ -3,6 +3,9 @@ so this needs to be kept seperate and the way to do that may be families
 
 on that note what if there is a people table or something like it and then a user/login entry is made when you want your own login.
 
+so we need pair tables for if you have a login and pair table if you are linking to someone elses
+actually that might not be needed all you need is to link person to show under someone else login
+
 and thus club level stuff is separate and controlled by club
 parents should decide what to suscribe to and be auto suscribed.:wq
 
