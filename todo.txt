@@ -1,3 +1,9 @@
+next to add a user screen, which will in turn add person and then allow that person to createadd a club and team etc.
+so anyone can add a club....
+once you add a club you and only you can add persons as clubmemebers and club players and add teams
+...a club manager or coach can add and delete team players
+a club administrator can add teams so we need that table
+
 i think what we are modelling is real people who may be using another persons login.
 so this needs to be kept seperate and the way to do that may be families
 
