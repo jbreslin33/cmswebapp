@@ -141,13 +141,10 @@ DROP TABLE parents CASCADE;
 
 DROP TABLE club_members CASCADE;
 
-drop table users_families cascade;
+drop table persons_families cascade;
 drop table families cascade;
 
-DROP TABLE members CASCADE;
-
 drop table login_credentials cascade;
-DROP TABLE user_guardians CASCADE;
 DROP TABLE users CASCADE;
 DROP TABLE persons CASCADE;
 
@@ -510,54 +507,24 @@ create table login_credentials
         PRIMARY KEY (id)
 );
 
+--this would say Jim Breslin's family via foreign key persons_id
 CREATE TABLE families 
 (
 	id SERIAL,
-	head_of_family_id integer,
-        FOREIGN KEY(head_of_family_id) REFERENCES users(id),
+	person_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE users_families 
+CREATE TABLE persons_families 
 (
 	id SERIAL,
-	user_id integer,
+	person_id integer,
 	family_id integer,
-        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(family_id) REFERENCES families(id),
 	PRIMARY KEY (id)
 );
-
---just extra logins that dont pay and won't be managers or anything but need to be linked to users for schedules they dont even need names really
-CREATE TABLE user_guardians
-(
-	id SERIAL,
-	username text not null unique, --this needs to be unique and can be username or password matter of fact can I check memmber email as well during login check?
-    	password text NOT NULL UNIQUE, 
-	name text, --mom mom, poppy, uncle brian
-	email text, --email to send schedule updates to.
-	user_id integer NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id),
-	PRIMARY KEY (id)
-);
-
-
---Luke Breslin
-CREATE TABLE members 
-(
-	id SERIAL,
-    	first_name text,
-    	middle_name text,
-    	last_name text,
-    	email text not null, --lbreslin6 or this could be parent email for player Luke Breslin email of parent jbreslin33@gmail.com
-    	phone text,
-	address text,
-	coordinates text,
-	user_id integer not null, 
-        FOREIGN KEY(user_id) REFERENCES users(id), 
-	PRIMARY KEY (id)
-);
-
 
 --Luke Breslin, Celta Vigo
 CREATE TABLE club_members 
