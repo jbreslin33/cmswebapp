@@ -132,6 +132,7 @@ DROP TABLE team_members CASCADE;
 DROP TABLE club_players CASCADE;
 DROP TABLE club_coaches CASCADE;
 DROP TABLE club_managers CASCADE;
+DROP TABLE club_administrators CASCADE;
 DROP TABLE club_parents CASCADE;
 
 DROP TABLE players CASCADE;
@@ -596,7 +597,6 @@ CREATE TABLE club_players
 CREATE TABLE club_coaches 
 (
 	id SERIAL,
-	--uniform_number integer,
 	club_member_id integer,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
@@ -605,7 +605,14 @@ CREATE TABLE club_coaches
 CREATE TABLE club_managers 
 (
 	id SERIAL,
-	--uniform_number integer,
+	club_member_id integer,
+        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+	PRIMARY KEY (id)
+);
+--so add club will auto pop you in this table then you can add other club members into this
+CREATE TABLE club_administrators 
+(
+	id SERIAL,
 	club_member_id integer,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
