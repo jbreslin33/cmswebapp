@@ -487,12 +487,11 @@ CREATE TABLE persons
 
 --jbreslin33@gmail.com this is if you want a login???
 --some person needs to own this????
+--user preferences could be placed here like see whole family etc
 CREATE TABLE users 
 (
 	id SERIAL,
 	person_id integer not null,
-	password text not null,
-	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -500,7 +499,7 @@ CREATE TABLE users
 create table login_credentials
 (
 	id SERIAL,
-	user_id integer, --owner
+	user_id integer not null unique, --owner
 	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
     	password text not null,  --Iggles_13           , toy_bot_6 
         FOREIGN KEY(user_id) REFERENCES users(id),
