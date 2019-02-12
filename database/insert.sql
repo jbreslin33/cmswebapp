@@ -11,10 +11,26 @@ insert into teams (name,club_id) values ('u15girls',1);
 insert into teams (name,club_id) values ('u14boys',2);
 insert into teams (name,club_id) values ('u15boys',2);
 
+--persons
+CREATE TABLE persons
+(
+        id SERIAL,
+        first_name text,
+        middle_name text,
+        last_name text,
+        email text not null, --jbreslin33
+        phone text,
+        address text,
+        coordinates text,
+        PRIMARY KEY (id)
+);
+
+insert into persons (first_name, middle_name, last_name, email, phone, address, user_id) values ('James', 'Anthony', 'Breslin', 'jbreslin33@gmail.com', '215-828-4924', '804 East Girard Avenue, Philadelphia PA 19125', 2); 
+
+insert into persons (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
+
 --users
 insert into users (username,password) values ('l','l'); --luke
-insert into users (username,password) values ('j','j'); --jim breslin
-insert into users (username,password) values ('lo','lo'); --louise 
 
 --user_members
 insert into user_members (first_name, middle_name, last_name, email, phone, address, user_id) values ('Luke', 'James', 'Breslin', 'lbreslin6@gmail.com', '215-839-2598', '804 East Girard Avenue, Philadelphia PA 19125', 1); 
