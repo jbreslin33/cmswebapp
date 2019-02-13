@@ -7,45 +7,9 @@ class InsertEvento extends Insert
 	{
 
 		//insertEvento specific parameters	
-                if (isset($_GET['evento_date']))
+                if (isset($_GET['first_name']))
                 {
-                        $this->mEventoDate = $_GET['evento_date'];
-                }
-                if (isset($_GET['arrival_time']))
-                {
-                        $this->mArrivalTime = $_GET['arrival_time'];
-                }
-                if (isset($_GET['start_time']))
-                {
-                        $this->mStartTime = $_GET['start_time'];
-                }
-                if (isset($_GET['end_time']))
-                {
-                        $this->mEndTime = $_GET['end_time'];
-                }
-                if (isset($_GET['address']))
-                {
-                        $this->mAddress = $_GET['address'];
-                }
-                if (isset($_GET['coordinates']))
-                {
-                        $this->mCoordinates = $_GET['coordinates'];
-                }
-                if (isset($_GET['pitch_id']))
-                {
-                        $this->mPitchID = $_GET['pitch_id'];
-                }
-                if (isset($_GET['field_name']))
-                {
-                        $this->mFieldName = $_GET['field_name'];
-                }
-                if (isset($_GET['team_id']))
-                {
-                        $this->mTeamID = $_GET['team_id'];
-                }
-                if (isset($_GET['evento_types_id']))
-                {
-                        $this->mEventoTypesID = $_GET['evento_types_id'];
+                        $this->mAddress = $_GET['first_name'];
                 }
 		
 		parent::__construct();

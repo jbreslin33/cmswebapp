@@ -407,7 +407,7 @@ CREATE TABLE persons
     	first_name text,
     	middle_name text,
     	last_name text,
-    	email text not null, --jbreslin33
+    	email text, --jbreslin33
     	phone text,
 	address text,
 	coordinates text,
