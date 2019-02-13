@@ -24,6 +24,9 @@ class JoinScreen
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_JOIN);
                 this.mStateMachine.changeState(this.mINIT_JOIN);
+
+		document.getElementById("joinscreenbuttonid").addEventListener("click",this.send);
+
 	}
 
 	update(timestamp)
