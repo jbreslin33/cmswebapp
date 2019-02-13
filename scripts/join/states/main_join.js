@@ -1,7 +1,7 @@
 
 'use strict';
 
-class INIT_JOIN extends State
+class MAIN_JOIN extends State
 {
 	constructor() 
 	{

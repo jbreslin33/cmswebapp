@@ -1,4 +1,3 @@
-
 'use strict';
 
 class INIT_JOIN extends State
@@ -15,7 +14,7 @@ class INIT_JOIN extends State
 			console.log("INIT_JOIN: ENTER");        
 		}
 	
-
+	}
         execute(join)
         {
 		if (join.mStateLogs || join.mStateExecuteLogs)

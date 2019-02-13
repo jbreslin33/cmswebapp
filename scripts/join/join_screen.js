@@ -57,4 +57,14 @@ class JoinScreen
                 request.open('POST', url);
                 request.send();
 	}
+
+	show()
+	{
+              document.getElementById("join_screen_html_id").style.display = "block";
+	}
+
+	hide()
+	{
+              document.getElementById("join_screen_html_id").style.display = "none";
+	}
 }
