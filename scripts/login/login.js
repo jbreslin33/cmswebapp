@@ -85,4 +85,15 @@ class Login
 		localStorage.setItem("username",username);
 		localStorage.setItem("password",password);
         }
+
+	show()
+        {
+                document.getElementById("login_screen_html_id").style.display = "block";
+        }
+
+        hide()
+        {
+                document.getElementById("login_screen_html_id").style.display = "none";
+        }
+
 }

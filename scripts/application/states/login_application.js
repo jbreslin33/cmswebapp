@@ -27,6 +27,8 @@ class LOGIN_APPLICATION extends State
 			//start the login subsystem
 			app.mLogin = new Login(app);
 		}
+    		app.mLogin.show();
+
 	}
 
         execute(app)
@@ -48,5 +50,6 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXIT");        
 		}
+    		app.mLogin.hide();
 	}
 }
