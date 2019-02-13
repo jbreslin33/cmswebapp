@@ -1,7 +1,7 @@
 
 'use strict';
 
-class SHOW_DAILY_SCHEDULE_APPLICATION extends State
+class JOIN_SCREEN_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -12,26 +12,27 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: ENTER");        
+			console.log("JOIN_SCREEN_APPLICATION: ENTER");        
 		}
-		if (app.mDailySchedule)
+		if (app.mJoinScreen)
 		{
 			//also maybe some clean up as well, so just leaving this if statement here.
-			app.mDailySchedule = new DailySchedule(app);
+			app.mJoinScreen = new JoinScreen(app);
 
 		}
 		else
 		{
-			app.mDailySchedule = new DailySchedule(app);
+			app.mJoinScreen = new JoinScreen(app);
 		}
-		document.getElementById("daily_schedule_nav_id").className += " active";
+		app.mJoinScreen.show();
+		//document.getElementById("daily_schedule_nav_id").className += " active";
 	}
 
         execute(app)
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: EXECUTE");        
+			console.log("JOIN_SCREEN_APPLICATION: EXECUTE");        
 		}
 	}
 
@@ -39,11 +40,11 @@ class SHOW_DAILY_SCHEDULE_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("SHOW_DAILY_SCHEDULE_APPLICATION: EXIT");        
+			console.log("JOIN_SCREEN_APPLICATION: EXIT");        
 		}
 		//hide it for now maybe delete later
-		app.mDailySchedule.hideSchedule();
+		app.mJoinScreen.hide();
 
-		document.getElementById("daily_schedule_nav_id").className = document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
+		//document.getElementById("daily_schedule_nav_id").className = document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
 	}
 }
