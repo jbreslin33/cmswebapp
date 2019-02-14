@@ -12,8 +12,10 @@ class JoinScreen
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
 
-		//credentials
-		this.mUsername = null;
+		//sql php vars
+		this.mFirstName = null;
+		this.mMiddleName = null;
+		this.mLastName = null;
 
                 //states
                 this.mStateMachine = new StateMachine(this);
@@ -25,7 +27,7 @@ class JoinScreen
                 this.mStateMachine.setGlobalState(this.mGLOBAL_JOIN);
                 this.mStateMachine.changeState(this.mINIT_JOIN);
 
-		document.getElementById("joinscreenbuttonid").addEventListener("click",this.send);
+		document.getElementById("joinscreenbuttonid").addEventListener("click",this.send.bind(this));
 
 	}
 
@@ -36,8 +38,13 @@ class JoinScreen
 
 	send()
 	{
+		//get vars
+               	this.mFirstName  = document.getElementById("join_first_name_id").value;
+               	this.mMiddleName = document.getElementById("join_middle_name_id").value;
+               	this.mLastName   = document.getElementById("join_last_name_id").value;
+
 		//need to handle not having a team yet...
-		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword; 
+		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

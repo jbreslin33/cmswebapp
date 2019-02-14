@@ -20,6 +20,8 @@ class Application
 
 		//login first
 		this.mLogin = null;
+
+		this.mJoinScreen = null;
 	
 		//daily schedule
 		this.mDailySchedule = null;
