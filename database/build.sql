@@ -74,6 +74,7 @@ drop table persons_families cascade;
 drop table families cascade;
 
 drop table login_credentials cascade;
+--drop table users_persons cascade;
 DROP TABLE users CASCADE;
 DROP TABLE persons CASCADE;
 
@@ -424,6 +425,17 @@ CREATE TABLE users
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
+
+--create table users_persons
+--(
+--	id serial,
+--	person_id integer not null,
+--	user_id integer not null,
+ --       FOREIGN KEY(person_id) REFERENCES persons(id),
+  --      FOREIGN KEY(user_id) REFERENCES users(id),
+	--unique(person_id,user_id),
+--	PRIMARY KEY (id)
+--);
 
 create table login_credentials
 (
