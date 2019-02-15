@@ -410,6 +410,7 @@ CREATE TABLE persons
     	phone text,
 	address text,
 	coordinates text,
+	timestamp_created timestamp,
 	PRIMARY KEY (id)
 );
 
@@ -429,6 +430,7 @@ CREATE TABLE logins
 	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
     	password text not null,  --Iggles_13           , toy_bot_6 
     	email_id integer not null, --so you need atleast one email its the master email
+	timestamp_created timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
 );
@@ -450,8 +452,8 @@ create table persons_logins
 create table persons_emails
 (
 	id serial,
-	person_id integer,
-	email_id integer,
+	person_id integer not null,
+	email_id integer not null, --every person needs an email but it can be someone else's
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(email_id) REFERENCES emails(id),
 	unique(person_id,email_id),
@@ -459,10 +461,13 @@ create table persons_emails
 );
 
 --this would say Jim Breslin's family via foreign key persons_id
+--person_id is the family creator
+--familys are linked by people not logins
 CREATE TABLE families 
 (
 	id SERIAL,
 	person_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -470,8 +475,9 @@ CREATE TABLE families
 CREATE TABLE persons_families 
 (
 	id SERIAL,
-	person_id integer,
+	person_id integer, --create by
 	family_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(family_id) REFERENCES families(id),
 	PRIMARY KEY (id)
@@ -483,6 +489,7 @@ CREATE TABLE club_members
 	id SERIAL,
 	club_id integer,
 	person_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id), 
         FOREIGN KEY(club_id) REFERENCES clubs(id), 
 	PRIMARY KEY (id)
@@ -495,6 +502,7 @@ CREATE TABLE players
 	id SERIAL,
 	dob date not null,
 	person_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -503,6 +511,7 @@ CREATE TABLE coaches
 (
 	id SERIAL,
 	person_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -511,6 +520,7 @@ CREATE TABLE managers
 (
 	id SERIAL,
 	person_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -518,6 +528,7 @@ CREATE TABLE parents
 (
 	id SERIAL,
 	person_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -528,6 +539,7 @@ CREATE TABLE parents_players
 	id SERIAL,
 	parent_id integer not null,
 	player_id integer not null,
+	timestamp_created timestamp,
         FOREIGN KEY(parent_id) REFERENCES parents(id),
         FOREIGN KEY(player_id) REFERENCES players(id),
 	unique (parent_id, player_id),
@@ -541,6 +553,7 @@ CREATE TABLE club_players
 	id SERIAL,
 	uniform_number integer,
 	club_member_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -549,6 +562,7 @@ CREATE TABLE club_coaches
 (
 	id SERIAL,
 	club_member_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -557,6 +571,7 @@ CREATE TABLE club_managers
 (
 	id SERIAL,
 	club_member_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -565,6 +580,7 @@ CREATE TABLE club_administrators
 (
 	id SERIAL,
 	club_member_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -574,6 +590,7 @@ CREATE TABLE club_parents
 	id SERIAL,
 	--uniform_number integer,
 	club_member_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -587,6 +604,7 @@ CREATE TABLE team_members
 	id serial,
 	team_id integer,
 	club_members_id integer,
+	timestamp_created timestamp,
         FOREIGN KEY(club_members_id) REFERENCES club_members(id),
         FOREIGN KEY(team_id) REFERENCES teams(id),
 	primary key(id)
@@ -596,6 +614,7 @@ CREATE TABLE team_players
 (
 	id SERIAL,
 	team_member_id integer not null,
+	timestamp_created timestamp,
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
@@ -604,6 +623,7 @@ CREATE TABLE team_coaches
 (
 	id SERIAL,
 	team_member_id integer not null,
+	timestamp_created timestamp,
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
@@ -612,6 +632,7 @@ CREATE TABLE team_managers
 (
 	id SERIAL,
 	team_member_id integer not null,
+	timestamp_created timestamp,
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
@@ -620,6 +641,7 @@ CREATE TABLE team_parents
 (
 	id SERIAL,
 	team_member_id integer not null,
+	timestamp_created timestamp,
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
