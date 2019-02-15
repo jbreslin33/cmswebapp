@@ -18,20 +18,52 @@ class Join extends Insert
                 {
                         $this->mLastName = $_GET['last_name'];
                 }
+                if (isset($_GET['phone']))
+                {
+                        $this->mLastName = $_GET['phone'];
+                }
+                if (isset($_GET['address']))
+                {
+                        $this->mLastName = $_GET['address'];
+                }
+                if (isset($_GET['email']))
+                {
+                        $this->mLastName = $_GET['email'];
+                }
+                if (isset($_GET['username']))
+                {
+                        $this->mLastName = $_GET['username'];
+                }
+                if (isset($_GET['password']))
+                {
+                        $this->mLastName = $_GET['password'];
+                }
 		
 		parent::__construct();
+		    var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword;
+
 	}
 
 	public function query()
 	{
 		$this->mSQL = "
 		
-		insert into persons (first_name, middle_name, last_name) values('" . 
+		insert into persons (first_name, middle_name, last_name,phone, address, email, username, password) values('" . 
 		$this->mFirstName .
 		"','" .
 		$this->mMiddleName .
 		"','" .
 		$this->mLastName .
+		"','" .
+		$this->mPhone .
+		"','" .
+		$this->mAddress .
+		"','" .
+		$this->mEmail .
+		"','" .
+		$this->mUsername .
+		"','" .
+		$this->mPassword .
 		"');";
 
 		error_log($this->mSQL);
