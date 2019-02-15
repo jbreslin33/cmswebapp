@@ -413,19 +413,6 @@ CREATE TABLE persons
 	PRIMARY KEY (id)
 );
 
---jbreslin33@gmail.com this is if you want a login???
---some person needs to own this????
---user preferences could be placed here like see whole family etc
-CREATE TABLE logins 
-(
-	id SERIAL,
-	--person_id integer not null,
-	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
-    	password text not null,  --Iggles_13           , toy_bot_6 
-        --FOREIGN KEY(person_id) REFERENCES persons(id),
-	PRIMARY KEY (id)
-);
-
 create table emails 
 (
 	id serial,
@@ -433,20 +420,33 @@ create table emails
 	PRIMARY KEY (id)
 );
 
+--jbreslin33@gmail.com this is if you want a login???
+--some person needs to own this????
+--user preferences could be placed here like see whole family etc
+CREATE TABLE logins 
+(
+	id SERIAL,
+	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
+    	password text not null,  --Iggles_13           , toy_bot_6 
+    	email_id integer not null, --so you need atleast one email its the master email
+ 	FOREIGN KEY(email_id) REFERENCES emails(id),
+	PRIMARY KEY (id)
+);
+
+
+--luke uses jbreslin33
 create table persons_logins
 (
 	id serial,
 	person_id integer not null,
 	login_id integer not null,
-    	email_id integer not null, --so you need atleast one email
         FOREIGN KEY(person_id) REFERENCES persons(id),
  	FOREIGN KEY(login_id) REFERENCES logins(id),
- 	FOREIGN KEY(email_id) REFERENCES emails(id),
 	unique(person_id,login_id),
 	PRIMARY KEY (id)
 );
 
---chance for extra emails if you want
+--chance for email for luke or no email for grace or multiple emails for luke
 create table persons_emails
 (
 	id serial,
@@ -454,6 +454,7 @@ create table persons_emails
 	email_id integer,
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(email_id) REFERENCES emails(id),
+	unique(person_id,email_id),
 	PRIMARY KEY (id)
 );
 
