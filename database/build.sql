@@ -434,7 +434,7 @@ CREATE TABLE logins
 );
 
 
---luke uses jbreslin33
+--luke uses jbreslin33 also luke could use jbreslin33 AND lbreslin6 logins
 create table persons_logins
 (
 	id serial,
