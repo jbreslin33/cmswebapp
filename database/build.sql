@@ -73,9 +73,12 @@ DROP TABLE club_members CASCADE;
 drop table persons_families cascade;
 drop table families cascade;
 
-drop table login_credentials cascade;
---drop table users_persons cascade;
-DROP TABLE users CASCADE;
+drop table persons_emails cascade;
+DROP TABLE persons_logins CASCADE;
+DROP TABLE logins CASCADE;
+drop table emails cascade;
+
+
 DROP TABLE persons CASCADE;
 
 
@@ -124,10 +127,6 @@ SET default_with_oids = false;
 --******************  CREATE TABLES *************************
 --**************************************************************
 --**************************************************************
-
---==================================================================
---==================== users  ========================
---==================================================================
 
 --==================================================================
 --=========================== HELPER  ========================
@@ -408,7 +407,6 @@ CREATE TABLE persons
     	first_name text,
     	middle_name text,
     	last_name text,
-    	email text, --jbreslin33
     	phone text,
 	address text,
 	coordinates text,
@@ -418,33 +416,45 @@ CREATE TABLE persons
 --jbreslin33@gmail.com this is if you want a login???
 --some person needs to own this????
 --user preferences could be placed here like see whole family etc
-CREATE TABLE users 
+CREATE TABLE logins 
 (
 	id SERIAL,
-	person_id integer not null,
-        FOREIGN KEY(person_id) REFERENCES persons(id),
+	--person_id integer not null,
+	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
+    	password text not null,  --Iggles_13           , toy_bot_6 
+        --FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
---create table users_persons
---(
---	id serial,
---	person_id integer not null,
---	user_id integer not null,
- --       FOREIGN KEY(person_id) REFERENCES persons(id),
-  --      FOREIGN KEY(user_id) REFERENCES users(id),
-	--unique(person_id,user_id),
---	PRIMARY KEY (id)
---);
-
-create table login_credentials
+create table emails 
 (
-	id SERIAL,
-	user_id integer not null unique, --owner
-	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
-    	password text not null,  --Iggles_13           , toy_bot_6 
-        FOREIGN KEY(user_id) REFERENCES users(id),
-        PRIMARY KEY (id)
+	id serial,
+	email text not null unique,
+	PRIMARY KEY (id)
+);
+
+create table persons_logins
+(
+	id serial,
+	person_id integer not null,
+	login_id integer not null,
+    	email_id integer not null, --so you need atleast one email
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+ 	FOREIGN KEY(login_id) REFERENCES logins(id),
+ 	FOREIGN KEY(email_id) REFERENCES emails(id),
+	unique(person_id,login_id),
+	PRIMARY KEY (id)
+);
+
+--chance for extra emails if you want
+create table persons_emails
+(
+	id serial,
+	person_id integer,
+	email_id integer,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(email_id) REFERENCES emails(id),
+	PRIMARY KEY (id)
 );
 
 --this would say Jim Breslin's family via foreign key persons_id
