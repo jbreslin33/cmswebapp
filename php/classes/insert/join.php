@@ -1,6 +1,6 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
-//include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
 
 class Join 
 {
@@ -9,22 +9,27 @@ class Join
 
                 if (isset($_GET['first_name']))
                 {
+			error_log("first name got");
                         $this->mFirstName = $_GET['first_name'];
                 }
                 if (isset($_GET['middle_name']))
                 {
+			error_log("middle name got");
                         $this->mMiddleName = $_GET['middle_name'];
                 }
                 if (isset($_GET['last_name']))
                 {
+			error_log("last name got");
                         $this->mLastName = $_GET['last_name'];
                 }
                 if (isset($_GET['phone']))
                 {
+			error_log("phonegot");
                         $this->mPhone = $_GET['phone'];
                 }
                 if (isset($_GET['address']))
                 {
+			error_log("addressl got");
                         $this->mAddress = $_GET['address'];
                 }
 
@@ -48,6 +53,7 @@ class Join
                 }
 
 		$insertEmail = new InsertEmail($this->mEmail);
+		$insertLogin = new InsertLogin($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 	}
 }
 	$join = new Join();	
