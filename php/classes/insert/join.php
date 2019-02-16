@@ -40,8 +40,6 @@ class Join extends Insert
                 }
 		
 		parent::__construct();
-		    var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword;
-
 	}
 
 	public function query()

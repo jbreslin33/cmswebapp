@@ -51,7 +51,7 @@ class JoinScreen
                	this.mAddress    = document.getElementById("join_address_id").value;
                	this.mEmail      = document.getElementById("join_email_id").value;
                	this.mUsername   = document.getElementById("join_username_id").value;
-               	this.mPassword   = document.getElementById("join_password_id").value;
+               	this.mPassword   = document.getElementById("join_password1_id").value;
 
 		//need to handle not having a team yet...
 		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword; 
