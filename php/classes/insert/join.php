@@ -1,11 +1,12 @@
 <?php 
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
+//include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
+//include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
 
-class Join extends Insert
+class Join 
 {
 	function __construct() 
 	{
-		//insertEvento specific parameters	
+
                 if (isset($_GET['first_name']))
                 {
                         $this->mFirstName = $_GET['first_name'];
@@ -20,54 +21,35 @@ class Join extends Insert
                 }
                 if (isset($_GET['phone']))
                 {
-                        $this->mLastName = $_GET['phone'];
+                        $this->mPhone = $_GET['phone'];
                 }
                 if (isset($_GET['address']))
                 {
-                        $this->mLastName = $_GET['address'];
+                        $this->mAddress = $_GET['address'];
                 }
+
                 if (isset($_GET['email']))
                 {
-                        $this->mLastName = $_GET['email'];
+			error_log("email got");
+                        $this->mEmail = $_GET['email'];
                 }
+		else
+		{
+			error_log("no email got");
+		}
+
                 if (isset($_GET['username']))
                 {
-                        $this->mLastName = $_GET['username'];
+                        $this->mUsername = $_GET['username'];
                 }
                 if (isset($_GET['password']))
                 {
-                        $this->mLastName = $_GET['password'];
+                        $this->mPassword = $_GET['password'];
                 }
-		
-		parent::__construct();
-	}
 
-	public function query()
-	{
-		$this->mSQL = "
-		
-		insert into persons (first_name, middle_name, last_name,phone, address, email, username, password) values('" . 
-		$this->mFirstName .
-		"','" .
-		$this->mMiddleName .
-		"','" .
-		$this->mLastName .
-		"','" .
-		$this->mPhone .
-		"','" .
-		$this->mAddress .
-		"','" .
-		$this->mEmail .
-		"','" .
-		$this->mUsername .
-		"','" .
-		$this->mPassword .
-		"');";
-
-		error_log($this->mSQL);
 	}
 }
-
-$join = new Join();
+	//$insertEmail = new InsertEmail($this->mEmail);
+	$join = new Join();	
 
 ?>
