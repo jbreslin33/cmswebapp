@@ -19,7 +19,7 @@ class InsertPerson extends Insert
 	{
 		$this->mSQL = "
 
-		insert into logins (first_name, middle_name, last_name, phone, address) values('" . 
+		insert into persons (first_name, middle_name, last_name, phone, address) values('" . 
 		$this->mFirstName .
 		"','" .
 		$this->mMiddleName .
