@@ -23,8 +23,9 @@ abstract class Insert
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
 
-                $results = $database->query($this->mSQL);
-
+                //$results = $database->query($this->mSQL);
+                $database->query($this->mSQL);
+/*
                 $myarray = array();
 
                 $resultArray = pg_fetch_all($results);
@@ -34,6 +35,7 @@ abstract class Insert
                         $myarray[] = $row;
                 }
                 $this->mData = json_encode($myarray);
+ */
 	}
 
 	public function sendData()

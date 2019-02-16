@@ -1,5 +1,5 @@
 <?php 
-//include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
 //include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
 
 class Join 
@@ -47,9 +47,9 @@ class Join
                         $this->mPassword = $_GET['password'];
                 }
 
+		$insertEmail = new InsertEmail($this->mEmail);
 	}
 }
-	//$insertEmail = new InsertEmail($this->mEmail);
 	$join = new Join();	
 
 ?>

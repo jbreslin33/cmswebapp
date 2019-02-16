@@ -3,9 +3,9 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
 
 class InsertEmail extends Insert
 {
-	function __construct(email) 
+	function __construct($email) 
 	{
-                $this->mEmail = email;
+                $this->mEmail = $email;
 		
 		parent::__construct();
 	}
@@ -16,7 +16,7 @@ class InsertEmail extends Insert
 
 		insert into emails (email) values ('" .
 		$this->mEmail .
-		"');" .
+		"');"; 
 
 		error_log($this->mSQL);
 	}
