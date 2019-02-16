@@ -17,16 +17,19 @@ class Join
 			error_log("middle name got");
                         $this->mMiddleName = $_GET['middle_name'];
                 }
+
                 if (isset($_GET['last_name']))
                 {
 			error_log("last name got");
                         $this->mLastName = $_GET['last_name'];
                 }
+
                 if (isset($_GET['phone']))
                 {
 			error_log("phonegot");
                         $this->mPhone = $_GET['phone'];
                 }
+
                 if (isset($_GET['address']))
                 {
 			error_log("addressl got");
@@ -53,7 +56,9 @@ class Join
                 }
 
 		$insertEmail = new InsertEmail($this->mEmail);
-		$insertLogin = new InsertLogin($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
+		//$insertLogin = new InsertLogin($this->mUsername, $this->mPassword, $this->mEmailID);
+		$insertLogin = new InsertLogin($this->mUsername, $this->mPassword,1);
+		//$insertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 	}
 }
 	$join = new Join();	

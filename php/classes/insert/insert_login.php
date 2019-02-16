@@ -3,14 +3,12 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
 
 class InsertLogin extends Insert
 {
-	function __construct($first_name, $middle_name, $last_name, $phone, $address) 
+	function __construct($username, $password, $email_id) 
 	{
 
-                $this->mFirstName = $first_name;
-                $this->mMiddleName = $middle_name;
-                $this->mLastName = $last_name;
-                $this->mPhone = $phone;
-                $this->mAddress = $address;
+                $this->mUsername = $username;
+                $this->mPassword = $password;
+                $this->mEmailID  = $email_id;
 		
 		parent::__construct();
 	}
@@ -19,17 +17,13 @@ class InsertLogin extends Insert
 	{
 		$this->mSQL = "
 
-		insert into logins (first_name, middle_name, last_name, phone, address) values('" . 
-		$this->mFirstName .
+		insert into logins (username, password, email_id) values('" . 
+		$this->mUsername .
 		"','" .
-		$this->mMiddleName .
-		"','" .
-		$this->mLastName .
-		"','" . 
-		$this->mPhone .
-		"','" .
-		$this->mAddress .
-		"');";
+		$this->mPassword .
+		"'," .
+		$this->mEmailID .
+		");";
 		
 		error_log($this->mSQL);
 	}
