@@ -58,7 +58,7 @@ class Join
 
 		$insertEmail = new InsertEmail($this->mEmail);
 		//$insertLogin = new InsertLogin($this->mUsername, $this->mPassword, $this->mEmailID);
-		$insertLogin = new InsertLogin($this->mUsername, $this->mPassword,1);
+		$insertLogin = new InsertLogin($this->mUsername, $this->mPassword,$insertEmail->mID);
 		$insertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 	}
 }

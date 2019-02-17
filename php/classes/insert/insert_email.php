@@ -16,7 +16,7 @@ class InsertEmail extends Insert
 
 		insert into emails (email) values ('" .
 		$this->mEmail .
-		"');"; 
+		"') returning id;"; 
 
 		error_log($this->mSQL);
 	}
