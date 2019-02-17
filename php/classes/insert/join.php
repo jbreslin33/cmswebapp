@@ -3,6 +3,7 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_person.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_persons_logins.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_persons_emails.php");
 
 class Join 
 {
@@ -51,6 +52,7 @@ class Join
 		$insertLogin = new InsertLogin($this->mUsername, $this->mPassword,$insertEmail->mID);
 		$insertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 		$insertPersonsLogins = new InsertPersonsLogins($insertPerson->mID, $insertLogin->mID);
+		$insertPersonsEmails = new InsertPersonsEmails($insertPerson->mID, $insertEmail->mID);
 	}
 }
 	$join = new Join();	
