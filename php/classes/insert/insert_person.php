@@ -29,7 +29,7 @@ class InsertPerson extends Insert
 		$this->mPhone .
 		"','" .
 		$this->mAddress .
-		"');";
+		"') returning id;";
 		
 		error_log($this->mSQL);
 	}

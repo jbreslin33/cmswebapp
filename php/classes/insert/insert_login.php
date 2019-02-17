@@ -23,7 +23,7 @@ class InsertLogin extends Insert
 		$this->mPassword .
 		"'," .
 		$this->mEmailID .
-		");";
+		") returning id;";
 		
 		error_log($this->mSQL);
 	}
