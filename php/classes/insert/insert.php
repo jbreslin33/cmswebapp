@@ -12,9 +12,6 @@ abstract class Insert
 
 		$this->query();
 		$this->runQuery();
-
-		//return result to client
-		$this->sendData();
 	}
 
 	//query is the sql line do we need to pass in anything?
@@ -47,11 +44,6 @@ abstract class Insert
 			$this->mSuccess = false;
 		}
 		
-	}
-
-	public function sendData()
-	{
-		echo $this->mData;
 	}
 }
 ?>

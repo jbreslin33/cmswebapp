@@ -75,9 +75,15 @@ class Login
 		if (code == 100)
 		{
 			this.mLoggedIn = true;	
-			APPLICATION.save(APPLICATION.mLogin.mEmail, APPLICATION.mLogin.mPassword);
+			this.save(this.mEmail, this.mPassword);
 		}
 	}
+
+        save(email, password)
+        {
+		localStorage.setItem("email",email);
+		localStorage.setItem("password",password);
+        }
 
 	show()
         {
