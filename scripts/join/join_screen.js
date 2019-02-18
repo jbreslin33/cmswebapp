@@ -20,7 +20,8 @@ class JoinScreen
 		this.mAddress = null;
 		this.mEmail = null;
 		this.mUsername = null;
-		this.mPassword = null;
+		this.mPassword1 = null;
+		this.mPassword2 = null;
 
                 //states
                 this.mStateMachine = new StateMachine(this);
@@ -51,10 +52,11 @@ class JoinScreen
                	this.mAddress    = document.getElementById("join_address_id").value;
                	this.mEmail      = document.getElementById("join_email_id").value;
                	this.mUsername   = document.getElementById("join_username_id").value;
-               	this.mPassword   = document.getElementById("join_password1_id").value;
+               	this.mPassword1   = document.getElementById("join_password1_id").value;
+               	this.mPassword2   = document.getElementById("join_password2_id").value;
 
 		//need to handle not having a team yet...
-		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword; 
+		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword1; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
