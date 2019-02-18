@@ -29,9 +29,24 @@ class Join
                         $this->mPhone = $_GET['phone'];
                 }
 
-                if (isset($_GET['address']))
+                if (isset($_GET['street']))
                 {
-                        $this->mAddress = $_GET['address'];
+                        $this->mStreet = $_GET['street'];
+                }
+		
+		if (isset($_GET['city']))
+                {
+                        $this->mCity = $_GET['city'];
+                }
+
+		if (isset($_GET['state']))
+                {
+                        $this->mState = $_GET['state'];
+                }
+
+		if (isset($_GET['zip']))
+                {
+                        $this->mZip = $_GET['zip'];
                 }
 
                 if (isset($_GET['email']))
@@ -49,8 +64,8 @@ class Join
                 }
 
 		$insertEmail = new InsertEmail($this->mEmail);
-		$insertLogin = new InsertLogin($this->mUsername, $this->mPassword,$insertEmail->mID);
-		$insertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
+		$insertLogin = new InsertLogin($insertEmail->mID, $this->mPassword);
+		$insertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
 		$insertPersonsLogins = new InsertPersonsLogins($insertPerson->mID, $insertLogin->mID);
 		$insertPersonsEmails = new InsertPersonsEmails($insertPerson->mID, $insertEmail->mID);
 	}

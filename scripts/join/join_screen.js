@@ -44,19 +44,24 @@ class JoinScreen
 
 	send()
 	{
+		console.log("send..................");
 		//get vars
                	this.mFirstName  = document.getElementById("join_first_name_id").value;
                	this.mMiddleName = document.getElementById("join_middle_name_id").value;
                	this.mLastName   = document.getElementById("join_last_name_id").value;
                	this.mPhone      = document.getElementById("join_phone_id").value;
-               	this.mAddress    = document.getElementById("join_address_id").value;
+
+               	this.mStreet = document.getElementById("join_street_id").value;
+               	this.mCity = document.getElementById("join_city_id").value;
+               	this.mState = document.getElementById("join_state_id").value;
+               	this.mZip = document.getElementById("join_zip_id").value;
+
                	this.mEmail      = document.getElementById("join_email_id").value;
-               	this.mUsername   = document.getElementById("join_username_id").value;
                	this.mPassword1   = document.getElementById("join_password1_id").value;
                	this.mPassword2   = document.getElementById("join_password2_id").value;
 
 		//need to handle not having a team yet...
-		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword1; 
+		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&street=" + this.mStreet + "&city=" + this.mCity + "&state=" + this.mState + "&zip=" + this.mZip + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword1; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

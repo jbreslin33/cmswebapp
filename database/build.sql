@@ -408,7 +408,10 @@ CREATE TABLE persons
     	middle_name text,
     	last_name text,
     	phone text,
-	address text,
+	street text,
+	city text,
+	state text,
+	zip text,
 	coordinates text,
 	timestamp_created timestamp,
 	PRIMARY KEY (id)
@@ -427,9 +430,8 @@ create table emails
 CREATE TABLE logins 
 (
 	id SERIAL,
-	username text not null unique,  --jbreslin33@gmail.com, lbreslin6@gmail.com
+    	email_id integer not null unique, --so you need atleast one email its the master email
     	password text not null,  --Iggles_13           , toy_bot_6 
-    	email_id integer not null, --so you need atleast one email its the master email
 	timestamp_created timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
