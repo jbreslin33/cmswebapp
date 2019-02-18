@@ -18,10 +18,7 @@ class JoinScreen
 		this.mLastName = null;
 		this.mPhone = null;
 		this.mAddress = null;
-		this.mEmail = null;
-		this.mUsername = null;
-		this.mPassword1 = null;
-		this.mPassword2 = null;
+		this.mPassword = null;
 
                 //states
                 this.mStateMachine = new StateMachine(this);
@@ -56,12 +53,12 @@ class JoinScreen
                	this.mState = document.getElementById("join_state_id").value;
                	this.mZip = document.getElementById("join_zip_id").value;
 
-               	this.mEmail      = document.getElementById("join_email_id").value;
-               	this.mPassword1   = document.getElementById("join_password1_id").value;
-               	this.mPassword2   = document.getElementById("join_password2_id").value;
+               	this.mApplication.mLogin.mEmail    = document.getElementById("join_email_id").value;
+               	this.mApplication.mLogin.mPassword = document.getElementById("join_password1_id").value;
+               	this.mPassword                     = document.getElementById("join_password2_id").value;
 
 		//need to handle not having a team yet...
-		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&street=" + this.mStreet + "&city=" + this.mCity + "&state=" + this.mState + "&zip=" + this.mZip + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword1; 
+		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&street=" + this.mStreet + "&city=" + this.mCity + "&state=" + this.mState + "&zip=" + this.mZip + "&email=" + this.mEmail + "&username=" + this.mUsername + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -75,7 +72,7 @@ class JoinScreen
                                         {
 						if (data == 100)
 						{
-							APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
+							APPLICATION.mLogin.process(data); //should recieve 100 for good login
 						}
                                         }
                                 }
@@ -84,7 +81,7 @@ class JoinScreen
                 request.open('POST', url);
                 request.send();
 	}
-
+        
 	show()
 	{
               document.getElementById("join_screen_html_id").style.display = "block";

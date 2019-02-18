@@ -14,10 +14,6 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: ENTER");        
 		}
-		//login
-		//app.mLogin = new Login(app);
-		//app.mStateMachine.changeState(app.mCHECK_LOCALSTORAGE);
-		//
 		if (app.mLogin)
 		{
 			//do nothing right now	

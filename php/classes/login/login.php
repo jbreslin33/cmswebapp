@@ -23,31 +23,19 @@ only updates and inserts should check for password
 
 class Login 
 {
-	function __construct() 
+	function __construct($email, $password) 
 	{
 		$this->mEcho = "";
 
-		$this->mUsername = "";
-		$this->mPassword = "";
-
-		//check for proper post or get
-		if (isset($_POST['username']) && isset($_POST['password']))
-		{
-			$this->mUsername = $_POST['username'];
-			$this->mPassword = $_POST['password'];
-		}
-		if (isset($_GET['username']) && isset($_GET['password']))
-		{
-			$this->mUsername = $_GET['username'];
-			$this->mPassword = $_GET['password'];
-		}
+		$this->mEmail = $email;
+		$this->mPassword = $password;
 
 		//business rules check
-		if ($this->mUsername == "" && $this->mPassword == "")
+		if ($this->mEmail == "" && $this->mPassword == "")
 		{
 			$this->mEcho = 101; 
 		}	
-		else if ($this->mUsername == "")
+		else if ($this->mEmail == "")
 		{
 			$this->mEcho = 102; 
 		}	
@@ -66,9 +54,11 @@ class Login
 	public function processLogin()
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
-		$query = "select users.id, users.password from users
-			where users.username = '"; 
-			$query .= $this->mUsername; 
+
+		$query = "select logins.password from logins
+			join emails on emails.id=logins.email_id
+			where emails.email = '";
+			$query .= $this->mEmail; 
 			$query .= "';";
 
 		$result = $database->query($query);
@@ -80,17 +70,17 @@ class Login
 
 			if ($this->mPassword == $password)
 			{
-				$this->mEcho = "100"; //good username and password, yeah
+				$this->mEcho = "100"; //good email and password, yeah
 			}
 			else
 			{
-				$this->mEcho = "105"; //good username no password match
+				$this->mEcho = "105"; //good email no password match
 			}
 			error_log($this->mEcho);	
 		}
 		else
 		{
-			//no username match
+			//no email match
 			$this->mEcho = "104";
 		}
 	}
@@ -100,7 +90,15 @@ class Login
 		echo $this->mEcho;
 	}
 }
+//get parameters
 
-$login = new Login();
+//check for proper get
+if (isset($_GET['email']) && isset($_GET['password']))
+{
+	$this->mEmail = $_GET['email'];
+        $this->mPassword = $_GET['password'];
+}
+
+$login = new Login($email,$password);
 
 ?>

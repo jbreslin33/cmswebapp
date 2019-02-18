@@ -15,7 +15,7 @@ class Login
 		this.mLoggedIn = false;
 
 		//credentials
-		this.mUsername = null;
+		this.mEmail    = null;
 		this.mPassword = null;
 		this.mUserID   = null;
 		this.mClubID   = null;
@@ -46,7 +46,7 @@ class Login
 	sendLogin()
 	{
 		//need to handle not having a team yet...
-		var url = "/php/classes/login/login.php?username=" + APPLICATION.mLogin.mUsername + "&password=" + APPLICATION.mLogin.mPassword; 
+		var url = "/php/classes/login/login.php?email=" + APPLICATION.mLogin.mEmail + "&password=" + APPLICATION.mLogin.mPassword; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -60,7 +60,7 @@ class Login
                                         {
 						if (data == 100)
 						{
-							APPLICATION.mLogin.processLogin(data); //should recieve 100 for good login
+							APPLICATION.mLogin.process(data); //should recieve 100 for good login
 						}
                                         }
                                 }
@@ -70,21 +70,14 @@ class Login
                 request.send();
 	}
 
-	processLogin(code)
+	process(code)
 	{
 		if (code == 100)
 		{
 			this.mLoggedIn = true;	
-			APPLICATION.mLogin.save(APPLICATION.mLogin.mUsername, APPLICATION.mLogin.mPassword);
+			APPLICATION.save(APPLICATION.mLogin.mEmail, APPLICATION.mLogin.mPassword);
 		}
 	}
-
-        // Save list of cities to localStorage.
-        save(username,password)
-        {
-		localStorage.setItem("username",username);
-		localStorage.setItem("password",password);
-        }
 
 	show()
         {

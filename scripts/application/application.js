@@ -47,14 +47,7 @@ class Application
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 	}
-/*
-        saveToLocalStorage(obj)
-        {
-                var data = JSON.stringify(obj);
-                localStorage.mEvento = data;
-        }
-*/
-
+	
 	update(timestamp)
 	{
 		this.mStateMachine.update();
