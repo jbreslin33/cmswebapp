@@ -54,16 +54,20 @@ class Join
                         $this->mEmail = $_GET['email'];
                 }
 		
-		if (isset($_GET['username']))
-                {
-                        $this->mUsername = $_GET['username'];
-                }
                 if (isset($_GET['password']))
                 {
                         $this->mPassword = $_GET['password'];
                 }
 
 		$insertEmail = new InsertEmail($this->mEmail);
+		if ($insertEmail->mSuccess == true)
+		{
+			error_log("SUCCESS ON EMAIL INSERT");
+		}
+		else
+		{
+			error_log("FAILURE ON EMAIL INSERT");
+		}
 		$insertLogin = new InsertLogin($insertEmail->mID, $this->mPassword);
 		$insertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
 		$insertPersonsLogins = new InsertPersonsLogins($insertPerson->mID, $insertLogin->mID);

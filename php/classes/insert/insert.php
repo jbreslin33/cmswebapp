@@ -5,6 +5,7 @@ abstract class Insert
 {
 	function __construct() 
 	{
+		$this->mSuccess = false;
 		$this->mID = "";
 		$this->mSQL = "";
 		$this->mData = "";
@@ -25,17 +26,27 @@ abstract class Insert
 		$database = new Database("localhost","cms","postgres","mibesfat");
 
                 $results = $database->query($this->mSQL);
+
+		if ($results)
+		{
+			$this->mSuccess = true;
+				
+			$myarray = array();
+
+                	$resultArray = pg_fetch_all($results);
+
+                	while ($row = pg_fetch_row($results))
+                	{
+                        	$myarray[] = $row;
+				$this->mID = $row[0];
+                	}
+                	$this->mData = json_encode($myarray);
+		}
+		else //we have a problem
+		{
+			$this->mSuccess = false;
+		}
 		
-		$myarray = array();
-
-                $resultArray = pg_fetch_all($results);
-
-                while ($row = pg_fetch_row($results))
-                {
-                        $myarray[] = $row;
-			$this->mID = $row[0];
-                }
-                $this->mData = json_encode($myarray);
 	}
 
 	public function sendData()
