@@ -70,15 +70,12 @@ class JoinScreen
                                         var data = this.responseText;
                                         if (data)
                                         {
-						console.log('DATA:' + data);
 						if (data == 100)
 						{
-							console.log('got 100');
-							APPLICATION.mLogin.process(data); //should recieve 100 for good login
+							APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
 						}
 						else
 						{
-							console.log('got somet 100');
 						}
                                         }
                                 }

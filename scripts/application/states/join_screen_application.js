@@ -34,6 +34,12 @@ class JOIN_SCREEN_APPLICATION extends State
 		{
 			console.log("JOIN_SCREEN_APPLICATION: EXECUTE");        
 		}
+               
+		if (app.mLogin.mLoggedIn == true)
+                {
+                        app.mStateMachine.changeState(app.mSHOW_DAILY_SCHEDULE_APPLICATION);
+                }
+
 	}
 
         exit(app)
