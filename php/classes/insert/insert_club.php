@@ -5,6 +5,7 @@ class InsertClub extends Insert
 {
 	function __construct($name, $street, $city, $state, $zip) 
 	{
+		error_log("const for indsrtVlub");
 
                 $this->mName = $name;
                 $this->mStreet = $street;
