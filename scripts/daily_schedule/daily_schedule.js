@@ -43,7 +43,7 @@ class DailySchedule
 
 	getSchedule()
         {
-                var url = "/php/classes/query/schedule_query.php?username=" + APPLICATION.mLogin.mUsername;
+                var url = "/php/classes/query/schedule_query.php?email=" + APPLICATION.mLogin.mEmail;
 
                 // Fetch the latest data.
                 var request = new XMLHttpRequest();

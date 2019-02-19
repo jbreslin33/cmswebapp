@@ -28,12 +28,14 @@ class ScheduleQuery extends Query
                         full outer join team_members on team_members.team_id=teams.id
 
                         full outer join club_members on club_members.id=team_members.club_members_id
-                        full outer join site_members on site_members.id=club_members.site_member_id
+                        full outer join persons on persons.id=club_members.person_id
+
+			full outer join persons_logins on persons_logins.id=persons
                         full outer join users on users.id=site_members.user_id
 
 			where evento_date >= now() - INTERVAL '1 DAY'  
-                        and users.username = '" .
-                        $this->mUsername .
+                        and users.email = '" .
+                        $this->mEmail .
 			"' order by evento_date asc";
 	}
 }

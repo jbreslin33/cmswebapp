@@ -5,18 +5,18 @@ abstract class Query
 {
 	function __construct() 
 	{
-		$this->mUsername = "";
+		$this->mEmail = "";
 		$this->mQuery = "";
 		$this->mData = "";
 
 		//check for proper post or get
-		if (isset($_POST['username']))
+		if (isset($_POST['email']))
 		{
-			$this->mUsername = $_POST['username'];
+			$this->mEmail = $_POST['email'];
 		}
-		if (isset($_GET['username']))
+		if (isset($_GET['email']))
 		{
-			$this->mUsername = $_GET['username'];
+			$this->mEmail = $_GET['email'];
 		}
 
 		//business rules check

@@ -37,7 +37,8 @@ class JOIN_SCREEN_APPLICATION extends State
                
 		if (app.mLogin.mLoggedIn == true)
                 {
-                        app.mStateMachine.changeState(app.mSHOW_DAILY_SCHEDULE_APPLICATION);
+                        //app.mStateMachine.changeState(app.mSHOW_DAILY_SCHEDULE_APPLICATION);
+                        app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                 }
 
 	}
