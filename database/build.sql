@@ -147,7 +147,10 @@ CREATE TABLE clubs
 (
         id SERIAL,
         name text NOT NULL,
-        address text,
+        street text,
+        city text,
+        state text,
+        zip text,
         coordinates text,
 	PRIMARY KEY (id)
 );

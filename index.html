@@ -58,7 +58,6 @@
 
 	<!-- END NAV_BAR HTML -->
 
-        
 	<!-- JOIN HTML  -->
 
 	<form id="join_screen_html_id" class="needs-validation" novalidate>
@@ -166,6 +165,60 @@
 	</form>
 
 	<!-- END JOIN HTML  -->
+        
+	<!-- ADD CLUB HTML  -->
+
+	<form id="add_club_html_id" class="needs-validation" novalidate>
+  		<div class="form-row">
+    			<div class="col-md-4 mb-3">
+      				<label for="add_club_name_id">Club Name</label>
+      				<input type="text" class="form-control" id="add_club_name_id" placeholder="Club Name" value="Club Name" required>
+      				<div class="valid-feedback">
+        				Looks good!
+      				</div>
+    			</div>
+    		</div>
+		
+		<div class="form-row">
+
+    			<div class="col-md-6 mb-3">
+      				<label for="add_club_street_id">Street Address</label>
+      				<input type="text" class="form-control" id="add_club_street_id" placeholder="Street Address" required>
+      				<div class="invalid-feedback">
+        				Please provide a valid street address.
+      				</div>
+    			</div>
+
+    			<div class="col-md-6 mb-3">
+      				<label for="add_club_city_id">City</label>
+      				<input type="text" class="form-control" id="add_club_city_id" placeholder="City" required>
+      				<div class="invalid-feedback">
+        				Please provide a valid city.
+      				</div>
+    			</div>
+
+    			<div class="col-md-3 mb-3">
+				<label for="add_club_state_id">State</label>
+      				<input type="text" class="form-control" id="add_club_state_id" placeholder="State" required>
+      				<div class="invalid-feedback">
+        				Please provide a valid state.
+      				</div>
+    			</div>
+    
+			<div class="col-md-3 mb-3">
+      				<label for="add_club_zip_id">Zip</label>
+      				<input type="text" class="form-control" id="add_club_zip_id" placeholder="Zip" required>
+      				<div class="invalid-feedback">
+        				Please provide a valid zip.
+      				</div>
+    			</div>
+  		</div>
+
+		<button type="submit" id="addclubbuttonid" class="btn btn-primary">Submit</button>
+
+	</form>
+
+	<!-- END ADD CLUB HTML  -->
 
 
 	<!-- LOGIN_HTML -->
