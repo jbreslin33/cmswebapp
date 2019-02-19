@@ -6,6 +6,8 @@ class JoinScreen
 	{
 		this.mApplication = application;
 
+		location.hash = "join-screen";
+
 		//logs
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true; 

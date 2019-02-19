@@ -21,6 +21,9 @@ class Application
 		//login first
 		this.mLogin = null;
 
+		this.mMain = null;
+		this.mAddClub = null;
+
 		this.mJoinScreen = null;
 	
 		//daily schedule
