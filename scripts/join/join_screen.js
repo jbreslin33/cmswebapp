@@ -20,28 +20,11 @@ class JoinScreen
 		this.mAddress = null;
 		this.mPassword = null;
 
-                //states
-                this.mStateMachine = new StateMachine(this);
-                this.mGLOBAL_JOIN  = new GLOBAL_JOIN();
-                this.mINIT_JOIN    = new INIT_JOIN();
-
-                this.mMAIN_JOIN    = new MAIN_JOIN();
-
-                this.mStateMachine.setGlobalState(this.mGLOBAL_JOIN);
-                this.mStateMachine.changeState(this.mINIT_JOIN);
-
 		document.getElementById("joinscreenbuttonid").addEventListener("click",this.send.bind(this));
-
-	}
-
-	update(timestamp)
-	{
-		this.mStateMachine.update();
 	}
 
 	send()
 	{
-		console.log("send..................");
 		//get vars
                	this.mFirstName  = document.getElementById("join_first_name_id").value;
                	this.mMiddleName = document.getElementById("join_middle_name_id").value;

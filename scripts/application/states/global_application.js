@@ -36,6 +36,10 @@ class GLOBAL_APPLICATION extends State
 			console.log('join screen cliked');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mJOIN_SCREEN_APPLICATION);
                 }
+		else if (location.hash == '#add_club' && app.mStateMachine.mCurrentState != app.mADD_CLUB_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mADD_CLUB_APPLICATION);
+                }
 
 		//set all tabs to not active
 		document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
