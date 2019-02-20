@@ -3,15 +3,45 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
 
 class InsertClub extends Insert
 {
-	function __construct($name, $street, $city, $state, $zip) 
+	function __construct() 
 	{
-		error_log("const for indsrtVlub");
+                $this->mName = null;
+                $this->mStreet = null;
+                $this->mCity = null;
+                $this->mState = null;
+                $this->mZip = null;
 
-                $this->mName = $name;
-                $this->mStreet = $street;
-                $this->mCity = $city;
-                $this->mState = $state;
-                $this->mZip = $zip;
+               	if (isset($_GET['name']))
+                {
+                        $this->mName = $_GET['name'];
+			error_log("NAME from PHP:");
+			error_log($this->mName);
+                }
+		else
+		{
+			error_log('no name:' + $this->mName);
+		}
+
+                if (isset($_GET['street']))
+                {
+                        $this->mStreet = $_GET['street'];
+                }
+
+                if (isset($_GET['city']))
+                {
+                        $this->mCity = $_GET['city'];
+                }
+
+                if (isset($_GET['state']))
+                {
+                        $this->mState = $_GET['state'];
+                }
+
+                if (isset($_GET['zip']))
+                {
+                        $this->mZip = $_GET['zip'];
+                }
+
 		
 		parent::__construct();
 	}
@@ -36,5 +66,6 @@ class InsertClub extends Insert
 	}
 }
 
+$insertClub = new InsertClub();
 
 ?>
