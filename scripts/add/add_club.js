@@ -5,6 +5,8 @@ class AddClub
 	constructor(application)
 	{
 		this.mApplication = application;
+
+		this.mCode = 0;
 		 
 		location.hash = "add_club";
 
@@ -15,29 +17,21 @@ class AddClub
 		this.mState = null;
 		this.mZip = null;
 
-
 		document.getElementById("addclubbuttonid").addEventListener("click",this.send.bind(this));
 	}
 
 	send()
 	{
-		console.log("SEND TO INSERT CLUB");
 		//get vars
                	this.mName  = document.getElementById("add_club_name_id").value;
-		console.log('name:' + this.mName);
 
                	this.mStreet = document.getElementById("add_club_street_id").value;
-		console.log('street:' + this.mStreet);
                	this.mCity   = document.getElementById("add_club_city_id").value;
-		console.log('city:' + this.mCity);
                	this.mState  = document.getElementById("add_club_state_id").value;
-		console.log('state:' + this.mState);
                	this.mZip    = document.getElementById("add_club_zip_id").value;
-		console.log('zip:' + this.mZip);
 
 		//need to handle not having a team yet...
 		var url = "/php/classes/insert/insert_club.php?name=" + this.mName + "&street=" + this.mStreet + "&city=" + this.mCity + "&state=" + this.mState + "&zip=" + this.mZip; 
-		console.log('URL:' + url);
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -46,19 +40,7 @@ class AddClub
                         {
                                 if (request.status === 200)
                                 {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-						if (data == 100)
-						{
-							console.log("got 100 son");
-							APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
-						}
-						else
-						{
-							console.log("got 101 son");
-						}
-                                        }
+                                        APPLICATION.mAddClub.mCode = this.responseText;
                                 }
                         }
                 };
