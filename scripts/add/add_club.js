@@ -51,10 +51,12 @@ class AddClub
                                         {
 						if (data == 100)
 						{
+							console.log("got 100 son");
 							APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
 						}
 						else
 						{
+							console.log("got 101 son");
 						}
                                         }
                                 }

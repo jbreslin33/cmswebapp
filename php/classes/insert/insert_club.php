@@ -14,13 +14,7 @@ class InsertClub extends Insert
                	if (isset($_GET['name']))
                 {
                         $this->mName = $_GET['name'];
-			error_log("NAME from PHP:");
-			error_log($this->mName);
                 }
-		else
-		{
-			error_log('no name:' + $this->mName);
-		}
 
                 if (isset($_GET['street']))
                 {
@@ -67,5 +61,13 @@ class InsertClub extends Insert
 }
 
 $insertClub = new InsertClub();
+if ($insertClub->mSuccess)
+{
+	echo "100"; //success	
+}
+else
+{
+	echo "101"; //failure
+}
 
 ?>
