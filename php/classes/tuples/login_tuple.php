@@ -23,7 +23,7 @@ class LoginTuple extends Tuple
 
 		$this->mInsert = new Insert();
 		
-		$sql = "insert into loginsD (email_id, password) values(" . 
+		$sql = "insert into logins (email_id, password) values(" . 
 		$emailID .
 		",'" .
 		$password .

@@ -2,6 +2,7 @@
 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/email_tuple.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/login_tuple.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/person_tuple.php");
 
 class Join 
 {
@@ -99,8 +100,21 @@ class Join
 				$this->mEmailTuple->delete($this->mEmailTuple->mID);
 			}
 		}
-
-
+/*
+                if ($this->mError == false)
+                {
+                        if ($this->mPersonTuple->mInsert->getSuccess())
+                        {
+                                $this->mPersonTuple = new PersonTuple();
+                                $this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
+                        }
+                        //rollback last all previous inserts which is just one at this point since we are here because login insert failed
+                        else
+                        {
+                                $this->mEmailTuple->delete($this->mEmailTuple->mID);
+                        }
+                }
+ */
 	}
 }
 	$join = new Join();	
