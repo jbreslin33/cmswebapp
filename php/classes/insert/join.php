@@ -1,6 +1,7 @@
 <?php 
 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/email_tuple.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/login_tuple.php");
 /*
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
@@ -15,7 +16,16 @@ class Join
 	{
 		$this->mEcho = null;
 
+		$this->mFirstName = null;
+		$this->mMiddleName = null;
+		$this->mLastName = null;
+		$this->mPhone = null;
+		$this->mStreet = null;
+		$this->mCity = null;
+		$this->mState = null;
+		$this->mZip = null;
 		$this->mEmail = null;
+		$this->mPassword = null;
 
                 if (isset($_GET['first_name']))
                 {
@@ -68,6 +78,10 @@ class Join
 
 		$this->mEmailTuple = new EmailTuple();
 		$this->mEmailTuple->insert($this->mEmail);
+
+		$this->mLoginTuple = new LoginTuple();
+		$this->mLoginTuple->insert($this->mEmailTuple->mID, $this->mPassword);
+
 
 /*
 		$this->mInsertEmail = null;
