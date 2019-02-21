@@ -18,7 +18,7 @@ class LoginTuple extends Tuple
 
 	function insert($emailID, $password) 
 	{
-		$this->mEmail = $email;
+		$this->mEmailID = $emailID;
 
 		$this->mInsert = new Insert();
 		
