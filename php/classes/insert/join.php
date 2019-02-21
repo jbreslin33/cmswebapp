@@ -3,6 +3,8 @@
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/email_tuple.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/login_tuple.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/person_tuple.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/person_login_tuple.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/person_email_tuple.php");
 
 class Join 
 {
@@ -94,27 +96,57 @@ class Join
 				$this->mPersonTuple = new PersonTuple();
 				$this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
 			}
-			//rollback last all previous inserts which is just one at this point since we are here because login insert failed
 			else
 			{
 				$this->mEmailTuple->delete($this->mEmailTuple->mID);
 			}
 		}
-/*
-                if ($this->mError == false)
+		
+		if ($this->mError == false)
                 {
                         if ($this->mPersonTuple->mInsert->getSuccess())
                         {
-                                $this->mPersonTuple = new PersonTuple();
-                                $this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
+                                $this->mPersonLoginTuple = new PersonLoginTuple();
+                                $this->mPersonLoginTuple->insert($this->mPersonTuple->mID, $this->mLoginTuple->mID);
                         }
-                        //rollback last all previous inserts which is just one at this point since we are here because login insert failed
                         else
                         {
-                                $this->mEmailTuple->delete($this->mEmailTuple->mID);
+				$this->mEmailTuple->delete($this->mEmailTuple->mID);
+                                $this->mLoginTuple->delete($this->mLoginTuple->mID);
                         }
                 }
- */
+		
+		if ($this->mError == false)
+                {
+                        if ($this->mPersonLoginTuple->mInsert->getSuccess())
+                        {
+                                $this->mPersonEmailTuple = new PersonEmailTuple();
+                                $this->mPersonEmailTuple->insert($this->mPersonTuple->mID, $this->mEmailTuple->mID);
+                        }
+                        else
+                        {
+				$this->mEmailTuple->delete($this->mEmailTuple->mID);
+                                $this->mLoginTuple->delete($this->mLoginTuple->mID);
+                                $this->mPersonTuple->delete($this->mLoginTuple->mID);
+                        }
+                }
+		
+		if ($this->mError == false)
+                {
+                        if ($this->mPersonEmailTuple->mInsert->getSuccess())
+                        {
+				//do nothing we had success
+                                //$this->mPersonEmailTuple = new PersonEmailTuple();
+                                //$this->mPersonEmailTuple->insert($this->mPersonTuple->mID, $this->mEmailTuple->mID);
+                        }
+                        else
+                        {
+				$this->mEmailTuple->delete($this->mEmailTuple->mID);
+                                $this->mLoginTuple->delete($this->mLoginTuple->mID);
+                                $this->mPersonTuple->delete($this->mLoginTuple->mID);
+                                $this->mPersonLoginTuple->delete($this->mPersonLoginTuple->mID);
+                        }
+                }
 	}
 }
 	$join = new Join();	
