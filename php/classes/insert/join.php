@@ -69,6 +69,8 @@ class Join
                         $this->mPassword = $_GET['password'];
                 }
 
+		$this->mError = false;
+
 		$this->mEmailTuple = new EmailTuple();
 		$this->mEmailTuple->insert($this->mEmail);
 
@@ -76,22 +78,26 @@ class Join
 		if ($this->mEmailTuple->mInsert->getSuccess())
 		{
 			$this->mLoginTuple = new LoginTuple();
+
 			$this->mLoginTuple->insert($this->mEmailTuple->mID, $this->mPassword);
 		}
-		//nothing to rollback
 		else
 		{
-			//$this->mEmailTuple->delete($this->mEmailTuple->mID);
+			$this->mError = true;
 		}
 
-		if ($this->mLoginTuple->mInsert->getSuccess())
+		if ($this->mError == false)
 		{
-			
-		}
-		//rollback last all previous inserts which is just one at this point since we are here because login insert failed
-		else
-		{
-			$this->mEmailTuple->delete($this->mEmailTuple->mID);
+			if ($this->mLoginTuple->mInsert->getSuccess())
+			{
+				$this->mPersonTuple = new PersonTuple();
+				$this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
+			}
+			//rollback last all previous inserts which is just one at this point since we are here because login insert failed
+			else
+			{
+				$this->mEmailTuple->delete($this->mEmailTuple->mID);
+			}
 		}
 
 
