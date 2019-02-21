@@ -78,21 +78,29 @@ class Join
 
 		$this->mEmailTuple = new EmailTuple();
 		$this->mEmailTuple->insert($this->mEmail);
-		error_log("HERE call insert");
 
 		//insert next tuple
 		if ($this->mEmailTuple->mInsert->getSuccess())
 		{
-			error_log("call insert");
 			$this->mLoginTuple = new LoginTuple();
 			$this->mLoginTuple->insert($this->mEmailTuple->mID, $this->mPassword);
 		}
-		//rollback last all previous inserts
+		//nothing to rollback
 		else
 		{
-			error_log("call delete");
+			//$this->mEmailTuple->delete($this->mEmailTuple->mID);
+		}
+
+		if ($this->mLoginTuple->mInsert->getSuccess())
+		{
+			
+		}
+		//rollback last all previous inserts which is just one at this point since we are here because login insert failed
+		else
+		{
 			$this->mEmailTuple->delete($this->mEmailTuple->mID);
 		}
+
 
 
 
