@@ -98,6 +98,7 @@ class Join
 			}
 			else
 			{
+				$this->mError = true;
 				$this->mEmailTuple->delete($this->mEmailTuple->mID);
 			}
 		}
@@ -111,6 +112,7 @@ class Join
                         }
                         else
                         {
+				$this->mError = true;
 				$this->mEmailTuple->delete($this->mEmailTuple->mID);
                                 $this->mLoginTuple->delete($this->mLoginTuple->mID);
                         }
@@ -125,6 +127,7 @@ class Join
                         }
                         else
                         {
+				$this->mError = true;
 				$this->mEmailTuple->delete($this->mEmailTuple->mID);
                                 $this->mLoginTuple->delete($this->mLoginTuple->mID);
                                 $this->mPersonTuple->delete($this->mLoginTuple->mID);
@@ -141,6 +144,7 @@ class Join
                         }
                         else
                         {
+				$this->mError = true;
 				$this->mEmailTuple->delete($this->mEmailTuple->mID);
                                 $this->mLoginTuple->delete($this->mLoginTuple->mID);
                                 $this->mPersonTuple->delete($this->mLoginTuple->mID);
