@@ -16,10 +16,7 @@ class Join
 		$this->mMiddleName = null;
 		$this->mLastName = null;
 		$this->mPhone = null;
-		$this->mStreet = null;
-		$this->mCity = null;
-		$this->mState = null;
-		$this->mZip = null;
+		$this->mAddress = null;
 		$this->mEmail = null;
 		$this->mPassword = null;
 
@@ -42,26 +39,11 @@ class Join
                         $this->mPhone = $_GET['phone'];
                 }
 
-                if (isset($_GET['street']))
+                if (isset($_GET['address']))
                 {
-                        $this->mStreet = $_GET['street'];
+                        $this->mAddress = $_GET['address'];
                 }
 		
-		if (isset($_GET['city']))
-                {
-                        $this->mCity = $_GET['city'];
-                }
-
-		if (isset($_GET['state']))
-                {
-                        $this->mState = $_GET['state'];
-                }
-
-		if (isset($_GET['zip']))
-                {
-                        $this->mZip = $_GET['zip'];
-                }
-
                 if (isset($_GET['email']))
                 {
                         $this->mEmail = $_GET['email'];
@@ -94,7 +76,7 @@ class Join
 			if ($this->mLoginTuple->mInsert->getSuccess())
 			{
 				$this->mPersonTuple = new PersonTuple();
-				$this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
+				$this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 			}
 			else
 			{
@@ -139,8 +121,6 @@ class Join
                         if ($this->mPersonEmailTuple->mInsert->getSuccess())
                         {
 				//do nothing we had success
-                                //$this->mPersonEmailTuple = new PersonEmailTuple();
-                                //$this->mPersonEmailTuple->insert($this->mPersonTuple->mID, $this->mEmailTuple->mID);
                         }
                         else
                         {

@@ -147,10 +147,7 @@ CREATE TABLE clubs
 (
         id SERIAL,
         name text NOT NULL,
-        street text,
-        city text,
-        state text,
-        zip text,
+        address text,
         coordinates text,
 	PRIMARY KEY (id)
 );
@@ -411,10 +408,7 @@ CREATE TABLE persons
     	middle_name text,
     	last_name text,
     	phone text,
-	street text,
-	city text,
-	state text,
-	zip text,
+	address text,
 	coordinates text,
 	timestamp_created timestamp,
 	PRIMARY KEY (id)
