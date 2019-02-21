@@ -30,7 +30,6 @@ class EmailTuple extends Tuple
 
 		$this->mID = $this->mInsert->run();
 	}
-	//need a delete class
 	
 	function delete($id) 
 	{
@@ -40,11 +39,9 @@ class EmailTuple extends Tuple
 
 		$sql = "delete from emails where id = " .
 		$id .
-		";";
+		" returning id;";
 		
 		$this->mDelete->setSQL($sql);
-
-		error_log($sql);
 
 		$this->mDelete->run();
 	}

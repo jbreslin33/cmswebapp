@@ -2,13 +2,6 @@
 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/email_tuple.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/login_tuple.php");
-/*
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_person.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_persons_logins.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_persons_emails.php");
- */
 
 class Join 
 {
@@ -102,73 +95,6 @@ class Join
 		}
 
 
-
-
-/*
-		$this->mInsertEmail = null;
-		$this->mInsertLogin = null;
-		$this->mInsertPerson = null;
-		$this->mInsertPersonsLogins = null;
-		$this->mInsertPersonsEmails = null;
-
-		$this->mInsertEmail = new InsertEmail($this->mEmail);
-		if ($this->mInsertEmail->mSuccess == true)
-		{
-			error_log("SUCCESS ON EMAIL INSERT");
-			$this->mInsertLogin = new InsertLogin($this->mInsertEmail->mID, $this->mPassword);
-		}
-		else
-		{
-			//no need for rollback because nothing went thru as yet
-			error_log("FAILURE ON EMAIL INSERT");
-		}
-
-		if ($this->mInsertLogin->mSuccess == true)
-		{
-			error_log("SUCCESS ON LOGIN INSERT");
-			$this->mInsertPerson = new InsertPerson($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mStreet, $this->mCity, $this->mState, $this->mZip);
-		}
-		else
-		{
-			//roll back
-			//delete from emails where id = $this->mInsertEmail->mID
-		}
-		
-		if ($this->mInsertPerson->mSuccess == true)
-		{
-			error_log("SUCCESS ON PERSON INSERT");
-			$this->mInsertPersonsLogins = new InsertPersonsLogins($this->mInsertPerson->mID, $this->mInsertLogin->mID);
-		}
-		else
-		{
-			//roll back
-			//delete from logins where id = $this->mInsertLogin->mID
-		}
-		
-		if ($this->mInsertPersonsLogins->mSuccess == true)
-		{
-			error_log("SUCCESS ON PERSONS_LOGINS INSERT");
-			$this->mInsertPersonsEmails = new InsertPersonsEmails($this->mInsertPerson->mID, $this->mInsertEmail->mID);
-		}
-		else
-		{
-			//roll back
-			//delete from persons where id = $this->mInsertLogin->mID
-		}
-
-		if ($this->mInsertPersonsEmails->mSuccess == true)
-		{
-			error_log("SUCCESS ON PERSONS_EMAILS INSERT");
-			$this->mEcho = "100";
-		}
-		else
-		{
-			//roll back everything
-			//delete from persons where id = $this->mInsertLogin->mID
-		}
-		
-		echo $this->mEcho;
- */
 	}
 }
 	$join = new Join();	

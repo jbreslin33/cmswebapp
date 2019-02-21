@@ -1,6 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/tuple.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/delete/delete.php");
 
 class LoginTuple extends Tuple
 {
@@ -33,16 +34,20 @@ class LoginTuple extends Tuple
 		$this->mID = $this->mInsert->run();
 	}
 
-	//need a delete class
-/*	
-	function delete($id) 
-	{
-		$sql = "delete from emails where id = " .
-		$id .
-		";";
-	}
- */
-}
+        function delete($id)
+        {
+                $this->mID = $id;
 
+                $this->mDelete = new Delete();
+
+                $sql = "delete from logins where id = " .
+                $id .
+                " returning id;";
+
+                $this->mDelete->setSQL($sql);
+
+                $this->mDelete->run();
+        }
+}
 
 ?>

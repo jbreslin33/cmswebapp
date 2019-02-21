@@ -9,7 +9,6 @@ class Delete
 		$this->mID = null;
 		$this->mSQL = null;
 		$this->mData = null;
-		$this->mNumberOfRows = 0; 
 	}
 
 	public function setSQL($sql)
@@ -45,16 +44,15 @@ class Delete
 
 		if ($results)
 		{
+			error_log($results);
 			$this->mSuccess = true;
 				
 			$myarray = array();
 
-                	$resultArray = pg_fetch_all($results);
-
                 	while ($row = pg_fetch_row($results))
                 	{
                         	$myarray[] = $row;
-				$this->mNumberOfRows = $row[0];
+				$this->mID = $row[0];
                 	}
                 	$this->mData = json_encode($myarray);
 		}
@@ -62,6 +60,10 @@ class Delete
 		{
 			$this->mSuccess = false;
 		}
+
+		$text = "Id deleted: ";
+		$text .= $this->mID;
+		error_log($text);
 
 		return $this->mNumberOfRows;
 	}
