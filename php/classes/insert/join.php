@@ -1,15 +1,21 @@
 <?php 
+
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/tuples/email_tuple.php");
+/*
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_email.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_login.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_person.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_persons_logins.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert_persons_emails.php");
+ */
 
 class Join 
 {
 	function __construct() 
 	{
 		$this->mEcho = null;
+
+		$this->mEmail = null;
 
                 if (isset($_GET['first_name']))
                 {
@@ -59,6 +65,11 @@ class Join
                 {
                         $this->mPassword = $_GET['password'];
                 }
+
+		$this->mEmailTuple = new EmailTuple();
+		$this->mEmailTuple->insert($this->mEmail);
+
+/*
 		$this->mInsertEmail = null;
 		$this->mInsertLogin = null;
 		$this->mInsertPerson = null;
@@ -66,7 +77,6 @@ class Join
 		$this->mInsertPersonsEmails = null;
 
 		$this->mInsertEmail = new InsertEmail($this->mEmail);
-
 		if ($this->mInsertEmail->mSuccess == true)
 		{
 			error_log("SUCCESS ON EMAIL INSERT");
@@ -123,6 +133,7 @@ class Join
 		}
 		
 		echo $this->mEcho;
+ */
 	}
 }
 	$join = new Join();	

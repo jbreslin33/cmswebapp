@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
-abstract class Insert 
+class Insert 
 {
 	function __construct() 
 	{
@@ -9,16 +9,34 @@ abstract class Insert
 		$this->mID = "";
 		$this->mSQL = "";
 		$this->mData = "";
-
-		$this->query();
-		$this->runQuery();
 	}
 
-	//query is the sql line do we need to pass in anything?
-	abstract protected function query();
+	public function setSQL($sql)
+	{
+		$this->mSQL = $sql;
+	}
+	
+	public function getSQL()
+	{
+		return $this->mSQL;
+	}
 
-	//run query is the machinations of running it from php to sql to return dataset
-	public function runQuery()
+	public function getData()
+	{
+		return $this->mData;
+	}
+
+	public function getID()
+	{
+		return $this->mID;
+	}
+	
+	public function getSuccess()
+	{
+		return $this->mSuccess;
+	}
+
+	public function run()
 	{
 		$database = new Database("localhost","cms","postgres","mibesfat");
 
@@ -43,7 +61,8 @@ abstract class Insert
 		{
 			$this->mSuccess = false;
 		}
-		
+
+		return $this->mID;
 	}
 }
 ?>

@@ -3,13 +3,13 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
 
 class InsertClub extends Insert
 {
-	function __construct() 
+	function __construct($name, $street, $city, $state, $zip) 
 	{
-                $this->mName = null;
-                $this->mStreet = null;
-                $this->mCity = null;
-                $this->mState = null;
-                $this->mZip = null;
+                $this->mName = $name;
+                $this->mStreet = $street;
+                $this->mCity = $city;
+                $this->mState = $state;
+                $this->mZip = $zip;
 
                	if (isset($_GET['name']))
                 {
@@ -36,6 +36,16 @@ class InsertClub extends Insert
                         $this->mZip = $_GET['zip'];
                 }
 
+		if ($insertClub->mSuccess)
+		{
+			echo "100"; //success	
+		}
+		else
+		{
+			echo "101"; //failure
+		}
+
+
 		
 		parent::__construct();
 	}
@@ -61,13 +71,5 @@ class InsertClub extends Insert
 }
 
 $insertClub = new InsertClub();
-if ($insertClub->mSuccess)
-{
-	echo "100"; //success	
-}
-else
-{
-	echo "101"; //failure
-}
 
 ?>
