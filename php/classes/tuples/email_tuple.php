@@ -37,9 +37,15 @@ class EmailTuple extends Tuple
 
 		$this->mDelete = new Delete();
 
-		$sql = "delete from emails where id = " .
+		$sql = " BEGIN 
+			delete from emails where id = " .
 		$id .
-		" returning id;";
+		" returning id;
+
+		EXCEPTION WHEN unique violation THEN
+			RAISE NOTICE 'unique violation';
+		END;
+		";
 		
 		$this->mDelete->setSQL($sql);
 
