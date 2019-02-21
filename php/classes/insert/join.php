@@ -151,6 +151,15 @@ class Join
                                 $this->mPersonLoginTuple->delete($this->mPersonLoginTuple->mID);
                         }
                 }
+		
+		if ($this->mError == false)
+		{
+			echo "100";	
+		}
+		else
+		{
+			echo "101";	
+		}
 	}
 }
 	$join = new Join();	

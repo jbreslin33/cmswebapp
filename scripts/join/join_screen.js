@@ -57,10 +57,12 @@ class JoinScreen
                                         {
 						if (data == 100)
 						{
+							console.log('joined cmswebapp');
 							APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
 						}
 						else
 						{
+							console.log('failed to joined cmswebapp');
 						}
                                         }
                                 }
