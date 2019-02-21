@@ -44,7 +44,6 @@ class Delete
 
 		if ($results)
 		{
-			error_log($results);
 			$this->mSuccess = true;
 				
 			$myarray = array();
@@ -61,11 +60,11 @@ class Delete
 			$this->mSuccess = false;
 		}
 
-		$text = "Id deleted: ";
-		$text .= $this->mID;
-		error_log($text);
+  		$text = "Id deleted: ";
+               	$text .= $this->mID;
+               	error_log($text);
 
-		return $this->mNumberOfRows;
+		return $this->mID;
 	}
 }
 ?>
