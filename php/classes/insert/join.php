@@ -55,7 +55,10 @@ class Join
                 }
 
 		$this->mError = false;
+	
+		
 
+/*
 		$this->mEmailTuple = new EmailTuple();
 		$this->mEmailTuple->insert($this->mEmail);
 
@@ -140,6 +143,7 @@ class Join
 		{
 			echo "101";	
 		}
+ */
 	}
 }
 	$join = new Join();	

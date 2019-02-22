@@ -777,3 +777,13 @@ CREATE TABLE order_items
         PRIMARY KEY (id)
 );
 
+--STORED PROCEDURES
+CREATE OR REPLACE PROCEDURE transfer(TEXT)
+LANGUAGE plpgsql    
+AS $$
+BEGIN
+    	-- emails 
+	insert into emails (email) values ($1);
+    COMMIT;
+END;
+$$;
