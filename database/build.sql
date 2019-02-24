@@ -778,17 +778,15 @@ CREATE TABLE order_items
 );
 
 --STORED PROCEDURES
-CREATE OR REPLACE PROCEDURE joinsite(TEXT, TEXT)
+CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-	emailID integer := 0;
+	returning_email_id CURSOR(email TEXT)
+	FOR insert into emails (email) values (email_name) returning id;
 BEGIN
-    	-- emails 
-	--insert into emails (email) values ($1) returning id;
-	insert into emails (email) values ($1);
-	--insert into logins (email_id, password) values (1,$2);
-    COMMIT;
+	open returning_email_id(email_name);
+    --COMMIT;
 END;
 $$;
 
