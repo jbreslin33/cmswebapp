@@ -802,14 +802,14 @@ DECLARE
 	ret_id integer;
 BEGIN
 
-	insert into emails (email) values ('jbreslin33@gmail.com');
+	insert into emails (email) values (email_name);
 
-	FOR var_r in (select * from emails where email = 'jbreslin33@gmail.com')
-	LOOP
-		returned_email_id := var_r.id;
-	END LOOP;
+	--FOR var_r in (select * from emails where email = 'jbreslin33@gmail.com')
+	--LOOP
+	--	returned_email_id := var_r.id;
+	--END LOOP;
 
-	insert into logins (email_id, password) values (returned_email_id,'jbreslin33@gmail.com');
+	--insert into logins (email_id, password) values (returned_email_id,'jbreslin33@gmail.com');
 	
 	insert into emails (email) values ('jbreslin33@yahoo.com') returning id into ret_id;
 
