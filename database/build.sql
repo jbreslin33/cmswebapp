@@ -813,7 +813,7 @@ BEGIN
 		returned_email_id := var_r.id;
 	END LOOP;
 
-	--insert into logins (email_id, password) values (1,'jbreslin33@gmail.com');
+	insert into logins (email_id, password) values (1,'jbreslin33@gmail.com');
 
 
      --WHERE
