@@ -49,25 +49,29 @@ class Join
                         $this->mPassword = $_GET['password'];
                 }
 
-		//$this->mSQL = "joinsite($this->mEmail
 		$this->run();
 	}
 
         public function run()
         {
                 $database = new Database("localhost","cms","postgres","mibesfat");
-		//$sql = 'SELECT adduser($1,$2,$3,$4)';
+
 		$sql = 'call joinsite($1,$2,$3,$4,$5,$6,$7)';
 		
-		$res = pg_prepare($database->mConnection, "q_joinsite", $sql);
+		$prepare_result = pg_prepare($database->mConnection, "q_joinsite", $sql);
 
-		$res = pg_execute($database->mConnection, "q_joinsite", array($this->mEmail,$this->mPassword, $this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress));
-		
-		//$result = pg_prepare($dbconn, "my_query", 'SELECT * FROM shops WHERE name = $1');
-		//$result = pg_prepare($database->mConnection, "q_joinsite", 'joinsite($1,$2,$3,$4,$5,$6,$7)');
+		$result = pg_execute($database->mConnection, "q_joinsite", array($this->mEmail,$this->mPassword, $this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress));
+
+		if ($result)
+		{
+			$this->mEcho = "100";
+		}
+		else
+		{
+			$this->mEcho = "101";
+		}
+		echo $this->mEcho;
         }
-
 }
 	$join = new Join();	
-
 ?>
