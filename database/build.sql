@@ -791,13 +791,27 @@ CREATE TABLE order_items
 
 
 --STORED PROCEDURES
+insert into emails (email) values ('j@j.com');
+
 CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-
+   emailid NUMERIC ; 
 BEGIN
-	insert into emails (email) values (email_name);
+ -- get the rate based on film_id
+     SELECT
+ INTO emailid  
+     FROM
+ emails;
+     --WHERE
+ --customer_id = p_customer_id ; 
+--email_id emails.id%TYPE;
+--email_name emails.email%TYPE;
+
+--BEGIN
+	--insert into tmp_tab insert into emails (email) values (email_name) returning id;
+--	insert into email_name select email from emails;
     	--COMMIT;
 END;
 $$;
