@@ -798,7 +798,7 @@ DECLARE
 
 BEGIN
 	insert into emails (email) values (email_name);
-    	COMMIT;
+    	--COMMIT;
 END;
 $$;
 
