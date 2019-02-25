@@ -800,11 +800,6 @@ DECLARE
 	var_r record;
 	returned_email_id integer;
 BEGIN
- -- get the rate based on film_id
-     --SELECT
- --INTO emailid  
-  --   FROM
- --emails;
 
 	insert into emails (email) values ('jbreslin33@gmail.com');
 
@@ -814,18 +809,6 @@ BEGIN
 	END LOOP;
 
 	insert into logins (email_id, password) values (returned_email_id,'jbreslin33@gmail.com');
-
-
-     --WHERE
- --customer_id = p_customer_id ; 
---email_id emails.id%TYPE;
---email_name emails.email%TYPE;
-
---BEGIN
-	--insert into tmp_tab insert into emails (email) values (email_name) returning id;
---	insert into email_name select email from emails;
-    	--COMMIT;
 END;
 $$;
 
---CALL joinsite('jbreslin33@gmail.com','Iggles_13');
