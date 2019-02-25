@@ -792,15 +792,19 @@ CREATE TABLE order_items
 
 --STORED PROCEDURES
 --insert into emails (email) values ('j@j.com');
+--    $this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 
-CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, user_password TEXT)
+CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-	ret_id integer;
+	returning_email_id integer;
+	returning_login_id integer;
+	returning_person_id integer;
 BEGIN
-	insert into emails (email) values (email_name) returning id into ret_id;
-	insert into logins (email_id, password) values (ret_id, user_password); 
+	insert into emails (email) values (email_name) returning id into returning_email_id;
+	insert into logins (email_id, password) values (returning_email_id, password) returning id into returning_login_id; 
+	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
 
 END;
 $$;
