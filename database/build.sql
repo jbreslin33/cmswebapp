@@ -797,7 +797,8 @@ CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-   emailid NUMERIC ; 
+	var_r record;
+	returned_email_id integer;
 BEGIN
  -- get the rate based on film_id
      --SELECT
@@ -805,8 +806,14 @@ BEGIN
   --   FROM
  --emails;
 
-insert into emails (email) values ('jbreslin33@gmail.com');
-insert into logins (email_id, password) values (1,'jbreslin33@gmail.com');
+	insert into emails (email) values ('jbreslin33@gmail.com');
+
+	FOR var_r in (select * from emails where email = 'jbreslin33@gmail.com')
+	LOOP
+		returned_email_id := var_r.id;
+	END LOOP;
+
+	--insert into logins (email_id, password) values (1,'jbreslin33@gmail.com');
 
 
      --WHERE
