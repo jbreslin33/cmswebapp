@@ -793,16 +793,16 @@ CREATE TABLE order_items
 --STORED PROCEDURES
 --insert into emails (email) values ('j@j.com');
 
-CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
+CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, user_password TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-	var_r record;
-	returned_email_id integer;
 	ret_id integer;
 BEGIN
 	insert into emails (email) values (email_name) returning id into ret_id;
+	insert into logins (email_id, password) values (ret_id, user_password); 
 
 END;
 $$;
+
 
