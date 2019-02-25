@@ -776,17 +776,29 @@ CREATE TABLE order_items
 	FOREIGN KEY (product_id) REFERENCES products(id),
         PRIMARY KEY (id)
 );
+--STORED PROCEDURES
+--CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
+--LANGUAGE plpgsql    
+--AS $$
+--DECLARE
+--	returning_email_id CURSOR(email TEXT)
+--	FOR insert into emails (email) values (email_name) returning id;
+--BEGIN
+--	open returning_email_id(email_name);
+ --   	COMMIT;
+--END;
+--$$;
+
 
 --STORED PROCEDURES
 CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-	returning_email_id CURSOR(email TEXT)
-	FOR insert into emails (email) values (email_name) returning id;
+
 BEGIN
-	open returning_email_id(email_name);
-    --COMMIT;
+	insert into emails (email) values (email_name);
+    	COMMIT;
 END;
 $$;
 
