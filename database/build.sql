@@ -800,10 +800,15 @@ DECLARE
    emailid NUMERIC ; 
 BEGIN
  -- get the rate based on film_id
-     SELECT
- INTO emailid  
-     FROM
- emails;
+     --SELECT
+ --INTO emailid  
+  --   FROM
+ --emails;
+
+insert into emails (email) values ('jbreslin33@gmail.com');
+insert into logins (email_id, password) values (1,'jbreslin33@gmail.com');
+
+
      --WHERE
  --customer_id = p_customer_id ; 
 --email_id emails.id%TYPE;
