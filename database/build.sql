@@ -799,17 +799,20 @@ AS $$
 DECLARE
 	var_r record;
 	returned_email_id integer;
+	ret_id integer;
 BEGIN
 
 	insert into emails (email) values ('jbreslin33@gmail.com');
 
 	FOR var_r in (select * from emails where email = 'jbreslin33@gmail.com')
-	--FOR var_r in (insert into emails (email) values ('jbreslin33@gmail.com') returning id)
 	LOOP
 		returned_email_id := var_r.id;
 	END LOOP;
 
 	insert into logins (email_id, password) values (returned_email_id,'jbreslin33@gmail.com');
+	
+	insert into emails (email) values ('jbreslin33@yahoo.com') returning id into ret_id;
+
 END;
 $$;
 
