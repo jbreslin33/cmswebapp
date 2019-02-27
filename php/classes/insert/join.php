@@ -56,12 +56,13 @@ class Join
         {
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-		$sql = 'call joinsite($1,$2,$3,$4,$5,$6,$7)';
+		$sql = 'select p_joinsite($1,$2,$3,$4,$5,$6,$7)';
 		
-		$prepare_result = pg_prepare($database->mConnection, "q_joinsite", $sql);
+		$prepare_result = pg_prepare($database->mConnection, "p_joinsite", $sql);
 
-		$result = pg_execute($database->mConnection, "q_joinsite", array($this->mEmail,$this->mPassword, $this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress));
+		$result = pg_execute($database->mConnection, "p_joinsite", array($this->mEmail,$this->mPassword, $this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress));
 
+/*
 		if ($result)
 		{
 			$this->mEcho = "100";
@@ -71,6 +72,7 @@ class Join
 			$this->mEcho = "101";
 		}
 		echo $this->mEcho;
+ */
         }
 }
 	$join = new Join();	
