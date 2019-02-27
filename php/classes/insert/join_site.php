@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
-class Join 
+class JoinSite 
 {
 	function __construct() 
 	{
@@ -18,5 +18,5 @@ class Join
 		echo pg_fetch_result($result, 0); 
         }
 }
-	$join = new Join();	
+	$joinSite = new JoinSite();	
 ?>

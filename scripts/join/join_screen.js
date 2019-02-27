@@ -39,7 +39,7 @@ class JoinScreen
                	this.mPassword                     = document.getElementById("join_password2_id").value;
 
 		//need to handle not having a team yet...
-		var url = "/php/classes/insert/join.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
+		var url = "/php/classes/insert/join_site.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
