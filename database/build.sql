@@ -796,8 +796,15 @@ $$;
 
 CREATE OR REPLACE FUNCTION p_joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
+DECLARE
+	email emails.email%TYPE;
 BEGIN
-	CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
+    	SELECT email INTO email FROM emails WHERE email_name = email_name;
+	IF FOUND THEN
+    		RAISE EXCEPTION 'email % exists!', email_name;
+	ELSE
+		CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
+	END IF;
 
 RETURN 'ok';
 
