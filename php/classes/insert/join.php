@@ -7,75 +7,15 @@ class Join
 	{
 		$this->mEcho = null;
 
-		$this->mFirstName = null;
-		$this->mMiddleName = null;
-		$this->mLastName = null;
-		$this->mPhone = null;
-		$this->mAddress = null;
-		$this->mEmail = null;
-		$this->mPassword = null;
-
-                if (isset($_GET['first_name']))
-                {
-                        $this->mFirstName = $_GET['first_name'];
-                }
-                if (isset($_GET['middle_name']))
-                {
-                        $this->mMiddleName = $_GET['middle_name'];
-                }
-
-                if (isset($_GET['last_name']))
-                {
-                        $this->mLastName = $_GET['last_name'];
-                }
-
-                if (isset($_GET['phone']))
-                {
-                        $this->mPhone = $_GET['phone'];
-                }
-
-                if (isset($_GET['address']))
-                {
-                        $this->mAddress = $_GET['address'];
-                }
-		
-                if (isset($_GET['email']))
-                {
-                        $this->mEmail = $_GET['email'];
-                }
-		
-                if (isset($_GET['password']))
-                {
-                        $this->mPassword = $_GET['password'];
-                }
-
-		$this->run();
-	}
-
-        public function run()
-        {
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
 		$sql = 'select p_joinsite($1,$2,$3,$4,$5,$6,$7)';
 		
 		$prepare_result = pg_prepare($database->mConnection, "p_joinsite", $sql);
 
-		$result = pg_execute($database->mConnection, "p_joinsite", array($this->mEmail,$this->mPassword, $this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress));
+		$result = pg_execute($database->mConnection, "p_joinsite", array( $_GET['email'] ,$_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address']));
 
-		//echo pg_fetch_result($res, 0);
-		//error_log( pg_fetch_result($result, 0) );
 		echo pg_fetch_result($result, 0); 
-/*
-		if ($result)
-		{
-			$this->mEcho = "100";
-		}
-		else
-		{
-			$this->mEcho = "101";
-		}
-		echo $this->mEcho;
- */
         }
 }
 	$join = new Join();	

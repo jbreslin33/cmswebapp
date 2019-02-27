@@ -804,7 +804,7 @@ DECLARE
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
-    		RAISE EXCEPTION 'email % exists!', found_name;
+    		RAISE EXCEPTION 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
 		CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
