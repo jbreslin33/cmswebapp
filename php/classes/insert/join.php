@@ -62,6 +62,9 @@ class Join
 
 		$result = pg_execute($database->mConnection, "p_joinsite", array($this->mEmail,$this->mPassword, $this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress));
 
+		//echo pg_fetch_result($res, 0);
+		//error_log( pg_fetch_result($result, 0) );
+		echo pg_fetch_result($result, 0); 
 /*
 		if ($result)
 		{

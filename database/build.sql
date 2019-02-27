@@ -800,15 +800,18 @@ CREATE OR REPLACE FUNCTION p_joinsite(email_name TEXT, password TEXT, first_name
 RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
+	return_code text;
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
     		RAISE EXCEPTION 'email % exists!', found_name;
+		return_code = '101';
 	ELSE
 		CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
+		return_code = '100';
 	END IF;
 
-RETURN 'ok';
+RETURN return_code;
 
 END;
 
