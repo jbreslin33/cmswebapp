@@ -794,12 +794,9 @@ BEGIN
 END;
 $$;
 
---insert into persons (first_name, last_name) values ('Jim', 'Breslin');
-
 CREATE OR REPLACE FUNCTION p_joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
 BEGIN
-	--CALL joinsite('lbreslin6@gmail.com','Iggles_13','Luke', 'James', 'Breslin','2158397777','804 East Girard');
 	CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
 
 RETURN 'ok';
