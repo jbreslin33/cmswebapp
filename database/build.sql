@@ -794,19 +794,19 @@ BEGIN
 END;
 $$;
 
-insert into persons (first_name, last_name) values ('Jim', 'Breslin');
+--insert into persons (first_name, last_name) values ('Jim', 'Breslin');
 
-CREATE or replace FUNCTION get_person(text) RETURNS text AS '
-  DECLARE
-     frst_name ALIAS FOR $1;
-     lst_name persons.last_name%TYPE;
-  BEGIN
-     SELECT INTO lst_name last_name FROM persons 
-	 WHERE first_name = frst_name;
-     return frst_name || '' '' || lst_name;
-  END;
-' LANGUAGE 'plpgsql';
+CREATE OR REPLACE FUNCTION f_joinsite ()
+RETURNS text AS $$
+BEGIN
+--PERFORM (SELECT * FROM mytable);
+	CALL joinsite('lbreslin6@gmail.com','Iggles_13','Luke', 'James', 'Breslin','2158397777','804 East Girard');
 
+RETURN 'ok';
 
-select get_person('Jim');
+END;
+
+$$ LANGUAGE plpgsql;
+
+select f_joinsite();
 
