@@ -776,23 +776,6 @@ CREATE TABLE order_items
 	FOREIGN KEY (product_id) REFERENCES products(id),
         PRIMARY KEY (id)
 );
---STORED PROCEDURES
---CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT)
---LANGUAGE plpgsql    
---AS $$
---DECLARE
---	returning_email_id CURSOR(email TEXT)
---	FOR insert into emails (email) values (email_name) returning id;
---BEGIN
---	open returning_email_id(email_name);
- --   	COMMIT;
---END;
---$$;
-
-
---STORED PROCEDURES
---insert into emails (email) values ('j@j.com');
---    $this->mPersonTuple->insert($this->mFirstName, $this->mMiddleName, $this->mLastName, $this->mPhone, $this->mAddress);
 
 CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
@@ -811,4 +794,19 @@ BEGIN
 END;
 $$;
 
+insert into persons (first_name, last_name) values ('Jim', 'Breslin');
+
+CREATE or replace FUNCTION get_person(text) RETURNS text AS '
+  DECLARE
+     frst_name ALIAS FOR $1;
+     lst_name persons.last_name%TYPE;
+  BEGIN
+     SELECT INTO lst_name last_name FROM persons 
+	 WHERE first_name = frst_name;
+     return frst_name || '' '' || lst_name;
+  END;
+' LANGUAGE 'plpgsql';
+
+
+select get_person('Jim');
 
