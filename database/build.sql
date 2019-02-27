@@ -777,6 +777,8 @@ CREATE TABLE order_items
         PRIMARY KEY (id)
 );
 
+insert into emails (email) values ('lbreslin6@gmail.com');
+
 CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
 AS $$
