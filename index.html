@@ -64,27 +64,27 @@
 
 	<!-- JOIN HTML  -->
 
-	<form id="join_screen_html_id" class="needs-validation" novalidate>
+	<form id="join_site_screen_html_id" class="needs-validation" novalidate>
   		<div class="form-row">
     			<div class="col-md-4 mb-3">
-      				<label for="join_first_name_id">First name</label>
-      				<input type="text" class="form-control" id="join_first_name_id" placeholder="First name" value="James" required>
+      				<label for="join_site_screen_first_name_id">First name</label>
+      				<input type="text" class="form-control" id="join_site_screen_first_name_id" placeholder="First name" value="James" required>
       				<div class="valid-feedback">
         				Looks good!
       				</div>
     			</div>
 
     			<div class="col-md-4 mb-3">
-				<label for="join_middle_name_id">Middle Name</label>
-      				<input type="text" class="form-control" id="join_middle_name_id" placeholder="Middle name" value="Anthony" required>
+				<label for="join_site_screen_middle_name_id">Middle Name</label>
+      				<input type="text" class="form-control" id="join_site_screen_middle_name_id" placeholder="Middle name" value="Anthony" required>
       				<div class="valid-feedback">
         				Looks good!
       				</div>
     			</div>
     			
 			<div class="col-md-4 mb-3">
-				<label for="join_last_name_id">Last Name</label>
-      				<input type="text" class="form-control" id="join_last_name_id" placeholder="Last name" value="Breslin" required>
+				<label for="join_site_screen_last_name_id">Last Name</label>
+      				<input type="text" class="form-control" id="join_site_screen_last_name_id" placeholder="Last name" value="Breslin" required>
       				<div class="valid-feedback">
         				Looks good!
       				</div>
@@ -94,8 +94,8 @@
 		<div class="form-row">
 
     			<div class="col-md-6 mb-3">
-      				<label for="join_address_id">Street Address</label>
-      				<input type="text" class="form-control" id="join_address_id" placeholder="Address" required>
+      				<label for="join_site_screen_address_id">Street Address</label>
+      				<input type="text" class="form-control" id="join_site_screen_address_id" placeholder="Address" required>
       				<div class="invalid-feedback">
         				Please provide a valid address.
       				</div>
@@ -105,16 +105,16 @@
   		<div class="form-row">
 			
 			<div class="col-md-4 mb-3">
-				<label for="join_phone_id">Phone Number</label>
-      				<input type="tel" class="form-control" id="join_phone_id" placeholder="Phone" value="Phone" required>
+				<label for="join_site_screen_phone_id">Phone Number</label>
+      				<input type="tel" class="form-control" id="join_site_screen_phone_id" placeholder="Phone" value="Phone" required>
       				<div class="valid-feedback">
         				Looks good!
       				</div>
     			</div>
 			
 			<div class="col-md-4 mb-3">
-				<label for="join_email_id">Email</label>
-      				<input type="text" class="form-control" id="join_email_id" placeholder="Email" value="Email" required>
+				<label for="join_site_screen_email_id">Email</label>
+      				<input type="text" class="form-control" id="join_site_screen_email_id" placeholder="Email" value="Email" required>
       				<div class="valid-feedback">
         				Looks good!
       				</div>
@@ -124,23 +124,23 @@
                 <div class="form-row">
 
                         <div class="col-md-4 mb-3">
-                                <label for="join_password1_id">Password</label>
-                                <input type="password" class="form-control" id="join_password1_id" placeholder="Phone" value="Password" required>
+                                <label for="join_site_screen_password1_id">Password</label>
+                                <input type="password" class="form-control" id="join_site_screen_password1_id" placeholder="Phone" value="Password" required>
                                 <div class="valid-feedback">
                                         Looks good!
                                 </div>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                                <label for="join_password2_id">Re-type Password</label>
-                                <input type="password" class="form-control" id="join_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
+                                <label for="join_site_screen_password2_id">Re-type Password</label>
+                                <input type="password" class="form-control" id="join_site_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
                                 <div class="valid-feedback">
                                         Looks good!
                                 </div>
                         </div>
                 </div>
 
-		<button type="submit" id="joinscreenbuttonid" class="btn btn-primary">Submit</button>
+		<button type="submit" id="joinsitescreenbuttonid" class="btn btn-primary">Submit</button>
 
 	</form>
 
@@ -203,7 +203,7 @@
 				<div class="card-body">
     					<h5 class="card-title">Not a member yet?</h5>
     					<p class="card-text">Click to join up below.</p>
-					<a href="#join_screen" class="btn btn-primary">JOIN</a>
+					<a href="#join_site_screen" class="btn btn-primary">JOIN</a>
   				</div>
 			</div>
 
@@ -315,7 +315,7 @@
 	<script src="scripts/utilities/time.js"></script>
 	
 	<!-- join -->
-	<script src="scripts/join/join_screen.js"></script>
+	<script src="scripts/screens/join_site_screen.js"></script>
 	
 	<!-- add club -->
 	<script src="scripts/add/add_club.js"></script>
@@ -354,13 +354,9 @@
   	<script src="scripts/application/states/login_application.js" ></script>
   	<script src="scripts/application/states/show_daily_schedule_application.js" ></script>
   	<script src="scripts/application/states/insert_evento_application.js" ></script>
-  	<script src="scripts/application/states/join_screen_application.js" ></script>
+  	<script src="scripts/application/states/join_site_screen_application.js" ></script>
   	<script src="scripts/application/states/add_club_application.js" ></script>
 	
-	<!-- Join states -->
-  	<script src="scripts/join/states/global_join.js" ></script>
-  	<script src="scripts/join/states/init_join.js" ></script>
-  	<script src="scripts/join/states/main_join.js" ></script>
 	
 	<!-- Login states -->
   	<script src="scripts/login/states/global_login.js" ></script>

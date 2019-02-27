@@ -1,18 +1,12 @@
 'use strict';
 
-class JoinScreen
+class JoinSiteScreen
 {
 	constructor(application)
 	{
 		this.mApplication = application;
 
-		location.hash = "join-screen";
-
-		//logs
-		this.mStateLogs = false;
-		this.mStateEnterLogs = true; 
-		this.mStateExecuteLogs = false;
-		this.mStateExitLogs = false;
+		location.hash = "join-site-screen";
 
 		//sql php vars
 		this.mFirstName = null;
@@ -22,21 +16,21 @@ class JoinScreen
 		this.mAddress = null;
 		this.mPassword = null;
 
-		document.getElementById("joinscreenbuttonid").addEventListener("click",this.send.bind(this));
+		document.getElementById("joinsitescreenbuttonid").addEventListener("click",this.send.bind(this));
 	}
 
 	send()
 	{
 		//get vars
-               	this.mFirstName  = document.getElementById("join_first_name_id").value;
-               	this.mMiddleName = document.getElementById("join_middle_name_id").value;
-               	this.mLastName   = document.getElementById("join_last_name_id").value;
-               	this.mPhone      = document.getElementById("join_phone_id").value;
-               	this.mAddress = document.getElementById("join_address_id").value;
+               	this.mFirstName  = document.getElementById("join_site_screen_first_name_id").value;
+               	this.mMiddleName = document.getElementById("join_site_screen_middle_name_id").value;
+               	this.mLastName   = document.getElementById("join_site_screen_last_name_id").value;
+               	this.mPhone      = document.getElementById("join_site_screen_phone_id").value;
+               	this.mAddress = document.getElementById("join_site_screen_address_id").value;
 
-               	this.mApplication.mLogin.mEmail    = document.getElementById("join_email_id").value;
-               	this.mApplication.mLogin.mPassword = document.getElementById("join_password1_id").value;
-               	this.mPassword                     = document.getElementById("join_password2_id").value;
+               	this.mApplication.mLogin.mEmail    = document.getElementById("join_site_screen_email_id").value;
+               	this.mApplication.mLogin.mPassword = document.getElementById("join_site_screen_password1_id").value;
+               	this.mPassword                     = document.getElementById("join_site_screen_password2_id").value;
 
 		//need to handle not having a team yet...
 		var url = "/php/classes/insert/join_site.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
@@ -70,11 +64,11 @@ class JoinScreen
         
 	show()
 	{
-              document.getElementById("join_screen_html_id").style.display = "block";
+              document.getElementById("join_site_screen_html_id").style.display = "block";
 	}
 
 	hide()
 	{
-              document.getElementById("join_screen_html_id").style.display = "none";
+              document.getElementById("join_site_screen_html_id").style.display = "none";
 	}
 }
