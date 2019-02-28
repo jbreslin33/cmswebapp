@@ -21,6 +21,16 @@ class JoinSiteScreen
 
 	send()
 	{
+
+		var form = document.getElementById('join_site_screen_html_id');
+		if (form.checkValidity() === false) 
+		{
+			console.log('false');
+		}
+		else
+		{
+			console.log('true');
+
 		//get vars
                	this.mFirstName  = document.getElementById("join_site_screen_first_name_id").value;
                	this.mMiddleName = document.getElementById("join_site_screen_middle_name_id").value;
@@ -60,6 +70,7 @@ class JoinSiteScreen
                 };
                 request.open('POST', url);
                 request.send();
+		}
 	}
         
 	show()
