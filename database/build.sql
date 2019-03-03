@@ -777,7 +777,6 @@ CREATE TABLE order_items
         PRIMARY KEY (id)
 );
 
---insert into emails (email) values ('lbreslin6@gmail.com');
 
 CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
@@ -817,5 +816,32 @@ END;
 
 $$ LANGUAGE plpgsql;
 
---select f_joinsite();
+
+CREATE OR REPLACE FUNCTION p_login(email_name TEXT, password TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email emails.email%TYPE;
+	return_code text;
+BEGIN
+    	SELECT email INTO found_email FROM logins 
+	join emails on emails.id=logins.email_id
+	WHERE email = email_name;
+	IF FOUND THEN
+    		RAISE EXCEPTION 'email % exists!', found_email;
+		return_code = '101';
+	ELSE
+    		RAISE EXCEPTION 'email % does not exist!', found_email;
+		--CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
+		return_code = '100';
+	END IF;
+
+RETURN return_code;
+
+END;
+
+$$ LANGUAGE plpgsql;
+
+--select logins.password from logins
+--join emails on emails.id=logins.email_id
+--where emails.email = 'j@j.com';
 
