@@ -843,7 +843,7 @@ DECLARE
 	return_code text;
 BEGIN
 	--found_email_id = SELECT f_get_email_id(email_name);	
-	select f_get_email_id(email_name);	
+	select into found_email_id f_get_email_id(email_name);	
 
 RETURN return_code;
 
