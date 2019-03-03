@@ -26,7 +26,9 @@ class MAIN_APPLICATION extends State
                 {
                       app.mMain = new Main(app);
                 }
-                //app.mJoinScreen.show();
+             	document.getElementById("main_nav_id").className += " active";
+
+                //app.mMain.show();
 
 	}
 
@@ -44,5 +46,8 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: EXIT");        
 		}
+                //app.mMain.hide();
+               	var element = document.getElementById("main_nav_id");
+                element.className = element.className.replace(/\active\b/g, "");
 	}
 }

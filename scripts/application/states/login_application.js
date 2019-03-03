@@ -23,6 +23,7 @@ class LOGIN_APPLICATION extends State
 			//start the login subsystem
 			app.mLogin = new Login(app);
 		}
+		document.getElementById("login_nav_id").className += " active";
     		app.mLogin.show();
 
 	}
@@ -46,6 +47,8 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXIT");        
 		}
+		var element = document.getElementById("login_nav_id");
+		element.className = element.className.replace(/\active\b/g, "");
     		app.mLogin.hide();
 	}
 }

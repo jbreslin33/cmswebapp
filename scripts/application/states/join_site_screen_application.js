@@ -24,6 +24,7 @@ class JOIN_SITE_SCREEN_APPLICATION extends State
 		{
 			app.mJoinSiteScreen = new JoinSiteScreen(app);
 		}
+                document.getElementById("join_site_nav_id").className += " active";
 		app.mJoinSiteScreen.show();
 	}
 
@@ -48,6 +49,9 @@ class JOIN_SITE_SCREEN_APPLICATION extends State
 			console.log("JOIN_SITE_SCREEN_APPLICATION: EXIT");        
 		}
 		//hide it for now maybe delete later
+		var element = document.getElementById("join_site_nav_id");
+                element.className = element.className.replace(/\active\b/g, "");
+
 		app.mJoinSiteScreen.hide();
 	}
 }
