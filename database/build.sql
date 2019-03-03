@@ -816,8 +816,28 @@ END;
 
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email_id logins.email_id%TYPE;
+BEGIN
+    	SELECT logins.email_id INTO found_email_id FROM logins 
+	join emails on emails.id=logins.email_id
+	WHERE email = email_name;
+	IF FOUND THEN
+    		RAISE EXCEPTION 'email_id % exists!', found_email_id;
+	ELSE
+    		RAISE EXCEPTION 'email % does not exist!', found_email;
+	END IF;
 
-CREATE OR REPLACE FUNCTION p_login(email_name TEXT, password TEXT)
+RETURN found_email_id;
+
+END;
+
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_login(email_name TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
