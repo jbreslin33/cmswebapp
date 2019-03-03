@@ -16,12 +16,11 @@ class JoinSiteScreen
 		this.mAddress = null;
 		this.mPassword = null;
 
-		document.getElementById("joinsitescreenbuttonid").addEventListener("click",this.send.bind(this));
+		document.getElementById("joinsitescreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
 
-	send()
+	hit()
 	{
-
 		var form = document.getElementById('join_site_screen_html_id');
 		if (form.checkValidity() === false) 
 		{
@@ -29,8 +28,13 @@ class JoinSiteScreen
 		}
 		else
 		{
+			this.send();
 			console.log('true');
+		}
+	}
 
+	send()
+	{
 		//get vars
                	this.mFirstName  = document.getElementById("join_site_screen_first_name_id").value;
                	this.mMiddleName = document.getElementById("join_site_screen_middle_name_id").value;
@@ -70,7 +74,6 @@ class JoinSiteScreen
                 };
                 request.open('POST', url);
                 request.send();
-		}
 	}
         
 	show()
