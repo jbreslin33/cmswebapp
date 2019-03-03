@@ -21,20 +21,6 @@ class JoinSiteScreen
 
 	hit()
 	{
-		var form = document.getElementById('join_site_screen_html_id');
-		if (form.checkValidity() === false) 
-		{
-			console.log('false');
-		}
-		else
-		{
-			this.send();
-			console.log('true');
-		}
-	}
-
-	send()
-	{
 		//get vars
                	this.mFirstName  = document.getElementById("join_site_screen_first_name_id").value;
                	this.mMiddleName = document.getElementById("join_site_screen_middle_name_id").value;
@@ -46,7 +32,33 @@ class JoinSiteScreen
                	this.mApplication.mLogin.mPassword = document.getElementById("join_site_screen_password1_id").value;
                	this.mPassword                     = document.getElementById("join_site_screen_password2_id").value;
 
-		//need to handle not having a team yet...
+		var form = document.getElementById('join_site_screen_html_id');
+		if (form.checkValidity() === false) 
+		{
+			console.log('invalid');
+		}
+		else
+		{
+			var passwordMatch = false;
+
+			if (this.mPassword == this.mApplication.mLogin.mPassword)
+			{
+				this.send();
+				console.log('valid');
+				console.log('passwords match');
+			}
+			else
+			{
+				console.log('passwords dont match');
+			}
+			//also check password match
+			
+			
+		}
+	}
+
+	send()
+	{
 		var url = "/php/classes/insert/join_site.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
