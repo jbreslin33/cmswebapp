@@ -824,12 +824,6 @@ BEGIN
     	SELECT logins.email_id INTO found_email_id FROM logins 
 	join emails on emails.id=logins.email_id
 	WHERE email = email_name;
-	--IF FOUND THEN
-    	--	RAISE EXCEPTION 'email_id % exists!', found_email_id;
-	--ELSE
-    	--	RAISE EXCEPTION 'email % does not exist!', found_email;
-	--END IF;
-
 RETURN found_email_id;
 
 END;
@@ -842,7 +836,6 @@ DECLARE
 	found_email_id logins.email_id%TYPE;
 	return_code text;
 BEGIN
-	--found_email_id = SELECT f_get_email_id(email_name);	
 	select into found_email_id f_get_email_id(email_name);	
 	IF found_email_id THEN
     		RAISE EXCEPTION 'email % exists!', found_email_id;
