@@ -795,7 +795,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION p_joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE FUNCTION f_joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
@@ -836,11 +836,25 @@ END;
 
 $$ LANGUAGE plpgsql;
 
-
 CREATE OR REPLACE FUNCTION f_login(email_name TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
-	found_email emails.email%TYPE;
+	found_email_id logins.email_id%TYPE;
+	return_code text;
+BEGIN
+	--found_email_id = SELECT f_get_email_id(email_name);	
+	select f_get_email_id(email_name);	
+
+RETURN return_code;
+
+END;
+
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_fake_login(email_name TEXT, password TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email_id emails.email_id%TYPE;
 	return_code text;
 BEGIN
     	SELECT email INTO found_email FROM logins 
