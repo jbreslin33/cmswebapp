@@ -834,13 +834,27 @@ CREATE OR REPLACE FUNCTION f_login(email_name TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id logins.email_id%TYPE;
+	found_id logins.id%TYPE;
 	return_code text;
 BEGIN
 	select into found_email_id f_get_email_id(email_name);	
 	IF found_email_id THEN
     		RAISE EXCEPTION 'email % exists!', found_email_id;
+
+        	SELECT id INTO found_id FROM logins 
+        	WHERE email_id = $1 AND password = '$2';
+        	
+		IF found_id THEN
+                	RAISE EXCEPTION 'found_id % exists!', found_id;
+                	return_code = '100';
+        	ELSE
+                	RAISE EXCEPTION 'found_id % does not exist!', found_id;
+                	return_code = '102';
+        	END IF;
+	
 	ELSE
     		RAISE EXCEPTION 'email % does not exist!', found_email_id;
+		return_code = '101'; 
 	END IF;
 
 RETURN return_code;
