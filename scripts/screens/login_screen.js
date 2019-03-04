@@ -32,21 +32,35 @@ class LoginScreen
                                         var data = this.responseText;
                                         if (data)
                                         {
-						console.log("CODE YO:" + data);
+                                		document.getElementById('login_screen_email_message_id').innerHTML = '';
+                                		document.getElementById('login_screen_password_message_id').innerHTML = '';
+
 						if (data == 100)
 						{
 							APPLICATION.mLogin.mLoggedIn = true; //should recieve 100 for good join/login
 						}
-						else
+						if (data == 101)
 						{
-							console.log('failed to login to cmswebapp');
+                                			document.getElementById('login_screen_email_message_id').style.color = 'red';
+                                			document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
+                        			}
+						if (data == 102)
+						{
+                                			document.getElementById('login_screen_password_message_id').style.color = 'red';
+                                			document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
 						}
                                         }
                                 }
                         }
                 };
-                request.open('POST', url);
-                request.send();
+	        
+		var form = document.getElementById('join_site_screen_html_id');
+                
+		//if (form.checkValidity() == true)
+                //{
+			request.open('POST', url);
+                        request.send();
+                //}
 	}
         
 	show()
