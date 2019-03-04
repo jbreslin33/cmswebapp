@@ -35,7 +35,7 @@ class LoginScreen
 						console.log("CODE YO:" + data);
 						if (data == 100)
 						{
-							APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
+							APPLICATION.mLogin.mLoggedIn = true; //should recieve 100 for good join/login
 						}
 						else
 						{
