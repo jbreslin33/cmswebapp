@@ -73,7 +73,6 @@ class JoinSiteScreen
                                         {
 						if (data == 100)
 						{
-							this.mJoined = true;
 							APPLICATION.mJoinSiteScreen.mJoined = true;
 						}
 						else
