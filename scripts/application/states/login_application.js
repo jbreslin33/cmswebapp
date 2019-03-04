@@ -21,7 +21,7 @@ class LOGIN_APPLICATION extends State
 		else
 		{
 			//start the login subsystem
-			app.mLogin = new Login(app);
+			app.mLogin = new LoginScreen(app);
 		}
 		document.getElementById("login_nav_id").className += " active";
     		app.mLogin.show();

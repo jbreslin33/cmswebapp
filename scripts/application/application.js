@@ -43,6 +43,7 @@ class Application
 		this.mINIT_APPLICATION            = new INIT_APPLICATION();
 		this.mMAIN_APPLICATION            = new MAIN_APPLICATION();
 		this.mJOIN_SITE_SCREEN_APPLICATION     = new JOIN_SITE_SCREEN_APPLICATION();
+		this.mCHECK_LOCALSTORAGE_APPLICATION  = new CHECK_LOCALSTORAGE_APPLICATION();
 		this.mLOGIN_APPLICATION           = new LOGIN_APPLICATION();
 		this.mSHOW_DAILY_SCHEDULE_APPLICATION   = new SHOW_DAILY_SCHEDULE_APPLICATION();
 		this.mINSERT_EVENTO_APPLICATION   = new INSERT_EVENTO_APPLICATION();
@@ -55,11 +56,7 @@ class Application
 	update(timestamp)
 	{
 		this.mStateMachine.update();
-
-		if (this.mLogin)
-		{
-			this.mLogin.update(timestamp);
-		}
+		
 		if (this.mDailySchedule)
 		{
 			this.mDailySchedule.update(timestamp);

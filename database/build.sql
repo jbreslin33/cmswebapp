@@ -863,31 +863,3 @@ END;
 
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_fake_login(email_name TEXT, password TEXT)
-RETURNS text AS $$
-DECLARE
-	found_email_id emails.email_id%TYPE;
-	return_code text;
-BEGIN
-    	SELECT email INTO found_email FROM logins 
-	join emails on emails.id=logins.email_id
-	WHERE email = email_name;
-	IF FOUND THEN
-    		RAISE EXCEPTION 'email % exists!', found_email;
-		return_code = '101';
-	ELSE
-    		RAISE EXCEPTION 'email % does not exist!', found_email;
-		--CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
-		return_code = '100';
-	END IF;
-
-RETURN return_code;
-
-END;
-
-$$ LANGUAGE plpgsql;
-
---select logins.password from logins
---join emails on emails.id=logins.email_id
---where emails.email = 'j@j.com';
-

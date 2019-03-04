@@ -4,7 +4,6 @@ class Login
 {
 	constructor(application)
 	{
-		this.mLoginScreen = null;
 		this.mApplication = application;
 
 		//logs
@@ -58,6 +57,7 @@ class Login
                                         var data = this.responseText;
                                         if (data)
                                         {
+						console.log('CODE FROM LOGIN:' + data);
 						if (data == 100)
 						{
 							APPLICATION.mLogin.process(data); //should recieve 100 for good login

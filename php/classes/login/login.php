@@ -5,13 +5,15 @@ class Login
 {
         function __construct()
         {
+		error_log("here in login");
+
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-                $sql = 'select p_login($1,$2)';
+                $sql = 'select f_login($1,$2)';
 
-                $prepare_result = pg_prepare($database->mConnection, "p_login", $sql);
+                $prepare_result = pg_prepare($database->mConnection, "f_login", $sql);
 
-                $result = pg_execute($database->mConnection, "p_login", array( $_GET['email'] ,$_GET['password']));
+                $result = pg_execute($database->mConnection, "f_login", array( $_GET['email'] ,$_GET['password']));
 
 		//return to client
                 echo pg_fetch_result($result, 0);

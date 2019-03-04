@@ -92,7 +92,7 @@ class JoinSiteScreen
 						if (data == 100)
 						{
 							console.log('joined cmswebapp');
-							APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
+							//APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
 						}
 						else
 						{

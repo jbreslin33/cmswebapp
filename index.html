@@ -177,12 +177,12 @@
 
     			<div class="input-group">
       				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      				<input id="loginscreenemailid" type="text" class="form-control" name="email" placeholder="Email">
+      				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email">
     			</div>
 
     			<div class="input-group">
       				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      				<input id="loginscreenpasswordid" type="password" class="form-control" name="password" placeholder="Password">
+      				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password">
     			</div>
  				
 			<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
@@ -316,8 +316,7 @@
 	<script src="scripts/main/main.js"></script>
 
 	<!-- login -->
-	<script src="scripts/login/login.js"></script>
-	<script src="scripts/login/login_screen.js"></script>
+	<script src="scripts/screens/login_screen.js"></script>
 
 	<!--evento -->
 	<script src="scripts/evento/evento.js"></script>
@@ -344,19 +343,12 @@
   	<script src="scripts/application/states/init_application.js" ></script>
   	<script src="scripts/application/states/main_application.js" ></script>
   	<script src="scripts/application/states/login_application.js" ></script>
+  	<script src="scripts/application/states/check_localstorage_application.js" ></script>
   	<script src="scripts/application/states/show_daily_schedule_application.js" ></script>
   	<script src="scripts/application/states/insert_evento_application.js" ></script>
   	<script src="scripts/application/states/join_site_screen_application.js" ></script>
   	<script src="scripts/application/states/add_club_application.js" ></script>
 	
-	
-	<!-- Login states -->
-  	<script src="scripts/login/states/global_login.js" ></script>
-  	<script src="scripts/login/states/init_login.js" ></script>
-  	<script src="scripts/login/states/check_localstorage.js" ></script>
-  	<script src="scripts/login/states/screen_login.js" ></script>
-  	<script src="scripts/login/states/logged_in.js" ></script>
-  
 	<!-- Daily Schedule states -->
         <script src="scripts/daily_schedule/states/global_daily_schedule.js" ></script>
         <script src="scripts/daily_schedule/states/init_daily_schedule.js" ></script>
