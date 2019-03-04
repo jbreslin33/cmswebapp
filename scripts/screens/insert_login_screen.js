@@ -52,7 +52,7 @@ class InsertLoginScreen
                         }
                 };
 
-		var form = document.getElementById('insert_login_screen_html_id');
+		var form = document.getElementById('insert_login_screen_form_id');
 		if (form.checkValidity() == true) 
 		{
 			var passwordMatch = false;
