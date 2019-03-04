@@ -60,18 +60,12 @@ class JoinSiteScreen
                 };
 
 		var form = document.getElementById('join_site_screen_html_id');
-		if (form.checkValidity() === false) 
-		{
-			//console.log('invalid');
-		}
-		else
+		if (form.checkValidity() == true) 
 		{
 			var passwordMatch = false;
 
 			if (this.mPassword == this.mApplication.mLogin.mPassword)
 			{
-				//this.send.bind(this);
-                		
 				request.open('POST', url);
                 		request.send();
 
@@ -84,8 +78,6 @@ class JoinSiteScreen
           			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
 			}
 		}
-
-
 	}
         
 	show()
