@@ -33,10 +33,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mSHOW_DAILY_SCHEDULE_APPLICATION);
                 }
-		else if (location.hash == '#join_site_screen' && app.mStateMachine.mCurrentState != app.mJOIN_SITE_SCREEN_APPLICATION)
+		else if (location.hash == '#insert_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_LOGIN_SCREEN_APPLICATION)
                 {
-			console.log('join site screen cliked');
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mJOIN_SITE_SCREEN_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_LOGIN_SCREEN_APPLICATION);
                 }
 		else if (location.hash == '#add_club' && app.mStateMachine.mCurrentState != app.mADD_CLUB_APPLICATION)
                 {

@@ -7,9 +7,10 @@
 --LIVE DROPS
 
 --FUNCTION DROPS
-drop procedure f_login(text,text); 
+drop function f_insert_login(text,text,text,text,text,text,text); 
+drop procedure p_insert_login(text,text,text,text,text,text,text); 
+
 drop function f_login(text,text); 
-drop function f_joinsite(text,text,text,text,text,text,text); 
 drop function f_get_email_id(text); 
 drop function f_add_club(text,text); 
 
@@ -787,7 +788,7 @@ CREATE TABLE order_items
 );
 
 
-CREATE OR REPLACE PROCEDURE joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
@@ -804,7 +805,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION f_joinsite(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE FUNCTION f_insert_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
@@ -815,7 +816,7 @@ BEGIN
     		RAISE warning 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
-		CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
+		CALL p_insert_login(email_name,password,first_name,middle_name,last_name,phone,address);
 		return_code = '100';
 	END IF;
 

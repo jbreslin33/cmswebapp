@@ -16,7 +16,7 @@ class INIT_APPLICATION extends State
 		}
 		//hide evertthing except nav_bar_id
 		document.getElementById("nav_bar_id").style.display = "block";
-		document.getElementById("join_site_screen_html_id").style.display = "none";
+		document.getElementById("insert_login_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
 		document.getElementById("card_original_id").style.display = "none";
 		document.getElementById("insert_evento_html_id").style.display = "none";
