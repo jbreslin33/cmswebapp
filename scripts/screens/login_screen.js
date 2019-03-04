@@ -54,13 +54,13 @@ class LoginScreen
                         }
                 };
 	        
-		var form = document.getElementById('join_site_screen_html_id');
+		var form = document.getElementById('login_screen_form_id');
                 
-		//if (form.checkValidity() == true)
-                //{
+		if (form.checkValidity() == true)
+                {
 			request.open('POST', url);
                         request.send();
-                //}
+                }
 	}
         
 	show()
