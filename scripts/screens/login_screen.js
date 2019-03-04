@@ -17,6 +17,9 @@ class LoginScreen
 
 	hit()
 	{
+                this.mEmail    = document.getElementById("login_screen_email_id").value;
+                this.mPassword  = document.getElementById("login_screen_password_id").value;
+
 		var url = "/php/classes/login/login.php?email=" + this.mEmail + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
