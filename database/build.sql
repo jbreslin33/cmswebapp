@@ -811,7 +811,7 @@ DECLARE
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
-    		RAISE EXCEPTION 'email % exists!', found_email;
+    		RAISE warning 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
 		CALL joinsite(email_name,password,first_name,middle_name,last_name,phone,address);
@@ -845,23 +845,23 @@ DECLARE
 	found_id logins.id%TYPE;
 	return_code text;
 BEGIN
-	select into found_email_id f_get_email_id($1);	
+	select into found_email_id f_get_email_id('$1');	
 	IF found_email_id THEN
-    		--RAISE EXCEPTION 'email % exists!', found_email_id;
+    		RAISE warning 'email % exists!', found_email_id;
 
         	SELECT id INTO found_id FROM logins 
         	WHERE email_id = found_email_id AND password = '$2';
         	
 		IF found_id THEN
                 	return_code = '100';
-                	--RAISE EXCEPTION 'found_id % exists!', found_id;
+                	RAISE warning 'found_id % exists!', found_id;
         	ELSE
                 	return_code = '102';
-                	--RAISE EXCEPTION 'found_id % does not exist!', found_id;
+                	RAISE WARNING 'found_id % does not exist!', found_id;
         	END IF;
 	
 	ELSE
-    		--RAISE EXCEPTION 'email % does not exist!', found_email_id;
+    		RAISE warning 'email % does not exist!', found_email_id;
 		return_code = '101'; 
 	END IF;
 
