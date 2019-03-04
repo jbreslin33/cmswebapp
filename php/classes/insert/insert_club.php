@@ -1,75 +1,20 @@
 <?php 
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
-class InsertClub extends Insert
+class AddClub 
 {
-	function __construct($name, $street, $city, $state, $zip) 
+	function __construct() 
 	{
-                $this->mName = $name;
-                $this->mStreet = $street;
-                $this->mCity = $city;
-                $this->mState = $state;
-                $this->mZip = $zip;
+                $database = new Database("localhost","cms","postgres","mibesfat");
 
-               	if (isset($_GET['name']))
-                {
-                        $this->mName = $_GET['name'];
-                }
-
-                if (isset($_GET['street']))
-                {
-                        $this->mStreet = $_GET['street'];
-                }
-
-                if (isset($_GET['city']))
-                {
-                        $this->mCity = $_GET['city'];
-                }
-
-                if (isset($_GET['state']))
-                {
-                        $this->mState = $_GET['state'];
-                }
-
-                if (isset($_GET['zip']))
-                {
-                        $this->mZip = $_GET['zip'];
-                }
-
-		if ($insertClub->mSuccess)
-		{
-			echo "100"; //success	
-		}
-		else
-		{
-			echo "101"; //failure
-		}
-
-
+		$sql = 'select f_add_club($1,$2)';
 		
-		parent::__construct();
-	}
+		$prepare_result = pg_prepare($database->mConnection, "f_add_club", $sql);
 
-	public function query()
-	{
-		$this->mSQL = "
+		$result = pg_execute($database->mConnection, "f_add_club", array( $_GET['name'] ,$_GET['address']));
 
-		insert into clubs (name, street, city, state, zip) values('" . 
-		$this->mName .
-		"','" .
-		$this->mStreet .
-		"','" .
-		$this->mCity .
-		"','" .
-		$this->mState .
-		"','" .
-		$this->mZip .
-		"') returning id;";
-		
-		error_log($this->mSQL);
-	}
+		echo pg_fetch_result($result, 0); 
+        }
 }
-
-$insertClub = new InsertClub();
-
+	$addClub = new AddClub();	
 ?>

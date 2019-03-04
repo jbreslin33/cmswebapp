@@ -14,15 +14,15 @@ class ADD_CLUB_APPLICATION extends State
 		{
 			console.log("ADD_CLUB_APPLICATION: ENTER");        
 		}
-		if (app.mAddClub)
+		if (app.mAddClubScreen)
 		{
-			app.mAddClub = new AddClub(app);
+			app.mAddClubScreen = new AddClubScreen(app);
 		}
 		else
 		{
-			app.mAddClub = new AddClub(app);
+			app.mAddClubScreen = new AddClubScreen(app);
 		}
-		app.mAddClub.show();
+		app.mAddClubScreen.show();
 	}
 
         execute(app)
@@ -32,7 +32,7 @@ class ADD_CLUB_APPLICATION extends State
 			console.log("ADD_CLUB_APPLICATION: EXECUTE");        
 		}
                
-		if (app.mAddClub.mCode == 100)
+		if (app.mAddClubScreen.mCode == 100)
                 {
                         app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                 }
@@ -44,7 +44,7 @@ class ADD_CLUB_APPLICATION extends State
 		{
 			console.log("ADD_CLUB_APPLICATION: EXIT");        
 		}
-		app.mAddClub.hide();
-		app.mAddClub.mCode == 0;
+		app.mAddClubScreen.hide();
+		app.mAddClubScreen.mCode = 0;
 	}
 }

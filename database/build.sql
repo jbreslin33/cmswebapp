@@ -11,6 +11,7 @@ drop procedure f_login(text,text);
 drop function f_login(text,text); 
 drop function f_joinsite(text,text,text,text,text,text,text); 
 drop function f_get_email_id(text); 
+drop function f_add_club(text,text); 
 
 --TABLE DROPS
 DROP TABLE error_log CASCADE; 
@@ -870,4 +871,42 @@ RETURN return_code;
 END;
 
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_add_club(TEXT, TEXT)
+RETURNS text AS $$
+DECLARE
+        found_club_name clubs.name%TYPE;
+        returning_club_id clubs.id%TYPE;
+        return_code text;
+BEGIN
+        SELECT name INTO found_club_name FROM clubs
+        WHERE name = $1;
+
+        IF found_club_name THEN
+		--dup
+                RAISE warning 'club % exists!', found_club_name;
+                return_code = '101';
+
+       	ELSE
+                insert into clubs (name,address) values ($1,$2) returning id into returning_club_id;
+
+                IF returning_club_id THEN
+                        return_code = '100';
+                        RAISE warning 'returning_club_id % exists!', returning_club_id;
+                ELSE
+                        return_code = '102'; --we failed for unknown reason
+                        RAISE WARNING 'failed for unknown reason on club % ', $1;
+                END IF;
+        END IF;
+
+RETURN return_code;
+
+END;
+
+$$ LANGUAGE plpgsql;
+
+
+
+
 
