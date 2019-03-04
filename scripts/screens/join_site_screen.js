@@ -34,31 +34,6 @@ class JoinSiteScreen
                	this.mApplication.mLogin.mPassword = document.getElementById("join_site_screen_password1_id").value;
                	this.mPassword                     = document.getElementById("join_site_screen_password2_id").value;
 
-		var form = document.getElementById('join_site_screen_html_id');
-		if (form.checkValidity() === false) 
-		{
-			//console.log('invalid');
-		}
-		else
-		{
-			var passwordMatch = false;
-
-			if (this.mPassword == this.mApplication.mLogin.mPassword)
-			{
-				this.send();
-          			document.getElementById('password_message_id').style.color = 'green';
-          			document.getElementById('password_message_id').innerHTML = 'passwords are matching';
-			}
-			else
-			{
-          			document.getElementById('password_message_id').style.color = 'red';
-          			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
-			}
-		}
-	}
-
-	send()
-	{
 		var url = "/php/classes/insert/join_site.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
@@ -83,8 +58,34 @@ class JoinSiteScreen
                                 }
                         }
                 };
-                request.open('POST', url);
-                request.send();
+
+		var form = document.getElementById('join_site_screen_html_id');
+		if (form.checkValidity() === false) 
+		{
+			//console.log('invalid');
+		}
+		else
+		{
+			var passwordMatch = false;
+
+			if (this.mPassword == this.mApplication.mLogin.mPassword)
+			{
+				//this.send.bind(this);
+                		
+				request.open('POST', url);
+                		request.send();
+
+          			document.getElementById('password_message_id').style.color = 'green';
+          			document.getElementById('password_message_id').innerHTML = 'passwords are matching';
+			}
+			else
+			{
+          			document.getElementById('password_message_id').style.color = 'red';
+          			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
+			}
+		}
+
+
 	}
         
 	show()
