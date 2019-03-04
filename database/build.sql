@@ -5,6 +5,14 @@
 --OLD DROPS
 
 --LIVE DROPS
+
+--FUNCTION DROPS
+drop procedure f_login(text,text); 
+drop function f_login(text,text); 
+drop function f_joinsite(text,text,text,text,text,text,text); 
+drop function f_get_email_id(text); 
+
+--TABLE DROPS
 DROP TABLE error_log CASCADE; 
 
 DROP TABLE sessions_media CASCADE; 
@@ -830,30 +838,30 @@ END;
 
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_login(email_name TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION f_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id logins.email_id%TYPE;
 	found_id logins.id%TYPE;
 	return_code text;
 BEGIN
-	select into found_email_id f_get_email_id(email_name);	
+	select into found_email_id f_get_email_id($1);	
 	IF found_email_id THEN
-    		RAISE EXCEPTION 'email % exists!', found_email_id;
+    		--RAISE EXCEPTION 'email % exists!', found_email_id;
 
         	SELECT id INTO found_id FROM logins 
-        	WHERE email_id = $1 AND password = '$2';
+        	WHERE email_id = found_email_id AND password = '$2';
         	
 		IF found_id THEN
-                	RAISE EXCEPTION 'found_id % exists!', found_id;
                 	return_code = '100';
+                	--RAISE EXCEPTION 'found_id % exists!', found_id;
         	ELSE
-                	RAISE EXCEPTION 'found_id % does not exist!', found_id;
                 	return_code = '102';
+                	--RAISE EXCEPTION 'found_id % does not exist!', found_id;
         	END IF;
 	
 	ELSE
-    		RAISE EXCEPTION 'email % does not exist!', found_email_id;
+    		--RAISE EXCEPTION 'email % does not exist!', found_email_id;
 		return_code = '101'; 
 	END IF;
 
