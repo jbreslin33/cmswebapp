@@ -37,7 +37,7 @@ class JoinSiteScreen
 		var form = document.getElementById('join_site_screen_html_id');
 		if (form.checkValidity() === false) 
 		{
-			console.log('invalid');
+			//console.log('invalid');
 		}
 		else
 		{
@@ -46,14 +46,11 @@ class JoinSiteScreen
 			if (this.mPassword == this.mApplication.mLogin.mPassword)
 			{
 				this.send();
-				console.log('valid');
-				console.log('passwords match');
           			document.getElementById('password_message_id').style.color = 'green';
           			document.getElementById('password_message_id').innerHTML = 'passwords are matching';
 			}
 			else
 			{
-				console.log('passwords dont match');
           			document.getElementById('password_message_id').style.color = 'red';
           			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
 			}
@@ -78,13 +75,10 @@ class JoinSiteScreen
 						{
 							this.mJoined = true;
 							APPLICATION.mJoinSiteScreen.mJoined = true;
-							console.log('joined cmswebapp');
-							//APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
 						}
 						else
 						{
 							this.mJoined = false;
-							console.log('failed to joined cmswebapp');
 						}
                                         }
                                 }
