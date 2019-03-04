@@ -845,12 +845,12 @@ DECLARE
 	found_id logins.id%TYPE;
 	return_code text;
 BEGIN
-	select into found_email_id f_get_email_id('$1');	
+	select into found_email_id f_get_email_id($1);	
 	IF found_email_id THEN
     		RAISE warning 'email % exists!', found_email_id;
 
         	SELECT id INTO found_id FROM logins 
-        	WHERE email_id = found_email_id AND password = '$2';
+        	WHERE email_id = found_email_id AND password = $2;
         	
 		IF found_id THEN
                 	return_code = '100';
