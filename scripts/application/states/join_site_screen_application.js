@@ -35,11 +35,11 @@ class JOIN_SITE_SCREEN_APPLICATION extends State
 			console.log("JOIN_SITE_SCREEN_APPLICATION: EXECUTE");        
 		}
                
-		if (app.mLogin.mLoggedIn == true)
+		if (app.mJoinSiteScreen.mJoined == true)
                 {
+			console.log("what");
                         app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                 }
-
 	}
 
         exit(app)

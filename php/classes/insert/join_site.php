@@ -5,6 +5,8 @@ class JoinSite
 {
 	function __construct() 
 	{
+		error_log("in class joinsite");
+
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
 		$sql = 'select f_joinsite($1,$2,$3,$4,$5,$6,$7)';

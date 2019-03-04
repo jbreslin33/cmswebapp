@@ -8,6 +8,8 @@ class JoinSiteScreen
 
 		location.hash = "join-site-screen";
 
+		this.mJoined = false;
+
 		//sql php vars
 		this.mFirstName = null;
 		this.mMiddleName = null;
@@ -48,7 +50,6 @@ class JoinSiteScreen
 				console.log('passwords match');
           			document.getElementById('password_message_id').style.color = 'green';
           			document.getElementById('password_message_id').innerHTML = 'passwords are matching';
-				
 			}
 			else
 			{
@@ -56,24 +57,8 @@ class JoinSiteScreen
           			document.getElementById('password_message_id').style.color = 'red';
           			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
 			}
-			//also check password match
-			
-			
 		}
 	}
-	/*
-	 
-	   var check = function() {
-      if (document.getElementById('password').value ==
-          document.getElementById('confirm_password').value) {
-          document.getElementById('message').style.color = 'green';
-          document.getElementById('message').innerHTML = 'matching';
-      } else {
-      		document.getElementById('message').style.color = 'red';
-          document.getElementById('message').innerHTML = 'not matching';
-      }
-  }
-  */
 
 	send()
 	{
@@ -91,11 +76,14 @@ class JoinSiteScreen
                                         {
 						if (data == 100)
 						{
+							this.mJoined = true;
+							APPLICATION.mJoinSiteScreen.mJoined = true;
 							console.log('joined cmswebapp');
 							//APPLICATION.mLogin.process(data); //should recieve 100 for good join/login
 						}
 						else
 						{
+							this.mJoined = false;
 							console.log('failed to joined cmswebapp');
 						}
                                         }
