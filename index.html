@@ -5,9 +5,11 @@
   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
 
-  		<!-- Auto0 CDN-->
-		<script src="https://cdn.auth0.com/js/auth0/9.10/auth0.min.js"></script>
-  		<!-- END Auto0 CDN-->
+  		<!-- GOOGLE CDN-->
+  		<meta name="google-signin-scope" content="profile email">
+    		<meta name="google-signin-client_id" content="328342167152-kgkn0drnkcg8us71974bulg290n67f45.apps.googleusercontent.com">
+    		<script src="https://apis.google.com/js/platform.js" async defer></script>
+  		<!-- END GOOGLE CDN-->
 
   		<!-- BOOTSRAP CDN-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +17,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   		<!-- END BOOTSRAP CDN-->
-  		
+
+
+
 		<title>CMS</title>
 
   		<!-- TODO add manifest here -->
@@ -167,39 +171,32 @@
 
 
 	<!-- BEGIN AUTH0 INDEX -->
-<div class="content">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Auth0 - JavaScript</a>
-
-        <button id="btn-home-view" class="btn btn-primary btn-margin">
-            Home
-        </button>
-
-        <button id="btn-login" class="btn btn-primary btn-margin">
-            Log In
-        </button>
-
-        <button id="btn-logout" class="btn btn-primary btn-margin">
-            Log Out
-        </button>
-
-      </div>
-    </div>
-  </nav>
-
-  <main class="container">
-    <!-- home view -->
-    <div id="home-view">
-      <h4></h4>
-    </div>
-    
-  </main>
-
-</div>
-
+	
 	<!-- END AUTH0 INDEX -->
+
+	<!-- BEGIN GOOGLE LOGIN -->
+
+
+<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      }
+    </script>
+	
+    <!-- END BEGIN GOOGLE LOGIN -->
+
 
 	<!-- LOGIN_HTML -->
 
@@ -337,8 +334,9 @@
 	<!-- javascripts -->
 	
 	
-	<!-- Auth0 -->
+	<!-- Auth0 
 	<script src="app.js"></script>
+	-->
 
 	<!-- utilities -->
 	<script src="scripts/utilities/utility.js"></script>
