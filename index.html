@@ -5,12 +5,16 @@
   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
 
-  		<!-- BOOTSRAP CDN-->
+  		<!-- Auto0 CDN-->
+		<script src="https://cdn.auth0.com/js/auth0/9.10/auth0.min.js"></script>
+  		<!-- END Auto0 CDN-->
 
+  		<!-- BOOTSRAP CDN-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<!-- END BOOTSRAP CDN-->
   		
 		<title>CMS</title>
 
@@ -162,6 +166,41 @@
 	<!-- END ADD CLUB HTML  -->
 
 
+	<!-- BEGIN AUTH0 INDEX -->
+<div class="content">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Auth0 - JavaScript</a>
+
+        <button id="btn-home-view" class="btn btn-primary btn-margin">
+            Home
+        </button>
+
+        <button id="btn-login" class="btn btn-primary btn-margin">
+            Log In
+        </button>
+
+        <button id="btn-logout" class="btn btn-primary btn-margin">
+            Log Out
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- home view -->
+    <div id="home-view">
+      <h4></h4>
+    </div>
+    
+  </main>
+
+</div>
+
+	<!-- END AUTH0 INDEX -->
+
 	<!-- LOGIN_HTML -->
 
 	<div class="container" id="login_screen_html_id">
@@ -181,7 +220,7 @@
 			<span id='login_screen_password_message_id'></span>
  				
 			<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
-
+			
 			<br>   			
 			<br>   			
 			
@@ -296,6 +335,10 @@
 	<!-- END INSERT_EVENTO HTML  -->
 
 	<!-- javascripts -->
+	
+	
+	<!-- Auth0 -->
+	<script src="app.js"></script>
 
 	<!-- utilities -->
 	<script src="scripts/utilities/utility.js"></script>
