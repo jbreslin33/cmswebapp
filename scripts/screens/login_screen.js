@@ -93,8 +93,8 @@ class LoginScreen
 		//i then need to send this to server and it will either be a insert or simply return 100
 		console.log("send to server next");
 
-		APPLICATION.mLogin.mGoogleID = profile.getId();	
 		APPLICATION.mLogin.mEmail = profile.getEmail();	
+		APPLICATION.mLogin.mGoogleID = profile.getId();	
 		APPLICATION.mLogin.mIDToken = id_token;	
 		APPLICATION.mLogin.mFirstName = profile.getGivenName();	
 		APPLICATION.mLogin.mLastName = profile.getFamilyName();	

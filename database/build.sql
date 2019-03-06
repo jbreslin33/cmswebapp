@@ -10,8 +10,8 @@
 drop function f_insert_native_login(text,text,text,text,text,text,text); 
 drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 
-drop function f_insert_google_login(text,text,text,text,text,text,text); 
-drop procedure p_insert_google_login(text,text,text,text,text,text,text); 
+--drop function f_insert_google_login(integer,text,text,text,text); 
+--drop procedure p_insert_google_login(integer,text,text,text,text); 
 
 drop function f_native_login(text,text); 
 drop function f_get_native_email_id(text); 
