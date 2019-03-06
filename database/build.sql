@@ -84,8 +84,8 @@ drop table persons_families cascade;
 drop table families cascade;
 
 drop table persons_emails cascade;
-DROP TABLE persons_logins CASCADE;
-DROP TABLE logins CASCADE;
+DROP TABLE native_logins CASCADE;
+DROP TABLE google_logins CASCADE;
 drop table emails cascade;
 
 
@@ -434,7 +434,7 @@ create table emails
 --jbreslin33@gmail.com this is if you want a login???
 --some person needs to own this????
 --user preferences could be placed here like see whole family etc
-CREATE TABLE logins 
+CREATE TABLE native_logins 
 (
 	id SERIAL,
     	email_id integer not null unique, --so you need atleast one email its the master email
@@ -444,16 +444,14 @@ CREATE TABLE logins
 	PRIMARY KEY (id)
 );
 
-
---luke uses jbreslin33 also luke could use jbreslin33 AND lbreslin6 logins
-create table persons_logins
+CREATE TABLE google_logins 
 (
-	id serial,
-	person_id integer not null,
-	login_id integer not null,
-        FOREIGN KEY(person_id) REFERENCES persons(id),
- 	FOREIGN KEY(login_id) REFERENCES logins(id),
-	unique(person_id,login_id),
+	id SERIAL,
+    	email_id integer not null unique,  
+    	google_id integer not null unique, 
+    	id_token text not null,  --big send what you have on client with all updates inserts deletes and it should match this which we update as soon as google auths us   
+	timestamp_created timestamp,
+ 	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
 );
 
@@ -797,9 +795,8 @@ DECLARE
 	returning_person_id integer;
 BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
-	insert into logins (email_id, password) values (returning_email_id, password) returning id into returning_login_id; 
+	insert into native_logins (email_id, password) values (returning_email_id, password) returning id into returning_login_id; 
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-	insert into persons_logins (person_id, login_id) values (returning_person_id, returning_login_id); 
 	insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id); 
 
 END;
@@ -829,10 +826,10 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
-	found_email_id logins.email_id%TYPE;
+	found_email_id native_logins.email_id%TYPE;
 BEGIN
-    	SELECT logins.email_id INTO found_email_id FROM logins 
-	join emails on emails.id=logins.email_id
+    	SELECT native_logins.email_id INTO found_email_id FROM native_logins 
+	join emails on emails.id=native_logins.email_id
 	WHERE email = email_name;
 RETURN found_email_id;
 
@@ -843,15 +840,15 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
-	found_email_id logins.email_id%TYPE;
-	found_id logins.id%TYPE;
+	found_email_id native_logins.email_id%TYPE;
+	found_id native_logins.id%TYPE;
 	return_code text;
 BEGIN
 	select into found_email_id f_get_email_id($1);	
 	IF found_email_id THEN
     		RAISE warning 'email % exists!', found_email_id;
 
-        	SELECT id INTO found_id FROM logins 
+        	SELECT id INTO found_id FROM native_logins 
         	WHERE email_id = found_email_id AND password = $2;
         	
 		IF found_id THEN
