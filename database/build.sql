@@ -3,6 +3,8 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
+--drop function f_google_login(text,integer,text,text,text); 
+--drop function f_google_login(text,text,text,text,text); 
 --LIVE DROPS
 
 --FUNCTION DROPS
@@ -16,8 +18,9 @@ drop procedure p_insert_native_login(text,text,text,text,text,text,text);
 drop function f_native_login(text,text); 
 drop function f_get_native_email_id(text); 
 
-drop function f_google_login(text,text,text,text,text); 
+drop function f_google_login(text,NUMERIC,text,text,text); 
 drop function f_get_google_email_id(text); 
+drop procedure p_insert_google_login(text,integer,text,text,text); 
 
 drop function f_add_club(text,text); 
 
@@ -810,14 +813,16 @@ END;
 $$;
 
 
-CREATE OR REPLACE PROCEDURE p_insert_google_login(email_id integer, google_id TEXT, token_id TEXT, first_name TEXT, last_name TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id integer, id_token TEXT, first_name TEXT, last_name TEXT)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+	returning_email_id integer;
         returning_google_login_id integer;
         returning_person_id integer;
 BEGIN
-        insert into google_logins (email_id, google_id, token_id) values (email_id, password) returning id into returning_google_login_id;
+	insert into emails (email) values (email_name) returning id into returning_email_id;
+        insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
         insert into persons_emails (person_id, email_id) values (returning_person_id, email_id);
 END;
@@ -900,11 +905,12 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
+CREATE OR REPLACE FUNCTION f_google_login(TEXT,NUMERIC,TEXT,TEXT,TEXT)
 RETURNS text AS $$
 DECLARE
         found_email_id google_logins.email_id%TYPE;
         found_id google_logins.id%TYPE;
+	--google_id google_logins.google_id%TYPE;
         return_code text;
 BEGIN
         select into found_email_id f_get_google_email_id($1);
@@ -924,7 +930,9 @@ BEGIN
 
         ELSE
                 RAISE warning 'email % does not exist do insert!', found_email_id;
-                return_code = '101';
+		--does this mean no person???
+		CALL p_insert_google_login($1,$2,$3,$4,$5);
+		return_code = '100';
         END IF;
 RETURN return_code;
 END;
