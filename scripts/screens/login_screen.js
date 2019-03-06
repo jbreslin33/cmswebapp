@@ -49,7 +49,32 @@ class LoginScreen
                         request.send();
                 }
 	}
-        
+       
+        googleLogin()
+        {
+                var url = "/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName;
+
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        var data = this.responseText;
+                                        if (data)
+                                        {
+
+                                                APPLICATION.mLogin.mCode = data;
+                                        }
+                                }
+                        }
+                };
+
+                request.open('POST', url);
+                request.send();
+        }
+
 	googleSignIn(googleUser)
 	{
         	// Useful data for your client-side scripts:
@@ -67,6 +92,15 @@ class LoginScreen
 	
 		//i then need to send this to server and it will either be a insert or simply return 100
 		console.log("send to server next");
+
+		APPLICATION.mLogin.mGoogleID = profile.getId();	
+		APPLICATION.mLogin.mEmail = profile.getEmail();	
+		APPLICATION.mLogin.mIDToken = id_token;	
+		APPLICATION.mLogin.mFirstName = profile.getGivenName();	
+		APPLICATION.mLogin.mLastName = profile.getFamilyName();	
+
+
+		this.googleLogin();
 	}
 
 	googleSignOut()

@@ -11,7 +11,10 @@ drop function f_insert_login(text,text,text,text,text,text,text);
 drop procedure p_insert_login(text,text,text,text,text,text,text); 
 
 drop function f_native_login(text,text); 
-drop function f_get_email_id(text); 
+drop function f_get_native_email_id(text); 
+
+drop function f_google_login(text,text,text,text,text); 
+drop function f_get_google_email_id(text); 
 
 drop function f_add_club(text,text); 
 
@@ -817,14 +820,12 @@ BEGIN
 		CALL p_insert_login(email_name,password,first_name,middle_name,last_name,phone,address);
 		return_code = '100';
 	END IF;
-
 RETURN return_code;
-
 END;
-
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
+
+CREATE OR REPLACE FUNCTION f_get_native_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
@@ -833,10 +834,22 @@ BEGIN
 	join emails on emails.id=native_logins.email_id
 	WHERE email = email_name;
 RETURN found_email_id;
-
 END;
 
+
 $$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION f_get_google_email_id(email_name TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id google_logins.email_id%TYPE;
+BEGIN
+        SELECT google_logins.email_id INTO found_email_id FROM google_logins
+        join emails on emails.id=google_logins.email_id
+        WHERE email = email_name;
+RETURN found_email_id;
+END;
+$$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
@@ -845,7 +858,7 @@ DECLARE
 	found_id native_logins.id%TYPE;
 	return_code text;
 BEGIN
-	select into found_email_id f_get_email_id($1);	
+	select into found_email_id f_get_native_email_id($1);	
 	IF found_email_id THEN
     		RAISE warning 'email % exists!', found_email_id;
 
@@ -864,11 +877,39 @@ BEGIN
     		RAISE warning 'email % does not exist!', found_email_id;
 		return_code = '101'; 
 	END IF;
-
 RETURN return_code;
-
 END;
+$$ LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id google_logins.email_id%TYPE;
+        found_id google_logins.id%TYPE;
+        return_code text;
+BEGIN
+        select into found_email_id f_get_google_email_id($1);
+        IF found_email_id THEN
+                RAISE warning 'email % exists do update!', found_email_id;
+
+--                SELECT id INTO found_id FROM google_logins
+ --               WHERE email_id = found_email_id AND password = $2;
+
+ --               IF found_id THEN
+  --                      return_code = '100';
+   --                     RAISE warning 'found_id % exists!', found_id;
+    --            ELSE
+     --                   return_code = '102';
+      --                  RAISE WARNING 'found_id % does not exist!', found_id;
+       --         END IF;
+
+        ELSE
+                RAISE warning 'email % does not exist do insert!', found_email_id;
+                return_code = '101';
+        END IF;
+RETURN return_code;
+END;
 $$ LANGUAGE plpgsql;
 
 
@@ -898,11 +939,8 @@ BEGIN
                         RAISE WARNING 'failed for unknown reason on club % ', $1;
                 END IF;
         END IF;
-
 RETURN return_code;
-
 END;
-
 $$ LANGUAGE plpgsql;
 
 
