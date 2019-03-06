@@ -3,12 +3,15 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
-
 --LIVE DROPS
 
 --FUNCTION DROPS
-drop function f_insert_login(text,text,text,text,text,text,text); 
-drop procedure p_insert_login(text,text,text,text,text,text,text); 
+
+drop function f_insert_native_login(text,text,text,text,text,text,text); 
+drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
+
+drop function f_insert_google_login(text,text,text,text,text,text,text); 
+drop procedure p_insert_google_login(text,text,text,text,text,text,text); 
 
 drop function f_native_login(text,text); 
 drop function f_get_native_email_id(text); 
@@ -790,23 +793,38 @@ CREATE TABLE order_items
 );
 
 
-CREATE OR REPLACE PROCEDURE p_insert_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
 	returning_email_id integer;
-	returning_login_id integer;
+	returning_native_login_id integer;
 	returning_person_id integer;
 BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
-	insert into native_logins (email_id, password) values (returning_email_id, password) returning id into returning_login_id; 
+	insert into native_logins (email_id, password) values (returning_email_id, password) returning id into returning_native_login_id; 
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
 	insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id); 
 
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION f_insert_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+
+CREATE OR REPLACE PROCEDURE p_insert_google_login(email_id integer, google_id TEXT, token_id TEXT, first_name TEXT, last_name TEXT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_google_login_id integer;
+        returning_person_id integer;
+BEGIN
+        insert into google_logins (email_id, google_id, token_id) values (email_id, password) returning id into returning_google_login_id;
+        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
+        insert into persons_emails (person_id, email_id) values (returning_person_id, email_id);
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
@@ -817,7 +835,7 @@ BEGIN
     		RAISE warning 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
-		CALL p_insert_login(email_name,password,first_name,middle_name,last_name,phone,address);
+		CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
 		return_code = '100';
 	END IF;
 RETURN return_code;
