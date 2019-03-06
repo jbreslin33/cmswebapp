@@ -5,6 +5,8 @@ class LoginScreen
 	constructor(application)
 	{
 		this.mApplication = application;
+		
+		this.mCode = 0;
 
 		location.hash = "login-screen";
 
@@ -35,21 +37,8 @@ class LoginScreen
                                         {
                                 		document.getElementById('login_screen_email_message_id').innerHTML = '';
                                 		document.getElementById('login_screen_password_message_id').innerHTML = '';
-
-						if (data == 100)
-						{
-							APPLICATION.mLogin.mLoggedIn = true; //should recieve 100 for good join/login
-						}
-						if (data == 101)
-						{
-                                			document.getElementById('login_screen_email_message_id').style.color = 'red';
-                                			document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
-                        			}
-						if (data == 102)
-						{
-                                			document.getElementById('login_screen_password_message_id').style.color = 'red';
-                                			document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
-						}
+							
+						APPLICATION.mLogin.mCode = data; 
                                         }
                                 }
                         }
