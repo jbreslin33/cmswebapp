@@ -17,7 +17,6 @@ class LoginScreen
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
 
-
 	hit()
 	{
                 this.mEmail    = document.getElementById("login_screen_email_id").value;
@@ -35,8 +34,6 @@ class LoginScreen
                                         var data = this.responseText;
                                         if (data)
                                         {
-                                		document.getElementById('login_screen_email_message_id').innerHTML = '';
-                                		document.getElementById('login_screen_password_message_id').innerHTML = '';
 							
 						APPLICATION.mLogin.mCode = data; 
                                         }

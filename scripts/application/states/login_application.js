@@ -38,16 +38,21 @@ class LOGIN_APPLICATION extends State
 		if (app.mLogin.mCode == 100)
 		{
 			app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+			document.getElementById('login_screen_password_message_id').innerHTML = '';
+			document.getElementById('login_screen_email_message_id').innerHTML = '';
 		}
 		if (app.mLogin.mCode == 101)
 		{
                 	document.getElementById('login_screen_email_message_id').style.color = 'red';
                         document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
+                        
+			document.getElementById('login_screen_password_message_id').innerHTML = '';
 		}
 		if (app.mLogin.mCode == 102)
 		{
                 	document.getElementById('login_screen_password_message_id').style.color = 'red';
                         document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
+			document.getElementById('login_screen_email_message_id').innerHTML = '';
 		}
 		app.mLogin.mCode = 0;
 	}
