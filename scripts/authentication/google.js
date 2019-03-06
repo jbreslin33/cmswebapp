@@ -1,6 +1,8 @@
 function onSignIn(googleUser) 
 {
+	APPLICATION.mLogin.googleSignIn(googleUser);
         // Useful data for your client-side scripts:
+	/*
         var profile = googleUser.getBasicProfile();
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
         console.log('Full Name: ' + profile.getName());
@@ -12,13 +14,17 @@ function onSignIn(googleUser)
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
+	*/
 }
 
 function signOut() 
 {
+	APPLICATION.mLogin.googleSignOut();
+	/*
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () 
 	{
       		console.log('User signed out.');
     	});
+	*/
 }

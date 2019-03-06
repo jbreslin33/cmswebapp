@@ -10,8 +10,9 @@
 drop function f_insert_login(text,text,text,text,text,text,text); 
 drop procedure p_insert_login(text,text,text,text,text,text,text); 
 
-drop function f_login(text,text); 
+drop function f_native_login(text,text); 
 drop function f_get_email_id(text); 
+
 drop function f_add_club(text,text); 
 
 --TABLE DROPS
@@ -837,7 +838,7 @@ END;
 
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_login(TEXT, TEXT)
+CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
