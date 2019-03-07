@@ -3,10 +3,12 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
+--drop procedure p_insert_google_login(text,text,text,text,text); 
 --LIVE DROPS
+drop procedure triple(int);
 
 --PROCEDURE DROPS
-drop procedure p_insert_google_login(text,text,text,text,text); 
+drop procedure p_insert_google_login(text,text,text,text,text,int); 
 drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 
 --FUNCTION DROPS
@@ -813,7 +815,7 @@ END;
 $$;
 
 
-CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -824,7 +826,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id);
+        insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
 
@@ -906,6 +908,7 @@ DECLARE
         found_id google_logins.id%TYPE;
 	--google_id google_logins.google_id%TYPE;
         return_code text;
+	DECLARE x int := 0;
 BEGIN
         select into found_email_id f_get_google_email_id($1);
         IF found_email_id THEN
@@ -925,7 +928,8 @@ BEGIN
         ELSE
                 RAISE warning 'email % does not exist do insert!', found_email_id;
 		--does this mean no person???
-		CALL p_insert_google_login($1,$2,$3,$4,$5);
+		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
+    		--RAISE warning 'here is the return value x:' %, x;
 		return_code = '100';
         END IF;
 RETURN return_code;
@@ -946,6 +950,8 @@ BEGIN
 		return_code = '101';
 	ELSE
 		CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
+
+
 		return_code = '100';
 	END IF;
 RETURN return_code;
@@ -986,6 +992,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
-
+CREATE PROCEDURE triple(INOUT x int)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    x := x * 3;
+END;
+$$;
 
