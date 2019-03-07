@@ -1,3 +1,21 @@
+are we trying to do too much on one webapp??
+why not have separate apps instead of a one stop shop
+
+they could share db's as well
+
+so we have the scheduling portion.....
+
+then we can have a separate club managment payment system....
+
+then we can hava a separate system for session planning
+
+then a separate system for video game like training....
+
+this would maybe make the scheduling system easier to handle db wise
+
+
+-------------------
+
 next to add a user screen, which will in turn add person and then allow that person to createadd a club and team etc.
 so anyone can add a club....
 once you add a club you and only you can add persons as clubmemebers and club players and add teams
