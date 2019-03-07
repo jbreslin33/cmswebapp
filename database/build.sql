@@ -3,8 +3,6 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
---drop function f_google_login(text,integer,text,text,text); 
---drop function f_google_login(text,text,text,text,text); 
 --LIVE DROPS
 
 --FUNCTION DROPS
@@ -12,15 +10,12 @@
 drop function f_insert_native_login(text,text,text,text,text,text,text); 
 drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 
---drop function f_insert_google_login(integer,text,text,text,text); 
---drop procedure p_insert_google_login(integer,text,text,text,text); 
-
 drop function f_native_login(text,text); 
 drop function f_get_native_email_id(text); 
 
-drop function f_google_login(text,NUMERIC,text,text,text); 
+drop function f_google_login(text,text,text,text,text); 
 drop function f_get_google_email_id(text); 
-drop procedure p_insert_google_login(text,integer,text,text,text); 
+drop procedure p_insert_google_login(text,text,text,text,text); 
 
 drop function f_add_club(text,text); 
 
@@ -458,7 +453,7 @@ CREATE TABLE google_logins
 (
 	id SERIAL,
     	email_id integer not null unique,  
-    	google_id integer not null unique, 
+    	google_id text not null unique, 
     	id_token text not null,  --big send what you have on client with all updates inserts deletes and it should match this which we update as soon as google auths us   
 	timestamp_created timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
@@ -813,7 +808,7 @@ END;
 $$;
 
 
-CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id integer, id_token TEXT, first_name TEXT, last_name TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -824,7 +819,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        insert into persons_emails (person_id, email_id) values (returning_person_id, email_id);
+        insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id);
 END;
 $$;
 
@@ -905,7 +900,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION f_google_login(TEXT,NUMERIC,TEXT,TEXT,TEXT)
+CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
 RETURNS text AS $$
 DECLARE
         found_email_id google_logins.email_id%TYPE;
