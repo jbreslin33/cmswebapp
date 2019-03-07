@@ -911,30 +911,36 @@ DECLARE
 	DECLARE x int := 0;
 BEGIN
 
-
         select into found_email_id f_get_email_id($1);
         IF found_email_id THEN
                 RAISE warning 'email % exists do update!', found_email_id;
         ELSE
                 RAISE warning 'email % does not exist do insert!', found_email_id;
-	END IF;
-
-
-        select into found_google_email_id f_get_google_email_id($1);
-        IF found_google_email_id THEN
-                RAISE warning 'google email % exists do update!', found_google_email_id;
-        ELSE
-                RAISE warning 'google email % does not exist do insert!', found_google_email_id;
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
 		IF x THEN
 			return_code = '100';
 		ELSE
 			return_code = '101';
-		END IF;
-        END IF;
+        	END IF;
+	END IF;
+
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
+
+--              select into found_google_email_id f_get_google_email_id($1);
+ --               IF found_google_email_id THEN
+  --                      RAISE warning 'google email % exists do update!', found_google_email_id;
+   --             ELSE
+    --                    RAISE warning 'google email % does not exist do insert!', found_google_email_id;
+     --                   CALL p_insert_google_login($1,$2,$3,$4,$5,x);
+      --                  IF x THEN
+      --                          return_code = '100';
+       --                 ELSE
+        --                        return_code = '101';
+         --               END IF;
+          --      END IF;
+
 
 --JOIN SITE
 
