@@ -421,9 +421,9 @@ CREATE TABLE zones_sessions
 CREATE TABLE persons 
 (
 	id SERIAL,
-    	first_name text,
+    	first_name text not null,
     	middle_name text,
-    	last_name text,
+    	last_name text not null,
     	phone text,
 	address text,
 	coordinates text,
@@ -487,7 +487,7 @@ CREATE TABLE google_logins
 CREATE TABLE families 
 (
 	id SERIAL,
-	user_id integer,
+	user_id integer not null unique,
 	timestamp_created timestamp,
         FOREIGN KEY(user_id) REFERENCES users(id),
 	PRIMARY KEY (id)
