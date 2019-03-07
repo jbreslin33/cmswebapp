@@ -94,14 +94,12 @@ DROP TABLE club_members CASCADE;
 drop table persons_families cascade;
 drop table families cascade;
 
-drop table persons_emails cascade;
 DROP TABLE native_logins CASCADE;
 DROP TABLE google_logins CASCADE;
+
+DROP TABLE users CASCADE;
 drop table emails cascade;
-
-
 DROP TABLE persons CASCADE;
-
 
 --UNIFORMS
 DROP TABLE uniforms_eventos CASCADE;
@@ -420,8 +418,6 @@ CREATE TABLE zones_sessions
         PRIMARY KEY (id)
 );
 
-
-
 CREATE TABLE persons 
 (
 	id SERIAL,
@@ -441,6 +437,19 @@ create table emails
 	email text not null unique,
 	PRIMARY KEY (id)
 );
+
+CREATE TABLE users
+(
+        id SERIAL,
+	person_id integer not null unique,
+	email_id integer not null unique,
+        timestamp_created timestamp,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(email_id) REFERENCES emails(id),
+        PRIMARY KEY (id)
+);
+
+
 
 --jbreslin33@gmail.com this is if you want a login???
 --some person needs to own this????
@@ -467,16 +476,10 @@ CREATE TABLE google_logins
 );
 
 --chance for email for luke or no email for grace or multiple emails for luke
-create table persons_emails
-(
-	id serial,
-	person_id integer not null,
-	email_id integer not null, --every person needs an email but it can be someone else's
-        FOREIGN KEY(person_id) REFERENCES persons(id),
-        FOREIGN KEY(email_id) REFERENCES emails(id),
-	unique(person_id,email_id),
-	PRIMARY KEY (id)
-);
+--this table could we leave it and use it or not but it has nothing to do with logins???? so this would be a way for me to send luke updates to his email but he would not need a login..then once in a while we can ask him if he wants his own login???
+--this was persons_emails...
+
+
 
 --this would say Jim Breslin's family via foreign key persons_id
 --person_id is the family creator
@@ -484,9 +487,9 @@ create table persons_emails
 CREATE TABLE families 
 (
 	id SERIAL,
-	person_id integer,
+	user_id integer,
 	timestamp_created timestamp,
-        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(user_id) REFERENCES users(id),
 	PRIMARY KEY (id)
 );
 
@@ -809,7 +812,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
 	insert into native_logins (email_id, password) values (returning_email_id, password) returning id into returning_native_login_id; 
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-	insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id); 
+	--insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id); 
 
 END;
 $$;
@@ -826,7 +829,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+        --insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
 
