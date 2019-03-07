@@ -930,7 +930,11 @@ BEGIN
 		--does this mean no person???
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
     		--RAISE warning 'here is the return value x:' %, x;
-		return_code = '100';
+		IF x THEN
+			return_code = '100';
+		ELSE
+			return_code = '101';
+		END IF;
         END IF;
 RETURN return_code;
 END;
