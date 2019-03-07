@@ -835,10 +835,9 @@ $$;
 CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
-        found_email_id google_logins.email_id%TYPE;
+        found_email_id emails.email_id%TYPE;
 BEGIN
-        SELECT google_logins.email_id INTO found_email_id FROM google_logins
-        join emails on emails.id=google_logins.email_id
+        SELECT email_id INTO found_email_id FROM emails
         WHERE email = email_name;
 RETURN found_email_id;
 END;
@@ -904,29 +903,24 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
 RETURNS text AS $$
 DECLARE
-        found_email_id google_logins.email_id%TYPE;
-        found_id google_logins.id%TYPE;
-	--google_id google_logins.google_id%TYPE;
+        found_google_email_id google_logins.email_id%TYPE;
+
+
         return_code text;
 	DECLARE x int := 0;
 BEGIN
-        select into found_email_id f_get_google_email_id($1);
-        IF found_email_id THEN
-                RAISE warning 'email % exists do update!', found_email_id;
 
---                SELECT id INTO found_id FROM google_logins
- --               WHERE email_id = found_email_id AND password = $2;
 
- --               IF found_id THEN
-  --                      return_code = '100';
-   --                     RAISE warning 'found_id % exists!', found_id;
-    --            ELSE
-     --                   return_code = '102';
-      --                  RAISE WARNING 'found_id % does not exist!', found_id;
-       --         END IF;
+        --select into found_email_id f_get_google_email_id($1);
+
+
+
+        select into found_google_email_id f_get_google_email_id($1);
+        IF found_google_email_id THEN
+                RAISE warning 'email % exists do update!', found_google_email_id;
 
         ELSE
-                RAISE warning 'email % does not exist do insert!', found_email_id;
+                RAISE warning 'email % does not exist do insert!', found_google_email_id;
 		--does this mean no person???
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
     		--RAISE warning 'here is the return value x:' %, x;
