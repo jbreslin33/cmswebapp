@@ -5,19 +5,23 @@
 --OLD DROPS
 --LIVE DROPS
 
---FUNCTION DROPS
-
-drop function f_insert_native_login(text,text,text,text,text,text,text); 
+--PROCEDURE DROPS
+drop procedure p_insert_google_login(text,text,text,text,text); 
 drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 
-drop function f_native_login(text,text); 
+--FUNCTION DROPS
+drop function f_get_email_id(text); 
 drop function f_get_native_email_id(text); 
-
-drop function f_google_login(text,text,text,text,text); 
 drop function f_get_google_email_id(text); 
-drop procedure p_insert_google_login(text,text,text,text,text); 
+
+drop function f_native_login(text,text); 
+drop function f_google_login(text,text,text,text,text); 
+
+drop function f_insert_native_login(text,text,text,text,text,text,text); 
 
 drop function f_add_club(text,text); 
+
+
 
 --TABLE DROPS
 DROP TABLE error_log CASCADE; 
@@ -790,6 +794,7 @@ CREATE TABLE order_items
         PRIMARY KEY (id)
 );
 
+--PROCEDURES
 
 CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 LANGUAGE plpgsql    
@@ -823,25 +828,19 @@ BEGIN
 END;
 $$;
 
+--GET EMAILS
 
-CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
-	found_email emails.email%TYPE;
-	return_code text;
+        found_email_id google_logins.email_id%TYPE;
 BEGIN
-    	SELECT email INTO found_email FROM emails WHERE email = email_name;
-	IF FOUND THEN
-    		RAISE warning 'email % exists!', found_email;
-		return_code = '101';
-	ELSE
-		CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
-		return_code = '100';
-	END IF;
-RETURN return_code;
+        SELECT google_logins.email_id INTO found_email_id FROM google_logins
+        join emails on emails.id=google_logins.email_id
+        WHERE email = email_name;
+RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
-
 
 CREATE OR REPLACE FUNCTION f_get_native_email_id(email_name TEXT)
 RETURNS text AS $$
@@ -853,9 +852,8 @@ BEGIN
 	WHERE email = email_name;
 RETURN found_email_id;
 END;
-
-
 $$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION f_get_google_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
@@ -868,6 +866,7 @@ RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
 
+--LOGINS
 
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
@@ -933,6 +932,28 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+--JOIN SITE
+
+CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email emails.email%TYPE;
+	return_code text;
+BEGIN
+    	SELECT email INTO found_email FROM emails WHERE email = email_name;
+	IF FOUND THEN
+    		RAISE warning 'email % exists!', found_email;
+		return_code = '101';
+	ELSE
+		CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
+		return_code = '100';
+	END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--ADD CLUB
 
 CREATE OR REPLACE FUNCTION f_add_club(TEXT, TEXT)
 RETURNS text AS $$
