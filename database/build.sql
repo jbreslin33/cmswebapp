@@ -68,31 +68,28 @@ DROP TABLE eventos_players_availability CASCADE;
 DROP TABLE eventos_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
+--PERSON RELATIONSHIPS
+drop table parent_child cascade; --let the person choose sex
+drop table siblings cascade;  -- if you add a grace a daughter then it automatically makes grace and luke siblings as it checks father_daughter table and father_son table and then if there is no current sibling entry it makes one for luke and grace
+drop table friends cascade;
+
 
 --USERS
-DROP TABLE parents_players CASCADE;
-
 DROP TABLE team_players CASCADE;
 DROP TABLE team_coaches CASCADE;
 DROP TABLE team_managers CASCADE;
-DROP TABLE team_parents CASCADE;
 DROP TABLE team_members CASCADE;
 
 DROP TABLE club_players CASCADE;
 DROP TABLE club_coaches CASCADE;
 DROP TABLE club_managers CASCADE;
 DROP TABLE club_administrators CASCADE;
-DROP TABLE club_parents CASCADE;
 
 DROP TABLE players CASCADE;
 DROP TABLE coaches CASCADE;
 DROP TABLE managers CASCADE;
-DROP TABLE parents CASCADE;
 
 DROP TABLE club_members CASCADE;
-
-drop table persons_families cascade;
-drop table families cascade;
 
 DROP TABLE native_logins CASCADE;
 DROP TABLE google_logins CASCADE;
@@ -484,26 +481,6 @@ CREATE TABLE google_logins
 --this would say Jim Breslin's family via foreign key persons_id
 --person_id is the family creator
 --familys are linked by people not logins
-CREATE TABLE families 
-(
-	id SERIAL,
-	user_id integer not null unique,
-	timestamp_created timestamp,
-        FOREIGN KEY(user_id) REFERENCES users(id),
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE persons_families 
-(
-	id SERIAL,
-	person_id integer, --create by
-	family_id integer,
-	timestamp_created timestamp,
-        FOREIGN KEY(person_id) REFERENCES persons(id),
-        FOREIGN KEY(family_id) REFERENCES families(id),
-	PRIMARY KEY (id)
-);
-
 --Luke Breslin, Celta Vigo
 CREATE TABLE club_members 
 (
@@ -545,28 +522,75 @@ CREATE TABLE managers
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
-CREATE TABLE parents 
+
+--Person relationships
+CREATE TABLE parent_child
 (
 	id SERIAL,
-	person_id integer,
+	parent_person_id integer not null,
+	child_person_id integer not null,
 	timestamp_created timestamp,
-        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(parent_person_id) REFERENCES persons(id),
+        FOREIGN KEY(child_person_id) REFERENCES persons(id),
+	unique (parent_person_id, child_person_id),
 	PRIMARY KEY (id)
 );
 
---PARENT PLAYER
-CREATE TABLE parents_players
+CREATE TABLE siblings --do you even need this or can it be inferred????
 (
 	id SERIAL,
-	parent_id integer not null,
-	player_id integer not null,
+	sibling1_person_id integer not null,
+	sibling2_person_id integer not null,
 	timestamp_created timestamp,
-        FOREIGN KEY(parent_id) REFERENCES parents(id),
-        FOREIGN KEY(player_id) REFERENCES players(id),
-	unique (parent_id, player_id),
+        FOREIGN KEY(sibling1_person_id) REFERENCES persons(id),
+        FOREIGN KEY(sibling2_person_id) REFERENCES persons(id),
+	unique (parent_person_id, child_person_id),
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE friends
+(
+	id SERIAL,
+	inviter_person_id integer not null,
+	invitee_person_id integer not null,
+	invitee_accepted_timestamp timestamp,
+	invitation_sent_timestamp timestamp,
+        FOREIGN KEY(parent_person_id) REFERENCES persons(id),
+        FOREIGN KEY(child_person_id) REFERENCES persons(id),
+	unique (parent_person_id, child_person_id),
+	PRIMARY KEY (id)
+);
+---------------------------____REQUESTS
+CREATE TABLE friend_requests
+(
+	id serial,
+	from_person_id not null,
+	to_person_id not null,
+	request_sent_timestamp timestamp,
+        FOREIGN KEY(from_person_id) REFERENCES persons(id),
+        FOREIGN KEY(to_person_id) REFERENCES persons(id),
+	unique (from_person_id, to_person_id),
+	PRIMARY KEY (id)
+);
+
+--join the next 2 tables and you have a friend history and whether some is friends currently or ever
+CREATE TABLE friend_acceptance
+(
+	id serial,
+	friend_request_id not null unique,
+	acceptance_timestamp timestamp,
+        FOREIGN KEY(friend_request_id) REFERENCES friend_requests(id),
+        FOREIGN KEY(to_person_id) REFERENCES persons(id),
+);
+
+CREATE TABLE friend_rejection
+(
+	id serial,
+	friend_request_id not null unique,
+	rejection_timestamp timestamp,
+        FOREIGN KEY(friend_request_id) REFERENCES friend_requests(id),
+        FOREIGN KEY(to_person_id) REFERENCES persons(id),
+);
 
 
 CREATE TABLE club_players 
@@ -606,17 +630,6 @@ CREATE TABLE club_administrators
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE club_parents 
-(
-	id SERIAL,
-	--uniform_number integer,
-	club_member_id integer,
-	timestamp_created timestamp,
-        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
-	PRIMARY KEY (id)
-);
-
-
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 
@@ -650,15 +663,6 @@ CREATE TABLE team_coaches
 );
 
 CREATE TABLE team_managers 
-(
-	id SERIAL,
-	team_member_id integer not null,
-	timestamp_created timestamp,
-        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE team_parents 
 (
 	id SERIAL,
 	team_member_id integer not null,
