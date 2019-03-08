@@ -457,6 +457,16 @@ create table relationships
 	primary key (id)
 );
 
+
+--person jim breslin
+--relationship_person grace breslin
+--relationship_id daugther
+
+--person luke breslin 
+--relationsip_person jim breslin 
+--relationship_id father 
+
+--when you add a person this should be encouraged or required to show a relationship
 create table persons_relationships
 (
 	id serial,
@@ -469,8 +479,10 @@ create table persons_relationships
 	primary key (id)
 );
 
+--select id from persons where relationship_id = parent and person = male
 
 
+--no permissions needed
 create table follow_schedules
 (
 	id serial,
@@ -478,6 +490,7 @@ create table follow_schedules
 	follow_person_id integer not null,
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(follow_person_id) REFERENCES persons(id),
+	unique (person_id, follow_person_id),
 	primary key (id)
 );
 
