@@ -810,6 +810,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
+        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
         --insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
