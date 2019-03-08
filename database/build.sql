@@ -94,6 +94,10 @@ DROP TABLE club_members CASCADE;
 DROP TABLE native_logins CASCADE;
 DROP TABLE google_logins CASCADE;
 
+drop table follow_schedules cascade;
+drop table persons_relationships cascade;
+drop table relationships cascade;
+
 DROP TABLE users CASCADE;
 drop table emails cascade;
 DROP TABLE persons CASCADE;
@@ -446,7 +450,36 @@ CREATE TABLE users
         PRIMARY KEY (id)
 );
 
+create table relationships
+(
+	id serial,
+	name text not null unique,
+	primary key (id)
+);
 
+create table persons_relationships
+(
+	id serial,
+	person_id integer not null,
+	relationship_person_id integer not null,
+	relationship_id integer not null,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(relationship_person_id) REFERENCES persons(id),
+        FOREIGN KEY(relationship_id) REFERENCES relationships(id),
+	primary key (id)
+);
+
+
+
+create table follow_schedules
+(
+	id serial,
+	person_id integer not null,
+	follow_person_id integer not null,
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(follow_person_id) REFERENCES persons(id),
+	primary key (id)
+);
 
 --jbreslin33@gmail.com this is if you want a login???
 --some person needs to own this????
