@@ -69,9 +69,9 @@ DROP TABLE eventos_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
 --PERSON RELATIONSHIPS
-drop table parent_child cascade; --let the person choose sex
-drop table siblings cascade;  -- if you add a grace a daughter then it automatically makes grace and luke siblings as it checks father_daughter table and father_son table and then if there is no current sibling entry it makes one for luke and grace
-drop table friends cascade;
+--drop table parent_child cascade; --let the person choose sex
+--drop table siblings cascade;  -- if you add a grace a daughter then it automatically makes grace and luke siblings as it checks father_daughter table and father_son table and then if there is no current sibling entry it makes one for luke and grace
+--drop table friends cascade;
 
 
 --USERS
@@ -521,75 +521,6 @@ CREATE TABLE managers
 	timestamp_created timestamp,
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
-);
-
---Person relationships
-CREATE TABLE parent_child
-(
-	id SERIAL,
-	parent_person_id integer not null,
-	child_person_id integer not null,
-	timestamp_created timestamp,
-        FOREIGN KEY(parent_person_id) REFERENCES persons(id),
-        FOREIGN KEY(child_person_id) REFERENCES persons(id),
-	unique (parent_person_id, child_person_id),
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE siblings --do you even need this or can it be inferred????
-(
-	id SERIAL,
-	sibling1_person_id integer not null,
-	sibling2_person_id integer not null,
-	timestamp_created timestamp,
-        FOREIGN KEY(sibling1_person_id) REFERENCES persons(id),
-        FOREIGN KEY(sibling2_person_id) REFERENCES persons(id),
-	unique (parent_person_id, child_person_id),
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE friends
-(
-	id SERIAL,
-	inviter_person_id integer not null,
-	invitee_person_id integer not null,
-	invitee_accepted_timestamp timestamp,
-	invitation_sent_timestamp timestamp,
-        FOREIGN KEY(parent_person_id) REFERENCES persons(id),
-        FOREIGN KEY(child_person_id) REFERENCES persons(id),
-	unique (parent_person_id, child_person_id),
-	PRIMARY KEY (id)
-);
----------------------------____REQUESTS
-CREATE TABLE friend_requests
-(
-	id serial,
-	from_person_id not null,
-	to_person_id not null,
-	request_sent_timestamp timestamp,
-        FOREIGN KEY(from_person_id) REFERENCES persons(id),
-        FOREIGN KEY(to_person_id) REFERENCES persons(id),
-	unique (from_person_id, to_person_id),
-	PRIMARY KEY (id)
-);
-
---join the next 2 tables and you have a friend history and whether some is friends currently or ever
-CREATE TABLE friend_acceptance
-(
-	id serial,
-	friend_request_id not null unique,
-	acceptance_timestamp timestamp,
-        FOREIGN KEY(friend_request_id) REFERENCES friend_requests(id),
-        FOREIGN KEY(to_person_id) REFERENCES persons(id),
-);
-
-CREATE TABLE friend_rejection
-(
-	id serial,
-	friend_request_id not null unique,
-	rejection_timestamp timestamp,
-        FOREIGN KEY(friend_request_id) REFERENCES friend_requests(id),
-        FOREIGN KEY(to_person_id) REFERENCES persons(id),
 );
 
 
