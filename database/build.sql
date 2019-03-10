@@ -819,17 +819,6 @@ $$;
 
 --GET EMAILS
 
-CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
-RETURNS text AS $$
-DECLARE
-        found_email_id emails.id%TYPE;
-BEGIN
-        SELECT id INTO found_email_id FROM emails
-        WHERE email = email_name;
-RETURN found_email_id;
-END;
-$$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION f_get_native_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
@@ -886,6 +875,18 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id emails.id%TYPE;
+BEGIN
+        SELECT id INTO found_email_id FROM emails
+        WHERE email = email_name;
+RETURN found_email_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -922,18 +923,33 @@ $$;
 CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
 RETURNS text AS $$
 DECLARE
-        found_google_email_id google_logins.email_id%TYPE;
-
+	
         found_email_id emails.id%TYPE;
+
+        found_google_login_id google_logins.id%TYPE;
 
         return_code text;
 	DECLARE x int := 0;
 BEGIN
 
         select into found_email_id f_get_email_id($1);
-        IF found_email_id THEN
-                RAISE warning 'email % exists do update!', found_email_id;
-        ELSE
+        IF found_email_id > 0 THEN
+		RAISE warning 'email % exists do some checking!', found_email_id;
+		--we may only have an email due to lets say a native login but no google login so we need to do some checks.
+		--so lets check if exists google_login		
+        	SELECT id INTO found_google_login_id FROM google_logins
+        	WHERE email_id = found_email_id;
+
+		IF found_google_login_id THEN
+			update google_logins set id_token = $3   
+			where id = found_google_login_id; 
+		ELSE
+			insert into google_logins (email_id, google_id, id_token) values (found_email_id, found_google_login_id, $3);
+
+		END IF;
+
+
+        ELSE --if there is no email then logically you cannot have the other tables so do a full insert
                 RAISE warning 'email % does not exist do insert!', found_email_id;
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
 		IF x THEN

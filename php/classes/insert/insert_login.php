@@ -7,11 +7,11 @@ class InsertLogin
 	{
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-		$sql = 'select f_insert_login($1,$2,$3,$4,$5,$6,$7)';
+		$sql = 'select f_insert_native_login($1,$2,$3,$4,$5,$6,$7)';
 		
-		$prepare_result = pg_prepare($database->mConnection, "f_insert_login", $sql);
+		$prepare_result = pg_prepare($database->mConnection, "f_insert_native_login", $sql);
 
-		$result = pg_execute($database->mConnection, "f_insert_login", array( $_GET['email'] ,$_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address']));
+		$result = pg_execute($database->mConnection, "f_insert_native_login", array( $_GET['email'] ,$_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address']));
 
 		echo pg_fetch_result($result, 0); 
         }
