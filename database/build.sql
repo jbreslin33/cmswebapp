@@ -9,6 +9,8 @@ drop procedure triple(int);
 
 --PROCEDURE DROPS
 drop procedure p_insert_google_login(text,text,text,text,text,int); 
+drop procedure p_update_google_login(text,text,text,text,text,int); 
+
 drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 
 --FUNCTION DROPS
@@ -98,6 +100,7 @@ drop table follow_schedules cascade;
 drop table persons_relationships cascade;
 drop table relationships cascade;
 
+DROP TABLE users_persons CASCADE;
 DROP TABLE users CASCADE;
 drop table emails cascade;
 DROP TABLE persons CASCADE;
@@ -450,6 +453,17 @@ CREATE TABLE users
         PRIMARY KEY (id)
 );
 
+CREATE TABLE users_persons
+(
+        id SERIAL,
+	user_id integer not null unique,
+	person_id integer not null unique,
+        timestamp_created timestamp,
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+        PRIMARY KEY (id)
+);
+
 create table relationships
 (
 	id serial,
@@ -798,22 +812,10 @@ BEGIN
 END;
 $$;
 
+--make an update version of this that updates them
 
-CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-	returning_email_id integer;
-        returning_google_login_id integer;
-        returning_person_id integer;
-BEGIN
-	insert into emails (email) values (email_name) returning id into returning_email_id;
-        insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
-        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
-        --insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
-END;
-$$;
+
+
 
 --GET EMAILS
 
@@ -884,6 +886,38 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	returning_email_id integer;
+        returning_google_login_id integer;
+        returning_person_id integer;
+BEGIN
+	insert into emails (email) values (email_name) returning id into returning_email_id;
+        insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
+        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
+        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+        --insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_update_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	returning_email_id integer;
+        returning_google_login_id integer;
+        returning_person_id integer;
+BEGIN
+	insert into emails (email) values (email_name) returning id into returning_email_id;
+        insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
+        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
+        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+        --insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+END;
+$$;
+
 
 CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
 RETURNS text AS $$
@@ -912,20 +946,6 @@ BEGIN
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
-
---              select into found_google_email_id f_get_google_email_id($1);
- --               IF found_google_email_id THEN
-  --                      RAISE warning 'google email % exists do update!', found_google_email_id;
-   --             ELSE
-    --                    RAISE warning 'google email % does not exist do insert!', found_google_email_id;
-     --                   CALL p_insert_google_login($1,$2,$3,$4,$5,x);
-      --                  IF x THEN
-      --                          return_code = '100';
-       --                 ELSE
-        --                        return_code = '101';
-         --               END IF;
-          --      END IF;
-
 
 --JOIN SITE
 
