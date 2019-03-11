@@ -856,17 +856,6 @@ RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_get_google_email_id(email_name TEXT)
-RETURNS text AS $$
-DECLARE
-        found_email_id google_logins.email_id%TYPE;
-BEGIN
-        SELECT google_logins.email_id INTO found_email_id FROM google_logins
-        join emails on emails.id=google_logins.email_id
-        WHERE email = email_name;
-RETURN found_email_id;
-END;
-$$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
@@ -903,6 +892,18 @@ $$ LANGUAGE plpgsql;
 
 
 --GOOGLE
+
+CREATE OR REPLACE FUNCTION f_get_google_email_id(email_name TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id google_logins.email_id%TYPE;
+BEGIN
+        SELECT google_logins.email_id INTO found_email_id FROM google_logins
+        join emails on emails.id=google_logins.email_id
+        WHERE email = email_name;
+RETURN found_email_id;
+END;
+$$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
