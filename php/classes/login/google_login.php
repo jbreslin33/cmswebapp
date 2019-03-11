@@ -5,9 +5,7 @@ class GoogleLogin
 {
         function __construct()
         {
-		error_log("in google login");
 		$id_token = $_GET['id_token'];
-		error_log($id_token);
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
                 $sql = 'select f_google_login($1,$2,$3,$4,$5)';

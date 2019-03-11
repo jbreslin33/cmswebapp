@@ -822,12 +822,7 @@ BEGIN
     		RAISE warning 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
-		--CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
-
-		--CALL p_insert_google_login($1,$2,$3,$4,$5,x);
-
-
 		return_code = '100';
 	END IF;
 RETURN return_code;
