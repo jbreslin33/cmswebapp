@@ -1,3 +1,5 @@
+should not be able to add club which is next step without sending login credentials
+----------
 are we trying to do too much on one webapp??
 why not have separate apps instead of a one stop shop
 
