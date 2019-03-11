@@ -75,7 +75,9 @@ class InsertLoginScreen
         
 	show()
 	{
-              document.getElementById("insert_login_screen_html_id").style.display = "block";
+              	document.getElementById("insert_login_screen_html_id").style.display = "block";
+		//hide link
+		document.getElementById("insert_login_screen_link_id").style.display = "none";
 	}
 
 	hide()
