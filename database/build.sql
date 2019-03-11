@@ -819,7 +819,6 @@ DECLARE
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
-    		RAISE warning 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);

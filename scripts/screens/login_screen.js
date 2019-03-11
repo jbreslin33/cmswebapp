@@ -8,7 +8,7 @@ class LoginScreen
 		
 		this.mCode = 0;
 
-		location.hash = "login-screen";
+		location.hash = "login_screen";
 
 		//sql php vars
 		this.mEmail = null;

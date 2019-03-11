@@ -39,6 +39,11 @@ class INSERT_LOGIN_SCREEN_APPLICATION extends State
                 {
                         app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                 }
+		if (app.mInsertLoginScreen.mCode == 101)
+		{
+                        document.getElementById('insert_login_screen_email_message_id').style.color = 'red';
+                        document.getElementById('insert_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?.';
+		}
 	}
 
         exit(app)

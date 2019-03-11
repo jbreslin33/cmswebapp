@@ -24,6 +24,11 @@ class GLOBAL_APPLICATION extends State
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
                 }
+                
+		if (location.hash == '#login_screen' && app.mStateMachine.mCurrentState != app.mLOGIN_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mLOGIN_APPLICATION);
+                }
 
                 if (location.hash == '#add_event' && app.mStateMachine.mCurrentState != app.mINSERT_EVENTO_APPLICATION)
                 {

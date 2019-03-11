@@ -6,7 +6,7 @@ class InsertLoginScreen
 	{
 		this.mApplication = application;
 
-		location.hash = "insert-login-screen";
+		location.hash = "insert_login_screen";
 
 		this.mCode = 0;
 

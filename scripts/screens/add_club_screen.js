@@ -6,7 +6,7 @@ class AddClubScreen
 	{
 		this.mApplication = application;
 
-		location.hash = "add-club-screen";
+		location.hash = "add_club_screen";
 
 		this.mCode = 0;
 
