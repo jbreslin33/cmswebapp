@@ -808,7 +808,7 @@ RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
 
---NATIVE
+--NATIVE INSERT LOGIN
 
 CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
@@ -855,7 +855,7 @@ RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
 
-
+--NATIVE LOGIN
 
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
@@ -970,9 +970,11 @@ BEGIN
 
                         update persons set first_name = $4 , last_name = $5
 			where id = found_person_id;
+			return_code = '100';
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into returning_person_id;
                         insert into users (person_id, email_id) values (returning_person_id,found_email_id);
+			return_code = '100';
                 END IF;
 
 
