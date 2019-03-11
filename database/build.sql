@@ -3,6 +3,7 @@
 --******************  DROP TABLES *************************
 --**************************************************************
 --OLD DROPS
+--drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 --drop procedure p_insert_google_login(text,text,text,text,text); 
 --LIVE DROPS
 drop procedure triple(int);
@@ -11,7 +12,7 @@ drop procedure triple(int);
 drop procedure p_insert_google_login(text,text,text,text,text,int); 
 drop procedure p_update_google_login(text,text,text,text,text,int); 
 
-drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
+drop procedure p_insert_native_login(text,text,text,text,text,text,text,int); 
 
 --FUNCTION DROPS
 drop function f_get_email_id(text); 
@@ -796,7 +797,7 @@ CREATE TABLE order_items
 
 --PROCEDURES
 
-CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
@@ -807,8 +808,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
 	insert into native_logins (email_id, password) values (returning_email_id, password) returning id into returning_native_login_id; 
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-	--insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id); 
-
+        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
 
@@ -899,7 +899,6 @@ BEGIN
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
         insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
-        --insert into persons_emails (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
 
@@ -925,8 +924,11 @@ RETURNS text AS $$
 DECLARE
 	
         found_email_id emails.id%TYPE;
-
         found_google_login_id google_logins.id%TYPE;
+        found_user_id users.id%TYPE;
+        found_person_id users.id%TYPE;
+        
+	returning_person_id integer;
 
         return_code text;
 	DECLARE x int := 0;
@@ -937,16 +939,35 @@ BEGIN
 		RAISE warning 'email % exists do some checking!', found_email_id;
 		--we may only have an email due to lets say a native login but no google login so we need to do some checks.
 		--so lets check if exists google_login		
+
         	SELECT id INTO found_google_login_id FROM google_logins
         	WHERE email_id = found_email_id;
-
 		IF found_google_login_id THEN
 			update google_logins set id_token = $3   
 			where id = found_google_login_id; 
 		ELSE
-			insert into google_logins (email_id, google_id, id_token) values (found_email_id, found_google_login_id, $3);
-
+			insert into google_logins (email_id, google_id, id_token) values (found_email_id, $2, $3);
 		END IF;
+
+                SELECT id INTO found_user_id FROM users
+                WHERE email_id = found_email_id;
+                IF found_user_id THEN
+			--do nothing...
+			--actually maybe update persons
+                        --update google_logins set id_token = $3
+                        --where id = found_google_login_id;
+                	SELECT person_id INTO found_person_id FROM users
+			where id = found_user_id;
+
+                        update persons set first_name = $4 , last_name = $5
+			where id = found_person_id;
+                ELSE
+        		insert into persons (first_name, last_name) values ($4,$5) returning id into returning_person_id;
+                        insert into users (person_id, email_id) values (returning_person_id,found_email_id);
+                END IF;
+
+
+		--what about persons and users....
 
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert
@@ -970,13 +991,17 @@ RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
 	return_code text;
+	DECLARE x int := 0;
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
     		RAISE warning 'email % exists!', found_email;
 		return_code = '101';
 	ELSE
-		CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
+		--CALL p_insert_native_login(email_name,password,first_name,middle_name,last_name,phone,address);
+		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
+
+		--CALL p_insert_google_login($1,$2,$3,$4,$5,x);
 
 
 		return_code = '100';
