@@ -7,12 +7,14 @@ class LoginScreen
 		this.mApplication = application;
 		
 		this.mCode = 0;
+		this.mData = null;
 
 		location.hash = "login_screen";
 
 		//sql php vars
 		this.mEmail = null;
 		this.mPassword = null;
+		this.mJWT = null;
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
@@ -31,12 +33,7 @@ class LoginScreen
                         {
                                 if (request.status === 200)
                                 {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-							
-						APPLICATION.mLogin.mCode = data; 
-                                        }
+                                        APPLICATION.mLogin.mData = this.responseText;
                                 }
                         }
                 };

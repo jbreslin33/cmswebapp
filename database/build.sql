@@ -862,6 +862,7 @@ RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_id native_logins.id%TYPE;
+	found_user_id users.id%TYPE;
 	return_code text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
@@ -872,16 +873,18 @@ BEGIN
         	WHERE email_id = found_email_id AND password = $2;
         	
 		IF found_id THEN
-                	return_code = '100';
                 	RAISE warning 'found_id % exists!', found_id;
+			SELECT id INTO found_user_id FROM users
+			where users.email_id = found_email_id;
+                	return_code = found_user_id;
         	ELSE
-                	return_code = '102';
-                	RAISE WARNING 'found_id % does not exist!', found_id;
+                	return_code = '-102';
+                	RAISE WARNING 'bad password on found_id % ', found_id;
         	END IF;
 	
 	ELSE
     		RAISE warning 'email % does not exist!', found_email_id;
-		return_code = '101'; 
+		return_code = '-101'; 
 	END IF;
 RETURN return_code;
 END;
