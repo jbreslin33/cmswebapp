@@ -34,7 +34,7 @@ class InsertLoginScreen
                	this.mApplication.mLogin.mPassword = document.getElementById("insert_login_screen_password1_id").value;
                	this.mPassword                     = document.getElementById("insert_login_screen_password2_id").value;
 
-		var url = "/php/classes/insert/insert_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
+		var url = "/php/classes/insert/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mApplication.mLogin.mEmail + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
-class InsertLogin 
+class InsertNativeLogin 
 {
 	function __construct() 
 	{
@@ -16,5 +16,5 @@ class InsertLogin
 		echo pg_fetch_result($result, 0); 
         }
 }
-	$insertLogin = new InsertLogin();	
+	$insertNativeLogin = new InsertNativeLogin();	
 ?>
