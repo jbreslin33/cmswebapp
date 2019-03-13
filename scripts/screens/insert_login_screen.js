@@ -9,6 +9,7 @@ class InsertLoginScreen
 		location.hash = "insert_login_screen";
 
 		this.mCode = 0;
+                this.mData = null;
 
 		//sql php vars
 		this.mFirstName = null;
@@ -46,7 +47,7 @@ class InsertLoginScreen
                                         var data = this.responseText;
                                         if (data)
                                         {
-						APPLICATION.mInsertLoginScreen.mCode = data;
+						APPLICATION.mInsertLoginScreen.mData = data;
                                         }
                                 }
                         }
