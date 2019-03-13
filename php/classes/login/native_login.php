@@ -1,5 +1,6 @@
 <?php
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
 
 class NativeLogin
 {
@@ -22,7 +23,7 @@ class NativeLogin
 		}
 		else
 		{
-
+/*
 			//jwt code
 			// Create token header as a JSON string
 			$header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
@@ -45,7 +46,25 @@ class NativeLogin
 			// Create JWT
 			$jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
+
+			$userId = 12;
+			$secret = 'sec!ReT423*&';
+			$expiration = time() + 3600;
+			$issuer = 'localhost';
+
+			$token = Token::create($userId, $secret, $expiration, $issuer);
+
+			echo "-100," . $token;
+ */
+			$secret = 'sec!ReT423*&';
+			$id = 1313;
+			$token = array();
+			$token['id'] = $id;
+
+			$jwt = JWT::encode($token, $secret);
+			error_log($jwt);
 			echo "-100," . $jwt;
+
 		}
         }
 }
