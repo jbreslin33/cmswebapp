@@ -819,10 +819,10 @@ DECLARE
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
-		return_code = '101';
+		return_code = '-101';
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
-		return_code = '100';
+		return_code = x;
 	END IF;
 RETURN return_code;
 END;
