@@ -56,12 +56,22 @@ class NativeLogin
 
 			echo "-100," . $token;
  */
+			//encode
 			$secret = 'sec!ReT423*&';
 			$id = 1313;
-			$token = array();
-			$token['id'] = $id;
+			$encoded_token = array();
+			$encoded_token['id'] = $id;
 
-			$jwt = JWT::encode($token, $secret);
+			$jwt = JWT::encode($encoded_token, $secret);
+
+
+
+			//decode test
+			//$decoded_token = JWT::decode($_POST['token'], 'secret_server_key');
+			$decoded_token = JWT::decode($jwt, $secret);
+			$text = "id:" . $decoded_token->id;
+			error_log($text);
+
 			error_log($jwt);
 			echo "-100," . $jwt;
 
