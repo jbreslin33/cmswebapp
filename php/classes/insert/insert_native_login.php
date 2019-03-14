@@ -1,5 +1,6 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
 
 class InsertNativeLogin 
 {

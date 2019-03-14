@@ -48,6 +48,7 @@ class InsertLoginScreen
                                         if (data)
                                         {
 						APPLICATION.mInsertLoginScreen.mData = data;
+						console.log('data:' + data);
                                         }
                                 }
                         }

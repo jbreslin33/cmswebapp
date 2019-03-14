@@ -35,23 +35,22 @@ class INSERT_LOGIN_SCREEN_APPLICATION extends State
 			console.log("INSERT_LOGIN_SCREEN_APPLICATION: EXECUTE");        
 		}
               
-                if (app.mLogin.mData)
+                if (app.mInsertLoginScreen.mData)
                 {
-                        var dataArray = app.mLogin.mData.split(",");
-                        app.mLogin.mCode = dataArray[0];
+                        var dataArray = app.mInsertLoginScreen.mData.split(",");
+                        app.mInsertLoginScreen.mCode = dataArray[0];
 
-                        if (app.mLogin.mCode == -100)
+                        if (app.mInsertLoginScreen.mCode == -100)
                         {
-                                app.mLogin.mJWT = dataArray[1]; //set jwt
-                                console.log("mJWT:" + app.mLogin.mJWT);
+                                app.mInsertLoginScreen.mJWT = dataArray[1]; //set jwt
+                                console.log("mJWT:" + app.mInsertLoginScreen.mJWT);
                                 //put in local storage
-                                // localStorage.setItem('mEventoArrayLocal', JSON.stringify(schedule.mEventoArray));
-                                localStorage.setItem('mJWT', app.mLogin.mJWT);
+                                localStorage.setItem('mJWT', app.mInsertLoginScreen.mJWT);
 
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         	document.getElementById('insert_login_screen_email_message_id').innerHTML = '';
                         }
-                        if (app.mLogin.mCode == -101)
+                        if (app.mInsertLoginScreen.mCode == -101)
                         {
 				document.getElementById('insert_login_screen_email_message_id').style.color = 'red';
                         	document.getElementById('insert_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
