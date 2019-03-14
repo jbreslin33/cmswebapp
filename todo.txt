@@ -1,3 +1,12 @@
+after insert_native_login OR google sign up/login ....we need to then
+check local storage on load of page.....
+then if they are there just take them to main dont send off to server....
+if they are not take to login page as we have no idea who this person is
+
+then later on add club etc we send jwt accross and if comes back bogus
+we take to login
+
+----------
 should not be able to add club which is next step without sending login credentials
 ----------
 are we trying to do too much on one webapp??
