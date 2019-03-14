@@ -24,7 +24,7 @@ class Application
 		this.mMain = null;
 		this.mAddClub = null;
 
-		this.mInsertLoginScreen = null;
+		this.mInsertNativeLoginScreen = null;
 	
 		//daily schedule
 		this.mDailySchedule = null;
@@ -42,7 +42,7 @@ class Application
 		this.mGLOBAL_APPLICATION          = new GLOBAL_APPLICATION();
 		this.mINIT_APPLICATION            = new INIT_APPLICATION();
 		this.mMAIN_APPLICATION            = new MAIN_APPLICATION();
-		this.mINSERT_LOGIN_SCREEN_APPLICATION     = new INSERT_LOGIN_SCREEN_APPLICATION();
+		this.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION     = new INSERT_NATIVE_LOGIN_SCREEN_APPLICATION();
 		this.mCHECK_LOCALSTORAGE_APPLICATION  = new CHECK_LOCALSTORAGE_APPLICATION();
 		this.mLOGIN_APPLICATION           = new LOGIN_APPLICATION();
 		this.mSHOW_DAILY_SCHEDULE_APPLICATION   = new SHOW_DAILY_SCHEDULE_APPLICATION();

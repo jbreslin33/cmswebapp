@@ -38,9 +38,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mSHOW_DAILY_SCHEDULE_APPLICATION);
                 }
-		else if (location.hash == '#insert_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_LOGIN_SCREEN_APPLICATION)
+		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_LOGIN_SCREEN_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
 		else if (location.hash == '#add_club' && app.mStateMachine.mCurrentState != app.mADD_CLUB_APPLICATION)
                 {
