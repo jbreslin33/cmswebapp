@@ -815,7 +815,7 @@ RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
 	return_code text;
-	DECLARE x int := 0;
+	DECLARE x int := -111; --for bad insert attempt
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF FOUND THEN
@@ -861,30 +861,25 @@ CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
-	found_id native_logins.id%TYPE;
+	found_native_login_id native_logins.id%TYPE;
 	found_user_id users.id%TYPE;
 	return_code text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 	IF found_email_id THEN
-    		RAISE warning 'email % exists!', found_email_id;
-
-        	SELECT id INTO found_id FROM native_logins 
+        	SELECT id INTO found_native_login_id FROM native_logins 
         	WHERE email_id = found_email_id AND password = $2;
         	
-		IF found_id THEN
-                	RAISE warning 'found_id % exists!', found_id;
+		IF found_native_login_id THEN
 			SELECT id INTO found_user_id FROM users
 			where users.email_id = found_email_id;
                 	return_code = found_user_id;
         	ELSE
-                	return_code = '-102';
-                	RAISE WARNING 'bad password on found_id % ', found_id;
+                	return_code = '-105';
         	END IF;
 	
 	ELSE
-    		RAISE warning 'email % does not exist!', found_email_id;
-		return_code = '-101'; 
+		return_code = '-102'; 
 	END IF;
 RETURN return_code;
 END;
@@ -951,11 +946,11 @@ DECLARE
 	returning_person_id integer;
 
         return_code text;
-	DECLARE x int := 0;
+	DECLARE x int := -111;
 BEGIN
 
         select into found_email_id f_get_email_id($1);
-        IF found_email_id > 0 THEN
+        IF found_email_id > 0 THEN --do an update and if no person or user do an insert on them
         	SELECT id INTO found_google_login_id FROM google_logins
         	WHERE email_id = found_email_id;
 		IF found_google_login_id THEN
@@ -973,20 +968,19 @@ BEGIN
 
                         update persons set first_name = $4 , last_name = $5
 			where id = found_person_id;
-			return_code = '100';
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into returning_person_id;
                         insert into users (person_id, email_id) values (returning_person_id,found_email_id);
-			return_code = '100';
                 END IF;
+		return_code = '-100';
 
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
-		IF x THEN
-			return_code = '100';
+		IF x > 0 THEN
+			return_code = '-100';
 		ELSE
-			return_code = '101';
+			return_code = x;
         	END IF;
 	END IF;
 
@@ -1012,17 +1006,15 @@ BEGIN
         IF found_club_name THEN
 		--dup
                 RAISE warning 'club % exists!', found_club_name;
-                return_code = '101';
+                return_code = '-106';
 
        	ELSE
                 insert into clubs (name,address) values ($1,$2) returning id into returning_club_id;
 
                 IF returning_club_id THEN
-                        return_code = '100';
-                        RAISE warning 'returning_club_id % exists!', returning_club_id;
+                        return_code = '-100';
                 ELSE
-                        return_code = '102'; --we failed for unknown reason
-                        RAISE WARNING 'failed for unknown reason on club % ', $1;
+                        return_code = '-111'; --we failed for unknown reason
                 END IF;
         END IF;
 RETURN return_code;
@@ -1037,4 +1029,13 @@ BEGIN
     x := x * 3;
 END;
 $$;
+
+--100 no problems total authentication
+--101 email exists
+--102 email does not exist
+--103 users exists
+--104 user does not exist
+--105 bad password
+--106 club exists
+--111 generic bad insert
 
