@@ -16,9 +16,9 @@ class InsertNativeLogin
 
 		$return_value = pg_fetch_result($result, 0); 
 
-               	if ($return_value < -100  && $return_code > -200)
+               	if ($return_value < -100  && $return_value > -200)
                 {
-                        echo $return_code;
+                        echo $return_value;
                 }
                 else
                 {
