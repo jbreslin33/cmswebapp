@@ -61,8 +61,7 @@ class LoginScreen
 					console.log('200 returned:' + data );
                                         if (data)
                                         {
-
-                                                APPLICATION.mLogin.mCode = data;
+                                                APPLICATION.mLogin.mData = data;
                                         }
                                 }
                         }
