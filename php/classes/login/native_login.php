@@ -17,9 +17,9 @@ class NativeLogin
 		//return to client
                 $return_value = pg_fetch_result($result, 0);
 
-		if ($return_value < -100  && $return_code > -200)
+		if ($return_value < -100  && $return_value > -999)
 		{
-			echo $return_code;
+			echo $return_value;
 		}
 		else
 		{
@@ -30,18 +30,7 @@ class NativeLogin
 			$encoded_token['id'] = $id;
 
 			$jwt = JWT::encode($encoded_token, $secret);
-
-
-
-			//decode test
-			//$decoded_token = JWT::decode($_POST['token'], 'secret_server_key');
-			$decoded_token = JWT::decode($jwt, $secret);
-			$text = "id:" . $decoded_token->id;
-			error_log($text);
-
-			error_log($jwt);
 			echo "-100," . $jwt;
-
 		}
         }
 }
