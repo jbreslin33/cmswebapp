@@ -29,7 +29,15 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
-		application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+		application.mJWT = localStorage.getItem("mJWT");
+		if (application.mJWT)
+		{
+			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+		}
+		else
+		{
+			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+		}
 	}
 
         exit(application)

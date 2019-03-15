@@ -12,6 +12,9 @@ class Application
 		//state changed
 		window.onhashchange = this.locationHashChanged;
 
+		//localstorage
+		this.mJWT = null;
+
 		//utilities
 		this.mUtility = new Utility();
 

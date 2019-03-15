@@ -14,7 +14,6 @@ class LoginScreen
 		//sql php vars
 		this.mEmail = null;
 		this.mPassword = null;
-		this.mJWT = null;
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}

@@ -42,10 +42,10 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 
                         if (app.mInsertNativeLoginScreen.mCode == -100)
                         {
-                                app.mInsertNativeLoginScreen.mJWT = dataArray[1]; //set jwt
-                                console.log("mJWT:" + app.mInsertNativeLoginScreen.mJWT);
+                                app.mJWT = dataArray[1]; //set jwt
+                                console.log("mJWT:" + app.mJWT);
                                 //put in local storage
-                                localStorage.setItem('mJWT', app.mInsertNativeLoginScreen.mJWT);
+                                localStorage.setItem('mJWT', app.mJWT);
 
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
