@@ -57,12 +57,7 @@ class LoginScreen
                         {
                                 if (request.status === 200)
                                 {
-                                        var data = this.responseText;
-					console.log('200 returned:' + data );
-                                        if (data)
-                                        {
-                                                APPLICATION.mLogin.mData = data;
-                                        }
+                                        APPLICATION.mLogin.mData = this.responseText;
                                 }
                         }
                 };

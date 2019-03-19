@@ -941,6 +941,7 @@ DECLARE
         found_email_id emails.id%TYPE;
         found_google_login_id google_logins.id%TYPE;
         found_user_id users.id%TYPE;
+        returning_user_id users.id%TYPE;
         found_person_id users.id%TYPE;
         
 	returning_person_id integer;
@@ -968,20 +969,16 @@ BEGIN
 
                         update persons set first_name = $4 , last_name = $5
 			where id = found_person_id;
+			return_code = found_user_user_id;
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into returning_person_id;
-                        insert into users (person_id, email_id) values (returning_person_id,found_email_id);
+                        insert into users (person_id, email_id) values (returning_person_id,found_email_id) returning id into returning_user_id;
+			return_code = returning_user_id;
                 END IF;
-		return_code = '-100';
-
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
-		IF x > 0 THEN
-			return_code = '-100';
-		ELSE
-			return_code = x;
-        	END IF;
+		return_code = x;
 	END IF;
 
 RETURN return_code;
