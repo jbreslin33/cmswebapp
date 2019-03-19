@@ -43,9 +43,7 @@ class LOGIN_APPLICATION extends State
 			if (app.mLogin.mCode == -100)
 			{
 				app.mJWT = dataArray[1]; //set jwt
-				console.log("mJWT:" + app.mJWT);
 				//put in local storage
-				// localStorage.setItem('mEventoArrayLocal', JSON.stringify(schedule.mEventoArray));
 				localStorage.setItem('mJWT', app.mJWT);
 					
 				app.mStateMachine.changeState(app.mMAIN_APPLICATION);

@@ -14,6 +14,11 @@ class LoginScreen
 		//sql php vars
 		this.mEmail = null;
 		this.mPassword = null;
+		this.mGoogleID = null;	
+		this.mGoogleIDToken = null;	
+		this.mFirstName = null;	
+		this.mLastName = null;	
+		this.mImageUrl = null;	
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
@@ -70,26 +75,16 @@ class LoginScreen
 	{
         	// Useful data for your client-side scripts:
         	var profile = googleUser.getBasicProfile();
-        	console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        	console.log('Full Name: ' + profile.getName());
-        	console.log('Given Name: ' + profile.getGivenName());
-        	console.log('Family Name: ' + profile.getFamilyName());
-        	console.log("Image URL: " + profile.getImageUrl());
-        	console.log("Email: " + profile.getEmail());
 
         	// The ID token you need to pass to your backend:
         	var id_token = googleUser.getAuthResponse().id_token;
-        	console.log("ID Token: " + id_token);
 	
-		//i then need to send this to server and it will either be a insert or simply return 100
-		console.log("send to server next");
-
 		APPLICATION.mLogin.mEmail = profile.getEmail();	
 		APPLICATION.mLogin.mGoogleID = profile.getId();	
 		APPLICATION.mLogin.mIDToken = id_token;	
 		APPLICATION.mLogin.mFirstName = profile.getGivenName();	
 		APPLICATION.mLogin.mLastName = profile.getFamilyName();	
-
+		APPLICATION.mLogin.mImageUrl = profile.getImageUrl();	
 
 		this.googleLogin();
 	}
