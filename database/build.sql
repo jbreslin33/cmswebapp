@@ -1025,8 +1025,12 @@ BEGIN
 		join users on persons.id=users.person_id
         	WHERE users.id = $3;
 
-		CALL p_insert_club($1,$2,found_person_id);
-		return_code = x;
+		CALL p_insert_club($1,$2,found_person_id,x);
+		IF x > 0 THEN
+			return_code = '-100';
+		ELSE
+			return_code = x;
+		END IF;
         END IF;
 RETURN return_code;
 END;
