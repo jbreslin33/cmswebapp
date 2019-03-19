@@ -7,14 +7,24 @@ class AddClub
 	{
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-		$sql = 'select f_add_club($1,$2)';
+		//actually we are going to get the jwt and need to extract id
+
+		$sql = 'select f_insert_club($1,$2,$3)';
 		
-		$prepare_result = pg_prepare($database->mConnection, "f_add_club", $sql);
+		$prepare_result = pg_prepare($database->mConnection, "f_insert_club", $sql);
 
-		$result = pg_execute($database->mConnection, "f_add_club", array( $_GET['name'] ,$_GET['address']));
 
-		echo pg_fetch_result($result, 0); 
+		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], 1));
+
+               	$return_value = pg_fetch_result($result, 0);
+
+                if ($return_value < -100  && $return_value > -200)
+                {
+                        echo $return_value;
+                }
         }
 }
-	$addClub = new AddClub();	
+
+$addClub = new AddClub();	
+
 ?>

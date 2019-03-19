@@ -48,7 +48,6 @@ class InsertLoginScreen
                                         if (data)
                                         {
 						APPLICATION.mInsertNativeLoginScreen.mData = data;
-						console.log('data:' + data);
                                         }
                                 }
                         }

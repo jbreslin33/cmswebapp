@@ -5,14 +5,17 @@
 --OLD DROPS
 --drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
 --drop procedure p_insert_google_login(text,text,text,text,text); 
+--drop function f_add_club(text,text); 
 --LIVE DROPS
-drop procedure triple(int);
+--drop procedure triple(int);
 
 --PROCEDURE DROPS
 drop procedure p_insert_google_login(text,text,text,text,text,int); 
 drop procedure p_update_google_login(text,text,text,text,text,int); 
 
 drop procedure p_insert_native_login(text,text,text,text,text,text,text,int); 
+
+drop procedure p_insert_club(text,text,int); 
 
 --FUNCTION DROPS
 drop function f_get_email_id(text); 
@@ -24,7 +27,7 @@ drop function f_google_login(text,text,text,text,text);
 
 drop function f_insert_native_login(text,text,text,text,text,text,text); 
 
-drop function f_add_club(text,text); 
+drop function f_insert_club(text,text,int); 
 
 
 
@@ -986,46 +989,49 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
-
 --ADD CLUB
 
-CREATE OR REPLACE FUNCTION f_add_club(TEXT, TEXT)
+CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, person_id int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_club_id integer;
+        returning_club_member_id integer;
+BEGIN
+        insert into clubs (name,address) values (name,address) returning id into returning_club_id;
+        insert into club_members (club_id, person_id) values (returning_club_id, person_id) returning id into returning_club_member_id;
+        insert into club_administrators (club_member_id) values (returning_club_member_id);
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, user_id int)
 RETURNS text AS $$
 DECLARE
+	found_person_id persons.id%TYPE;
         found_club_name clubs.name%TYPE;
         returning_club_id clubs.id%TYPE;
         return_code text;
+	DECLARE x int := -111;
 BEGIN
         SELECT name INTO found_club_name FROM clubs
         WHERE name = $1;
 
         IF found_club_name THEN
-		--dup
                 RAISE warning 'club % exists!', found_club_name;
                 return_code = '-106';
-
        	ELSE
-                insert into clubs (name,address) values ($1,$2) returning id into returning_club_id;
+		select persons.id INTO found_person_id from persons 
+		join users on persons.id=users.person_id
+        	WHERE users.id = $3;
 
-                IF returning_club_id THEN
-                        return_code = '-100';
-                ELSE
-                        return_code = '-111'; --we failed for unknown reason
-                END IF;
+		CALL p_insert_club($1,$2,found_person_id);
+		return_code = x;
         END IF;
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-
-CREATE PROCEDURE triple(INOUT x int)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    x := x * 3;
-END;
-$$;
 
 --100 no problems total authentication
 --101 email exists
