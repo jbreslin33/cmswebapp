@@ -1002,7 +1002,7 @@ DECLARE
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into returning_club_id;
         insert into club_members (club_id, person_id) values (returning_club_id, person_id) returning id into returning_club_member_id;
-        insert into club_administrators (club_member_id) values (returning_club_member_id);
+        insert into club_administrators (club_member_id) values (returning_club_member_id) returning id into x;
 END;
 $$;
 
