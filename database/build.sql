@@ -8,6 +8,8 @@
 --drop function f_add_club(text,text); 
 --LIVE DROPS
 --drop procedure triple(int);
+--drop procedure p_insert_club(text,text,int); 
+--drop procedure p_insert_club(text,text); 
 
 --PROCEDURE DROPS
 drop procedure p_insert_google_login(text,text,text,text,text,int); 
@@ -15,7 +17,7 @@ drop procedure p_update_google_login(text,text,text,text,text,int);
 
 drop procedure p_insert_native_login(text,text,text,text,text,text,text,int); 
 
-drop procedure p_insert_club(text,text,int); 
+drop procedure p_insert_club(text,text,int,int); 
 
 --FUNCTION DROPS
 drop function f_get_email_id(text); 
@@ -991,7 +993,7 @@ $$ LANGUAGE plpgsql;
 
 --ADD CLUB
 
-CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, person_id int)
+CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
