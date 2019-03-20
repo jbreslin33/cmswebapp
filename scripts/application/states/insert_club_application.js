@@ -37,22 +37,19 @@ class INSERT_CLUB_APPLICATION extends State
                         var dataArray = app.mInsertClubScreen.mData.split(",");
                         app.mInsertClubScreen.mCode = dataArray[0];
 
+
                         if (app.mInsertClubScreen.mCode == -100)
                         {
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
+                                document.getElementById('insert_club_screen_name_message_id').innerHTML = '';
+				console.log('in 100');
                         }
                         if (app.mInsertNativeLoginScreen.mCode == -106)
                         {
                                 document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
                                 document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
+				console.log('in 106');
                         }
-                }
-
-               
-		if (app.mInsertClubScreen.mCode == 100)
-                {
-                        app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                 }
 	}
 

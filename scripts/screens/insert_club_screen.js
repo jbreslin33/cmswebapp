@@ -24,7 +24,6 @@ class InsertClubScreen
                	this.mAddress = document.getElementById("insert_club_screen_address_id").value;
 
 		var url = "/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + localStorage.getItem("mJWT"); 
-		console.log('URL:' + url);
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -34,7 +33,6 @@ class InsertClubScreen
                                 if (request.status === 200)
                                 {
 					APPLICATION.mInsertClubScreen.mData = this.responseText;
-					console.log('resposnse:' + this.responseText);
                                 }
                         }
                 };
