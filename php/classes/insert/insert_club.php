@@ -18,10 +18,7 @@ class InsertClub
 
                	$return_value = pg_fetch_result($result, 0);
 
-                if ($return_value < -99  && $return_value > -200)
-                {
-                        echo $return_value;
-                }
+                echo $return_value;
         }
 }
 
