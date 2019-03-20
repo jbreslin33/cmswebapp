@@ -1011,16 +1011,16 @@ CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, user_id int)
 RETURNS text AS $$
 DECLARE
 	found_person_id persons.id%TYPE;
-        found_club_name clubs.name%TYPE;
+        found_club_id clubs.id%TYPE;
         returning_club_id clubs.id%TYPE;
         return_code text;
 	DECLARE x int := -111;
 BEGIN
-        SELECT name INTO found_club_name FROM clubs
+        SELECT id INTO found_club_id FROM clubs
         WHERE name = $1;
 
-        IF found_club_name THEN
-                RAISE warning 'club % exists!', found_club_name;
+        IF found_club_id THEN
+                RAISE warning 'club % exists!', $1;
                 return_code = '-106';
        	ELSE
 		select persons.id INTO found_person_id from persons 
