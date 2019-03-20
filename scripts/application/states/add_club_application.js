@@ -31,6 +31,24 @@ class ADD_CLUB_APPLICATION extends State
 		{
 			console.log("ADD_CLUB_APPLICATION: EXECUTE");        
 		}
+             
+		if (app.mAddClubScreen.mData)
+                {
+                        var dataArray = app.mAddClubScreen.mData.split(",");
+                        app.mAddClubScreen.mCode = dataArray[0];
+
+                        if (app.mAddClubScreen.mCode == -100)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
+                        }
+                        if (app.mInsertNativeLoginScreen.mCode == -106)
+                        {
+                                document.getElementById('add_club_screen_name_message_id').style.color = 'red';
+                                document.getElementById('add_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
+                        }
+                }
+
                
 		if (app.mAddClubScreen.mCode == 100)
                 {
@@ -46,5 +64,6 @@ class ADD_CLUB_APPLICATION extends State
 		}
 		app.mAddClubScreen.hide();
 		app.mAddClubScreen.mCode = 0;
+		app.mAddClubScreen.mData = null;
 	}
 }

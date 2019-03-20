@@ -34,6 +34,7 @@ class AddClubScreen
                                 if (request.status === 200)
                                 {
 					APPLICATION.mAddClubScreen.mData = this.responseText;
+					console.log('resposnse:' + this.responseText);
                                 }
                         }
                 };

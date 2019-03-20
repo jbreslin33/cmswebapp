@@ -43,7 +43,6 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
                         if (app.mInsertNativeLoginScreen.mCode == -100)
                         {
                                 app.mJWT = dataArray[1]; //set jwt
-                                console.log("mJWT:" + app.mJWT);
                                 //put in local storage
                                 localStorage.setItem('mJWT', app.mJWT);
 
