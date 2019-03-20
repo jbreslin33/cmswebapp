@@ -42,9 +42,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
-		else if (location.hash == '#add_club' && app.mStateMachine.mCurrentState != app.mADD_CLUB_APPLICATION)
+		else if (location.hash == '#insert_club' && app.mStateMachine.mCurrentState != app.mINSERT_CLUB_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mADD_CLUB_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
 		else if (location.hash == '#main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
                 {

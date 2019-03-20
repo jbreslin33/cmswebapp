@@ -1,12 +1,12 @@
 'use strict';
 
-class AddClubScreen
+class InsertClubScreen
 {
 	constructor(application)
 	{
 		this.mApplication = application;
 
-		location.hash = "add_club_screen";
+		location.hash = "insert_club_screen";
 
 		this.mCode = 0;
 		this.mData = null;
@@ -20,8 +20,8 @@ class AddClubScreen
 
 	hit()
 	{
-      		this.mName  = document.getElementById("add_club_screen_name_id").value;
-               	this.mAddress = document.getElementById("add_club_screen_address_id").value;
+      		this.mName  = document.getElementById("insert_club_screen_name_id").value;
+               	this.mAddress = document.getElementById("insert_club_screen_address_id").value;
 
 		var url = "/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + localStorage.getItem("mJWT"); 
 		console.log('URL:' + url);
@@ -33,13 +33,13 @@ class AddClubScreen
                         {
                                 if (request.status === 200)
                                 {
-					APPLICATION.mAddClubScreen.mData = this.responseText;
+					APPLICATION.mInsertClubScreen.mData = this.responseText;
 					console.log('resposnse:' + this.responseText);
                                 }
                         }
                 };
 
-		var form = document.getElementById('add_club_screen_html_id');
+		var form = document.getElementById('insert_club_screen_html_id');
 		if (form.checkValidity() == true) 
 		{
 			request.open('POST', url);
@@ -49,11 +49,11 @@ class AddClubScreen
         
 	show()
 	{
-              document.getElementById("add_club_screen_html_id").style.display = "block";
+              document.getElementById("insert_club_screen_html_id").style.display = "block";
 	}
 
 	hide()
 	{
-              document.getElementById("add_club_screen_html_id").style.display = "none";
+              document.getElementById("insert_club_screen_html_id").style.display = "none";
 	}
 }

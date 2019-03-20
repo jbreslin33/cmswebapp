@@ -50,7 +50,7 @@ class Application
 		this.mLOGIN_APPLICATION           = new LOGIN_APPLICATION();
 		this.mSHOW_DAILY_SCHEDULE_APPLICATION   = new SHOW_DAILY_SCHEDULE_APPLICATION();
 		this.mINSERT_EVENTO_APPLICATION   = new INSERT_EVENTO_APPLICATION();
-		this.mADD_CLUB_APPLICATION        = new ADD_CLUB_APPLICATION();
+		this.mINSERT_CLUB_APPLICATION        = new INSERT_CLUB_APPLICATION();
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);

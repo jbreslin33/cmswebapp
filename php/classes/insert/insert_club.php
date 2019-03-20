@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
-class AddClub 
+class InsertClub 
 {
 	function __construct() 
 	{
@@ -25,6 +25,6 @@ class AddClub
         }
 }
 
-$addClub = new AddClub();	
+$insertClub = new InsertClub();	
 
 ?>
