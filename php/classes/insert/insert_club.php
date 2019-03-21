@@ -19,7 +19,6 @@ class InsertClub
                	$return_value = pg_fetch_result($result, 0);
 
                 echo $return_value;
-		error_log($return_value);
         }
 }
 

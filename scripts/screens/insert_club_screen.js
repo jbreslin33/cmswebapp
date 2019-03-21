@@ -15,14 +15,11 @@ class InsertClubScreen
 		this.mName = null;
 		this.mAddress = null;
 		
-		//document.getElementById("addclubscreenbuttonid").addEventListener("click",this.hit.bind(this));
-		//document.getElementById("addclubscreenbuttonid").onclick = doFunction;
 		document.getElementById("addclubscreenbuttonid").onclick = this.hit.bind(this);
 	}
 
 	hit()
 	{
-		console.log('calling hit');
       		this.mName  = document.getElementById("insert_club_screen_name_id").value;
                	this.mAddress = document.getElementById("insert_club_screen_address_id").value;
 

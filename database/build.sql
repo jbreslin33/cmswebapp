@@ -1019,7 +1019,6 @@ BEGIN
         WHERE name = $1;
 
         IF found_club_id THEN
-                RAISE warning 'club % exists!', $1;
                 return_code = '-106';
        	ELSE
 		select persons.id INTO found_person_id from persons 
