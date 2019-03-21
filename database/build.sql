@@ -175,7 +175,7 @@ CREATE TABLE error_log
 CREATE TABLE clubs 
 (
         id SERIAL,
-        name text NOT NULL,
+        name text NOT NULL unique,
         address text,
         coordinates text,
 	PRIMARY KEY (id)
@@ -1012,7 +1012,6 @@ RETURNS text AS $$
 DECLARE
 	found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
-        returning_club_id clubs.id%TYPE;
         return_code text;
 	DECLARE x int := -111;
 BEGIN

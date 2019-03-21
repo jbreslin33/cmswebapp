@@ -20,6 +20,7 @@ class InsertClubScreen
 
 	hit()
 	{
+		console.log('calling hit');
       		this.mName  = document.getElementById("insert_club_screen_name_id").value;
                	this.mAddress = document.getElementById("insert_club_screen_address_id").value;
 

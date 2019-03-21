@@ -44,11 +44,14 @@ class INSERT_CLUB_APPLICATION extends State
                                 document.getElementById('insert_club_screen_name_message_id').innerHTML = '';
 				console.log('in 100');
                         }
-                        if (app.mInsertNativeLoginScreen.mCode == -106)
+                        if (app.mInsertClubScreen.mCode == -106)
                         {
                                 document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
                                 document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
 				console.log('in 106');
+				app.mInsertClubScreen.mCode = 0;
+				app.mInsertClubScreen.mData = null;
+
                         }
                 }
 	}
