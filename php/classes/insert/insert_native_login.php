@@ -1,6 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
 
 class InsertNativeLogin 
 {
@@ -23,15 +24,13 @@ class InsertNativeLogin
                 else
                 {
                         //encode
-                        $secret = 's%%xqc!___bzvReT423*&';
+			$oneRing = new OneRing();
                         $id = $return_value;
                         $encoded_token = array();
                         $encoded_token['id'] = $id;
-                        $jwt = JWT::encode($encoded_token, $secret);
-                        error_log($jwt);
+                        $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
                         echo "-100," . $jwt;
                 }
-
         }
 }
 	$insertNativeLogin = new InsertNativeLogin();	

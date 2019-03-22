@@ -151,6 +151,8 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+drop extension pgcrypto;
+create extension pgcrypto;
 --****************************************************************
 --***************************************************************
 --******************  CREATE TABLES *************************
