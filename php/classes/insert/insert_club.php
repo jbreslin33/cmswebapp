@@ -1,6 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
 
 class InsertClub 
 {
@@ -16,6 +17,11 @@ class InsertClub
 
 		//decode jwt
                 $secret = 's%%xqc!___bzvReT423*&';
+
+		$oneRing = new OneRing();
+
+		error_log($oneRing->mOneRing);
+
 		$jwt = $_GET['jwt'];
                 $payload = JWT::decode($jwt, $secret);
 		$id = $payload->id;
