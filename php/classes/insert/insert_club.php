@@ -15,15 +15,9 @@ class InsertClub
 		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_club", $sql);
 
-		//decode jwt
-                $secret = 's%%xqc!___bzvReT423*&';
-
-		$oneRing = new OneRing();
-
-		error_log($oneRing->mOneRing);
-
 		$jwt = $_GET['jwt'];
-                $payload = JWT::decode($jwt, $secret);
+		$oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
 		$id = $payload->id;
 
 		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $id));
