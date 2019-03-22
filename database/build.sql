@@ -877,7 +877,9 @@ BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 	IF found_email_id THEN
         	SELECT id INTO found_native_login_id FROM native_logins 
-        	WHERE email_id = found_email_id AND password = $2;
+        	--WHERE email_id = found_email_id AND password = $2;
+        	WHERE email_id = found_email_id AND password = (CRYPT('$2', password));
+		--(CRYPT('AnveshPassword', MyPassword))
         	
 		IF found_native_login_id THEN
 			SELECT id INTO found_user_id FROM users
