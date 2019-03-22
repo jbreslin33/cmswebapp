@@ -17,11 +17,10 @@ class NativeLogin
 		//return to client
                 $return_value = pg_fetch_result($result, 0);
 
-		if ($return_value < -100  && $return_value > -999)
-		{
-			echo $return_value;
-		}
-		else
+		$txt = "return_value:" . $return_value;
+		error_log($txt);
+
+		if ($return_value > 0)
 		{
 			//encode
 			$secret = 's%%xqc!___bzvReT423*&';
@@ -31,6 +30,10 @@ class NativeLogin
 
 			$jwt = JWT::encode($encoded_token, $secret);
 			echo "-100," . $jwt;
+		}
+		else
+		{
+			echo $return_value;
 		}
         }
 }

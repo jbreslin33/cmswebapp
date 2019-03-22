@@ -39,7 +39,7 @@ class LOGIN_APPLICATION extends State
 		{
 			var dataArray = app.mLogin.mData.split(",");
 			app.mLogin.mCode = dataArray[0];
-			
+			console.log('login:' + app.mLogin.mCode);	
 			if (app.mLogin.mCode == -100)
 			{
 				app.mJWT = dataArray[1]; //set jwt
