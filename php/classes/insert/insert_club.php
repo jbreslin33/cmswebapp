@@ -14,26 +14,13 @@ class InsertClub
 		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_club", $sql);
 
-
-
-		//jwt
-		//decode
+		//decode jwt
                 $secret = 's%%xqc!___bzvReT423*&';
 		$jwt = $_GET['jwt'];
                 $payload = JWT::decode($jwt, $secret);
-		$txt = "txt:" . $payload->id;
-		error_log($txt);
-		/*
-                $id = $return_value;
-                $encoded_token = array();
-                $encoded_token['id'] = $id;
-                $jwt = JWT::encode($encoded_token, $secret);
-                error_log($jwt);
-                echo "-100," . $jwt;
-		 */
+		$id = $payload->id;
 
-
-		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], 1));
+		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $id));
 
                	$return_value = pg_fetch_result($result, 0);
 
