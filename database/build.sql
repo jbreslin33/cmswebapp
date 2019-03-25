@@ -844,7 +844,7 @@ DECLARE
 	returning_person_id integer;
 BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
-	insert into native_logins (email_id, password) values (returning_email_id, CRYPT('$2', GEN_SALT('md5')));
+	insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
         insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
@@ -877,7 +877,7 @@ BEGIN
 	IF found_email_id THEN
 
         	SELECT id INTO found_native_login_id FROM native_logins 
-        	WHERE email_id = found_email_id AND password = (CRYPT('$2', password));
+        	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
         	
 		IF found_native_login_id THEN
 			SELECT id INTO found_user_id FROM users

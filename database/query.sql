@@ -1,3 +1,8 @@
-select logins.password from logins 
-join emails on emails.id=logins.email_id
-where emails.email = 'j@j.com';
+ SELECT id FROM native_logins
+ WHERE email_id = 1 AND password = (CRYPT('a', password));
+
+select * from native_logins;
+
+select * from native_logins where password = (CRYPT('a',password));
+
+
