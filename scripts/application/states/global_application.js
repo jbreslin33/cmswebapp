@@ -14,8 +14,6 @@ class GLOBAL_APPLICATION extends State
                 {
                         console.log("GLOBAL_APPLICATION: ENTER"); 
                 }
-		//document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
-		//document.getElementById("add_event_nav_id").className.replace(" active", "");
 	}
 
         execute(app)
@@ -46,15 +44,14 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
+		else if (location.hash == '#insert_forgot_password' && app.mStateMachine.mCurrentState != app.mINSERT_FORGOT_PASSWORD_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
+                }
 		else if (location.hash == '#main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mMAIN_APPLICATION);
                 }
-
-		//set all tabs to not active
-		//document.getElementById("daily_schedule_nav_id").className.replace(" active", "");
-		//document.getElementById("add_event_nav_id").className.replace(" active", "");
-
 	}
 
         exit(application)
