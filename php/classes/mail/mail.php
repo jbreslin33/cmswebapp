@@ -23,22 +23,10 @@ class Mail
     			$this->mPhpMailer->Password = 'Star5567';                           // SMTP password
     			$this->mPhpMailer->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     			$this->mPhpMailer->Port = 587;                                    // TCP port to connect to
-
-    			$this->mPhpMailer->setFrom('jbreslin33@gmail.com', 'Mailer');
-    			$this->mPhpMailer->addAddress('jbreslin33@yahoo.com', 'Jim breslin');     // Add a recipient
-    			$this->mPhpMailer->addReplyTo('info@example.com', 'Information');
-		
-			$this->mPhpMailer->isHTML(true);                                  // Set email format to HTML
-    			$this->mPhpMailer->Subject = 'Here is the subject';
-    			$this->mPhpMailer->Body    = 'This is the HTML message body <b>in bold!</b>';
-    			$this->mPhpMailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-    			$this->mPhpMailer->send();
-    			echo 'Message has been sent';
 		} 
 		catch (Exception $e) 
 		{
-    			echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    			echo 'Message could not be sent. Mailer Error: ', $this->ErrorInfo;
 		}
         }
 }
