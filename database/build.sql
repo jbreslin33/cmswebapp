@@ -99,6 +99,8 @@ DROP TABLE managers CASCADE;
 
 DROP TABLE club_members CASCADE;
 
+DROP TABLE password_resets CASCADE;
+
 DROP TABLE native_logins CASCADE;
 DROP TABLE google_logins CASCADE;
 
@@ -536,6 +538,17 @@ CREATE TABLE google_logins
     	google_id text not null unique, 
     	id_token text not null,  --big send what you have on client with all updates inserts deletes and it should match this which we update as soon as google auths us   
 	timestamp_created timestamp,
+ 	FOREIGN KEY(email_id) REFERENCES emails(id),
+	PRIMARY KEY (id)
+);
+
+
+create TABLE password_resets (
+        id serial,
+        email_id integer,
+        selector text,
+        token text,
+        expires timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
 );
