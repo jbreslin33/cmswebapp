@@ -19,8 +19,7 @@ class InsertForgotPasswordScreen
 
 	hit()
 	{
-      		this.mName  = document.getElementById("insert_forgot_password_screen_name_id").value;
-               	this.mAddress = document.getElementById("insert_forgot_password_screen_address_id").value;
+      		this.mEmail  = document.getElementById("insert_forgot_password_screen_email_id").value;
 
 		var url = "/php/classes/insert/insert_forgot_password.php?email=" + this.mEmail; 
 
