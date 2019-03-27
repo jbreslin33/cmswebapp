@@ -21,6 +21,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("card_original_id").style.display = "none";
 		document.getElementById("insert_evento_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
+		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
 	}
 
         execute(application)

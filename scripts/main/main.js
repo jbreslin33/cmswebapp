@@ -6,6 +6,6 @@ class Main
 	{
 		this.mApplication = application;
 		 
-		location.hash = "main";
+		location.hash = "main_screen";
 	}
 }
