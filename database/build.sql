@@ -30,7 +30,7 @@ drop function f_google_login(text,text,text,text,text);
 drop function f_insert_native_login(text,text,text,text,text,text,text); 
 
 drop function f_insert_club(text,text,int); 
-
+drop function f_insert_forgot_password(text,text,text); 
 
 
 --TABLE DROPS
@@ -99,7 +99,7 @@ DROP TABLE managers CASCADE;
 
 DROP TABLE club_members CASCADE;
 
-DROP TABLE password_resets CASCADE;
+DROP TABLE forgot_passwords CASCADE;
 
 DROP TABLE native_logins CASCADE;
 DROP TABLE google_logins CASCADE;
@@ -543,7 +543,7 @@ CREATE TABLE google_logins
 );
 
 
-create TABLE password_resets (
+create TABLE forgot_passwords (
         id serial,
         email_id integer,
         selector text,
@@ -1052,6 +1052,29 @@ BEGIN
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT, TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id emails.id%TYPE;
+        returning_forgot_passwords_id forgot_passwords.id%TYPE;
+        return_code text;
+BEGIN
+        select into found_email_id f_get_email_id($1);
+        IF found_email_id > 0 THEN 
+		insert into forgot_passwords (email_id, selector, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
+		IF returning_forgot_passwords_id > 0 THEN
+			return_code = '-100';
+		ELSE
+			return_code = '-111';
+		END IF;
+	ELSE
+		return_code = '-102';
+	END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
 
 
 --100 no problems total authentication
