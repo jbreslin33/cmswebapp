@@ -29,6 +29,10 @@ class InsertForgotPassword
                 $return_value = pg_fetch_result($result, 0);
 
                 echo $return_value;
+
+
+
+		//$message .= sprintf('<a href="%s">%s</a></p>', $url, $url);
         }
 }
 $email = $_GET['email'];

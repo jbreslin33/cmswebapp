@@ -3,9 +3,8 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 
 class ForgotPassword extends Mail 
 {
-	function __construct() 
+	function __construct($email,$url) 
 	{
-		//$this->mOneRing = 's%%xqc!___bzvReT423*&';
 		try 
 		{
 			parent::__construct();
@@ -15,8 +14,10 @@ class ForgotPassword extends Mail
 			
 			$this->mPhpMailer->isHTML(true);                                  // Set email format to HTML
 			$this->mPhpMailer->Subject = 'Forgot Password';
-			$this->mPhpMailer->Body    = 'Enter new password: <b>in bold!</b>';
-			$this->mPhpMailer->AltBody = 'Alt Body';
+			$body = "Click this link:";
+			$body .= $url;
+			$this->mPhpMailer->Body    = $body;
+			$this->mPhpMailer->AltBody = $body;
 
 			$this->mPhpMailer->send();
     			echo 'Message has been sent';
@@ -27,9 +28,5 @@ class ForgotPassword extends Mail
 		}
         }
 }
-
-//$email = $_GET['email'];
-//$forgotPassword = new ForgotPassword($email);
-$forgotPassword = new ForgotPassword();
 
 ?>
