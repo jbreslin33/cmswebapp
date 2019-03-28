@@ -1062,6 +1062,7 @@ DECLARE
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
+		delete from forgot_passwords where email_id = found_email_id; 
 		insert into forgot_passwords (email_id, selector, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
 			return_code = '-100';
