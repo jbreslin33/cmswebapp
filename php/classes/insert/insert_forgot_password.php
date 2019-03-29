@@ -18,7 +18,7 @@ class InsertForgotPassword
 
 		$this->mUrl = sprintf('%sphp/classes/update/update_forgot_password.php?%s', $this->mAbsoluteURL, http_build_query([
     			'selector' => $this->mSelector,
-    			'validator' => bin2hex($this->mToken)
+    			'token' => $this->mToken
 			]));
 
 		error_log($this->mUrl);

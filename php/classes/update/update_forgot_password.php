@@ -4,10 +4,9 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/forgot_password.php");
 
 class UpdateForgotPassword 
 {
-	function __construct($password,$selector,$token) 
+	function __construct($selector,$token) 
 	{
-		$txt = $password;
-		$txt .= $selector;
+		$txt = $selector;
 		$txt .= "BBBBBBBBBBBBBB";
 		$txt .= $token;
 		error_log($txt);
@@ -46,10 +45,9 @@ class UpdateForgotPassword
 		//$message .= sprintf('<a href="%s">%s</a></p>', $url, $url);
         }
 }
-$password = $_GET['password'];
 $selector = $_GET['selector'];
 $token = $_GET['token'];
 
-$updateForgotPassword = new UpdateForgotPassword($password,$selector,$token);	
+$updateForgotPassword = new UpdateForgotPassword($selector,$token);	
 
 ?>
