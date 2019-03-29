@@ -1,3 +1,5 @@
+next after we fix yahoo bug we simply need a change_password jawn just like forgot_password
+------------------
 actually we need to check right on first load now....
 and if no jwt in local storage we take them to login page else
 we take them to main(later probably schedule page)
