@@ -68,7 +68,10 @@
     				<a id="insert_club_nav_id" class="nav-link" href="#insert_club_screen">Add Club</a>
   			</li>
 			<li class="nav-item">
-    				<a id="insert_forgot_password_nav_id" class="nav-link" href="#insert_forgot_password_screen">Forgot Password</a>
+    				<a id="insert_forgot_password_nav_id" class="nav-link" href="#insert_forgot_password_screen">Insert Forgot Password</a>
+  			</li>
+			<li class="nav-item">
+    				<a id="update_forgot_password_nav_id" class="nav-link" href="#update_forgot_password_screen">Update Forgot Password</a>
   			</li>
 			
 			<li class="nav-item">
@@ -169,7 +172,7 @@
 
 	<!-- END ADD CLUB HTML  -->
 
-        <!-- FORGOT PASSWORD HTML  -->
+        <!-- INSERT FORGOT PASSWORD HTML  -->
 
         <form id="insert_forgot_password_screen_html_id" class="needs-validation">
                 <div class="form-row">
@@ -183,7 +186,31 @@
                 <button id="insertforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
         </form>
 
-        <!-- END FORGOT PASSWORD HTML  -->
+        <!-- END INSERT FORGOT PASSWORD HTML  -->
+
+
+        <!-- UPDATE FORGOT PASSWORD HTML  -->
+
+        <form id="update_forgot_password_screen_html_id" class="needs-validation">
+                <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                                <label for="update_forgot_password_screen_password1_id">Email</label>
+                                <input type="text" class="form-control" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" value="Password1" required>
+                                <span id='update_forgot_password_screen_password1_message_id'></span>
+                        </div>
+                </div>
+                <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                                <label for="update_forgot_password_screen_password2_id">Email</label>
+                                <input type="text" class="form-control" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" value="Password2" required>
+                                <span id='update_forgot_password_screen_password2_message_id'></span>
+                        </div>
+                </div>
+
+                <button id="updateforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- END UPDATE FORGOT PASSWORD HTML  -->
 
 
 	<!-- LOGIN_HTML -->
@@ -337,8 +364,11 @@
 	<!-- add club -->
 	<script src="scripts/screens/insert_club_screen.js"></script>
 	
-	<!-- forgot password -->
+	<!-- insert forgot password -->
 	<script src="scripts/screens/insert_forgot_password_screen.js"></script>
+	
+	<!-- update forgot password -->
+	<script src="scripts/screens/update_forgot_password_screen.js"></script>
 	
 	<!-- main -->
 	<script src="scripts/main/main.js"></script>
@@ -377,6 +407,7 @@
   	<script src="scripts/application/states/insert_native_login_screen_application.js" ></script>
   	<script src="scripts/application/states/insert_club_application.js" ></script>
   	<script src="scripts/application/states/insert_forgot_password_application.js" ></script>
+  	<script src="scripts/application/states/update_forgot_password_application.js" ></script>
 	
 	<!-- Daily Schedule states -->
         <script src="scripts/daily_schedule/states/global_daily_schedule.js" ></script>

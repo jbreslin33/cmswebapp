@@ -35,6 +35,12 @@ class Application
 		//insert evento
 		this.mInsertEvento = null;
 
+		//insert forgot password
+		this.mInsertForgotPasswordScreen = null;
+		
+		//update forgot password
+		this.mUpdateForgotPasswordScreen = null;
+
 		//main class
                 this.mDivMain = document.createElement("DIV");
                 this.mDivMain.setAttribute("class", "main");
@@ -52,6 +58,7 @@ class Application
 		this.mINSERT_EVENTO_APPLICATION   = new INSERT_EVENTO_APPLICATION();
 		this.mINSERT_CLUB_APPLICATION        = new INSERT_CLUB_APPLICATION();
 		this.mINSERT_FORGOT_PASSWORD_APPLICATION        = new INSERT_FORGOT_PASSWORD_APPLICATION();
+		this.mUPDATE_FORGOT_PASSWORD_APPLICATION        = new UPDATE_FORGOT_PASSWORD_APPLICATION();
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);

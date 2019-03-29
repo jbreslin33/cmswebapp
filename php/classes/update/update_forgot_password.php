@@ -2,21 +2,27 @@
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/forgot_password.php");
 
-class InsertForgotPassword 
+class UpdateForgotPassword 
 {
-	function __construct($email) 
+	function __construct($password,$selector,$token) 
 	{
+		$txt = $password;
+		$txt .= $selector;
+		$txt .= "BBBBBBBBBBBBBB";
+		$txt .= $token;
+		error_log($txt);
+		/*
 		$this->mEmail = $email;
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-		$this->mAbsoluteURL = "http://elacore.org/";
+		$this->mAbsoluteURL = "http://elacore.org/#insert_forgot_password_screen/";
 
 		$this->mSelector = bin2hex(random_bytes(8));
 
 		$this->mToken = bin2hex(random_bytes(32));
 
-		$this->mUrl = sprintf('%sphp/classes/update/update_forgot_password.php?%s', $this->mAbsoluteURL, http_build_query([
+		$this->mUrl = sprintf('%sreset.php?%s', $this->mAbsoluteURL, http_build_query([
     			'selector' => $this->mSelector,
     			'validator' => bin2hex($this->mToken)
 			]));
@@ -35,12 +41,15 @@ class InsertForgotPassword
 
 
 		$forgotPassword = new ForgotPassword($this->mEmail, $this->mUrl);
+		 */
 
 		//$message .= sprintf('<a href="%s">%s</a></p>', $url, $url);
         }
 }
-$email = $_GET['email'];
+$password = $_GET['password'];
+$selector = $_GET['selector'];
+$token = $_GET['token'];
 
-$insertForgotPassword = new InsertForgotPassword($email);	
+$updateForgotPassword = new UpdateForgotPassword($password,$selector,$token);	
 
 ?>
