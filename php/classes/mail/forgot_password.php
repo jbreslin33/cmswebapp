@@ -9,7 +9,7 @@ class ForgotPassword extends Mail
 		{
 			parent::__construct();
 			$this->mPhpMailer->setFrom('jbreslin33@gmail.com', 'Mailer');
-			$this->mPhpMailer->addAddress('jbreslin33@yahoo.com', 'Jim breslin');     // Add a recipient
+			$this->mPhpMailer->addAddress($email, 'Jim breslin');     // Add a recipient
 			$this->mPhpMailer->addReplyTo('info@example.com', 'Information');
 			
 			$this->mPhpMailer->isHTML(true);                                  // Set email format to HTML

@@ -1,5 +1,6 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/forgot_password.php");
 
 class InsertForgotPassword 
 {
@@ -20,6 +21,8 @@ class InsertForgotPassword
     			'validator' => bin2hex($this->mToken)
 			]));
 
+		error_log($this->mUrl);
+
                 $sql = 'select f_insert_forgot_password($1,$2,$3)';
 
                 $prepare_result = pg_prepare($database->mConnection, "f_insert_forgot_password", $sql);
@@ -31,6 +34,7 @@ class InsertForgotPassword
                 echo $return_value;
 
 
+		$forgotPassword = new ForgotPassword($this->mEmail, $this->mUrl);
 
 		//$message .= sprintf('<a href="%s">%s</a></p>', $url, $url);
         }
