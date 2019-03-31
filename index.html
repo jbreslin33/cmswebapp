@@ -425,7 +425,23 @@
 	<script src="scripts/application/application.js" ></script>
 
   	<script> 
-	
+	function getUrlVars() 
+	{
+    		var vars = {};
+    		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) 
+		{
+        		vars[key] = value;
+    		});
+    	return vars;
+	}
+
+	var selector = getUrlVars()["selector"];
+	var token    = getUrlVars()["token"];
+
+	console.log('selector jawn:' + selector);
+	console.log('token jawn:' + token);
+
+
 	var APPLICATION = new Application();
 
         //update loop
