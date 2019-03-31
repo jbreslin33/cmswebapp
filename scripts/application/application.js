@@ -2,7 +2,7 @@
 
 class Application 
 {
-	constructor() 
+	constructor(selector,token) 
 	{
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true;
@@ -11,6 +11,10 @@ class Application
 
 		//state changed
 		window.onhashchange = this.locationHashChanged;
+	
+		//forgot_password
+		this.mSelector = selector; 
+		this.mToken = token; 
 
 		//localstorage
 		this.mJWT = null;

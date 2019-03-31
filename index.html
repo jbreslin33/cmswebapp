@@ -435,14 +435,22 @@
     	return vars;
 	}
 
-	var selector = getUrlVars()["selector"];
-	var token    = getUrlVars()["token"];
+	var selector = null;
+	var token    = null;
+
+	if (getUrlVars()["selector"])
+	{
+		selector = getUrlVars()["selector"];
+	}
+	if (getUrlVars()["token"])
+	{
+		token = getUrlVars()["token"];
+	}
 
 	console.log('selector jawn:' + selector);
 	console.log('token jawn:' + token);
 
-
-	var APPLICATION = new Application();
+	var APPLICATION = new Application(selector,token);
 
         //update loop
         window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));

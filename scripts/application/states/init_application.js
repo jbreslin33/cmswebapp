@@ -31,14 +31,22 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
-		application.mJWT = localStorage.getItem("mJWT");
-		if (application.mJWT)
+
+		if (application.mSelector && application.mToken)
 		{
-			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
 		}
 		else
 		{
-			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+			application.mJWT = localStorage.getItem("mJWT");
+			if (application.mJWT)
+			{
+				application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+			}
+			else
+			{
+				application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+			}
 		}
 	}
 
