@@ -41,12 +41,12 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
                         if (app.mUpdateForgotPasswordScreen.mCode == -100)
                         {
                                 //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('insert_forgot_password_screen_name_message_id').innerHTML = 'Success';
+                                document.getElementById('update_forgot_password_screen_name_message_id').innerHTML = 'Success';
                         }
                         if (app.mUpdateForgotPasswordScreen.mCode == -111)
                         {
-                                document.getElementById('insert_forgot_password_screen_name_message_id').style.color = 'red';
-                                document.getElementById('insert_forgot_password_screen_name_message_id').innerHTML = 'Email does not exist. Do you want to create an account with that email?';
+                                document.getElementById('update_forgot_password_screen_name_message_id').style.color = 'red';
+                                document.getElementById('update_forgot_password_screen_name_message_id').innerHTML = 'Email does not exist. Do you want to create an account with that email?';
 				app.mUpdateForgotPasswordScreen.mCode = 0;
 				app.mUpdateForgotPasswordScreen.mData = null;
                         }

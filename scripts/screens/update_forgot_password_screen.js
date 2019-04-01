@@ -20,11 +20,12 @@ class UpdateForgotPasswordScreen
 
 	hit()
 	{
+		console.log('hit in update');
 		//get vars
                	this.mPassword1  = document.getElementById("update_forgot_password_screen_password1_id").value;
                	this.mPassword2  = document.getElementById("update_forgot_password_screen_password2_id").value;
 
-		var url = "/php/classes/update/update_forgot_password.php?selector=" + this.mApplication.mSelector + "&token=" + this.mApplication.mToken + "&password=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword; 
+		var url = "/php/classes/update/update_forgot_password.php?selector=" + this.mApplication.mSelector + "&token=" + this.mApplication.mToken + "&password=" + this.mPassword1; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -36,13 +37,13 @@ class UpdateForgotPasswordScreen
                                         var data = this.responseText;
                                         if (data)
                                         {
-						APPLICATION.mInsertNativeLoginScreen.mData = data;
+						APPLICATION.mUpdateForgotPasswordScreen.mData = data;
                                         }
                                 }
                         }
                 };
 
-		var form = document.getElementById('update_forgot_password_screen_form_id');
+		var form = document.getElementById('update_forgot_password_screen_html_id');
 		if (form.checkValidity() == true) 
 		{
 			var passwordMatch = false;
@@ -52,13 +53,15 @@ class UpdateForgotPasswordScreen
 				request.open('POST', url);
                 		request.send();
 
-          			document.getElementById('update_forgot_password_screen_message_id').style.color = 'green';
-          			document.getElementById('update_forgot_password_screen_message_id').innerHTML = 'passwords are matching';
+          			document.getElementById('update_forgot_password_screen_password_message_id').style.color = 'green';
+          			document.getElementById('update_forgot_password_screen_password_message_id').innerHTML = 'passwords are matching';
+				console.log('posting');
 			}
 			else
 			{
-          			document.getElementById('update_forgot_password_screen_message_id').style.color = 'red';
-          			document.getElementById('update_forgot_password_screen_message_id').innerHTML = 'passwords are not matching';
+          			document.getElementById('update_forgot_password_screen_password_message_id').style.color = 'red';
+          			document.getElementById('update_forgot_password_screen_password_message_id').innerHTML = 'passwords are not matching';
+				console.log('no match not posting');
 			}
 		}
 	}

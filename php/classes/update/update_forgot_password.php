@@ -48,6 +48,7 @@ class UpdateForgotPassword
 		//$message .= sprintf('<a href="%s">%s</a></p>', $url, $url);
         }
 }
+error_log("getting called php");
 $selector = $_GET['selector'];
 $token = $_GET['token'];
 $password = $_GET['password'];
