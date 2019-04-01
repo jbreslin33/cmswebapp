@@ -15,6 +15,9 @@ class UpdateForgotPasswordScreen
 		this.mEmail = null;
 		
 		document.getElementById("updateforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
+
+		console.log('selector in update:' + this.mApplication.mSelector);
+		console.log('token    in update:' + this.mApplication.mToken);
 	}
 
 	hit()
