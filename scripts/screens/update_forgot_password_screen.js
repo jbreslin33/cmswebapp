@@ -6,7 +6,7 @@ class UpdateForgotPasswordScreen
 	{
 		this.mApplication = application;
 
-		location.hash = "insert_forgot_password_screen";
+		location.hash = "update_forgot_password_screen";
 
 		this.mCode = 0;
 		this.mData = null;
@@ -14,14 +14,14 @@ class UpdateForgotPasswordScreen
 		//sql php vars
 		this.mEmail = null;
 		
-		document.getElementById("insertforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("updateforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
 	}
 
 	hit()
 	{
-      		this.mEmail  = document.getElementById("insert_forgot_password_screen_email_id").value;
+      		this.mEmail  = document.getElementById("update_forgot_password_screen_email_id").value;
 
-		var url = "/php/classes/insert/insert_forgot_password.php?email=" + this.mEmail; 
+		var url = "/php/classes/update/update_forgot_password.php?email=" + this.mEmail; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -35,7 +35,7 @@ class UpdateForgotPasswordScreen
                         }
                 };
 
-		var form = document.getElementById('insert_forgot_password_screen_html_id');
+		var form = document.getElementById('update_forgot_password_screen_html_id');
 		if (form.checkValidity() == true) 
 		{
 			request.open('POST', url);
@@ -45,11 +45,11 @@ class UpdateForgotPasswordScreen
         
 	show()
 	{
-              document.getElementById("insert_forgot_password_screen_html_id").style.display = "block";
+              document.getElementById("update_forgot_password_screen_html_id").style.display = "block";
 	}
 
 	hide()
 	{
-              document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
+              document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
 	}
 }
