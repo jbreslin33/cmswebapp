@@ -9,22 +9,22 @@ class UpdateForgotPasswordScreen
 		location.hash = "update_forgot_password_screen";
 
 		this.mCode = 0;
-		this.mData = null;
+                this.mData = null;
 
 		//sql php vars
-		this.mEmail = null;
-		
-		document.getElementById("updateforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
+		this.mPassword1 = null;
+		this.mPassword2 = null;
 
-		console.log('selector in update:' + this.mApplication.mSelector);
-		console.log('token    in update:' + this.mApplication.mToken);
+		document.getElementById("updateforgotpasswordscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
 
 	hit()
 	{
-      		this.mEmail  = document.getElementById("update_forgot_password_screen_email_id").value;
+		//get vars
+               	this.mPassword1  = document.getElementById("update_forgot_password_screen_password1_id").value;
+               	this.mPassword2  = document.getElementById("update_forgot_password_screen_password2_id").value;
 
-		var url = "/php/classes/update/update_forgot_password.php?email=" + this.mEmail; 
+		var url = "/php/classes/update/update_forgot_password.php?selector=" + this.mApplication.mSelector + "&token=" + this.mApplication.mToken + "&password=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -33,22 +33,39 @@ class UpdateForgotPasswordScreen
                         {
                                 if (request.status === 200)
                                 {
-					APPLICATION.mUpdateForgotPasswordScreen.mData = this.responseText;
+                                        var data = this.responseText;
+                                        if (data)
+                                        {
+						APPLICATION.mInsertNativeLoginScreen.mData = data;
+                                        }
                                 }
                         }
                 };
 
-		var form = document.getElementById('update_forgot_password_screen_html_id');
+		var form = document.getElementById('update_forgot_password_screen_form_id');
 		if (form.checkValidity() == true) 
 		{
-			request.open('POST', url);
-                	request.send();
+			var passwordMatch = false;
+
+			if (this.mPassword1 == this.mPassword2)
+			{
+				request.open('POST', url);
+                		request.send();
+
+          			document.getElementById('update_forgot_password_screen_message_id').style.color = 'green';
+          			document.getElementById('update_forgot_password_screen_message_id').innerHTML = 'passwords are matching';
+			}
+			else
+			{
+          			document.getElementById('update_forgot_password_screen_message_id').style.color = 'red';
+          			document.getElementById('update_forgot_password_screen_message_id').innerHTML = 'passwords are not matching';
+			}
 		}
 	}
         
 	show()
 	{
-              document.getElementById("update_forgot_password_screen_html_id").style.display = "block";
+              	document.getElementById("update_forgot_password_screen_html_id").style.display = "block";
 	}
 
 	hide()
