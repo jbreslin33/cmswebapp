@@ -424,9 +424,11 @@
 	<script src="scripts/application/application.js" ></script>
 
   	<script> 
+	
+	var selector = null;
+	var token    = null;
 
 	var hash = window.location.hash.substr(1);
-	console.log('hash:' + hash);
 
 	var urlArray = hash.split('&');
 	var parameterHash = null;
@@ -434,66 +436,30 @@
 	var parameterValuesArray = new Array();
 	for (var i = 0; i < urlArray.length; i++)
 	{
-		console.log('urlArray loop');
 		if (i == 0) //get the location.hash
 		{
 			parameterHash = urlArray[i];		
-			console.log('parameterHash:' + parameterHash);
 		}
 		else
 		{
 			var x = urlArray[i].split('=');
 			parameterNamesArray.push(x[0]);
 			parameterValuesArray.push(x[1]);
-			//console.log('parameterNamesArray:' + parameterNamesArray
 		}
 	}
 
 	for (var y = 0; y < parameterNamesArray.length; y++)
 	{
-		if (parameterNamesArray[y] == 'token')
-		{
-			console.log('TOKEN=' + parameterValuesArray[y]) 
-		}
 		if (parameterNamesArray[y] == 'selector')
 		{
-			console.log('SELECTOR=' + parameterValuesArray[y]) 
+			selector = parameterValuesArray[y];
+		}
+
+		if (parameterNamesArray[y] == 'token')
+		{
+			token = parameterValuesArray[y];
 		}
 	}
-
-	var result = hash.split('&').reduce(function (result, item) 
-	{
-    		var parts = item.split('=');
-    		result[parts[0]] = parts[1];
-    		return result;
-	}, {});
-
-	console.log('result:' + result);
-
-	function getUrlVars() 
-	{
-    		var vars = {};
-    		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) 
-		{
-        		vars[key] = value;
-    		});
-    	return vars;
-	}
-
-	var selector = null;
-	var token    = null;
-
-	if (getUrlVars()["selector"])
-	{
-		selector = getUrlVars()["selector"];
-	}
-	if (getUrlVars()["token"])
-	{
-		token = getUrlVars()["token"];
-	}
-
-	console.log('selector jawn:' + selector);
-	console.log('token jawn:' + token);
 
 	var APPLICATION = new Application(selector,token);
 
