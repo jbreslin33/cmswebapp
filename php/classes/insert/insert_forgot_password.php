@@ -10,7 +10,8 @@ class InsertForgotPassword
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-		$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&selector=123&token=123";
+		//$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&selector=123&token=123";
+		$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
 
 		$this->mSelector = bin2hex(random_bytes(8));
 
@@ -21,7 +22,13 @@ class InsertForgotPassword
     			'token' => $this->mToken
 			]));
  */
-		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, '');
+
+		//$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, '');
+		
+		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
+    			'selector' => $this->mSelector,
+    			'token' => $this->mToken
+			]));
 
 		error_log($this->mUrl);
 

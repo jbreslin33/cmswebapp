@@ -35,6 +35,8 @@ class INIT_APPLICATION extends State
 		if (application.mSelector && application.mToken)
 		{
 			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
+			console.log('mSelector:' + application.mSelector);
+			console.log('mToken:' + application.mToken);
 		}
 		else
 		{
