@@ -23,7 +23,6 @@ class UpdateForgotPasswordScreen
 	{
 		console.log('hit in update');
 		//get vars
-		/*
                	this.mPassword1  = document.getElementById("update_forgot_password_screen_password1_id").value;
                	this.mPassword2  = document.getElementById("update_forgot_password_screen_password2_id").value;
 
@@ -66,7 +65,6 @@ class UpdateForgotPasswordScreen
 				console.log('no match not posting');
 			}
 		}
-		*/
 	}
         
 	show()
