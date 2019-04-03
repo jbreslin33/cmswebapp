@@ -12,8 +12,11 @@ class InsertNativeLogin
 		$sql = 'select f_insert_native_login($1,$2,$3,$4,$5,$6,$7)';
 		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_native_login", $sql);
-
-		$result = pg_execute($database->mConnection, "f_insert_native_login", array( $_GET['email'] ,$_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address']));
+		$password = $_GET['password'];
+		$txt = "password:";
+		$txt .= $password;
+		error_log($txt);
+		$result = pg_execute($database->mConnection, "f_insert_native_login", array( $_GET['email'] ,$password, $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address']));
 
 		$return_value = pg_fetch_result($result, 0); 
 
