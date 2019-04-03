@@ -13,6 +13,21 @@ class UpdateForgotPassword
 		$txt .= "PPPPPPPPPPP:";
 		$txt .= $password;
 		error_log($txt);
+
+                $database = new Database("localhost","cms","postgres","mibesfat");
+
+                $sql = 'select f_update_forgot_password($1,$2,$3)';
+
+                $prepare_result = pg_prepare($database->mConnection, "f_update_forgot_password", $sql);
+
+                $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $selector ,$token, $password));
+
+                $return_value = pg_fetch_result($result, 0);
+
+                echo $return_value;
+
+
+
 		/*
 		$this->mEmail = $email;
 
