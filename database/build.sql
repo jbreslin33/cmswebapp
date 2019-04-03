@@ -27,6 +27,8 @@ drop function f_get_google_email_id(text);
 drop function f_native_login(text,text); 
 drop function f_google_login(text,text,text,text,text); 
 
+drop function f_update_forgot_password(text,text,text); 
+
 drop function f_insert_native_login(text,text,text,text,text,text,text); 
 
 drop function f_insert_club(text,text,int); 
@@ -832,15 +834,15 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_update_forgot_password(selector TEXT, token TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
-        found_email emails.email%TYPE;
+        found_forgot_passwords_id forgot_passwords.id%TYPE;
         return_code text;
-        DECLARE x int := -111; --for bad insert attempt
+        DECLARE x int := -112; --for generic bad update attempt
 BEGIN
-        SELECT email INTO found_email FROM emails WHERE email = email_name;
-        IF FOUND THEN
+        SELECT id INTO found_forgot_passwords_id FROM forgot_passwords WHERE expires > NOW();
+        IF found_forgot_passwords_id THEN
                 return_code = '-101';
         ELSE
-                CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
+                --CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
                 return_code = x;
         END IF;
 RETURN return_code;
@@ -1107,4 +1109,5 @@ $$ LANGUAGE plpgsql;
 --105 bad password
 --106 club exists
 --111 generic bad insert
+--112 generic bad update
 
