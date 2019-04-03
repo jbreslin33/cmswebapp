@@ -828,6 +828,26 @@ RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
 
+-- UPDATE FORGOT PASSWORD
+CREATE OR REPLACE FUNCTION f_update_forgot_password(selector TEXT, token TEXT, password TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email emails.email%TYPE;
+        return_code text;
+        DECLARE x int := -111; --for bad insert attempt
+BEGIN
+        SELECT email INTO found_email FROM emails WHERE email = email_name;
+        IF FOUND THEN
+                return_code = '-101';
+        ELSE
+                CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
+                return_code = x;
+        END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
+
 --NATIVE INSERT LOGIN
 
 CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
