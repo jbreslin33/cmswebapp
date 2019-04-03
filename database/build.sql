@@ -834,12 +834,17 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_update_forgot_password(selector TEXT, token TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
-        found_forgot_passwords_id forgot_passwords.id%TYPE;
+        found_email_id forgot_passwords.email_id%TYPE;
         return_code text;
         DECLARE x int := -112; --for generic bad update attempt
 BEGIN
-        SELECT id INTO found_forgot_passwords_id FROM forgot_passwords WHERE expires > NOW();
-        IF found_forgot_passwords_id THEN
+        SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW();
+        IF found_email_id THEN
+		--update password
+		--insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
+        	--WHERE email_id = found_email_id AND password = (CRYPT($2, password));
+
+		update native_logins set password = CRYPT($3, GEN_SALT('md5')) where email_id = found_email_id;     
                 return_code = '-101';
         ELSE
                 --CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
