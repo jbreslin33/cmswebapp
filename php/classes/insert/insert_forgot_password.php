@@ -40,6 +40,7 @@ class InsertForgotPassword
 
                 $return_value = pg_fetch_result($result, 0);
 
+		error_log($return_value);
                 echo $return_value;
 
 

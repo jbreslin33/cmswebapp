@@ -845,7 +845,7 @@ BEGIN
         	--WHERE email_id = found_email_id AND password = (CRYPT($2, password));
 
 		update native_logins set password = CRYPT($3, GEN_SALT('md5')) where email_id = found_email_id;     
-                return_code = '-101';
+                return_code = '-100';
         ELSE
                 --CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
                 return_code = x;

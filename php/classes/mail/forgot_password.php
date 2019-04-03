@@ -20,11 +20,11 @@ class ForgotPassword extends Mail
 			$this->mPhpMailer->AltBody = $body;
 
 			$this->mPhpMailer->send();
-    			echo 'Message has been sent';
+    			//echo 'Message has been sent';
 		} 
 		catch (Exception $e) 
 		{
-    			echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    			//echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 		}
         }
 }

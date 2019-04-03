@@ -40,7 +40,7 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 
                         if (app.mInsertForgotPasswordScreen.mCode == -100)
                         {
-                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                                 document.getElementById('insert_forgot_password_screen_name_message_id').innerHTML = 'A link to reset password has been sent to your email.';
                         }
                         if (app.mInsertForgotPasswordScreen.mCode == -111)

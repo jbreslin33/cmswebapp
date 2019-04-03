@@ -30,6 +30,7 @@ class InsertForgotPasswordScreen
                         {
                                 if (request.status === 200)
                                 {
+					console.log('res:' + this.responseText);
 					APPLICATION.mInsertForgotPasswordScreen.mData = this.responseText;
                                 }
                         }
