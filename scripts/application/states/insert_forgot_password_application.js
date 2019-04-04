@@ -31,12 +31,19 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("INSERT_FORGOT_PASSWORD_APPLICATION: EXECUTE");        
 		}
+			
+		if (app.mInsertForgotPasswordScreen.mHit)
+		{
+			console.log('show spinner');
+			//app.mInsertForgotPasswordScreen.hide();
+			app.mInsertForgotPasswordScreen.showSpinner();
+		}
+
              
 		if (app.mInsertForgotPasswordScreen.mData)
                 {
                         var dataArray = app.mInsertForgotPasswordScreen.mData.split(",");
                         app.mInsertForgotPasswordScreen.mCode = dataArray[0];
-
 
                         if (app.mInsertForgotPasswordScreen.mCode == -100)
                         {
@@ -45,6 +52,7 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
                         }
                         if (app.mInsertForgotPasswordScreen.mCode == -111)
                         {
+				app.mInsertForgotPasswordScreen.show();
                                 document.getElementById('insert_forgot_password_screen_name_message_id').style.color = 'red';
                                 document.getElementById('insert_forgot_password_screen_name_message_id').innerHTML = 'Email does not exist. Do you want to create an account with that email?';
 				app.mInsertForgotPasswordScreen.mCode = 0;
@@ -59,6 +67,7 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("INSERT_FORGOT_PASSWORD_APPLICATION: EXIT");        
 		}
+		this.mHit = false;
 		app.mInsertForgotPasswordScreen.hide();
 		app.mInsertForgotPasswordScreen.mCode = 0;
 		app.mInsertForgotPasswordScreen.mData = null;
