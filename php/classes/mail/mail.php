@@ -9,11 +9,10 @@ class Mail
 {
 	function __construct() 
 	{
-		//$this->mOneRing = 's%%xqc!___bzvReT423*&';
 		try 
 		{
 			$this->mPhpMailer = new PHPMailer(true);                              // Passing `true` enables exceptions
-    			$this->mPhpMailer->SMTPDebug = 2;                                 // Enable verbose debug output
+    			$this->mPhpMailer->SMTPDebug = 0;                                 // Enable verbose debug output
     			$this->mPhpMailer->isSMTP();                                      // Set mailer to use SMTP
 		
 			//$mail->Host = 'smtp1.example.com;smtp2.example.com';  // Specify main and backup SMTP servers
