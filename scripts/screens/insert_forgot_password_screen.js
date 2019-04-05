@@ -49,46 +49,9 @@ class InsertForgotPasswordScreen extends Screen
                 	request.send();
 		}
 	}
-	/*
-        <form id="insert_forgot_password_screen_html_id" class="needs-validation">
-                <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                                <label for="insert_forgot_password_screen_email_id">Email</label>
-                                <input type="text" class="form-control" id="insert_forgot_password_screen_email_id" placeholder="Email" value="Email" required>
-                                <span id='insert_forgot_password_screen_email_message_id'></span>
-                        </div>
-                </div>
-                <div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
-
-                <button id="insertforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
-        </form>
-
-	        <form id="insert_forgot_password_screen_html_id" class="needs-validation">
-                <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                                <label id="insert_forgot_passwored_screen_label_id" for="insert_forgot_password_screen_email_id">Email</label>
-                                <input type="text" class="form-control" id="insert_forgot_password_screen_email_id" placeholder="Email" value="Email" required>
-                                <span id='insert_forgot_password_screen_email_message_id'></span>
-                        </div>
-                </div>
-                <div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
-
-                <button id="insertforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
-        </form>
-
-      */ 
 	showSpinner()
 	{
-              	document.getElementById("insert_forgot_password_screen_label_id").style.visibility = "hidden";
-
-              	document.getElementById("insert_forgot_password_screen_email_id").style.visibility = "hidden";
-
-              	document.getElementById("insertforgotpasswordscreenbuttonid").style.visibility = "hidden";
-
+              	document.getElementById("insert_forgot_password_screen_html_id").style.visibility = "hidden";
               	document.getElementById("insert_forgot_password_screen_spinner_id").style.visibility = "visible";
 	}
 
