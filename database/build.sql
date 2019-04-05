@@ -10,6 +10,13 @@
 --drop procedure triple(int);
 --drop procedure p_insert_club(text,text,int); 
 --drop procedure p_insert_club(text,text); 
+drop table eventos_players_attendance CASCADE;
+drop table evento_types cascade;
+drop table eventos cascade;
+drop table eventos_player_availablility cascade;
+drop table eventos_sessions cascade;
+drop table uniforms_eventos cascade;
+
 
 --PROCEDURE DROPS
 drop procedure p_insert_google_login(text,text,text,text,text,int); 
@@ -71,11 +78,11 @@ DROP TABLE products CASCADE;
 DROP TABLE discount_units CASCADE;
 
 --EVENTS
-DROP TABLE eventos_players_attendance CASCADE;
-DROP TABLE eventos_players_availability CASCADE;
+DROP TABLE practices_players_attendance CASCADE;
+DROP TABLE practices_players_availability CASCADE;
 
 
-DROP TABLE eventos_sessions CASCADE;
+DROP TABLE practices_sessions CASCADE;
 DROP TABLE sessions CASCADE;
 
 --PERSON RELATIONSHIPS
@@ -116,7 +123,7 @@ drop table emails cascade;
 DROP TABLE persons CASCADE;
 
 --UNIFORMS
-DROP TABLE uniforms_eventos CASCADE;
+DROP TABLE uniforms_practices CASCADE;
 DROP TABLE uniforms_order CASCADE;
 DROP TABLE uniforms_sizes CASCADE;
 DROP TABLE uniforms CASCADE;
@@ -126,8 +133,8 @@ DROP TABLE availability CASCADE;
 DROP TABLE attendance CASCADE;
 
 --EVENTOS
-DROP TABLE eventos CASCADE;
-DROP TABLE evento_types CASCADE;
+DROP TABLE practices CASCADE;
+DROP TABLE practice_types CASCADE;
 
 DROP TABLE teams CASCADE;
 DROP TABLE pitches CASCADE;
@@ -257,19 +264,19 @@ CREATE TABLE zones
 );
 
 
-CREATE TABLE evento_types
+CREATE TABLE practice_types
 (
 	id SERIAL,
 	name text,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE eventos 
+CREATE TABLE practices 
 (
         id SERIAL,
 
 	--time
-	evento_date date NOT NULL,
+	practice_date date NOT NULL,
         arrival_time time, --only 1 arrival time leave it
         start_time time, --only 1 start time leave it
         end_time time,
@@ -278,11 +285,11 @@ CREATE TABLE eventos
 	pitch_id integer, --all you need for a practice	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
-	evento_types_id integer,
+	practice_types_id integer,
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (evento_types_id) REFERENCES evento_types(id),
+	FOREIGN KEY (practice_types_id) REFERENCES practice_types(id),
 	PRIMARY KEY (id)
 );
 
@@ -307,14 +314,14 @@ CREATE TABLE uniforms_order
         PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_eventos 
+CREATE TABLE uniforms_practices 
 (
 	id SERIAL,
 	uniform_id integer,
 	uniforms_order_id integer,
-	evento_id integer,
+	practice_id integer,
         PRIMARY KEY (id),
-	FOREIGN KEY (evento_id) REFERENCES eventos(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
@@ -346,15 +353,15 @@ CREATE TABLE sessions_media
         PRIMARY KEY (id)
 );
 
-CREATE TABLE eventos_sessions 
+CREATE TABLE practices_sessions 
 (
         id SERIAL,
-        evento_id integer NOT NULL,
+        practice_id integer NOT NULL,
         session_id integer NOT NULL,
         start_time timestamp, --if you want for each session
         end_time timestamp, --if you want for efficiency
         PRIMARY KEY (id),
-	FOREIGN KEY (evento_id) REFERENCES eventos(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (session_id) REFERENCES sessions(id)
 );
 
@@ -685,26 +692,26 @@ CREATE TABLE team_managers
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE eventos_players_availability 
+CREATE TABLE practices_players_availability 
 (
         id SERIAL,
-        evento_id integer NOT NULL,
+        practice_id integer NOT NULL,
        	team_player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
-	FOREIGN KEY (evento_id) REFERENCES eventos(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
         PRIMARY KEY (id)
 );
 
-CREATE TABLE eventos_players_attendance 
+CREATE TABLE practices_players_attendance 
 (
         id SERIAL,
-        evento_id integer NOT NULL,
+        practice_id integer NOT NULL,
        	team_player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
-	FOREIGN KEY (evento_id) REFERENCES eventos(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
         PRIMARY KEY (id)
