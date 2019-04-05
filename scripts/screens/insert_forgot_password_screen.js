@@ -17,6 +17,20 @@ class InsertForgotPasswordScreen
 		this.mEmail = null;
 		
 		document.getElementById("insertforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
+                
+                //states
+		this.mStateLogs = false;
+                this.mStateEnterLogs = true;
+                this.mStateExecuteLogs = false;
+                this.mStateExitLogs = false;
+
+                this.mStateMachine = new StateMachine(this);
+                this.mINIT_INSERT_FORGOT_PASSWORD_SCREEN            = new INIT_INSERT_FORGOT_PASSWORD_SCREEN();
+                this.mGLOBAL_INSERT_FORGOT_PASSWORD_SCREEN            = new GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN();
+                this.mWAIT_INSERT_FORGOT_PASSWORD_SCREEN            = new WAIT_INSERT_FORGOT_PASSWORD_SCREEN();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_FORGOT_PASSWORD_SCREEN);
+                this.mStateMachine.changeState(this.mINIT_INSERT_FORGOT_PASSWORD_SCREEN);
 	}
 
 	hit()
@@ -49,7 +63,6 @@ class InsertForgotPasswordScreen
        
 	showSpinner()
 	{
-		console.log('in funcion');
               	document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
               	document.getElementById("insert_forgot_password_screen_spinner_id").style.display = "block";
 	}
@@ -63,5 +76,11 @@ class InsertForgotPasswordScreen
 	hide()
 	{
               	document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
+	}
+
+	update(timestamp)
+	{
+		console.log('update');
+		this.mStateMachine.update();
 	}
 }

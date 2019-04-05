@@ -319,11 +319,8 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 			
 		if (app.mInsertForgotPasswordScreen.mHit)
 		{
-			console.log('show spinner');
-			//app.mInsertForgotPasswordScreen.hide();
 			app.mInsertForgotPasswordScreen.showSpinner();
 		}
-
              
 		if (app.mInsertForgotPasswordScreen.mData)
                 {

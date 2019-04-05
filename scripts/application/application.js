@@ -68,6 +68,11 @@ class Application
 	update(timestamp)
 	{
 		this.mStateMachine.update();
+
+		if (this.mInsertForgotPasswordScreen)
+		{
+			this.mInsertForgotPasswordScreen.update(timestamp);
+		}
 		
 		if (this.mDailySchedule)
 		{
