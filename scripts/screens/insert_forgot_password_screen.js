@@ -52,7 +52,7 @@ class InsertForgotPasswordScreen extends Screen
        
 	showSpinner()
 	{
-              	document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
+              	//document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
               	document.getElementById("insert_forgot_password_screen_spinner_id").style.display = "block";
 	}
 
