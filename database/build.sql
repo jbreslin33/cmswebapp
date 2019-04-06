@@ -79,24 +79,8 @@ CREATE TABLE teams
 	UNIQUE (name,club_id)
 );
 
-CREATE TABLE microcycles
-(
-        id SERIAL,
-	name text,
-	url text,
-        PRIMARY KEY (id)
-);
-
-CREATE TABLE mesocycles
-(
-        id SERIAL,
-	name text,
-	url text,
-        PRIMARY KEY (id)
-);
-
 --season
-CREATE TABLE macroycles
+CREATE TABLE macrocycles
 (
         id SERIAL,
 	start_timestamp timestamp,
@@ -107,6 +91,28 @@ CREATE TABLE macroycles
 	FOREIGN KEY (team_id) REFERENCES teams(id),
         PRIMARY KEY (id)
 );
+
+CREATE TABLE mesocycles
+(
+        id SERIAL,
+	name text,
+	url text,
+	macrocycle_id integer,
+	FOREIGN KEY (macrocycle_id) REFERENCES macrocycles(id),
+        PRIMARY KEY (id)
+);
+
+
+CREATE TABLE microcycles
+(
+        id SERIAL,
+	name text,
+	url text,
+	mesocycle_id integer,
+	FOREIGN KEY (mesocycle_id) REFERENCES mesocycles(id),
+        PRIMARY KEY (id)
+);
+
 
 CREATE TABLE sessions 
 (
