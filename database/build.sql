@@ -129,32 +129,32 @@ CREATE TABLE zones
 );
 
 
-CREATE TABLE practice_types
+CREATE TABLE session_types
 (
 	id SERIAL,
 	name text,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE practices 
+CREATE TABLE sessions 
 (
         id SERIAL,
 
 	--time
-	practice_date date NOT NULL,
+	session_date date NOT NULL,
         arrival_time time, --only 1 arrival time leave it
         start_time time, --only 1 start time leave it
         end_time time,
         address text,
         coordinates text,
-	pitch_id integer, --all you need for a practice	
+	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
-	practice_types_id integer,
+	session_types_id integer,
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (practice_types_id) REFERENCES practice_types(id),
+	FOREIGN KEY (session_types_id) REFERENCES session_types(id),
 	PRIMARY KEY (id)
 );
 
@@ -179,14 +179,14 @@ CREATE TABLE uniforms_order
         PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_practices 
+CREATE TABLE uniforms_sessions 
 (
 	id SERIAL,
 	uniform_id integer,
 	uniforms_order_id integer,
-	practice_id integer,
+	session_id integer,
         PRIMARY KEY (id),
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
@@ -218,15 +218,15 @@ CREATE TABLE exercises_media
         PRIMARY KEY (id)
 );
 
-CREATE TABLE practices_exercises 
+CREATE TABLE sessions_exercises 
 (
         id SERIAL,
-        practice_id integer NOT NULL,
+        session_id integer NOT NULL,
         exercise_id integer NOT NULL,
         start_time timestamp, --if you want for each exercise
         end_time timestamp, --if you want for efficiency
         PRIMARY KEY (id),
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (exercise_id) REFERENCES exercises(id)
 );
 
@@ -557,26 +557,26 @@ CREATE TABLE team_managers
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE practices_players_availability 
+CREATE TABLE sessions_players_availability 
 (
         id SERIAL,
-        practice_id integer NOT NULL,
+        session_id integer NOT NULL,
        	team_player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
         PRIMARY KEY (id)
 );
 
-CREATE TABLE practices_players_attendance 
+CREATE TABLE sessions_players_attendance 
 (
         id SERIAL,
-        practice_id integer NOT NULL,
+        session_id integer NOT NULL,
        	team_player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
-	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
         PRIMARY KEY (id)
