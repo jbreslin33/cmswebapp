@@ -79,63 +79,6 @@ CREATE TABLE teams
 	UNIQUE (name,club_id)
 );
 
---FOR SESSIONS LATER
-CREATE TABLE genders 
-(
-        id SERIAL,
-	name text UNIQUE,
-        PRIMARY KEY (id)
-);
-
-
---442 433 451
-CREATE TABLE formations 
-(
-	id SERIAL,
-    	name text UNIQUE, 
-	PRIMARY KEY (id)
-);
-
---u3 u4 u19  
-CREATE TABLE ages 
-(
-	id SERIAL,
-    	name text UNIQUE, 
-	PRIMARY KEY (id)
-);
-
---a b c  
-CREATE TABLE levels 
-(
-	id SERIAL,
-    	name text UNIQUE, 
-	PRIMARY KEY (id)
-);
-
--- possessions 
-CREATE TABLE possessions 
-(
-	id SERIAL,
-    	name text UNIQUE, 
-	PRIMARY KEY (id)
-);
-
---  zones
-CREATE TABLE zones 
-(
-	id SERIAL,
-    	name text UNIQUE, 
-	PRIMARY KEY (id)
-);
-
-
-CREATE TABLE session_types
-(
-	id SERIAL,
-	name text,
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE sessions 
 (
         id SERIAL,
@@ -150,11 +93,9 @@ CREATE TABLE sessions
 	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
-	session_types_id integer,
 
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (session_types_id) REFERENCES session_types(id),
 	PRIMARY KEY (id)
 );
 
@@ -241,68 +182,6 @@ CREATE TABLE attendance
 (
 	id SERIAL,
 	name text,
-        PRIMARY KEY (id)
-);
-
---search fields for exercises
-
-CREATE TABLE genders_exercises 
-(
-        id SERIAL,
-	gender_id integer,
-	exercise_id integer,
-        PRIMARY KEY (id),
-        FOREIGN KEY(gender_id) REFERENCES genders(id),
-        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
-);
-
-CREATE TABLE formations_exercises 
-(
-        id SERIAL,
-	formation_id integer,
-	exercise_id integer,
-        PRIMARY KEY (id),
-        FOREIGN KEY(formation_id) REFERENCES formations(id),
-        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
-);
-
-CREATE TABLE ages_exercises 
-(
-        id SERIAL,
-	age_id integer,
-	exercise_id integer,
-        PRIMARY KEY (id),
-        FOREIGN KEY(age_id) REFERENCES ages(id),
-        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
-);
-
-CREATE TABLE levels_exercises 
-(
-        id SERIAL,
-	level_id integer,
-	exercise_id integer,
-        PRIMARY KEY (id),
-        FOREIGN KEY(level_id) REFERENCES levels(id),
-        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
-);
-
-CREATE TABLE possessions_exercises 
-(
-        id SERIAL,
-	possession_id integer,
-	exercise_id integer,
-        PRIMARY KEY (id),
-        FOREIGN KEY(possession_id) REFERENCES possessions(id),
-        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
-);
-
-CREATE TABLE zones_exercises 
-(
-        id SERIAL,
-	zones_id integer,
-	exercise_id integer,
-        FOREIGN KEY(zones_id) REFERENCES zones(id),
-        FOREIGN KEY(exercise_id) REFERENCES exercises(id),
         PRIMARY KEY (id)
 );
 
