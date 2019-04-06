@@ -2,143 +2,9 @@
 --***************************************************************
 --******************  DROP TABLES *************************
 --**************************************************************
---OLD DROPS
---drop procedure p_insert_native_login(text,text,text,text,text,text,text); 
---drop procedure p_insert_google_login(text,text,text,text,text); 
---drop function f_add_club(text,text); 
---LIVE DROPS
---drop procedure triple(int);
---drop procedure p_insert_club(text,text,int); 
---drop procedure p_insert_club(text,text); 
-drop table eventos_players_attendance CASCADE;
-drop table evento_types cascade;
-drop table eventos cascade;
-drop table eventos_player_availablility cascade;
-drop table eventos_sessions cascade;
-drop table uniforms_eventos cascade;
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 
-
---PROCEDURE DROPS
-drop procedure p_insert_google_login(text,text,text,text,text,int); 
-drop procedure p_update_google_login(text,text,text,text,text,int); 
-
-drop procedure p_insert_native_login(text,text,text,text,text,text,text,int); 
-
-drop procedure p_insert_club(text,text,int,int); 
-
---FUNCTION DROPS
-drop function f_get_email_id(text); 
-drop function f_get_native_email_id(text); 
-drop function f_get_google_email_id(text); 
-
-drop function f_native_login(text,text); 
-drop function f_google_login(text,text,text,text,text); 
-
-drop function f_update_forgot_password(text,text,text); 
-
-drop function f_insert_native_login(text,text,text,text,text,text,text); 
-
-drop function f_insert_club(text,text,int); 
-drop function f_insert_forgot_password(text,text,text); 
-
-
---TABLE DROPS
-DROP TABLE error_log CASCADE; 
-
-DROP TABLE sessions_media CASCADE; 
-DROP TABLE media CASCADE; 
-
-DROP TABLE genders_sessions CASCADE;
-DROP TABLE formations_sessions CASCADE;
-DROP TABLE ages_sessions CASCADE;
-DROP TABLE levels_sessions CASCADE;
-DROP TABLE possesions_sessions CASCADE;
-DROP TABLE zones_sessions CASCADE;
-
-DROP TABLE genders CASCADE;
-DROP TABLE ages CASCADE;
-DROP TABLE levels CASCADE;
-DROP TABLE possessions CASCADE;
-DROP TABLE zones CASCADE;
-DROP TABLE formations CASCADE;
-
---ORDER SYSTEM
-DROP TABLE order_items CASCADE;
-DROP TABLE orders CASCADE;
-
-DROP TABLE product_pricing CASCADE;
-
-DROP TABLE product_types_products CASCADE;
-DROP TABLE product_discount CASCADE;
-DROP TABLE product_type_discount CASCADE;
-DROP TABLE product_types CASCADE;
-
-
-DROP TABLE products CASCADE;
-DROP TABLE discount_units CASCADE;
-
---EVENTS
-DROP TABLE practices_players_attendance CASCADE;
-DROP TABLE practices_players_availability CASCADE;
-
-
-DROP TABLE practices_sessions CASCADE;
-DROP TABLE sessions CASCADE;
-
---PERSON RELATIONSHIPS
---drop table parent_child cascade; --let the person choose sex
---drop table siblings cascade;  -- if you add a grace a daughter then it automatically makes grace and luke siblings as it checks father_daughter table and father_son table and then if there is no current sibling entry it makes one for luke and grace
---drop table friends cascade;
-
-
---USERS
-DROP TABLE team_players CASCADE;
-DROP TABLE team_coaches CASCADE;
-DROP TABLE team_managers CASCADE;
-DROP TABLE team_members CASCADE;
-
-DROP TABLE club_players CASCADE;
-DROP TABLE club_coaches CASCADE;
-DROP TABLE club_managers CASCADE;
-DROP TABLE club_administrators CASCADE;
-
-DROP TABLE players CASCADE;
-DROP TABLE coaches CASCADE;
-DROP TABLE managers CASCADE;
-
-DROP TABLE club_members CASCADE;
-
-DROP TABLE forgot_passwords CASCADE;
-
-DROP TABLE native_logins CASCADE;
-DROP TABLE google_logins CASCADE;
-
-drop table follow_schedules cascade;
-drop table persons_relationships cascade;
-drop table relationships cascade;
-
-DROP TABLE users_persons CASCADE;
-DROP TABLE users CASCADE;
-drop table emails cascade;
-DROP TABLE persons CASCADE;
-
---UNIFORMS
-DROP TABLE uniforms_practices CASCADE;
-DROP TABLE uniforms_order CASCADE;
-DROP TABLE uniforms_sizes CASCADE;
-DROP TABLE uniforms CASCADE;
-
---ATTENDANCE
-DROP TABLE availability CASCADE;
-DROP TABLE attendance CASCADE;
-
---EVENTOS
-DROP TABLE practices CASCADE;
-DROP TABLE practice_types CASCADE;
-
-DROP TABLE teams CASCADE;
-DROP TABLE pitches CASCADE;
-DROP TABLE clubs CASCADE;
 
 --****************************************************************
 --***************************************************************
@@ -162,7 +28,6 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
-drop extension pgcrypto;
 create extension pgcrypto;
 --****************************************************************
 --***************************************************************
@@ -327,7 +192,7 @@ CREATE TABLE uniforms_practices
 );
 
 
-CREATE TABLE sessions 
+CREATE TABLE exercises 
 (
         id SERIAL,
 	url text UNIQUE, --link
@@ -342,27 +207,27 @@ CREATE TABLE media
 );
 
 
-CREATE TABLE sessions_media 
+CREATE TABLE exercises_media 
 (
 	id SERIAL,
-	sessions_id integer,
+	exercises_id integer,
 	media_id integer, --picture, text, video, link
 	url text, 
 	FOREIGN KEY (media_id) REFERENCES media(id),
-	FOREIGN KEY (sessions_id) REFERENCES sessions(id),
+	FOREIGN KEY (exercises_id) REFERENCES exercises(id),
         PRIMARY KEY (id)
 );
 
-CREATE TABLE practices_sessions 
+CREATE TABLE practices_exercises 
 (
         id SERIAL,
         practice_id integer NOT NULL,
-        session_id integer NOT NULL,
-        start_time timestamp, --if you want for each session
+        exercise_id integer NOT NULL,
+        start_time timestamp, --if you want for each exercise
         end_time timestamp, --if you want for efficiency
         PRIMARY KEY (id),
 	FOREIGN KEY (practice_id) REFERENCES practices(id),
-	FOREIGN KEY (session_id) REFERENCES sessions(id)
+	FOREIGN KEY (exercise_id) REFERENCES exercises(id)
 );
 
 CREATE TABLE availability 
@@ -379,65 +244,65 @@ CREATE TABLE attendance
         PRIMARY KEY (id)
 );
 
---search fields for sessions
+--search fields for exercises
 
-CREATE TABLE genders_sessions 
+CREATE TABLE genders_exercises 
 (
         id SERIAL,
 	gender_id integer,
-	session_id integer,
+	exercise_id integer,
         PRIMARY KEY (id),
         FOREIGN KEY(gender_id) REFERENCES genders(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id)
+        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
 );
 
-CREATE TABLE formations_sessions 
+CREATE TABLE formations_exercises 
 (
         id SERIAL,
 	formation_id integer,
-	session_id integer,
+	exercise_id integer,
         PRIMARY KEY (id),
         FOREIGN KEY(formation_id) REFERENCES formations(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id)
+        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
 );
 
-CREATE TABLE ages_sessions 
+CREATE TABLE ages_exercises 
 (
         id SERIAL,
 	age_id integer,
-	session_id integer,
+	exercise_id integer,
         PRIMARY KEY (id),
         FOREIGN KEY(age_id) REFERENCES ages(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id)
+        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
 );
 
-CREATE TABLE levels_sessions 
+CREATE TABLE levels_exercises 
 (
         id SERIAL,
 	level_id integer,
-	session_id integer,
+	exercise_id integer,
         PRIMARY KEY (id),
         FOREIGN KEY(level_id) REFERENCES levels(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id)
+        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
 );
 
-CREATE TABLE possesions_sessions 
+CREATE TABLE possessions_exercises 
 (
         id SERIAL,
 	possession_id integer,
-	session_id integer,
+	exercise_id integer,
         PRIMARY KEY (id),
         FOREIGN KEY(possession_id) REFERENCES possessions(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id)
+        FOREIGN KEY(exercise_id) REFERENCES exercises(id)
 );
 
-CREATE TABLE zones_sessions 
+CREATE TABLE zones_exercises 
 (
         id SERIAL,
 	zones_id integer,
-	session_id integer,
+	exercise_id integer,
         FOREIGN KEY(zones_id) REFERENCES zones(id),
-        FOREIGN KEY(session_id) REFERENCES sessions(id),
+        FOREIGN KEY(exercise_id) REFERENCES exercises(id),
         PRIMARY KEY (id)
 );
 
