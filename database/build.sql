@@ -79,6 +79,35 @@ CREATE TABLE teams
 	UNIQUE (name,club_id)
 );
 
+CREATE TABLE microcycles
+(
+        id SERIAL,
+	name text,
+	url text,
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE mesocycles
+(
+        id SERIAL,
+	name text,
+	url text,
+        PRIMARY KEY (id)
+);
+
+--season
+CREATE TABLE macroycles
+(
+        id SERIAL,
+	start_timestamp timestamp,
+	end_timestamp timestamp,
+	team_id integer,
+	name text,
+	url text,
+	FOREIGN KEY (team_id) REFERENCES teams(id),
+        PRIMARY KEY (id)
+);
+
 CREATE TABLE sessions 
 (
         id SERIAL,
@@ -92,10 +121,9 @@ CREATE TABLE sessions
         coordinates text,
 	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
-	team_id integer,
-
-	FOREIGN KEY (team_id) REFERENCES teams(id),
+	microcycle_id integer,
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
+	FOREIGN KEY (microcycle_id) REFERENCES microcycles(id),
 	PRIMARY KEY (id)
 );
 
@@ -132,33 +160,6 @@ CREATE TABLE uniforms_sessions
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
 
-CREATE TABLE microcycles
-(
-        id SERIAL,
-	name text,
-	url text,
-        PRIMARY KEY (id)
-);
-
-CREATE TABLE mesocycles
-(
-        id SERIAL,
-	name text,
-	url text,
-        PRIMARY KEY (id)
-);
-
---season
-CREATE TABLE macroycles
-(
-        id SERIAL,
-	start_timestamp timestamp,
-	end_timestamp timestamp,
-	team_id integer,
-	name text,
-	url text,
-        PRIMARY KEY (id)
-);
 
 CREATE TABLE sico_exercises
 (
