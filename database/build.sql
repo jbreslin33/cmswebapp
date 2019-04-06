@@ -132,6 +132,33 @@ CREATE TABLE uniforms_sessions
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
 
+CREATE TABLE microcycles
+(
+        id SERIAL,
+	name text,
+	url text,
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE mesocycles
+(
+        id SERIAL,
+	name text,
+	url text,
+        PRIMARY KEY (id)
+);
+
+--season
+CREATE TABLE macroycles
+(
+        id SERIAL,
+	start_timestamp timestamp,
+	end_timestamp timestamp,
+	team_id integer,
+	name text,
+	url text,
+        PRIMARY KEY (id)
+);
 
 CREATE TABLE sico_exercises
 (
