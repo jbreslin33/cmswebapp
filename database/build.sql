@@ -133,12 +133,57 @@ CREATE TABLE uniforms_sessions
 );
 
 
-CREATE TABLE exercises 
+CREATE TABLE sico_exercises
 (
         id SERIAL,
 	url text UNIQUE, --link
         PRIMARY KEY (id)
 );
+
+CREATE TABLE possession_exercises
+(
+        id SERIAL,
+	url text UNIQUE, --link
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE functional_exercises 
+(
+        id SERIAL,
+	url text UNIQUE, --link
+        PRIMARY KEY (id)
+);
+
+create table sessions_sico_exercises
+(
+	id serial,
+	session_id integer,
+	sico_exercise_id integer,
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (sico_exercise_id) REFERENCES sico_exercises(id),
+        PRIMARY KEY (id)
+);
+
+create table sessions_possesion_exercises
+(
+	id serial,
+	session_id integer,
+	possession_exercise_id integer,
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (possession_exercise_id) REFERENCES possession_exercises(id),
+        PRIMARY KEY (id)
+);
+
+create table sessions_functional_exercises
+(
+	id serial,
+	session_id integer,
+	functional_exercise_id integer,
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (functional_exercise_id) REFERENCES functional_exercises(id),
+        PRIMARY KEY (id)
+);
+
 
 CREATE TABLE media 
 (
@@ -147,29 +192,6 @@ CREATE TABLE media
         PRIMARY KEY (id)
 );
 
-
-CREATE TABLE exercises_media 
-(
-	id SERIAL,
-	exercises_id integer,
-	media_id integer, --picture, text, video, link
-	url text, 
-	FOREIGN KEY (media_id) REFERENCES media(id),
-	FOREIGN KEY (exercises_id) REFERENCES exercises(id),
-        PRIMARY KEY (id)
-);
-
-CREATE TABLE sessions_exercises 
-(
-        id SERIAL,
-        session_id integer NOT NULL,
-        exercise_id integer NOT NULL,
-        start_time timestamp, --if you want for each exercise
-        end_time timestamp, --if you want for efficiency
-        PRIMARY KEY (id),
-	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (exercise_id) REFERENCES exercises(id)
-);
 
 CREATE TABLE availability 
 (
