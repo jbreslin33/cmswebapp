@@ -93,16 +93,19 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
                 {
                         var dataArray = owner.mData.split(",");
                         owner.mCode = dataArray[0];
+			console.log('mCode from owner:' + owner.mCode);
 
                         if (owner.mCode == -100)
                         {
                                 owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
                         }
-                        if (owner.mCode == -111)
+                        if (owner.mCode == -102)
                         {
                                 owner.show();
-                                document.getElementById('insert_forgot_password_screen_name_message_id').style.color = 'red';
-                                document.getElementById('insert_forgot_password_screen_name_message_id').innerHTML = 'Email does not exist. Do you want to create an account with that email?';
+				//document.getElementById("insert_forgot_password_screen_spinner_id").style.visibility = "visible";
+
+                                document.getElementById('insert_forgot_password_screen_email_message_id').style.color = 'red';
+                                document.getElementById('insert_forgot_password_screen_email_message_id').innerHTML = 'Email does not exist. Do you want to create an account with that email?';
                                 owner.mCode = 0;
                                 owner.mData = null;
                         }

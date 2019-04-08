@@ -58,6 +58,7 @@ class InsertForgotPasswordScreen extends Screen
 	show()
 	{
               	document.getElementById("insert_forgot_password_screen_html_id").style.display = "block";
+              	document.getElementById("insert_forgot_password_screen_html_id").style.visibility = "visible";
               	document.getElementById("insert_forgot_password_screen_spinner_id").style.visibility = "hidden";
 	}
 
