@@ -73,6 +73,10 @@ class Application
 		{
 			this.mInsertForgotPasswordScreen.update(timestamp);
 		}
+		if (this.mUpdateForgotPasswordScreen)
+		{
+			this.mUpdateForgotPasswordScreen.update(timestamp);
+		}
 		
 		if (this.mDailySchedule)
 		{
