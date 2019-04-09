@@ -117,12 +117,9 @@ CREATE TABLE microcycles
 CREATE TABLE sessions 
 (
         id SERIAL,
-
-	--time
-	session_date date NOT NULL,
-        arrival_time time, --only 1 arrival time leave it
-        start_time time, --only 1 start time leave it
-        end_time time,
+        arrival_time timestamp, --only 1 arrival time leave it
+        start_time timestamp, --only 1 start time leave it
+        end_time timestamp,
         address text,
         coordinates text,
 	pitch_id integer, --all you need for a session	
@@ -130,6 +127,25 @@ CREATE TABLE sessions
 	microcycle_id integer,
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (microcycle_id) REFERENCES microcycles(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE games 
+(
+        id SERIAL,
+
+	--time
+        arrival_time timestamp, --only 1 arrival time leave it
+        start_time timestamp, --only 1 start time leave it
+        actual_start_time timestamp, --only 1 start time leave it
+        end_time timestamp,
+        address text,
+        coordinates text,
+	pitch_id integer, --all you need for a session	
+	field_name text, --field 3, field A, 9v9 field etc if nothing in db
+	macrocycle_id integer,
+	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
+	FOREIGN KEY (macrocycle_id) REFERENCES macrocycles(id),
 	PRIMARY KEY (id)
 );
 
