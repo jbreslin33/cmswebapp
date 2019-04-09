@@ -362,26 +362,6 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("UPDATE_FORGOT_PASSWORD_APPLICATION: EXECUTE");        
 		}
-             
-		if (app.mUpdateForgotPasswordScreen.mData)
-                {
-                        var dataArray = app.mUpdateForgotPasswordScreen.mData.split(",");
-                        app.mUpdateForgotPasswordScreen.mCode = dataArray[0];
-
-
-                        if (app.mUpdateForgotPasswordScreen.mCode == -100)
-                        {
-                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('update_forgot_password_screen_name_message_id').innerHTML = 'Success';
-                        }
-                        if (app.mUpdateForgotPasswordScreen.mCode == -111)
-                        {
-                                document.getElementById('update_forgot_password_screen_name_message_id').style.color = 'red';
-                                document.getElementById('update_forgot_password_screen_name_message_id').innerHTML = 'Email does not exist. Do you want to create an account with that email?';
-				app.mUpdateForgotPasswordScreen.mCode = 0;
-				app.mUpdateForgotPasswordScreen.mData = null;
-                        }
-                }
 	}
 
         exit(app)

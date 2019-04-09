@@ -1,5 +1,5 @@
 
-class GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN extends State
+class GLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN extends State
 {
         constructor()
         {
@@ -10,7 +10,7 @@ class GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateEnterLogs)
                 {
-                        console.log("GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN: ENTER");
+                        console.log("GLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN: ENTER");
                 }
         }
 
@@ -18,7 +18,7 @@ class GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExecuteLogs)
                 {
-                        console.log("GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN: EXECUTE");
+                        console.log("GLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN: EXECUTE");
                 }
         }
 
@@ -26,12 +26,12 @@ class GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExitLogs)
                 {
-                        console.log("GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN: EXIT");
+                        console.log("GLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN: EXIT");
                 }
         }
 }
 
-class INIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
+class INIT_UPDATE_FORGOT_PASSWORD_SCREEN extends State
 {
         constructor()
         {
@@ -42,7 +42,7 @@ class INIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateEnterLogs)
                 {
-                        console.log("INIT_INSERT_FORGOT_PASSWORD_SCREEN: ENTER");
+                        console.log("INIT_UPDATE_FORGOT_PASSWORD_SCREEN: ENTER");
                 }
         }
 
@@ -50,11 +50,11 @@ class INIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExecuteLogs)
                 {
-                        console.log("INIT_INSERT_FORGOT_PASSWORD_SCREEN: EXECUTE");
+                        console.log("INIT_UPDATE_FORGOT_PASSWORD_SCREEN: EXECUTE");
                 }
                 if (owner.mHit)
                 {
-                        owner.mStateMachine.changeState(owner.mWAIT_INSERT_FORGOT_PASSWORD_SCREEN);
+                        owner.mStateMachine.changeState(owner.mWAIT_UPDATE_FORGOT_PASSWORD_SCREEN);
                 }
         }
 
@@ -62,12 +62,12 @@ class INIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExitLogs)
                 {
-                        console.log("INIT_INSERT_FORGOT_PASSWORD_SCREEN: EXIT");
+                        console.log("INIT_UPDATE_FORGOT_PASSWORD_SCREEN: EXIT");
                 }
         }
 }
 
-class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
+class WAIT_UPDATE_FORGOT_PASSWORD_SCREEN extends State
 {
         constructor()
         {
@@ -78,7 +78,7 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateEnterLogs)
                 {
-                        console.log("WAIT_INSERT_FORGOT_PASSWORD_SCREEN: ENTER");
+                        console.log("WAIT_UPDATE_FORGOT_PASSWORD_SCREEN: ENTER");
                 }
                 owner.showSpinner();
         }
@@ -87,7 +87,7 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExecuteLogs)
                 {
-                        console.log("WAIT_INSERT_FORGOT_PASSWORD_SCREEN: EXECUTE");
+                        console.log("WAIT_UPDATE_FORGOT_PASSWORD_SCREEN: EXECUTE");
                 }
 
                 if (owner.mData)
@@ -103,8 +103,8 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
                         if (owner.mCode == -102)
                         {
                                 owner.show();
-                                document.getElementById('insert_forgot_password_screen_email_message_id').style.color = 'red';
-                                document.getElementById('insert_forgot_password_screen_email_message_id').innerHTML = 'Email does not exist. Would you like to <a href="#insert_native_login_screen">Join</a> with the above email instead? Or perhaps you typed email wrong?';
+                                document.getElementById('update_forgot_password_screen_email_message_id').style.color = 'red';
+                                document.getElementById('update_forgot_password_screen_email_message_id').innerHTML = 'Email does not exist. Would you like to <a href="#update_native_login_screen">Join</a> with the above email instead? Or perhaps you typed email wrong?';
                                 owner.mCode = 0;
                                 owner.mData = null;
                         }
@@ -115,7 +115,7 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExitLogs)
                 {
-                        console.log("WAIT_INSERT_FORGOT_PASSWORD_SCREEN: EXIT");
+                        console.log("WAIT_UPDATE_FORGOT_PASSWORD_SCREEN: EXIT");
                 }
         }
 }

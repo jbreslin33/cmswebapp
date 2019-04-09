@@ -8,6 +8,10 @@ class InsertForgotPasswordScreen extends Screen
 
 		location.hash = "insert_forgot_password_screen";
 
+		//html ids 
+		this.mSpinnerId = "insert_forgot_password_screen_spinner_id";
+		this.mHtmlId = "insert_forgot_password_screen_html_id";
+
 		//sql php vars
 		this.mEmail = null;
 		
@@ -48,22 +52,5 @@ class InsertForgotPasswordScreen extends Screen
 			request.open('POST', url);
                 	request.send();
 		}
-	}
-	showSpinner()
-	{
-              	document.getElementById("insert_forgot_password_screen_html_id").style.visibility = "hidden";
-              	document.getElementById("insert_forgot_password_screen_spinner_id").style.visibility = "visible";
-	}
-
-	show()
-	{
-              	document.getElementById("insert_forgot_password_screen_html_id").style.display = "block";
-              	document.getElementById("insert_forgot_password_screen_html_id").style.visibility = "visible";
-              	document.getElementById("insert_forgot_password_screen_spinner_id").style.visibility = "hidden";
-	}
-
-	hide()
-	{
-              	document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
 	}
 }

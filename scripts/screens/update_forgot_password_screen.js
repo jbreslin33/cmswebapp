@@ -1,22 +1,30 @@
 'use strict';
 
-class UpdateForgotPasswordScreen
+class UpdateForgotPasswordScreen extends Screen
 {
 	constructor(application)
 	{
-		this.mApplication = application;
+                super(application);
 
 		location.hash = "update_forgot_password_screen";
 
-		this.mCode = 0;
-                this.mData = null;
+		//html ids
+               	this.mSpinnerId = "update_forgot_password_screen_spinner_id";
+                this.mHtmlId = "update_forgot_password_screen_html_id";
 
-		//sql php vars
+                //sql php vars
 		this.mPassword1 = null;
 		this.mPassword2 = null;
 
-		//document.getElementById("updateforgotpasswordscreenbuttonid").addEventListener("click",this.hit.bind(this));
 		document.getElementById("updateforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
+
+                this.mStateMachine = new StateMachine(this);
+                this.mINIT_UPDATE_FORGOT_PASSWORD_SCREEN            = new INIT_UPDATE_FORGOT_PASSWORD_SCREEN();
+                this.mGLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN            = new GLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN();
+                this.mWAIT_UPDATE_FORGOT_PASSWORD_SCREEN            = new WAIT_UPDATE_FORGOT_PASSWORD_SCREEN();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN);
+                this.mStateMachine.changeState(this.mINIT_UPDATE_FORGOT_PASSWORD_SCREEN);
 	}
 
 	hit()
@@ -38,6 +46,7 @@ class UpdateForgotPasswordScreen
                                         var data = this.responseText;
                                         if (data)
                                         {
+						console.log('data:' + data);
 						APPLICATION.mUpdateForgotPasswordScreen.mData = data;
                                         }
                                 }
@@ -65,15 +74,5 @@ class UpdateForgotPasswordScreen
 				console.log('no match not posting');
 			}
 		}
-	}
-        
-	show()
-	{
-              	document.getElementById("update_forgot_password_screen_html_id").style.display = "block";
-	}
-
-	hide()
-	{
-              document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
 	}
 }

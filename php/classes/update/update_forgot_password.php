@@ -15,6 +15,7 @@ class UpdateForgotPassword
                 $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $selector ,$token, $password));
 
                 $return_value = pg_fetch_result($result, 0);
+		error_log($return_value);
 
                 echo $return_value;
         }
