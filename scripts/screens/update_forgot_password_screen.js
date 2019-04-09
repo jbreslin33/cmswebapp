@@ -29,7 +29,8 @@ class UpdateForgotPasswordScreen extends Screen
 
 	hit()
 	{
-		console.log('hit in update');
+		this.mHit = true;
+
 		//get vars
                	this.mPassword1  = document.getElementById("update_forgot_password_screen_password1_id").value;
                	this.mPassword2  = document.getElementById("update_forgot_password_screen_password2_id").value;
@@ -46,7 +47,6 @@ class UpdateForgotPasswordScreen extends Screen
                                         var data = this.responseText;
                                         if (data)
                                         {
-						console.log('data:' + data);
 						APPLICATION.mUpdateForgotPasswordScreen.mData = data;
                                         }
                                 }
@@ -65,13 +65,11 @@ class UpdateForgotPasswordScreen extends Screen
 
           			document.getElementById('update_forgot_password_screen_password_message_id').style.color = 'green';
           			document.getElementById('update_forgot_password_screen_password_message_id').innerHTML = 'passwords are matching';
-				console.log('posting');
 			}
 			else
 			{
           			document.getElementById('update_forgot_password_screen_password_message_id').style.color = 'red';
           			document.getElementById('update_forgot_password_screen_password_message_id').innerHTML = 'passwords are not matching';
-				console.log('no match not posting');
 			}
 		}
 	}
