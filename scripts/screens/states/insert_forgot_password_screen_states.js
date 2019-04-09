@@ -105,7 +105,7 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
 				//document.getElementById("insert_forgot_password_screen_spinner_id").style.visibility = "visible";
 //<a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a>
                                 document.getElementById('insert_forgot_password_screen_email_message_id').style.color = 'red';
-                                document.getElementById('insert_forgot_password_screen_email_message_id').innerHTML = 'Email does not exist. <a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a>';
+                                document.getElementById('insert_forgot_password_screen_email_message_id').innerHTML = 'Email does not exist. Would you like to <a href="#insert_native_login_screen">Join</a> with the above email instead? Or perhaps you typed email wrong?';
                                 owner.mCode = 0;
                                 owner.mData = null;
                         }
