@@ -80,15 +80,23 @@ CREATE TABLE teams
 );
 
 --season
+CREATE TABLE periodizations
+(
+        id SERIAL,
+	name text,
+	url text,
+        PRIMARY KEY (id)
+);
+
 CREATE TABLE macrocycles
 (
         id SERIAL,
+	periodization_id integer,
 	start_timestamp timestamp,
 	end_timestamp timestamp,
-	team_id integer,
 	name text,
 	url text,
-	FOREIGN KEY (team_id) REFERENCES teams(id),
+	FOREIGN KEY (periodization_id) REFERENCES periodizations(id),
         PRIMARY KEY (id)
 );
 
@@ -97,6 +105,8 @@ CREATE TABLE mesocycles
         id SERIAL,
 	name text,
 	url text,
+	start_timestamp timestamp,
+	end_timestamp timestamp,
 	macrocycle_id integer,
 	FOREIGN KEY (macrocycle_id) REFERENCES macrocycles(id),
         PRIMARY KEY (id)
@@ -108,11 +118,22 @@ CREATE TABLE microcycles
         id SERIAL,
 	name text,
 	url text,
+	start_timestamp timestamp,
+	end_timestamp timestamp,
 	mesocycle_id integer,
 	FOREIGN KEY (mesocycle_id) REFERENCES mesocycles(id),
         PRIMARY KEY (id)
 );
 
+CREATE TABLE teams_periodizations 
+(
+	id serial,
+	team_id integer,
+	periodization_id integer,
+	FOREIGN KEY (team_id) REFERENCES teams(id),
+	FOREIGN KEY (periodization_id) REFERENCES periodizations(id),
+        PRIMARY KEY (id)
+);
 
 CREATE TABLE sessions 
 (
@@ -124,28 +145,26 @@ CREATE TABLE sessions
         coordinates text,
 	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
-	microcycle_id integer,
+	team_id integer,
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (microcycle_id) REFERENCES microcycles(id),
+	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE games 
 (
         id SERIAL,
-
-	--time
         arrival_time timestamp, --only 1 arrival time leave it
         start_time timestamp, --only 1 start time leave it
         actual_start_time timestamp, --only 1 start time leave it
         end_time timestamp,
         address text,
         coordinates text,
-	pitch_id integer, --all you need for a session	
+	team_id integer,
+	pitch_id integer, 	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
-	macrocycle_id integer,
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (macrocycle_id) REFERENCES macrocycles(id),
+	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
 );
 
