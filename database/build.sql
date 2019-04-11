@@ -417,8 +417,18 @@ create TABLE forgot_passwords (
 --whereas a simple join will only make them a user and a person
 --also when you send the invite we will check email and if email is already in system then we simply add to club and then send an email saying welcome to celta! 
 --later when adding someone to a team or manager etc we will simply send email saying 'you have been added to ardillos team etc.'
+--actually this is only for 
+--you have been invited to join celta click here to accept...then it takes you to either a your in or join page depending on if email exists
+--whoever you invite will have an email_id because we will create it on the fly???
 create table invite_club_member (
-
+	id serial
+        email_id integer,
+	club_id integer,
+	token text,
+	expires timestamp,
+ 	FOREIGN KEY(email_id) REFERENCES emails(id),
+ 	FOREIGN KEY(club_id) REFERENCES clubs(id),
+	primary key(id)
 );
 
 --chance for email for luke or no email for grace or multiple emails for luke
