@@ -79,6 +79,22 @@ CREATE TABLE teams
 	UNIQUE (name,club_id)
 );
 
+--principles
+create table tactical_principles
+(
+        id SERIAL,
+	name text,
+        PRIMARY KEY (id)
+);
+
+create table technical_principles
+(
+        id SERIAL,
+	name text,
+        PRIMARY KEY (id)
+);
+
+
 --season
 CREATE TABLE periodizations
 (
