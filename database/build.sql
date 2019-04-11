@@ -413,6 +413,14 @@ create TABLE forgot_passwords (
 	PRIMARY KEY (id)
 );
 
+--this will take user to join page and then also make them a member of a club via a check of a club_token....
+--whereas a simple join will only make them a user and a person
+--also when you send the invite we will check email and if email is already in system then we simply add to club and then send an email saying welcome to celta! 
+--later when adding someone to a team or manager etc we will simply send email saying 'you have been added to ardillos team etc.'
+create table invite_club_member (
+
+);
+
 --chance for email for luke or no email for grace or multiple emails for luke
 --this table could we leave it and use it or not but it has nothing to do with logins???? so this would be a way for me to send luke updates to his email but he would not need a login..then once in a while we can ask him if he wants his own login???
 --this was persons_emails...
