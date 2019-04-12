@@ -1,7 +1,8 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/invite_club_member.php");
-
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
+//ok we need to think about this
+//if 
 class InsertInviteClubMember 
 {
 	function __construct($email) 
@@ -10,6 +11,7 @@ class InsertInviteClubMember
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
+		$this->mSubject = "Invitation to Join Club Link";
 		$this->mAbsoluteURL = "http://elacore.org/#update_invite_club_member_screen&";
 		$this->mSelector = bin2hex(random_bytes(8));
 		$this->mToken = bin2hex(random_bytes(32));
@@ -29,7 +31,7 @@ class InsertInviteClubMember
 		error_log($return_value);
                 echo $return_value;
 
-		$inviteClubMember = new InviteClubMember($this->mEmail, $this->mUrl);
+		$mail = new Mail($this->mEmail, $this->mUrl,$this->mSubject);
         }
 }
 $email = $_GET['email'];
