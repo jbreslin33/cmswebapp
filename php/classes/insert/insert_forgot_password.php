@@ -1,6 +1,6 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/forgot_password.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 
 class InsertForgotPassword 
 {
@@ -10,6 +10,7 @@ class InsertForgotPassword
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
+		$this->mSubject = "Forgot Password Link";
 		$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
 		$this->mSelector = bin2hex(random_bytes(8));
 		$this->mToken = bin2hex(random_bytes(32));
@@ -29,7 +30,7 @@ class InsertForgotPassword
 		error_log($return_value);
                 echo $return_value;
 
-		$forgotPassword = new ForgotPassword($this->mEmail, $this->mUrl);
+		$mail = new Mail($this->mEmail, $this->mUrl,$this->mSubject);
         }
 }
 $email = $_GET['email'];

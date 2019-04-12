@@ -3,7 +3,7 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 
 class ForgotPassword extends Mail 
 {
-	function __construct($email,$url) 
+	function __construct($email,$url,$subject) 
 	{
 		try 
 		{
@@ -13,7 +13,7 @@ class ForgotPassword extends Mail
 			$this->mPhpMailer->addReplyTo('info@example.com', 'Information');
 			
 			$this->mPhpMailer->isHTML(true);                                  // Set email format to HTML
-			$this->mPhpMailer->Subject = 'Forgot Password';
+			$this->mPhpMailer->Subject = $subject;
 			$body = "Click this link:";
 			$body .= $url;
 			$this->mPhpMailer->Body    = $body;
