@@ -2,7 +2,18 @@
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 //ok we need to think about this
-//if 
+//1: if email does not exist create it
+//2: if person exists  
+//   { 
+//   	insert club member etc
+//   }
+//   else
+//   {
+//   	take them to join screen but with a special token so that if mToken then cross ref with db entry and insert them into club as well as standard join....	 	
+//
+//   }
+//
+//else just add an entry to 
 class InsertInviteClubMember 
 {
 	function __construct($email) 
