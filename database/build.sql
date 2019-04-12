@@ -403,7 +403,8 @@ CREATE TABLE google_logins
 );
 
 
-create TABLE forgot_passwords (
+create TABLE forgot_passwords 
+(
         id serial,
         email_id integer,
         selector text,
@@ -420,8 +421,9 @@ create TABLE forgot_passwords (
 --actually this is only for 
 --you have been invited to join celta click here to accept...then it takes you to either a your in or join page depending on if email exists
 --whoever you invite will have an email_id because we will create it on the fly???
-create table invite_club_member (
-	id serial
+create table invite_club_member 
+(
+	id serial,
         email_id integer,
 	club_id integer,
 	token text,

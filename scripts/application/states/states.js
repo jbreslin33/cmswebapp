@@ -48,6 +48,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
                 }
+		else if (location.hash == '#insert_invite_club_member_screen' && app.mStateMachine.mCurrentState != app.mINSERT_INVITE_CLUB_MEMBER_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_INVITE_CLUB_MEMBER_APPLICATION);
+                }
 		else if (location.hash == '#update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
@@ -89,6 +93,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_evento_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
+		document.getElementById("insert_invite_club_member_screen_html_id").style.display = "none";
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
 	}
 
@@ -102,8 +107,6 @@ class INIT_APPLICATION extends State
 		if (application.mSelector && application.mToken)
 		{
 			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
-			console.log('mSelector:' + application.mSelector);
-			console.log('mToken:' + application.mToken);
 		}
 		else
 		{
@@ -331,6 +334,51 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 	}
 }
 
+class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
+{
+        constructor()
+        {
+                super();
+        }
+
+        enter(app)
+        {
+                if (app.mStateLogs || app.mStateEnterLogs)
+                {
+                        console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: ENTER");
+		}
+
+                if (app.mInsertInviteClubMemberScreen)
+                {
+                        app.mInsertInviteClubMemberScreen = new InsertInviteClubMemberScreen(app);
+                }
+                else
+                {
+                        app.mInsertInviteClubMemberScreen = new InsertInviteClubMemberScreen(app);
+                }
+                app.mInsertInviteClubMemberScreen.show();
+        }
+
+        execute(app)
+        {
+                if (app.mStateLogs || app.mStateExecuteLogs)
+                {
+                        console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: EXECUTE");
+                }
+        }
+
+        exit(app)
+        {
+                if (app.mStateLogs || app.mStateExitLogs)
+                {
+                        console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: EXIT");
+                }
+                this.mHit = false;
+                app.mInsertInviteClubMemberScreen.hide();
+                app.mInsertInviteClubMemberScreen.mCode = 0;
+                app.mInsertInviteClubMemberScreen.mData = null;
+        }
+}
 
 class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 {
