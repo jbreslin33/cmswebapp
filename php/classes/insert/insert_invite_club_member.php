@@ -22,6 +22,13 @@ class InsertInviteClubMember
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
+                $sql = 'select f_insert_invite_club_member($1,$2,$3)';
+                $prepare_result = pg_prepare($database->mConnection, "f_insert_invite_club_member", $sql);
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $this->mEmail ,$this->mSelector, $this->mToken));
+
+                $return_value = pg_fetch_result($result, 0);
+
+		//token and email	
 		$this->mSubject = "Invitation to Join Club Link";
 		$this->mAbsoluteURL = "http://elacore.org/#update_invite_club_member_screen&";
 		$this->mSelector = bin2hex(random_bytes(8));
@@ -32,13 +39,11 @@ class InsertInviteClubMember
     			'token' => $this->mToken
 			]));
 
-                $sql = 'select f_insert_invite_club_member($1,$2,$3)';
-                $prepare_result = pg_prepare($database->mConnection, "f_insert_invite_club_member", $sql);
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $this->mEmail ,$this->mSelector, $this->mToken));
-
-                $return_value = pg_fetch_result($result, 0);
 		$return_value .= ",";
 
+		//this return value may have to send them to join screen with a token....
+		//or send them to main
+		//actually send a 100 with or without token if there is a token we know to take them to join
 		error_log($return_value);
                 echo $return_value;
 
