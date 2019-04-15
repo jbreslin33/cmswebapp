@@ -421,7 +421,7 @@ create TABLE forgot_passwords
 --actually this is only for 
 --you have been invited to join celta click here to accept...then it takes you to either a your in or join page depending on if email exists
 --whoever you invite will have an email_id because we will create it on the fly???
-create table invite_club_member 
+create table invite_club_members 
 (
 	id serial,
         email_id integer,
@@ -981,6 +981,43 @@ BEGIN
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, TEXT, TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id emails.id%TYPE;
+        returning_forgot_passwords_id forgot_passwords.id%TYPE;
+        return_code text;
+BEGIN
+        select into found_email_id f_get_email_id($1);
+        IF found_email_id > 0 THEN 
+		delete from forgot_passwords where email_id = found_email_id; 
+		insert into invite_club_members (email_id, selector, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
+		IF returning_forgot_passwords_id > 0 THEN
+			return_code = '-100';
+		ELSE
+			return_code = '-111';
+		END IF;
+	ELSE
+		return_code = '-102';
+	END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--create table invite_club_members
+--(
+ --       id serial,
+  --      email_id integer,
+   --     club_id integer,
+    --    token text,
+     --   expires timestamp,
+      --  FOREIGN KEY(email_id) REFERENCES emails(id),
+       -- FOREIGN KEY(club_id) REFERENCES clubs(id),
+        --primary key(id)
+--);
+
 
 
 

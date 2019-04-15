@@ -19,6 +19,8 @@ class InsertInviteClubMember
 	function __construct($email) 
 	{
 		$this->mEmail = $email;
+		$this->mSelector = bin2hex(random_bytes(8));
+		$this->mToken = bin2hex(random_bytes(32));
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
@@ -27,12 +29,11 @@ class InsertInviteClubMember
                 $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $this->mEmail ,$this->mSelector, $this->mToken));
 
                 $return_value = pg_fetch_result($result, 0);
-
+		
 		//token and email	
 		$this->mSubject = "Invitation to Join Club Link";
+		//this will either be main or joinscreen
 		$this->mAbsoluteURL = "http://elacore.org/#update_invite_club_member_screen&";
-		$this->mSelector = bin2hex(random_bytes(8));
-		$this->mToken = bin2hex(random_bytes(32));
 		
 		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
     			'selector' => $this->mSelector,
