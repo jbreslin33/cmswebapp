@@ -26,6 +26,14 @@ class InsertInviteClubMemberScreen extends Screen
                 this.mStateMachine.changeState(this.mINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 	}
 
+	get()
+	{
+		if (this.mApplication.mJWT)
+		{
+			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + this.mApplication.mJWT; 
+		}
+	}
+
 	hit()
 	{
 		this.mHit = true;

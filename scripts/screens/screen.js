@@ -30,6 +30,11 @@ class Screen
 	{
 	
 	}
+
+	get()
+	{
+
+	}
        
 	update(timestamp)
 	{

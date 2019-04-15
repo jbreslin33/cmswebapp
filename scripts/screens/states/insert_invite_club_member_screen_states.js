@@ -44,6 +44,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: ENTER");
                 }
+		//use ajax to get club names and ids
         }
 
         execute(owner)
@@ -52,6 +53,31 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
+		//get clubs
+                if (owner.mData)
+                {
+                        var dataArray = owner.mData.split(",");
+                        owner.mCode = dataArray[0];
+                        console.log('mCode from owner:' + owner.mCode);
+
+                        if (owner.mCode == -100)
+                        {
+                                //owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
+				//no we are going to populate select instead
+                        }
+                        if (owner.mCode == -102)
+                        {
+				//let us know there is an error figuring out what club you are admin of......
+				/*
+                                owner.show();
+                                document.getElementById('insert_invite_club_member_screen_email_message_id').style.color = 'red';
+                                document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'Email does not exist. Would you like to <a href="#insert_native_login_screen">Join</a> with the above email instead? Or perhaps you typed email wrong?';
+				*/
+                                owner.mCode = 0;
+                                owner.mData = null;
+                        }
+                }
+
                 if (owner.mHit)
                 {
                         owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
