@@ -16,8 +16,30 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 //else just add an entry to 
 class InsertInviteClubMember 
 {
-	function __construct($email) 
+	function __construct($email,$club_id,$jwt) 
 	{
+                $database = new Database("localhost","cms","postgres","mibesfat");
+
+                $sql = 'select f_insert_invite_club_member($1,$2,$3)';
+
+                $prepare_result = pg_prepare($database->mConnection, "f_insert_invite_club_member", $sql);
+
+		//jwt decoding
+                $oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
+                $id = $payload->id;
+
+		//token	
+		$token = bin2hex(random_bytes(32));
+
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token));
+
+                $return_value = pg_fetch_result($result, 0);
+
+                echo $return_value;
+
+		///////////////////////////////OLD
+		/*
 		$this->mEmail = $email;
 		$this->mSelector = bin2hex(random_bytes(8));
 		$this->mToken = bin2hex(random_bytes(32));
@@ -49,10 +71,13 @@ class InsertInviteClubMember
                 echo $return_value;
 
 		$mail = new Mail($this->mEmail, $this->mUrl,$this->mSubject);
+		 */
         }
 }
 $email = $_GET['email'];
+$club_id = $_GET['club_id'];
+$jwt = $_GET['jwt'];
 
-$insertInviteClubMember = new InsertInviteClubMember($email);	
+$insertInviteClubMember = new InsertInviteClubMember($email,$club_id,$jwt);	
 
 ?>

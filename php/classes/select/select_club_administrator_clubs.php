@@ -1,7 +1,6 @@
 <?php
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
 
 class NativeLogin
 {
