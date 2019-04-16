@@ -1,18 +1,24 @@
 <?php
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
 
-class NativeLogin
+class SelectClubAdministratorClubs
 {
-        function __construct()
+        function __construct($jwt)
         {
+                $jwt = $_GET['jwt'];
+                $oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
+                $id = $payload->id;
+
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-                $sql = 'select f_native_login($1,$2)';
+                $sql = 'select f_select_club_administrator_clubs($1)';
 
-                $prepare_result = pg_prepare($database->mConnection, "f_native_login", $sql);
+                $prepare_result = pg_prepare($database->mConnection, "f_select_club_administrator_clubs", $sql);
 
-                $result = pg_execute($database->mConnection, "f_native_login", array( $_GET['email'] ,$_GET['password']));
+                $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $id));
 
 		//return to client
                 $return_value = pg_fetch_result($result, 0);
@@ -20,23 +26,18 @@ class NativeLogin
 		$txt = "return_value:" . $return_value;
 		error_log($txt);
 
-		if ($return_value > 0)
+		if ($return_value)
 		{
-			//encode
-			$oneRing = new OneRing();
-
-			$id = $return_value;
-			$encoded_token = array();
-			$encoded_token['id'] = $id;
-
-			$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
-			echo "-100," . $jwt;
+			echo "-100," . $return_value;
 		}
 		else
 		{
-			echo $return_value;
+			echo "-100";
 		}
         }
 }
+
+$_GET['jwt'];
+
         $nativeLogin = new NativeLogin();
 ?>

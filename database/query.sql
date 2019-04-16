@@ -1,8 +1,10 @@
- SELECT id FROM native_logins
- WHERE email_id = 1 AND password = (CRYPT('a', password));
 
-select * from native_logins;
+select * from users;
+select * from persons;
+select * from club_members;
+select * from clubs;
 
-select * from native_logins where password = (CRYPT('a',password));
+
+select persons.id from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id; 
 
 

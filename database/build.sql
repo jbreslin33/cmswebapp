@@ -1006,6 +1006,18 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+CREATE OR REPLACE FUNCTION f_select_club_administrators_clubs(user_id int)
+RETURNS text AS $$
+DECLARE
+        found_email_id google_logins.email_id%TYPE;
+BEGIN
+        SELECT google_logins.email_id INTO found_email_id FROM google_logins
+        join emails on emails.id=google_logins.email_id
+        WHERE email = email_name;
+RETURN found_email_id;
+END;
+$$ LANGUAGE plpgsql;
+
 --create table invite_club_members
 --(
  --       id serial,
