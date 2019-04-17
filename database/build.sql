@@ -1005,7 +1005,7 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_select_club_administrators_clubs(user_id int)
+CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
 RETURNS TABLE(club_id int, club_name text) AS $$
 DECLARE 
 	club_id clubs.id%TYPE;

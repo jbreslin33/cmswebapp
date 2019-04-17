@@ -20,7 +20,13 @@ class SelectClubAdministratorClubs
 
                 $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $id));
 
+		while ($row = pg_fetch_row($result)) 
+		{
+  			error_log($row[0]);
+  			error_log($row[1]);
+		}
 		//return to client
+		/*
                 $return_value = pg_fetch_result($result, 0);
 
 		$txt = "return_value:" . $return_value;
@@ -34,10 +40,11 @@ class SelectClubAdministratorClubs
 		{
 			echo "-100";
 		}
+		 */
         }
 }
 
-$_GET['jwt'];
+$jwt = $_GET['jwt'];
 
-        $nativeLogin = new NativeLogin();
+$selectClubAdministratorClubs = new SelectClubAdministratorClubs($jwt);
 ?>

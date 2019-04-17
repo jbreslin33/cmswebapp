@@ -45,6 +45,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: ENTER");
                 }
 		//use ajax to get club names and ids
+		owner.get();
         }
 
         execute(owner)
