@@ -1005,8 +1005,6 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
---select persons.id from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = 1;
-
 CREATE OR REPLACE FUNCTION f_select_club_administrators_clubs(user_id int)
 RETURNS TABLE(club_id int, club_name text) AS $$
 DECLARE 
@@ -1014,31 +1012,9 @@ DECLARE
         club_name clubs.name%TYPE;
 	r clubs%rowtype;
 BEGIN
-	--return Query select id, name from clubs;
-	--for r IN 
 	return Query select clubs.id, clubs.name from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id;
-	--	select * from clubs
-	--LOOP
-	--	return next r;
-	--	END LOOP;
-	--RETURN;
 END
 $$ LANGUAGE plpgsql;
-
---create table invite_club_members
---(
- --       id serial,
-  --      email_id integer,
-   --     club_id integer,
-    --    token text,
-     --   expires timestamp,
-      --  FOREIGN KEY(email_id) REFERENCES emails(id),
-       -- FOREIGN KEY(club_id) REFERENCES clubs(id),
-        --primary key(id)
---);
-
-
-
 
 --100 no problems total authentication
 --101 email exists
