@@ -1014,9 +1014,9 @@ DECLARE
         club_name clubs.name%TYPE;
 	r clubs%rowtype;
 BEGIN
-	return Query select id, name from clubs;
+	--return Query select id, name from clubs;
 	--for r IN 
-		--select clubs.id, clubs.name from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id
+	return Query select clubs.id, clubs.name from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id;
 	--	select * from clubs
 	--LOOP
 	--	return next r;
