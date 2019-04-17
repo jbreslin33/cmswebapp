@@ -1005,17 +1005,24 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+--select persons.id from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = 1;
 
 CREATE OR REPLACE FUNCTION f_select_club_administrators_clubs(user_id int)
-RETURNS text AS $$
-DECLARE
-        found_email_id google_logins.email_id%TYPE;
+RETURNS TABLE(club_id int, club_name text) AS $$
+DECLARE 
+	club_id clubs.id%TYPE;
+        club_name clubs.name%TYPE;
+	r clubs%rowtype;
 BEGIN
-        SELECT google_logins.email_id INTO found_email_id FROM google_logins
-        join emails on emails.id=google_logins.email_id
-        WHERE email = email_name;
-RETURN found_email_id;
-END;
+	return Query select id, name from clubs;
+	--for r IN 
+		--select clubs.id, clubs.name from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id
+	--	select * from clubs
+	--LOOP
+	--	return next r;
+	--	END LOOP;
+	--RETURN;
+END
 $$ LANGUAGE plpgsql;
 
 --create table invite_club_members
