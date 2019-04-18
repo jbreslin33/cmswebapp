@@ -1005,16 +1005,27 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
-RETURNS TABLE(club_id int, club_name text) AS $$
+--CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
+--RETURNS json AS $$ 
+--DECLARE 
+--	club_id clubs.id%TYPE;
+--        club_name clubs.name%TYPE;
+--	r clubs%rowtype;
+--BEGIN
+	--SELECT json_agg(t) FROM t
+--	select json_object_agg(clubs.id, clubs.name) from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id;
+--END
+--$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int) 
+RETURNS json AS $$ 
 DECLARE 
-	club_id clubs.id%TYPE;
-        club_name clubs.name%TYPE;
-	r clubs%rowtype;
-BEGIN
-	return Query select clubs.id, clubs.name from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id;
-END
-$$ LANGUAGE plpgsql;
+	c_row clubs%ROWTYPE; 
+BEGIN 
+	SELECT * INTO c_row FROM clubs;
+	RETURN row_to_json(c_row); 
+END; 
+$$ LANGUAGE 'plpgsql';
 
 --100 no problems total authentication
 --101 email exists
