@@ -21,13 +21,14 @@ class SelectClubAdministratorClubs
 
                 $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $id));
 		error_log(pg_num_rows($result));
-		$return_value = json_encode($result);
-		error_log($return_value);
-		echo $return_value; 
+		//$return_value = json_encode($result);
+		//error_log($return_value);
+		//echo $return_value; 
 
 		while ($row = pg_fetch_row($result)) 
 		{
   			error_log($row[0]);
+  			//error_log($row[1]);
 		}
 		//return to client
 		/*

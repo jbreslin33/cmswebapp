@@ -1017,15 +1017,25 @@ $$ LANGUAGE plpgsql;
 --END
 --$$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int) 
-RETURNS json AS $$ 
-DECLARE 
-	c_row clubs%ROWTYPE; 
-BEGIN 
-	SELECT * INTO c_row FROM clubs;
-	RETURN row_to_json(c_row); 
-END; 
-$$ LANGUAGE 'plpgsql';
+--CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int) 
+--RETURNS json AS $$ 
+--DECLARE 
+
+--BEGIN 
+	--select * INTO c_row FROM clubs;
+ --	RETURN select array_to_json(array_agg(row_to_json(t)))
+  --  	from (
+   --   	select id, name from clubs
+    --	) t
+--END; 
+--$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
+  RETURNS SETOF clubs AS
+$func$
+   SELECT * FROM clubs;  -- Requires Postgres 9.3; or use $1
+$func$ LANGUAGE sql;
+
 
 --100 no problems total authentication
 --101 email exists
