@@ -1033,7 +1033,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
   RETURNS SETOF clubs AS
 $func$
-   SELECT * FROM clubs;  -- Requires Postgres 9.3; or use $1
+   SELECT array_to_json(*) FROM clubs;  -- Requires Postgres 9.3; or use $1
 $func$ LANGUAGE sql;
 
 
