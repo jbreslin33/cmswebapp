@@ -1031,10 +1031,15 @@ $$ LANGUAGE plpgsql;
 --$$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
-  RETURNS SETOF clubs AS
-$func$
-   SELECT array_to_json(*) FROM clubs;  -- Requires Postgres 9.3; or use $1
-$func$ LANGUAGE sql;
+  RETURNS json AS $$
+   SELECT json_agg(t) 
+	from 
+	(
+		select * from clubs
+	) t;
+
+--array_to_json(*) FROM clubs;  -- Requires Postgres 9.3; or use $1
+$$ LANGUAGE sql;
 
 
 --100 no problems total authentication
