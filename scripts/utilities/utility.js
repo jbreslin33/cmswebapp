@@ -15,4 +15,16 @@ class Utility
         		selectbox.remove(i);
     		}
 	}
+
+	getJson(data)
+	{
+		var jsonString = data.slice(6,data.length);
+		return JSON.parse(jsonString);
+	}
+
+	getCode(data)
+	{
+         	var dataArray = data.split(",");
+                return dataArray[0];
+	}
 }
