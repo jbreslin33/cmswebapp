@@ -94,7 +94,6 @@ class WAIT_INSERT_FORGOT_PASSWORD_SCREEN extends State
                 {
                         var dataArray = owner.mData.split(",");
                         owner.mCode = dataArray[0];
-			console.log('mCode from owner:' + owner.mCode);
 
                         if (owner.mCode == -100)
                         {

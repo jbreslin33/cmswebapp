@@ -54,20 +54,27 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
+               //console.log("XINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
 		//get clubs
                 if (owner.mData)
                 {
                         var dataArray = owner.mData.split(",");
                         owner.mCode = dataArray[0];
                         console.log('mCode from owner:' + owner.mCode);
+                        var length = owner.mData.length;
+                        var jsonString = owner.mData.slice(6,length);
+                        console.log('mCode from owner:' + owner.mCode);
+                        console.log('jsonString:' + jsonString);
+
 
                         if (owner.mCode == -100)
                         {
-                                //owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
+                                owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
 				//no we are going to populate select instead
                         }
                         if (owner.mCode == -102)
                         {
+                                owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
 				//let us know there is an error figuring out what club you are admin of......
 				/*
                                 owner.show();

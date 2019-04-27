@@ -1,6 +1,7 @@
 
 --clubs
 insert into clubs (name,address) values ('RC CELTA', '3331 Street Rd., Bensalem, PA 19020 Suite 240'); 
+insert into clubs (name,address) values ('Kensington', 'Casiano Field'); 
 select f_select_club_administrator_clubs(1); 
 --insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
 

@@ -78,6 +78,10 @@ class Application
 		{
 			this.mUpdateForgotPasswordScreen.update(timestamp);
 		}
+		if (this.mInsertInviteClubMemberScreen)
+		{
+			this.mInsertInviteClubMemberScreen.update(timestamp);
+		}
 		
 		if (this.mDailySchedule)
 		{
