@@ -45,6 +45,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: ENTER");
                 }
 		//use ajax to get club names and ids
+                //owner.showSpinner();
 		owner.get();
         }
 
@@ -69,7 +70,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
 
                         if (owner.mCode == -100)
                         {
-                                owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
+                                owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 				//no we are going to populate select instead
                         }
                         if (owner.mCode == -102)
@@ -114,7 +115,6 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: ENTER");
                 }
-                owner.showSpinner();
         }
 
         execute(owner)
@@ -123,7 +123,7 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
-
+/*
                 if (owner.mData)
                 {
                         var dataArray = owner.mData.split(",");
@@ -143,6 +143,7 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                                 owner.mData = null;
                         }
                 }
+		*/
         }
 
         exit(owner)
