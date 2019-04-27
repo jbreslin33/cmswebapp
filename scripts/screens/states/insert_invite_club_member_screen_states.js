@@ -67,11 +67,8 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                         console.log('jsonString:' + jsonString);
 
 			var obj = JSON.parse(jsonString);
-			console.log(obj.id);
-			// expected output: 42
-
-			console.log(obj.name);
-			// expected output: true
+			console.log(obj.clubs[0].id);
+			console.log(obj.clubs[0].name);
 
                         if (owner.mCode == -100)
                         {

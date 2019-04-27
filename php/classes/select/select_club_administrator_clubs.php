@@ -20,14 +20,20 @@ class SelectClubAdministratorClubs
                 $prepare_result = pg_prepare($database->mConnection, "f_select_club_administrator_clubs", $sql);
 
                 $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $id));
-		$txt = "";	
+		$data = "";	
 		while ($row = pg_fetch_row($result)) 
 		{
-			error_log("how many times");
-  			error_log($row[0]);
-  			$txt .= $row[0];
-  			//error_log($row[1]);
+  			$data .= $row[0];
 		}
+
+                //$data = pg_fetch_result($result, 0);
+                $front = '{ "clubs" :';
+                $back = '}';
+
+                $return_value .= $front;
+                $return_value .= $data;
+                $return_value .= $back;
+
 		//echo $txt; 
 		/*
                 $return_value = pg_fetch_result($result, 0);
@@ -36,9 +42,9 @@ class SelectClubAdministratorClubs
 		error_log($txt);
 		 */
 
-		if ($txt)
+		if ($return_value)
 		{
-			echo "-100," . $txt;
+			echo "-100," . $return_value;
 		}
 		else
 		{
