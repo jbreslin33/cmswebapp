@@ -54,17 +54,17 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
-               //console.log("XINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
+		
 		//get clubs
                 if (owner.mData)
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
-                        var jsonObject = owner.mApplication.mUtility.getJson(owner.mData);
+                        owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
 
-			for (var i = 0; i < jsonObject.clubs.length; i++)
+			for (var i = 0; i < owner.mJson.clubs.length; i++)
 			{
-				console.log(jsonObject.clubs[i].id);
-				console.log(jsonObject.clubs[i].name);
+				console.log(owner.mJson.clubs[i].id);
+				console.log(owner.mJson.clubs[i].name);
 			}
 
                         if (owner.mCode == -100)

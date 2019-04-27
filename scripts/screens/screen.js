@@ -14,6 +14,7 @@ class Screen
 
 		this.mCode = 0;
 		this.mData = null;
+		this.mJson = null;
 
 		this.mHit = false;
 
