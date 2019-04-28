@@ -34,7 +34,7 @@ class InsertInviteClubMember
 		//token	
 		$token = bin2hex(random_bytes(32));
 
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token));
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token, $id));
 
   		$return_value = pg_fetch_result($result, 0);
 

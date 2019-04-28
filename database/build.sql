@@ -995,7 +995,7 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, TEXT, TEXT)
+CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, int, TEXT, int) --email,club_id,token,user_id associated with club_admin
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
