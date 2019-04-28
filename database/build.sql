@@ -1007,13 +1007,8 @@ BEGIN
 		--delete from forgot_passwords where email_id = found_email_id; 
 		--delete from invite_club_members...where....
 		insert into invite_club_members (email_id, selector, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_forgot_passwords_id;	
-		IF returning_forgot_passwords_id > 0 THEN
-			return_code = '-100';
-		ELSE
-			return_code = '-111';
-		END IF;
 	ELSE --actually just do insert of email then invite...
-		return_code = '-102';
+		return_code = '-111';
 	END IF;
 RETURN return_code;
 END;
@@ -1049,7 +1044,7 @@ CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
    SELECT json_agg(t) 
 	from 
 	(
-		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id where users.id = 1
+		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id where users.id = user_id 
 	) t;
 
 --array_to_json(*) FROM clubs;  -- Requires Postgres 9.3; or use $1

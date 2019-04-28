@@ -170,17 +170,16 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 if (owner.mData)
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
-                        //owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
 
                         if (owner.mCode == -100)
                         {
                                 owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
                         }
-                        if (owner.mCode == -102)
+                        if (owner.mCode == -111)
                         {
                                 owner.show();
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').style.color = 'red';
-                                document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'Email does not exist. Would you like to <a href="#insert_native_login_screen">Join</a> with the above email instead? Or perhaps you typed email wrong?';
+                                document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'Invite failed.';
                                 owner.mCode = 0;
                                 owner.mData = null;
                         }

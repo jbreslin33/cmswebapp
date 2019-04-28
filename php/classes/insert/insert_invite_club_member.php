@@ -22,19 +22,19 @@ class InsertInviteClubMember
 	{
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-                $sql = 'select f_insert_invite_club_member($1,$2,$3)';
+                $sql = 'select f_insert_invite_club_member($1,$2,$3,$4)';
 
                 $prepare_result = pg_prepare($database->mConnection, "f_insert_invite_club_member", $sql);
 
 		//jwt decoding
                 $oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-                $id = $payload->id;
+                $user_id = $payload->id;
 
 		//token	
 		$token = bin2hex(random_bytes(32));
 
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token, $id));
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token, $user_id));
 
   		$return_value = pg_fetch_result($result, 0);
 
