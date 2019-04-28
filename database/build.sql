@@ -1006,12 +1006,12 @@ BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 
-		delete from invite_club_members where email_id = found_email_id;
+		delete from invite_club_members where email_id = found_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
 
 	ELSE --actually just do insert of email then invite...
 		insert into emails (email) values ($1) returning id into returning_email_id; 
-		delete from invite_club_members where email_id = returning_email_id;
+		delete from invite_club_members where email_id = returning_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
 
 	END IF;
