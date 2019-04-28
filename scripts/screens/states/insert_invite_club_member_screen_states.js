@@ -48,13 +48,14 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 //owner.showSpinner();
 		if (document.getElementById("insert_invite_club_member_screen_select_id").length > 0)
 		{
-                	owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+                	//owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 		}
 		else
 		{
                 	owner.mStateMachine.changeState(owner.mWAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 			//owner.get();
 		}
+
         }
 
         execute(owner)
