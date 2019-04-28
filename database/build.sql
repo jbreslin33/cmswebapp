@@ -1051,4 +1051,5 @@ $$ LANGUAGE sql;
 --106 club exists
 --111 generic bad insert
 --112 generic bad update
+--113 generic no result
 

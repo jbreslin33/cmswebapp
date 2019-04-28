@@ -26,7 +26,6 @@ class SelectClubAdministratorClubs
   			$data .= $row[0];
 		}
 
-                //$data = pg_fetch_result($result, 0);
                 $front = '{ "clubs" :';
                 $back = '}';
 
@@ -34,21 +33,13 @@ class SelectClubAdministratorClubs
                 $return_value .= $data;
                 $return_value .= $back;
 
-		//echo $txt; 
-		/*
-                $return_value = pg_fetch_result($result, 0);
-
-		$txt = "return_value:" . $return_value;
-		error_log($txt);
-		 */
-
-		if ($return_value)
+		if ($data)
 		{
 			echo "-100," . $return_value;
 		}
 		else
 		{
-			echo "-100";
+			echo "-113";
 		}
         }
 }
