@@ -36,6 +36,8 @@ class InsertInviteClubMember
 
                 $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token));
 
+  		$return_value = pg_fetch_result($result, 0);
+
                 echo $return_value;
 
 		///////////////////////////////OLD
