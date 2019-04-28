@@ -46,7 +46,15 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 }
 		//use ajax to get club names and ids
                 //owner.showSpinner();
-		owner.get();
+		if (document.getElementById("insert_invite_club_member_screen_select_id").length > 0)
+		{
+                	owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+		}
+		else
+		{
+                	owner.mStateMachine.changeState(owner.mWAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+			//owner.get();
+		}
         }
 
         execute(owner)
@@ -55,7 +63,45 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
-		
+
+                if (owner.mHit)
+                {
+                        owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+                }
+        }
+
+        exit(owner)
+        {
+                if (owner.mStateLogs || owner.mStateExitLogs)
+                {
+                        console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXIT");
+                }
+        }
+}
+
+class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
+{
+        constructor()
+        {
+                super();
+        }
+
+        enter(owner)
+        {
+                if (owner.mStateLogs || owner.mStateEnterLogs)
+                {
+                        console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: ENTER");
+                }
+		owner.get();
+        }
+
+        execute(owner)
+        {
+                if (owner.mStateLogs || owner.mStateExecuteLogs)
+                {
+                        console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
+                }
+
 		//get clubs
                 if (owner.mData)
                 {
@@ -74,25 +120,18 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
 					select.appendChild(opt);
 				}
 				
-                                owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+                                owner.mStateMachine.changeState(owner.mINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
                         }
-                        if (owner.mCode == -102)
+                        if (owner.mCode == -113)
                         {
-                                owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
+                                //owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
 				//let us know there is an error figuring out what club you are admin of......
-				/*
                                 owner.show();
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').style.color = 'red';
-                                document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'Email does not exist. Would you like to <a href="#insert_native_login_screen">Join</a> with the above email instead? Or perhaps you typed email wrong?';
-				*/
+                                document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'You are not administrator of any clubs. Would you like to add a club? <a href="#insert_club_screen">Add Club</a>';
                                 owner.mCode = 0;
                                 owner.mData = null;
                         }
-                }
-
-                if (owner.mHit)
-                {
-                        owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
                 }
         }
 
@@ -100,7 +139,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExitLogs)
                 {
-                        console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXIT");
+                        console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXIT");
                 }
         }
 }
