@@ -515,13 +515,25 @@ create table invite_club_members
 (
 	id serial,
         email_id integer,
-	club_administrator_id integer,
+	club_id integer,
 	token text,
 	expires timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
+ 	FOREIGN KEY(club_id) REFERENCES club_administrators(id),
+	primary key(id)
+);
+
+create table invite_club_members_club_administrators
+(
+	id serial,
+        invite_club_member_id integer,
+	club_administrator_id integer,
+ 	FOREIGN KEY(invite_club_member_id) REFERENCES invite_club_members(id),
  	FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
 	primary key(id)
 );
+
+--this gets deleted if player goes from a team to b team within club
 
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
