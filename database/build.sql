@@ -999,20 +999,54 @@ CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, int, TEXT, int) --e
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
-        returning_forgot_passwords_id forgot_passwords.id%TYPE;
+        returning_email_id emails.id%TYPE;
+        returning_invite_club_members_id invite_club_members.id%TYPE;
         return_code text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 		--delete from forgot_passwords where email_id = found_email_id; 
 		--delete from invite_club_members...where....
-		insert into invite_club_members (email_id, selector, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_forgot_passwords_id;	
+		insert into invite_club_members (email_id, club_id, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
 	ELSE --actually just do insert of email then invite...
-		return_code = '-111';
+		insert into emails (email) values ($1) returning id into returning_email_id; 
+		insert into invite_club_members (email_id, club_id, token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
 	END IF;
+	return_code = '-100';
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
+
+create table invite_club_members
+(
+        id serial,
+        email_id integer,
+        club_id integer,
+        token text,
+        expires timestamp,
+        FOREIGN KEY(email_id) REFERENCES emails(id),
+        FOREIGN KEY(club_id) REFERENCES club_administrators(id),
+        primary key(id)
+);
+
+create table invite_club_members_club_administrators
+(
+        id serial,
+        invite_club_member_id integer,
+        club_administrator_id integer,
+        FOREIGN KEY(invite_club_member_id) REFERENCES invite_club_members(id),
+        FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
+        primary key(id)
+);
+create table emails
+(
+        id serial,
+        email text not null unique,
+        PRIMARY KEY (id)
+);
+
+
+
 
 --CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
 --RETURNS json AS $$ 
