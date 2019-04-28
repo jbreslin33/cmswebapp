@@ -29,6 +29,7 @@ class SelectClubAdministratorClubs
                 $front = '{ "clubs" :';
                 $back = '}';
 
+                $return_value = "";
                 $return_value .= $front;
                 $return_value .= $data;
                 $return_value .= $back;

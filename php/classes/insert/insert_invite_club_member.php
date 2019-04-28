@@ -75,6 +75,11 @@ class InsertInviteClubMember
 $email = $_GET['email'];
 $club_id = $_GET['club_id'];
 $jwt = $_GET['jwt'];
+error_log("crap:");
+error_log($email);
+error_log($club_id);
+error_log($jwt);
+error_log("end crap:");
 
 $insertInviteClubMember = new InsertInviteClubMember($email,$club_id,$jwt);	
 

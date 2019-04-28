@@ -130,8 +130,6 @@ class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                                 owner.show();
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').style.color = 'red';
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'You are not administrator of any clubs. Would you like to add a club? <a href="#insert_club_screen">Add Club</a>';
-                                owner.mCode = 0;
-                                owner.mData = null;
                         }
                 }
         }
@@ -142,6 +140,8 @@ class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXIT");
                 }
+                owner.mCode = 0;
+                owner.mData = null;
         }
 }
 
@@ -166,12 +166,11 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         console.log("WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
-/*
+
                 if (owner.mData)
                 {
-                        var dataArray = owner.mData.split(",");
-                        owner.mCode = dataArray[0];
-			console.log('mCode from owner:' + owner.mCode);
+                        owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
+                        owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
 
                         if (owner.mCode == -100)
                         {
@@ -186,7 +185,6 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                                 owner.mData = null;
                         }
                 }
-		*/
         }
 
         exit(owner)

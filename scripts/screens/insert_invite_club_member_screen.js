@@ -56,7 +56,7 @@ class InsertInviteClubMemberScreen extends Screen
 
       		this.mEmail  = document.getElementById("insert_invite_club_member_screen_email_id").value;
 
-		var url = "/php/classes/insert/insert_invite_club_member.php?email=" + this.mEmail; 
+		var url = "/php/classes/insert/insert_invite_club_member.php?email=" + this.mEmail + '&club_id=' + document.getElementById("insert_invite_club_member_screen_select_id").value + '&jwt=' + APPLICATION.mJWT;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
