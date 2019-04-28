@@ -170,7 +170,7 @@ class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 if (owner.mData)
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
-                        owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
+                        //owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
 
                         if (owner.mCode == -100)
                         {

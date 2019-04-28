@@ -19,7 +19,15 @@ class Utility
 	getJson(data)
 	{
 		var jsonString = data.slice(6,data.length);
-		return JSON.parse(jsonString);
+		if (jsonString)
+		{
+			return JSON.parse(jsonString);
+		}
+		else
+		{
+			console.log('no jsonString');
+			return "";
+		}
 	}
 
 	getCode(data)
