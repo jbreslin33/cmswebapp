@@ -61,15 +61,35 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
                         owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
-
+/*
 			for (var i = 0; i < owner.mJson.clubs.length; i++)
 			{
 				console.log(owner.mJson.clubs[i].id);
 				console.log(owner.mJson.clubs[i].name);
 			}
+			*/
 
                         if (owner.mCode == -100)
                         {
+				//load up option
+				//insert_invite_club_member_screen_select_id
+				//
+				//   var opt = document.createElement('option');
+    				//opt.value = i;
+    				//opt.innerHTML = i;
+    				//select.appendChild(opt);
+				var select = document.getElementById("insert_invite_club_member_screen_select_id");
+				for (var i = 0; i < owner.mJson.clubs.length; i++)
+				{
+					//console.log(owner.mJson.clubs[i].id);
+					//console.log(owner.mJson.clubs[i].name);
+					var opt = document.createElement('option');
+					opt.value = owner.mJson.clubs[i].id; 
+					opt.innerHTML = owner.mJson.clubs[i].name; 
+					select.appendChild(opt);
+					
+				}
+				
                                 owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 				//no we are going to populate select instead
                         }
