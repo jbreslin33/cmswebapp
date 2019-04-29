@@ -1000,24 +1000,28 @@ RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
         returning_email_id emails.id%TYPE;
-        returning_invite_club_members_id invite_club_members.id%TYPE;
-        found_club_administrators_id club_administrators.id%TYPE;
+        returning_invite_club_member_id invite_club_members.id%TYPE;
+        found_invite_club_member_id invite_club_members.id%TYPE;
+        found_club_administrator_id club_administrators.id%TYPE;
         return_code text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 
+		select invite_club_members.id into found_invite_club_member_id from invite_club_members where email_id = found_email_id and club_id = $2;
 		delete from invite_club_members where email_id = found_email_id and club_id = $2;
-		insert into invite_club_members (email_id, club_id, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
-		select club_administrators.id into found_club_administrators_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
-		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_members_id, found_club_administrators_id);
+		insert into invite_club_members (email_id, club_id, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
+		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
 
 	ELSE --actually just do insert of email then invite...
 		insert into emails (email) values ($1) returning id into returning_email_id; 
+
+		select invite_club_members.id into found_invite_club_member_id from invite_club_members where email_id = returning_email_id and club_id = $2;
 		delete from invite_club_members where email_id = returning_email_id and club_id = $2;
-		insert into invite_club_members (email_id, club_id, token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
-		select club_administrators.id into found_club_administrators_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
-		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_members_id, found_club_administrators_id);
+		insert into invite_club_members (email_id, club_id, token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
+		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
 
 	END IF;
 	return_code = '-100';
