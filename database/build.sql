@@ -1009,6 +1009,9 @@ BEGIN
         IF found_email_id > 0 THEN 
 
 		select invite_club_members.id into found_invite_club_member_id from invite_club_members where email_id = found_email_id and club_id = $2;
+
+		delete from invite_club_members_club_administrators where invite_club_member_id = found_invite_club_member_id;
+
 		delete from invite_club_members where email_id = found_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
@@ -1018,6 +1021,9 @@ BEGIN
 		insert into emails (email) values ($1) returning id into returning_email_id; 
 
 		select invite_club_members.id into found_invite_club_member_id from invite_club_members where email_id = returning_email_id and club_id = $2;
+
+		delete from invite_club_members_club_administrators where invite_club_member_id = found_invite_club_member_id;
+
 		delete from invite_club_members where email_id = returning_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
