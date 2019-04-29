@@ -1008,73 +1008,19 @@ BEGIN
 
 		delete from invite_club_members where email_id = found_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
+		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_members_id, returning_club_administrators_id);
 
 	ELSE --actually just do insert of email then invite...
 		insert into emails (email) values ($1) returning id into returning_email_id; 
 		delete from invite_club_members where email_id = returning_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_members_id;	
+		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_members_id, returning_club_administrators_id);
 
 	END IF;
 	return_code = '-100';
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
-
-create table invite_club_members
-(
-        id serial,
-        email_id integer,
-        club_id integer,
-        token text,
-        expires timestamp,
-        FOREIGN KEY(email_id) REFERENCES emails(id),
-        FOREIGN KEY(club_id) REFERENCES club_administrators(id),
-        primary key(id)
-);
-
-create table invite_club_members_club_administrators
-(
-        id serial,
-        invite_club_member_id integer,
-        club_administrator_id integer,
-        FOREIGN KEY(invite_club_member_id) REFERENCES invite_club_members(id),
-        FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
-        primary key(id)
-);
-create table emails
-(
-        id serial,
-        email text not null unique,
-        PRIMARY KEY (id)
-);
-
-
-
-
---CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
---RETURNS json AS $$ 
---DECLARE 
---	club_id clubs.id%TYPE;
---        club_name clubs.name%TYPE;
---	r clubs%rowtype;
---BEGIN
-	--SELECT json_agg(t) FROM t
---	select json_object_agg(clubs.id, clubs.name) from users join persons on persons.id=users.person_id join club_members on club_members.person_id=persons.id join club_administrators on club_administrators.club_member_id=club_members.id join clubs on clubs.id=club_members.club_id where users.id = user_id;
---END
---$$ LANGUAGE plpgsql;
-
---CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int) 
---RETURNS json AS $$ 
---DECLARE 
-
---BEGIN 
-	--select * INTO c_row FROM clubs;
- --	RETURN select array_to_json(array_agg(row_to_json(t)))
-  --  	from (
-   --   	select id, name from clubs
-    --	) t
---END; 
---$$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
   RETURNS json AS $$
@@ -1083,8 +1029,6 @@ CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
 	(
 		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id where users.id = user_id 
 	) t;
-
---array_to_json(*) FROM clubs;  -- Requires Postgres 9.3; or use $1
 $$ LANGUAGE sql;
 
 
