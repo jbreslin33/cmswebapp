@@ -32,7 +32,7 @@ class InsertInviteClubMember
                 $user_id = $payload->id;
 
 		//token	
-		$token = bin2hex(random_bytes(32));
+                $this->mToken = bin2hex(random_bytes(32));
 
                 $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token, $user_id));
 
@@ -40,40 +40,17 @@ class InsertInviteClubMember
 
                 echo $return_value;
 
-		///////////////////////////////OLD
-		/*
-		$this->mEmail = $email;
-		$this->mSelector = bin2hex(random_bytes(8));
-		$this->mToken = bin2hex(random_bytes(32));
+                //create mail
+                $this->mEmail = $email;
+                $this->mSubject = "Welcome to Club Link";
+                $this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
 
-                $database = new Database("localhost","cms","postgres","mibesfat");
+                $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
+                        'token' => $this->mToken
+                        ]));
 
-                $sql = 'select f_insert_invite_club_member($1,$2,$3)';
-                $prepare_result = pg_prepare($database->mConnection, "f_insert_invite_club_member", $sql);
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $this->mEmail ,$this->mSelector, $this->mToken));
-
-                $return_value = pg_fetch_result($result, 0);
-		
-		//token and email	
-		$this->mSubject = "Invitation to Join Club Link";
-		//this will either be main or joinscreen
-		$this->mAbsoluteURL = "http://elacore.org/#update_invite_club_member_screen&";
-		
-		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-    			'selector' => $this->mSelector,
-    			'token' => $this->mToken
-			]));
-
-		$return_value .= ",";
-
-		//this return value may have to send them to join screen with a token....
-		//or send them to main
-		//actually send a 100 with or without token if there is a token we know to take them to join
-		error_log($return_value);
-                echo $return_value;
-
-		$mail = new Mail($this->mEmail, $this->mUrl,$this->mSubject);
-		 */
+                //send mail
+                $mail = new Mail($this->mEmail, $this->mUrl,$this->mSubject);
         }
 }
 $email = $_GET['email'];
