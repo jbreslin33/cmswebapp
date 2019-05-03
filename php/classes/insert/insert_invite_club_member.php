@@ -43,7 +43,7 @@ class InsertInviteClubMember
                 //create mail
                 $this->mEmail = $email;
                 $this->mSubject = "Welcome to Club Link";
-                $this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
+                $this->mAbsoluteURL = "http://elacore.org/#insert_native_login_screen&";
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
                         'token' => $this->mToken
@@ -56,11 +56,6 @@ class InsertInviteClubMember
 $email = $_GET['email'];
 $club_id = $_GET['club_id'];
 $jwt = $_GET['jwt'];
-error_log("crap:");
-error_log($email);
-error_log($club_id);
-error_log($jwt);
-error_log("end crap:");
 
 $insertInviteClubMember = new InsertInviteClubMember($email,$club_id,$jwt);	
 
