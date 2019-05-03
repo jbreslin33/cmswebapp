@@ -26,6 +26,15 @@ class LoginScreen extends Screen
 		this.mImageUrl = null;	
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
+
+		if (this.mApplication.mToken)
+		{
+			console.log('mToken:' + this.mApplication.mToken);
+		}
+		else
+		{
+			console.log('NO mToken:');
+		}
 	}
 
 	hit()
