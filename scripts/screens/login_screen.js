@@ -1,15 +1,20 @@
 'use strict';
 
-class LoginScreen
+class LoginScreen extends Screen
 {
 	constructor(application)
 	{
+		super(application);
 		this.mApplication = application;
 		
 		this.mCode = 0;
 		this.mData = null;
 
 		location.hash = "login_screen";
+
+                //html ids
+                this.mSpinnerId = "login_screen_spinner_id";
+                this.mHtmlId = "login_screen_html_id";
 
 		//sql php vars
 		this.mEmail = null;
@@ -96,15 +101,5 @@ class LoginScreen
         	{
                 	console.log('User signed out.');
         	});
-	}
-
-	show()
-	{
-              document.getElementById("login_screen_html_id").style.display = "block";
-	}
-
-	hide()
-	{
-              document.getElementById("login_screen_html_id").style.display = "none";
 	}
 }
