@@ -34,16 +34,23 @@ class InsertInviteClubMember
 		//token	
                 $this->mToken = bin2hex(random_bytes(32));
 
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $token, $user_id));
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mToken, $user_id));
 
   		$return_value = pg_fetch_result($result, 0);
 
                 echo $return_value;
+		//so lets say i send this link i tell them click link to accept. 
+		//i then take them to custom accept_invite_screen_screen
+		//on that page it asks if you want to join via google or native
+		//then if they are not a user/person already i have them fill in join form
+		//
+		//else 
+		//
 
                 //create mail
                 $this->mEmail = $email;
                 $this->mSubject = "Welcome to Club Link";
-                $this->mAbsoluteURL = "http://elacore.org/#insert_native_login_screen&";
+                $this->mAbsoluteURL = "http://elacore.org/#login_screen&";
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
                         'token' => $this->mToken
