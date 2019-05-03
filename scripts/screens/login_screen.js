@@ -30,6 +30,8 @@ class LoginScreen extends Screen
 		if (this.mApplication.mToken)
 		{
 			console.log('mToken:' + this.mApplication.mToken);
+                        document.getElementById('login_screen_team_message_id').style.color = 'blue';
+                        document.getElementById('login_screen_team_message_id').innerHTML = 'Login or Create an acoount to join Celta.';
 		}
 		else
 		{
