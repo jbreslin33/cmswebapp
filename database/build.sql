@@ -407,8 +407,7 @@ create TABLE forgot_passwords
 (
         id serial,
         email_id integer,
-        selector text,
-        token text,
+        forgot_password_token text,
         expires timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
@@ -516,7 +515,7 @@ create table invite_club_members
 	id serial,
         email_id integer,
 	club_id integer,
-	token text,
+	club_invite_token text,
 	expires timestamp,
  	FOREIGN KEY(email_id) REFERENCES emails(id),
  	FOREIGN KEY(club_id) REFERENCES club_administrators(id),
@@ -722,7 +721,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- UPDATE FORGOT PASSWORD
-CREATE OR REPLACE FUNCTION f_update_forgot_password(selector TEXT, token TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION f_update_forgot_password(update_forgot_password_token TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
         found_email_id forgot_passwords.email_id%TYPE;
@@ -731,14 +730,9 @@ DECLARE
 BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW();
         IF found_email_id THEN
-		--update password
-		--insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
-        	--WHERE email_id = found_email_id AND password = (CRYPT($2, password));
-
-		update native_logins set password = CRYPT($3, GEN_SALT('md5')) where email_id = found_email_id;     
+		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
                 return_code = '-100';
         ELSE
-                --CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
                 return_code = x;
         END IF;
 RETURN return_code;
@@ -972,7 +966,7 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT, TEXT)
+CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
@@ -982,7 +976,7 @@ BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 		delete from forgot_passwords where email_id = found_email_id; 
-		insert into forgot_passwords (email_id, selector, token, expires) values (found_email_id, $2, $3, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
+		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
 			return_code = '-100';
 		ELSE

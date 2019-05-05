@@ -8,11 +8,11 @@ class UpdateForgotPassword
 	{
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-                $sql = 'select f_update_forgot_password($1,$2,$3)';
+                $sql = 'select f_update_forgot_password($1,$2)';
 
                 $prepare_result = pg_prepare($database->mConnection, "f_update_forgot_password", $sql);
 
-                $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $selector ,$token, $password));
+                $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $forgot_password_token, $password));
 
                 $return_value = pg_fetch_result($result, 0);
 		error_log($return_value);
@@ -20,9 +20,8 @@ class UpdateForgotPassword
                 echo $return_value;
         }
 }
-$selector = $_GET['selector'];
-$token = $_GET['token'];
+$token = $_GET['forgot_password_token'];
 $password = $_GET['password'];
 
-$updateForgotPassword = new UpdateForgotPassword($selector,$token,$password);	
+$updateForgotPassword = new UpdateForgotPassword($forgot_password_token,$password);	
 ?>

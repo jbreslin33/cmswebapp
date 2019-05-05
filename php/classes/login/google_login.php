@@ -30,7 +30,6 @@ class GoogleLogin
                         $encoded_token = array();
                         $encoded_token['id'] = $id;
                         $jwt = JWT::encode($encoded_token, $secret);
-                        error_log($jwt);
                         echo "-100," . $jwt;
                 }
 

@@ -476,8 +476,9 @@
 
   	<script> 
 	
-	var selector = null;
-	var token    = null;
+	var clubInviteName      = null;
+	var clubInviteToken     = null;
+	var forgotPasswordToken = null;
 
 	var hash = window.location.hash.substr(1);
 
@@ -501,18 +502,23 @@
 
 	for (var y = 0; y < parameterNamesArray.length; y++)
 	{
-		if (parameterNamesArray[y] == 'selector')
+		if (parameterNamesArray[y] == 'clubInviteName')
 		{
 			selector = parameterValuesArray[y];
 		}
 
-		if (parameterNamesArray[y] == 'token')
+		if (parameterNamesArray[y] == 'clubInviteToken')
+		{
+			token = parameterValuesArray[y];
+		}
+		
+		if (parameterNamesArray[y] == 'forgotPasswordToken')
 		{
 			token = parameterValuesArray[y];
 		}
 	}
 
-	var APPLICATION = new Application(selector,token);
+	var APPLICATION = new Application(clubInviteName,clubInviteToken,forgotPasswordToken);
 
         //update loop
         window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));

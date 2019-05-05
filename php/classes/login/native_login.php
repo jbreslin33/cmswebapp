@@ -19,7 +19,6 @@ class NativeLogin
                 $return_value = pg_fetch_result($result, 0);
 
 		$txt = "return_value:" . $return_value;
-		error_log($txt);
 
 		if ($return_value > 0)
 		{

@@ -35,7 +35,7 @@ class UpdateForgotPasswordScreen extends Screen
                	this.mPassword1  = document.getElementById("update_forgot_password_screen_password1_id").value;
                	this.mPassword2  = document.getElementById("update_forgot_password_screen_password2_id").value;
 
-		var url = "/php/classes/update/update_forgot_password.php?selector=" + this.mApplication.mSelector + "&token=" + this.mApplication.mToken + "&password=" + this.mPassword1; 
+		var url = "/php/classes/update/update_forgot_password.php?&forgot_password_token=" + this.mApplication.mForgotPasswordToken + "&password=" + this.mPassword1; 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

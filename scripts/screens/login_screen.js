@@ -27,15 +27,14 @@ class LoginScreen extends Screen
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 
-		if (this.mApplication.mToken)
+		if (this.mApplication.mClubInviteToken && this.mApplication.mClubInviteName)
 		{
-			console.log('mToken:' + this.mApplication.mToken);
                         document.getElementById('login_screen_team_message_id').style.color = 'blue';
-                        document.getElementById('login_screen_team_message_id').innerHTML = 'Login or Create an acoount to join Celta.';
+                        document.getElementById('login_screen_team_message_id').innerHTML = 'Login or Create an acoount to join ' + this.mApplication.mClubInviteName;
 		}
 		else
 		{
-			console.log('NO mToken:');
+			console.log('NO mClubInviteToken');
 		}
 	}
 

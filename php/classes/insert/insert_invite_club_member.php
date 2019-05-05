@@ -3,19 +3,7 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
-//ok we need to think about this
-//1: if email does not exist create it
-//2: if person exists  
-//   { 
-//   	insert club member etc
-//   }
-//   else
-//   {
-//   	take them to join screen but with a special token so that if mToken then cross ref with db entry and insert them into club as well as standard join....	 	
-//
-//   }
-//
-//else just add an entry to 
+
 class InsertInviteClubMember 
 {
 	function __construct($email,$club_id,$jwt) 
@@ -32,20 +20,13 @@ class InsertInviteClubMember
                 $user_id = $payload->id;
 
 		//token	
-                $this->mToken = bin2hex(random_bytes(32));
+                $this->mInviteClubToken = bin2hex(random_bytes(32));
 
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mToken, $user_id));
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mInviteClubToken, $user_id));
 
   		$return_value = pg_fetch_result($result, 0);
 
                 echo $return_value;
-		//so lets say i send this link i tell them click link to accept. 
-		//i then take them to custom accept_invite_screen_screen
-		//on that page it asks if you want to join via google or native
-		//then if they are not a user/person already i have them fill in join form
-		//
-		//else 
-		//
 
                 //create mail
                 $this->mEmail = $email;
@@ -53,7 +34,7 @@ class InsertInviteClubMember
                 $this->mAbsoluteURL = "http://elacore.org/#login_screen&";
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-                        'token' => $this->mToken
+                        'invite_club_token' => $this->mInviteClubToken
                         ]));
 
                 //send mail

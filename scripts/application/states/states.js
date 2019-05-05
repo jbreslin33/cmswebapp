@@ -83,7 +83,7 @@ class INIT_APPLICATION extends State
         {
 		if (application.mStateLogs || application.mStateEnterLogs)
 		{
-			console.log("INIT_APPLICATION_STATE: ENTER");        
+			console.log("INIT_PPLICATION_STATE: ENTER");        
 		}
 		//hide evertthing except nav_bar_id
 		document.getElementById("nav_bar_id").style.display = "block";
@@ -99,27 +99,45 @@ class INIT_APPLICATION extends State
 
         execute(application)
         {
+		console.log("A0");
 		if (application.mStateLogs || application.mStateExecuteLogs)
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
+		application.mJWT = localStorage.getItem("mJWT");
 
-		if (application.mSelector && application.mToken)
+		if (application.mForgotPasswordToken)
 		{
+			console.log("A1");
 			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
 		}
+		else if (application.mClubInviteName && application.mClubInviteToken && application.mJWT)
+		{
+			//you already are logged in (sortof) and you have creds to join club so do it but maybe with something other than whats below
+			console.log("A2");
+			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+		}
+		else if (application.mClubInviteName && application.mClubInviteToken && application.mJWT == null)
+		{
+			//you are not logged in but you have creds to join club so do it but maybe with something other than whats below
+			console.log("A3");
+			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+		}
+		//else its  not a special case like forgot password or join club etc and just a normal login attempt
 		else
 		{
-			application.mJWT = localStorage.getItem("mJWT");
 			if (application.mJWT)
 			{
+				console.log("A4");
 				application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 			}
 			else
 			{
+				console.log("A5");
 				application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 			}
 		}
+		console.log("A6");
 	}
 
         exit(application)
@@ -246,7 +264,6 @@ class LOGIN_APPLICATION extends State
 		{
 			var dataArray = app.mLogin.mData.split(",");
 			app.mLogin.mCode = dataArray[0];
-			console.log('login:' + app.mLogin.mCode);	
 			if (app.mLogin.mCode == -100)
 			{
 				app.mJWT = dataArray[1]; //set jwt
