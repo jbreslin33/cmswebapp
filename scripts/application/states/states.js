@@ -99,7 +99,6 @@ class INIT_APPLICATION extends State
 
         execute(application)
         {
-		console.log("A0");
 		if (application.mStateLogs || application.mStateExecuteLogs)
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
@@ -137,7 +136,6 @@ class INIT_APPLICATION extends State
 				application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 			}
 		}
-		console.log("A6");
 	}
 
         exit(application)
