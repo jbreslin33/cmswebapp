@@ -104,7 +104,17 @@ class INIT_APPLICATION extends State
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
 		application.mJWT = localStorage.getItem("mJWT");
-
+		if (application.mJWT)
+		{
+			console.log("A4");
+			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+		}
+		else
+		{
+			console.log("A5");
+			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+		}
+/*
 		if (application.mForgotPasswordToken)
 		{
 			console.log("A1");
@@ -136,6 +146,7 @@ class INIT_APPLICATION extends State
 				application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 			}
 		}
+		*/
 	}
 
         exit(application)
