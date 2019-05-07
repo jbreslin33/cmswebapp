@@ -22,41 +22,46 @@ class GLOBAL_APPLICATION extends State
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
                 }
+     	
+		var myHash = null;
+
+		var hash = window.location.hash.substr(1);
+
+        	var urlArray = hash.split('&');
+        	var parameterHash = null;
+		if (urlArray.length > 0)
+		{
+			myHash = urlArray[0];
+		}
+
+		console.log('loc:' + location.hash);
+		console.log('myHash:' + myHash);
                 
-		if (location.hash == '#login_screen' && app.mStateMachine.mCurrentState != app.mLOGIN_APPLICATION)
+		if (myHash == 'login_screen' && app.mStateMachine.mCurrentState != app.mLOGIN_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGIN_APPLICATION);
                 }
-
-                if (location.hash == '#add_event' && app.mStateMachine.mCurrentState != app.mINSERT_EVENTO_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EVENTO_APPLICATION);
-                }
-		else if (location.hash == '#daily_schedule' && app.mStateMachine.mCurrentState != app.mSHOW_DAILY_SCHEDULE_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mSHOW_DAILY_SCHEDULE_APPLICATION);
-                }
-		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
-                }
-		else if (location.hash == '#insert_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_CLUB_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
-                }
-		else if (location.hash == '#insert_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mINSERT_FORGOT_PASSWORD_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
-                }
-		else if (location.hash == '#insert_invite_club_member_screen' && app.mStateMachine.mCurrentState != app.mINSERT_INVITE_CLUB_MEMBER_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_INVITE_CLUB_MEMBER_APPLICATION);
-                }
-		else if (location.hash == '#update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
+		else if (myHash == 'update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
                 }
-		else if (location.hash == '#main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
+		else if (myHash == 'insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
+                }
+		else if (myHash == 'insert_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_CLUB_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
+                }
+		else if (myHash == 'insert_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mINSERT_FORGOT_PASSWORD_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
+                }
+		else if (myHash == 'insert_invite_club_member_screen' && app.mStateMachine.mCurrentState != app.mINSERT_INVITE_CLUB_MEMBER_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_INVITE_CLUB_MEMBER_APPLICATION);
+                }
+		else if (myHash == 'main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mMAIN_APPLICATION);
                 }
