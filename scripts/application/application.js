@@ -11,6 +11,9 @@ class Application
 
 		//state changed
 		window.onhashchange = this.locationHashChanged;
+
+		//locatation.has
+		this.mLocationHash = null;
 	
 		//forgot_password
 		this.mClubInviteName = clubInviteName; 
