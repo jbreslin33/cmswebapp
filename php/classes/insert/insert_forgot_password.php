@@ -31,10 +31,6 @@ class InsertForgotPassword
 		$return_value .= ",";
                 echo $return_value;
 
-		//send mail
-		//                        $body = "Click this link:";
-//                        $body .= $this->mUrl;
-
 		$mail = new Mail($this->mEmail,$this->mSubject,$this->mBody);
         }
 }
