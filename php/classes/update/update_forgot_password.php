@@ -7,6 +7,8 @@ class UpdateForgotPassword
 	function __construct($forgot_password_token,$password) 
 	{
                 $database = new Database("localhost","cms","postgres","mibesfat");
+		error_log($forgot_password_token);
+		error_log($password);
 
                 $sql = 'select f_update_forgot_password($1,$2)';
 
@@ -15,6 +17,8 @@ class UpdateForgotPassword
                 $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $forgot_password_token, $password));
 
                 $return_value = pg_fetch_result($result, 0);
+                echo $return_value;
+		/*
 		if ($return_value == "-112")
 		{
                 	echo $return_value;
@@ -23,6 +27,7 @@ class UpdateForgotPassword
 		{
 			echo "-100";	
 		}
+		 */
 
         }
 }

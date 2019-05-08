@@ -728,7 +728,7 @@ DECLARE
         return_code text;
         DECLARE x int := -112; --for generic bad update attempt
 BEGIN
-        SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW();
+        SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW() and forgot_password_token = update_forgot_password_token;
         IF found_email_id THEN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
                 return_code = found_email_id;
