@@ -18,6 +18,8 @@ class InsertForgotPassword
 		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
     			'forgot_password_token' => $this->mForgotPasswordToken
 			]));
+		$this->mBody = "Click the link to change password: ";
+		$this->mBody .= $this->mUrl; 
 
 		//insert
                 $sql = 'select f_insert_forgot_password($1,$2)';
@@ -30,7 +32,10 @@ class InsertForgotPassword
                 echo $return_value;
 
 		//send mail
-		$mail = new Mail($this->mEmail, $this->mUrl,$this->mSubject);
+		//                        $body = "Click this link:";
+//                        $body .= $this->mUrl;
+
+		$mail = new Mail($this->mEmail,$this->mSubject,$this->mBody);
         }
 }
 $email = $_GET['email'];

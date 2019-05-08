@@ -7,11 +7,11 @@ require '../../../vendor/autoload.php';
 
 class Mail 
 {
-	function __construct($email,$url,$subject) 
+	function __construct($email,$subject,$body) 
 	{
 		$this->mEmail = $email;
-		$this->mUrl = $url;
 		$this->mSubject = $subject;
+		$this->mBody = $body;
 
 		try 
 		{
@@ -34,14 +34,12 @@ class Mail
 
                         $this->mPhpMailer->isHTML(true);                                  // Set email format to HTML
                         $this->mPhpMailer->Subject = $this->mSubject;
-                        $body = "Click this link:";
-                        $body .= $this->mUrl;
+                        //$body = "Click this link:";
+                        //$body .= $this->mUrl;
                         $this->mPhpMailer->Body    = $body;
                         $this->mPhpMailer->AltBody = $body;
 
                         $this->mPhpMailer->send();
-
-
 		} 
 		catch (Exception $e) 
 		{
