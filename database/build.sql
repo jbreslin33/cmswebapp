@@ -725,13 +725,15 @@ CREATE OR REPLACE FUNCTION f_update_forgot_password(update_forgot_password_token
 RETURNS text AS $$
 DECLARE
         found_email_id forgot_passwords.email_id%TYPE;
+        found_email emails.email%TYPE;
         return_code text;
         DECLARE x int := -112; --for generic bad update attempt
 BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW() and forgot_password_token = update_forgot_password_token;
+	SELECT email into found_email from emails where id = found_email_id;
         IF found_email_id THEN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-                return_code = found_email_id;
+                return_code = found_email;
         ELSE
                 return_code = '-112';
         END IF;

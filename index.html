@@ -481,7 +481,6 @@
 	var forgotPasswordToken = null;
 
 	var hash = window.location.hash.substr(1);
-	console.log('hash:' + hash);
 
 	var urlArray = hash.split('&');
 	var parameterHash = null;
@@ -492,7 +491,6 @@
 		if (i == 0) //get the location.hash
 		{
 			parameterHash = urlArray[i];		
-			console.log('parameterHash:' + parameterHash);
 		}
 		else
 		{

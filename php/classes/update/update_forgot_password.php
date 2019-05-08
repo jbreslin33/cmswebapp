@@ -17,13 +17,15 @@ class UpdateForgotPassword
                 $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $forgot_password_token, $password));
 
                 $return_value = pg_fetch_result($result, 0);
-                //echo $return_value;
 		if ($return_value == "-112")
 		{
                 	echo $return_value;
 		}
 		else
 		{
+                	//echo $return_value;
+			//send mail....
+			error_log($return_value);
 			echo "-100";	
 		}
         }
