@@ -731,9 +731,9 @@ BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW();
         IF found_email_id THEN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-                return_code = '-100';
+                return_code = found_email_id;
         ELSE
-                return_code = x;
+                return_code = '-112';
         END IF;
 RETURN return_code;
 END;
