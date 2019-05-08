@@ -19,6 +19,7 @@ class Application
 		this.mClubInviteName = clubInviteName; 
 		this.mClubInviteToken = clubInviteToken; 
 		this.mForgotPasswordToken = forgotPasswordToken; 
+		console.log('mForgotPasswordToken:' + this.mForgotPasswordToken);
 
 		//localstorage
 		this.mJWT = null;
