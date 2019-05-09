@@ -106,47 +106,12 @@ class INIT_APPLICATION extends State
 		application.mJWT = localStorage.getItem("mJWT");
 		if (application.mJWT)
 		{
-			console.log("A4");
 			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 		}
 		else
 		{
-			console.log("A5");
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 		}
-/*
-		if (application.mForgotPasswordToken)
-		{
-			console.log("A1");
-			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
-		}
-		else if (application.mClubInviteName && application.mClubInviteToken && application.mJWT)
-		{
-			//you already are logged in (sortof) and you have creds to join club so do it but maybe with something other than whats below
-			console.log("A2");
-			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
-		}
-		else if (application.mClubInviteName && application.mClubInviteToken && application.mJWT == null)
-		{
-			//you are not logged in but you have creds to join club so do it but maybe with something other than whats below
-			console.log("A3");
-			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
-		}
-		//else its  not a special case like forgot password or join club etc and just a normal login attempt
-		else
-		{
-			if (application.mJWT)
-			{
-				console.log("A4");
-				application.mStateMachine.changeState(application.mMAIN_APPLICATION);
-			}
-			else
-			{
-				console.log("A5");
-				application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
-			}
-		}
-		*/
 	}
 
         exit(application)
