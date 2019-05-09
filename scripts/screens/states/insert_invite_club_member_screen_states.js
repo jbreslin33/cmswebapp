@@ -49,11 +49,13 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
 		if (document.getElementById("insert_invite_club_member_screen_select_id").length > 0)
 		{
                 	//owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+			console.log('if');
 		}
 		else
 		{
                 	owner.mStateMachine.changeState(owner.mWAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 			//owner.get();
+			console.log('else');
 		}
 
         }
