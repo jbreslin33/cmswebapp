@@ -347,7 +347,7 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                 {
                         app.mInsertInviteClubMemberScreen = new InsertInviteClubMemberScreen(app);
                 }
-                app.mInsertInviteClubMemberScreen.show();
+                //app.mInsertInviteClubMemberScreen.show();
         }
 
         execute(app)
@@ -364,10 +364,12 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                 {
                         console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: EXIT");
                 }
+		/*
                 this.mHit = false;
                 app.mInsertInviteClubMemberScreen.hide();
                 app.mInsertInviteClubMemberScreen.mCode = 0;
                 app.mInsertInviteClubMemberScreen.mData = null;
+		*/
         }
 }
 

@@ -46,6 +46,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 }
 		//use ajax to get club names and ids
                 //owner.showSpinner();
+		/*
 		if (document.getElementById("insert_invite_club_member_screen_select_id").length > 0)
 		{
                 	//owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
@@ -57,6 +58,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
 			//owner.get();
 			console.log('else');
 		}
+		*/
 
         }
 
@@ -105,7 +107,20 @@ class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                         console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
 
+        }
+
+        exit(owner)
+        {
+                if (owner.mStateLogs || owner.mStateExitLogs)
+                {
+                        console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXIT");
+                }
+                owner.mCode = 0;
+                owner.mData = null;
+        }
+}
 		//get clubs
+/*
                 if (owner.mData)
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
@@ -134,19 +149,7 @@ class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'You are not administrator of any clubs. Would you like to add a club? <a href="#insert_club_screen">Add Club</a>';
                         }
                 }
-        }
-
-        exit(owner)
-        {
-                if (owner.mStateLogs || owner.mStateExitLogs)
-                {
-                        console.log("WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXIT");
-                }
-                owner.mCode = 0;
-                owner.mData = null;
-        }
-}
-
+*/
 class WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
 {
         constructor()
