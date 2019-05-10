@@ -31,7 +31,7 @@ class InsertInviteClubMember
                 //create mail
                 $this->mEmail = $email;
                 $this->mSubject = "Welcome to Club Link";
-                $this->mAbsoluteURL = "http://elacore.org/#login_screen&";
+                $this->mAbsoluteURL = "http://elacore.org/#insert_accept_club_invite_screen&";
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
                         'invite_club_token' => $this->mInviteClubToken
