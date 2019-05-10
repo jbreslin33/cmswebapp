@@ -938,6 +938,17 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
+RETURNS text AS $$
+DECLARE
+        found_user_id users.id%TYPE;
+        found_email_id emails.id%TYPE;
+BEGIN
+	select email_id into found_email_id from invite_club_members where club_invite_token = $1; 
+        --select user_id inot found_user_id from users where email_id = returning_email_id;  
+RETURN found_email_id;
+END;
+$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, user_id int)
 RETURNS text AS $$

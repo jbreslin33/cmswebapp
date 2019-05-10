@@ -87,7 +87,7 @@ class INIT_APPLICATION extends State
         {
 		if (application.mStateLogs || application.mStateEnterLogs)
 		{
-			console.log("INIT_PPLICATION_STATE: ENTER");        
+			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
 		//hide evertthing except nav_bar_id
 		document.getElementById("nav_bar_id").style.display = "block";
@@ -120,6 +120,7 @@ class INIT_APPLICATION extends State
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 		}
 
+/*
                 if (application.mClubInviteToken && application.mClubInviteName)
                 {
                         document.getElementById('login_screen_team_message_id').style.color = 'blue';
@@ -129,7 +130,7 @@ class INIT_APPLICATION extends State
                 {
                         console.log('NO mClubInviteToken');
                 }
-
+*/
 	}
 
         exit(application)

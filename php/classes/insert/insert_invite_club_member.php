@@ -20,9 +20,9 @@ class InsertInviteClubMember
                 $user_id = $payload->id;
 
 		//token	
-                $this->mInviteClubToken = bin2hex(random_bytes(32));
+                $this->mClubInviteToken = bin2hex(random_bytes(32));
 
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mInviteClubToken, $user_id));
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mClubInviteToken, $user_id));
 
   		$return_value = pg_fetch_result($result, 0);
 
@@ -34,7 +34,7 @@ class InsertInviteClubMember
                 $this->mAbsoluteURL = "http://elacore.org/#insert_accept_club_invite_screen&";
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-                        'invite_club_token' => $this->mInviteClubToken
+                        'club_invite_token' => $this->mClubInviteToken
                         ]));
 
                 //send mail

@@ -18,7 +18,8 @@ class InsertAcceptClubInviteScreen extends Screen
 		console.log('get in acc');
 		//if (this.mApplication.mJWT)
 		//{
-			var url = "/php/classes/insert/insert_accept_club_invite.php"; 
+			var url = "/php/classes/insert/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken; 
+			//var url = "/php/classes/insert/insert_accept_club_invite.php"; 
 		        var request = new XMLHttpRequest();
                 	request.onreadystatechange = function()
                 	{
