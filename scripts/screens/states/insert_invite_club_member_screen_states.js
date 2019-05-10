@@ -59,6 +59,7 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
 			console.log('else');
 		}
 		*/
+                owner.mStateMachine.changeState(owner.mWAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN);
 
         }
 
@@ -69,10 +70,9 @@ class INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                         console.log("INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
 
-                if (owner.mHit)
-                {
-                        owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
-                }
+                //if (owner.mHit)
+                //{
+                //}
         }
 
         exit(owner)
@@ -111,9 +111,13 @@ class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
                         owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
+                        owner.show();
 
                         if (owner.mCode == -100)
                         {
+
+				//remove all old options
+
                                 //load up option
                                 var select = document.getElementById("insert_invite_club_member_screen_select_id");
                                 for (var i = 0; i < owner.mJson.clubs.length; i++)
@@ -124,13 +128,12 @@ class WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                                         select.appendChild(opt);
                                 }
 
-                                owner.mStateMachine.changeState(owner.mINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
+                                owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
                         }
                         if (owner.mCode == -113)
                         {
                                 //owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
                                 //let us know there is an error figuring out what club you are admin of......
-                                owner.show();
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').style.color = 'red';
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'You are not administrator of any clubs. Would you like to add a club? <a href="#insert_club_screen">Add Club</a>';
                         }
