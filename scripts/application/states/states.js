@@ -400,6 +400,15 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: ENTER");
 		}
+                if (app.mInsertAcceptClubInviteScreen)
+                {
+                        app.mInsertAcceptClubInviteScreen = new InsertAcceptClubInviteScreen(app);
+                }
+                else
+                {
+                        app.mInsertAcceptClubInviteScreen = new InsertAcceptClubInviteScreen(app);
+                }
+		app.mInsertAcceptClubInviteScreen.get();
         }
 
         execute(app)
