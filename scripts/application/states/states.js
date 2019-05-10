@@ -96,8 +96,11 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_invite_club_member_screen_html_id").style.display = "none";
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
 	}
-
-        execute(application)
+        
+//if you click link it automatically joins you to club	
+	//then it simply takes you to login page
+	//where you can join site or simply login
+	execute(application)
         {
 		if (application.mStateLogs || application.mStateExecuteLogs)
 		{
@@ -112,6 +115,17 @@ class INIT_APPLICATION extends State
 		{
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 		}
+
+                if (application.mClubInviteToken && application.mClubInviteName)
+                {
+                        document.getElementById('login_screen_team_message_id').style.color = 'blue';
+                        document.getElementById('login_screen_team_message_id').innerHTML = 'Login or Create an acoount to join ' + this.mApplication.mClubInviteName;
+                }
+                else
+                {
+                        console.log('NO mClubInviteToken');
+                }
+
 	}
 
         exit(application)
@@ -123,6 +137,86 @@ class INIT_APPLICATION extends State
 	}
 }
 
+class LOGIN_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("LOGIN_APPLICATION: ENTER");        
+		}
+		if (app.mLogin)
+		{
+			//do nothing right now	
+		}
+		else
+		{
+			//start the login subsystem
+			app.mLogin = new LoginScreen(app);
+		}
+		document.getElementById("login_nav_id").className += " active";
+    		app.mLogin.show();
+//you need to take the invite token and do a query to find out the appropriate place for this user....
+		//to do this do we need loginScreen states?
+		//
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("LOGIN_APPLICATION: EXECUTE");        
+		}
+
+		if (app.mLogin.mData)
+		{
+			var dataArray = app.mLogin.mData.split(",");
+			app.mLogin.mCode = dataArray[0];
+			if (app.mLogin.mCode == -100)
+			{
+				app.mJWT = dataArray[1]; //set jwt
+				//put in local storage
+				localStorage.setItem('mJWT', app.mJWT);
+					
+				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+				document.getElementById('login_screen_password_message_id').innerHTML = '';
+				document.getElementById('login_screen_email_message_id').innerHTML = '';
+			}
+			if (app.mLogin.mCode == -101)
+			{
+                		document.getElementById('login_screen_email_message_id').style.color = 'red';
+                        	document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
+				document.getElementById('login_screen_password_message_id').innerHTML = '';
+			}
+			if (app.mLogin.mCode == -105)
+			{
+                		document.getElementById('login_screen_password_message_id').style.color = 'red';
+                        	document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
+				document.getElementById('login_screen_email_message_id').innerHTML = '';
+			}
+		}
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("LOGIN_APPLICATION: EXIT");        
+		}
+		//reset data variables
+		app.mLogin.mCode = 0;
+		app.mLogin.mData = null;
+
+		var element = document.getElementById("login_nav_id");
+		element.className = element.className.replace(/\active\b/g, "");
+    		app.mLogin.hide();
+	}
+}
 
 class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 {
@@ -198,86 +292,9 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		app.mInsertNativeLoginScreen.hide();
 	}
 }
+/*
+*/
 
-
-class LOGIN_APPLICATION extends State
-{
-	constructor() 
-	{
-		super();
-	}
-
-        enter(app)
-        {
-		if (app.mStateLogs || app.mStateEnterLogs)
-		{
-			console.log("LOGIN_APPLICATION: ENTER");        
-		}
-		if (app.mLogin)
-		{
-			//do nothing right now	
-		}
-		else
-		{
-			//start the login subsystem
-			app.mLogin = new LoginScreen(app);
-		}
-		document.getElementById("login_nav_id").className += " active";
-    		app.mLogin.show();
-
-	}
-
-        execute(app)
-        {
-		if (app.mStateLogs || app.mStateExecuteLogs)
-		{
-			console.log("LOGIN_APPLICATION: EXECUTE");        
-		}
-
-		if (app.mLogin.mData)
-		{
-			var dataArray = app.mLogin.mData.split(",");
-			app.mLogin.mCode = dataArray[0];
-			if (app.mLogin.mCode == -100)
-			{
-				app.mJWT = dataArray[1]; //set jwt
-				//put in local storage
-				localStorage.setItem('mJWT', app.mJWT);
-					
-				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-				document.getElementById('login_screen_password_message_id').innerHTML = '';
-				document.getElementById('login_screen_email_message_id').innerHTML = '';
-			}
-			if (app.mLogin.mCode == -101)
-			{
-                		document.getElementById('login_screen_email_message_id').style.color = 'red';
-                        	document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
-				document.getElementById('login_screen_password_message_id').innerHTML = '';
-			}
-			if (app.mLogin.mCode == -105)
-			{
-                		document.getElementById('login_screen_password_message_id').style.color = 'red';
-                        	document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
-				document.getElementById('login_screen_email_message_id').innerHTML = '';
-			}
-		}
-	}
-
-        exit(app)
-        {
-		if (app.mStateLogs || app.mStateExitLogs)
-		{
-			console.log("LOGIN_APPLICATION: EXIT");        
-		}
-		//reset data variables
-		app.mLogin.mCode = 0;
-		app.mLogin.mData = null;
-
-		var element = document.getElementById("login_nav_id");
-		element.className = element.className.replace(/\active\b/g, "");
-    		app.mLogin.hide();
-	}
-}
 
 
 class INSERT_FORGOT_PASSWORD_APPLICATION extends State

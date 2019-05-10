@@ -26,16 +26,6 @@ class LoginScreen extends Screen
 		this.mImageUrl = null;	
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
-
-		if (this.mApplication.mClubInviteToken && this.mApplication.mClubInviteName)
-		{
-                        document.getElementById('login_screen_team_message_id').style.color = 'blue';
-                        document.getElementById('login_screen_team_message_id').innerHTML = 'Login or Create an acoount to join ' + this.mApplication.mClubInviteName;
-		}
-		else
-		{
-			console.log('NO mClubInviteToken');
-		}
 	}
 
 	hit()
