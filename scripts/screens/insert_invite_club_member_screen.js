@@ -18,9 +18,10 @@ class InsertInviteClubMemberScreen extends Screen
 		document.getElementById("insertinviteclubmemberscreenbuttonid").onclick = this.hit.bind(this);
                 
                 this.mStateMachine = new StateMachine(this);
-                this.mINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN            = new INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN();
                 this.mGLOBAL_INSERT_INVITE_CLUB_MEMBER_SCREEN            = new GLOBAL_INSERT_INVITE_CLUB_MEMBER_SCREEN();
+                this.mINIT_INSERT_INVITE_CLUB_MEMBER_SCREEN            = new INIT_INSERT_INVITE_CLUB_MEMBER_SCREEN();
                 this.mWAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN            = new WAIT_FOR_CLUBS_INSERT_INVITE_CLUB_MEMBER_SCREEN();
+                this.mWAIT_FOR_SUBMIT_INSERT_INVITE_CLUB_MEMBER_SCREEN            = new WAIT_FOR_SUBMIT_INSERT_INVITE_CLUB_MEMBER_SCREEN();
                 this.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN            = new WAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN();
 
                 this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_INVITE_CLUB_MEMBER_SCREEN);
