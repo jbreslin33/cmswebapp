@@ -364,7 +364,6 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                 {
                         app.mInsertInviteClubMemberScreen = new InsertInviteClubMemberScreen(app);
                 }
-                //app.mInsertInviteClubMemberScreen.show();
         }
 
         execute(app)
@@ -381,12 +380,38 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                 {
                         console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: EXIT");
                 }
-		/*
-                this.mHit = false;
-                app.mInsertInviteClubMemberScreen.hide();
-                app.mInsertInviteClubMemberScreen.mCode = 0;
-                app.mInsertInviteClubMemberScreen.mData = null;
-		*/
+        }
+}
+
+class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
+{
+        constructor()
+        {
+                super();
+        }
+
+        enter(app)
+        {
+                if (app.mStateLogs || app.mStateEnterLogs)
+                {
+                        console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: ENTER");
+		}
+        }
+
+        execute(app)
+        {
+                if (app.mStateLogs || app.mStateExecuteLogs)
+                {
+                        console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXECUTE");
+                }
+        }
+
+        exit(app)
+        {
+                if (app.mStateLogs || app.mStateExitLogs)
+                {
+                        console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXIT");
+                }
         }
 }
 

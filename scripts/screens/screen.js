@@ -47,6 +47,7 @@ class Screen
 
         showSpinner()
         {
+		console.log('showspinner');
                 document.getElementById(this.mHtmlId).style.visibility = "hidden";
                 document.getElementById(this.mSpinnerId).style.visibility = "visible";
         }

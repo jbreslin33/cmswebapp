@@ -154,19 +154,22 @@ class WAIT_FOR_SUBMIT_INSERT_INVITE_CLUB_MEMBER_SCREEN extends State
                         console.log("WAIT_FOR_SUBMIT_INSERT_INVITE_CLUB_MEMBER_SCREEN: EXECUTE");
                 }
 
+		if (owner.mHit == true)
+		{
+			owner.showSpinner();
+		}
+
                 if (owner.mData)
                 {
                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
 
                         if (owner.mCode == -100)
                         {
-				console.log('if to main');
                                 owner.mStateMachine.changeState(owner.mWAIT_INSERT_INVITE_CLUB_MEMBER_SCREEN);
                                 owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
                         }
                         if (owner.mCode == -111)
                         {
-				console.log('else  to error');
                                 owner.show();
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').style.color = 'red';
                                 document.getElementById('insert_invite_club_member_screen_email_message_id').innerHTML = 'Invite failed.';
