@@ -941,12 +941,18 @@ $$;
 CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
 RETURNS text AS $$
 DECLARE
-        found_user_id users.id%TYPE;
         found_email_id emails.id%TYPE;
+        found_user_id users.id%TYPE;
+	return_code text;
 BEGIN
 	select email_id into found_email_id from invite_club_members where club_invite_token = $1; 
-        --select user_id inot found_user_id from users where email_id = returning_email_id;  
-RETURN found_email_id;
+        select id into found_user_id from users where email_id = found_email_id;  
+	IF found_user_id THEN
+		return_code = '-888';
+	ELSE
+		return_code = '-777';
+	END IF;
+RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
