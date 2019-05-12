@@ -947,10 +947,10 @@ DECLARE
 BEGIN
 	select email_id into found_email_id from invite_club_members where club_invite_token = $1; 
         select id into found_user_id from users where email_id = found_email_id;  
-	IF found_user_id THEN
-		return_code = '-888';
-	ELSE
-		return_code = '-777';
+	IF found_user_id THEN --we have a user already so add the user to club and move on...
+		return_code = '-100';
+	ELSE -- we do not have a user so we need to signal user to a join page where they will join and we will auto add them to club
+		return_code = '-104';
 	END IF;
 RETURN return_code;
 END;

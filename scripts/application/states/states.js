@@ -418,6 +418,18 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXECUTE");
                 }
+               	if (app.mInsertAcceptClubInviteScreen.mCode == -100)
+                {
+                        app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        document.getElementById('insert_club_screen_name_message_id').innerHTML = '';
+                }
+                if (app.mInsertAcceptClubInviteScreen.mCode == -104)
+               	{    
+			document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
+                       	document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
+                       	app.mInsertClubScreen.mCode = 0;
+                        app.mInsertClubScreen.mData = null;
+                }
         }
 
         exit(app)
