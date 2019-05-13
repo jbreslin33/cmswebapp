@@ -1,12 +1,12 @@
 'use strict';
 
-class InsertLoginScreen extends Screen
+class InsertLoginClubScreen extends InsertLoginScreen
 {
-        constructor(application)
-        {
-                super(application);
+	constructor(application)
+	{
+		this.mApplication = application;
 
-		location.hash = "insert_native_login_screen";
+		location.hash = "insert_native_login_club_screen";
 
 		this.mCode = 0;
                 this.mData = null;
