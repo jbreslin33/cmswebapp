@@ -43,6 +43,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
+		else if (app.mLocationHash == 'insert_native_login_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
+                }
 		else if (app.mLocationHash == 'insert_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_CLUB_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
@@ -507,7 +511,8 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
 		//we need to have you join and get a user and person and user_person entry
                 if (app.mInsertAcceptClubInviteScreen.mCode == -104)
                	{    
-                        app.mStateMachine.changeState(app.mLOGIN_APPLICATION);
+			//console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXIT");        
+                        app.mStateMachine.changeState(app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
                         //app.mStateMachine.changeState(app.mLOGIN_ACCEPT_CLUB_INVITE_APPLICATION);
                         //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
 			/*
