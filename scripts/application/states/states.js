@@ -488,8 +488,8 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 }
 		app.mInsertAcceptClubInviteScreen.get();
         }
-//APPLICATION.mInsertAcceptClubInviteScreen.mData
-        execute(app)
+        
+	execute(app)
         {
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
@@ -499,28 +499,16 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
 		{
                 	var dataArray = app.mInsertAcceptClubInviteScreen.mData.split(",");
                 	app.mInsertAcceptClubInviteScreen.mCode = dataArray[0];
-                	console.log('code is what:' + app.mInsertAcceptClubInviteScreen.mCode)
-
 		}
 		//you joined club welcome
                	if (app.mInsertAcceptClubInviteScreen.mCode == -100)
                 {
                         app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        document.getElementById('insert_club_screen_name_message_id').innerHTML = '';
                 }
 		//we need to have you join and get a user and person and user_person entry
                 if (app.mInsertAcceptClubInviteScreen.mCode == -104)
                	{    
-			//console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXIT");        
                         app.mStateMachine.changeState(app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
-                        //app.mStateMachine.changeState(app.mLOGIN_ACCEPT_CLUB_INVITE_APPLICATION);
-                        //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-			/*
-			document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
-                       	document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
-			*/
-                       	app.mInsertAcceptClubInviteScreen.mCode = 0;
-                        app.mInsertAcceptClubInviteScreen.mData = null;
                 }
         }
 
@@ -530,6 +518,8 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXIT");
                 }
+                app.mInsertAcceptClubInviteScreen.mCode = 0;
+                app.mInsertAcceptClubInviteScreen.mData = null;
         }
 }
 
