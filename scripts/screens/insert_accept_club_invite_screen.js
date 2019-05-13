@@ -27,19 +27,8 @@ class InsertAcceptClubInviteScreen extends Screen
                         	{
                                 	if (request.status === 200)
                                 	{
-						console.log('response:' + this.responseText);
 						APPLICATION.mInsertAcceptClubInviteScreen.mData = this.responseText;
-						/*
-						if (APPLICATION.mInsertAcceptClubInviteScreen.mData == '-100')
-						{						
-                                        		//lifes grand send to main
-						}
-
-						if (APPLICATION.mInsertAcceptClubInviteScreen.mData == '-104')
-						{
-							
-						}
-						*/
+						console.log('DUDE:' + APPLICATION.mInsertAcceptClubInviteScreen.mData);
                                 	}
                         	}
                 	};

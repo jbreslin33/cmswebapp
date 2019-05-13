@@ -26,7 +26,6 @@ class GLOBAL_APPLICATION extends State
 		//mLocationHash in application	
 		var hash = window.location.hash.substr(1);
         	var urlArray = hash.split('&');
-        	var parameterHash = null;
 		if (urlArray.length > 0)
 		{
 			app.mLocationHash = urlArray[0];
@@ -411,24 +410,38 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 }
 		app.mInsertAcceptClubInviteScreen.get();
         }
-
+//APPLICATION.mInsertAcceptClubInviteScreen.mData
         execute(app)
         {
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXECUTE");
                 }
+                if (app.mInsertAcceptClubInviteScreen.mData)
+		{
+                	var dataArray = app.mInsertAcceptClubInviteScreen.mData.split(",");
+                	app.mInsertAcceptClubInviteScreen.mCode = dataArray[0];
+                	console.log('code is what:' + app.mInsertAcceptClubInviteScreen.mCode)
+
+		}
+		//you joined club welcome
                	if (app.mInsertAcceptClubInviteScreen.mCode == -100)
                 {
                         app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         document.getElementById('insert_club_screen_name_message_id').innerHTML = '';
                 }
+		//we need to have you join and get a user and person and user_person entry
                 if (app.mInsertAcceptClubInviteScreen.mCode == -104)
                	{    
+                        app.mStateMachine.changeState(app.mLOGIN_APPLICATION);
+                        //app.mStateMachine.changeState(app.mLOGIN_ACCEPT_CLUB_INVITE_APPLICATION);
+                        //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+			/*
 			document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
                        	document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
-                       	app.mInsertClubScreen.mCode = 0;
-                        app.mInsertClubScreen.mData = null;
+			*/
+                       	app.mInsertAcceptClubInviteScreen.mCode = 0;
+                        app.mInsertAcceptClubInviteScreen.mData = null;
                 }
         }
 
