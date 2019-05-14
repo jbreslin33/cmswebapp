@@ -45,11 +45,7 @@ class InsertLoginScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-						APPLICATION.mInsertNativeLoginScreen.mData = data;
-                                        }
+					APPLICATION.mInsertNativeLoginScreen.mData = this.responseText;
                                 }
                         }
                 };

@@ -778,6 +778,41 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE FUNCTION f_insert_native_login_club(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, club_invite_token TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email emails.email%TYPE;
+	return_code text;
+	DECLARE x int := -111; --for bad insert attempt
+BEGIN
+    	SELECT email INTO found_email FROM emails WHERE email = email_name;
+	IF FOUND THEN
+		return_code = '-101';
+	ELSE
+		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,$8,x);
+		return_code = x;
+	END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE p_insert_native_login_club(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
+LANGUAGE plpgsql    
+AS $$
+DECLARE
+	returning_email_id integer;
+	returning_native_login_id integer;
+	returning_person_id integer;
+BEGIN
+	insert into emails (email) values (email_name) returning id into returning_email_id;
+	insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
+	--insert into native_logins (email_id, password) values (returning_email_id, CRYPT('m', GEN_SALT('md5')));
+	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
+        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+END;
+$$;
+
+
 CREATE OR REPLACE FUNCTION f_get_native_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
