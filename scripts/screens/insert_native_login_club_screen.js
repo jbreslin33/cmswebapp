@@ -37,7 +37,7 @@ class InsertLoginClubScreen extends InsertLoginScreen
                         {
                                 if (request.status === 200)
                                 {
-                                        APPLICATION.mInsertNativeLoginScreen.mData = this.responseText;
+                                        APPLICATION.mInsertNativeLoginClubScreen.mData = this.responseText;
                                 }
                         }
                 };
