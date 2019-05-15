@@ -506,11 +506,13 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
 		//you joined club welcome
                	if (app.mInsertAcceptClubInviteScreen.mCode == -100)
                 {
+			console.log('we should have already joined in db and this is confirm message 100');
                         app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                 }
 		//we need to have you join and get a user and person and user_person entry
                 if (app.mInsertAcceptClubInviteScreen.mCode == -104)
                	{    
+			console.log('lets redirect its a 104 to a join as there is no user yet');
                         app.mStateMachine.changeState(app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
                 }
         }

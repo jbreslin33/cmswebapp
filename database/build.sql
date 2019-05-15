@@ -977,11 +977,15 @@ RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
         found_user_id users.id%TYPE;
+        found_person_id persons.id%TYPE;
+        found_club_id clubs.id%TYPE;
 	return_code text;
 BEGIN
 	select email_id into found_email_id from invite_club_members where club_invite_token = $1; 
-        select id into found_user_id from users where email_id = found_email_id;  
-	IF found_user_id THEN --we have a user already so add the user to club and move on...
+        select id, person_id into found_user_id, found_person_id from users where email_id = found_email_id;  
+	IF found_user_id > 0 THEN --we have a user already so add the user to club and move on...
+		SELECT club_id INTO found_club_id FROM invite_club_members WHERE club_invite_token = $1;
+        	insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
 		return_code = '-100';
 	ELSE -- we do not have a user so we need to signal user to a join page where they will join and we will auto add them to club
 		return_code = '-104';

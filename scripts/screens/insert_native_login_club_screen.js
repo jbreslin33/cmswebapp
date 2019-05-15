@@ -77,6 +77,8 @@ class InsertLoginClubScreen extends InsertLoginScreen
 insert_native_login_screen_header_div_id
 		document.getElementById("insert_native_login_screen_club_header_div_id").innerHTML = "Join Celta with google login:";
 		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Or Join Celta without google login:";
+		
+		document.getElementById("insert_native_login_screen_email_id").required = false;
 
 	}
 

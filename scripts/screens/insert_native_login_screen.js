@@ -78,6 +78,8 @@ class InsertLoginScreen extends Screen
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
 		document.getElementById("insert_native_login_screen_email_div_id").style.display = "block";
 		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Join Cmswebapp";
+		document.getElementById("insert_native_login_screen_email_id").required = true;
+
 	}
 
 	hide()
