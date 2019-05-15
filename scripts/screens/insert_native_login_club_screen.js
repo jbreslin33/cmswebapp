@@ -12,7 +12,7 @@ class InsertLoginClubScreen extends InsertLoginScreen
                 this.mSpinnerId = "insert_native_login_club_screen_spinner_id";
                 this.mHtmlId    = "insert_native_login_club_screen_html_id";
 
-		document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
+		//document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
 
 
