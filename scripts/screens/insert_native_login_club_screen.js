@@ -77,6 +77,7 @@ class InsertLoginClubScreen extends InsertLoginScreen
 	hide()
 	{
 		//also hide google
+              document.getElementById("insert_native_login_screen_html_id").style.display = "none";
               document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 	}
 }

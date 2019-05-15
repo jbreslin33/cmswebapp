@@ -803,7 +803,6 @@ DECLARE
 	returning_native_login_id integer;
 	returning_person_id integer;
 BEGIN
-	--insert into emails (email) values (email_name) returning id into returning_email_id;
 	insert into native_logins (email_id, password) values ($1, CRYPT($2, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
         insert into users (person_id, email_id) values (returning_person_id, $1) returning id into x;

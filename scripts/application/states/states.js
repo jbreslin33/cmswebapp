@@ -342,6 +342,8 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
                 {
                         var dataArray = app.mInsertNativeLoginClubScreen.mData.split(",");
                         app.mInsertNativeLoginClubScreen.mCode = dataArray[0];
+                        console.log('CODE:::' + app.mInsertNativeLoginClubScreen.mCode);
+
 
                         if (app.mInsertNativeLoginClubScreen.mCode == -100)
                         {
@@ -352,7 +354,7 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
                         }
-                        if (app.mInsertNativeLoginClubScreen.mCode == -101)
+                        if (app.mInsertNativeLoginClubScreen.mCode == -102)
                         {
 				document.getElementById('insert_native_login_screen_email_message_id').style.color = 'red';
                         	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
