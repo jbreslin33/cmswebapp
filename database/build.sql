@@ -914,6 +914,7 @@ DECLARE
         found_user_id users.id%TYPE;
         returning_user_id users.id%TYPE;
         found_person_id users.id%TYPE;
+        found_club_id clubs.id%TYPE;
         
 	returning_person_id integer;
 
@@ -953,11 +954,11 @@ BEGIN
 	END IF;
 
 	IF $6 THEN
-
+		SELECT club_id into found_club_id from invite_club_members where club_invite_token = $6;
+		insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
 	ELSE
 
 	END IF;	
-	
 
 RETURN return_code;
 END;
