@@ -67,8 +67,8 @@ class InsertLoginClubScreen extends InsertLoginScreen
 	show()
 	{
 		//also show google
-              	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
               	document.getElementById("insert_native_login_club_screen_html_id").style.display = "block";
+              	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
 		//hide link
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
 		//document.getElementById("insert_native_login_club_screen_link_id").style.display = "none";
