@@ -905,7 +905,7 @@ END;
 $$;
 
 
-CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT)
+CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT,TEXT)
 RETURNS text AS $$
 DECLARE
 	
@@ -951,6 +951,13 @@ BEGIN
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
 		return_code = x;
 	END IF;
+
+	IF $6 THEN
+
+	ELSE
+
+	END IF;	
+	
 
 RETURN return_code;
 END;
