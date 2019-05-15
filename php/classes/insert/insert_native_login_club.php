@@ -9,13 +9,14 @@ class InsertNativeLoginClub
 	{
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
-		$sql = 'select f_insert_native_login_club($1,$2,$3,$4,$5,$6,$7,$8)';
+		$sql = 'select f_insert_native_login_club($1,$2,$3,$4,$5,$6,$7)';
 		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_native_login_club", $sql);
 		
-		$result = pg_execute($database->mConnection, "f_insert_native_login_club", array( $_GET['email'] , $_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address'], $_GET['club_invite_token']));
+		$result = pg_execute($database->mConnection, "f_insert_native_login_club", array( $_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address'], $_GET['club_invite_token']));
 
 		$return_value = pg_fetch_result($result, 0); 
+		error_log($return_value);
 
                	if ($return_value < -100  && $return_value > -200)
                 {
