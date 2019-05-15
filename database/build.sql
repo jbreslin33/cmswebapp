@@ -940,7 +940,7 @@ BEGIN
 
                         update persons set first_name = $4 , last_name = $5
 			where id = found_person_id;
-			return_code = found_user_user_id;
+			return_code = found_user_id;
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into returning_person_id;
                         insert into users (person_id, email_id) values (returning_person_id,found_email_id) returning id into returning_user_id;
