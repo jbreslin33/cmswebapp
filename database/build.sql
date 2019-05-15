@@ -781,12 +781,13 @@ CREATE OR REPLACE FUNCTION f_insert_native_login_club(TEXT,TEXT,TEXT,TEXT,TEXT,T
 RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
+	found_club_id clubs.id%TYPE;
 	return_code text;
 	DECLARE x int := -111; --for bad insert attempt
 BEGIN
-    	SELECT email_id INTO found_email_id FROM invite_club_members WHERE club_invite_token = $7;
-	IF found_email_id > 0 THEN
-		CALL p_insert_native_login_club(found_email_id,$1,$2,$3,$4,$5,$6,$7,x);
+    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_members WHERE club_invite_token = $7;
+	IF found_club_id > 0 THEN
+		CALL p_insert_native_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
 		return_code = x;
 	ELSE --for some reason email does not exist
 		return_code = '-102';
@@ -795,7 +796,7 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_native_login_club(int, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_native_login_club(int, int, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
@@ -803,9 +804,10 @@ DECLARE
 	returning_native_login_id integer;
 	returning_person_id integer;
 BEGIN
-	insert into native_logins (email_id, password) values ($1, CRYPT($2, GEN_SALT('md5')));
+	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
         insert into users (person_id, email_id) values (returning_person_id, $1) returning id into x;
+	insert into club_members (club_id,person_id) values ($2,returning_person_id);
 END;
 $$;
 
