@@ -72,6 +72,9 @@ class InsertLoginClubScreen extends InsertLoginScreen
 		//hide link
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
 		//document.getElementById("insert_native_login_club_screen_link_id").style.display = "none";
+		//insert_native_login_screen_email_div_id
+		document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
+
 	}
 
 	hide()

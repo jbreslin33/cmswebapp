@@ -76,6 +76,8 @@ class InsertLoginScreen extends Screen
               	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
 		//hide link
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
+		document.getElementById("insert_native_login_screen_email_div_id").style.display = "block";
+
 	}
 
 	hide()

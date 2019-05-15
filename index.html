@@ -103,80 +103,99 @@
 
 <!--	  <div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 -->
-
-	<!-- INSERT LOGIN HTML  -->
-
-	<div class="container" id="insert_native_login_screen_html_id">
-		<form id="insert_native_login_screen_form_id" class="needs-validation">
-
-  			<div class="form-row">
-    				<div class="col-md-4 mb-3">
-      					<label for="insert_native_login_screen_first_name_id">First name</label>
-      					<input type="text" class="form-control" id="insert_native_login_screen_first_name_id" placeholder="First name" required>
-    				</div>
-
-    				<div class="col-md-4 mb-3">
-					<label for="insert_native_login_screen_middle_name_id">Middle Name</label>
-      					<input type="text" class="form-control" id="insert_native_login_screen_middle_name_id" placeholder="Middle name" required>
-    				</div>
-    			
-				<div class="col-md-4 mb-3">
-					<label for="insert_native_login_screen_last_name_id">Last Name</label>
-      					<input type="text" class="form-control" id="insert_native_login_screen_last_name_id" placeholder="Last name" required>
-    				</div>
-    			</div>
-		
-			<div class="form-row">
-
-    				<div class="col-md-6 mb-3">
-      					<label for="insert_native_login_screen_address_id">Street Address</label>
-      					<input type="text" class="form-control" id="insert_native_login_screen_address_id" placeholder="Address" required>
-    				</div>
-  			</div>
-
-  			<div class="form-row">
-			
-				<div class="col-md-4 mb-3">
-					<label for="insert_native_login_screen_phone_id">Phone Number</label>
-      					<input type="tel" class="form-control" id="insert_native_login_screen_phone_id" placeholder="Phone" required>
-    				</div>
-			
-				<div class="col-md-4 mb-3">
-					<label for="insert_native_login_screen_email_id">Email</label>
-      					<input type="text" class="form-control" id="insert_native_login_screen_email_id" placeholder="Email" required>
-					<span id='insert_native_login_screen_email_message_id'></span>
-					<a id='insert_native_login_screen_link_id' href="#login_screen">Login</a>
-    				</div>
-    			</div>
-
-                	<div class="form-row">
-
-                        	<div class="col-md-4 mb-3">
-                                	<label for="insert_native_login_screen_password1_id">Password</label>
-                                	<input type="password" class="form-control" id="insert_native_login_screen_password1_id" placeholder="Phone" value="Password" required>
-                        	</div>
-
-                        	<div class="col-md-4 mb-3">
-                                	<label for="insert_native_login_screen_password2_id">Re-type Password</label>
-                                	<input type="password" class="form-control" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
-					<span id='password_message_id'></span>
-                        	</div>
-                	</div>
-
-			<button type="submit" id="insertloginscreenbuttonid" class="btn btn-primary">Submit</button>
-		</form>
-	</div>
-
-	<!-- END JOIN HTML  -->
-
-
 	<!-- INSERT LOGIN CLUB HTML  -->
+
 
 	<div class="container" id="insert_native_login_club_screen_html_id">
 		<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 	</div>
 
 	<!-- END INSERT LOGIN CLUB HTML  -->
+
+	<!-- INSERT LOGIN HTML  -->
+<!--
+	<div class="card">
+  		<div class="card-header">
+    			Featured
+  		</div>
+  		<div class="card-body">
+    			<h5 class="card-title">Special title treatment</h5>
+    			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    			<a href="#" class="btn btn-primary">Go somewhere</a>
+  		</div>
+	</div>
+-->
+	<div class="card" id="insert_native_login_screen_html_id">
+  		<div class="card-header">
+    			 Join
+  		</div>
+
+  		<div class="card-body">
+
+			<form id="insert_native_login_screen_form_id" class="needs-validation">
+
+  				<div class="form-row">
+    					<div class="col-md-4 mb-3">
+      						<label for="insert_native_login_screen_first_name_id">First name</label>
+      						<input type="text" class="form-control" id="insert_native_login_screen_first_name_id" placeholder="First name" required>
+    					</div>
+
+    					<div class="col-md-4 mb-3">
+						<label for="insert_native_login_screen_middle_name_id">Middle Name</label>
+      						<input type="text" class="form-control" id="insert_native_login_screen_middle_name_id" placeholder="Middle name" required>
+    					</div>
+    			
+					<div class="col-md-4 mb-3">
+						<label for="insert_native_login_screen_last_name_id">Last Name</label>
+      						<input type="text" class="form-control" id="insert_native_login_screen_last_name_id" placeholder="Last name" required>
+    					</div>
+    				</div>
+		
+				<div class="form-row">
+
+    					<div class="col-md-6 mb-3">
+      						<label for="insert_native_login_screen_address_id">Street Address</label>
+      						<input type="text" class="form-control" id="insert_native_login_screen_address_id" placeholder="Address" required>
+    					</div>
+  				</div>
+
+  				<div class="form-row">
+			
+					<div class="col-md-4 mb-3">
+						<label for="insert_native_login_screen_phone_id">Phone Number</label>
+      						<input type="tel" class="form-control" id="insert_native_login_screen_phone_id" placeholder="Phone" required>
+    					</div>
+			
+					<div class="col-md-4 mb-3" id="insert_native_login_screen_email_div_id">
+						<label for="insert_native_login_screen_email_id">Email</label>
+      						<input type="text" class="form-control" id="insert_native_login_screen_email_id" placeholder="Email" required>
+						<span id='insert_native_login_screen_email_message_id'></span>
+						<a id='insert_native_login_screen_link_id' href="#login_screen">Login</a>
+    					</div>
+    				</div>
+
+                		<div class="form-row">
+
+                        		<div class="col-md-4 mb-3">
+                                		<label for="insert_native_login_screen_password1_id">Password</label>
+                                		<input type="password" class="form-control" id="insert_native_login_screen_password1_id" placeholder="Phone" value="Password" required>
+                        		</div>
+
+                        		<div class="col-md-4 mb-3">
+                                		<label for="insert_native_login_screen_password2_id">Re-type Password</label>
+                                		<input type="password" class="form-control" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
+						<span id='password_message_id'></span>
+                        		</div>
+                		</div>
+
+				<button type="submit" id="insertloginscreenbuttonid" class="btn btn-primary">Submit</button>
+			</form>
+               	</div>
+	</div>
+
+	<!-- END JOIN HTML  -->
+
+
 
         
 	<!-- ADD CLUB HTML  -->
