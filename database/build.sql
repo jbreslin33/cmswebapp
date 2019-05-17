@@ -70,6 +70,59 @@ CREATE TABLE pitches
         FOREIGN KEY(club_id) REFERENCES clubs(id)
 );
 
+--2004,2005,2006
+create table birth_year
+(
+	id serial,
+	year integer,
+        primary key (id)
+);
+
+
+--u9,u10,u11
+--also you could have a generic promote all teams or demote all teams function, as well as for individual teams.
+create table ages
+(
+	id serial,
+	name text unique,
+        primary key (id)
+);
+
+--male,female
+create table genders
+(
+	id serial
+	name text,
+	primary key (id)
+);
+
+create table years
+(
+	id serial,
+	year integer,
+	primary key (id)
+);
+
+--fall,winter 1, winter 2, spring, summer
+--a team has a 1 team to many seasons relationship or do we allow many teams to many seasons???? sort of like tags???
+create table seasons
+(
+	id serial
+	--team_id text,
+        --FOREIGN KEY(team_id) REFERENCES teams(id),
+	created_at timestamp not null default now(),
+	primary key (id)
+);
+
+create table seasons_years
+(
+	id serial,
+	season_id integer,
+	year_id integer,
+	foreign key (season_id) references seasons(id),
+	foreign key (year_id) references years(id),
+);
+
 --TEAM
 CREATE TABLE teams 
 (
@@ -80,6 +133,16 @@ CREATE TABLE teams
         PRIMARY KEY (id),
         FOREIGN KEY(club_id) REFERENCES clubs(id),
 	UNIQUE (name,club_id)
+);
+
+create table teams_seasons
+(
+        id SERIAL,
+	team_id integer,
+	season_id integer,
+        PRIMARY KEY (id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(season_id) REFERENCES seasons(id)
 );
 
 --principles
@@ -558,7 +621,7 @@ CREATE TABLE team_members
         FOREIGN KEY(team_id) REFERENCES teams(id),
 	primary key(id)
 );
-
+--this will show when a player was added to a team....should we delete or list as not-active????
 CREATE TABLE team_players 
 (
 	id SERIAL,
@@ -567,6 +630,26 @@ CREATE TABLE team_players
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
+
+--add,drop,suspend,deactivate
+create table transactions
+(
+	id serial,
+	name text,
+	primary key (id)
+);
+
+--you might need more of these....for managers, coaches etc.
+CREATE TABLE team_players_transactions
+(
+	id SERIAL,
+	team_player_id integer,
+	transaction_id integer,
+	foreign key (team_player_id) references team_players(id),
+	foreign key (transaction_id) references transactions(id)
+	primary key (id)
+);
+
 
 CREATE TABLE team_coaches 
 (
