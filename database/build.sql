@@ -235,6 +235,23 @@ create table sessions_exercises
         PRIMARY KEY (id)
 );
 
+create table tags 
+(
+	id SERIAL,
+	name text unique,
+        PRIMARY KEY (id)
+);
+
+create table exercises_tags
+(
+	id serial,
+	exercise_id integer,
+	tag_id integer,
+	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
+	FOREIGN KEY (tag_id) REFERENCES tags(id),
+        PRIMARY KEY (id)
+);
+
 CREATE TABLE media 
 (
 	id SERIAL,
