@@ -56,6 +56,7 @@ CREATE TABLE clubs
         name text NOT NULL unique,
         address text,
         coordinates text,
+	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
 
@@ -64,6 +65,7 @@ CREATE TABLE pitches
         id SERIAL,
         name text NOT NULL,
         club_id integer NOT NULL,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id),
         FOREIGN KEY(club_id) REFERENCES clubs(id)
 );
@@ -74,6 +76,7 @@ CREATE TABLE teams
         id SERIAL,
 	name text,
         club_id integer,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id),
         FOREIGN KEY(club_id) REFERENCES clubs(id),
 	UNIQUE (name,club_id)
@@ -84,6 +87,7 @@ create table tactical_principles
 (
         id SERIAL,
 	name text,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -91,6 +95,7 @@ create table technical_principles
 (
         id SERIAL,
 	name text,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -101,6 +106,7 @@ CREATE TABLE periodizations
         id SERIAL,
 	name text,
 	url text,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -112,6 +118,7 @@ CREATE TABLE macrocycles
 	end_timestamp timestamp,
 	name text,
 	url text,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (periodization_id) REFERENCES periodizations(id),
         PRIMARY KEY (id)
 );
@@ -124,6 +131,7 @@ CREATE TABLE mesocycles
 	start_timestamp timestamp,
 	end_timestamp timestamp,
 	macrocycle_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (macrocycle_id) REFERENCES macrocycles(id),
         PRIMARY KEY (id)
 );
@@ -137,6 +145,7 @@ CREATE TABLE microcycles
 	start_timestamp timestamp,
 	end_timestamp timestamp,
 	mesocycle_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (mesocycle_id) REFERENCES mesocycles(id),
         PRIMARY KEY (id)
 );
@@ -146,6 +155,7 @@ CREATE TABLE teams_periodizations
 	id serial,
 	team_id integer,
 	periodization_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	FOREIGN KEY (periodization_id) REFERENCES periodizations(id),
         PRIMARY KEY (id)
@@ -162,6 +172,7 @@ CREATE TABLE sessions
 	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
@@ -179,6 +190,7 @@ CREATE TABLE games
 	team_id integer,
 	pitch_id integer, 	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
+	created_at timestamp not null default now(),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
@@ -188,6 +200,7 @@ CREATE TABLE uniforms
 (
 	id SERIAL,
     	name text UNIQUE, 
+	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
 
@@ -195,6 +208,7 @@ CREATE TABLE uniforms_sizes
 (
 	id SERIAL,
 	name text, 
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -202,6 +216,7 @@ CREATE TABLE uniforms_order
 (
 	id SERIAL,
 	name text, --primary, secondary, tertiary
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -211,17 +226,18 @@ CREATE TABLE uniforms_sessions
 	uniform_id integer,
 	uniforms_order_id integer,
 	session_id integer,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
 	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
 );
 
-
 CREATE TABLE exercises
 (
         id SERIAL,
 	url text UNIQUE, --link
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -230,6 +246,7 @@ create table sessions_exercises
 	id serial,
 	session_id integer,
 	exercise_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
         PRIMARY KEY (id)
@@ -239,6 +256,7 @@ create table tags
 (
 	id SERIAL,
 	name text unique,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -247,6 +265,7 @@ create table exercises_tags
 	id serial,
 	exercise_id integer,
 	tag_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
 	FOREIGN KEY (tag_id) REFERENCES tags(id),
         PRIMARY KEY (id)
@@ -256,6 +275,7 @@ CREATE TABLE media
 (
 	id SERIAL,
 	name text, --pic, text, video, link
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -264,6 +284,7 @@ CREATE TABLE availability
 (
 	id SERIAL,
 	name text,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -271,6 +292,7 @@ CREATE TABLE attendance
 (
 	id SERIAL,
 	name text,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -283,7 +305,7 @@ CREATE TABLE persons
     	phone text,
 	address text,
 	coordinates text,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
 
@@ -291,6 +313,7 @@ create table emails
 (
 	id serial,
 	email text not null unique,
+	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
 
@@ -299,7 +322,7 @@ CREATE TABLE users
         id SERIAL,
 	person_id integer not null unique,
 	email_id integer not null unique,
-        timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(email_id) REFERENCES emails(id),
         PRIMARY KEY (id)
@@ -310,7 +333,7 @@ CREATE TABLE users_persons
         id SERIAL,
 	user_id integer not null unique,
 	person_id integer not null unique,
-        timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(user_id) REFERENCES users(id),
         FOREIGN KEY(person_id) REFERENCES persons(id),
         PRIMARY KEY (id)
@@ -320,6 +343,7 @@ create table relationships
 (
 	id serial,
 	name text not null unique,
+	created_at timestamp not null default now(),
 	primary key (id)
 );
 
@@ -339,6 +363,7 @@ create table persons_relationships
 	person_id integer not null,
 	relationship_person_id integer not null,
 	relationship_id integer not null,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(relationship_person_id) REFERENCES persons(id),
         FOREIGN KEY(relationship_id) REFERENCES relationships(id),
@@ -354,6 +379,7 @@ create table follow_schedules
 	id serial,
 	person_id integer not null,
 	follow_person_id integer not null,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(follow_person_id) REFERENCES persons(id),
 	unique (person_id, follow_person_id),
@@ -368,7 +394,7 @@ CREATE TABLE native_logins
 	id SERIAL,
     	email_id integer not null unique, --so you need atleast one email its the master email
     	password text not null,  --Iggles_13           , toy_bot_6 
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
 );
@@ -379,7 +405,7 @@ CREATE TABLE google_logins
     	email_id integer not null unique,  
     	google_id text not null unique, 
     	id_token text not null,  --big send what you have on client with all updates inserts deletes and it should match this which we update as soon as google auths us   
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
 );
@@ -391,6 +417,7 @@ create TABLE forgot_passwords
         email_id integer,
         forgot_password_token text,
         expires timestamp,
+	created_at timestamp not null default now(),
  	FOREIGN KEY(email_id) REFERENCES emails(id),
 	PRIMARY KEY (id)
 );
@@ -411,7 +438,7 @@ CREATE TABLE club_members
 	id SERIAL,
 	club_id integer,
 	person_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id), 
         FOREIGN KEY(club_id) REFERENCES clubs(id), 
 	PRIMARY KEY (id)
@@ -424,7 +451,7 @@ CREATE TABLE players
 	id SERIAL,
 	dob date not null,
 	person_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -433,7 +460,7 @@ CREATE TABLE coaches
 (
 	id SERIAL,
 	person_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -442,7 +469,7 @@ CREATE TABLE managers
 (
 	id SERIAL,
 	person_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
@@ -453,7 +480,7 @@ CREATE TABLE club_players
 	id SERIAL,
 	uniform_number integer,
 	club_member_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -462,7 +489,7 @@ CREATE TABLE club_coaches
 (
 	id SERIAL,
 	club_member_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -471,7 +498,7 @@ CREATE TABLE club_managers
 (
 	id SERIAL,
 	club_member_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -480,7 +507,7 @@ CREATE TABLE club_administrators
 (
 	id SERIAL,
 	club_member_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(club_member_id) REFERENCES club_members(id),
 	PRIMARY KEY (id)
 );
@@ -499,6 +526,7 @@ create table invite_club_members
 	club_id integer,
 	club_invite_token text,
 	expires timestamp,
+	created_at timestamp not null default now(),
  	FOREIGN KEY(email_id) REFERENCES emails(id),
  	FOREIGN KEY(club_id) REFERENCES club_administrators(id),
 	primary key(id)
@@ -509,6 +537,7 @@ create table invite_club_members_club_administrators
 	id serial,
         invite_club_member_id integer,
 	club_administrator_id integer,
+	created_at timestamp not null default now(),
  	FOREIGN KEY(invite_club_member_id) REFERENCES invite_club_members(id),
  	FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
 	primary key(id)
@@ -524,7 +553,7 @@ CREATE TABLE team_members
 	id serial,
 	team_id integer,
 	club_members_id integer,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(club_members_id) REFERENCES club_members(id),
         FOREIGN KEY(team_id) REFERENCES teams(id),
 	primary key(id)
@@ -534,7 +563,7 @@ CREATE TABLE team_players
 (
 	id SERIAL,
 	team_member_id integer not null,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
@@ -543,7 +572,7 @@ CREATE TABLE team_coaches
 (
 	id SERIAL,
 	team_member_id integer not null,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
@@ -552,7 +581,7 @@ CREATE TABLE team_managers
 (
 	id SERIAL,
 	team_member_id integer not null,
-	timestamp_created timestamp,
+	created_at timestamp not null default now(),
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
@@ -564,6 +593,7 @@ CREATE TABLE sessions_players_availability
        	team_player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
@@ -576,6 +606,7 @@ CREATE TABLE sessions_players_attendance
         session_id integer NOT NULL,
        	team_player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
@@ -589,6 +620,7 @@ create table products
         id SERIAL,
 	name text,
 	description text, 
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -598,9 +630,9 @@ create table product_pricing
         id SERIAL,
 	product_id text,
 	base_price money,
-	create_date timestamp,
 	start_date timestamp, --order by create_date desc limit 1 to get just the latest price, if there is not valid price than the product is still with company in theory but not for sale currently
 	end_date timestamp,
+	created_at timestamp not null default now(),
 	active boolean,
         PRIMARY KEY (id)
 );
@@ -610,6 +642,7 @@ create table product_types
         id SERIAL,
 	name text,
 	description text,
+	created_at timestamp not null default now(),
         PRIMARY KEY (id)
 );
 
@@ -619,6 +652,7 @@ create table product_types_products
         id SERIAL,
 	product_type_id integer,
 	product_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (product_type_id) REFERENCES product_types(id),
 	FOREIGN KEY (product_id) REFERENCES products(id),
         PRIMARY KEY (id)
@@ -628,6 +662,7 @@ create table discount_units
 (
 	id serial,
 	name text,
+	created_at timestamp not null default now(),
 	primary key(id)
 );
 
@@ -638,13 +673,13 @@ create table product_discount
 	product_id integer,
 	discount_value integer,
 	discount_unit_id integer,
-	create_date timestamp,
 	start_date timestamp,
 	end_date timestamp,
 	coupon_code text,
 	minimum_order_value integer,
 	maximum_discount_amount integer,
 	is_redeem_allowed boolean,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (discount_unit_id) REFERENCES discount_units(id),
         PRIMARY KEY (id)
 );
@@ -655,13 +690,13 @@ create table product_type_discount
 	product_type_id integer,
 	discount_value integer,
 	discount_unit_id integer,
-	create_date timestamp,
 	start_date timestamp,
 	end_date timestamp,
 	coupon_code text,
 	minimum_order_value integer,
 	maximum_discount_amount integer,
 	is_redeem_allowed boolean,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (product_type_id) REFERENCES product_types(id),
 	FOREIGN KEY (discount_unit_id) REFERENCES discount_units(id),
         PRIMARY KEY (id)
@@ -672,8 +707,8 @@ create table product_type_discount
 CREATE TABLE orders 
 (
 	id SERIAL,
-	create_time timestamp,
 	person_id integer,
+	created_at timestamp not null default now(),
 	FOREIGN KEY (person_id) REFERENCES persons(id),
         PRIMARY KEY (id)
 );
@@ -684,6 +719,7 @@ CREATE TABLE order_items
 	order_id integer,
 	product_id integer,
 	price money, --this is calced frozen in at time of order.....
+	created_at timestamp not null default now(),
 	FOREIGN KEY (order_id) REFERENCES orders(id),
 	FOREIGN KEY (product_id) REFERENCES products(id),
         PRIMARY KEY (id)
