@@ -1,2 +1,1 @@
-sudo -u postgres pg_dump -Fc jamesanthonybreslin > src/database/backup/full
-
+sudo -u postgres pg_dump -Fc cms > database/backup/backup
