@@ -117,10 +117,13 @@ create table season_segments
 create table seasons
 (
 	id serial,
-	season_segment_id integer,
-	season_year_id integer,
 	primary key (id)
 );
+
+--so club wide we make
+--Fall 2019
+--which is season_segment=Fall 
+
 
 --so this could have multiple entries for season. for example season 1, year 1 and 2 ||| seasons 2, year 1
 create table seasons_years
@@ -130,6 +133,7 @@ create table seasons_years
 	year_id integer,
 	foreign key (season_id) references seasons(id),
 	foreign key (year_id) references years(id),
+	unique(season_id, year_id),
 	primary key (id)
 );
 
