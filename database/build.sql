@@ -102,48 +102,17 @@ create table years
 	year integer,
 	primary key (id)
 );
---these are just general descriptive terms that are historically used in youth soccer 
---fall, fall early, fall late, indoor, winter, winter 1, winter 2, spring, spring early, spring late, summer, summer 1, summer 2
---a team has a 1 team to many seasons relationship or do we allow many teams to many seasons???? sort of like tags???
-create table season_segments
-(
-	id serial,
-	name text,
-	created_at timestamp not null default now(),
-	primary key (id)
-);
 
 --so an administrator would create the season and then join teams to it.
 create table seasons
 (
 	id serial,
-	primary key (id)
-);
-
---so club wide we make
---Fall 2019
---which is season_segment=Fall 
-
-
---so this could have multiple entries for season. for example season 1, year 1 and 2 ||| seasons 2, year 1
-create table seasons_years
-(
-	id serial,
-	season_id integer,
-	year_id integer,
-	foreign key (season_id) references seasons(id),
-	foreign key (year_id) references years(id),
-	unique(season_id, year_id),
-	primary key (id)
-);
-
-create table season_season_segments
-(
-	id serial,
-	season_id integer,
-	season_segment_id integer,
-	foreign key (season_id) references seasons(id),
-	foreign key (season_segment_id) references season_segments(id),
+	name text,
+	club_id integer not null,	
+	start_date timestamp not null,
+	end_date timestamp not null,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
 	primary key (id)
 );
 
