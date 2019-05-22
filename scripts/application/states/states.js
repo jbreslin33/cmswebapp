@@ -51,6 +51,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
+		else if (app.mLocationHash == 'insert_team_screen' && app.mStateMachine.mCurrentState != app.mINSERT_TEAM_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
+                }
 		else if (app.mLocationHash == 'insert_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mINSERT_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
@@ -100,6 +104,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("card_original_id").style.display = "none";
 		document.getElementById("insert_evento_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
+		document.getElementById("insert_team_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
 		document.getElementById("insert_invite_club_member_screen_html_id").style.display = "none";
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
@@ -624,7 +629,6 @@ class MAIN_APPLICATION extends State
 	}
 }
 
-
 class INSERT_CLUB_APPLICATION extends State
 {
 	constructor() 
@@ -688,3 +692,73 @@ class INSERT_CLUB_APPLICATION extends State
 		app.mInsertClubScreen.mData = null;
 	}
 }
+
+
+
+
+class INSERT_TEAM_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("INSERT_TEAM_APPLICATION: ENTER");        
+		}
+		if (app.mInsertTeamScreen)
+		{
+			app.mInsertTeamScreen = new InsertTeamScreen(app);
+		}
+		else
+		{
+			app.mInsertTeamScreen = new InsertTeamScreen(app);
+		}
+		app.mInsertTeamScreen.show();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("INSERT_TEAM_APPLICATION: EXECUTE");        
+		}
+             
+		if (app.mInsertTeamScreen.mData)
+                {
+                        var dataArray = app.mInsertTeamScreen.mData.split(",");
+                        app.mInsertTeamScreen.mCode = dataArray[0];
+
+
+                        if (app.mInsertTeamScreen.mCode == -100)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                document.getElementById('insert_team_screen_name_message_id').innerHTML = '';
+                        }
+                        if (app.mInsertTeamScreen.mCode == -106)
+                        {
+                                document.getElementById('insert_team_screen_name_message_id').style.color = 'red';
+                                document.getElementById('insert_team_screen_name_message_id').innerHTML = 'Team Name already exists.';
+				app.mInsertTeamScreen.mCode = 0;
+				app.mInsertTeamScreen.mData = null;
+                        }
+                }
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("INSERT_TEAM_APPLICATION: EXIT");        
+		}
+		app.mInsertTeamScreen.hide();
+		app.mInsertTeamScreen.mCode = 0;
+		app.mInsertTeamScreen.mData = null;
+	}
+}
+
+
+

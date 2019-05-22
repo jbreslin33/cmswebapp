@@ -72,8 +72,13 @@
 			-->
 
 			<li class="nav-item">
-    				<a id="insert_club_nav_id" class="nav-link" href="#insert_club_screen">Add Club</a>
+    				<a id="insert_club_nav_id" class="nav-link" href="#insert_club_screen">Insert Club</a>
   			</li>
+			
+			<li class="nav-item">
+    				<a id="insert_team_nav_id" class="nav-link" href="#insert_team_screen">Insert Team</a>
+  			</li>
+
 			<li class="nav-item">
     				<a id="insert_forgot_password_nav_id" class="nav-link" href="#insert_forgot_password_screen">Insert Forgot Password</a>
   			</li>
@@ -200,11 +205,8 @@
 	</div>
 
 	<!-- END JOIN HTML  -->
-
-
-
-        
-	<!-- ADD CLUB HTML  -->
+	
+	<!-- INSERT CLUB HTML  -->
 
 	<form id="insert_club_screen_html_id" class="needs-validation">
   		<div class="form-row">
@@ -222,12 +224,29 @@
       				<input type="text" class="form-control" id="insert_club_screen_address_id" placeholder="Club Address" required>
     			</div>
   		</div>
-
+		
 		<button id="addclubscreenbuttonid" class="btn btn-primary">Submit</button>
 
 	</form>
 
-	<!-- END ADD CLUB HTML  -->
+	<!-- END INSERT CLUB HTML  -->
+
+	<!-- INSERT TEAM HTML  -->
+
+	<form id="insert_team_screen_html_id" class="needs-validation">
+  		<div class="form-row">
+    			<div class="col-md-4 mb-3">
+      				<label for="insert_team_name_id">Team Name</label>
+      				<input type="text" class="form-control" id="insert_team_screen_name_id" placeholder="Team Name" value="Team Name" required>
+				<span id='insert_team_screen_name_message_id'></span>
+    			</div>
+    		</div>
+		
+		<button id="addteamscreenbuttonid" class="btn btn-primary">Submit</button>
+
+	</form>
+
+	<!-- END INSERT TEAM HTML  -->
 
         <!-- INSERT FORGOT PASSWORD HTML  -->
 
@@ -460,9 +479,11 @@
 	<script src="scripts/screens/insert_native_login_screen.js"></script>
 	<script src="scripts/screens/insert_native_login_club_screen.js"></script>
 	
-	<!-- add club -->
+	<!-- insert club -->
 	<script src="scripts/screens/insert_club_screen.js"></script>
-
+	
+	<!-- insert team -->
+	<script src="scripts/screens/insert_team_screen.js"></script>
 
 	<!-- insert forgot password -->
 	<script src="scripts/screens/insert_forgot_password_screen.js"></script>

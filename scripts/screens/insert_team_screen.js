@@ -1,10 +1,10 @@
 'use strict';
 
-class InsertTeamScreen
+class InsertTeamScreen extends Screen
 {
 	constructor(application)
 	{
-		this.mApplication = application;
+		super(application);
 
 		location.hash = "insert_team_screen";
 
@@ -23,7 +23,7 @@ class InsertTeamScreen
       		this.mName  = document.getElementById("insert_team_screen_name_id").value;
                	this.mAddress = document.getElementById("insert_team_screen_address_id").value;
 
-		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + localStorage.getItem("mJWT"); 
+		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + "&jwt=" + localStorage.getItem("mJWT"); 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

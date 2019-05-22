@@ -1,10 +1,10 @@
 'use strict';
 
-class InsertClubScreen
+class InsertClubScreen extends Screen
 {
 	constructor(application)
 	{
-		this.mApplication = application;
+		super(application);
 
 		location.hash = "insert_club_screen";
 
