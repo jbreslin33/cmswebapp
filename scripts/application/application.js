@@ -34,6 +34,7 @@ class Application
 
 		this.mMain = null;
 		this.mAddClub = null;
+		this.mInsertTeamScreen = null;
 
 		this.mInsertNativeLoginScreen = null;
 	

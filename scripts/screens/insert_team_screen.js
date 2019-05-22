@@ -8,22 +8,56 @@ class InsertTeamScreen extends Screen
 
 		location.hash = "insert_team_screen";
 
-		this.mCode = 0;
-		this.mData = null;
+		//html ids 
+		this.mSpinnerId = "insert_team_screen_spinner_id";
+		this.mHtmlId = "insert_team_screen_html_id";
 
 		//sql php vars
-		this.mName = null;
-		this.mAddress = null;
+		this.mEmail = null;
 		
-		document.getElementById("addteamscreenbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertteamscreenbuttonid").onclick = this.hit.bind(this);
+                
+                this.mStateMachine = new StateMachine(this);
+                this.mGLOBAL_INSERT_TEAM_SCREEN            = new GLOBAL_INSERT_TEAM_SCREEN();
+                this.mINIT_INSERT_TEAM_SCREEN            = new INIT_INSERT_TEAM_SCREEN();
+                this.mWAIT_FOR_CLUBS_INSERT_TEAM_SCREEN            = new WAIT_FOR_CLUBS_INSERT_TEAM_SCREEN();
+                this.mWAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN            = new WAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN();
+                this.mWAIT_INSERT_TEAM_SCREEN            = new WAIT_INSERT_TEAM_SCREEN();
+
+                this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_TEAM_SCREEN);
+                this.mStateMachine.changeState(this.mINIT_INSERT_TEAM_SCREEN);
+	}
+
+	get()
+	{
+		if (this.mApplication.mJWT)
+		{
+			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + this.mApplication.mJWT; 
+		        var request = new XMLHttpRequest();
+                	request.onreadystatechange = function()
+                	{
+                        	if (request.readyState === XMLHttpRequest.DONE)
+                        	{
+                                	if (request.status === 200)
+                                	{
+						console.log('response:' + this.responseText);
+                                        	APPLICATION.mInsertTeamScreen.mData = this.responseText;
+                                	}
+                        	}
+                	};
+
+                        request.open('POST', url);
+                        request.send();
+		}
 	}
 
 	hit()
 	{
-      		this.mName  = document.getElementById("insert_team_screen_name_id").value;
-               	this.mAddress = document.getElementById("insert_team_screen_address_id").value;
+		this.mHit = true;
 
-		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + "&jwt=" + localStorage.getItem("mJWT"); 
+		this.mName  = document.getElementById("insert_team_screen_name_id").value;
+
+		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + '&club_id=' + document.getElementById("insert_team_screen_select_id").value + '&jwt=' + APPLICATION.mJWT;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -32,7 +66,7 @@ class InsertTeamScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-					APPLICATION.mInsertTeamScreen.mData = this.responseText;
+					APPLICATION.mInsertInviteClubMemberScreen.mData = this.responseText;
                                 }
                         }
                 };
@@ -43,15 +77,5 @@ class InsertTeamScreen extends Screen
 			request.open('POST', url);
                 	request.send();
 		}
-	}
-        
-	show()
-	{
-              document.getElementById("insert_team_screen_html_id").style.display = "block";
-	}
-
-	hide()
-	{
-              document.getElementById("insert_team_screen_html_id").style.display = "none";
 	}
 }
