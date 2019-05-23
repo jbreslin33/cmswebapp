@@ -217,7 +217,7 @@ CREATE TABLE teams_periodizations
         PRIMARY KEY (id)
 );
 
-CREATE TABLE sessions 
+CREATE TABLE practices 
 (
         id SERIAL,
         arrival_time timestamp, --only 1 arrival time leave it
@@ -276,56 +276,6 @@ CREATE TABLE uniforms_order
         PRIMARY KEY (id)
 );
 
-CREATE TABLE uniforms_sessions 
-(
-	id SERIAL,
-	uniform_id integer,
-	uniforms_order_id integer,
-	session_id integer,
-	created_at timestamp not null default now(),
-        PRIMARY KEY (id),
-	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
-	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
-);
-
-CREATE TABLE exercises
-(
-        id SERIAL,
-	url text UNIQUE, --link
-	created_at timestamp not null default now(),
-        PRIMARY KEY (id)
-);
-
-create table sessions_exercises
-(
-	id serial,
-	session_id integer,
-	exercise_id integer,
-	created_at timestamp not null default now(),
-	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
-        PRIMARY KEY (id)
-);
-
-create table tags 
-(
-	id SERIAL,
-	name text unique,
-	created_at timestamp not null default now(),
-        PRIMARY KEY (id)
-);
-
-create table exercises_tags
-(
-	id serial,
-	exercise_id integer,
-	tag_id integer,
-	created_at timestamp not null default now(),
-	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
-	FOREIGN KEY (tag_id) REFERENCES tags(id),
-        PRIMARY KEY (id)
-);
 
 CREATE TABLE media 
 (
@@ -401,6 +351,80 @@ create table relationships
 	name text not null unique,
 	created_at timestamp not null default now(),
 	primary key (id)
+);
+
+
+CREATE TABLE sessions 
+(
+        id SERIAL,
+	name text,
+	created_at timestamp not null default now(),
+	user_id integer,	
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	PRIMARY KEY (id)
+);
+
+create table sessions_practices
+(
+	id serial,
+	session_id integer,
+	practice_id integer,
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	unique (session_id, practice_id),
+	primary key (id)
+
+);
+
+CREATE TABLE uniforms_sessions 
+(
+	id SERIAL,
+	uniform_id integer,
+	uniforms_order_id integer,
+	session_id integer,
+	created_at timestamp not null default now(),
+        PRIMARY KEY (id),
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (uniform_id) REFERENCES uniforms(id),
+	FOREIGN KEY (uniforms_order_id) REFERENCES uniforms_order(id)
+);
+
+CREATE TABLE exercises
+(
+        id SERIAL,
+	url text UNIQUE, --link
+	created_at timestamp not null default now(),
+        PRIMARY KEY (id)
+);
+
+create table sessions_exercises
+(
+	id serial,
+	session_id integer,
+	exercise_id integer,
+	created_at timestamp not null default now(),
+	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
+        PRIMARY KEY (id)
+);
+
+create table tags 
+(
+	id SERIAL,
+	name text unique,
+	created_at timestamp not null default now(),
+        PRIMARY KEY (id)
+);
+
+create table exercises_tags
+(
+	id serial,
+	exercise_id integer,
+	tag_id integer,
+	created_at timestamp not null default now(),
+	FOREIGN KEY (exercise_id) REFERENCES exercises(id),
+	FOREIGN KEY (tag_id) REFERENCES tags(id),
+        PRIMARY KEY (id)
 );
 
 
