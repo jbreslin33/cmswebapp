@@ -7,23 +7,39 @@ class InsertTeam
 {
 	function __construct() 
 	{
+
+		//handle variables from sender's javascript
+		$name = null;
+		$club_id = null;
+		$jwt = null;
+	
+		if (isset($_GET['name']))
+		{
+			$name = $_GET['name'];
+		}
+		if (isset($_GET['club_id']))
+		{
+			$name = $_GET['club_id'];
+
+		}
+		if (isset($_GET['jwt']))
+		{
+			$jwt = $_GET['jwt'];
+		}
+
+		//prep db
                 $database = new Database("localhost","cms","postgres","mibesfat");
-
-		//actually we are going to get the jwt and need to extract id
-
 		$sql = 'select f_insert_team($1,$2,$3)';
-		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_team", $sql);
 
-		$jwt = $_GET['jwt'];
+		//get id of sender
 		$oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
 		$id = $payload->id;
 
-		$result = pg_execute($database->mConnection, "f_insert_team", array( $_GET['name'] ,$_GET['address'], $id));
-
+		//result for sender
+		$result = pg_execute($database->mConnection, "f_insert_team", array( $name ,$club_id, $id));
                	$return_value = pg_fetch_result($result, 0);
-
                 echo $return_value;
         }
 }

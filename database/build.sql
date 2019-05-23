@@ -1125,6 +1125,35 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_insert_team(TEXT, int, user_id int)
+RETURNS text AS $$
+DECLARE
+	found_person_id persons.id%TYPE;
+        found_club_id clubs.id%TYPE;
+        return_code text;
+	DECLARE x int := -111;
+BEGIN
+        SELECT id INTO found_club_id FROM clubs
+        WHERE name = $1;
+
+        IF found_club_id THEN
+                return_code = '-106';
+       	ELSE
+		select persons.id INTO found_person_id from persons 
+		join users on persons.id=users.person_id
+        	WHERE users.id = $3;
+
+		CALL p_insert_club($1,$2,found_person_id,x);
+		IF x > 0 THEN
+			return_code = '-100';
+		ELSE
+			return_code = x;
+		END IF;
+        END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
