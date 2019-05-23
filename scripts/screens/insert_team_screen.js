@@ -66,7 +66,7 @@ class InsertTeamScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-					APPLICATION.mInsertInviteClubMemberScreen.mData = this.responseText;
+					APPLICATION.mInsertTeamScreen.mData = this.responseText;
                                 }
                         }
                 };

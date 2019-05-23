@@ -90,6 +90,10 @@ class Application
 		{
 			this.mInsertInviteClubMemberScreen.update(timestamp);
 		}
+		if (this.mInsertTeamScreen)
+		{
+			this.mInsertTeamScreen.update(timestamp);
+		}
 		
 		if (this.mDailySchedule)
 		{

@@ -726,26 +726,6 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			console.log("INSERT_TEAM_APPLICATION: EXECUTE");        
 		}
-             
-		if (app.mInsertTeamScreen.mData)
-                {
-                        var dataArray = app.mInsertTeamScreen.mData.split(",");
-                        app.mInsertTeamScreen.mCode = dataArray[0];
-
-
-                        if (app.mInsertTeamScreen.mCode == -100)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('insert_team_screen_name_message_id').innerHTML = '';
-                        }
-                        if (app.mInsertTeamScreen.mCode == -106)
-                        {
-                                document.getElementById('insert_team_screen_name_message_id').style.color = 'red';
-                                document.getElementById('insert_team_screen_name_message_id').innerHTML = 'Team Name already exists.';
-				app.mInsertTeamScreen.mCode = 0;
-				app.mInsertTeamScreen.mData = null;
-                        }
-                }
 	}
 
         exit(app)
