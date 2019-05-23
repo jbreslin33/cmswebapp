@@ -1125,31 +1125,38 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE PROCEDURE p_insert_team(name TEXT, club_id int, user_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        --returning_team_id integer;
+        --returning_club_member_id integer;
+BEGIN
+
+	--select club_administrators.id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = 1 and users.id = 1;
+
+        --insert into clubs (name,address) values (name,address) returning id into returning_club_id;
+        insert into teams (name,club_id) values (name,club_id) returning id into x;
+        --insert into club_members (club_id, person_id) values (returning_club_id, person_id) returning id into returning_club_member_id;
+        --insert into club_administrators (club_member_id) values (returning_club_member_id) returning id into x;
+END;
+$$;
+
+
 CREATE OR REPLACE FUNCTION f_insert_team(TEXT, int, user_id int)
 RETURNS text AS $$
 DECLARE
-	found_person_id persons.id%TYPE;
-        found_club_id clubs.id%TYPE;
         return_code text;
 	DECLARE x int := -111;
 BEGIN
-        SELECT id INTO found_club_id FROM clubs
-        WHERE name = $1;
+	CALL p_insert_team($1,$2,user_id,x);
 
-        IF found_club_id THEN
-                return_code = '-106';
-       	ELSE
-		select persons.id INTO found_person_id from persons 
-		join users on persons.id=users.person_id
-        	WHERE users.id = $3;
+	IF x > 0 THEN
+		return_code = '-100';
+	ELSE
+		return_code = x;
+	END IF;
 
-		CALL p_insert_club($1,$2,found_person_id,x);
-		IF x > 0 THEN
-			return_code = '-100';
-		ELSE
-			return_code = x;
-		END IF;
-        END IF;
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
