@@ -19,7 +19,7 @@ class InsertTeam
 		}
 		if (isset($_GET['club_id']))
 		{
-			$name = $_GET['club_id'];
+			$club_id = $_GET['club_id'];
 
 		}
 		if (isset($_GET['jwt']))

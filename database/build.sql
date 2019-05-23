@@ -1125,7 +1125,7 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_team(name TEXT, club_id int, user_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1136,7 +1136,7 @@ BEGIN
 	--select club_administrators.id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = 1 and users.id = 1;
 
         --insert into clubs (name,address) values (name,address) returning id into returning_club_id;
-        insert into teams (name,club_id) values (name,club_id) returning id into x;
+        insert into teams (name,club_id) values ($1,$2) returning id into x;
         --insert into club_members (club_id, person_id) values (returning_club_id, person_id) returning id into returning_club_member_id;
         --insert into club_administrators (club_member_id) values (returning_club_member_id) returning id into x;
 END;
