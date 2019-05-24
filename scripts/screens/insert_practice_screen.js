@@ -20,7 +20,7 @@ class InsertPracticeScreen extends Screen
                 this.mStateMachine = new StateMachine(this);
                 this.mGLOBAL_INSERT_PRACTICE_SCREEN            = new GLOBAL_INSERT_PRACTICE_SCREEN();
                 this.mINIT_INSERT_PRACTICE_SCREEN            = new INIT_INSERT_PRACTICE_SCREEN();
-                this.mWAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN            = new WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN();
+                this.mWAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN            = new WAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN();
                 this.mWAIT_FOR_SUBMIT_INSERT_PRACTICE_SCREEN            = new WAIT_FOR_SUBMIT_INSERT_PRACTICE_SCREEN();
                 this.mWAIT_INSERT_PRACTICE_SCREEN            = new WAIT_INSERT_PRACTICE_SCREEN();
 

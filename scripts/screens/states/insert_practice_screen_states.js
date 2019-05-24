@@ -44,7 +44,7 @@ class INIT_INSERT_PRACTICE_SCREEN extends State
                 {
                         console.log("INIT_INSERT_PRACTICE_SCREEN: ENTER");
                 }
-                owner.mStateMachine.changeState(owner.mWAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN);
+                owner.mStateMachine.changeState(owner.mWAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN);
         }
 
         execute(owner)
@@ -64,7 +64,7 @@ class INIT_INSERT_PRACTICE_SCREEN extends State
         }
 }
 
-class WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN extends State
+class WAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN extends State
 {
         constructor()
         {
@@ -75,7 +75,7 @@ class WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateEnterLogs)
                 {
-                        console.log("WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN: ENTER");
+                        console.log("WAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN: ENTER");
                 }
                 owner.showSpinner();
 		owner.get();
@@ -85,7 +85,7 @@ class WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExecuteLogs)
                 {
-                        console.log("WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN: EXECUTE");
+                        console.log("WAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN: EXECUTE");
                 }
 
 		if (owner.mData)
@@ -100,7 +100,7 @@ class WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN extends State
 				//remove all old options
 
                                 //load up option
-                                var select = document.getElementById("insert_practice_screen_select_id");
+                                var select = document.getElementById("insert_practice_screen_team_id");
                                 for (var i = 0; i < owner.mJson.clubs.length; i++)
                                 {
                                         var opt = document.createElement('option');
@@ -125,7 +125,7 @@ class WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN extends State
         {
                 if (owner.mStateLogs || owner.mStateExitLogs)
                 {
-                        console.log("WAIT_FOR_CLUBS_INSERT_PRACTICE_SCREEN: EXIT");
+                        console.log("WAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN: EXIT");
                 }
                 owner.mCode = 0;
                 owner.mData = null;
