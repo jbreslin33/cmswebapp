@@ -55,6 +55,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
                 }
+		else if (app.mLocationHash == 'insert_practice_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PRACTICE_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PRACTICE_APPLICATION);
+                }
 		else if (app.mLocationHash == 'insert_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mINSERT_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
@@ -101,8 +105,6 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
-		document.getElementById("card_original_id").style.display = "none";
-		document.getElementById("insert_evento_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_team_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
@@ -693,9 +695,6 @@ class INSERT_CLUB_APPLICATION extends State
 	}
 }
 
-
-
-
 class INSERT_TEAM_APPLICATION extends State
 {
 	constructor() 
@@ -737,6 +736,52 @@ class INSERT_TEAM_APPLICATION extends State
 		app.mInsertTeamScreen.hide();
 		app.mInsertTeamScreen.mCode = 0;
 		app.mInsertTeamScreen.mData = null;
+	}
+}
+
+
+
+class INSERT_PRACTICE_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("INSERT_PRACTICE_APPLICATION: ENTER");        
+		}
+		if (app.mInsertPracticeScreen)
+		{
+			app.mInsertPracticeScreen = new InsertPracticeScreen(app);
+		}
+		else
+		{
+			app.mInsertPracticeScreen = new InsertPracticeScreen(app);
+		}
+		app.mInsertPracticeScreen.show();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("INSERT_PRACTICE_APPLICATION: EXECUTE");        
+		}
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("INSERT_PRACTICE_APPLICATION: EXIT");        
+		}
+		app.mInsertPracticeScreen.hide();
+		app.mInsertPracticeScreen.mCode = 0;
+		app.mInsertPracticeScreen.mData = null;
 	}
 }
 

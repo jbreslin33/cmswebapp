@@ -65,6 +65,7 @@ class Application
 		this.mLOGIN_APPLICATION           = new LOGIN_APPLICATION();
 		this.mINSERT_CLUB_APPLICATION        = new INSERT_CLUB_APPLICATION();
 		this.mINSERT_TEAM_APPLICATION        = new INSERT_TEAM_APPLICATION();
+		this.mINSERT_PRACTICE_APPLICATION        = new INSERT_PRACTICE_APPLICATION();
 		this.mINSERT_FORGOT_PASSWORD_APPLICATION        = new INSERT_FORGOT_PASSWORD_APPLICATION();
 		this.mINSERT_INVITE_CLUB_MEMBER_APPLICATION        = new INSERT_INVITE_CLUB_MEMBER_APPLICATION();
 		this.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION        = new INSERT_ACCEPT_CLUB_INVITE_APPLICATION();
@@ -94,7 +95,10 @@ class Application
 		{
 			this.mInsertTeamScreen.update(timestamp);
 		}
-		
+		if (this.mInsertPracticeScreen)
+		{
+			this.mInsertPracticeScreen.update(timestamp);
+		}
 		if (this.mDailySchedule)
 		{
 			this.mDailySchedule.update(timestamp);
