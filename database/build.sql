@@ -1109,10 +1109,11 @@ BEGIN
 		return_code = x;
 	END IF;
 
-	IF $6 THEN
+	IF $6 != null THEN
 		SELECT club_id into found_club_id from invite_club_members where club_invite_token = $6;
 		insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
 	ELSE
+		insert into emails (email) values ('yourmom');
 
 	END IF;	
 
