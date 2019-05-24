@@ -107,6 +107,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("login_screen_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_team_screen_html_id").style.display = "none";
+		document.getElementById("insert_practice_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
 		document.getElementById("insert_invite_club_member_screen_html_id").style.display = "none";
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
