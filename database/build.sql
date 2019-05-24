@@ -930,41 +930,6 @@ BEGIN
 END;
 $$;
 
---insert_google_login_club
-CREATE OR REPLACE FUNCTION f_insert_google_login_club(TEXT,TEXT,TEXT,TEXT,TEXT,TEXT,TEXT)
-RETURNS text AS $$
-DECLARE
-	found_email_id emails.id%TYPE;
-	found_club_id clubs.id%TYPE;
-	return_code text;
-	DECLARE x int := -111; --for bad insert attempt
-BEGIN
-    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_members WHERE club_invite_token = $7;
-	IF found_club_id > 0 THEN
-		CALL p_insert_google_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
-		return_code = x;
-	ELSE --for some reason email does not exist
-		return_code = '-102';
-	END IF;
-RETURN return_code;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE PROCEDURE p_insert_google_login_club(int, int, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
-LANGUAGE plpgsql    
-AS $$
-DECLARE
-	returning_email_id integer;
-	returning_native_login_id integer;
-	returning_person_id integer;
-BEGIN
-	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-        insert into users (person_id, email_id) values (returning_person_id, $1) returning id into x;
-	insert into club_members (club_id,person_id) values ($2,returning_person_id);
-END;
-$$;
-
 --get_native_email
 CREATE OR REPLACE FUNCTION f_get_native_email_id(email_name TEXT)
 RETURNS text AS $$
@@ -1067,7 +1032,7 @@ DECLARE
         found_google_login_id google_logins.id%TYPE;
         found_user_id users.id%TYPE;
         returning_user_id users.id%TYPE;
-        found_person_id users.id%TYPE;
+        found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
         
 	found_club_invite_token invite_club_members.club_invite_token%TYPE;
@@ -1099,12 +1064,12 @@ BEGIN
 			where id = found_person_id;
 			return_code = found_user_id;
                 ELSE
-        		insert into persons (first_name, last_name) values ($4,$5) returning id into returning_person_id;
-                        insert into users (person_id, email_id) values (returning_person_id,found_email_id) returning id into returning_user_id;
-			return_code = returning_user_id;
+        		insert into persons (first_name, last_name) values ($4,$5) returning id into found_person_id;
+                        insert into users (person_id, email_id) values (found_person_id,found_email_id) returning id into found_user_id;
+			return_code = found_user_id;
                 END IF;
 
-        ELSE --if there is no email then logically you cannot have the other tables so do a full insert
+        ELSE --if there is no email then logically you cannot have the other tables so do a full insert, also we wont have an invite as we would have made an insert into email
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
 		return_code = x;
 	END IF;
