@@ -1,9 +1,27 @@
 function onSignIn(googleUser) 
 {
-	APPLICATION.mLogin.googleSignIn(googleUser);
+	if (APPLICATION.mLogin)
+	{
+		APPLICATION.mLogin.googleSignIn(googleUser);
+	}
+
+	if (APPLICATION.mInsertNativeLoginClubScreen)
+	{
+
+		APPLICATION.mInsertNativeLoginClubScreen.googleSignIn(googleUser);
+	}
 }
 
 function signOut() 
 {
-	APPLICATION.mLogin.googleSignOut();
+	if (APPLICATION.mLogin)
+	{
+		APPLICATION.mLogin.googleSignOut();
+	}
+
+	if (APPLICATION.mInsertNativeLoginClubScreen)
+	{
+
+		APPLICATION.mInsertNativeLoginClubScreen.googleSignOut();
+	}
 }

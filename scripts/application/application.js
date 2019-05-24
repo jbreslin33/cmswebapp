@@ -32,6 +32,9 @@ class Application
 		//login first
 		this.mLogin = null;
 
+		//login via club invite
+		this.mInsertNativeLoginClubScreen = null;
+
 		this.mMain = null;
 		this.mAddClub = null;
 		this.mInsertTeamScreen = null;

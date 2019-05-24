@@ -88,4 +88,52 @@ insert_native_login_screen_header_div_id
               document.getElementById("insert_native_login_screen_html_id").style.display = "none";
               document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 	}
+
+        googleLogin()
+        {
+                var url = "/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName;
+
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        APPLICATION.mInsertNativeLoginClubScreen.mData = this.responseText;
+                                }
+                        }
+                };
+
+                request.open('POST', url);
+                request.send();
+        }
+
+        googleSignIn(googleUser)
+        {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+
+                APPLICATION.mInsertNativeLoginClubScreen.mEmail = profile.getEmail();
+                APPLICATION.mInsertNativeLoginClubScreen.mGoogleID = profile.getId();
+                APPLICATION.mInsertNativeLoginClubScreen.mIDToken = id_token;
+                APPLICATION.mInsertNativeLoginClubScreen.mFirstName = profile.getGivenName();
+                APPLICATION.mInsertNativeLoginClubScreen.mLastName = profile.getFamilyName();
+                APPLICATION.mInsertNativeLoginClubScreen.mImageUrl = profile.getImageUrl();
+
+                this.googleLogin();
+        }
+
+        googleSignOut()
+        {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function ()
+                {
+                        console.log('User signed out.');
+                });
+        }
+
 }
