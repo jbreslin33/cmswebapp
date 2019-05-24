@@ -91,9 +91,9 @@ insert_native_login_screen_header_div_id
 
         googleLogin()
         {
-                var url = "/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName;
+                var url = "/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName + "&club_invite_token=" + APPLICATION.mClubInviteToken;
 
-                var request = new XMLHttpRequest();
+		var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
                         if (request.readyState === XMLHttpRequest.DONE)
