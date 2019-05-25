@@ -1075,11 +1075,9 @@ BEGIN
 	END IF;
 
 	IF $6 is NULL THEN
-		insert into emails (email) values ('yourmom is null');
-		insert into emails (email) values ($6);
+		--do nothing
 	ELSE
-		insert into emails (email) values ('yourmom is not null');
-		insert into emails (email) values ($6);
+		--insert into emails (email) values ($6);
 		SELECT club_id into found_club_id from invite_club_members where club_invite_token = $6;
 		insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
 	END IF;	

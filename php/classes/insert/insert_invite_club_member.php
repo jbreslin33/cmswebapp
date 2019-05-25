@@ -17,7 +17,7 @@ class InsertInviteClubMember
 		//jwt decoding
                 $oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-                $user_id = $payload->id;
+                $user_id = $payload->user_id;
 
 		//token	
                 $this->mClubInviteToken = bin2hex(random_bytes(32));

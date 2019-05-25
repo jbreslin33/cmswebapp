@@ -26,9 +26,9 @@ class InsertGoogleLoginClub
                 {
                         //encode
 			$oneRing = new OneRing();
-                        $id = $return_value;
+                        $user_id = $return_value;
                         $encoded_token = array();
-                        $encoded_token['id'] = $id;
+                        $encoded_token['user_id'] = $user_id;
                         $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
                         echo "-100," . $jwt;
                 }

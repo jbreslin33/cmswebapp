@@ -18,9 +18,9 @@ class InsertClub
 		$jwt = $_GET['jwt'];
 		$oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-		$id = $payload->id;
+		$user_id = $payload->user_id;
 
-		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $id));
+		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $user_id));
 
                	$return_value = pg_fetch_result($result, 0);
 
