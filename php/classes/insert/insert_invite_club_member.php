@@ -17,12 +17,12 @@ class InsertInviteClubMember
 		//jwt decoding
                 $oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-                $user_id = $payload->user_id;
+                $person_id = $payload->person_id;
 
 		//token	
                 $this->mClubInviteToken = bin2hex(random_bytes(32));
 
-                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mClubInviteToken, $user_id));
+                $result = pg_execute($database->mConnection, "f_insert_invite_club_member", array( $email, $club_id, $this->mClubInviteToken, $person_id));
 
   		$return_value = pg_fetch_result($result, 0);
 

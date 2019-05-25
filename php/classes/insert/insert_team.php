@@ -35,10 +35,10 @@ class InsertTeam
 		//get id of sender
 		$oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-		$user_id = $payload->user_id;
+		$person_id = $payload->person_id;
 
 		//result for sender
-		$result = pg_execute($database->mConnection, "f_insert_team", array( $name ,$club_id, $user_id));
+		$result = pg_execute($database->mConnection, "f_insert_team", array( $name ,$club_id, $person_id));
                	$return_value = pg_fetch_result($result, 0);
                 echo $return_value;
         }

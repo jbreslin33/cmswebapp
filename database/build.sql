@@ -886,12 +886,11 @@ AS $$
 DECLARE
 	returning_email_id integer;
 	returning_native_login_id integer;
-	returning_person_id integer;
 BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
 	insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
+        insert into users (person_id, email_id) values (x, returning_email_id);
 END;
 $$;
 
@@ -921,12 +920,11 @@ AS $$
 DECLARE
 	returning_email_id integer;
 	returning_native_login_id integer;
-	returning_person_id integer;
 BEGIN
 	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-        insert into users (person_id, email_id) values (returning_person_id, $1) returning id into x;
-	insert into club_members (club_id,person_id) values ($2,returning_person_id);
+	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
+        insert into users (person_id, email_id) values (x, $1);
+	insert into club_members (club_id,person_id) values ($2,x);
 END;
 $$;
 
@@ -950,7 +948,7 @@ RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
-	found_user_id users.id%TYPE;
+	found_person_id users.person_id%TYPE;
 	return_code text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
@@ -961,9 +959,9 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
         	
 		IF found_native_login_id THEN
-			SELECT id INTO found_user_id FROM users
+			SELECT person_id INTO found_person_id FROM users
 			where users.email_id = found_email_id;
-                	return_code = found_user_id;
+                	return_code = found_person_id;
         	ELSE
                 	return_code = '-105';
         	END IF;
@@ -999,12 +997,11 @@ AS $$
 DECLARE
 	returning_email_id integer;
         returning_google_login_id integer;
-        returning_person_id integer;
 BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
-        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+        insert into persons (first_name, last_name) values (first_name, last_name) returning id into x;
+        insert into users (person_id, email_id) values (x, returning_email_id);
 END;
 $$;
 
@@ -1062,11 +1059,11 @@ BEGIN
 
                         update persons set first_name = $4 , last_name = $5
 			where id = found_person_id;
-			return_code = found_user_id;
+			return_code = found_person_id;
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into found_person_id;
                         insert into users (person_id, email_id) values (found_person_id,found_email_id) returning id into found_user_id;
-			return_code = found_user_id;
+			return_code = found_person_id;
                 END IF;
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert, also we wont have an invite as we would have made an insert into email
@@ -1124,10 +1121,9 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, user_id int)
+CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, person_id int)
 RETURNS text AS $$
 DECLARE
-	found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
         return_code text;
 	DECLARE x int := -111;
@@ -1138,11 +1134,7 @@ BEGIN
         IF found_club_id THEN
                 return_code = '-106';
        	ELSE
-		select persons.id INTO found_person_id from persons 
-		join users on persons.id=users.person_id
-        	WHERE users.id = $3;
-
-		CALL p_insert_club($1,$2,found_person_id,x);
+		CALL p_insert_club($1,$2,person_id,x);
 		IF x > 0 THEN
 			return_code = '-100';
 		ELSE
@@ -1157,27 +1149,19 @@ CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        --returning_team_id integer;
-        --returning_club_member_id integer;
 BEGIN
-
-	--select club_administrators.id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = 1 and users.id = 1;
-
-        --insert into clubs (name,address) values (name,address) returning id into returning_club_id;
         insert into teams (name,club_id) values ($1,$2) returning id into x;
-        --insert into club_members (club_id, person_id) values (returning_club_id, person_id) returning id into returning_club_member_id;
-        --insert into club_administrators (club_member_id) values (returning_club_member_id) returning id into x;
 END;
 $$;
 
-
-CREATE OR REPLACE FUNCTION f_insert_team(TEXT, int, user_id int)
+--not using person id to check if club admin but need too!!!!!!!!!!!!!
+CREATE OR REPLACE FUNCTION f_insert_team(TEXT, int, person_id int)
 RETURNS text AS $$
 DECLARE
         return_code text;
 	DECLARE x int := -111;
 BEGIN
-	CALL p_insert_team($1,$2,user_id,x);
+	CALL p_insert_team($1,$2,person_id,x);
 
 	IF x > 0 THEN
 		return_code = '-100';
@@ -1231,7 +1215,7 @@ BEGIN
 
 		delete from invite_club_members where email_id = found_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join clubs on clubs.id=club_members.club_id where club_id = $2 and persons.id = $4; 
 		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
 
 	ELSE --actually just do insert of email then invite...
@@ -1243,7 +1227,7 @@ BEGIN
 
 		delete from invite_club_members where email_id = returning_email_id and club_id = $2;
 		insert into invite_club_members (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id join clubs on clubs.id=club_members.club_id where club_id = $2 and users.id = $4; 
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join clubs on clubs.id=club_members.club_id where club_id = $2 and persons.id = $4; 
 		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
 
 	END IF;
@@ -1252,12 +1236,12 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(user_id int)
+CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(person_id int)
   RETURNS json AS $$
    SELECT json_agg(t) 
 	from 
 	(
-		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id join users on users.person_id=persons.id where users.id = user_id 
+		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id where persons.id = person_id 
 	) t;
 $$ LANGUAGE sql;
 
