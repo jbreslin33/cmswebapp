@@ -35,6 +35,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGIN_APPLICATION);
                 }
+		else if (app.mLocationHash == 'logout_screen' && app.mStateMachine.mCurrentState != app.mLOGOUT_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mLOGOUT_APPLICATION);
+                }
 		else if (app.mLocationHash == 'update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
@@ -232,6 +236,49 @@ class LOGIN_APPLICATION extends State
 		var element = document.getElementById("login_nav_id");
 		element.className = element.className.replace(/\active\b/g, "");
     		app.mLogin.hide();
+	}
+}
+
+class LOGOUT_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("LOGOUT_APPLICATION: ENTER");        
+		}
+		
+		//document.getElementById("logout_nav_id").className += " active";
+
+		localStorage.removeItem("mJWT");
+                //app.mLocationHash = "logout_screen";
+		app.mStateMachine.changeState(app.mINIT_APPLICATION);
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("LOGOUT_APPLICATION: EXECUTE");        
+		}
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("LOGOUT_APPLICATION: EXIT");        
+		}
+
+		var element = document.getElementById("logout_nav_id");
+		element.className = element.className.replace(/\active\b/g, "");
+                app.mLocationHash = "login_screen";
+		location.hash = "login_screen";
 	}
 }
 
