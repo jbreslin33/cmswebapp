@@ -1176,8 +1176,11 @@ CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
         insert into teams (name,club_id) values ($1,$2) returning id into x;
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id where club_members.person_id = $3; 
+        insert into teams_transactions (transaction_id,club_administrator_id) values (1,found_club_administrator_id) returning id into x;
 END;
 $$;
 
