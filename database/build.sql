@@ -977,6 +977,7 @@ $$ LANGUAGE plpgsql;
 
 --NATIVE LOGIN
 -- this is where you realize lukes idea of multiple people
+--you will return a result set of persons
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
