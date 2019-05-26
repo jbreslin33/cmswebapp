@@ -349,24 +349,13 @@ create table emails
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE users
+CREATE TABLE emails_persons
 (
         id SERIAL,
-	person_id integer not null unique,
 	email_id integer not null unique,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(person_id) REFERENCES persons(id),
-        FOREIGN KEY(email_id) REFERENCES emails(id),
-        PRIMARY KEY (id)
-);
-
-CREATE TABLE users_persons
-(
-        id SERIAL,
-	user_id integer not null unique,
 	person_id integer not null unique,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(email_id) REFERENCES emails(id),
         FOREIGN KEY(person_id) REFERENCES persons(id),
         PRIMARY KEY (id)
 );
@@ -385,8 +374,8 @@ CREATE TABLE sessions
         id SERIAL,
 	name text,
 	created_at timestamp not null default now(),
-	user_id integer,	
-	FOREIGN KEY (user_id) REFERENCES users(id),
+	person_id integer,	
+	FOREIGN KEY (person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
@@ -935,7 +924,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
 	insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
-        insert into users (person_id, email_id) values (x, returning_email_id);
+	insert into emails_persons (email_id, person_id) values (returning_email_id, x); 
 END;
 $$;
 
@@ -968,7 +957,7 @@ DECLARE
 BEGIN
 	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
-        insert into users (person_id, email_id) values (x, $1);
+        --insert into users (person_id, email_id) values (x, $1);
 	insert into club_members (club_id,person_id) values ($2,x);
 END;
 $$;
@@ -987,13 +976,13 @@ END;
 $$ LANGUAGE plpgsql;
 
 --NATIVE LOGIN
-
+-- this is where you realize lukes idea of multiple people
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
-	found_person_id users.person_id%TYPE;
+	found_person_id persons.id%TYPE;
 	return_code text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
@@ -1046,7 +1035,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into x;
-        insert into users (person_id, email_id) values (x, returning_email_id);
+        --insert into users (person_id, email_id) values (x, returning_email_id);
 END;
 $$;
 
@@ -1061,7 +1050,7 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
+        --insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
 
