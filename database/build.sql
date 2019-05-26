@@ -84,6 +84,8 @@ CREATE TABLE clubs
 	PRIMARY KEY (id)
 );
 
+
+
 CREATE TABLE pitches 
 (
         id SERIAL,
@@ -684,12 +686,14 @@ CREATE TABLE team_players_transactions
 	primary key (id)
 );
 
-CREATE TABLE teams_transactions
+CREATE TABLE team_transactions
 (
 	id serial,
+	team_id integer,
 	transaction_id integer,
 	club_administrator_id integer,
 	transacation_timestamp timestamp not null default now(),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
         FOREIGN KEY(transaction_id) REFERENCES transactions(id),
         FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
 	primary key (id)
@@ -712,6 +716,20 @@ CREATE TABLE team_managers
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
+
+CREATE TABLE club_transactions
+(
+        id serial,
+	club_id integer,
+        transaction_id integer,
+        person_id integer,
+        transacation_timestamp timestamp not null default now(),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(transaction_id) REFERENCES transactions(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+        primary key (id)
+);
+
 
 CREATE TABLE sessions_players_availability 
 (
@@ -1117,12 +1135,12 @@ CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, person_id int
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        returning_club_id integer;
         returning_club_member_id integer;
 BEGIN
-        insert into clubs (name,address) values (name,address) returning id into returning_club_id;
-        insert into club_members (club_id, person_id) values (returning_club_id, person_id) returning id into returning_club_member_id;
-        insert into club_administrators (club_member_id) values (returning_club_member_id) returning id into x;
+        insert into clubs (name,address) values (name,address) returning id into x;
+        insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
+        insert into club_administrators (club_member_id) values (returning_club_member_id);
+        insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
 END;
 $$;
 
@@ -1180,7 +1198,7 @@ DECLARE
 BEGIN
         insert into teams (name,club_id) values ($1,$2) returning id into x;
 	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id where club_members.person_id = $3; 
-        insert into teams_transactions (transaction_id,club_administrator_id) values (1,found_club_administrator_id) returning id into x;
+        insert into team_transactions (team_id, transaction_id,club_administrator_id) values (x,1,found_club_administrator_id);
 END;
 $$;
 
