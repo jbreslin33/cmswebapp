@@ -49,6 +49,30 @@ CREATE TABLE error_log
 	PRIMARY KEY (id) 	
 );
 
+--create,deactivate,activate
+create table transactions
+(
+	id serial,
+	name text,
+	primary key (id)
+);
+
+insert into transactions (name) values ('create');
+insert into transactions (name) values ('deactivate');
+insert into transactions (name) values ('activate');
+
+--active(shows),inactive(does not show),cancelled(this shows up as cancelled)
+create table status
+(
+	id serial,
+	name text,
+	primary key (id)
+);
+
+insert into status (name) values ('active');
+insert into status (name) values ('inactive');
+insert into status (name) values ('cancelled');
+
 -- a club should have admins in roles table
 CREATE TABLE clubs 
 (
@@ -122,11 +146,11 @@ CREATE TABLE teams
         id SERIAL,
 	name text,
         club_id integer,
-	created_at timestamp not null default now(),
-        PRIMARY KEY (id),
         FOREIGN KEY(club_id) REFERENCES clubs(id),
-	UNIQUE (name,club_id)
+	UNIQUE (name,club_id),
+        PRIMARY KEY (id)
 );
+
 
 create table teams_seasons
 (
@@ -648,13 +672,6 @@ CREATE TABLE team_players
 	PRIMARY KEY (id)
 );
 
---add,drop,suspend,deactivate
-create table transactions
-(
-	id serial,
-	name text,
-	primary key (id)
-);
 
 --you might need more of these....for managers, coaches etc.
 CREATE TABLE team_players_transactions
@@ -667,6 +684,16 @@ CREATE TABLE team_players_transactions
 	primary key (id)
 );
 
+CREATE TABLE teams_transactions
+(
+	id serial,
+	transaction_id integer,
+	club_administrator_id integer,
+	transacation_timestamp timestamp not null default now(),
+        FOREIGN KEY(transaction_id) REFERENCES transactions(id),
+        FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
+	primary key (id)
+);
 
 CREATE TABLE team_coaches 
 (
@@ -1256,4 +1283,5 @@ $$ LANGUAGE sql;
 --111 generic bad insert
 --112 generic bad update
 --113 generic no result
+--121 only club administrators can perform this action....
 
