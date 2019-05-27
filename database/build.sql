@@ -1018,9 +1018,11 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
         	
 		IF found_native_login_id THEN
-			SELECT person_id INTO found_person_id FROM users
-			where users.email_id = found_email_id;
-                	return_code = found_person_id;
+			return_code = select f_select_persons(found_email_id);
+
+			--SELECT person_id INTO found_person_id FROM users
+			--where users.email_id = found_email_id;
+                	--return_code = found_person_id;
         	ELSE
                 	return_code = '-105';
         	END IF;

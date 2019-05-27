@@ -20,8 +20,13 @@ class NativeLogin
 
 		$txt = "return_value:" . $return_value;
 
-		if ($return_value > 0)
+		if ($return_value < -100 && > -200)
 		{
+			echo $return_value;
+		}
+		else
+		{
+
 			//encode
 			$oneRing = new OneRing();
 
@@ -30,11 +35,7 @@ class NativeLogin
 			$encoded_token['person_id'] = $person_id;
 
 			$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
-			echo "-100," . $jwt;
-		}
-		else
-		{
-			echo $return_value;
+			echo "-100," . $jwt . "," . $return_value;
 		}
         }
 }
