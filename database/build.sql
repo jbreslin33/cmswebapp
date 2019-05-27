@@ -996,7 +996,8 @@ CREATE OR REPLACE FUNCTION f_select_persons(email_id int)
    SELECT json_agg(t)
         from
         (
-		select persons.id, persons.first_name, persons.last_name from emails join emails_persons on emails_persons.email_id=emails.id join persons on persons.id=emails_persons.person_id where emails.id = email_id 
+		--select persons.id, persons.first_name, persons.last_name from emails join emails_persons on emails_persons.email_id=emails.id join persons on persons.id=emails_persons.person_id where emails.id = email_id 
+		select persons.id, persons.first_name, persons.last_name from persons join emails_persons on emails_persons.person_id=persons.id join emails on emails.id=emails_persons.email_id where emails.id = email_id 
         ) t;
 $$ LANGUAGE sql;
 
@@ -1018,7 +1019,7 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
         	
 		IF found_native_login_id THEN
-			return_code = select f_select_persons(found_email_id);
+			select f_select_persons(found_email_id) into return_code;
 
 			--SELECT person_id INTO found_person_id FROM users
 			--where users.email_id = found_email_id;

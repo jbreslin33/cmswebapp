@@ -193,16 +193,74 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
+/*
+         getJson(data)
+        {
+                var jsonString = data.slice(6,data.length);
+                if (jsonString)
+                {
+                        return JSON.parse(jsonString);
+                }
+                else
+                {
+                        console.log('no jsonString');
+                        return "";
+                }
+        }
 
+        getCode(data)
+        {
+                var dataArray = data.split(",");
+                return dataArray[0];
+        }
+*
+*
+*                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
+                        owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
+                        owner.show();
+
+                        if (owner.mCode == -100)
+                        {
+
+                                //remove all old options
+
+                                //load up option
+                                var select = document.getElementById("insert_team_screen_select_id");
+                                for (var i = 0; i < owner.mJson.clubs.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = owner.mJson.clubs[i].id;
+                                        opt.innerHTML = owner.mJson.clubs[i].name;
+                                        select.appendChild(opt);
+                                }
+
+                                owner.mStateMachine.changeState(owner.mWAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN);
+                        }
+
+ */
 		if (app.mLogin.mData)
 		{
 			var dataArray = app.mLogin.mData.split(",");
 			app.mLogin.mCode = dataArray[0];
 			if (app.mLogin.mCode == -100)
 			{
+				//mJWT
 				app.mJWT = dataArray[1]; //set jwt
 				//put in local storage
 				localStorage.setItem('mJWT', app.mJWT);
+                        
+				//JSON
+				//console.log('dataArray[2]:' + dataArray[2]);
+				dataArray.shift(); //remove mCode
+				dataArray.shift(); //remove mJwt
+				dataArray.join();
+				console.log('dataArray:' + dataArray);
+				app.mLogin.mJson = JSON.parse(dataArray);
+                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
+				{
+					console.log('DATA:' + app.mLogin.mJson.persons[i].first_name);
+					console.log('DATA:' + app.mLogin.mJson.persons[i].last_name);
+				}
 					
 				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
 				document.getElementById('login_screen_password_message_id').innerHTML = '';

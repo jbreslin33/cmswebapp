@@ -15,27 +15,40 @@ class NativeLogin
 
                 $result = pg_execute($database->mConnection, "f_native_login", array( $_GET['email'] ,$_GET['password']));
 
-		//return to client
-                $return_value = pg_fetch_result($result, 0);
+		$data = "";
+                while ($row = pg_fetch_row($result))
+                {
+                        $data .= $row[0];
+                }
 
-		$txt = "return_value:" . $return_value;
-
-		if ($return_value < -100 && > -200)
+		if ($data)
 		{
-			echo $return_value;
-		}
-		else
-		{
+			if ($data < -101 && $data > -200)
+			{
+				echo $data;
+			}
+			else
+			{
+				//encode
+				$oneRing = new OneRing();
 
-			//encode
-			$oneRing = new OneRing();
+				$person_id = $return_value;
+				$encoded_token = array();
+				$encoded_token['person_id'] = $person_id;
 
-			$person_id = $return_value;
-			$encoded_token = array();
-			$encoded_token['person_id'] = $person_id;
+				$front = '{ "persons" :';
+                		$back = '}';
 
-			$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
-			echo "-100," . $jwt . "," . $return_value;
+                		$return_value = "";
+                		$return_value .= $front;
+                		$return_value .= $data;
+                		$return_value .= $back;
+
+				$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
+				$txt =  "-100," . $jwt . "," . $return_value;
+				error_log($txt);
+				echo $txt;
+			}
 		}
         }
 }

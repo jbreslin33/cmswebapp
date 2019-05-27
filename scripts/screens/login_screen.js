@@ -7,9 +7,6 @@ class LoginScreen extends Screen
 		super(application);
 		this.mApplication = application;
 		
-		this.mCode = 0;
-		this.mData = null;
-
 		location.hash = "login_screen";
 
                 //html ids
