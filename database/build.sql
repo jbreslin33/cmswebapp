@@ -978,6 +978,30 @@ $$ LANGUAGE plpgsql;
 --NATIVE LOGIN
 -- this is where you realize lukes idea of multiple people
 --you will return a result set of persons
+--BEGIN SAMPLE JSON
+CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(person_id int)
+  RETURNS json AS $$
+   SELECT json_agg(t)
+        from
+        (
+                select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id where persons.id = person_id
+        ) t;
+$$ LANGUAGE sql;
+
+--END SAMPLE JSON
+
+--BEGIN NEW JSON
+CREATE OR REPLACE FUNCTION f_select_persons(email_id int)
+  RETURNS json AS $$
+   SELECT json_agg(t)
+        from
+        (
+		select persons.id, persons.first_name, persons.last_name from emails join emails_persons on emails_persons.email_id=emails.id join persons on persons.id=emails_persons.person_id where emails.id = email_id 
+        ) t;
+$$ LANGUAGE sql;
+
+--END NEW JSON
+
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
@@ -1273,15 +1297,6 @@ BEGIN
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(person_id int)
-  RETURNS json AS $$
-   SELECT json_agg(t) 
-	from 
-	(
-		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id where persons.id = person_id 
-	) t;
-$$ LANGUAGE sql;
 
 
 --100 no problems total authentication
