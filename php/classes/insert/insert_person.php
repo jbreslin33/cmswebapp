@@ -1,48 +1,64 @@
 <?php 
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/insert/insert.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
 
-class InsertPerson extends Insert
+class InsertPerson 
 {
-	function __construct($first_name, $middle_name, $last_name, $phone, $street, $city, $state, $zip) 
+	function __construct() 
 	{
+		$first_name = null;
+		$middle_name = null;
+		$last_name = null;
+		$phone_name = null;
+		$address_name = null;
+		$jwt = null;
 
-                $this->mFirstName = $first_name;
-                $this->mMiddleName = $middle_name;
-                $this->mLastName = $last_name;
-                $this->mPhone = $phone;
-                $this->mStreet = $street;
-                $this->mCity = $city;
-                $this->mState = $state;
-                $this->mZip = $zip;
+               	if (isset($_GET['first_name']))
+                {
+                        $first_name = $_GET['first_name'];
+                }
+               	if (isset($_GET['middle_name']))
+                {
+                        $middle_name = $_GET['middle_name'];
+                }
+               	if (isset($_GET['last_name']))
+                {
+                        $last_name = $_GET['last_name'];
+                }
+               	if (isset($_GET['phone']))
+                {
+                        $phone = $_GET['phone'];
+                }
+               	if (isset($_GET['address']))
+                {
+                        $address = $_GET['address'];
+                }
+               	if (isset($_GET['jwt']))
+                {
+                        $jwt = $_GET['jwt'];
+                }
+
+                $database = new Database("localhost","cms","postgres","mibesfat");
+
+		//actually we are going to get the jwt and need to extract id
+
+		$sql = 'select f_insert_person($1,$2,$3,$4,$5,$6)';
 		
-		parent::__construct();
-	}
+		$prepare_result = pg_prepare($database->mConnection, "f_insert_person", $sql);
 
-	public function query()
-	{
-		$this->mSQL = "
+		$oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
+		$person_id = $payload->person_id;
 
-		insert into persons (first_name, middle_name, last_name, phone, street, city, state, zip) values('" . 
-		$this->mFirstName .
-		"','" .
-		$this->mMiddleName .
-		"','" .
-		$this->mLastName .
-		"','" . 
-		$this->mPhone .
-		"','" .
-		$this->mStreet .
-		"','" .
-		$this->mCity .
-		"','" .
-		$this->mState .
-		"','" .
-		$this->mZip .
-		"') returning id;";
-		
-		error_log($this->mSQL);
-	}
+		$result = pg_execute($database->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $person_id));
+
+               	$return_value = pg_fetch_result($result, 0);
+
+                echo $return_value;
+        }
 }
 
+$insertPerson = new InsertPerson();	
 
 ?>

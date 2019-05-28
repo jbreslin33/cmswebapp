@@ -12,10 +12,13 @@ class InsertPersonScreen extends Screen
 		this.mData = null;
 
 		//sql php vars
-		this.mName = null;
+		this.mFirstName = null;
+		this.mMiddleName = null;
+		this.mLastName = null;
+		this.mPhone = null;
 		this.mAddress = null;
 		
-		document.getElementById("addpersoncreenbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("addpersonscreenbuttonid").onclick = this.hit.bind(this);
 	}
 
 	hit()
@@ -26,7 +29,7 @@ class InsertPersonScreen extends Screen
                	this.mPhone = document.getElementById("insert_person_screen_phone_id").value;
                	this.mAddress = document.getElementById("insert_person_screen_address_id").value;
 
-		var url = "/php/classes/insert/insert_person.php?first_name=" + this.mFirstName + "&address=" + this.mAddress + "&jwt=" + localStorage.getItem("mJWT"); 
+		var url = "/php/classes/insert/insert_person.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&jwt=" + localStorage.getItem("mJWT"); 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

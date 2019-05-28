@@ -55,6 +55,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
+		else if (app.mLocationHash == 'insert_person_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PERSON_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
+                }
 		else if (app.mLocationHash == 'insert_team_screen' && app.mStateMachine.mCurrentState != app.mINSERT_TEAM_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
@@ -110,6 +114,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
+		document.getElementById("insert_person_screen_html_id").style.display = "none";
 		document.getElementById("insert_team_screen_html_id").style.display = "none";
 		document.getElementById("insert_practice_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
@@ -798,6 +803,70 @@ class INSERT_CLUB_APPLICATION extends State
 		app.mInsertClubScreen.hide();
 		app.mInsertClubScreen.mCode = 0;
 		app.mInsertClubScreen.mData = null;
+	}
+}
+
+class INSERT_PERSON_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("INSERT_PERSON_APPLICATION: ENTER");        
+		}
+		if (app.mInsertPersonScreen)
+		{
+			app.mInsertPersonScreen = new InsertPersonScreen(app);
+		}
+		else
+		{
+			app.mInsertPersonScreen = new InsertPersonScreen(app);
+		}
+		app.mInsertPersonScreen.show();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("INSERT_PERSON_APPLICATION: EXECUTE");        
+		}
+             
+		if (app.mInsertPersonScreen.mData)
+                {
+                        var dataArray = app.mInsertPersonScreen.mData.split(",");
+                        app.mInsertPersonScreen.mCode = dataArray[0];
+
+
+                        if (app.mInsertPersonScreen.mCode == -100)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                document.getElementById('insert_person_screen_name_message_id').innerHTML = '';
+                        }
+                        if (app.mInsertPersonScreen.mCode == -106)
+                        {
+                                document.getElementById('insert_person_screen_name_message_id').style.color = 'red';
+                                document.getElementById('insert_person_screen_name_message_id').innerHTML = 'Person Name already exists.';
+				app.mInsertPersonScreen.mCode = 0;
+				app.mInsertPersonScreen.mData = null;
+                        }
+                }
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("INSERT_PERSON_APPLICATION: EXIT");        
+		}
+		app.mInsertPersonScreen.hide();
+		app.mInsertPersonScreen.mCode = 0;
+		app.mInsertPersonScreen.mData = null;
 	}
 }
 

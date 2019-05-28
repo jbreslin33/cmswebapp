@@ -1146,8 +1146,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
---ADD CLUB
-
+--INSERT CLUB
 CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -1158,6 +1157,20 @@ BEGIN
         insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
         insert into club_administrators (club_member_id) values (returning_club_member_id);
         insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
+END;
+$$;
+
+--INSERT PERSON
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, person_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_club_member_id integer;
+BEGIN
+        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
+        --insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
+        --insert into club_administrators (club_member_id) values (returning_club_member_id);
+        --insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
 END;
 $$;
 
@@ -1197,6 +1210,30 @@ BEGIN
                 return_code = '-106';
        	ELSE
 		CALL p_insert_club($1,$2,person_id,x);
+		IF x > 0 THEN
+			return_code = '-100';
+		ELSE
+			return_code = x;
+		END IF;
+        END IF;
+RETURN return_code;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, person_id int)
+RETURNS text AS $$
+DECLARE
+        found_person_id persons.id%TYPE;
+        return_code text;
+	DECLARE x int := -111;
+BEGIN
+        SELECT id INTO found_person_id FROM persons
+        WHERE first_name = $1 AND last_name = $3;
+
+        IF found_person_id THEN
+                return_code = '-107';
+       	ELSE
+		CALL p_insert_person($1,$2,$3,$4,$5,person_id,x);
 		IF x > 0 THEN
 			return_code = '-100';
 		ELSE
@@ -1309,6 +1346,7 @@ $$ LANGUAGE plpgsql;
 --104 user does not exist
 --105 bad password
 --106 club exists
+--107 person exists
 --111 generic bad insert
 --112 generic bad update
 --113 generic no result
