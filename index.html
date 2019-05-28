@@ -60,6 +60,10 @@
   			</li>
 			
 			<li class="nav-item">
+    				<a id="insert_person_nav_id" class="nav-link" href="#insert_person_screen">Insert Person</a>
+  			</li>
+			
+			<li class="nav-item">
     				<a id="insert_team_nav_id" class="nav-link" href="#insert_team_screen">Insert Team</a>
   			</li>
 			
@@ -197,6 +201,52 @@
   		</div>
 		
 		<button id="addclubscreenbuttonid" class="btn btn-primary">Submit</button>
+
+	</form>
+
+	<!-- END INSERT CLUB HTML  -->
+	
+	
+	<!-- INSERT PERSON HTML  -->
+
+	<form id="insert_person_screen_html_id" class="needs-validation">
+  		<div class="form-row">
+    			<div class="col-md-4 mb-3">
+      				<label for="insert_person_name_id">First Name</label>
+      				<input type="text" class="form-control" id="insert_person_screen_name_id" placeholder="First Name" value="First Name" required>
+				<span id='insert_person_screen_name_message_id'></span>
+    			</div>
+    		</div>
+		
+		<div class="form-row">
+    			<div class="col-md-6 mb-3">
+      				<label for="insert_person_screen_middle_name_id">Middle Name</label>
+      				<input type="text" class="form-control" id="insert_person_screen_middle_name_id" placeholder="Middle Name" required>
+    			</div>
+  		</div>
+		
+		<div class="form-row">
+    			<div class="col-md-6 mb-3">
+      				<label for="insert_person_screen_last_name_id">Last Name</label>
+      				<input type="text" class="form-control" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
+    			</div>
+  		</div>
+		
+		<div class="form-row">
+    			<div class="col-md-6 mb-3">
+      				<label for="insert_person_screen_phone_id">Phone</label>
+      				<input type="text" class="form-control" id="insert_person_screen_phone_id" placeholder="Phone" required>
+    			</div>
+  		</div>
+		
+		<div class="form-row">
+    			<div class="col-md-6 mb-3">
+      				<label for="insert_person_screen_address_id">Address</label>
+      				<input type="text" class="form-control" id="insert_person_screen_address_id" placeholder="Address" required>
+    			</div>
+  		</div>
+		
+		<button id="addpersonscreenbuttonid" class="btn btn-primary">Submit</button>
 
 	</form>
 
@@ -443,6 +493,9 @@
 	
 	<!-- insert club -->
 	<script src="scripts/screens/insert_club_screen.js"></script>
+	
+	<!-- insert person -->
+	<script src="scripts/screens/insert_person_screen.js"></script>
 	
 	<!-- insert team -->
 	<script src="scripts/screens/insert_team_screen.js"></script>
