@@ -1174,13 +1174,8 @@ BEGIN
 	FOR rec in select email_id from emails_persons where person_id = $6
 
 	LOOP
-		--insert into birth_year (year) values ('2005');	
 		insert into emails_persons (email_id, person_id) values (rec.email_id, x);   
-
 	END LOOP;
-        --insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
-        --insert into club_administrators (club_member_id) values (returning_club_member_id);
-        --insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
 END;
 $$;
 
