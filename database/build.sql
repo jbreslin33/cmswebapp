@@ -1161,13 +1161,21 @@ END;
 $$;
 
 --INSERT PERSON
-CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, person_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_club_member_id integer;
+	rec RECORD;
 BEGIN
         insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
+
+	FOR rec in select emails_persons.email_id from emails_persons where emails_persons.person_id = $6
+
+	LOOP
+		insert into birth_year (year) values ('2005');	
+
+	END LOOP;
         --insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
         --insert into club_administrators (club_member_id) values (returning_club_member_id);
         --insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
