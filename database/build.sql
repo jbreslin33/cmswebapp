@@ -352,11 +352,12 @@ create table emails
 CREATE TABLE emails_persons
 (
         id SERIAL,
-	email_id integer not null unique,
-	person_id integer not null unique,
+	email_id integer not null,
+	person_id integer not null,
 	created_at timestamp not null default now(),
         FOREIGN KEY(email_id) REFERENCES emails(id),
         FOREIGN KEY(person_id) REFERENCES persons(id),
+	unique (email_id, person_id),
         PRIMARY KEY (id)
 );
 
@@ -1170,10 +1171,11 @@ DECLARE
 BEGIN
         insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
 
-	FOR rec in select emails_persons.email_id from emails_persons where emails_persons.person_id = $6
+	FOR rec in select email_id from emails_persons where person_id = $6
 
 	LOOP
-		insert into birth_year (year) values ('2005');	
+		--insert into birth_year (year) values ('2005');	
+		insert into emails_persons (email_id, person_id) values (rec.email_id, x);   
 
 	END LOOP;
         --insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
