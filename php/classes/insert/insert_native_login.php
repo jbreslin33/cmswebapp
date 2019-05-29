@@ -25,9 +25,10 @@ class InsertNativeLogin
                 {
                         //encode
 			$oneRing = new OneRing();
-                        $person_id = $return_value;
+                        $email_person_id = $return_value;
                         $encoded_token = array();
-                        $encoded_token['person_id'] = $person_id;
+                        $encoded_token['email_person_id'] = $email_person_id;
+                        $encoded_token['email_person_person_id'] = null;
                         $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
                         echo "-100," . $jwt;
                 }
