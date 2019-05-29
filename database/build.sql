@@ -377,8 +377,10 @@ CREATE TABLE emails_persons_persons
 (
         id SERIAL,
 	email_person_id integer not null,
+	person_id integer not null,
 	created_at timestamp not null default now(),
         FOREIGN KEY(email_person_id) REFERENCES emails_persons(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	primary key (id)
 );
 
@@ -1244,7 +1246,7 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, person_id int)
+CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_person_id int)
 RETURNS text AS $$
 DECLARE
         found_person_id persons.id%TYPE;
