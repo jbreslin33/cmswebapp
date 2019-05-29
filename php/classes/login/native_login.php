@@ -16,13 +16,17 @@ class NativeLogin
                 $result = pg_execute($database->mConnection, "f_native_login", array( $_GET['email'] ,$_GET['password']));
 
 		$data = "";
+		$email_person_id = null;
+		$email_person_person_id = null;
                 while ($row = pg_fetch_row($result))
                 {
                         $data .= $row[0];
                 }
-
+		
 		if ($data)
 		{
+			$decoded_data = json_decode($data);
+
 			if ($data < -101 && $data > -200)
 			{
 				echo $data;
@@ -32,9 +36,9 @@ class NativeLogin
 				//encode
 				$oneRing = new OneRing();
 
-				$person_id = $return_value;
 				$encoded_token = array();
-				$encoded_token['person_id'] = $person_id;
+				$encoded_token['email_person_id'] = $decoded_data[0]->email_person_id;
+				$encoded_token['email_person_person_id'] = $decoded_data[0]->email_person_person_id;
 
 				$front = '{ "persons" :';
                 		$back = '}';

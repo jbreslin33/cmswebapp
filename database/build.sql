@@ -1020,7 +1020,8 @@ CREATE OR REPLACE FUNCTION f_select_persons(email_id int)
    SELECT json_agg(t)
         from
         (
-		select persons.id, persons.first_name, persons.last_name from persons join emails_persons on emails_persons.person_id=persons.id join emails on emails.id=emails_persons.email_id where emails.id = email_id 
+		select emails_persons.id as email_person_id, emails_persons_persons.id as email_person_person_id, persons.first_name, persons.last_name from persons join emails_persons on emails_persons.person_id=persons.id left outer join emails_persons_persons on emails_persons_persons.email_person_id=emails_persons.id join emails on emails.id=emails_persons.email_id where emails.id = email_id 
+
         ) t;
 $$ LANGUAGE sql;
 
@@ -1032,7 +1033,7 @@ DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
 	found_person_id persons.id%TYPE;
-	return_code text;
+	result_set text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
@@ -1042,19 +1043,15 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
         	
 		IF found_native_login_id THEN
-			select f_select_persons(found_email_id) into return_code;
-
-			--SELECT person_id INTO found_person_id FROM users
-			--where users.email_id = found_email_id;
-                	--return_code = found_person_id;
+			select f_select_persons(found_email_id) into result_set;
         	ELSE
-                	return_code = '-105';
+                	result_set = '-105';
         	END IF;
 	
 	ELSE
-		return_code = '-102'; 
+		result_set = '-102'; 
 	END IF;
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
