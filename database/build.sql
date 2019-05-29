@@ -349,6 +349,18 @@ create table emails
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE clubs_emails
+(
+        id SERIAL,
+	club_id integer not null,
+	email_id integer not null,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(email_id) REFERENCES emails(id),
+	unique (email_id, club_id),
+        PRIMARY KEY (id)
+);
+
 CREATE TABLE emails_persons
 (
         id SERIAL,
@@ -359,6 +371,15 @@ CREATE TABLE emails_persons
         FOREIGN KEY(person_id) REFERENCES persons(id),
 	unique (email_id, person_id),
         PRIMARY KEY (id)
+);
+--you need a child of above.....
+CREATE TABLE emails_persons_persons
+(
+        id SERIAL,
+	email_person_id integer not null,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(email_person_id) REFERENCES emails_persons(id),
+	primary key (id)
 );
 
 create table relationships
@@ -542,6 +563,8 @@ CREATE TABLE club_members
 
 --this only gets deleted when player leaves club if you want to
 --Luke Breslin is a player at Celta Vigo
+--oh crap an email should create a player....
+--so emails_players/....
 CREATE TABLE players 
 (
 	id SERIAL,
