@@ -552,6 +552,7 @@ create TABLE forgot_passwords
 --person_id is the family creator
 --familys are linked by people not logins
 --Luke Breslin, Celta Vigo
+--actually this is officially that you are part of a club this way if the master account leaves you could also still stay, as the master email propels this to an insert
 CREATE TABLE club_members 
 (
 	id SERIAL,
