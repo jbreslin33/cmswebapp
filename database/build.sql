@@ -1183,23 +1183,6 @@ BEGIN
 END;
 $$;
 
---INSERT PERSON
-CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-        returning_club_member_id integer;
-	rec RECORD;
-BEGIN
-        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
-
-	FOR rec in select email_id from emails_persons where person_id = $6
-
-	LOOP
-		insert into emails_persons (email_id, person_id) values (rec.email_id, x);   
-	END LOOP;
-END;
-$$;
 
 CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
 RETURNS text AS $$
@@ -1247,29 +1230,35 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+--BEGIN INSERT PERSON
 CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_person_id int)
 RETURNS text AS $$
 DECLARE
-        found_person_id persons.id%TYPE;
         return_code text;
 	DECLARE x int := -111;
 BEGIN
-        SELECT id INTO found_person_id FROM persons
-        WHERE first_name = $1 AND last_name = $3;
-
-        IF found_person_id THEN
-                return_code = '-107';
-       	ELSE
-		CALL p_insert_person($1,$2,$3,$4,$5,person_id,x);
-		IF x > 0 THEN
-			return_code = '-100';
-		ELSE
-			return_code = x;
-		END IF;
+	CALL p_insert_person($1,$2,$3,$4,$5,email_person_id,x);
+	IF x > 0 THEN
+		return_code = '-100';
+	ELSE
+		return_code = x;
         END IF;
 RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_club_member_id integer;
+	rec RECORD;
+BEGIN
+        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
+	insert into emails_persons_persons (email_person_id, person_id) values ($6, x);
+END;
+$$;
+--END INSERT PERSON
 
 CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
 LANGUAGE plpgsql

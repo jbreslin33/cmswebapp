@@ -50,7 +50,6 @@ class InsertPerson
 		$oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
 		$email_person_id = $payload->email_person_id;
-		//$email_person_person_id = $payload->email_person_person_id;
 
 		$result = pg_execute($database->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $email_person_id));
 
