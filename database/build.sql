@@ -1054,7 +1054,8 @@ BEGIN
 			select id into found_email_person_id from emails_persons where email_id = found_email_id;
 
 			IF found_email_person_id THEN
-				select f_select_persons(found_email_person_id) into result_set;
+				result_set = found_email_person_id;
+				--select f_select_persons(found_email_person_id) into result_set;
 			ELSE
                 		result_set = '-105';
 			END IF;
