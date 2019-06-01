@@ -6,10 +6,14 @@
 
 select * from emails_persons union select * from emails_persons_persons;
 
-select persons.id as person_id, emails_persons.id as email_person_id, persons.first_name, persons.last_name from emails_persons join persons on persons.id=emails_persons.person_id;
-select persons.id as person_id, emails_persons_persons.id as email_person_person_id, persons.first_name, persons.last_name from emails_persons_persons join persons on persons.id=emails_persons_persons.person_id;
+--select persons.id as person_id, emails_persons.id as email_person_id, persons.first_name, persons.last_name from emails_persons join persons on persons.id=emails_persons.person_id;
+--select persons.id as person_id, emails_persons_persons.id as email_person_person_id, persons.first_name, persons.last_name from emails_persons_persons join persons on persons.id=emails_persons_persons.person_id;
 
 select persons.id as person_id, emails_persons.id as email_person_id, persons.first_name, persons.last_name from emails_persons join persons on persons.id=emails_persons.person_id
+union
+select persons.id as person_id, emails_persons_persons.id as email_person_person_id, persons.first_name, persons.last_name from emails_persons_persons join persons on persons.id=emails_persons_persons.person_id;
+
+select persons.id as person_id, emails_persons.id as email_person_id, persons.first_name, persons.last_name from emails_persons join persons on persons.id=emails_persons.person_id where emails_persons.id = 1
 union
 select persons.id as person_id, emails_persons_persons.id as email_person_person_id, persons.first_name, persons.last_name from emails_persons_persons join persons on persons.id=emails_persons_persons.person_id;
 
