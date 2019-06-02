@@ -1033,7 +1033,6 @@ CREATE OR REPLACE FUNCTION f_select_persons(email_person_id int)
 $$ LANGUAGE sql;
 
 --END NEW JSON
-
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
@@ -1055,7 +1054,6 @@ BEGIN
 
 			IF found_email_person_id THEN
 				result_set = found_email_person_id;
-				--select f_select_persons(found_email_person_id) into result_set;
 			ELSE
                 		result_set = '-105';
 			END IF;

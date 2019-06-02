@@ -13,25 +13,29 @@ class NativeLogin
                 $prepare_result = pg_prepare($database->mConnection, "f_native_login", $sql);
                 $result = pg_execute($database->mConnection, "f_native_login", array( $_GET['email'] ,$_GET['password']));
 
-		//then result should contain email_person_id then
-		//do f_select_persons
-         //return to client
+
                 $return_value = pg_fetch_result($result, 0);
 
+		error_log($return_value);
+	}
+/*
                 if ($return_value < -100  && $return_value > -200)
                 {
                         echo $return_value;
                 }
                 else
 		{
-                	$sql = 'select f_select persons($1)';
-                	$prepare_result = pg_prepare($database->mConnection, "f_select_persons", $sql);
-                	$result = pg_execute($database->mConnection, "f_select_persons", array($return_value));
+                	$sqlA = 'select f_native_login_select persons($1)';
+                	$prepare_resultA = pg_prepare($database->mConnection, "f_native_login_select_persons", $sql);
+//			   $result = pg_execute($database->mConnection, "f_google_login", array( $email ,$google_id, $id_token, $first_name, $last_name, $club_invite_token));
+
+                	//$resultA = pg_execute($database->mConnection, "f_native_login_select_persons", array($return_value));
+                	$resultA = pg_execute($database->mConnection, "f_native_login_select_persons", array(1));
 
 			$data = "";
 			$email_person_id = null;
 			$email_person_person_id = null;
-                	while ($row = pg_fetch_row($result))
+                	while ($row = pg_fetch_row($resultA))
                 	{
                         	$data .= $row[0];
                 	}
@@ -69,6 +73,7 @@ class NativeLogin
 			}
         	}
 	}
+ */
 }
         $nativeLogin = new NativeLogin();
 ?>
