@@ -1038,7 +1038,6 @@ RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
-	found_person_id persons.id%TYPE;
 	found_email_person_id emails_persons.id%TYPE;
 	result_set text;
 BEGIN
@@ -1054,6 +1053,7 @@ BEGIN
 
 			IF found_email_person_id THEN
 				result_set = found_email_person_id;
+				--result_set = CONCAT(result_set,found_email_id,found_native_login_id,found_email_person_id);
 			ELSE
                 		result_set = '-105';
 			END IF;
