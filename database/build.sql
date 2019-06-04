@@ -1024,11 +1024,9 @@ CREATE OR REPLACE FUNCTION f_select_persons(email_person_id int)
    SELECT json_agg(t)
         from
         (
-
 	select persons.id, first_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = email_person_id 
 	union
-	select persons.id, first_name, last_name from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = email_person_id 
-
+	select persons.id, first_name, last_name from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = email_person_id
         ) t;
 $$ LANGUAGE sql;
 
@@ -1040,6 +1038,7 @@ DECLARE
 	found_native_login_id native_logins.id%TYPE;
 	found_email_person_id emails_persons.id%TYPE;
 	result_set text;
+	json_result text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
@@ -1051,9 +1050,12 @@ BEGIN
 		IF found_native_login_id THEN
 			select id into found_email_person_id from emails_persons where email_id = found_email_id;
 
+			select into json_result f_select_persons(found_email_person_id);
+
+
 			IF found_email_person_id THEN
 				result_set = found_email_person_id;
-				--result_set = CONCAT(result_set,found_email_id,found_native_login_id,found_email_person_id);
+				result_set = CONCAT(found_email_person_id,json_result);
 			ELSE
                 		result_set = '-105';
 			END IF;
