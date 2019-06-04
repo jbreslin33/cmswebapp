@@ -1055,7 +1055,7 @@ BEGIN
 
 			IF found_email_person_id THEN
 				result_set = found_email_person_id;
-				result_set = CONCAT(found_email_person_id,json_result);
+				result_set = CONCAT_WS(',',found_email_person_id,json_result);
 			ELSE
                 		result_set = '-105';
 			END IF;
