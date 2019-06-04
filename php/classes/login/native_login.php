@@ -17,6 +17,13 @@ class NativeLogin
                 $return_value = pg_fetch_result($result, 0);
 
 		error_log($return_value);
+		$return_value_array = explode(",",$return_value);
+		$email_person_id = array_shift($return_value_array);
+		$data = implode($return_value_array);
+
+		error_log("got this:");
+		error_log($email_person_id);
+		error_log($data);
 	}
 /*
                 if ($return_value < -100  && $return_value > -200)
