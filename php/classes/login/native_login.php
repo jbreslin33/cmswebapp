@@ -5,13 +5,13 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
 
 class NativeLogin
 {
-        function __construct()
+        function __construct($email,$password)
         {
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
                 $sql = 'select f_native_login($1,$2)';
                 $prepare_result = pg_prepare($database->mConnection, "f_native_login", $sql);
-                $result = pg_execute($database->mConnection, "f_native_login", array( $_GET['email'] ,$_GET['password']));
+                $result = pg_execute($database->mConnection, "f_native_login", array( $email,$password));
 
                 $return_value = pg_fetch_result($result, 0);
 
@@ -49,5 +49,9 @@ class NativeLogin
         	}
 	}
 }
-        $nativeLogin = new NativeLogin();
+
+$email = $_GET['email']; 
+$password = $_GET['password']; 
+
+$nativeLogin = new NativeLogin($email,$password);
 ?>
