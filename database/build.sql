@@ -927,17 +927,23 @@ CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT,
 RETURNS text AS $$
 DECLARE
 	found_email emails.email%TYPE;
-	return_code text;
+	result_set text;
 	DECLARE x int := -111; --for bad insert attempt
+	json_result text;
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF found_email THEN
-		return_code = '-101';
+		result_set = '-101';
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
-		return_code = x;
+		IF x THEN
+                	select into json_result f_select_persons(x);
+                        result_set = CONCAT_WS(',',x,json_result);
+                ELSE
+                	result_set = '-105';
+		END IF;
 	END IF;
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
