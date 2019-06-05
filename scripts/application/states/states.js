@@ -255,17 +255,10 @@ class LOGIN_APPLICATION extends State
 				localStorage.setItem('mJWT', app.mJWT);
                         
 				//JSON
-				//console.log('dataArray[2]:' + dataArray[2]);
 				dataArray.shift(); //remove mCode
 				dataArray.shift(); //remove mJwt
 				dataArray.join();
-				console.log('dataArray:' + dataArray);
 				app.mLogin.mJson = JSON.parse(dataArray);
-                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
-				{
-					console.log('DATA:' + app.mLogin.mJson.persons[i].first_name);
-					console.log('DATA:' + app.mLogin.mJson.persons[i].last_name);
-				}
                                 //remove all old options
 
                                 //load up option
@@ -401,6 +394,26 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
                                 app.mJWT = dataArray[1]; //set jwt
                                 //put in local storage
                                 localStorage.setItem('mJWT', app.mJWT);
+
+
+				   //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                app.mLogin.mJson = JSON.parse(dataArray);
+                                //remove all old options
+
+                                //load up option
+                                var select = document.getElementById("person_select_id");
+                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = app.mLogin.mJson.persons[i].id;
+                                        opt.innerHTML = app.mLogin.mJson.persons[i].first_name;
+                                        //opt.innerHTML = app.mLogin.mJson.persons[i].first_name;
+                                        select.appendChild(opt);
+                                }
+
 
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
