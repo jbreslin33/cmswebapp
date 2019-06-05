@@ -13,18 +13,12 @@ class NativeLogin
                 $prepare_result = pg_prepare($database->mConnection, "f_native_login", $sql);
                 $result = pg_execute($database->mConnection, "f_native_login", array( $_GET['email'] ,$_GET['password']));
 
-
                 $return_value = pg_fetch_result($result, 0);
 
-		error_log($return_value);
 		$return_value_array = explode(",",$return_value);
 		$email_person_id = array_shift($return_value_array);
 		$data = implode(",",$return_value_array);
 
-		error_log("got this:");
-		error_log($email_person_id);
-		error_log($data);
-		
 		if ($email_person_id < -100  && $email_person_id > -200)
                 {
                         echo $email_person_id;
@@ -50,7 +44,6 @@ class NativeLogin
                			$return_value .= $back;
 
 				$txt =  "-100," . $jwt . "," . $return_value;
-				error_log($txt);
 				echo $txt;
 			}
         	}
