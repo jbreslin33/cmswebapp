@@ -1252,16 +1252,18 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_person_id int)
 RETURNS text AS $$
 DECLARE
-        return_code text;
+        result_set text;
 	DECLARE x int := -111;
+	json_result text; 
 BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_person_id,x);
 	IF x > 0 THEN
-		return_code = '-100';
-	ELSE
-		return_code = x;
+        	select into json_result f_select_persons(email_person_id);
+                result_set = CONCAT_WS(',',email_person_id,json_result);
+        ELSE
+                result_set = '-105';
         END IF;
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
