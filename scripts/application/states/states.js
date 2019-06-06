@@ -408,7 +408,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
                                 {
                                         var opt = document.createElement('option');
                                         opt.value = app.mLogin.mJson.persons[i].id;
-                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].last_name;
+                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].middle_name + ' ' + app.mLogin.mJson.persons[i].last_name;
                                         opt.innerHTML = full_name;
                                         select.appendChild(opt);
                                 }

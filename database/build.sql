@@ -1030,9 +1030,9 @@ CREATE OR REPLACE FUNCTION f_select_persons(email_person_id int)
    SELECT json_agg(t)
         from
         (
-	select persons.id, first_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = email_person_id 
+	select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = email_person_id 
 	union
-	select persons.id, first_name, last_name from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = email_person_id
+	select persons.id, first_name, middle_name, last_name from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = email_person_id
         ) t;
 $$ LANGUAGE sql;
 
