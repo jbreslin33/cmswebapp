@@ -865,9 +865,31 @@ class INSERT_PERSON_APPLICATION extends State
                         var dataArray = app.mInsertPersonScreen.mData.split(",");
                         app.mInsertPersonScreen.mCode = dataArray[0];
 
-
                         if (app.mInsertPersonScreen.mCode == -100)
                         {
+
+                                app.mJWT = dataArray[1]; //set jwt
+                                //put in local storage
+                                localStorage.setItem('mJWT', app.mJWT);
+
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                app.mLogin.mJson = JSON.parse(dataArray);
+                                //remove all old options
+
+                                //load up option
+                                var select = document.getElementById("person_select_id");
+                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = app.mLogin.mJson.persons[i].id;
+                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].middle_name + ' ' + app.mLogin.mJson.persons[i].last_name;
+                                        opt.innerHTML = full_name;
+                                        select.appendChild(opt);
+                                }
+
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                                 document.getElementById('insert_person_screen_name_message_id').innerHTML = '';
                         }
