@@ -395,8 +395,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
                                 //put in local storage
                                 localStorage.setItem('mJWT', app.mJWT);
 
-
-				   //JSON
+				//JSON
                                 dataArray.shift(); //remove mCode
                                 dataArray.shift(); //remove mJwt
                                 dataArray.join();
@@ -409,11 +408,10 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
                                 {
                                         var opt = document.createElement('option');
                                         opt.value = app.mLogin.mJson.persons[i].id;
-                                        opt.innerHTML = app.mLogin.mJson.persons[i].first_name;
-                                        //opt.innerHTML = app.mLogin.mJson.persons[i].first_name;
+                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].last_name;
+                                        opt.innerHTML = full_name;
                                         select.appendChild(opt);
                                 }
-
 
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
