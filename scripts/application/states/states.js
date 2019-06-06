@@ -879,8 +879,10 @@ class INSERT_PERSON_APPLICATION extends State
                                 app.mLogin.mJson = JSON.parse(dataArray);
                                 //remove all old options
 
+				
                                 //load up option
                                 var select = document.getElementById("person_select_id");
+				select.length = 0;
                                 for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
                                 {
                                         var opt = document.createElement('option');
