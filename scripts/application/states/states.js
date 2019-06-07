@@ -859,13 +859,14 @@ class INSERT_PERSON_APPLICATION extends State
 		{
 			console.log("INSERT_PERSON_APPLICATION: EXECUTE");        
 		}
+		var screen = app.mInsertPersonScreen;
              
-		if (app.mInsertPersonScreen.mData)
+		if (screen.mData)
                 {
                         var dataArray = app.mInsertPersonScreen.mData.split(",");
-                        app.mInsertPersonScreen.mCode = dataArray[0];
+                        screen.mCode = dataArray[0];
 
-                        if (app.mInsertPersonScreen.mCode == -100)
+                        if (screen.mCode == -100)
                         {
 
                                 app.mJWT = dataArray[1]; //set jwt
@@ -876,18 +877,18 @@ class INSERT_PERSON_APPLICATION extends State
                                 dataArray.shift(); //remove mCode
                                 dataArray.shift(); //remove mJwt
                                 dataArray.join();
-                                app.mLogin.mJson = JSON.parse(dataArray);
+                                screen.mJson = JSON.parse(dataArray);
                                 //remove all old options
 
 				
                                 //load up option
                                 var select = document.getElementById("person_select_id");
 				select.length = 0;
-                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
+                                for (var i = 0; i < screen.mJson.persons.length; i++)
                                 {
                                         var opt = document.createElement('option');
-                                        opt.value = app.mLogin.mJson.persons[i].id;
-                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].middle_name + ' ' + app.mLogin.mJson.persons[i].last_name;
+                                        opt.value = screen.mJson.persons[i].id;
+                                        var full_name = screen.mJson.persons[i].first_name + ' ' + screen.mJson.persons[i].middle_name + ' ' + screen.mJson.persons[i].last_name;
                                         opt.innerHTML = full_name;
                                         select.appendChild(opt);
                                 }
