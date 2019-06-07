@@ -94,10 +94,33 @@ class WAIT_UPDATE_FORGOT_PASSWORD_SCREEN extends State
                 {
                         var dataArray = owner.mData.split(",");
                         owner.mCode = dataArray[0];
-			console.log('mCode from owner:' + owner.mCode);
 
                         if (owner.mCode == -100)
                         {
+				owner.mApplication.mJWT = dataArray[1]; //set jwt
+                                //put in local storage
+                                localStorage.setItem('mJWT', owner.mApplication.mJWT);
+
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                owner.mJson = JSON.parse(dataArray);
+                                //remove all old options
+
+
+                                //load up option
+                                var select = document.getElementById("person_select_id");
+                                select.length = 0;
+                                for (var i = 0; i < owner.mJson.persons.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = owner.mJson.persons[i].id;
+                                        var full_name = owner.mJson.persons[i].first_name + ' ' + owner.mJson.persons[i].middle_name + ' ' + owner.mJson.persons[i].last_name;
+                                        opt.innerHTML = full_name;
+                                        select.appendChild(opt);
+                                }
+
                                 owner.mApplication.mStateMachine.changeState(owner.mApplication.mMAIN_APPLICATION);
                         }
                         if (owner.mCode == -102)
