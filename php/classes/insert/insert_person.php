@@ -53,11 +53,6 @@ class InsertPerson
 
 		$result = pg_execute($database->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $email_person_id));
 
-               	//$return_value = pg_fetch_result($result, 0);
-
-                //echo $return_value;
-
-		//A
                	$return_value = pg_fetch_result($result, 0);
 
                 if ($return_value < -100  && $return_value > -200)
@@ -77,15 +72,12 @@ class InsertPerson
                         }
                         else
                         {
-                                $email_person_person_id = null;
-
                                 if ($data)
                                 {
                                         //encode
                                         $oneRing = new OneRing();
                                         $encoded_token = array();
                                         $encoded_token['email_person_id'] = $email_person_id;
-                                        $encoded_token['email_person_person_id'] = null;
                                         $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
                                         $front = '{ "persons" :';

@@ -25,15 +25,12 @@ class NativeLogin
                 }
                 else
 		{
-			$email_person_person_id = null;
-		
 			if ($data)
 			{
 				//encode
 				$oneRing = new OneRing();
 				$encoded_token = array();
-				$encoded_token['email_person_id'] = $email_person_id;
-				$encoded_token['email_person_person_id'] = null;
+                                $encoded_token['email_person_id'] = $email_person_id;
 				$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
 				$front = '{ "persons" :';

@@ -1194,16 +1194,26 @@ $$ LANGUAGE plpgsql;
 
 
 --INSERT CLUB
-CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, person_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_club_member_id integer;
+	rec RECORD;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
-        insert into club_members (club_id, person_id) values (x, person_id) returning id into returning_club_member_id;
         insert into club_administrators (club_member_id) values (returning_club_member_id);
         insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
+  	FOR rec IN 
+		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1
+		union
+		select persons.id from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = 1;
+
+	LOOP
+        
+		insert into club_members (club_id, person_id) values (x, persons.id) returning id into returning_club_member_id;
+
+	END LOOP;
 END;
 $$;
 
