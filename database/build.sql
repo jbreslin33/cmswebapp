@@ -1232,11 +1232,11 @@ BEGIN
 		union
 		select persons.id from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = $3
 	LOOP
-		--IF persons.id = person_id THEN
-			--insert into club_members (club_id, person_id) values (x, persons.id) returning id into returning_club_member_id;
-		--ELSE
+		IF rec.id = person_id THEN
+			insert into club_members (club_id, person_id) values (x, rec.id) returning id into returning_club_member_id;
+		ELSE
 			insert into club_members (club_id, person_id) values (x, rec.id);
-		--END IF;
+		END IF;
 	END LOOP;
         --insert into club_administrators (club_member_id) values (returning_club_member_id);
         insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id); --should this be a foreign key person or email_person
