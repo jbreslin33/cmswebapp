@@ -1193,29 +1193,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 
---INSERT CLUB
-CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_person_id int, INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-        returning_club_member_id integer;
-	rec RECORD;
-BEGIN
-        insert into clubs (name,address) values (name,address) returning id into x;
-        insert into club_administrators (club_member_id) values (returning_club_member_id);
-        insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id);
-  	FOR rec IN 
-		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1
-		union
-		select persons.id from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = 1;
-
-	LOOP
-        
-		insert into club_members (club_id, person_id) values (x, persons.id) returning id into returning_club_member_id;
-
-	END LOOP;
-END;
-$$;
 
 
 CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
@@ -1240,7 +1217,33 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, person_id int)
+--INSERT CLUB
+CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_person_id int, person_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_club_member_id integer;
+	rec RECORD;
+BEGIN
+        insert into clubs (name,address) values (name,address) returning id into x;
+	--insert into club_members (club_id, person_id) values (x,person_id);
+  	FOR rec IN 
+		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $3
+		union
+		select persons.id from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = $3
+	LOOP
+		--IF persons.id = person_id THEN
+			--insert into club_members (club_id, person_id) values (x, persons.id) returning id into returning_club_member_id;
+		--ELSE
+			insert into club_members (club_id, person_id) values (x, rec.id);
+		--END IF;
+	END LOOP;
+        --insert into club_administrators (club_member_id) values (returning_club_member_id);
+        insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id); --should this be a foreign key person or email_person
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, email_person_id int, person_id int)
 RETURNS text AS $$
 DECLARE
         found_club_id clubs.id%TYPE;
@@ -1253,7 +1256,7 @@ BEGIN
         IF found_club_id THEN
                 return_code = '-106';
        	ELSE
-		CALL p_insert_club($1,$2,person_id,x);
+		CALL p_insert_club($1,$2,email_person_id,person_id,x);
 		IF x > 0 THEN
 			return_code = '-100';
 		ELSE

@@ -11,7 +11,7 @@ class InsertClub
 
 		//actually we are going to get the jwt and need to extract id
 
-		$sql = 'select f_insert_club($1,$2,$3)';
+		$sql = 'select f_insert_club($1,$2,$3,$4)';
 		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_club", $sql);
 
@@ -20,7 +20,7 @@ class InsertClub
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
 		$email_person_id = $payload->email_person_id;
 
-		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $email_person_id));
+		$result = pg_execute($database->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $email_person_id, $_GET['person_id']));
 
                	$return_value = pg_fetch_result($result, 0);
 
