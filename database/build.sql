@@ -1238,7 +1238,7 @@ BEGIN
 			insert into club_members (club_id, person_id) values (x, rec.id);
 		END IF;
 	END LOOP;
-        --insert into club_administrators (club_member_id) values (returning_club_member_id);
+        insert into club_administrators (club_member_id) values (returning_club_member_id);
         insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id); --should this be a foreign key person or email_person
 END;
 $$;
