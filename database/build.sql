@@ -74,7 +74,7 @@ insert into status (name) values ('inactive');
 insert into status (name) values ('cancelled');
 
 -- a club should have admins in roles table
-CREATE TABLE clubs 
+CREATE table clubs 
 (
         id SERIAL,
         name text NOT NULL unique,
@@ -733,16 +733,22 @@ CREATE TABLE team_managers
 	PRIMARY KEY (id)
 );
 
+--1: add club
+--2: remove club
+--3: add member
+--4: remove member 
+--5: suspend club
+--6: unsuspend club
 CREATE TABLE club_transactions
 (
         id serial,
 	club_id integer,
         transaction_id integer,
-        person_id integer,
+        club_member_id integer,
         transacation_timestamp timestamp not null default now(),
         FOREIGN KEY(club_id) REFERENCES clubs(id),
         FOREIGN KEY(transaction_id) REFERENCES transactions(id),
-        FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
         primary key (id)
 );
 
@@ -1226,7 +1232,6 @@ DECLARE
 	rec RECORD;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
-	--insert into club_members (club_id, person_id) values (x,person_id);
   	FOR rec IN 
 		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $3
 		union
@@ -1239,7 +1244,7 @@ BEGIN
 		END IF;
 	END LOOP;
         insert into club_administrators (club_member_id) values (returning_club_member_id);
-        insert into club_transactions (club_id,transaction_id,person_id) values (x,1,person_id); --should this be a foreign key person or email_person
+        insert into club_transactions (club_id,transaction_id,club_member_id) values (x,1,returning_club_member_id); --should this be a foreign key person or email_person
 END;
 $$;
 
