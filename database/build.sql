@@ -49,30 +49,6 @@ CREATE TABLE error_log
 	PRIMARY KEY (id) 	
 );
 
---create,deactivate,activate
-create table transactions
-(
-	id serial,
-	name text,
-	primary key (id)
-);
-
-insert into transactions (name) values ('create');
-insert into transactions (name) values ('deactivate');
-insert into transactions (name) values ('activate');
-
---active(shows),inactive(does not show),cancelled(this shows up as cancelled)
-create table status
-(
-	id serial,
-	name text,
-	primary key (id)
-);
-
-insert into status (name) values ('active');
-insert into status (name) values ('inactive');
-insert into status (name) values ('cancelled');
-
 -- a club should have admins in roles table
 CREATE table clubs 
 (
@@ -83,8 +59,6 @@ CREATE table clubs
 	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
-
-
 
 CREATE TABLE pitches 
 (
@@ -553,6 +527,7 @@ create TABLE forgot_passwords
 --familys are linked by people not logins
 --Luke Breslin, Celta Vigo
 --actually this is officially that you are part of a club this way if the master account leaves you could also still stay, as the master email propels this to an insert
+--so if we delete club then it takes with it all club_members???
 CREATE TABLE club_members 
 (
 	id SERIAL,
@@ -691,30 +666,6 @@ CREATE TABLE team_players
 );
 
 
---you might need more of these....for managers, coaches etc.
-CREATE TABLE team_players_transactions
-(
-	id SERIAL,
-	team_player_id integer,
-	transaction_id integer,
-	foreign key (team_player_id) references team_players(id),
-	foreign key (transaction_id) references transactions(id),
-	primary key (id)
-);
-
-CREATE TABLE team_transactions
-(
-	id serial,
-	team_id integer,
-	transaction_id integer,
-	club_administrator_id integer,
-	transacation_timestamp timestamp not null default now(),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
-        FOREIGN KEY(transaction_id) REFERENCES transactions(id),
-        FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
-	primary key (id)
-);
-
 CREATE TABLE team_coaches 
 (
 	id SERIAL,
@@ -732,26 +683,6 @@ CREATE TABLE team_managers
         FOREIGN KEY(team_member_id) REFERENCES team_members(id),
 	PRIMARY KEY (id)
 );
-
---1: add club
---2: remove club
---3: add member
---4: remove member 
---5: suspend club
---6: unsuspend club
-CREATE TABLE club_transactions
-(
-        id serial,
-	club_id integer,
-        transaction_id integer,
-        club_member_id integer,
-        transacation_timestamp timestamp not null default now(),
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
-        FOREIGN KEY(transaction_id) REFERENCES transactions(id),
-        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
-        primary key (id)
-);
-
 
 CREATE TABLE sessions_players_availability 
 (
@@ -1244,7 +1175,7 @@ BEGIN
 		END IF;
 	END LOOP;
         insert into club_administrators (club_member_id) values (returning_club_member_id);
-        insert into club_transactions (club_id,transaction_id,club_member_id) values (x,1,returning_club_member_id); --should this be a foreign key person or email_person
+        --insert into club_transactions (club_id,transaction_id,club_member_id) values (x,1,returning_club_member_id); --should this be a foreign key person or email_person
 END;
 $$;
 
