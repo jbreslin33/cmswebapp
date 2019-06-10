@@ -1175,7 +1175,6 @@ BEGIN
 		END IF;
 	END LOOP;
         insert into club_administrators (club_member_id) values (returning_club_member_id);
-        --insert into club_transactions (club_id,transaction_id,club_member_id) values (x,1,returning_club_member_id); --should this be a foreign key person or email_person
 END;
 $$;
 
