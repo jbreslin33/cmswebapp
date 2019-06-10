@@ -346,17 +346,6 @@ CREATE TABLE emails_persons
 	unique (email_id, person_id),
         PRIMARY KEY (id)
 );
---you need a child of above.....
-CREATE TABLE emails_persons_persons
-(
-        id SERIAL,
-	email_person_id integer not null,
-	person_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(email_person_id) REFERENCES emails_persons(id),
-        FOREIGN KEY(person_id) REFERENCES persons(id),
-	primary key (id)
-);
 
 create table relationships
 (
@@ -894,14 +883,12 @@ CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT
 LANGUAGE plpgsql    
 AS $$
 DECLARE
-	returning_email_id integer;
-	returning_native_login_id integer;
 	returning_person_id integer;
 BEGIN
-	insert into emails (email) values (email_name) returning id into returning_email_id;
-	insert into native_logins (email_id, password) values (returning_email_id, CRYPT($2, GEN_SALT('md5')));
+	insert into emails (email) values (email_name) returning id into x;
+	insert into native_logins (email_id, password) values (x, CRYPT($2, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-	insert into emails_persons (email_id, person_id) values (returning_email_id, returning_person_id) returning id into x; 
+	insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
 
@@ -968,14 +955,12 @@ $$ LANGUAGE sql;
 --END SAMPLE JSON
 
 --BEGIN NEW JSON
-CREATE OR REPLACE FUNCTION f_select_persons(email_person_id int)
+CREATE OR REPLACE FUNCTION f_select_persons(email_id int)
   RETURNS json AS $$
    SELECT json_agg(t)
         from
         (
-	select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = email_person_id 
-	union
-	select persons.id, first_name, middle_name, last_name from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = email_person_id
+		select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
         ) t;
 $$ LANGUAGE sql;
 

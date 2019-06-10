@@ -23,7 +23,6 @@ class InsertNativeLogin
                 }
                 else
                 {
-
                 	$return_value_array = explode(",",$return_value);
                 	$email_person_id = array_shift($return_value_array);
                 	$data = implode(",",$return_value_array);
