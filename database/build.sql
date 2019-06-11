@@ -1041,7 +1041,6 @@ BEGIN
 	insert into emails (email) values (email_name) returning id into returning_email_id;
         insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
         insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-        --insert into users (person_id, email_id) values (returning_person_id, returning_email_id) returning id into x;
 END;
 $$;
 
@@ -1061,8 +1060,9 @@ DECLARE
         
 	returning_person_id integer;
 
-        return_code text;
+        result_set text;
 	DECLARE x int := -111;
+	json_result text; 
 BEGIN
 
         select into found_email_id f_get_email_id($1);
@@ -1088,13 +1088,18 @@ BEGIN
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into found_person_id;
                         insert into emails_persons (email_id,person_id) values (found_email_id,found_person_id);
-			return_code = found_email_id;
+			--return_code = found_email_id;
                 END IF;
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert, also we wont have an invite as we would have made an insert into email
 		CALL p_insert_google_login($1,$2,$3,$4,$5,x);
-		return_code = x;
+		found_email_id = x;
 	END IF;
+
+       	select into json_result f_select_persons(found_email_id);
+
+        result_set = found_email_id;
+        result_set = CONCAT_WS(',',found_email_id,json_result);
 
 	IF $6 is NULL THEN
 		--do nothing
@@ -1104,12 +1109,9 @@ BEGIN
 		insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
 	END IF;	
 
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
-
-
 
 CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
 RETURNS text AS $$

@@ -140,18 +140,6 @@ class INIT_APPLICATION extends State
 		{
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 		}
-
-/*
-                if (application.mClubInviteToken && application.mClubInviteName)
-                {
-                        document.getElementById('login_screen_team_message_id').style.color = 'blue';
-                        document.getElementById('login_screen_team_message_id').innerHTML = 'Login or Create an acoount to join ' + this.mApplication.mClubInviteName;
-                }
-                else
-                {
-                        console.log('NO mClubInviteToken');
-                }
-*/
 	}
 
         exit(application)
@@ -198,51 +186,50 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
-/*
-         getJson(data)
-        {
-                var jsonString = data.slice(6,data.length);
-                if (jsonString)
+              /* 
+		if (app.mInsertNativeLoginScreen.mData)
                 {
-                        return JSON.parse(jsonString);
-                }
-                else
-                {
-                        console.log('no jsonString');
-                        return "";
-                }
-        }
+                        var dataArray = app.mInsertNativeLoginScreen.mData.split(",");
+                        app.mInsertNativeLoginScreen.mCode = dataArray[0];
 
-        getCode(data)
-        {
-                var dataArray = data.split(",");
-                return dataArray[0];
-        }
-*
-*
-*                         owner.mCode = owner.mApplication.mUtility.getCode(owner.mData);
-                        owner.mJson = owner.mApplication.mUtility.getJson(owner.mData);
-                        owner.show();
-
-                        if (owner.mCode == -100)
+                        if (app.mInsertNativeLoginScreen.mCode == -100)
                         {
+                                app.mJWT = dataArray[1]; //set jwt
+                                //put in local storage
+                                localStorage.setItem('mJWT', app.mJWT);
 
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                app.mLogin.mJson = JSON.parse(dataArray);
                                 //remove all old options
 
                                 //load up option
-                                var select = document.getElementById("insert_team_screen_select_id");
-                                for (var i = 0; i < owner.mJson.clubs.length; i++)
+                                var select = document.getElementById("person_select_id");
+                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
                                 {
                                         var opt = document.createElement('option');
-                                        opt.value = owner.mJson.clubs[i].id;
-                                        opt.innerHTML = owner.mJson.clubs[i].name;
+                                        opt.value = app.mLogin.mJson.persons[i].id;
+                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].middle_name + ' ' + app.mLogin.mJson.persons[i].last_name;
+                                        opt.innerHTML = full_name;
                                         select.appendChild(opt);
                                 }
 
-                                owner.mStateMachine.changeState(owner.mWAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN);
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
                         }
+                        if (app.mInsertNativeLoginScreen.mCode == -101)
+                        {
+                                document.getElementById('insert_native_login_screen_email_message_id').style.color = 'red';
+                                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
+                                //show link as well
+                                document.getElementById("insert_native_login_screen_link_id").style.display = "block";
+                        }
+                }
+*/
 
- */
+
 		if (app.mLogin.mData)
 		{
 			var dataArray = app.mLogin.mData.split(",");
