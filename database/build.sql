@@ -1181,17 +1181,17 @@ END;
 $$ LANGUAGE plpgsql;
 
 --BEGIN INSERT PERSON
-CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_person_id int)
+CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 	DECLARE x int := -111;
 	json_result text; 
 BEGIN
-	CALL p_insert_person($1,$2,$3,$4,$5,email_person_id,x);
+	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
 	IF x > 0 THEN
-        	select into json_result f_select_persons(email_person_id);
-                result_set = CONCAT_WS(',',email_person_id,json_result);
+        	select into json_result f_select_persons(email_id);
+                result_set = CONCAT_WS(',',email_id,json_result);
         ELSE
                 result_set = '-105';
         END IF;
@@ -1203,11 +1203,11 @@ CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, l
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        returning_club_member_id integer;
+        returning_person_id integer;
 	rec RECORD;
 BEGIN
-        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
-	insert into emails_persons_persons (email_person_id, person_id) values ($6, x);
+        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
+	insert into emails_persons (email_id, person_id) values ($6, returning_person_id) returning id into x; 
 END;
 $$;
 --END INSERT PERSON

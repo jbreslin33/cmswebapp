@@ -49,9 +49,9 @@ class InsertPerson
 
 		$oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-		$email_person_id = $payload->email_person_id;
+		$email_id = $payload->email_id;
 
-		$result = pg_execute($database->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $email_person_id));
+		$result = pg_execute($database->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $email_id));
 
                	$return_value = pg_fetch_result($result, 0);
 
@@ -63,12 +63,12 @@ class InsertPerson
                 {
 
                         $return_value_array = explode(",",$return_value);
-                        $email_person_id = array_shift($return_value_array);
+                        $email_id = array_shift($return_value_array);
                         $data = implode(",",$return_value_array);
 
-                        if ($email_person_id < -100  && $email_person_id > -200)
+                        if ($email_id < -100  && $email_id > -200)
                         {
-                                echo $email_person_id;
+                                echo $email_id;
                         }
                         else
                         {
@@ -77,7 +77,7 @@ class InsertPerson
                                         //encode
                                         $oneRing = new OneRing();
                                         $encoded_token = array();
-                                        $encoded_token['email_person_id'] = $email_person_id;
+                                        $encoded_token['email_id'] = $email_id;
                                         $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
                                         $front = '{ "persons" :';
