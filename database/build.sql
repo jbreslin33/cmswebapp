@@ -970,7 +970,6 @@ RETURNS text AS $$
 DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
-	found_email_person_id emails_persons.id%TYPE;
 	result_set text;
 	json_result text;
 BEGIN
@@ -982,17 +981,11 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
         	
 		IF found_native_login_id THEN
-			select id into found_email_person_id from emails_persons where email_id = found_email_id;
 
-			select into json_result f_select_persons(found_email_person_id);
+			select into json_result f_select_persons(found_email_id);
 
-
-			IF found_email_person_id THEN
-				result_set = found_email_person_id;
-				result_set = CONCAT_WS(',',found_email_person_id,json_result);
-			ELSE
-                		result_set = '-105';
-			END IF;
+			result_set = found_email_id;
+			result_set = CONCAT_WS(',',found_email_id,json_result);
         	ELSE
                 	result_set = '-105';
         	END IF;
