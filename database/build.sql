@@ -1021,11 +1021,12 @@ AS $$
 DECLARE
 	returning_email_id integer;
         returning_google_login_id integer;
+	returning_person_id integer;
 BEGIN
-	insert into emails (email) values (email_name) returning id into returning_email_id;
-        insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
-        insert into persons (first_name, last_name) values (first_name, last_name) returning id into x;
-        --insert into users (person_id, email_id) values (x, returning_email_id);
+	insert into emails (email) values (email_name) returning id into x;
+        insert into google_logins (email_id, google_id, id_token) values (x, google_id, id_token) returning id into returning_google_login_id;
+        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
+	insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
 
@@ -1051,8 +1052,8 @@ DECLARE
 	
         found_email_id emails.id%TYPE;
         found_google_login_id google_logins.id%TYPE;
-        found_user_id users.id%TYPE;
-        returning_user_id users.id%TYPE;
+        found_email_person_id emails_persons.id%TYPE;
+        --returning_user_id users.id%TYPE;
         found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
         
@@ -1065,7 +1066,7 @@ DECLARE
 BEGIN
 
         select into found_email_id f_get_email_id($1);
-        IF found_email_id > 0 THEN --do an update and if no person or user do an insert on them
+        IF found_email_id THEN --do an update and if no person or user do an insert on them
         	SELECT id INTO found_google_login_id FROM google_logins
         	WHERE email_id = found_email_id;
 		IF found_google_login_id THEN
@@ -1075,19 +1076,19 @@ BEGIN
 			insert into google_logins (email_id, google_id, id_token) values (found_email_id, $2, $3);
 		END IF;
 
-                SELECT id INTO found_user_id FROM users
+                SELECT id INTO found_email_person_id FROM emails_persons
                 WHERE email_id = found_email_id;
-                IF found_user_id THEN
-                	SELECT person_id INTO found_person_id FROM users
-			where id = found_user_id;
+                IF found_email_person_id THEN
+                	--SELECT person_id INTO found_person_id FROM emails_persons
+			--where emailperson_id = found_person_id;
 
-                        update persons set first_name = $4 , last_name = $5
-			where id = found_person_id;
-			return_code = found_person_id;
+                        --update persons set first_name = $4 , last_name = $5
+			--where id = found_person_id;
+			--return_code = found_person_id;
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into found_person_id;
-                        insert into users (person_id, email_id) values (found_person_id,found_email_id) returning id into found_user_id;
-			return_code = found_person_id;
+                        insert into emails_persons (email_id,person_id) values (found_email_id,found_person_id);
+			return_code = found_email_id;
                 END IF;
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert, also we wont have an invite as we would have made an insert into email

@@ -43,8 +43,6 @@ class GoogleLogin
                 $sql = 'select f_google_login($1,$2,$3,$4,$5,$6)';
 
                 $prepare_result = pg_prepare($database->mConnection, "f_google_login", $sql);
-		$txt = "EMAIL:";
-		$txt .= $email;
 
                 $result = pg_execute($database->mConnection, "f_google_login", array( $email ,$google_id, $id_token, $first_name, $last_name, $club_invite_token));
 
@@ -59,13 +57,12 @@ class GoogleLogin
                 {
                         //encode
                         $secret = 's%%xqc!___bzvReT423*&';
-                        $person_id = $return_value;
+                        $email_id = $return_value;
                         $encoded_token = array();
-                        $encoded_token['person_id'] = $person_id;
+                        $encoded_token['email_id'] = $email_id;
                         $jwt = JWT::encode($encoded_token, $secret);
                         echo "-100," . $jwt;
                 }
-
         }
 }
         $googleLogin = new GoogleLogin();
