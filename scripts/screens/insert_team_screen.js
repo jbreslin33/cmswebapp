@@ -32,7 +32,9 @@ class InsertTeamScreen extends Screen
 	{
 		if (this.mApplication.mJWT)
 		{
-			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + this.mApplication.mJWT; 
+			var select = document.getElementById("person_select_id");
+                	var person_id = select.options[select.selectedIndex].value;
+			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + localStorage.getItem("mJWT") + '&person_id=' + person_id; 
 		        var request = new XMLHttpRequest();
                 	request.onreadystatechange = function()
                 	{

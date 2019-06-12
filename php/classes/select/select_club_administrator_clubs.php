@@ -11,7 +11,7 @@ class SelectClubAdministratorClubs
                 $jwt = $_GET['jwt'];
                 $oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-                $email_person_id = $payload->email_person_id;
+                $email_person_id = $payload->email_id;
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
@@ -19,7 +19,7 @@ class SelectClubAdministratorClubs
 
                 $prepare_result = pg_prepare($database->mConnection, "f_select_club_administrator_clubs", $sql);
 
-                $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $email_person_id));
+                $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $_GET['person_id']));
 		$data = "";	
 		while ($row = pg_fetch_row($result)) 
 		{
