@@ -59,7 +59,10 @@ class InsertTeamScreen extends Screen
 
 		this.mName  = document.getElementById("insert_team_screen_name_id").value;
 
-		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + '&club_id=' + document.getElementById("insert_team_screen_select_id").value + '&jwt=' + APPLICATION.mJWT;
+		var select = document.getElementById("person_select_id");
+                var person_id = select.options[select.selectedIndex].value;
+
+		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + '&club_id=' + document.getElementById("insert_team_screen_select_id").value + '&jwt=' + APPLICATION.mJWT + '&person_id=' + person_id;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

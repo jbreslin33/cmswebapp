@@ -26,6 +26,10 @@ class InsertTeam
 		{
 			$jwt = $_GET['jwt'];
 		}
+		if (isset($_GET['person_id']))
+		{
+			$person_id = $_GET['person_id'];
+		}
 
 		//prep db
                 $database = new Database("localhost","cms","postgres","mibesfat");
@@ -35,7 +39,7 @@ class InsertTeam
 		//get id of sender
 		$oneRing = new OneRing();
                 $payload = JWT::decode($jwt, $oneRing->mOneRing);
-		$person_id = $payload->person_id;
+		$person_id = $payload->email_id;
 
 		//result for sender
 		$result = pg_execute($database->mConnection, "f_insert_team", array( $name ,$club_id, $person_id));
