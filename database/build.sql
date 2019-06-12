@@ -1219,11 +1219,8 @@ CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-        insert into teams (name,club_id) values ($1,$2) returning id into x;
-	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id where club_members.person_id = $3; 
-        insert into team_transactions (team_id, transaction_id,club_administrator_id) values (x,1,found_club_administrator_id);
+       	insert into teams (name,club_id) values ($1,$2) returning id into x;
 END;
 $$;
 
@@ -1233,13 +1230,22 @@ RETURNS text AS $$
 DECLARE
         return_code text;
 	DECLARE x int := -111;
+	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-	CALL p_insert_team($1,$2,person_id,x);
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id where club_members.person_id = $3; 
 
-	IF x > 0 THEN
-		return_code = '-100';
+	IF found_club_administrator_id THEN
+
+		CALL p_insert_team($1,$2,person_id,x);
+
+		IF x > 0 THEN
+			return_code = '-100';
+		ELSE
+			return_code = x;
+		END IF;
+
 	ELSE
-		return_code = x;
+		return_code = '-121';
 	END IF;
 
 RETURN return_code;
