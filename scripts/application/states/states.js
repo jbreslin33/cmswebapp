@@ -941,6 +941,43 @@ class DELETE_PERSON_APPLICATION extends State
 		{
 			console.log("DELETE_PERSON_APPLICATION: EXECUTE");        
 		}
+		var screen = app.mDeletePersonScreen;
+
+                if (screen.mData)
+                {
+                        var dataArray = screen.mData.split(",");
+                        screen.mCode = dataArray[0];
+
+                        if (screen.mCode == -100)
+                        {
+
+                                app.mJWT = dataArray[1]; //set jwt
+                                //put in local storage
+                                localStorage.setItem('mJWT', app.mJWT);
+
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                screen.mJson = JSON.parse(dataArray);
+                                //remove all old options
+
+                                //load up option
+                                var select = document.getElementById("delete_person_screen_select_id");
+                                select.length = 0;
+                                for (var i = 0; i < screen.mJson.persons.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = screen.mJson.persons[i].id;
+                                        var full_name = screen.mJson.persons[i].first_name + ' ' + screen.mJson.persons[i].middle_name + ' ' + screen.mJson.persons[i].last_name;
+                                        opt.innerHTML = full_name;
+                                        select.appendChild(opt);
+                                }
+
+                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                //document.getElementById('delete_person_screen_name_message_id').innerHTML = '';
+                        }
+		}
 	}
 
         exit(app)
