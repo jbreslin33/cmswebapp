@@ -1215,6 +1215,39 @@ END;
 $$;
 --END INSERT PERSON
 
+--BEGIN DELETE PERSON
+CREATE OR REPLACE FUNCTION f_delete_person(person_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+        CALL p_delete_person($1,$2,$3,$4,$5,email_id,x);
+        IF x > 0 THEN
+                select into json_result f_select_persons(email_id);
+                result_set = CONCAT_WS(',',email_id,json_result);
+        ELSE
+                result_set = '-105';
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_person_id integer;
+        rec RECORD;
+BEGIN
+        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
+        insert into emails_persons (email_id, person_id) values ($6, returning_person_id) returning id into x;
+END;
+$$;
+--END INSERT PERSON
+
+
 CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
 LANGUAGE plpgsql
 AS $$

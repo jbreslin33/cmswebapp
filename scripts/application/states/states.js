@@ -59,6 +59,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
                 }
+		else if (app.mLocationHash == 'delete_person_screen' && app.mStateMachine.mCurrentState != app.mDELETE_PERSON_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mDELETE_PERSON_APPLICATION);
+                }
 		else if (app.mLocationHash == 'insert_team_screen' && app.mStateMachine.mCurrentState != app.mINSERT_TEAM_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
@@ -115,6 +119,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("login_screen_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_person_screen_html_id").style.display = "none";
+		document.getElementById("delete_person_screen_html_id").style.display = "none";
 		document.getElementById("insert_team_screen_html_id").style.display = "none";
 		document.getElementById("insert_practice_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
@@ -904,6 +909,51 @@ class INSERT_PERSON_APPLICATION extends State
 		app.mInsertPersonScreen.mData = null;
 	}
 }
+
+class DELETE_PERSON_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("DELETE_PERSON_APPLICATION: ENTER");        
+		}
+		if (app.mDeletePersonScreen)
+		{
+			app.mDeletePersonScreen = new DeletePersonScreen(app);
+		}
+		else
+		{
+			app.mDeletePersonScreen = new DeletePersonScreen(app);
+		}
+		app.mDeletePersonScreen.show();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("DELETE_PERSON_APPLICATION: EXECUTE");        
+		}
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("DELETE_PERSON_APPLICATION: EXIT");        
+		}
+		app.mDeletePersonScreen.hide();
+		app.mDeletePersonScreen.mCode = 0;
+		app.mDeletePersonScreen.mData = null;
+	}
+}
+
 
 class INSERT_TEAM_APPLICATION extends State
 {
