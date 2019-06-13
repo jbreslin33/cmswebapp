@@ -55,7 +55,7 @@ class SelectPersons
                                         $return_value .= $data;
                                         $return_value .= $back;
 
-                                        $txt =  "-100," . $jwt . "," . $return_value;
+                                        $txt =  "-190," . $jwt . "," . $return_value;
                                         echo $txt;
                                 }
                         }

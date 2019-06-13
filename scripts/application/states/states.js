@@ -948,7 +948,7 @@ class DELETE_PERSON_APPLICATION extends State
                         var dataArray = screen.mData.split(",");
                         screen.mCode = dataArray[0];
 
-                        if (screen.mCode == -100)
+                        if (screen.mCode == -190)
                         {
 
                                 app.mJWT = dataArray[1]; //set jwt

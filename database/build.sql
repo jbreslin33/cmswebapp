@@ -1375,4 +1375,5 @@ $$ LANGUAGE plpgsql;
 --112 generic bad update
 --113 generic no result
 --121 only club administrators can perform this action....
+--190 temp result stay in state
 
