@@ -49,15 +49,12 @@ class DeletePerson
 
                         if ($email_id < -100  && $email_id > -200)
                         {
-				error_log("A");
                                 echo $email_id;
                         }
                         else
                         {
-				error_log("B");
                                 if ($data)
                                 {
-					error_log("C");
                                         //encode
                                         $oneRing = new OneRing();
                                         $encoded_token = array();
@@ -76,9 +73,6 @@ class DeletePerson
                                 }
                         }
                 }
-	
-		
-		//B
         }
 }
 
