@@ -58,7 +58,7 @@ class DeletePersonScreen extends Screen
 	{
 		this.mHit = true;
 
-		var select = document.getElementById("person_select_id");
+		var select = document.getElementById("delete_person_screen_select_id");
                 var person_id = select.options[select.selectedIndex].value;
 		var url = "/php/classes/delete/delete_person.php?name=" + "&jwt=" + localStorage.getItem("mJWT") + '&person_id=' + person_id;
 
