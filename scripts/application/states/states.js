@@ -931,6 +931,7 @@ class DELETE_PERSON_APPLICATION extends State
 		{
 			app.mDeletePersonScreen = new DeletePersonScreen(app);
 		}
+		app.mDeletePersonScreen.get();
 		app.mDeletePersonScreen.show();
 	}
 

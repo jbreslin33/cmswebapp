@@ -842,7 +842,7 @@ BEGIN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
 		select id into email_person_id from emails_persons where email_id = email_id;
 		--A
-                select into json_result f_select_persons(email_person_id);
+                select into json_result j_select_persons(email_person_id);
                 result_set = CONCAT_WS(',',found_email,email_person_id,json_result);
 		--B
         ELSE
@@ -869,7 +869,7 @@ BEGIN
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
 		IF x THEN
-                	select into json_result f_select_persons(x);
+                	select into json_result j_select_persons(x);
                         result_set = CONCAT_WS(',',x,json_result);
                 ELSE
                 	result_set = '-105';
@@ -955,7 +955,7 @@ $$ LANGUAGE sql;
 --END SAMPLE JSON
 
 --BEGIN NEW JSON
-CREATE OR REPLACE FUNCTION f_select_persons(email_id int)
+CREATE OR REPLACE FUNCTION j_select_persons(email_id int)
   RETURNS json AS $$
    SELECT json_agg(t)
         from
@@ -982,7 +982,7 @@ BEGIN
         	
 		IF found_native_login_id THEN
 
-			select into json_result f_select_persons(found_email_id);
+			select into json_result j_select_persons(found_email_id);
 
 			result_set = found_email_id;
 			result_set = CONCAT_WS(',',found_email_id,json_result);
@@ -1096,7 +1096,7 @@ BEGIN
 		found_email_id = x;
 	END IF;
 
-       	select into json_result f_select_persons(found_email_id);
+       	select into json_result j_select_persons(found_email_id);
 
         result_set = found_email_id;
         result_set = CONCAT_WS(',',found_email_id,json_result);
@@ -1183,6 +1183,20 @@ RETURN return_code;
 END;
 $$ LANGUAGE plpgsql;
 
+--BEGIN SELECT PERSON
+CREATE OR REPLACE FUNCTION f_select_person(email_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+        select into json_result j_select_persons(email_id);
+        result_set = CONCAT_WS(',',email_id,json_result);
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 --BEGIN INSERT PERSON
 CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int)
 RETURNS text AS $$
@@ -1193,7 +1207,7 @@ DECLARE
 BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
 	IF x > 0 THEN
-        	select into json_result f_select_persons(email_id);
+        	select into json_result j_select_persons(email_id);
                 result_set = CONCAT_WS(',',email_id,json_result);
         ELSE
                 result_set = '-105';
@@ -1225,7 +1239,7 @@ DECLARE
 BEGIN
         CALL p_delete_person($1,$2,$3,$4,$5,email_id,x);
         IF x > 0 THEN
-                select into json_result f_select_persons(email_id);
+                select into json_result j_select_persons(email_id);
                 result_set = CONCAT_WS(',',email_id,json_result);
         ELSE
                 result_set = '-105';
@@ -1234,7 +1248,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
