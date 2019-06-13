@@ -975,6 +975,8 @@ class DELETE_PERSON_APPLICATION extends State
 
                                 //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                                 //document.getElementById('delete_person_screen_name_message_id').innerHTML = '';
+				screen.mCode = 0;
+				screen.mData = null;
                         }
 
                         if (screen.mCode == -100)
@@ -1008,11 +1010,15 @@ class DELETE_PERSON_APPLICATION extends State
                         if (screen.mCode == -131)
 			{
                                 document.getElementById('delete_person_screen_message_id').innerHTML = 'Sorry you cannot delete only person.';
+				screen.mCode = 0;
+				screen.mData = null;
 
 			}
                         if (screen.mCode == -132)
 			{
                                 document.getElementById('delete_person_screen_message_id').innerHTML = 'Sorry you cannot delete this person as they are involved in club.';
+				screen.mCode = 0;
+				screen.mData = null;
 			}
 		}
 	}
