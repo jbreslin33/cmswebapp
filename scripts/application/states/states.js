@@ -950,7 +950,6 @@ class DELETE_PERSON_APPLICATION extends State
 
                         if (screen.mCode == -190)
                         {
-
                                 app.mJWT = dataArray[1]; //set jwt
                                 //put in local storage
                                 localStorage.setItem('mJWT', app.mJWT);
@@ -977,6 +976,44 @@ class DELETE_PERSON_APPLICATION extends State
                                 //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                                 //document.getElementById('delete_person_screen_name_message_id').innerHTML = '';
                         }
+
+                        if (screen.mCode == -100)
+                        {
+                                app.mJWT = dataArray[1]; //set jwt
+                                //put in local storage
+                                localStorage.setItem('mJWT', app.mJWT);
+
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                screen.mJson = JSON.parse(dataArray);
+                                //remove all old options
+
+
+                                //load up option
+                                var select = document.getElementById("person_select_id");
+                                select.length = 0;
+                                for (var i = 0; i < screen.mJson.persons.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = screen.mJson.persons[i].id;
+                                        var full_name = screen.mJson.persons[i].first_name + ' ' + screen.mJson.persons[i].middle_name + ' ' + screen.mJson.persons[i].last_name;
+                                        opt.innerHTML = full_name;
+                                        select.appendChild(opt);
+                                }
+
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                        if (screen.mCode == -131)
+			{
+                                document.getElementById('delete_person_screen_message_id').innerHTML = 'Sorry you cannot delete only person.';
+
+			}
+                        if (screen.mCode == -132)
+			{
+                                document.getElementById('delete_person_screen_message_id').innerHTML = 'Sorry you cannot delete this person as they are involved in club.';
+			}
 		}
 	}
 

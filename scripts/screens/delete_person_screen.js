@@ -58,12 +58,9 @@ class DeletePersonScreen extends Screen
 	{
 		this.mHit = true;
 
-		this.mName  = document.getElementById("delete_person_screen_name_id").value;
-
 		var select = document.getElementById("person_select_id");
                 var person_id = select.options[select.selectedIndex].value;
-
-		var url = "/php/classes/delete/delete_person.php?name=" + this.mName + '&club_id=' + document.getElementById("delete_person_screen_select_id").value + '&jwt=' + APPLICATION.mJWT + '&person_id=' + person_id;
+		var url = "/php/classes/delete/delete_person.php?name=" + "&jwt=" + localStorage.getItem("mJWT") + '&person_id=' + person_id;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -72,16 +69,11 @@ class DeletePersonScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-					APPLICATION.mInsertTeamScreen.mData = this.responseText;
+					APPLICATION.mDeletePersonScreen.mData = this.responseText;
                                 }
                         }
                 };
-
-		var form = document.getElementById('delete_person_screen_html_id');
-		if (form.checkValidity() == true) 
-		{
-			request.open('POST', url);
-                	request.send();
-		}
+		request.open('POST', url);
+                request.send();
 	}
 }

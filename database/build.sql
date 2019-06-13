@@ -1230,33 +1230,40 @@ $$;
 --END INSERT PERSON
 
 --BEGIN DELETE PERSON
-CREATE OR REPLACE FUNCTION f_delete_person(person_id int)
+CREATE OR REPLACE FUNCTION f_delete_person(int, int)
 RETURNS text AS $$
 DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
+	total_persons int;
 BEGIN
-        CALL p_delete_person($1,$2,$3,$4,$5,email_id,x);
-        IF x > 0 THEN
-                select into json_result j_select_persons(email_id);
-                result_set = CONCAT_WS(',',email_id,json_result);
-        ELSE
-                result_set = '-105';
-        END IF;
+	select count(*) into total_persons from emails_persons where email_id = $1;
+	IF total_persons > 1 THEN
+        	CALL p_delete_person($1,$2,x);
+        	IF x > 0 THEN
+                	select into json_result j_select_persons($1);
+                	result_set = CONCAT_WS(',',$1,json_result);
+        	ELSE
+                	result_set = '-132';
+        	END IF;
+	ELSE
+                result_set = '-131';
+		--not enuf persons
+	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_person(int, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_person_id integer;
         rec RECORD;
 BEGIN
-        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
-        insert into emails_persons (email_id, person_id) values ($6, returning_person_id) returning id into x;
+	delete from emails_persons where person_id = $2;
+	delete from persons where id = $2 returning id into x;
 END;
 $$;
 --END INSERT PERSON
@@ -1374,6 +1381,8 @@ $$ LANGUAGE plpgsql;
 --111 generic bad insert
 --112 generic bad update
 --113 generic no result
+--131 cant delete only person
+--132 delete failed because of constraints
 --121 only club administrators can perform this action....
 --190 temp result stay in state
 
