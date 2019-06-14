@@ -191,49 +191,6 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
-              /* 
-		if (app.mInsertNativeLoginScreen.mData)
-                {
-                        var dataArray = app.mInsertNativeLoginScreen.mData.split(",");
-                        app.mInsertNativeLoginScreen.mCode = dataArray[0];
-
-                        if (app.mInsertNativeLoginScreen.mCode == -100)
-                        {
-                                app.mJWT = dataArray[1]; //set jwt
-                                //put in local storage
-                                localStorage.setItem('mJWT', app.mJWT);
-
-                                //JSON
-                                dataArray.shift(); //remove mCode
-                                dataArray.shift(); //remove mJwt
-                                dataArray.join();
-                                app.mLogin.mJson = JSON.parse(dataArray);
-                                //remove all old options
-
-                                //load up option
-                                var select = document.getElementById("person_select_id");
-                                for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
-                                {
-                                        var opt = document.createElement('option');
-                                        opt.value = app.mLogin.mJson.persons[i].id;
-                                        var full_name = app.mLogin.mJson.persons[i].first_name + ' ' + app.mLogin.mJson.persons[i].middle_name + ' ' + app.mLogin.mJson.persons[i].last_name;
-                                        opt.innerHTML = full_name;
-                                        select.appendChild(opt);
-                                }
-
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
-                        }
-                        if (app.mInsertNativeLoginScreen.mCode == -101)
-                        {
-                                document.getElementById('insert_native_login_screen_email_message_id').style.color = 'red';
-                                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
-                                //show link as well
-                                document.getElementById("insert_native_login_screen_link_id").style.display = "block";
-                        }
-                }
-*/
-
 
 		if (app.mLogin.mData)
 		{

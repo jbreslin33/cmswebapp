@@ -971,7 +971,8 @@ DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
 	result_set text;
-	json_result text;
+	json_result_persons text;
+	json_result_persons_full text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
@@ -982,10 +983,11 @@ BEGIN
         	
 		IF found_native_login_id THEN
 
-			select into json_result j_select_persons(found_email_id);
+			select into json_result_persons j_select_persons(found_email_id);
 
-			result_set = found_email_id;
-			result_set = CONCAT_WS(',',found_email_id,json_result);
+			json_result_persons_full = CONCAT('{ "persons" : ', json_result_persons, '}');  
+
+			result_set = CONCAT_WS(',',found_email_id,json_result_persons_full);
         	ELSE
                 	result_set = '-105';
         	END IF;
