@@ -1,0 +1,51 @@
+<?php
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
+header('Content-Type: application/json');
+
+class SelectForInsertPractice
+{
+        function __construct($jwt)
+        {
+                $jwt = $_GET['jwt'];
+                $oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
+                $email_person_id = $payload->email_id;
+
+                $database = new Database("localhost","cms","postgres","mibesfat");
+
+                $sql = 'select f_select_for_insert_practice($1)';
+
+                $prepare_result = pg_prepare($database->mConnection, "f_select_for_insert_practice", $sql);
+
+                $result = pg_execute($database->mConnection, "f_select_club_administrator_clubs", array( $_GET['person_id']));
+		$data = "";	
+		while ($row = pg_fetch_row($result)) 
+		{
+  			$data .= $row[0];
+		}
+
+                $front = '{ "clubs" :';
+                $back = '}';
+
+                $return_value = "";
+                $return_value .= $front;
+                $return_value .= $data;
+                $return_value .= $back;
+
+		if ($data)
+		{
+			echo "-100," . $return_value;
+		}
+		else
+		{
+			echo "-113";
+		}
+        }
+}
+
+$jwt = $_GET['jwt'];
+
+$selectClubAdministratorClubs = new SelectClubAdministratorClubs($jwt);
+?>
