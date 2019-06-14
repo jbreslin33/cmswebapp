@@ -969,8 +969,6 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
 	result_set = CONCAT('{ "persons" : ', raw_json, '}');
-	--json_result_persons_full = CONCAT('{ "persons" : ', json_result_persons, '}');  
-	 --= CONCAT('{ "persons" : ', t, '}');  
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
