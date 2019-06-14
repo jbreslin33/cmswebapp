@@ -41,14 +41,7 @@ class InsertNativeLogin
                                 	$encoded_token['email_id'] = $email_id;
                                 	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
-                                	$front = '{ "persons" :';
-                                	$back = '}';
-                                	$return_value = "";
-                                	$return_value .= $front;
-                                	$return_value .= $data;
-                                	$return_value .= $back;
-
-                                	$txt =  "-100," . $jwt . "," . $return_value;
+                                	$txt =  "-100," . $jwt . "," . $data;
                                 	echo $txt;
                         	}
                 	}

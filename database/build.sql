@@ -956,13 +956,24 @@ $$ LANGUAGE sql;
 
 --BEGIN NEW JSON
 CREATE OR REPLACE FUNCTION j_select_persons(email_id int)
-  RETURNS json AS $$
-   SELECT json_agg(t)
-        from
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+	from
         (
 		select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
         ) t;
-$$ LANGUAGE sql;
+
+	result_set = CONCAT('{ "persons" : ', raw_json, '}');
+	--json_result_persons_full = CONCAT('{ "persons" : ', json_result_persons, '}');  
+	 --= CONCAT('{ "persons" : ', t, '}');  
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 
 --END NEW JSON
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
@@ -985,9 +996,9 @@ BEGIN
 
 			select into json_result_persons j_select_persons(found_email_id);
 
-			json_result_persons_full = CONCAT('{ "persons" : ', json_result_persons, '}');  
+			--json_result_persons_full = CONCAT('{ "persons" : ', json_result_persons, '}');  
 
-			result_set = CONCAT_WS(',',found_email_id,json_result_persons_full);
+			result_set = CONCAT_WS(',',found_email_id,json_result_persons);
         	ELSE
                 	result_set = '-105';
         	END IF;
