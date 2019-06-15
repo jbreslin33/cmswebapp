@@ -1012,8 +1012,8 @@ DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
 	result_set text;
-	json_result_persons text;
-	json_result_persons_full text;
+        json_result_persons text;
+        json_result_clubs text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
@@ -1021,18 +1021,15 @@ BEGIN
 
         	SELECT id INTO found_native_login_id FROM native_logins 
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
-        	
+                
 		IF found_native_login_id THEN
+                        select into json_result_persons j_select_persons(found_email_id);
+                        select into json_result_clubs j_select_clubs(found_email_id);
+                        result_set = CONCAT(found_email_id,',','{',json_result_clubs,',',json_result_persons,'}');
+                ELSE
+                        result_set = '-105';
+                END IF;
 
-			select into json_result_persons j_select_persons(found_email_id);
-
-			--json_result_persons_full = CONCAT('{ "persons" : ', json_result_persons, '}');  
-
-			result_set = CONCAT_WS(',',found_email_id,json_result_persons);
-        	ELSE
-                	result_set = '-105';
-        	END IF;
-	
 	ELSE
 		result_set = '-102'; 
 	END IF;
