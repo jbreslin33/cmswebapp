@@ -1111,9 +1111,6 @@ DECLARE
 
         result_set text;
 	DECLARE x int := -111;
-	json_result text; 
-       	json_result_persons text;
-       	json_result_clubs text;
 BEGIN
 
         select into found_email_id f_get_email_id($1);
@@ -1149,9 +1146,7 @@ BEGIN
 
 
         IF x THEN
-        	select into json_result_persons j_select_persons(x);
-                select into json_result_clubs j_select_clubs(x);
-               	result_set = CONCAT(x,',','{',json_result_clubs,',',json_result_persons,'}');
+		result_set = f_format_result_set(x);
         ELSE
                 result_set = '-105';
         END IF;
