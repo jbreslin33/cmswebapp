@@ -1034,9 +1034,7 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id THEN
-                        select into json_result_persons j_select_persons(found_email_id);
-                        select into json_result_clubs j_select_clubs(found_email_id);
-                        result_set = CONCAT(found_email_id,',','{',json_result_clubs,',',json_result_persons,'}');
+			 result_set = f_format_result_set(found_email_id);
                 ELSE
                         result_set = '-105';
                 END IF;
