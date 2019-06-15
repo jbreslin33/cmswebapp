@@ -1023,8 +1023,6 @@ DECLARE
 	found_email_id native_logins.email_id%TYPE;
 	found_native_login_id native_logins.id%TYPE;
 	result_set text;
-        json_result_persons text;
-        json_result_clubs text;
 BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
@@ -1145,8 +1143,8 @@ BEGIN
 	END IF;
 
 
-        IF x THEN
-		result_set = f_format_result_set(x);
+        IF found_email_id THEN
+		result_set = f_format_result_set(found_email_id);
         ELSE
                 result_set = '-105';
         END IF;
@@ -1215,6 +1213,7 @@ DECLARE
         found_club_id clubs.id%TYPE;
         return_code text;
 	DECLARE x int := -111;
+	result_set text;
 BEGIN
         SELECT id INTO found_club_id FROM clubs
         WHERE name = $1;
@@ -1224,12 +1223,12 @@ BEGIN
        	ELSE
 		CALL p_insert_club($1,$2,email_id,person_id,x);
 		IF x > 0 THEN
-			return_code = '-100';
+			result_set = f_format_result_set(email_id);
 		ELSE
-			return_code = x;
+			result_set = x;
 		END IF;
         END IF;
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -1254,15 +1253,11 @@ DECLARE
         result_set text;
 	DECLARE x int := -111;
 	json_result text; 
-	json_result_clubs text;
-	json_result_persons text;
 BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
 
         IF x > 0 THEN
-        	select into json_result_persons j_select_persons(email_id);
-                select into json_result_clubs j_select_clubs(email_id);
-                result_set = CONCAT(email_id,',','{',json_result_clubs,',',json_result_persons,'}');
+		result_set = f_format_result_set(email_id);
         ELSE
                 result_set = '-105';
         END IF;

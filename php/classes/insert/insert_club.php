@@ -24,7 +24,8 @@ class InsertClub
 
                	$return_value = pg_fetch_result($result, 0);
 
-                echo $return_value;
+		$result_set = $database->formatResultSet($return_value);
+                echo $result_set;
         }
 }
 
