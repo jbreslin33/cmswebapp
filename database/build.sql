@@ -861,7 +861,8 @@ DECLARE
 	found_email emails.email%TYPE;
 	result_set text;
 	DECLARE x int := -111; --for bad insert attempt
-	json_result text;
+	json_result_persons text;
+	json_result_clubs text;
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF found_email THEN
@@ -869,8 +870,9 @@ BEGIN
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
 		IF x THEN
-                	select into json_result j_select_persons(x);
-                        result_set = CONCAT_WS(',',x,json_result);
+                	select into json_result_persons j_select_persons(x);
+                	select into json_result_clubs j_select_clubs(x);
+                        result_set = CONCAT(x,',','{',json_result_clubs,',',json_result_persons,'}');
                 ELSE
                 	result_set = '-105';
 		END IF;
@@ -878,6 +880,46 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+--BEGIN J_SELECT PERSONS
+CREATE OR REPLACE FUNCTION j_select_persons(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+	from
+        (
+		select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
+        ) t;
+
+	result_set = CONCAT('"persons":[ ', raw_json, ']');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT PERSONS
+
+--BEGIN J_SELECT CLUBS
+CREATE OR REPLACE FUNCTION j_select_clubs(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
+        ) t;
+
+	result_set = CONCAT('"clubs":[ ', raw_json, ']');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT CLUBS
 
 CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, INOUT x int)
 LANGUAGE plpgsql    
@@ -954,26 +996,9 @@ $$ LANGUAGE sql;
 
 --END SAMPLE JSON
 
---BEGIN NEW JSON
-CREATE OR REPLACE FUNCTION j_select_persons(email_id int)
-RETURNS text AS $$
-DECLARE
-raw_json text;
-result_set text;
-BEGIN
 
-SELECT json_agg(t) INTO raw_json
-	from
-        (
-		select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
-        ) t;
+--select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1;
 
-	result_set = CONCAT('{ "persons" : ', raw_json, '}');
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
---END NEW JSON
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE

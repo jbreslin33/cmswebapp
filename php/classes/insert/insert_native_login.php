@@ -42,6 +42,7 @@ class InsertNativeLogin
                                 	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
                                 	$txt =  "-100," . $jwt . "," . $data;
+					error_log($txt);
                                 	echo $txt;
                         	}
                 	}
