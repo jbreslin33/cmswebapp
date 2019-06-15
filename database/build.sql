@@ -852,6 +852,21 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_format_result_set(int)
+RETURNS text AS $$
+DECLARE
+        json_result_persons text;
+        json_result_clubs text;
+	result_set text;
+BEGIN
+	select into json_result_persons j_select_persons($1);
+        select into json_result_clubs j_select_clubs($1);
+        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_persons,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 --NATIVE INSERT LOGIN
 
@@ -861,8 +876,6 @@ DECLARE
 	found_email emails.email%TYPE;
 	result_set text;
 	DECLARE x int := -111; --for bad insert attempt
-	json_result_persons text;
-	json_result_clubs text;
 BEGIN
     	SELECT email INTO found_email FROM emails WHERE email = email_name;
 	IF found_email THEN
@@ -870,9 +883,7 @@ BEGIN
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
 		IF x THEN
-                	select into json_result_persons j_select_persons(x);
-                	select into json_result_clubs j_select_clubs(x);
-                        result_set = CONCAT(x,',','{',json_result_clubs,',',json_result_persons,'}');
+			result_set = f_format_result_set(x);
                 ELSE
                 	result_set = '-105';
 		END IF;
