@@ -894,8 +894,11 @@ SELECT json_agg(t) INTO raw_json
         (
 		select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
         ) t;
-
-	result_set = CONCAT('"persons":[ ', raw_json, ']');
+	IF raw_json is NULL THEN
+		result_set = CONCAT('"persons": []', raw_json);
+	ELSE
+		result_set = CONCAT('"persons": ', raw_json);
+	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -915,7 +918,11 @@ SELECT json_agg(t) INTO raw_json
 		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
         ) t;
 
-	result_set = CONCAT('"clubs":[ ', raw_json, ']');
+	IF raw_json is NULL THEN
+		result_set = CONCAT('"clubs": []', raw_json);
+	ELSE
+		result_set = CONCAT('"clubs": ', raw_json);
+	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
