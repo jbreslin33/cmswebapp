@@ -1250,14 +1250,19 @@ DECLARE
         result_set text;
 	DECLARE x int := -111;
 	json_result text; 
+	json_result_clubs text;
+	json_result_persons text;
 BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
-	IF x > 0 THEN
-        	select into json_result j_select_persons(email_id);
-                result_set = CONCAT_WS(',',email_id,json_result);
+
+        IF x > 0 THEN
+        	select into json_result_persons j_select_persons(email_id);
+                select into json_result_clubs j_select_clubs(email_id);
+                result_set = CONCAT(email_id,',','{',json_result_clubs,',',json_result_persons,'}');
         ELSE
                 result_set = '-105';
         END IF;
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
