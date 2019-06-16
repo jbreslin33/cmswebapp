@@ -692,46 +692,13 @@ class INSERT_CLUB_APPLICATION extends State
 			console.log("INSERT_CLUB_APPLICATION: EXECUTE");        
 		}
             
+		var screen = app.mInsertClubScreen;
 
-		app.mInsertClubScreen.processData();
+		screen.processData();
 
-		if (app.mInsertClubScreen.mData)
+		if (screen.mData)
                 {
-                        var dataArray = app.mInsertClubScreen.mData.split(",");
-                        app.mInsertClubScreen.mCode = dataArray[0];
-
-
-                       	var dataArray = app.mLogin.mData.split(",");
-                        app.mLogin.mCode = dataArray[0];
-                        if (app.mLogin.mCode == -100)
-                        {
-                                //mJWT
-                                app.mJWT = dataArray[1]; //set jwt
-                                //put in local storage
-                                localStorage.setItem('mJWT', app.mJWT);
-
-                                //JSON
-                                dataArray.shift(); //remove mCode
-                                dataArray.shift(); //remove mJwt
-                                dataArray.join();
-                                app.mLogin.mJson = JSON.parse(dataArray);
-
-                                app.mLogin.processClubTeamPersonData();
-
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('login_screen_password_message_id').innerHTML = '';
-                                document.getElementById('login_screen_email_message_id').innerHTML = '';
-                        }
-
-
-
-
-                        if (app.mInsertClubScreen.mCode == -100)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('insert_club_screen_name_message_id').innerHTML = '';
-                        }
-                        if (app.mInsertClubScreen.mCode == -106)
+                        if (screen.mCode == -106)
                         {
                                 document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
                                 document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
