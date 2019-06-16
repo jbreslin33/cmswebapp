@@ -63,4 +63,29 @@ class Screen
         {
                 document.getElementById(this.mHtmlId).style.display = "none";
         }
+
+	processClubTeamPersonData()
+	{
+		//load up clubs option
+                var select = document.getElementById("club_select_id");
+               	for (var i = 0; i < this.mJson.clubs.length; i++)
+                {
+                	var opt = document.createElement('option');
+                        opt.value = this.mJson.clubs[i].id;
+                        var name = this.mJson.clubs[i].name;
+                        opt.innerHTML = name;
+                        select.appendChild(opt);
+                }
+
+                //load up persons option
+                var select = document.getElementById("person_select_id");
+                for (var i = 0; i < this.mJson.persons.length; i++)
+                {
+                	var opt = document.createElement('option');
+                       	opt.value = this.mJson.persons[i].id;
+                        var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                        opt.innerHTML = full_name;
+                        select.appendChild(opt);
+                }
+	}
 }
