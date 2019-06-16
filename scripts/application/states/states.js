@@ -209,10 +209,22 @@ class LOGIN_APPLICATION extends State
 				dataArray.join();
 				app.mLogin.mJson = JSON.parse(dataArray);
                                 //remove all old options
+				//
 
-                                //load up option
-                                var select = document.getElementById("person_select_id");
+				//load up clubs option
+                                var select = document.getElementById("club_select_id");
                                 for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = app.mLogin.mJson.clubs[i].id;
+                                        var name = app.mLogin.mJson.clubs[i].name;
+                                        opt.innerHTML = name;
+                                        select.appendChild(opt);
+                                }
+
+                                //load up persons option
+                                var select = document.getElementById("person_select_id");
+				for (var i = 0; i < app.mLogin.mJson.persons.length; i++)
                                 {
                                         var opt = document.createElement('option');
                                         opt.value = app.mLogin.mJson.persons[i].id;
