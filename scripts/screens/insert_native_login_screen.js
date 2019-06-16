@@ -86,4 +86,14 @@ class InsertLoginScreen extends Screen
 	{
               document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 	}
+
+	whatis()
+	{
+/*
+        	document.getElementById('insert_native_login_screen_email_message_id').style.color = 'red';
+                document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
+                //show link as well
+               document.getElementById("insert_native_login_screen_link_id").style.display = "block";
+	       */
+	}
 }

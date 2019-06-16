@@ -63,6 +63,37 @@ class Screen
         {
                 document.getElementById(this.mHtmlId).style.display = "none";
         }
+	processData()
+	{
+                if (this.mData)
+                {
+                        var dataArray = this.mData.split(",");
+                        this.mCode = dataArray[0];
+
+                        var dataArray = this.mData.split(",");
+                        this.mCode = dataArray[0];
+                        if (this.mCode == -100)
+                        {
+                                //mJWT
+                                this.mApplication.mJWT = dataArray[1]; //set jwt
+                                
+				//put in local storage
+                                localStorage.setItem('mJWT', this.mApplication.mJWT);
+
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                this.mJson = JSON.parse(dataArray);
+
+                                this.processClubTeamPersonData();
+
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                document.getElementById('login_screen_password_message_id').innerHTML = '';
+                                document.getElementById('login_screen_email_message_id').innerHTML = '';
+                        }
+		}
+	}
 
 	processClubTeamPersonData()
 	{

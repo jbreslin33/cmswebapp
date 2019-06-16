@@ -192,29 +192,12 @@ class LOGIN_APPLICATION extends State
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
 
-		if (app.mLogin.mData)
-		{
-			var dataArray = app.mLogin.mData.split(",");
-			app.mLogin.mCode = dataArray[0];
-			if (app.mLogin.mCode == -100)
-			{
-				//mJWT
-				app.mJWT = dataArray[1]; //set jwt
-				//put in local storage
-				localStorage.setItem('mJWT', app.mJWT);
-                        
-				//JSON
-				dataArray.shift(); //remove mCode
-				dataArray.shift(); //remove mJwt
-				dataArray.join();
-				app.mLogin.mJson = JSON.parse(dataArray);
+		var screen = app.mLogin;
 
-				app.mLogin.processClubTeamPersonData();
-					
-				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-				document.getElementById('login_screen_password_message_id').innerHTML = '';
-				document.getElementById('login_screen_email_message_id').innerHTML = '';
-			}
+		screen.processData();
+
+		if (screen.mData)
+		{
 			if (app.mLogin.mCode == -101)
 			{
                 		document.getElementById('login_screen_email_message_id').style.color = 'red';
@@ -322,33 +305,17 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXECUTE");        
 		}
+
+		var screen = app.mInsertNativeLoginScreen;
+
+		screen.processData();
               
                 if (app.mInsertNativeLoginScreen.mData)
-                {
-                        var dataArray = app.mInsertNativeLoginScreen.mData.split(",");
-                        app.mInsertNativeLoginScreen.mCode = dataArray[0];
-
-                        if (app.mInsertNativeLoginScreen.mCode == -100)
-                        {
-                                app.mJWT = dataArray[1]; //set jwt
-                                //put in local storage
-                                localStorage.setItem('mJWT', app.mJWT);
-
-				//JSON
-                                dataArray.shift(); //remove mCode
-                                dataArray.shift(); //remove mJwt
-                                dataArray.join();
-                                app.mLogin.mJson = JSON.parse(dataArray);
-                                
-				app.mLogin.processClubTeamPersonData();
-
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
-                        }
-                        if (app.mInsertNativeLoginScreen.mCode == -101)
-                        {
+		{
+			if (app.mInsertNativeLoginScreen.mCode == -101)
+                	{
 				document.getElementById('insert_native_login_screen_email_message_id').style.color = 'red';
-                        	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
+                       		document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
 				//show link as well
 				document.getElementById("insert_native_login_screen_link_id").style.display = "block";
                         }
@@ -724,11 +691,39 @@ class INSERT_CLUB_APPLICATION extends State
 		{
 			console.log("INSERT_CLUB_APPLICATION: EXECUTE");        
 		}
-             
+            
+
+		app.mInsertClubScreen.processData();
+
 		if (app.mInsertClubScreen.mData)
                 {
                         var dataArray = app.mInsertClubScreen.mData.split(",");
                         app.mInsertClubScreen.mCode = dataArray[0];
+
+
+                       	var dataArray = app.mLogin.mData.split(",");
+                        app.mLogin.mCode = dataArray[0];
+                        if (app.mLogin.mCode == -100)
+                        {
+                                //mJWT
+                                app.mJWT = dataArray[1]; //set jwt
+                                //put in local storage
+                                localStorage.setItem('mJWT', app.mJWT);
+
+                                //JSON
+                                dataArray.shift(); //remove mCode
+                                dataArray.shift(); //remove mJwt
+                                dataArray.join();
+                                app.mLogin.mJson = JSON.parse(dataArray);
+
+                                app.mLogin.processClubTeamPersonData();
+
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                document.getElementById('login_screen_password_message_id').innerHTML = '';
+                                document.getElementById('login_screen_email_message_id').innerHTML = '';
+                        }
+
+
 
 
                         if (app.mInsertClubScreen.mCode == -100)
