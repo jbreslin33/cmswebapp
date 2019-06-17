@@ -1350,11 +1350,12 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
 rec RECORD;
+returning_team_member_id team_members.id%TYPE;
 BEGIN
        	insert into teams (club_id,name) values ($2,$5) returning id into x;
 
         FOR rec IN
-                select club_members.id from club_members join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
+                select club_members.id from club_members join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id join clubs on clubs.id=club_members.club_id where emails_persons.email_id = $1
         LOOP
                 IF rec.id = $4 THEN
                         insert into team_members (team_id, club_members_id) values (x, rec.id) returning id into returning_team_member_id;
@@ -1376,13 +1377,15 @@ DECLARE
 	found_club_administrator_id club_administrators.id%TYPE;
 	found_club_members_id club_members.id%TYPE;
 BEGIN
+	--are you a club admin of club $2????
 	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
 
-	select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
 
 	IF found_club_administrator_id THEN
+		--lets get your club_members.id so we can make pass in to p function and make you a team_manager
+		select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
 
-		CALL p_insert_team($1,$4,found_club_members_id,x);
+		CALL p_insert_team($1,$2,$3,found_club_members_id,$4,x);
 
 		IF x > 0 THEN
                      	result_set = f_format_result_set($1);
