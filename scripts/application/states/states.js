@@ -309,6 +309,19 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		var screen = app.mInsertNativeLoginScreen;
 
 		screen.processData();
+
+		if (screen.mJson)
+		{
+			if (screen.mJson.persons)
+			{
+				console.log('we got persons');
+				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+			}
+			else
+			{
+				console.log('no persons');
+			}
+		}
               
                 if (app.mInsertNativeLoginScreen.mData)
 		{
@@ -1025,6 +1038,10 @@ class INSERT_PRACTICE_APPLICATION extends State
 		{
 			console.log("INSERT_PRACTICE_APPLICATION: EXECUTE");        
 		}
+               
+		var screen = app.mInsertPracticeScreen;
+
+                screen.processData();
 	}
 
         exit(app)

@@ -56,4 +56,5 @@ class InsertClubScreen extends Screen
 	{
               document.getElementById("insert_club_screen_html_id").style.display = "none";
 	}
+	
 }

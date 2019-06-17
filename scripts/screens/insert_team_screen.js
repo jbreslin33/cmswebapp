@@ -48,4 +48,24 @@ class InsertTeamScreen extends Screen
                 	request.send();
 		}
 	}
+
+/*
+        processClubTeamPersonData()
+        {
+                super.processClubTeamPersonData();
+
+		//load up teams option
+                var select = document.getElementById("insert_team_screen_pitch_id");
+                select.length = 0;
+                for (var i = 0; i < this.mJson.pitches.length; i++)
+                {
+                        var opt = document.createElement('option');
+                        opt.value = this.mJson.pitches[i].id;
+                        var name = this.mJson.pitches[i].name;
+                        opt.innerHTML = name;
+                        select.appendChild(opt);
+                }
+
+        }
+	*/
 }

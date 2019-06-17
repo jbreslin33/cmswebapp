@@ -12,20 +12,7 @@ class InsertPracticeScreen extends Screen
 		this.mSpinnerId = "insert_practice_screen_spinner_id";
 		this.mHtmlId = "insert_practice_screen_html_id";
 
-		//sql php vars
-		this.mEmail = null;
-		
 		document.getElementById("insertpracticescreenbuttonid").onclick = this.hit.bind(this);
-                
-                this.mStateMachine = new StateMachine(this);
-                this.mGLOBAL_INSERT_PRACTICE_SCREEN            = new GLOBAL_INSERT_PRACTICE_SCREEN();
-                this.mINIT_INSERT_PRACTICE_SCREEN            = new INIT_INSERT_PRACTICE_SCREEN();
-                this.mWAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN            = new WAIT_FOR_SELECTS_INSERT_PRACTICE_SCREEN();
-                this.mWAIT_FOR_SUBMIT_INSERT_PRACTICE_SCREEN            = new WAIT_FOR_SUBMIT_INSERT_PRACTICE_SCREEN();
-                this.mWAIT_INSERT_PRACTICE_SCREEN            = new WAIT_INSERT_PRACTICE_SCREEN();
-
-                this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_PRACTICE_SCREEN);
-                this.mStateMachine.changeState(this.mINIT_INSERT_PRACTICE_SCREEN);
 	}
 
 	get()

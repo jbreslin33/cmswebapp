@@ -88,7 +88,7 @@ class Screen
 
                                 this.processClubTeamPersonData();
 
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                //this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                                 document.getElementById('login_screen_password_message_id').innerHTML = '';
                                 document.getElementById('login_screen_email_message_id').innerHTML = '';
                         }
@@ -99,40 +99,63 @@ class Screen
 	{
 
 		//load up clubs option
-
-                var select = document.getElementById("club_select_id");
-		select.length = 0;
-               	for (var i = 0; i < this.mJson.clubs.length; i++)
-                {
-                	var opt = document.createElement('option');
-                        opt.value = this.mJson.clubs[i].id;
-                        var name = this.mJson.clubs[i].name;
-                        opt.innerHTML = name;
-                        select.appendChild(opt);
-                }
-
+		if (this.mJson.clubs)
+		{
+                	var select = document.getElementById("club_select_id");
+			select.length = 0;
+               		for (var i = 0; i < this.mJson.clubs.length; i++)
+                	{
+                		var opt = document.createElement('option');
+                        	opt.value = this.mJson.clubs[i].id;
+                        	var name = this.mJson.clubs[i].name;
+                        	opt.innerHTML = name;
+                        	select.appendChild(opt);
+                	}
+		}
+		
 		//load up teams option
-                var select = document.getElementById("team_select_id");
-		select.length = 0;
-               	for (var i = 0; i < this.mJson.teams.length; i++)
-                {
-                	var opt = document.createElement('option');
-                        opt.value = this.mJson.teams[i].id;
-                        var name = this.mJson.teams[i].name;
-                        opt.innerHTML = name;
-                        select.appendChild(opt);
-                }
+		if (this.mJson.teams)
+		{
+                	var select = document.getElementById("team_select_id");
+			select.length = 0;
+               		for (var i = 0; i < this.mJson.teams.length; i++)
+                	{
+                		var opt = document.createElement('option');
+                        	opt.value = this.mJson.teams[i].id;
+                        	var name = this.mJson.teams[i].name;
+                        	opt.innerHTML = name;
+                        	select.appendChild(opt);
+                	}
+		}
 
-                //load up persons option
-                var select = document.getElementById("person_select_id");
-		select.length = 0;
-                for (var i = 0; i < this.mJson.persons.length; i++)
-                {
-                	var opt = document.createElement('option');
-                       	opt.value = this.mJson.persons[i].id;
-                        var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                        opt.innerHTML = full_name;
-                        select.appendChild(opt);
-                }
+		if (this.mJson.persons)
+		{
+                	//load up persons option
+                	var select = document.getElementById("person_select_id");
+			select.length = 0;
+                	for (var i = 0; i < this.mJson.persons.length; i++)
+                	{
+                		var opt = document.createElement('option');
+                       		opt.value = this.mJson.persons[i].id;
+                        	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                        	opt.innerHTML = full_name;
+                        	select.appendChild(opt);
+                	}
+		}
+		
+		if (this.mJson.pitches)
+		{
+                	//load up pitches option
+                	var select = document.getElementById("insert_team_screen_pitch_id");
+			select.length = 0;
+                	for (var i = 0; i < this.mJson.pitches.length; i++)
+                	{
+                		var opt = document.createElement('option');
+                       		opt.value = this.mJson.pitches[i].id;
+                        	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                        	opt.innerHTML = full_name;
+                        	select.appendChild(opt);
+                	}
+		}
 	}
 }
