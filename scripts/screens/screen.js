@@ -97,8 +97,11 @@ class Screen
 
 	processClubTeamPersonData()
 	{
+
 		//load up clubs option
+
                 var select = document.getElementById("club_select_id");
+		select.length = 0;
                	for (var i = 0; i < this.mJson.clubs.length; i++)
                 {
                 	var opt = document.createElement('option');
@@ -110,6 +113,7 @@ class Screen
 
 		//load up teams option
                 var select = document.getElementById("team_select_id");
+		select.length = 0;
                	for (var i = 0; i < this.mJson.teams.length; i++)
                 {
                 	var opt = document.createElement('option');
@@ -121,6 +125,7 @@ class Screen
 
                 //load up persons option
                 var select = document.getElementById("person_select_id");
+		select.length = 0;
                 for (var i = 0; i < this.mJson.persons.length; i++)
                 {
                 	var opt = document.createElement('option');
