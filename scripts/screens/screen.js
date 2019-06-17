@@ -108,6 +108,17 @@ class Screen
                         select.appendChild(opt);
                 }
 
+		//load up teams option
+                var select = document.getElementById("team_select_id");
+               	for (var i = 0; i < this.mJson.teams.length; i++)
+                {
+                	var opt = document.createElement('option');
+                        opt.value = this.mJson.teams[i].id;
+                        var name = this.mJson.teams[i].name;
+                        opt.innerHTML = name;
+                        select.appendChild(opt);
+                }
+
                 //load up persons option
                 var select = document.getElementById("person_select_id");
                 for (var i = 0; i < this.mJson.persons.length; i++)

@@ -856,12 +856,14 @@ CREATE OR REPLACE FUNCTION f_format_result_set(int)
 RETURNS text AS $$
 DECLARE
         json_result_persons text;
+        json_result_teams text;
         json_result_clubs text;
 	result_set text;
 BEGIN
 	select into json_result_persons j_select_persons($1);
+	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
-        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_persons,'}');
+        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -914,6 +916,32 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PERSONS
+
+--BEGIN J_SELECT TEAMS
+CREATE OR REPLACE FUNCTION j_select_teams(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+		--select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
+		--select teams.id, teams.name from teams join team_members on team_members.team_id=teams.id join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
+		select teams.id, teams.name from teams
+        ) t;
+
+	IF raw_json is NULL THEN
+		result_set = CONCAT('"teams": []', raw_json);
+	ELSE
+		result_set = CONCAT('"teams": ', raw_json);
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT CLUBS
 
 --BEGIN J_SELECT CLUBS
 CREATE OR REPLACE FUNCTION j_select_clubs(email_id int)
@@ -1194,8 +1222,6 @@ BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
   	FOR rec IN 
 		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $3
-		--union
-		--select persons.id from persons join emails_persons_persons on emails_persons_persons.person_id=persons.id where emails_persons_persons.email_person_id = $3
 	LOOP
 		IF rec.id = person_id THEN
 			insert into club_members (club_id, person_id) values (x, rec.id) returning id into returning_club_member_id;
@@ -1318,13 +1344,25 @@ END;
 $$;
 --END INSERT PERSON
 
-
-CREATE OR REPLACE PROCEDURE p_insert_team(int,text, INOUT x int)
+--email_id,club_id,person_id,club_members_id,name
+CREATE OR REPLACE PROCEDURE p_insert_team(int,int,int,int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+rec RECORD;
 BEGIN
-       	insert into teams (club_id,name) values ($1,$2) returning id into x;
+       	insert into teams (club_id,name) values ($2,$5) returning id into x;
+
+        FOR rec IN
+                select club_members.id from club_members join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
+        LOOP
+                IF rec.id = $4 THEN
+                        insert into team_members (team_id, club_members_id) values (x, rec.id) returning id into returning_team_member_id;
+                ELSE
+                        insert into team_members (team_id, club_members_id) values (x, rec.id);
+                END IF;
+        END LOOP;
+        insert into team_managers (team_member_id) values (returning_team_member_id);
 END;
 $$;
 
@@ -1336,12 +1374,15 @@ DECLARE
 	result_set text;
 	DECLARE x int := -111;
 	found_club_administrator_id club_administrators.id%TYPE;
+	found_club_members_id club_members.id%TYPE;
 BEGIN
 	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
 
+	select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
+
 	IF found_club_administrator_id THEN
 
-		CALL p_insert_team($2,$4,x);
+		CALL p_insert_team($1,$4,found_club_members_id,x);
 
 		IF x > 0 THEN
                      	result_set = f_format_result_set($1);
