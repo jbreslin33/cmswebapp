@@ -12,57 +12,22 @@ class InsertTeamScreen extends Screen
 		this.mSpinnerId = "insert_team_screen_spinner_id";
 		this.mHtmlId = "insert_team_screen_html_id";
 
-		//sql php vars
-		this.mEmail = null;
-		
 		document.getElementById("insertteamscreenbuttonid").onclick = this.hit.bind(this);
-                
-                this.mStateMachine = new StateMachine(this);
-                this.mGLOBAL_INSERT_TEAM_SCREEN            = new GLOBAL_INSERT_TEAM_SCREEN();
-                this.mINIT_INSERT_TEAM_SCREEN            = new INIT_INSERT_TEAM_SCREEN();
-                this.mWAIT_FOR_CLUBS_INSERT_TEAM_SCREEN            = new WAIT_FOR_CLUBS_INSERT_TEAM_SCREEN();
-                this.mWAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN            = new WAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN();
-                this.mWAIT_INSERT_TEAM_SCREEN            = new WAIT_INSERT_TEAM_SCREEN();
-
-                this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_TEAM_SCREEN);
-                this.mStateMachine.changeState(this.mINIT_INSERT_TEAM_SCREEN);
-	}
-
-	get()
-	{
-		if (this.mApplication.mJWT)
-		{
-			var select = document.getElementById("person_select_id");
-                	var person_id = select.options[select.selectedIndex].value;
-			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + localStorage.getItem("mJWT") + '&person_id=' + person_id; 
-		        var request = new XMLHttpRequest();
-                	request.onreadystatechange = function()
-                	{
-                        	if (request.readyState === XMLHttpRequest.DONE)
-                        	{
-                                	if (request.status === 200)
-                                	{
-						console.log('response:' + this.responseText);
-                                        	APPLICATION.mInsertTeamScreen.mData = this.responseText;
-                                	}
-                        	}
-                	};
-
-                        request.open('POST', url);
-                        request.send();
-		}
 	}
 
 	hit()
 	{
 		this.mHit = true;
 
-		this.mName  = document.getElementById("insert_team_screen_name_id").value;
+		var name  = document.getElementById("insert_team_screen_name_id").value;
+			
+		var person_select = document.getElementById("person_select_id");
+               	var person_id = person_select.options[person_select.selectedIndex].value;
 
-		var select = document.getElementById("person_select_id");
-                var person_id = select.options[select.selectedIndex].value;
+		var club_select = document.getElementById("club_select_id");
+               	var club_id = club_select.options[club_select.selectedIndex].value;
 
-		var url = "/php/classes/insert/insert_team.php?name=" + this.mName + '&club_id=' + document.getElementById("insert_team_screen_select_id").value + '&jwt=' + APPLICATION.mJWT + '&person_id=' + person_id;
+		var url = "/php/classes/insert/insert_team.php?jwt=" + APPLICATION.mJWT + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

@@ -1319,40 +1319,41 @@ $$;
 --END INSERT PERSON
 
 
-CREATE OR REPLACE PROCEDURE p_insert_team(TEXT,int,int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_team(int,text, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
 BEGIN
-       	insert into teams (name,club_id) values ($1,$2) returning id into x;
+       	insert into teams (club_id,name) values ($1,$2) returning id into x;
 END;
 $$;
 
 --not using person id to check if club admin but need too!!!!!!!!!!!!!
-CREATE OR REPLACE FUNCTION f_insert_team(TEXT, int, person_id int)
+--email_id,club_id,person_id,name
+CREATE OR REPLACE FUNCTION f_insert_team(int,int,int,text)
 RETURNS text AS $$
 DECLARE
-        return_code text;
+	result_set text;
 	DECLARE x int := -111;
 	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id where club_members.person_id = $3; 
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
 
 	IF found_club_administrator_id THEN
 
-		CALL p_insert_team($1,$2,person_id,x);
+		CALL p_insert_team($2,$4,x);
 
 		IF x > 0 THEN
-			return_code = '-100';
+                     	result_set = f_format_result_set($1);
 		ELSE
-			return_code = x;
+			result_set = x;
 		END IF;
 
 	ELSE
-		return_code = '-121';
+		result_set = '-121';
 	END IF;
 
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 

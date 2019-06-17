@@ -965,6 +965,20 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			console.log("INSERT_TEAM_APPLICATION: EXECUTE");        
 		}
+                var screen = app.mInsertTeamScreen;
+
+                screen.processData();
+
+                if (screen.mData)
+                {
+                        if (screen.mCode == -106)
+                        {
+                                document.getElementById('insert_team_screen_name_message_id').style.color = 'red';
+                                document.getElementById('insert_team_screen_name_message_id').innerHTML = 'Team Name already exists.';
+                                app.mInsertTeamScreen.mCode = 0;
+                                app.mInsertTeamScreen.mData = null;
+                        }
+                }
 	}
 
         exit(app)
