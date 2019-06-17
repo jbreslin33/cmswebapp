@@ -954,7 +954,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
+		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
         ) t;
 
 	IF raw_json is NULL THEN
