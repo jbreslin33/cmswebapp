@@ -230,6 +230,7 @@ class LOGIN_APPLICATION extends State
 		//reset data variables
 		app.mLogin.mCode = 0;
 		app.mLogin.mData = null;
+		app.mLogin.mJson = null;
 
 		var element = document.getElementById("login_nav_id");
 		element.className = element.className.replace(/\active\b/g, "");
@@ -351,6 +352,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		}
 		app.mInsertNativeLoginScreen.mCode = 0;
 		app.mInsertNativeLoginScreen.mData = null;
+		app.mInsertNativeLoginScreen.mJson = null;
 
 		//hide it for now maybe delete later
 		var element = document.getElementById("insert_native_login_screen_nav_id");
@@ -712,10 +714,18 @@ class INSERT_CLUB_APPLICATION extends State
 		{
 			console.log("INSERT_CLUB_APPLICATION: EXECUTE");        
 		}
-            
+		
 		var screen = app.mInsertClubScreen;
 
 		screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
 
 		if (screen.mData)
                 {
@@ -738,6 +748,7 @@ class INSERT_CLUB_APPLICATION extends State
 		app.mInsertClubScreen.hide();
 		app.mInsertClubScreen.mCode = 0;
 		app.mInsertClubScreen.mData = null;
+		app.mInsertClubScreen.mJson = null;
 	}
 }
 
