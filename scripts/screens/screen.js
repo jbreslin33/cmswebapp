@@ -103,6 +103,7 @@ class Screen
 		//load up clubs option
 		if (this.mJson.clubs)
 		{
+			console.log('A1');
                 	var select = document.getElementById("club_select_id");
 			select.length = 0;
                		for (var i = 0; i < this.mJson.clubs.length; i++)
@@ -118,6 +119,7 @@ class Screen
 		//load up teams option
 		if (this.mJson.teams)
 		{
+			console.log('A2');
                 	var select = document.getElementById("team_select_id");
 			select.length = 0;
                		for (var i = 0; i < this.mJson.teams.length; i++)
@@ -132,13 +134,16 @@ class Screen
 
 		if (this.mJson.persons)
 		{
+			console.log('A');
 			if (this.mJson.clubs)
 			{
+				console.log('B');
                 		//load up persons option
                 		var select = document.getElementById("person_select_id");
 				select.length = 0;
                 		for (var i = 0; i < this.mJson.persons.length; i++)
                 		{
+					console.log('B:' + i);
                 			var opt = document.createElement('option');
                        			opt.value = this.mJson.persons[i].id;
                         		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
@@ -148,6 +153,7 @@ class Screen
 			}
 			else
 			{
+				console.log('C');
                    		//load up persons for delete option
                                 var select = document.getElementById("delete_person_screen_select_id");
                                 select.length = 0;

@@ -847,7 +847,19 @@ class DELETE_PERSON_APPLICATION extends State
 		app.mDeletePersonScreen.get();
 		app.mDeletePersonScreen.show();
 	}
+	/*
+                var screen = app.mInsertTeamScreen;
 
+                screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
+*/
         execute(app)
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
@@ -864,7 +876,7 @@ class DELETE_PERSON_APPLICATION extends State
                         {
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         }
-                        if (screen.mJson.persons)
+			else if(screen.mJson.persons)
                         {
 				screen.mCode = 0;
 				screen.mData = null;

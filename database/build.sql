@@ -1326,8 +1326,9 @@ BEGIN
 	IF total_persons > 1 THEN
         	CALL p_delete_person($1,$2,x);
         	IF x > 0 THEN
-                	select into json_result j_select_persons($1);
-                	result_set = CONCAT_WS(',',$1,json_result);
+			result_set = f_format_result_set($1);
+                	--select into json_result j_select_persons($1);
+                	--result_set = CONCAT_WS(',',$1,json_result);
         	ELSE
                 	result_set = '-132';
         	END IF;
