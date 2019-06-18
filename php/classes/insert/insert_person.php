@@ -40,11 +40,7 @@ class InsertPerson
                 }
 
                 $database = new Database("localhost","cms","postgres","mibesfat");
-
-		//actually we are going to get the jwt and need to extract id
-
 		$sql = 'select f_insert_person($1,$2,$3,$4,$5,$6)';
-		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_person", $sql);
 
 		$oneRing = new OneRing();

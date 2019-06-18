@@ -1048,10 +1048,21 @@ class INSERT_PRACTICE_APPLICATION extends State
 		{
 			console.log("INSERT_PRACTICE_APPLICATION: EXECUTE");        
 		}
-               
-		var screen = app.mInsertPracticeScreen;
 
+		var screen = app.mInsertPracticeScreen;
                 screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                        if (screen.mJson.pitches)
+                        {
+				console.log('got pitches');
+                        }
+                }
 	}
 
         exit(app)
@@ -1063,6 +1074,7 @@ class INSERT_PRACTICE_APPLICATION extends State
 		app.mInsertPracticeScreen.hide();
 		app.mInsertPracticeScreen.mCode = 0;
 		app.mInsertPracticeScreen.mData = null;
+		app.mInsertPracticeScreen.mJson = null;
 	}
 }
 
