@@ -783,42 +783,23 @@ class INSERT_PERSON_APPLICATION extends State
 			console.log("INSERT_PERSON_APPLICATION: EXECUTE");        
 		}
 		var screen = app.mInsertPersonScreen;
+
+                screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
+
              
 		if (screen.mData)
                 {
                         var dataArray = app.mInsertPersonScreen.mData.split(",");
                         screen.mCode = dataArray[0];
 
-                        if (screen.mCode == -100)
-                        {
-
-                                app.mJWT = dataArray[1]; //set jwt
-                                //put in local storage
-                                localStorage.setItem('mJWT', app.mJWT);
-
-                                //JSON
-                                dataArray.shift(); //remove mCode
-                                dataArray.shift(); //remove mJwt
-                                dataArray.join();
-                                screen.mJson = JSON.parse(dataArray);
-                                //remove all old options
-
-				
-                                //load up option
-                                var select = document.getElementById("person_select_id");
-				select.length = 0;
-                                for (var i = 0; i < screen.mJson.persons.length; i++)
-                                {
-                                        var opt = document.createElement('option');
-                                        opt.value = screen.mJson.persons[i].id;
-                                        var full_name = screen.mJson.persons[i].first_name + ' ' + screen.mJson.persons[i].middle_name + ' ' + screen.mJson.persons[i].last_name;
-                                        opt.innerHTML = full_name;
-                                        select.appendChild(opt);
-                                }
-
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                                document.getElementById('insert_person_screen_name_message_id').innerHTML = '';
-                        }
                         if (app.mInsertPersonScreen.mCode == -106)
                         {
                                 document.getElementById('insert_person_screen_name_message_id').style.color = 'red';
@@ -838,6 +819,7 @@ class INSERT_PERSON_APPLICATION extends State
 		app.mInsertPersonScreen.hide();
 		app.mInsertPersonScreen.mCode = 0;
 		app.mInsertPersonScreen.mData = null;
+		app.mInsertPersonScreen.mJson = null;
 	}
 }
 
@@ -1000,6 +982,14 @@ class INSERT_TEAM_APPLICATION extends State
                 var screen = app.mInsertTeamScreen;
 
                 screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
 
                 if (screen.mData)
                 {
