@@ -172,8 +172,8 @@ class Screen
                 	{
                 		var opt = document.createElement('option');
                        		opt.value = this.mJson.pitches[i].id;
-                        	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                        	opt.innerHTML = full_name;
+                        	var name = this.mJson.pitches[i].name;
+                        	opt.innerHTML = name;
                         	select.appendChild(opt);
                 	}
 		}
