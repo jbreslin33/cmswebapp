@@ -17,7 +17,7 @@ class SelectPitches
 
                 if (isset($_GET['club_id']))
                 {
-                        $club = $_GET['club_id'];
+                        $club_id = $_GET['club_id'];
                 }
 
 		//dont use this other than logged in check.....
