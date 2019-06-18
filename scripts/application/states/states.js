@@ -1002,6 +1002,7 @@ class INSERT_PRACTICE_APPLICATION extends State
 			app.mInsertPracticeScreen = new InsertPracticeScreen(app);
 		}
 		app.mInsertPracticeScreen.show();
+		app.mInsertPracticeScreen.get();
 	}
 
         execute(app)

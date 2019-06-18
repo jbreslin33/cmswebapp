@@ -894,6 +894,32 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--BEGIN J_SELECT PITCHES
+--params:club_id
+CREATE OR REPLACE FUNCTION j_select_pitches(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select pitches.id, pitches.name from pitches where club_id = $1 
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"pitches": []', raw_json);
+        ELSE
+                result_set = CONCAT('"pitches": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT PITCHES
+
+
 --BEGIN J_SELECT PERSONS
 CREATE OR REPLACE FUNCTION j_select_persons(email_id int)
 RETURNS text AS $$
@@ -928,8 +954,6 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		--select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
-		--select teams.id, teams.name from teams join team_members on team_members.team_id=teams.id join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = $1
 		select teams.id, teams.name from teams
         ) t;
 
@@ -941,7 +965,7 @@ SELECT json_agg(t) INTO raw_json
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
---END J_SELECT CLUBS
+--END J_SELECT TEAMS
 
 --BEGIN J_SELECT CLUBS
 CREATE OR REPLACE FUNCTION j_select_clubs(email_id int)
@@ -1257,6 +1281,22 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+--BEGIN SELECT PITCHES
+CREATE OR REPLACE FUNCTION f_select_pitches(club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result_pitches text;
+        json_result text;
+BEGIN
+        select into json_result_pitches j_select_pitches($1);
+        result_set = CONCAT($1,',','{',json_result_pitches,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 --BEGIN SELECT PERSON
 CREATE OR REPLACE FUNCTION f_select_person(email_id int)

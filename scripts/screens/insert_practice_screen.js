@@ -19,7 +19,7 @@ class InsertPracticeScreen extends Screen
 	{
 		if (this.mApplication.mJWT)
 		{
-			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + this.mApplication.mJWT; 
+			var url = "/php/classes/select/select_pitches.php?jwt=" + this.mApplication.mJWT; 
 		        var request = new XMLHttpRequest();
                 	request.onreadystatechange = function()
                 	{
