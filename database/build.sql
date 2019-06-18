@@ -1267,15 +1267,8 @@ DECLARE
         json_result_persons text;
         json_result text;
 BEGIN
-
         select into json_result_persons j_select_persons($1);
-        --select into json_result_teams j_select_teams($1);
-        --select into json_result_clubs j_select_clubs($1);
-        --result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
         result_set = CONCAT($1,',','{',json_result_persons,'}');
-
-        --select into json_result j_select_persons(email_id);
-        --result_set = CONCAT_WS(',',email_id,json_result);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
