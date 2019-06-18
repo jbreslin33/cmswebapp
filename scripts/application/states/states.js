@@ -191,10 +191,18 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
-
+                
 		var screen = app.mLogin;
 
-		screen.processData();
+                screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
 
 		if (screen.mData)
 		{
