@@ -16,17 +16,6 @@ class DeletePersonScreen extends Screen
 		this.mEmail = null;
 		
 		document.getElementById("deletepersonscreenbuttonid").onclick = this.hit.bind(this);
-               /* 
-                this.mStateMachine = new StateMachine(this);
-                this.mGLOBAL_INSERT_TEAM_SCREEN            = new GLOBAL_INSERT_TEAM_SCREEN();
-                this.mINIT_INSERT_TEAM_SCREEN            = new INIT_INSERT_TEAM_SCREEN();
-                this.mWAIT_FOR_CLUBS_INSERT_TEAM_SCREEN            = new WAIT_FOR_CLUBS_INSERT_TEAM_SCREEN();
-                this.mWAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN            = new WAIT_FOR_SUBMIT_INSERT_TEAM_SCREEN();
-                this.mWAIT_INSERT_TEAM_SCREEN            = new WAIT_INSERT_TEAM_SCREEN();
-
-                this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_TEAM_SCREEN);
-                this.mStateMachine.changeState(this.mINIT_INSERT_TEAM_SCREEN);
-		*/
 	}
 
 	get()
