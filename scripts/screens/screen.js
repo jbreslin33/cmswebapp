@@ -18,6 +18,8 @@ class Screen
 
 		this.mHit = false;
 
+		this.mMessageSpan = null;
+
                 //states
 		this.mStateLogs = false;
                 this.mStateEnterLogs = true;

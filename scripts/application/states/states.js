@@ -1012,6 +1012,7 @@ class INSERT_TEAM_APPLICATION extends State
 		app.mInsertTeamScreen.hide();
 		app.mInsertTeamScreen.mCode = 0;
 		app.mInsertTeamScreen.mData = null;
+		app.mInsertTeamScreen.mJson = null;
 	}
 }
 
