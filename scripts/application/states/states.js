@@ -864,6 +864,12 @@ class DELETE_PERSON_APPLICATION extends State
                         {
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         }
+                        if (screen.mJson.persons)
+                        {
+				screen.mCode = 0;
+				screen.mData = null;
+				screen.mJson = null;
+			}
                 }
                 
 		if (screen.mCode == -131)
