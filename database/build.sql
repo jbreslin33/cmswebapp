@@ -220,6 +220,7 @@ CREATE TABLE teams_periodizations
 CREATE TABLE practices 
 (
         id SERIAL,
+	practice_date date,
         arrival_time timestamp, --only 1 arrival time leave it
         start_time timestamp, --only 1 start time leave it
         end_time timestamp,
@@ -1281,6 +1282,42 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE p_insert_practice(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+BEGIN
+	insert into practices (team_id, practice_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($2,$3,$4,$5,$6,$7,$8,$9,$10) returning id into x;
+END;
+$$;
+--END INSERT PERSON
+
+
+--$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
+
+--BEGIN INSERT PRACTICE
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,date,date,timestamp,timestamp,text,text,int,text)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+        CALL p_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+
+        IF x > 0 THEN
+                result_set = f_format_result_set(email_id);
+        ELSE
+                result_set = '-105';
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 --BEGIN SELECT PITCHES
 CREATE OR REPLACE FUNCTION f_select_pitches(club_id int)

@@ -10,9 +10,7 @@ class InsertPractice
 
 		//handle variables from sender's javascript
 		$jwt = null;
-		$club_id = null;
 		$team_id = null;
-		$person_id = null;
 		$date = null;
 		$arrival_time = null;
 		$start_time = null;
@@ -26,17 +24,9 @@ class InsertPractice
 		{
 			$jwt = $_GET['jwt'];
 		}
-		if (isset($_GET['club_id']))
-		{
-			$club_id = $_GET['club_id'];
-		}
 		if (isset($_GET['team_id']))
 		{
 			$team_id = $_GET['team_id'];
-		}
-		if (isset($_GET['person_id']))
-		{
-			$person_id = $_GET['person_id'];
 		}
 		if (isset($_GET['date']))
 		{
@@ -71,21 +61,22 @@ class InsertPractice
 			$field_name = $_GET['field_name'];
 		}
 
+		error_log($field_name);
+
 		//insert
 		if ($date)
 		{
 			//prep db
                 	$database = new Database("localhost","cms","postgres","mibesfat");
-			$sql = 'select f_insert_team($1,$2,$3,$4)';
-			$prepare_result = pg_prepare($database->mConnection, "f_insert_team", $sql);
+			$sql = 'select f_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)';
+			$prepare_result = pg_prepare($database->mConnection, "f_insert_practice", $sql);
 
-			//get id of sender
 			$oneRing = new OneRing();
                 	$payload = JWT::decode($jwt, $oneRing->mOneRing);
 			$email_id = $payload->email_id;
 
 			//result for sender
-			$result = pg_execute($database->mConnection, "f_insert_team", array( $email_id, $club_id, $person_id, $name));
+			$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
                		$return_value = pg_fetch_result($result, 0);
 
                 	$result_set = $database->formatResultSet($return_value);
@@ -99,6 +90,6 @@ class InsertPractice
         }
 }
 
-$insertTeam = new InsertTeam();	
+$insertPractice = new InsertPractice();	
 
 ?>
