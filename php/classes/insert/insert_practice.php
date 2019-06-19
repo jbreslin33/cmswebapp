@@ -28,9 +28,9 @@ class InsertPractice
 		{
 			$team_id = $_GET['team_id'];
 		}
-		if (isset($_GET['date']))
+		if (isset($_GET['practice_date']))
 		{
-			$date = $_GET['date'];
+			$practice_date = $_GET['practice_date'];
 		}
 		if (isset($_GET['arrival_time']))
 		{
@@ -64,7 +64,7 @@ class InsertPractice
 		error_log($field_name);
 
 		//insert
-		if ($date)
+		if ($practice_date)
 		{
 			//prep db
                 	$database = new Database("localhost","cms","postgres","mibesfat");

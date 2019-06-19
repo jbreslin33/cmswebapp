@@ -1298,7 +1298,7 @@ $$;
 --$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
 
 --BEGIN INSERT PRACTICE
-CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,date,date,timestamp,timestamp,text,text,int,text)
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,timestamp,timestamp,timestamp,text,text,int,text)
 RETURNS text AS $$
 DECLARE
         result_set text;
