@@ -221,9 +221,9 @@ CREATE TABLE practices
 (
         id SERIAL,
 	practice_date date,
-        arrival_time timestamp, --only 1 arrival time leave it
-        start_time timestamp, --only 1 start time leave it
-        end_time timestamp,
+        arrival_time time, --only 1 arrival time leave it
+        start_time time, --only 1 start time leave it
+        end_time time,
         address text,
         coordinates text,
 	pitch_id integer, --all you need for a session	
