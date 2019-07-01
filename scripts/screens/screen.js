@@ -85,16 +85,12 @@ class Screen
                                 dataArray.join();
                                 this.mJson = JSON.parse(dataArray);
 
-                                this.processClubTeamPersonData();
-
-                                //this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
-                                document.getElementById('login_screen_password_message_id').innerHTML = '';
-                                document.getElementById('login_screen_email_message_id').innerHTML = '';
+                                this.processJsonData();
                         }
 		}
 	}
 
-	processClubTeamPersonData()
+	processJsonData()
 	{
 
 		//load up clubs option

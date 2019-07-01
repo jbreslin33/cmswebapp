@@ -705,7 +705,7 @@ class MAIN_APPLICATION extends State
 		var element = document.getElementById("main_nav_id");
                 element.className = element.className.replace(/\active\b/g, "");
 
-                var screen = app.mMain.hide();
+                var screen = app.mMain;
                 screen.hide();
                 screen.mCode = 0;
                 screen.mData = null;
