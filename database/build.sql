@@ -1283,13 +1283,13 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_practice(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_practice(int,date,time,time,time,text,text,int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
 
 BEGIN
-	insert into practices (team_id, practice_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($2,$3,$4,$5,$6,$7,$8,$9,$10) returning id into x;
+	insert into practices (team_id, practice_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
 END;
 $$;
 --END INSERT PERSON
@@ -1298,17 +1298,17 @@ $$;
 --$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
 
 --BEGIN INSERT PRACTICE
-CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,timestamp,timestamp,timestamp,text,text,int,text)
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text)
 RETURNS text AS $$
 DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
 BEGIN
-        CALL p_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+        CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
 
         IF x > 0 THEN
-                result_set = f_format_result_set(email_id);
+                result_set = f_format_result_set($1);
         ELSE
                 result_set = '-105';
         END IF;
