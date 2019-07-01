@@ -71,9 +71,6 @@ class Screen
                 {
                         var dataArray = this.mData.split(",");
                         this.mCode = dataArray[0];
-
-                        var dataArray = this.mData.split(",");
-                        this.mCode = dataArray[0];
                         if (this.mCode == -100)
                         {
                                 //mJWT

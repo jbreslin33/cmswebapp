@@ -39,6 +39,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGOUT_APPLICATION);
                 }
+		else if (app.mLocationHash == 'main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mMAIN_APPLICATION);
+                }
 		else if (app.mLocationHash == 'update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
@@ -117,6 +121,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
+		document.getElementById("main_screen_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_person_screen_html_id").style.display = "none";
 		document.getElementById("delete_person_screen_html_id").style.display = "none";
@@ -632,7 +637,6 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 	}
 }
 
-
 class MAIN_APPLICATION extends State
 {
 	constructor() 
@@ -646,13 +650,10 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
-		//app.mStateMachine.changeState(app.mLOGIN_APPLICATION);
 		
 		if (app.mMain)
 		{
-                        //also maybe some clean up as well, so just leaving this if statement here.
                       app.mMain = new Main(app);
-
                 }
                 else
                 {
@@ -660,8 +661,8 @@ class MAIN_APPLICATION extends State
                 }
              	document.getElementById("main_nav_id").className += " active";
 
-                //app.mMain.show();
-
+                app.mMain.show();
+                app.mMain.get();
 	}
 
         execute(app)
@@ -670,6 +671,28 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: EXECUTE");        
 		}
+                var screen = app.mMain;
+                screen.processData();
+
+                if (screen.mJson)
+                {
+			/*
+                        if (screen.mJson.persons)
+                        {
+                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+				//instead we will display data (schedule)
+                        }
+                        if (screen.mJson.pitches)
+                        {
+                                console.log('got pitches');
+                        }
+			*/
+                        if (screen.mJson.practices)
+                        {
+                                console.log('got practices');
+                        }
+                }
+
 	}
 
         exit(app)
