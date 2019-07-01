@@ -34,7 +34,7 @@ class InsertPractice
 		}
 		if (isset($_GET['arrival_time']))
 		{
-			$arrivalTime = $_GET['arrival_time'];
+			$arrival_time = $_GET['arrival_time'];
 		}
 		if (isset($_GET['start_time']))
 		{
@@ -76,7 +76,7 @@ class InsertPractice
 			$email_id = $payload->email_id;
 
 			//result for sender
-			$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
+			$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $practice_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
                		$return_value = pg_fetch_result($result, 0);
 
                 	$result_set = $database->formatResultSet($return_value);
