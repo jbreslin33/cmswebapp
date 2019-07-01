@@ -65,6 +65,7 @@ class Screen
         {
                 document.getElementById(this.mHtmlId).style.display = "none";
         }
+
 	processData()
 	{
                 if (this.mData)
