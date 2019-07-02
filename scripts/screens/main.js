@@ -70,22 +70,37 @@ class Main extends Screen
 		super.processJsonData();
                 if (this.mJson.events)
                 {
-                        var card_0 = document.getElementById("main_screen_card_0");
+                        var main_screen_card_0 = document.getElementById("main_screen_card_0");
                         
 			console.log('length of events:' + this.mJson.events.length);
 			
 
-			var card_0_children_array = card_0.childNodes;
+			var main_screen_card_0_children_array = main_screen_card_0.childNodes;
 
                         for (var i = 0; i < this.mJson.events.length; i++)
                         {
                                 //date_div.innerHTML = this.mJson.events[i].practice_date;
-                                card_0_children_array[1].innerHTML = this.mJson.events[i].practice_date;
+				if (i == 0)
+				{
+                                	main_screen_card_0_children_array[1].innerHTML = this.mJson.events[i].practice_date;
+				}
+				else //clone
+				{
+					var clone = main_screen_card_0.cloneNode(true);
+					document.body.appendChild(clone);
+					clone.id = 'main_screen_card_' + i;
+					var card_children_array = clone.childNodes;
+					card_children_array[1].innerHTML = this.mJson.events[i].practice_date; 
+				}
                         }
                 }
 		else
 		{
 			console.log('elseer');
 		}
+		//after processing data reset
+	      	this.mCode = 0;
+                this.mData = null;
+                this.mJson = null;
 	}
 }
