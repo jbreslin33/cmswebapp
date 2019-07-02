@@ -992,6 +992,32 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT CLUBS
 
+
+--BEGIN J_SELECT EVENTS
+CREATE OR REPLACE FUNCTION j_select_events(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select practices.id, practices.practice_date from practices
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"events": []', raw_json);
+        ELSE
+                result_set = CONCAT('"events": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT EVENTS
+
+
 CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
@@ -1334,6 +1360,21 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--BEGIN SELECT EVENTS
+CREATE OR REPLACE FUNCTION f_select_events(email_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result_events text;
+        json_result text;
+BEGIN
+        select into json_result_events j_select_events($1);
+        result_set = CONCAT($1,',','{',json_result_events,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 --BEGIN SELECT PERSON
 CREATE OR REPLACE FUNCTION f_select_person(email_id int)
@@ -1349,6 +1390,7 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --BEGIN INSERT PERSON
 CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int)

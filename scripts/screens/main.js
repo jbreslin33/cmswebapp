@@ -33,33 +33,24 @@ class Main extends Screen
 
         get()
         {
-/*
-                var club_select = document.getElementById("club_select_id");
-
-                if (club_select.length)
+		if (this.mApplication.mJWT)
                 {
-                        var club_id = club_select.options[club_select.selectedIndex].value;
-
-                        if (this.mApplication.mJWT)
+                	var url = "/php/classes/select/select_events.php?jwt=" + APPLICATION.mJWT;
+                        var request = new XMLHttpRequest();
+                        request.onreadystatechange = function()
                         {
-                                var url = "/php/classes/select/select_pitches.php?jwt=" + APPLICATION.mJWT + '&club_id=' + club_id;
-                                var request = new XMLHttpRequest();
-                                request.onreadystatechange = function()
+                        	if (request.readyState === XMLHttpRequest.DONE)
                                 {
-                                        if (request.readyState === XMLHttpRequest.DONE)
+                                	if (request.status === 200)
                                         {
-                                                if (request.status === 200)
-                                                {
-                                                        console.log('response:' + this.responseText);
-                                                        APPLICATION.mInsertPracticeScreen.mData = this.responseText;
-                                                }
+                                        	console.log('response:' + this.responseText);
+                                                APPLICATION.mMain.mData = this.responseText;
                                         }
-                                };
-                                request.open('POST', url);
-                                request.send();
-                        }
+                                }
+                        };
+                        request.open('POST', url);
+                        request.send();
                 }
-		*/
         }
 
         processJsonData()
