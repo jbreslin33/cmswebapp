@@ -11,8 +11,8 @@ class Main extends Screen
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
-                var date_div_c = document.getElementById("main_screen_date");
-		date_div_c.innerHTML = "yo";
+                //var date_div_c = document.getElementById("main_screen_date");
+		//date_div_c.innerHTML = "yo";
 
                 //document.getElementById("mainscreenbuttonid").onclick = this.hit.bind(this);
         }
@@ -54,17 +54,33 @@ class Main extends Screen
                         request.send();
                 }
         }
+	/*
+	var div = document.getElementById('div_id'),
+    	clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+	clone.id = "some_id";
+	document.body.appendChild(clone);
+	 *
+	 *
+	 *
+	 * main_screen_card_0
+	 */
 
         processJsonData()
 	{
 		super.processJsonData();
                 if (this.mJson.events)
                 {
-                        var date_div = document.getElementById("main_screen_date");
-                        console.log('length of events:' + this.mJson.events.length);
+                        var card_0 = document.getElementById("main_screen_card_0");
+                        
+			console.log('length of events:' + this.mJson.events.length);
+			
+
+			var card_0_children_array = card_0.childNodes;
+
                         for (var i = 0; i < this.mJson.events.length; i++)
                         {
-                                date_div.innerHTML = this.mJson.events[i].practice_date;
+                                //date_div.innerHTML = this.mJson.events[i].practice_date;
+                                card_0_children_array[1].innerHTML = this.mJson.events[i].practice_date;
                         }
                 }
 		else
