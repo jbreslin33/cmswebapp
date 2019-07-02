@@ -83,6 +83,7 @@ class Main extends Screen
 				if (i == 0)
 				{
                                 	main_screen_card_0_children_array[1].innerHTML = this.mJson.events[i].practice_date;
+                                	main_screen_card_0_children_array[3].innerHTML = this.mJson.events[i].id;
 				}
 				else //clone
 				{
@@ -91,6 +92,7 @@ class Main extends Screen
 					clone.id = 'main_screen_card_' + i;
 					var card_children_array = clone.childNodes;
 					card_children_array[1].innerHTML = this.mJson.events[i].practice_date; 
+					card_children_array[3].innerHTML = this.mJson.events[i].id; 
 				}
                         }
                 }
