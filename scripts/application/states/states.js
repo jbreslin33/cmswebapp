@@ -1050,10 +1050,6 @@ class INSERT_PRACTICE_APPLICATION extends State
                         {
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         }
-                        if (screen.mJson.pitches)
-                        {
-				console.log('got pitches');
-                        }
                 }
 	}
 
@@ -1063,10 +1059,11 @@ class INSERT_PRACTICE_APPLICATION extends State
 		{
 			console.log("INSERT_PRACTICE_APPLICATION: EXIT");        
 		}
-		app.mInsertPracticeScreen.hide();
-		app.mInsertPracticeScreen.mCode = 0;
-		app.mInsertPracticeScreen.mData = null;
-		app.mInsertPracticeScreen.mJson = null;
+		var screen = app.mInsertPracticeScreen;
+		screen.hide();
+		screen.mCode = 0;
+		screen.mData = null;
+		screen.mJson = null;
 	}
 }
 

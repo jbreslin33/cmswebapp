@@ -11,6 +11,8 @@ class Main extends Screen
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
+                var date_div_c = document.getElementById("main_screen_date");
+		date_div_c.innerHTML = "yo";
 
                 //document.getElementById("mainscreenbuttonid").onclick = this.hit.bind(this);
         }
@@ -56,5 +58,18 @@ class Main extends Screen
         processJsonData()
 	{
 		super.processJsonData();
+                if (this.mJson.events)
+                {
+                        var date_div = document.getElementById("main_screen_date");
+                        console.log('length of events:' + this.mJson.events.length);
+                        for (var i = 0; i < this.mJson.events.length; i++)
+                        {
+                                date_div.innerHTML = this.mJson.events[i].practice_date;
+                        }
+                }
+		else
+		{
+			console.log('elseer');
+		}
 	}
 }
