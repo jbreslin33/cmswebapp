@@ -11,10 +11,7 @@ class Main extends Screen
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
-                //var date_div_c = document.getElementById("main_screen_date");
-		//date_div_c.innerHTML = "yo";
-
-                //document.getElementById("mainscreenbuttonid").onclick = this.hit.bind(this);
+		this.mClonedArray = new Array();
         }
 
 	/*
@@ -81,8 +78,6 @@ class Main extends Screen
 		(
 			function(a, b)
 			{
-				console.log('a.event_date:' + a.event_date);
-				//return new Date(a.event_date) - new Date(b.event_date)
 				var d = new Date(a.event_date) - new Date(b.event_date)
 				if (d != 0)
 				{
@@ -108,6 +103,7 @@ class Main extends Screen
 				else //clone
 				{
 					var clone = main_screen_card_0.cloneNode(true);
+					this.mClonedArray.push(clone);
 					document.body.appendChild(clone);
 					clone.id = 'main_screen_card_' + i;
 					var card_children_array = clone.childNodes;
