@@ -1020,7 +1020,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select practices.id, practices.event_date, practices.arrival_time from practices
+                select practices.id, practices.event_date, practices.arrival_time from practices order by practices.event_date, practices.arrival_time
         ) t;
 
         IF raw_json is NULL THEN
@@ -1044,7 +1044,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select games.id, games.event_date, games.arrival_time from games
+                select games.id, games.event_date, games.arrival_time from games order by games.event_date, games.arrival_time
         ) t;
 
         IF raw_json is NULL THEN
