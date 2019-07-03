@@ -58,6 +58,31 @@ class Main extends Screen
         processJsonData()
 	{
 		super.processJsonData();
+
+		var events = [];
+
+                if (this.mJson.practices)
+		{
+                        for (var i = 0; i < this.mJson.practices.length; i++)
+			{
+				events.push(this.mJson.practices[i]);
+			}
+		}
+                
+		if (this.mJson.games)
+		{
+                        for (var i = 0; i < this.mJson.games.length; i++)
+			{
+				events.push(this.mJson.games[i]);
+			}
+		}
+                console.log('events length:' +  events.length)
+
+
+
+
+
+
                 if (this.mJson.practices)
                 {
 			console.log('practices.length:' + this.mJson.practices.length);		
