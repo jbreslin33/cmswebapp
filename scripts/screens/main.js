@@ -97,12 +97,18 @@ class Main extends Screen
 			function(a, b)
 			{
 				console.log('a.event_date:' + a.event_date);
-				return new Date(a.event_date) - new Date(b.event_date)
+				//return new Date(a.event_date) - new Date(b.event_date)
+				var d = new Date(a.event_date) - new Date(b.event_date)
+				if (d != 0)
+				{
+					return d;	
+				}
+				return new Date(a.arrival_time) - new Date(b.arrival_time); 
 			}
 		);
 		for (i = 0; i < events.length; i++)
 		{
-			console.log('a:' + events[i].event_date);
+			console.log('order:' + events[i].event_date + ' ' + events[i].arrival_time);
 		}
 
 
