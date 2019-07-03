@@ -68,6 +68,7 @@ class Main extends Screen
 				events.push(this.mJson.practices[i]);
 			}
 		}
+
                 
 		if (this.mJson.games)
 		{
@@ -76,11 +77,33 @@ class Main extends Screen
 				events.push(this.mJson.games[i]);
 			}
 		}
-                console.log('events length:' +  events.length)
 
+		//events.sort(
+		/*
+		events.sort(function (x, y) 
+		{
+    			var n = x.event_date - y.event_date;
+    			if (n != 0) 
+			{
+        			return n;
+    			}
+    			return x.arrival_time - y.arrival_time;
+		});
 
+*/
 
-
+		events.sort
+		(
+			function(a, b)
+			{
+				console.log('a.event_date:' + a.event_date);
+				return new Date(a.event_date) - new Date(b.event_date)
+			}
+		);
+		for (i = 0; i < events.length; i++)
+		{
+			console.log('a:' + events[i].event_date);
+		}
 
 
                 if (this.mJson.practices)
@@ -125,4 +148,10 @@ class Main extends Screen
                 this.mData = null;
                 this.mJson = null;
 	}
+/*
+	comp(a, b) 
+	{
+    		return new Date(a.events.event_date).getTime() - new Date(b.events.event_date).getTime();
+	}
+	*/
 }
