@@ -112,23 +112,18 @@ class Main extends Screen
 		}
 
 
-                if (this.mJson.practices)
+                if (events)
                 {
-			console.log('practices.length:' + this.mJson.practices.length);		
-			/*
                         var main_screen_card_0 = document.getElementById("main_screen_card_0");
                         
-			console.log('length of events:' + this.mJson.events.length);
-			
-
 			var main_screen_card_0_children_array = main_screen_card_0.childNodes;
 
-                        for (var i = 0; i < this.mJson.events.length; i++)
+                        for (var i = 0; i < events.length; i++)
                         {
 				if (i == 0)
 				{
-                                	main_screen_card_0_children_array[1].innerHTML = this.mJson.events[i].event_date;
-                                	main_screen_card_0_children_array[3].innerHTML = this.mJson.events[i].id;
+                                	main_screen_card_0_children_array[1].innerHTML = events[i].event_date;
+                                	main_screen_card_0_children_array[3].innerHTML = events[i].id;
 				}
 				else //clone
 				{
@@ -136,19 +131,12 @@ class Main extends Screen
 					document.body.appendChild(clone);
 					clone.id = 'main_screen_card_' + i;
 					var card_children_array = clone.childNodes;
-					card_children_array[1].innerHTML = this.mJson.events[i].event_date; 
-					card_children_array[3].innerHTML = this.mJson.events[i].id; 
+					card_children_array[1].innerHTML = events[i].event_date; 
+					card_children_array[3].innerHTML = events[i].id; 
 				}
                         }
-			*/
                 }
                 
-		if (this.mJson.games)
-                {
-			console.log('games.length:' + this.mJson.games.length);		
-		}
-		
-		
 		//after processing data reset
 	      	this.mCode = 0;
                 this.mData = null;
