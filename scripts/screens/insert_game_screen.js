@@ -58,7 +58,7 @@ class InsertGameScreen extends Screen
 		var coordinates = document.getElementById("insert_game_screen_coordinates_id").value;
               
 		var pitch_id = null;	
-		var pitch_select = document.getElementById("insert_team_screen_pitch_id");
+		var pitch_select = document.getElementById("insert_game_screen_pitch_id");
                 if (pitch_select.length)
                 {
                         var pitch_id = pitch_select.options[pitch_select.selectedIndex].value;
@@ -96,4 +96,25 @@ class InsertGameScreen extends Screen
 			}
 		}
 	}
+
+	processJsonData()
+        {
+                super.processJsonData();
+
+                if (this.mJson.pitches)
+                {
+                        //load up pitches option
+                        var select = document.getElementById("insert_game_screen_pitch_id");
+                        select.length = 0;
+                        for (var i = 0; i < this.mJson.pitches.length; i++)
+                        {
+                                var opt = document.createElement('option');
+                                opt.value = this.mJson.pitches[i].id;
+                                var name = this.mJson.pitches[i].name;
+                                opt.innerHTML = name;
+                                select.appendChild(opt);
+                        }
+                }
+        }
+
 }

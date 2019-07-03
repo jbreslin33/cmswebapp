@@ -156,7 +156,7 @@ class Screen
 
 			}
 		}
-		
+	/*	
 		if (this.mJson.pitches)
 		{
                 	//load up pitches option
@@ -171,5 +171,6 @@ class Screen
                         	select.appendChild(opt);
                 	}
 		}
+		*/
 	}
 }
