@@ -103,7 +103,7 @@ class Main extends Screen
 				{
 					return d;	
 				}
-				return new Date(a.arrival_time) - new Date(b.arrival_time); 
+				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
 		for (i = 0; i < events.length; i++)
