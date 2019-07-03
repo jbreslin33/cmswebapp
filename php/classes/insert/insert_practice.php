@@ -11,7 +11,7 @@ class InsertPractice
 		//handle variables from sender's javascript
 		$jwt = null;
 		$team_id = null;
-		$date = null;
+		$event_date = null;
 		$arrival_time = null;
 		$start_time = null;
 		$end_time = null;
@@ -28,9 +28,9 @@ class InsertPractice
 		{
 			$team_id = $_GET['team_id'];
 		}
-		if (isset($_GET['practice_date']))
+		if (isset($_GET['event_date']))
 		{
-			$practice_date = $_GET['practice_date'];
+			$event_date = $_GET['event_date'];
 		}
 		if (isset($_GET['arrival_time']))
 		{
@@ -64,7 +64,7 @@ class InsertPractice
 		error_log($field_name);
 
 		//insert
-		if ($practice_date)
+		if ($event_date)
 		{
 			//prep db
                 	$database = new Database("localhost","cms","postgres","mibesfat");
@@ -76,7 +76,7 @@ class InsertPractice
 			$email_id = $payload->email_id;
 
 			//result for sender
-			$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $practice_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
+			$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
                		$return_value = pg_fetch_result($result, 0);
 
                 	$result_set = $database->formatResultSet($return_value);

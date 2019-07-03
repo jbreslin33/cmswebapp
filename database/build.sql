@@ -220,7 +220,7 @@ CREATE TABLE teams_periodizations
 CREATE TABLE practices 
 (
         id SERIAL,
-	practice_date date,
+	event_date date,
         arrival_time time, --only 1 arrival time leave it
         start_time time, --only 1 start time leave it
         end_time time,
@@ -238,15 +238,16 @@ CREATE TABLE practices
 CREATE TABLE games 
 (
         id SERIAL,
-        arrival_time timestamp, --only 1 arrival time leave it
-        start_time timestamp, --only 1 start time leave it
-        actual_start_time timestamp, --only 1 start time leave it
-        end_time timestamp,
+	event_date date,
+        arrival_time time, --only 1 arrival time leave it
+        start_time time, --only 1 start time leave it
+        end_time time,
         address text,
         coordinates text,
-	team_id integer,
-	pitch_id integer, 	
+	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
+	team_id integer,
+	opponent text,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
@@ -1004,7 +1005,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select practices.id, practices.practice_date from practices
+                select practices.id, practices.event_date from practices
         ) t;
 
         IF raw_json is NULL THEN
@@ -1315,7 +1316,7 @@ AS $$
 DECLARE
 
 BEGIN
-	insert into practices (team_id, practice_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+	insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
 END;
 $$;
 --END INSERT PERSON

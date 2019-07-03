@@ -9,7 +9,7 @@
 
 --select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = 1; 
 
-select practices.id, practices.practice_date from practices 
+select practices.id, practices.event_date from practices 
 join teams on teams.id=practices.team_id
 join team_members on team_members.team_id=teams.id
 join club_members on club_members.id=team_members.club_members_id
@@ -17,7 +17,7 @@ join persons on persons.id=club_members.person_id
 join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = 1
 ;  
 
-select practices.id, practices.practice_date from games, practices 
+select practices.id, practices.event_date from games, practices 
 join teams on teams.id=practices.team_id
 --join games on games.team_id=teams.id
 join team_members on team_members.team_id=teams.id
@@ -26,7 +26,7 @@ join persons on persons.id=club_members.person_id
 join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = 1
 ;  
 
-select practices.id, practices.practice_date from practices
+select practices.id, practices.event_date from practices
 union
 select games.id, games.arrival_time from games
 ;

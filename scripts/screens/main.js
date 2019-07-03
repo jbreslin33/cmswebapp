@@ -79,10 +79,9 @@ class Main extends Screen
 
                         for (var i = 0; i < this.mJson.events.length; i++)
                         {
-                                //date_div.innerHTML = this.mJson.events[i].practice_date;
 				if (i == 0)
 				{
-                                	main_screen_card_0_children_array[1].innerHTML = this.mJson.events[i].practice_date;
+                                	main_screen_card_0_children_array[1].innerHTML = this.mJson.events[i].event_date;
                                 	main_screen_card_0_children_array[3].innerHTML = this.mJson.events[i].id;
 				}
 				else //clone
@@ -91,7 +90,7 @@ class Main extends Screen
 					document.body.appendChild(clone);
 					clone.id = 'main_screen_card_' + i;
 					var card_children_array = clone.childNodes;
-					card_children_array[1].innerHTML = this.mJson.events[i].practice_date; 
+					card_children_array[1].innerHTML = this.mJson.events[i].event_date; 
 					card_children_array[3].innerHTML = this.mJson.events[i].id; 
 				}
                         }
