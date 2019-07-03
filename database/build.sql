@@ -1020,7 +1020,16 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select practices.id, practices.event_date, practices.arrival_time from practices order by practices.event_date, practices.arrival_time
+
+		select practices.id, practices.event_date, practices.arrival_time from practices
+		join teams on teams.id=practices.team_id
+		join team_members on team_members.team_id=teams.id
+		join club_members on club_members.id=team_members.club_members_id
+		join persons on persons.id=club_members.person_id
+		join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 order by practices.event_date, practices.arrival_time 
+
+
+                --select practices.id, practices.event_date, practices.arrival_time from practices order by practices.event_date, practices.arrival_time
         ) t;
 
         IF raw_json is NULL THEN
