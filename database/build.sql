@@ -1310,6 +1310,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--BEGIN INSERT PRACTICE
 CREATE OR REPLACE PROCEDURE p_insert_practice(int,date,time,time,time,text,text,int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -1319,10 +1320,20 @@ BEGIN
 	insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
 END;
 $$;
---END INSERT PERSON
+--END INSERT PRACTICE
 
+--BEGIN INSERT GAME
+CREATE OR REPLACE PROCEDURE p_insert_game(int,date,time,time,time,text,text,int,text,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
 
---$result = pg_execute($database->mConnection, "f_insert_practice", array( $email_id, $team_id, $date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
+BEGIN
+	insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+END;
+$$;
+--END INSERT GAME
+
 
 --BEGIN INSERT PRACTICE
 CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text)
@@ -1343,7 +1354,28 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+--END INSERT PRACTICE
 
+--BEGIN INSERT GAME
+CREATE OR REPLACE FUNCTION f_insert_game(int,int,date,time,time,time,text,text,int,text)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+        CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+
+        IF x > 0 THEN
+                result_set = f_format_result_set($1);
+        ELSE
+                result_set = '-105';
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END INSERT GAME
 
 
 --BEGIN SELECT PITCHES

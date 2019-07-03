@@ -78,6 +78,10 @@
   			</li>
 			
 			<li class="nav-item">
+    				<a id="insert_game_nav_id" class="nav-link" href="#insert_game_screen">TEAM MANAGER: Insert Game</a>
+  			</li>
+			
+			<li class="nav-item">
     				<a id="insert_team_nav_id" class="nav-link" href="#insert_team_screen">CLUB ADMIN: Insert Team</a>
   			</li>
 			
@@ -415,6 +419,74 @@
 	<!-- END INSERT PRACTICE HTML  -->
 
 
+	<!-- INSERT GAME HTML  -->
+
+        <form id="insert_game_screen_html_id" class="needs-validation">
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_date_id" class="col-2 col-form-label">Date:</label>
+                        <div class="col-10">
+                                <input class="form-control" type="date" value="2019-05-25" id="insert_game_screen_date_id">
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_arrival_time_id" class="col-2 col-form-label">Arrival Time:</label>
+                        <div class="col-10">
+                                <input class="form-control" type="time" value="17:45:00" id="insert_game_screen_arrival_time_id">
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_start_time_id" class="col-2 col-form-label">Start Time:</label>
+                        <div class="col-10">
+                                <input class="form-control" type="time" value="18:00:00" id="insert_game_screen_start_time_id">
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_end_time_id" class="col-2 col-form-label">End Time:</label>
+                        <div class="col-10">
+                                <input class="form-control" type="time" value="19:30:00" id="insert_game_screen_end_time_id">
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_address_id">Address:</label>
+                        <input type="text" class="form-control" id="insert_game_screen_address_id" placeholder="Address" value="Address">
+                </div>
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_coordinates_id">Coordinates:</label>
+                        <input type="text" class="form-control" id="insert_game_screen_coordinates_id" placeholder="Coordinates" value="Coordinates">
+                </div>
+
+                <div class="form-row">
+                        <div id="insert_team_screen_pitch_div_id" class="form-group col-md-4">
+                                <label for="insert_team_screen_pitch_id">Pitch:</label>
+                                <select id="insert_team_screen_pitch_id" class="form-control">
+                                </select>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                        <label for="insert_game_screen_field_id">Field Name:</label>
+                        <input type="text" class="form-control" id="insert_game_screen_field_id" placeholder="Field" value="Field">
+                </div>
+
+
+
+                <div id="insert_game_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                </div>
+
+                <button id="insertgamescreenbuttonid" class="btn btn-primary">Submit</button>
+
+        </form>
+
+        <!-- END INSERT GAME HTML  -->
+
+
 
 
         <!-- INSERT FORGOT PASSWORD HTML  -->
@@ -566,6 +638,9 @@
 	
 	<!-- insert practice -->
 	<script src="scripts/screens/insert_practice_screen.js"></script>
+	
+	<!-- insert game -->
+	<script src="scripts/screens/insert_game_screen.js"></script>
 
 	<!-- insert forgot password -->
 	<script src="scripts/screens/insert_forgot_password_screen.js"></script>

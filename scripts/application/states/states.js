@@ -75,6 +75,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PRACTICE_APPLICATION);
                 }
+		else if (app.mLocationHash == 'insert_game_screen' && app.mStateMachine.mCurrentState != app.mINSERT_GAME_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_GAME_APPLICATION);
+                }
 		else if (app.mLocationHash == 'insert_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mINSERT_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
@@ -127,6 +131,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("delete_person_screen_html_id").style.display = "none";
 		document.getElementById("insert_team_screen_html_id").style.display = "none";
 		document.getElementById("insert_practice_screen_html_id").style.display = "none";
+		document.getElementById("insert_game_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
 		document.getElementById("insert_invite_club_member_screen_html_id").style.display = "none";
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
@@ -1008,7 +1013,6 @@ class INSERT_TEAM_APPLICATION extends State
 }
 
 
-
 class INSERT_PRACTICE_APPLICATION extends State
 {
 	constructor() 
@@ -1060,6 +1064,64 @@ class INSERT_PRACTICE_APPLICATION extends State
 			console.log("INSERT_PRACTICE_APPLICATION: EXIT");        
 		}
 		var screen = app.mInsertPracticeScreen;
+		screen.hide();
+		screen.mCode = 0;
+		screen.mData = null;
+		screen.mJson = null;
+	}
+}
+
+class INSERT_GAME_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("INSERT_GAME_APPLICATION: ENTER");        
+		}
+		if (app.mInsertGameScreen)
+		{
+			app.mInsertGameScreen = new InsertGameScreen(app);
+		}
+		else
+		{
+			app.mInsertGameScreen = new InsertGameScreen(app);
+		}
+		app.mInsertGameScreen.show();
+		app.mInsertGameScreen.get();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("INSERT_GAME_APPLICATION: EXECUTE");        
+		}
+
+		var screen = app.mInsertGameScreen;
+                screen.processData();
+
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("INSERT_GAME_APPLICATION: EXIT");        
+		}
+		var screen = app.mInsertGameScreen;
 		screen.hide();
 		screen.mCode = 0;
 		screen.mData = null;
