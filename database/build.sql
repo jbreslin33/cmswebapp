@@ -870,6 +870,22 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_format_result_set_events(int)
+RETURNS text AS $$
+DECLARE
+        json_result_practices text;
+        json_result_games text;
+	result_set text;
+BEGIN
+	select into json_result_practices j_select_practices($1);
+	select into json_result_games j_select_games($1);
+        result_set = CONCAT($1,',','{',json_result_practices,',',json_result_games,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 
 
 --NATIVE INSERT LOGIN
@@ -993,9 +1009,8 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT CLUBS
 
-
---BEGIN J_SELECT EVENTS
-CREATE OR REPLACE FUNCTION j_select_events(email_id int)
+--BEGIN J_SELECT PRACTICES
+CREATE OR REPLACE FUNCTION j_select_practices(email_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1009,14 +1024,38 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"events": []', raw_json);
+                result_set = CONCAT('"practices": []', raw_json);
         ELSE
-                result_set = CONCAT('"events": ', raw_json);
+                result_set = CONCAT('"practices": ', raw_json);
         END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
---END J_SELECT EVENTS
+--END J_SELECT PRACTICES
+
+--BEGIN J_SELECT GAMES
+CREATE OR REPLACE FUNCTION j_select_games(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select games.id, games.event_date from games
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"games": []', raw_json);
+        ELSE
+                result_set = CONCAT('"games": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT PRACTICES
 
 
 CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, INOUT x int)
@@ -1398,12 +1437,14 @@ CREATE OR REPLACE FUNCTION f_select_events(email_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
-        DECLARE x int := -111;
-        json_result_events text;
-        json_result text;
+        --DECLARE x int := -111;
+        --json_result_events text;
 BEGIN
-        select into json_result_events j_select_events($1);
-        result_set = CONCAT($1,',','{',json_result_events,'}');
+        --select into json_result_events j_select_events($1);
+        --result_set = CONCAT($1,',','{',json_result_events,'}');
+--	     result_set = f_format_result_set(x);
+	result_set = f_format_result_set_events(email_id);
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

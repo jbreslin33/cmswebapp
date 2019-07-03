@@ -54,22 +54,14 @@ class Main extends Screen
                         request.send();
                 }
         }
-	/*
-	var div = document.getElementById('div_id'),
-    	clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
-	clone.id = "some_id";
-	document.body.appendChild(clone);
-	 *
-	 *
-	 *
-	 * main_screen_card_0
-	 */
 
         processJsonData()
 	{
 		super.processJsonData();
-                if (this.mJson.events)
+                if (this.mJson.practices)
                 {
+			console.log('practices.length:' + this.mJson.practices.length);		
+			/*
                         var main_screen_card_0 = document.getElementById("main_screen_card_0");
                         
 			console.log('length of events:' + this.mJson.events.length);
@@ -94,11 +86,15 @@ class Main extends Screen
 					card_children_array[3].innerHTML = this.mJson.events[i].id; 
 				}
                         }
+			*/
                 }
-		else
-		{
-			console.log('elseer');
+                
+		if (this.mJson.games)
+                {
+			console.log('games.length:' + this.mJson.games.length);		
 		}
+		
+		
 		//after processing data reset
 	      	this.mCode = 0;
                 this.mData = null;
