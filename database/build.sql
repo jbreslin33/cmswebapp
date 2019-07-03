@@ -1231,7 +1231,7 @@ DECLARE
 BEGIN
 
         select into found_email_id f_get_email_id($1);
-        IF found_email_id THEN --do an update and if no person or user do an insert on them
+        IF found_email_id > 0 THEN --do an update and if no person or user do an insert on them
         	SELECT id INTO found_google_login_id FROM google_logins
         	WHERE email_id = found_email_id;
 		IF found_google_login_id THEN
@@ -1243,7 +1243,7 @@ BEGIN
 
                 SELECT id INTO found_email_person_id FROM emails_persons
                 WHERE email_id = found_email_id;
-                IF found_email_person_id THEN
+                IF found_email_person_id > 0 THEN
                 	--SELECT person_id INTO found_person_id FROM emails_persons
 			--where emailperson_id = found_person_id;
 
