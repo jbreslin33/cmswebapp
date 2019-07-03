@@ -69,7 +69,6 @@ class Main extends Screen
 			}
 		}
 
-                
 		if (this.mJson.games)
 		{
                         for (var i = 0; i < this.mJson.games.length; i++)
@@ -77,20 +76,6 @@ class Main extends Screen
 				events.push(this.mJson.games[i]);
 			}
 		}
-
-		//events.sort(
-		/*
-		events.sort(function (x, y) 
-		{
-    			var n = x.event_date - y.event_date;
-    			if (n != 0) 
-			{
-        			return n;
-    			}
-    			return x.arrival_time - y.arrival_time;
-		});
-
-*/
 
 		events.sort
 		(
@@ -106,11 +91,6 @@ class Main extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
-		for (i = 0; i < events.length; i++)
-		{
-			console.log('order:' + events[i].event_date + ' ' + events[i].arrival_time);
-		}
-
 
                 if (events)
                 {
@@ -142,10 +122,4 @@ class Main extends Screen
                 this.mData = null;
                 this.mJson = null;
 	}
-/*
-	comp(a, b) 
-	{
-    		return new Date(a.events.event_date).getTime() - new Date(b.events.event_date).getTime();
-	}
-	*/
 }

@@ -715,6 +715,8 @@ class MAIN_APPLICATION extends State
                 screen.mCode = 0;
                 screen.mData = null;
                 screen.mJson = null;
+
+		//need to delete cards
 	}
 }
 
