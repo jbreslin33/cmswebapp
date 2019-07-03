@@ -10,8 +10,8 @@ class GoogleLogin
 		$email = null;
 		$google_id = null;
 		$id_token = null;
-		$last_name = null;
 		$first_name = null;
+		$last_name = null;
 		$club_invite_token = null;
 	
 		if (isset($_GET['email']))

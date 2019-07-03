@@ -1262,7 +1262,7 @@ BEGIN
 	END IF;
 
 
-        IF found_email_id THEN
+        IF found_email_id > 0 THEN
 		result_set = f_format_result_set(found_email_id);
         ELSE
                 result_set = '-105';
