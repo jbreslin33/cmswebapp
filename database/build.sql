@@ -1051,7 +1051,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, games.pitch_id, games.field_name, games.team_id
+		select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, games.pitch_id, games.field_name, games.team_id, games.opponent
 	       	from games
 		join teams on teams.id=games.team_id
 		join team_members on team_members.team_id=teams.id
