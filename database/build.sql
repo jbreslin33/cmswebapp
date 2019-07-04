@@ -1020,8 +1020,8 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-
-		select practices.id, practices.event_date, practices.arrival_time from practices
+		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, practices.pitch_id, practices.field_name, practices.team_id 
+		from practices
 		join teams on teams.id=practices.team_id
 		join team_members on team_members.team_id=teams.id
 		join club_members on club_members.id=team_members.club_members_id
@@ -1051,7 +1051,8 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select games.id, games.event_date, games.arrival_time from games
+		select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, games.pitch_id, games.field_name, games.team_id
+	       	from games
 		join teams on teams.id=games.team_id
 		join team_members on team_members.team_id=teams.id
 		join club_members on club_members.id=team_members.club_members_id
