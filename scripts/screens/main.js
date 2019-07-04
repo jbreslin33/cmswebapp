@@ -136,9 +136,9 @@ class Main extends Screen
 				address.innerHTML = events[i].address;
 				address.innerHTML = events[i].address;
 				coordinates.innerHTML = events[i].coordinates;
-				pitch_id.innerHTML = events[i].pitch_id;
+				pitch_id.innerHTML = events[i].pitch_name;
 				field_name.innerHTML = events[i].field_name;
-				team_id.innerHTML = events[i].name;
+				team_id.innerHTML = events[i].team_name;
                         }
                 }
                 
