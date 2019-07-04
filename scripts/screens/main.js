@@ -47,6 +47,7 @@ class Main extends Screen
                         for (var i = 0; i < this.mJson.practices.length; i++)
 			{
 				events.push(this.mJson.practices[i]);
+				this.mJson.practices[i].type = 'practice';
 			}
 		}
 
@@ -55,6 +56,7 @@ class Main extends Screen
                         for (var i = 0; i < this.mJson.games.length; i++)
 			{
 				events.push(this.mJson.games[i]);
+				this.mJson.practices[i].type = 'game';
 			}
 		}
 
@@ -139,6 +141,15 @@ class Main extends Screen
 				pitch_id.innerHTML = events[i].pitch_name;
 				field_name.innerHTML = events[i].field_name;
 				team_id.innerHTML = events[i].team_name;
+
+				if (events[i].type == 'game')
+				{
+					console.log('its all a game');
+				}
+				if (events[i].type == 'practice')
+				{
+					console.log('we talking about practice not a game');
+				}
                         }
                 }
                 
