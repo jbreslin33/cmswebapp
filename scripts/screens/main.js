@@ -131,14 +131,51 @@ class Main extends Screen
 				title.setAttribute('class','card-title');
 				divBody.appendChild(title);
 
+/// id | event_date | arrival_time | start_time | end_time | address | coordinates | pitch_id | field_name | team_id 
+				
 				var arrival_time = document.createElement('p');
 				arrival_time.setAttribute('class','card-text');
 				divBody.appendChild(arrival_time);
-
+				
+				var start_time = document.createElement('p');
+				start_time.setAttribute('class','card-text');
+				divBody.appendChild(start_time);
+				
+				var end_time = document.createElement('p');
+				end_time.setAttribute('class','card-text');
+				divBody.appendChild(end_time);
+				
+				var address = document.createElement('p');
+				address.setAttribute('class','card-text');
+				divBody.appendChild(address);
+				
+				var coordinates = document.createElement('p');
+				coordinates.setAttribute('class','card-text');
+				divBody.appendChild(coordinates);
+				
+				var pitch_id = document.createElement('p');
+				pitch_id.setAttribute('class','card-text');
+				divBody.appendChild(pitch_id);
+				
+				var field_name = document.createElement('p');
+				field_name.setAttribute('class','card-text');
+				divBody.appendChild(field_name);
+				
+				var team_id = document.createElement('p');
+				team_id.setAttribute('class','card-text');
+				divBody.appendChild(team_id);
 
 				divHeader.innerHTML = events[i].id;
 				title.innerHTML = events[i].event_date;
 				arrival_time.innerHTML = events[i].arrival_time;
+				start_time.innerHTML = events[i].start_time;
+				end_time.innerHTML = events[i].end_time;
+				address.innerHTML = events[i].address;
+				address.innerHTML = events[i].address;
+				coordinates.innerHTML = events[i].coordinates;
+				pitch_id.innerHTML = events[i].pitch_id;
+				field_name.innerHTML = events[i].field_name;
+				team_id.innerHTML = events[i].team_id;
 
 
 				/*
