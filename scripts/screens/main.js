@@ -86,19 +86,65 @@ class Main extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
+// id | event_date | arrival_time | start_time | end_time | address | coordinates | pitch_id | field_name | team_id | opponent 
+		/*
+                
+		<div id="main_screen_card_0" class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                        </div>
+                </div>
 
+			*/
                 if (events)
                 {
-                        var main_screen_card_0 = document.getElementById("main_screen_card_0");
-                        
-			var main_screen_card_0_children_array = main_screen_card_0.childNodes;
 
                         for (var i = 0; i < events.length; i++)
                         {
+				var div = document.createElement('div');	
+				div.setAttribute('class','card text-white bg-primary mb-3');
+				div.style = "max-width: 18rem;";
+				document.getElementById("main_screen_html_id").appendChild(div);
+
+				//add to array
+				this.mCloneArray.push(div);
+
+				var divHeader = document.createElement('div');
+				divHeader.setAttribute('class','card-header');
+				div.appendChild(divHeader);
+
+				var divBody = document.createElement('div');
+				divBody.setAttribute('class','card-body');
+				div.appendChild(divBody);
+
+				divHeader.innerHTML = events[i].id;
+
+
+				/*
 				if (i == 0)
 				{
-                                	main_screen_card_0_children_array[1].innerHTML = events[i].event_date;
-                                	main_screen_card_0_children_array[3].innerHTML = events[i].id;
+                                	array[0].innerHTML = events[i].id;
+                                	array[1].innerHTML = events[i].event_date;
+					//arrayB[1].innerHTML = events[i].start_time;
+					/*
+                                	array[4].innerHTML = events[i].arrival_time;
+                                	//array[5].innerHTML = events[i].start_time;
+                                	//array[6].innerHTML = events[i].end_time;
+                                	array[7].innerHTML = events[i].address;
+                                	array[8].innerHTML = events[i].coordinates;
+                                	array[9].innerHTML = events[i].pitch_id;
+                                	array[10].innerHTML = events[i].field_name;
+                                	array[11].innerHTML = events[i].team_id;
 				}
 				else //clone
 				{
@@ -106,10 +152,20 @@ class Main extends Screen
 					this.mCloneArray.push(clone);
 					document.body.appendChild(clone);
 					clone.id = 'main_screen_card_' + i;
-					var card_children_array = clone.childNodes;
-					card_children_array[1].innerHTML = events[i].event_date; 
-					card_children_array[3].innerHTML = events[i].id; 
+					var cloneChildrenArray = clone.childNodes;
+					cloneChildrenArray[1].innerHTML = events[i].id; 
+					cloneChildrenArray[3].innerHTML = events[i].event_date; 
+					cloneChildrenArray[4].innerHTML = events[i].arrival_time; 
+					cloneChildrenArray[5].innerHTML = events[i].start_time; 
+					cloneChildrenArray[6].innerHTML = events[i].end_time; 
+					cloneChildrenArray[7].innerHTML = events[i].address; 
+					cloneChildrenArray[8].innerHTML = events[i].coordinates; 
+					cloneChildrenArray[9].innerHTML = events[i].pitch_id; 
+					cloneChildrenArray[10].innerHTML = events[i].field_name; 
+					cloneChildrenArray[11].innerHTML = events[i].team_id; 
+					cloneChildrenArray[12].innerHTML = events[i].opponent; 
 				}
+			*/
                         }
                 }
                 
