@@ -14,22 +14,6 @@ class Main extends Screen
 		this.mCloneArray = new Array();
         }
 
-	/*
-	        <div id="main_screen_html_id">
-                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Header</div>
-                        <div class="card-body">
-                                <h5 class="card-title">Primary card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                </div>
-                <div id="main_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
-        </div>
- 
-		**/
-
         get()
         {
 		if (this.mApplication.mJWT)
@@ -86,27 +70,8 @@ class Main extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
-// id | event_date | arrival_time | start_time | end_time | address | coordinates | pitch_id | field_name | team_id | opponent 
-		/*
                 
-		<div id="main_screen_card_0" class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-header"></div>
-                        <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                        </div>
-                </div>
-
-			*/
-                if (events)
+		if (events)
                 {
 
                         for (var i = 0; i < events.length; i++)
@@ -131,8 +96,6 @@ class Main extends Screen
 				title.setAttribute('class','card-title');
 				divBody.appendChild(title);
 
-/// id | event_date | arrival_time | start_time | end_time | address | coordinates | pitch_id | field_name | team_id 
-				
 				var arrival_time = document.createElement('p');
 				arrival_time.setAttribute('class','card-text');
 				divBody.appendChild(arrival_time);
@@ -176,44 +139,6 @@ class Main extends Screen
 				pitch_id.innerHTML = events[i].pitch_id;
 				field_name.innerHTML = events[i].field_name;
 				team_id.innerHTML = events[i].team_id;
-
-
-				/*
-				if (i == 0)
-				{
-                                	array[0].innerHTML = events[i].id;
-                                	array[1].innerHTML = events[i].event_date;
-					//arrayB[1].innerHTML = events[i].start_time;
-					/*
-                                	array[4].innerHTML = events[i].arrival_time;
-                                	//array[5].innerHTML = events[i].start_time;
-                                	//array[6].innerHTML = events[i].end_time;
-                                	array[7].innerHTML = events[i].address;
-                                	array[8].innerHTML = events[i].coordinates;
-                                	array[9].innerHTML = events[i].pitch_id;
-                                	array[10].innerHTML = events[i].field_name;
-                                	array[11].innerHTML = events[i].team_id;
-				}
-				else //clone
-				{
-					var clone = main_screen_card_0.cloneNode(true);
-					this.mCloneArray.push(clone);
-					document.body.appendChild(clone);
-					clone.id = 'main_screen_card_' + i;
-					var cloneChildrenArray = clone.childNodes;
-					cloneChildrenArray[1].innerHTML = events[i].id; 
-					cloneChildrenArray[3].innerHTML = events[i].event_date; 
-					cloneChildrenArray[4].innerHTML = events[i].arrival_time; 
-					cloneChildrenArray[5].innerHTML = events[i].start_time; 
-					cloneChildrenArray[6].innerHTML = events[i].end_time; 
-					cloneChildrenArray[7].innerHTML = events[i].address; 
-					cloneChildrenArray[8].innerHTML = events[i].coordinates; 
-					cloneChildrenArray[9].innerHTML = events[i].pitch_id; 
-					cloneChildrenArray[10].innerHTML = events[i].field_name; 
-					cloneChildrenArray[11].innerHTML = events[i].team_id; 
-					cloneChildrenArray[12].innerHTML = events[i].opponent; 
-				}
-			*/
                         }
                 }
                 
