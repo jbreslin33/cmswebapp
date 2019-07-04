@@ -127,7 +127,12 @@ class Main extends Screen
 				divBody.setAttribute('class','card-body');
 				div.appendChild(divBody);
 
+				var divTitle = document.createElement('div');
+				divTitle.setAttribute('class','card-title');
+				divBody.appendChild(divTitle);
+
 				divHeader.innerHTML = events[i].id;
+				divTitle.innerHTML = events[i].event_date;
 
 
 				/*
