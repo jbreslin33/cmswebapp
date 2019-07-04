@@ -717,6 +717,11 @@ class MAIN_APPLICATION extends State
                 screen.mJson = null;
 
 		//need to delete cards
+		//while (screen.mCloneArray.length > 0)
+		for (i = 0; i < screen.mCloneArray.length; i++)
+		{
+			screen.mCloneArray[i].remove();
+		}
 	}
 }
 

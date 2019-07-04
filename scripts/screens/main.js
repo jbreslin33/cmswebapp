@@ -11,7 +11,7 @@ class Main extends Screen
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
-		this.mClonedArray = new Array();
+		this.mCloneArray = new Array();
         }
 
 	/*
@@ -103,7 +103,7 @@ class Main extends Screen
 				else //clone
 				{
 					var clone = main_screen_card_0.cloneNode(true);
-					this.mClonedArray.push(clone);
+					this.mCloneArray.push(clone);
 					document.body.appendChild(clone);
 					clone.id = 'main_screen_card_' + i;
 					var card_children_array = clone.childNodes;
