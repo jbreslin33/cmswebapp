@@ -138,7 +138,7 @@ class Main extends Screen
 				coordinates.innerHTML = events[i].coordinates;
 				pitch_id.innerHTML = events[i].pitch_id;
 				field_name.innerHTML = events[i].field_name;
-				team_id.innerHTML = events[i].team_id;
+				team_id.innerHTML = events[i].name;
                         }
                 }
                 
