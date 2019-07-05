@@ -873,13 +873,19 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_format_result_set_events(int)
 RETURNS text AS $$
 DECLARE
+        json_result_persons text;
+        json_result_teams text;
+        json_result_clubs text;
         json_result_practices text;
         json_result_games text;
 	result_set text;
 BEGIN
+	select into json_result_persons j_select_persons($1);
+	select into json_result_teams j_select_teams($1);
+        select into json_result_clubs j_select_clubs($1);
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-        result_set = CONCAT($1,',','{',json_result_practices,',',json_result_games,'}');
+        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
