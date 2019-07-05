@@ -97,9 +97,7 @@ class WAIT_UPDATE_FORGOT_PASSWORD_SCREEN extends State
 
                         if (owner.mCode == -100)
                         {
-				owner.mApplication.mJWT = dataArray[1]; //set jwt
-                                //put in local storage
-                                localStorage.setItem('mJWT', owner.mApplication.mJWT);
+				owner.mApplication.setJWT(dataArray[1]); //set jwt
 
                                 //JSON
                                 dataArray.shift(); //remove mCode

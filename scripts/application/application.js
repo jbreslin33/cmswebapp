@@ -20,9 +20,6 @@ class Application
 		this.mClubInviteToken = clubInviteToken; 
 		this.mForgotPasswordToken = forgotPasswordToken; 
 
-		//localstorage
-		this.mJWT = null;
-
 		//utilities
 		this.mUtility = new Utility();
 
@@ -114,4 +111,13 @@ class Application
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
 	}
+	setJWT(jwt)
+	{
+		localStorage.setItem('mJWT', jwt);
+	}
+	getJWT()
+	{
+		return localStorage.getItem("mJWT");
+	}
+
 }

@@ -23,9 +23,9 @@ class InsertPracticeScreen extends Screen
                 {
                         var club_id = club_select.options[club_select.selectedIndex].value;
 
-			if (this.mApplication.mJWT)
+			if (APPLICATION.getJWT())
 			{
-                        	var url = "/php/classes/select/select_pitches.php?jwt=" + APPLICATION.mJWT + '&club_id=' + club_id;
+                        	var url = "/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id;
 		        	var request = new XMLHttpRequest();
                 		request.onreadystatechange = function()
                 		{
@@ -74,7 +74,7 @@ class InsertPracticeScreen extends Screen
 			console.log('in if');
                         var team_id = team_select.options[team_select.selectedIndex].value;
 
-                        var url = "/php/classes/insert/insert_practice.php?jwt=" + APPLICATION.mJWT + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name;
+                        var url = "/php/classes/insert/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name;
 
 			console.log('url:' + url);
 

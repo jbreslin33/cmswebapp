@@ -16,9 +16,11 @@ class Main extends Screen
 
         get()
         {
-		if (this.mApplication.mJWT)
+		console.log('getting');
+		if (APPLICATION.getJWT())
                 {
-                	var url = "/php/classes/select/select_events.php?jwt=" + APPLICATION.mJWT;
+			console.log('in if getting');
+                	var url = "/php/classes/select/select_events.php?jwt=" + APPLICATION.getJWT();
                         var request = new XMLHttpRequest();
                         request.onreadystatechange = function()
                         {

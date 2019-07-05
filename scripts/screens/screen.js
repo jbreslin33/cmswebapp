@@ -74,12 +74,8 @@ class Screen
                         this.mCode = dataArray[0];
                         if (this.mCode == -100)
                         {
-                                //mJWT
-                                this.mApplication.mJWT = dataArray[1]; //set jwt
+                                this.mApplication.setJWT(dataArray[1]); //set jwt
                                 
-				//put in local storage
-                                localStorage.setItem('mJWT', this.mApplication.mJWT);
-
                                 //JSON
                                 dataArray.shift(); //remove mCode
                                 dataArray.shift(); //remove mJwt

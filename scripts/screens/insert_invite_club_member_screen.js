@@ -30,9 +30,9 @@ class InsertInviteClubMemberScreen extends Screen
 
 	get()
 	{
-		if (this.mApplication.mJWT)
+		if (APPLICATION.getJWT)
 		{
-			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + this.mApplication.mJWT; 
+			var url = "/php/classes/select/select_club_administrator_clubs.php?jwt=" + APPLICATION.getJWT(); 
 		        var request = new XMLHttpRequest();
                 	request.onreadystatechange = function()
                 	{
@@ -57,7 +57,7 @@ class InsertInviteClubMemberScreen extends Screen
 
       		this.mEmail  = document.getElementById("insert_invite_club_member_screen_email_id").value;
 
-		var url = "/php/classes/insert/insert_invite_club_member.php?email=" + this.mEmail + '&club_id=' + document.getElementById("insert_invite_club_member_screen_select_id").value + '&jwt=' + APPLICATION.mJWT;
+		var url = "/php/classes/insert/insert_invite_club_member.php?email=" + this.mEmail + '&club_id=' + document.getElementById("insert_invite_club_member_screen_select_id").value + '&jwt=' + APPLICATION.getJWT();
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

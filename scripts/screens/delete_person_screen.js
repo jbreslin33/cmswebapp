@@ -20,11 +20,11 @@ class DeletePersonScreen extends Screen
 
 	get()
 	{
-		if (this.mApplication.mJWT)
+		if (APPLICATION.getJWT())
 		{
 			var select = document.getElementById("person_select_id");
                 	var person_id = select.options[select.selectedIndex].value;
-			var url = "/php/classes/select/select_persons.php?jwt=" + localStorage.getItem("mJWT"); 
+			var url = "/php/classes/select/select_persons.php?jwt=" + APPLICATION.getJWT(); 
 		        var request = new XMLHttpRequest();
                 	request.onreadystatechange = function()
                 	{
@@ -49,7 +49,7 @@ class DeletePersonScreen extends Screen
 
 		var select = document.getElementById("delete_person_screen_select_id");
                 var person_id = select.options[select.selectedIndex].value;
-		var url = "/php/classes/delete/delete_person.php?name=" + "&jwt=" + localStorage.getItem("mJWT") + '&person_id=' + person_id;
+		var url = "/php/classes/delete/delete_person.php?name=" + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id;
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()

@@ -146,8 +146,7 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
-		application.mJWT = localStorage.getItem("mJWT");
-		if (application.mJWT)
+		if (application.getJWT())
 		{
 			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 		}
@@ -417,9 +416,7 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 
                         if (app.mInsertNativeLoginClubScreen.mCode == -100)
                         {
-                                app.mJWT = dataArray[1]; //set jwt
-                                //put in local storage
-                                localStorage.setItem('mJWT', app.mJWT);
+                                app.setJWT(dataArray[1]); //set jwt
 
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
