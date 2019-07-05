@@ -56,7 +56,7 @@ class Main extends Screen
                         for (var i = 0; i < this.mJson.games.length; i++)
 			{
 				events.push(this.mJson.games[i]);
-				this.mJson.practices[i].type = 'game';
+				this.mJson.games[i].type = 'game';
 			}
 		}
 
@@ -130,7 +130,15 @@ class Main extends Screen
 				team_id.setAttribute('class','card-text');
 				divBody.appendChild(team_id);
 
-				divHeader.innerHTML = events[i].id;
+				if (events[i].type == 'game')
+				{
+					divHeader.innerHTML = "GAME";
+				}
+				if (events[i].type == 'practice')
+				{
+					divHeader.innerHTML = "PRACTICE";
+				}
+
 				title.innerHTML = events[i].event_date;
 				arrival_time.innerHTML = events[i].arrival_time;
 				start_time.innerHTML = events[i].start_time;
