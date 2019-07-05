@@ -42,6 +42,7 @@ class Main extends Screen
 
 		var events = [];
 
+		//make new array containing games and practices together
                 if (this.mJson.practices)
 		{
                         for (var i = 0; i < this.mJson.practices.length; i++)
@@ -60,6 +61,7 @@ class Main extends Screen
 			}
 		}
 
+		//sort events by date and arrival time
 		events.sort
 		(
 			function(a, b)
@@ -72,7 +74,8 @@ class Main extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
-                
+               
+		//print to screen
 		if (events)
                 {
 
@@ -149,15 +152,6 @@ class Main extends Screen
 				pitch_id.innerHTML = events[i].pitch_name;
 				field_name.innerHTML = events[i].field_name;
 				team_id.innerHTML = events[i].team_name;
-
-				if (events[i].type == 'game')
-				{
-					console.log('its all a game');
-				}
-				if (events[i].type == 'practice')
-				{
-					console.log('we talking about practice not a game');
-				}
                         }
                 }
                 
