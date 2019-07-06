@@ -94,6 +94,15 @@ class Main extends Screen
 				var divHeader = document.createElement('div');
 				divHeader.setAttribute('class','card-header');
 				div.appendChild(divHeader);
+				
+				if (events[i].type == 'game')
+				{
+					divHeader.innerHTML = "GAME";
+				}
+				if (events[i].type == 'practice')
+				{
+					divHeader.innerHTML = "PRACTICE";
+				}
 
 				var divBody = document.createElement('div');
 				divBody.setAttribute('class','card-body');
@@ -135,24 +144,16 @@ class Main extends Screen
 				team_id.setAttribute('class','card-text');
 				divBody.appendChild(team_id);
 
-				if (events[i].type == 'game')
-				{
-					divHeader.innerHTML = "GAME";
-				}
-				if (events[i].type == 'practice')
-				{
-					divHeader.innerHTML = "PRACTICE";
-				}
 
 				title.innerHTML = events[i].event_date;
-				arrival_time.innerHTML = events[i].arrival_time;
-				start_time.innerHTML = events[i].start_time;
-				end_time.innerHTML = events[i].end_time;
+				arrival_time.innerHTML = 'Arrive by: ' + events[i].arrival_time;
+				start_time.innerHTML = ' Start time: ' + events[i].start_time;
+				end_time.innerHTML = ' End time: ' + events[i].end_time;
 				address.innerHTML = events[i].address;
 				address.innerHTML = events[i].address;
 				coordinates.innerHTML = events[i].coordinates;
 				pitch_id.innerHTML = events[i].pitch_name;
-				field_name.innerHTML = events[i].field_name;
+				field_name.innerHTML = 'team: ' + events[i].field_name;
 				team_id.innerHTML = events[i].team_name;
                         }
                 }
