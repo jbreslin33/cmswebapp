@@ -108,50 +108,85 @@ class Main extends Screen
 				divBody.setAttribute('class','card-body');
 				div.appendChild(divBody);
 
-				var title = document.createElement('h5');
-				title.setAttribute('class','card-title');
-				divBody.appendChild(title);
-				title.innerHTML = events[i].event_date;
+				if (events[i].event_date)
+				{
+					var title = document.createElement('h5');
+					title.setAttribute('class','card-title');
+					divBody.appendChild(title);
+					title.innerHTML = events[i].event_date;
+				}
 
-				var arrival_time = document.createElement('p');
-				arrival_time.setAttribute('class','card-text');
-				divBody.appendChild(arrival_time);
-				arrival_time.innerHTML = 'Arrive by: ' + events[i].arrival_time;
+				if (events[i].arrival_time)
+				{
+					var arrival_time = document.createElement('p');
+					arrival_time.setAttribute('class','card-text');
+					divBody.appendChild(arrival_time);
+					arrival_time.innerHTML = 'Arrive by: ' + events[i].arrival_time;
+				}
 				
-				var start_time = document.createElement('p');
-				start_time.setAttribute('class','card-text');
-				divBody.appendChild(start_time);
-				start_time.innerHTML = ' Start time: ' + events[i].start_time;
+				if (events[i].start_time)
+				{
+					var start_time = document.createElement('p');
+					start_time.setAttribute('class','card-text');
+					divBody.appendChild(start_time);
+					start_time.innerHTML = ' Start time: ' + events[i].start_time;
+				}
 				
-				var end_time = document.createElement('p');
-				end_time.setAttribute('class','card-text');
-				divBody.appendChild(end_time);
-				end_time.innerHTML = ' End time: ' + events[i].end_time;
+				if (events[i].end_time)
+				{
+					var end_time = document.createElement('p');
+					end_time.setAttribute('class','card-text');
+					divBody.appendChild(end_time);
+					end_time.innerHTML = ' End time: ' + events[i].end_time;
+				}
 				
-				var address = document.createElement('p');
-				address.setAttribute('class','card-text');
-				divBody.appendChild(address);
-				address.innerHTML = events[i].address;
+				if (events[i].address)
+				{
+					var address = document.createElement('p');
+					address.setAttribute('class','card-text');
+					divBody.appendChild(address);
+					address.innerHTML = events[i].address;
+				}
+
+				if (events[i].coordinates)
+				{
+					var coordinates = document.createElement('p');
+					coordinates.setAttribute('class','card-text');
+					divBody.appendChild(coordinates);
+					coordinates.innerHTML = events[i].coordinates;
+				}
 				
-				var coordinates = document.createElement('p');
-				coordinates.setAttribute('class','card-text');
-				divBody.appendChild(coordinates);
-				coordinates.innerHTML = events[i].coordinates;
+				if (events[i].pitch_name)
+				{
+					var pitch_id = document.createElement('p');
+					pitch_id.setAttribute('class','card-text');
+					divBody.appendChild(pitch_id);
+					pitch_id.innerHTML = events[i].pitch_name;
+				}
 				
-				var pitch_id = document.createElement('p');
-				pitch_id.setAttribute('class','card-text');
-				divBody.appendChild(pitch_id);
-				pitch_id.innerHTML = events[i].pitch_name;
+				if (events[i].field_name)
+				{
+					var field_name = document.createElement('p');
+					field_name.setAttribute('class','card-text');
+					divBody.appendChild(field_name);
+					field_name.innerHTML = 'team: ' + events[i].field_name;
+				}
 				
-				var field_name = document.createElement('p');
-				field_name.setAttribute('class','card-text');
-				divBody.appendChild(field_name);
-				field_name.innerHTML = 'team: ' + events[i].field_name;
+				if (events[i].team_name)
+				{
+					var team_id = document.createElement('p');
+					team_id.setAttribute('class','card-text');
+					divBody.appendChild(team_id);
+					team_id.innerHTML = events[i].team_name;
+				}
 				
-				var team_id = document.createElement('p');
-				team_id.setAttribute('class','card-text');
-				divBody.appendChild(team_id);
-				team_id.innerHTML = events[i].team_name;
+				if (events[i].opponent)
+				{
+					var opponent = document.createElement('p');
+					team_id.setAttribute('class','card-text');
+					divBody.appendChild(opponent);
+					opponent.innerHTML = 'Opponent: ' + events[i].opponent;
+				}
                         }
                 }
                 
