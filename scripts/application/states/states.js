@@ -187,7 +187,7 @@ class LOGIN_APPLICATION extends State
 			//start the login subsystem
 			app.mLogin = new LoginScreen(app);
 		}
-		document.getElementById("login_nav_id").className += " active";
+		//document.getElementById("login_nav_id").className += " active";
     		app.mLogin.show();
 //you need to take the invite token and do a query to find out the appropriate place for this user....
 		//to do this do we need loginScreen states?
