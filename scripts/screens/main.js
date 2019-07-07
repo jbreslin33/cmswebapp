@@ -116,7 +116,9 @@ class Main extends Screen
 					var title = document.createElement('h5');
 					title.setAttribute('class','card-title');
 					divBody.appendChild(title);
-					title.innerHTML = events[i].event_date;
+					//title.innerHTML = events[i].event_date;
+					title.innerHTML = this.mApplication.mCalendar.convertDate(events[i].event_date);
+					//var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
 				}
 				
 				var textArray = new Array();
