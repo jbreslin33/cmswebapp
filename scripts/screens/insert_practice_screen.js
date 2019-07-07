@@ -13,6 +13,9 @@ class InsertPracticeScreen extends Screen
 		this.mHtmlId = "insert_practice_screen_html_id";
 
 		document.getElementById("insertpracticescreenbuttonid").onclick = this.hit.bind(this);
+
+		//set todays date
+		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
 	}
 
 	get()
