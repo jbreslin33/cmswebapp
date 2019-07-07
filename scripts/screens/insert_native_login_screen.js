@@ -6,8 +6,6 @@ class InsertLoginScreen extends Screen
         {
                 super(application);
 
-		location.hash = "insert_native_login_screen";
-
 		this.mCode = 0;
                 this.mData = null;
 

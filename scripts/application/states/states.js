@@ -140,12 +140,12 @@ class INIT_APPLICATION extends State
 		if (application.getJWT())
 		{
 			console.log('got jwt');
-			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+			//application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 		}
 		else
 		{
 			console.log('no jwt');
-			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+			//application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 		}
 	}
 

@@ -6,15 +6,10 @@ class InsertLoginClubScreen extends InsertLoginScreen
 	{
 		super(application);
 
-		location.hash = "insert_native_login_club_screen";
-
                 //html ids
                 this.mSpinnerId = "insert_native_login_club_screen_spinner_id";
                 this.mHtmlId    = "insert_native_login_club_screen_html_id";
-
-		//document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 	}
-
 
         hit()
         {

@@ -6,8 +6,6 @@ class InsertInviteClubMemberScreen extends Screen
 	{
 		super(application);
 
-		location.hash = "insert_invite_club_member_screen";
-
 		//html ids 
 		this.mSpinnerId = "insert_invite_club_member_screen_spinner_id";
 		this.mHtmlId = "insert_invite_club_member_screen_html_id";

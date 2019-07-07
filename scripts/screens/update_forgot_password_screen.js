@@ -6,8 +6,6 @@ class UpdateForgotPasswordScreen extends Screen
 	{
                 super(application);
 
-		location.hash = "update_forgot_password_screen";
-
 		//html ids
                	this.mSpinnerId = "update_forgot_password_screen_spinner_id";
                 this.mHtmlId = "update_forgot_password_screen_html_id";

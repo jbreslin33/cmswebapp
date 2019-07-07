@@ -7,7 +7,7 @@ class LoginScreen extends Screen
 		super(application);
 		this.mApplication = application;
 		
-		location.hash = "login_screen";
+		console.log('in const of LoginScreen');
 
                 //html ids
                 this.mSpinnerId = "login_screen_spinner_id";

@@ -6,8 +6,6 @@ class Screen
 	{
 		this.mApplication = application;
 
-		location.hash = null;
-
 		//html ids
 		this.mSpinnerId = null;
 		this.mHtmlId = null;

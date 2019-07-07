@@ -6,8 +6,6 @@ class InsertTeamScreen extends Screen
 	{
 		super(application);
 
-		location.hash = "insert_team_screen";
-
 		//html ids 
 		this.mSpinnerId = "insert_team_screen_spinner_id";
 		this.mHtmlId = "insert_team_screen_html_id";

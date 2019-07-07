@@ -6,8 +6,6 @@ class InsertGameScreen extends Screen
 	{
 		super(application);
 
-		location.hash = "insert_game_screen";
-
 		//html ids 
 		this.mSpinnerId = "insert_game_screen_spinner_id";
 		this.mHtmlId = "insert_game_screen_html_id";

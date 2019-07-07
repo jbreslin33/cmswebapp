@@ -6,8 +6,6 @@ class InsertForgotPasswordScreen extends Screen
 	{
 		super(application);
 
-		location.hash = "insert_forgot_password_screen";
-
 		//html ids 
 		this.mSpinnerId = "insert_forgot_password_screen_spinner_id";
 		this.mHtmlId = "insert_forgot_password_screen_html_id";
