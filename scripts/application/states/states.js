@@ -261,11 +261,17 @@ class LOGOUT_APPLICATION extends State
 			console.log("LOGOUT_APPLICATION: ENTER");        
 		}
 		
-		//document.getElementById("logout_nav_id").className += " active";
 
+		//clear mJWT from localstorage
 		localStorage.removeItem("mJWT");
-                //app.mLocationHash = "logout_screen";
-		app.mStateMachine.changeState(app.mINIT_APPLICATION);
+
+		//clear personal selects
+		var club_select = document.getElementById("club_select_id");
+                club_select.length = 0;
+		var team_select = document.getElementById("team_select_id");
+                team_select.length = 0;
+		var person_select = document.getElementById("person_select_id");
+                person_select.length = 0;
 	}
 
         execute(app)
@@ -274,6 +280,7 @@ class LOGOUT_APPLICATION extends State
 		{
 			console.log("LOGOUT_APPLICATION: EXECUTE");        
 		}
+		app.mStateMachine.changeState(app.mINIT_APPLICATION);
 	}
 
         exit(app)
