@@ -6,6 +6,8 @@ class DeletePersonScreen extends Screen
 	{
 		super(application);
 
+		location.hash = 'delete_person_screen';
+
 		//html ids 
 		this.mSpinnerId = "delete_person_screen_spinner_id";
 		this.mHtmlId = "delete_person_screen_html_id";

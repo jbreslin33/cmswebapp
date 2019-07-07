@@ -6,6 +6,8 @@ class InsertPersonScreen extends Screen
 	{
 		super(application);
 
+		location.hash = 'insert_person_screen';
+
 		this.mCode = 0;
 		this.mData = null;
 

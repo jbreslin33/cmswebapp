@@ -6,6 +6,8 @@ class InsertClubScreen extends Screen
 	{
 		super(application);
 
+		location.hash = 'insert_club_screen';
+
 		this.mCode = 0;
 		this.mData = null;
 

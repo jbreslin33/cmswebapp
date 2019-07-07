@@ -5,9 +5,8 @@ class LoginScreen extends Screen
 	constructor(application)
 	{
 		super(application);
-		this.mApplication = application;
-		
-		console.log('in const of LoginScreen');
+	
+		location.hash = 'login_screen';
 
                 //html ids
                 this.mSpinnerId = "login_screen_spinner_id";
