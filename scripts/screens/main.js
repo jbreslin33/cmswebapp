@@ -175,7 +175,7 @@ class Main extends Screen
 
 				for (var r = 0; r < textArray.length; r++)
 				{
-					p.innerHTML = p.innerHTML + ' ' + textArray[r];	
+					p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
 				}
                         }
                 }
