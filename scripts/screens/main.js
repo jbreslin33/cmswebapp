@@ -145,7 +145,7 @@ class Main extends Screen
 				
 				if (events[i].address)
 				{
-					textArray.push('Addres: ' + events[i].address);
+					textArray.push('Address: ' + events[i].address);
 				}
 
 				if (events[i].coordinates)
