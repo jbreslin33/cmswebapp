@@ -13,6 +13,9 @@ class InsertGameScreen extends Screen
 		this.mHtmlId = "insert_game_screen_html_id";
 
 		document.getElementById("insertgamescreenbuttonid").onclick = this.hit.bind(this);
+
+               	//set todays date
+               	document.getElementById('insert_game_screen_date_id').valueAsDate = new Date();
 	}
 
 	get()
