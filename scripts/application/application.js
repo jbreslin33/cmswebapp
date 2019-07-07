@@ -25,6 +25,9 @@ class Application
 
 		//calendar
 		this.mCalendar = new Calendar();
+		
+		//time
+		this.mTime = new Time();
 
 		//login first
 		this.mLogin = null;

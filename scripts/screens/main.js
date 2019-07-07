@@ -12,6 +12,7 @@ class Main extends Screen
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
 		this.mCloneArray = new Array();
+
         }
 
         get()
@@ -121,7 +122,8 @@ class Main extends Screen
 					var arrival_time = document.createElement('p');
 					arrival_time.setAttribute('class','card-text');
 					divBody.appendChild(arrival_time);
-					arrival_time.innerHTML = 'Arrive by: ' + events[i].arrival_time;
+					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].arrival_time);
+					arrival_time.innerHTML = 'Arrive by: ' + humanTime;
 				}
 				
 				if (events[i].start_time)
@@ -129,7 +131,8 @@ class Main extends Screen
 					var start_time = document.createElement('p');
 					start_time.setAttribute('class','card-text');
 					divBody.appendChild(start_time);
-					start_time.innerHTML = ' Start time: ' + events[i].start_time;
+					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
+					start_time.innerHTML = 'Start time: ' + humanTime;
 				}
 				
 				if (events[i].end_time)
@@ -137,7 +140,8 @@ class Main extends Screen
 					var end_time = document.createElement('p');
 					end_time.setAttribute('class','card-text');
 					divBody.appendChild(end_time);
-					end_time.innerHTML = ' End time: ' + events[i].end_time;
+					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].end_time);
+					end_time.innerHTML = 'End time: ' + humanTime;
 				}
 				
 				if (events[i].address)
