@@ -1111,8 +1111,10 @@ class INSERT_GAME_APPLICATION extends State
 
                 if (screen.mJson)
                 {
+			console.log('got mJson in exe');
                         if (screen.mJson.persons)
                         {
+				console.log('got persons in exe');
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         }
                 }
