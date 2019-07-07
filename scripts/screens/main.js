@@ -95,7 +95,8 @@ class Main extends Screen
 				var divHeader = document.createElement('div');
 				divHeader.setAttribute('class','card-header');
 				div.appendChild(divHeader);
-				
+			
+
 				if (events[i].type == 'game')
 				{
 					divHeader.innerHTML = "GAME";
@@ -104,6 +105,7 @@ class Main extends Screen
 				{
 					divHeader.innerHTML = "PRACTICE";
 				}
+
 
 				var divBody = document.createElement('div');
 				divBody.setAttribute('class','card-body');
@@ -116,80 +118,64 @@ class Main extends Screen
 					divBody.appendChild(title);
 					title.innerHTML = events[i].event_date;
 				}
+				
+				var textArray = new Array();
+				
+				var p = document.createElement('p');
+				p.setAttribute('class','card-text');
+				divBody.appendChild(p);
 
 				if (events[i].arrival_time)
 				{
-					var arrival_time = document.createElement('p');
-					arrival_time.setAttribute('class','card-text');
-					divBody.appendChild(arrival_time);
 					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].arrival_time);
-					arrival_time.innerHTML = 'Arrive by: ' + humanTime;
+					textArray.push('Arrive by: ' + humanTime);
 				}
 				
 				if (events[i].start_time)
 				{
-					var start_time = document.createElement('p');
-					start_time.setAttribute('class','card-text');
-					divBody.appendChild(start_time);
 					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
-					start_time.innerHTML = 'Start time: ' + humanTime;
+					textArray.push('Start time: ' + humanTime);
 				}
 				
 				if (events[i].end_time)
 				{
-					var end_time = document.createElement('p');
-					end_time.setAttribute('class','card-text');
-					divBody.appendChild(end_time);
 					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].end_time);
-					end_time.innerHTML = 'End time: ' + humanTime;
+					textArray.push('End time: ' + humanTime);
 				}
 				
 				if (events[i].address)
 				{
-					var address = document.createElement('p');
-					address.setAttribute('class','card-text');
-					divBody.appendChild(address);
-					address.innerHTML = events[i].address;
+					textArray.push('Addres: ' + events[i].address);
 				}
 
 				if (events[i].coordinates)
 				{
-					var coordinates = document.createElement('p');
-					coordinates.setAttribute('class','card-text');
-					divBody.appendChild(coordinates);
-					coordinates.innerHTML = events[i].coordinates;
+					textArray.push('Coordinates: ' + events[i].coordinates);
 				}
 				
 				if (events[i].pitch_name)
 				{
-					var pitch_id = document.createElement('p');
-					pitch_id.setAttribute('class','card-text');
-					divBody.appendChild(pitch_id);
-					pitch_id.innerHTML = events[i].pitch_name;
+					textArray.push('Pitch: ' + events[i].pitch_name);
 				}
 				
 				if (events[i].field_name)
 				{
-					var field_name = document.createElement('p');
-					field_name.setAttribute('class','card-text');
-					divBody.appendChild(field_name);
-					field_name.innerHTML = 'team: ' + events[i].field_name;
+					textArray.push('Field: ' + events[i].field_name);
 				}
 				
 				if (events[i].team_name)
 				{
-					var team_id = document.createElement('p');
-					team_id.setAttribute('class','card-text');
-					divBody.appendChild(team_id);
-					team_id.innerHTML = events[i].team_name;
+					textArray.push('Team: ' + events[i].team_name);
 				}
 				
 				if (events[i].opponent)
 				{
-					var opponent = document.createElement('p');
-					team_id.setAttribute('class','card-text');
-					divBody.appendChild(opponent);
-					opponent.innerHTML = 'Opponent: ' + events[i].opponent;
+					textArray.push('Opponent: ' + events[i].opponent);
+				}
+
+				for (var r = 0; r < textArray.length; r++)
+				{
+					p.innerHTML = p.innerHTML + ' ' + textArray[r];	
 				}
                         }
                 }
