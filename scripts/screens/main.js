@@ -91,7 +91,7 @@ class Main extends Screen
 
 				//add to array
 				this.mCloneArray.push(div);
-
+/*
 				var divHeader = document.createElement('div');
 				divHeader.setAttribute('class','card-header');
 				div.appendChild(divHeader);
@@ -105,7 +105,7 @@ class Main extends Screen
 				{
 					divHeader.innerHTML = "PRACTICE";
 				}
-
+*/
 
 				var divBody = document.createElement('div');
 				divBody.setAttribute('class','card-body');
@@ -117,7 +117,14 @@ class Main extends Screen
 					title.setAttribute('class','card-title');
 					divBody.appendChild(title);
 					//title.innerHTML = events[i].event_date;
-					title.innerHTML = this.mApplication.mCalendar.convertDate(events[i].event_date);
+					if (events[i].type == 'game')
+					{
+						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
+					}
+					if (events[i].type == 'practice')
+					{
+						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
+					}
 					//var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
 				}
 				
