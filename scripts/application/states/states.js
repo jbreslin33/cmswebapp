@@ -18,6 +18,7 @@ class GLOBAL_APPLICATION extends State
 
         execute(app)
         {
+		console.log('D:' + location.hash);
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
@@ -322,7 +323,6 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXECUTE");        
 		}
-
 		var screen = app.mInsertNativeLoginScreen;
 
 		screen.processData();
@@ -651,7 +651,6 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
-		
 		if (app.mMain)
 		{
                       app.mMain = new Main(app);
@@ -693,7 +692,6 @@ class MAIN_APPLICATION extends State
                                 console.log('got practices');
                         }
                 }
-
 	}
 
         exit(app)
