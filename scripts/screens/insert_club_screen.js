@@ -27,6 +27,8 @@ class InsertClubScreen extends Screen
 		var person_id = select.options[select.selectedIndex].value;
 		var url = "/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id; 
 
+		console.log('burl:' + url); 
+
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {

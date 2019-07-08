@@ -2,12 +2,13 @@ function onSignIn(googleUser)
 {
 	if (APPLICATION.mLogin)
 	{
+		console.log('in onSignin mLogin');
 		APPLICATION.mLogin.googleSignIn(googleUser);
 	}
 
 	if (APPLICATION.mInsertNativeLoginClubScreen)
 	{
-
+		console.log('in onSignin mInsertNativeLLoginClub');
 		APPLICATION.mInsertNativeLoginClubScreen.googleSignIn(googleUser);
 	}
 }

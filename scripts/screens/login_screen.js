@@ -74,6 +74,7 @@ class LoginScreen extends Screen
 
 	googleSignIn(googleUser)
 	{
+
         	// Useful data for your client-side scripts:
         	var profile = googleUser.getBasicProfile();
 
@@ -86,6 +87,8 @@ class LoginScreen extends Screen
 		APPLICATION.mLogin.mFirstName = profile.getGivenName();	
 		APPLICATION.mLogin.mLastName = profile.getFamilyName();	
 		APPLICATION.mLogin.mImageUrl = profile.getImageUrl();	
+
+		console.log('email:' + APPLICATION.mLogin.mEmail);
 
 		this.googleLogin();
 	}
