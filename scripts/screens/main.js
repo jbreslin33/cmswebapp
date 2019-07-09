@@ -5,55 +5,9 @@ class Main extends Screen
         constructor(application)
         {
                 super(application);
-// that IE11 now returns undefined again for window.chrome
-// and new Opera 30 outputs true for window.chrome
-// but needs to check if window.opr is not undefined
-// and new IE Edge outputs to true now for window.chrome
-// and if not iOS Chrome check
-// so use the below updated condition
-		/*
-var isChromium = window.chrome;
-var winNav = window.navigator;
-var vendorName = winNav.vendor;
-var isOpera = typeof window.opr !== "undefined";
-var isIEedge = winNav.userAgent.indexOf("Edge") > -1;
-var isIOSChrome = winNav.userAgent.match("CriOS");
+               	
+		location.hash = 'main_screen';
 
-if (isIOSChrome)
-{
-        // is Google Chrome on IOS
-}
-else if(
-  isChromium !== null &&
-  typeof isChromium !== "undefined" &&
-  vendorName === "Google Inc." &&
-  isOpera === false &&
-  isIEedge === false
-)
-{
-        // is Google Chrome
-	location.hash = 'main_screen';
-	location.href = "";
-	location.href = location.hash;
-} else
-{
-        // not Google Chrome
-	location.hash = 'main_screen';
-}
-*/
-	//location.hash = 'main_screen';
-		/*
-        if(history.pushState) 
-        {
-                history.pushState(null, null, '#main_screen');
-        }
-        else 
-        {
-                //window.location.href = '#main_screen';
-               	location.hash = '#main_screen';
-        }
-	*/
-               	location.hash = 'main_screen';
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
