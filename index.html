@@ -105,7 +105,7 @@
 
   		<div class="card-body">
 
-			<form id="insert_native_login_screen_form_id" class="needs-validation">
+			<form id="insert_native_login_screen_form_id" onsubmit="return false;" class="needs-validation">
 
   				<div class="form-row">
     					<div class="col-md-4 mb-3">
@@ -631,6 +631,7 @@
 	var forgotPasswordToken = null;
 
 	var hash = window.location.hash.substr(1);
+	console.log('HASH:' + hash);
 
 	var urlArray = hash.split('&');
 	var parameterHash = null;
