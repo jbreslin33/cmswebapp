@@ -43,7 +43,9 @@ else if(
 	location.hash = 'login_screen';
 }
 */
+
 	//location.hash = 'login_screen';
+		/*
 	if(history.pushState) 
 	{
     		history.pushState(null, null, '#login_screen');
@@ -52,6 +54,8 @@ else if(
 	{
     		location.hash = '#login_screen';
 	}
+	*/
+    		location.hash = 'login_screen';
                 //html ids
                 this.mSpinnerId = "login_screen_spinner_id";
                 this.mHtmlId = "login_screen_html_id";

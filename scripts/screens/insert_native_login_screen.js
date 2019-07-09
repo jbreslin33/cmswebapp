@@ -43,6 +43,7 @@ else if(
 */
 		//location.hash = 'insert_native_login_screen';
         //location.hash = 'login_screen';
+		/*
         if(history.pushState) 
         {
                 history.pushState(null, null, '#insert_native_login_screen');
@@ -51,6 +52,8 @@ else if(
         {
                 location.hash = '#insert_native_login_screen';
         }
+	*/
+                location.hash = 'insert_native_login_screen';
 		this.mCode = 0;
                 this.mData = null;
 

@@ -42,6 +42,7 @@ else if(
 }
 */
 	//location.hash = 'main_screen';
+		/*
         if(history.pushState) 
         {
                 history.pushState(null, null, '#main_screen');
@@ -51,6 +52,8 @@ else if(
                 //window.location.href = '#main_screen';
                	location.hash = '#main_screen';
         }
+	*/
+               	location.hash = 'main_screen';
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
                 this.mHtmlId = "main_screen_html_id";
