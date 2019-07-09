@@ -48,7 +48,8 @@ else if(
         }
         else 
         {
-                window.location.href = '#main_screen';
+                //window.location.href = '#main_screen';
+               	location.hash = '#main_screen';
         }
                 //html ids 
                 this.mSpinnerId = "main_screen_spinner_id";
