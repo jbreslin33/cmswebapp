@@ -141,12 +141,15 @@ class INIT_APPLICATION extends State
 		if (application.getJWT())
 		{
 			console.log('got jwt');
-			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+			//application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+			 document.getElementById('main_nav_id').click();
+
 		}
 		else
 		{
 			console.log('no jwt');
-			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+			//application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
+			 document.getElementById('login_nav_id').click();
 		}
 	}
 
@@ -203,7 +206,8 @@ class LOGIN_APPLICATION extends State
                 {
                         if (screen.mJson.persons)
                         {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+			 	document.getElementById('main_nav_id').click();
                         }
                 }
 
@@ -332,7 +336,8 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 			if (screen.mJson.persons)
 			{
 				console.log('we got persons');
-				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+				document.getElementById('main_nav_id').click();
+				//app.mStateMachine.changeState(app.mMAIN_APPLICATION);
 			}
 			else
 			{
