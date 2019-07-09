@@ -207,6 +207,7 @@ class LOGIN_APPLICATION extends State
                         if (screen.mJson.persons)
                         {
                                 //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+				console.log('fake clicked main');
 			 	document.getElementById('main_nav_id').click();
                         }
                 }
@@ -335,7 +336,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			if (screen.mJson.persons)
 			{
-				console.log('we got persons');
+				console.log('fake click main');
 				document.getElementById('main_nav_id').click();
 				//app.mStateMachine.changeState(app.mMAIN_APPLICATION);
 			}
