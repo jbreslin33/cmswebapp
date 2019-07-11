@@ -1592,27 +1592,33 @@ DECLARE
 	DECLARE x int := -111;
 	found_club_administrator_id club_administrators.id%TYPE;
 	found_club_members_id club_members.id%TYPE;
+	found_team_id teams.id%TYPE;
 BEGIN
-	--are you a club admin of club $2????
-	select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
+		
+	select id into found_team_id from teams where name = $4;  	
 
-
-	IF found_club_administrator_id THEN
-		--lets get your club_members.id so we can make pass in to p function and make you a team_manager
-		select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
-
-		CALL p_insert_team($1,$2,$3,found_club_members_id,$4,x);
-
-		IF x > 0 THEN
-                     	result_set = f_format_result_set($1);
-		ELSE
-			result_set = x;
-		END IF;
-
+	IF found_team_id > 0 THEN
+		result_set = '-106';
 	ELSE
-		result_set = '-121';
-	END IF;
+		--are you a club admin of club $2????
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
 
+
+		IF found_club_administrator_id THEN
+			--lets get your club_members.id so we can make pass in to p function and make you a team_manager
+			select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
+
+			CALL p_insert_team($1,$2,$3,found_club_members_id,$4,x);
+
+			IF x > 0 THEN
+                     		result_set = f_format_result_set($1);
+			ELSE
+				result_set = x;
+			END IF;
+		ELSE
+			result_set = '-121';
+		END IF;
+	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
