@@ -26,6 +26,11 @@ class Application
 		//time
 		this.mTime = new Time();
 
+		//SCREENs
+
+		//current Screen
+		this.mCurrentScreen = null;
+
 		//login first
 		this.mLogin = null;
 

@@ -29,6 +29,12 @@ class Screen
                 this.mStateMachine = null;
 	}
 
+	setMessage(message, color)
+	{
+                APPLICATION.mInsertTeamScreen.mMessageSpan.innerHTML = message;
+		APPLICATION.mInsertTeamScreen.mMessageSpan.style.color = color;
+	}
+
 	hit()
 	{
 	
@@ -152,21 +158,5 @@ class Screen
 
 			}
 		}
-	/*	
-		if (this.mJson.pitches)
-		{
-                	//load up pitches option
-                	var select = document.getElementById("insert_team_screen_pitch_id");
-			select.length = 0;
-                	for (var i = 0; i < this.mJson.pitches.length; i++)
-                	{
-                		var opt = document.createElement('option');
-                       		opt.value = this.mJson.pitches[i].id;
-                        	var name = this.mJson.pitches[i].name;
-                        	opt.innerHTML = name;
-                        	select.appendChild(opt);
-                	}
-		}
-		*/
 	}
 }

@@ -53,8 +53,7 @@ class InsertTeamScreen extends Screen
 		}
 		else
 		{
-			APPLICATION.mInsertTeamScreen.mMessageSpan.style.color = "red";	
-			APPLICATION.mInsertTeamScreen.mMessageSpan.innerHTML = "You must select a club first";	
+			this.setMessage("You must select a club first","red");
 		}
 	}
 }
