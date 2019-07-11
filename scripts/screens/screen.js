@@ -18,7 +18,7 @@ class Screen
 
 		this.mHit = false;
 
-		this.mMessageSpan = null;
+		this.mMessageElement = null;
 
                 //states
 		this.mStateLogs = false;
@@ -29,10 +29,15 @@ class Screen
                 this.mStateMachine = null;
 	}
 
+	setMessageElement(messageElement)
+	{
+		this.mMessageElement = messageElement;
+	}
+
 	setMessage(message, color)
 	{
-                APPLICATION.mInsertTeamScreen.mMessageSpan.innerHTML = message;
-		APPLICATION.mInsertTeamScreen.mMessageSpan.style.color = color;
+                this.mMessageElement.innerHTML = message;
+		this.mMessageElement.style.color = color;
 	}
 
 	hit()

@@ -14,7 +14,7 @@ class InsertTeamScreen extends Screen
 
 		document.getElementById("insertteamscreenbuttonid").onclick = this.hit.bind(this);
 		
-		this.mMessageSpan = document.getElementById("insert_team_screen_message_id");
+		this.setMessageElement(document.getElementById("insert_team_screen_message_id"));
 	}
 
 	hit()
