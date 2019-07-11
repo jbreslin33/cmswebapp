@@ -164,4 +164,13 @@ class Screen
 			}
 		}
 	}
+
+	exit()
+	{
+                this.hide();
+                this.mCode = 0;
+                this.mData = null;
+                this.mJson = null;
+                this.mApplication.setCurrentScreen(null);
+	}
 }

@@ -973,6 +973,7 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			app.mInsertTeamScreen = new InsertTeamScreen(app);
 		}
+		app.setCurrentScreen(app.mInsertTeamScreen);
 		app.mInsertTeamScreen.show();
 	}
 
@@ -998,8 +999,7 @@ class INSERT_TEAM_APPLICATION extends State
                 {
                         if (screen.mCode == -106)
                         {
-                                document.getElementById('insert_team_screen_name_message_id').style.color = 'red';
-                                document.getElementById('insert_team_screen_name_message_id').innerHTML = 'Team Name already exists.';
+				app.mCurrentScreen.setMessage("Team name already exists", "red");
                                 app.mInsertTeamScreen.mCode = 0;
                                 app.mInsertTeamScreen.mData = null;
                         }
@@ -1012,10 +1012,7 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			console.log("INSERT_TEAM_APPLICATION: EXIT");        
 		}
-		app.mInsertTeamScreen.hide();
-		app.mInsertTeamScreen.mCode = 0;
-		app.mInsertTeamScreen.mData = null;
-		app.mInsertTeamScreen.mJson = null;
+		app.getCurrentScreen().exit();
 	}
 }
 
