@@ -168,9 +168,8 @@ class LOGIN_APPLICATION extends State
 			console.log("LOGIN_APPLICATION: ENTER");        
 		}
 
-		//start the login subsystem
 		app.setCurrentScreen(new LoginScreen(app));
-    		app.mCurrentScreen.show();
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -180,28 +179,30 @@ class LOGIN_APPLICATION extends State
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
                 
-                app.mCurrentScreen.processData();
+                app.getCurrentScreen().processData();
 
-		if (app.mCurrentScreen.mData)
+		if (app.getCurrentScreen().mData)
 		{
-			if (app.mCurrentScreen.mCode == -102)
+			/*
+			if (app.getCurrentScreen().mCode == -102)
 			{
 				//todo make this a 101
                 		document.getElementById('login_screen_email_message_id').style.color = 'red';
                         	document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
 				document.getElementById('login_screen_password_message_id').innerHTML = '';
 			}
-			if (app.mCurrentScreen.mCode == -105)
+			if (app.getCurrentScreen().mCode == -105)
 			{
                 		document.getElementById('login_screen_password_message_id').style.color = 'red';
                         	document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
 				document.getElementById('login_screen_email_message_id').innerHTML = '';
 			}
+			*/
 		}
                 
-		if (app.mCurrentScreen.mJson)
+		if (app.getCurrentScreen().mJson)
                 {
-                        if (app.mCurrentScreen.mJson.persons)
+                        if (app.getCurrentScreen().mJson.persons)
                         {
                                 app.mStateMachine.changeState(app.mMAIN_APPLICATION);
                         }
@@ -216,9 +217,6 @@ class LOGIN_APPLICATION extends State
 		}
 	
 		app.mCurrentScreen.exit();
-
-		var element = document.getElementById("login_nav_id");
-		element.className = element.className.replace(/\active\b/g, "");
 	}
 }
 

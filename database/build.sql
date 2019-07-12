@@ -1174,11 +1174,11 @@ BEGIN
 		IF found_native_login_id THEN
 			 result_set = f_format_result_set(found_email_id);
                 ELSE
-                        result_set = '-105';
+			result_set = '-101, Bad password.';
                 END IF;
 
 	ELSE
-		result_set = '-102'; 
+		result_set = '-101, Email does not exist.';
 	END IF;
 RETURN result_set;
 END;

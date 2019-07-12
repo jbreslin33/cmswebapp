@@ -22,10 +22,8 @@ class LoginScreen extends Screen
 		this.mImageUrl = null;	
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
-               	//this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
+               	this.setMessageElement(document.getElementById("login_screen_message_id"));
 		this.setMenuItem(document.getElementById("login_nav_id"));
-
-
 	}
 
 	hit()
@@ -42,7 +40,7 @@ class LoginScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-                                        APPLICATION.mCurrentScreen.mData = this.responseText;
+                                        APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
                         }
                 };
