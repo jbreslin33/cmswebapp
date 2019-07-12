@@ -27,33 +27,14 @@ class Application
 		this.mTime = new Time();
 
 		//SCREENs
-
 		//current Screen
 		this.mCurrentScreen = null;
 
-		//login first
-		this.mLogin = null;
-
-		//login via club invite
-		this.mInsertNativeLoginClubScreen = null;
-
-		this.mMain = null;
-		this.mAddClub = null;
-		this.mInsertTeamScreen = null;
-
-		this.mInsertNativeLoginScreen = null;
-	
 		//daily schedule
 		this.mDailySchedule = null;
 
 		//insert evento
 		this.mInsertEvento = null;
-
-		//insert forgot password
-		this.mInsertForgotPasswordScreen = null;
-		
-		//update forgot password
-		this.mUpdateForgotPasswordScreen = null;
 
 		//main class
                 this.mDivMain = document.createElement("DIV");

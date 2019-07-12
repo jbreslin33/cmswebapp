@@ -129,9 +129,6 @@ class INIT_APPLICATION extends State
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
 	}
         
-//if you click link it automatically joins you to club	
-	//then it simply takes you to login page
-	//where you can join site or simply login
 	execute(application)
         {
 		if (application.mStateLogs || application.mStateExecuteLogs)
@@ -140,16 +137,11 @@ class INIT_APPLICATION extends State
 		}
 		if (application.getJWT())
 		{
-			console.log('got jwt');
 			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
-			 //document.getElementById('main_nav_id').click();
-
 		}
 		else
 		{
-			console.log('no jwt');
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
-			// document.getElementById('login_nav_id').click();
 		}
 	}
 
@@ -175,20 +167,10 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: ENTER");        
 		}
-		if (app.mLogin)
-		{
-			//do nothing right now	
-		}
-		else
-		{
-			//start the login subsystem
-			app.mLogin = new LoginScreen(app);
-		}
-		//document.getElementById("login_nav_id").className += " active";
-    		app.mLogin.show();
-//you need to take the invite token and do a query to find out the appropriate place for this user....
-		//to do this do we need loginScreen states?
-		//
+
+		//start the login subsystem
+		app.setCurrentScreen(new LoginScreen(app));
+    		app.mCurrentScreen.show();
 	}
 
         execute(app)
@@ -198,35 +180,31 @@ class LOGIN_APPLICATION extends State
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
                 
-		var screen = app.mLogin;
+                app.mCurrentScreen.processData();
 
-                screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-				console.log('fake clicked main');
-			 	document.getElementById('main_nav_id').click();
-                        }
-                }
-
-		if (screen.mData)
+		if (app.mCurrentScreen.mData)
 		{
-			if (app.mLogin.mCode == -102)
+			if (app.mCurrentScreen.mCode == -102)
 			{
                 		document.getElementById('login_screen_email_message_id').style.color = 'red';
                         	document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
 				document.getElementById('login_screen_password_message_id').innerHTML = '';
 			}
-			if (app.mLogin.mCode == -105)
+			if (app.mCurrentScreen.mCode == -105)
 			{
                 		document.getElementById('login_screen_password_message_id').style.color = 'red';
                         	document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
 				document.getElementById('login_screen_email_message_id').innerHTML = '';
 			}
 		}
+                
+		if (app.mCurrentScreen.mJson)
+                {
+                        if (app.mCurrentScreen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
 	}
 
         exit(app)
@@ -235,14 +213,11 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXIT");        
 		}
-		//reset data variables
-		app.mLogin.mCode = 0;
-		app.mLogin.mData = null;
-		app.mLogin.mJson = null;
+	
+		app.mCurrentScreen.exit();
 
 		var element = document.getElementById("login_nav_id");
 		element.className = element.className.replace(/\active\b/g, "");
-    		app.mLogin.hide();
 	}
 }
 

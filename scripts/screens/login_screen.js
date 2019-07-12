@@ -38,7 +38,7 @@ class LoginScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-                                        APPLICATION.mLogin.mData = this.responseText;
+                                        APPLICATION.mCurrentScreen.mData = this.responseText;
                                 }
                         }
                 };
@@ -63,7 +63,7 @@ class LoginScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-                                        APPLICATION.mLogin.mData = this.responseText;
+                                        APPLICATION.mCurrentScreen.mData = this.responseText;
                                 }
                         }
                 };
@@ -74,21 +74,18 @@ class LoginScreen extends Screen
 
 	googleSignIn(googleUser)
 	{
-
         	// Useful data for your client-side scripts:
         	var profile = googleUser.getBasicProfile();
 
         	// The ID token you need to pass to your backend:
         	var id_token = googleUser.getAuthResponse().id_token;
 	
-		APPLICATION.mLogin.mEmail = profile.getEmail();	
-		APPLICATION.mLogin.mGoogleID = profile.getId();	
-		APPLICATION.mLogin.mIDToken = id_token;	
-		APPLICATION.mLogin.mFirstName = profile.getGivenName();	
-		APPLICATION.mLogin.mLastName = profile.getFamilyName();	
-		APPLICATION.mLogin.mImageUrl = profile.getImageUrl();	
-
-		console.log('email:' + APPLICATION.mLogin.mEmail);
+		APPLICATION.mCurrentScreen.mEmail = profile.getEmail();	
+		APPLICATION.mCurrentScreen.mGoogleID = profile.getId();	
+		APPLICATION.mCurrentScreen.mIDToken = id_token;	
+		APPLICATION.mCurrentScreen.mFirstName = profile.getGivenName();	
+		APPLICATION.mCurrentScreen.mLastName = profile.getFamilyName();	
+		APPLICATION.mCurrentScreen.mImageUrl = profile.getImageUrl();	
 
 		this.googleLogin();
 	}
