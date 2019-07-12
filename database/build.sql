@@ -899,16 +899,16 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
 RETURNS text AS $$
 DECLARE
-	found_email emails.email%TYPE;
+	found_email_id emails.id%TYPE;
 	result_set text;
 	DECLARE x int := -111; --for bad insert attempt
 BEGIN
-    	SELECT email INTO found_email FROM emails WHERE email = email_name;
-	IF found_email THEN
+    	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
+	IF found_email_id > 0 THEN
 		result_set = '-101';
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
-		IF x THEN
+		IF x > 0 THEN
 			result_set = f_format_result_set(x);
                 ELSE
                 	result_set = '-105';
