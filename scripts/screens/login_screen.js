@@ -22,6 +22,10 @@ class LoginScreen extends Screen
 		this.mImageUrl = null;	
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
+               	//this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
+		this.setMenuItem(document.getElementById("login_nav_id"));
+
+
 	}
 
 	hit()

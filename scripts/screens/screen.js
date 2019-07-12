@@ -19,6 +19,7 @@ class Screen
 		this.mHit = false;
 
 		this.mMessageElement = null;
+		this.mMenuItem = null;
 
                 //states
 		this.mStateLogs = false;
@@ -38,6 +39,16 @@ class Screen
 	{
                 this.mMessageElement.innerHTML = message;
 		this.mMessageElement.style.color = color;
+	}
+
+	setMenuItem(menuItem)
+	{
+		this.mMenuItem = menuItem;
+	}
+
+	getMenuItem()
+	{
+		return this.mMenuItem;
 	}
 
 	hit()
@@ -168,6 +179,17 @@ class Screen
 			}
 		}
 	}
+	
+	enter()
+	{
+		this.getMenuItem().className += " active";
+		this.show();
+	}
+
+	execute()
+	{
+
+	}
 
 	exit()
 	{
@@ -175,6 +197,10 @@ class Screen
                 this.mCode = 0;
                 this.mData = null;
                 this.mJson = null;
-                this.mApplication.setCurrentScreen(null);
+
+            	this.getMenuItem().className = this.getMenuItem().className.replace(/\active\b/g, "");
+                //element.className = element.className.replace(/\active\b/g, "");
+                
+		this.mApplication.setCurrentScreen(null);
 	}
 }

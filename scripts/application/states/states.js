@@ -284,18 +284,10 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: ENTER");        
 		}
-		if (app.mInsertNativeLoginScreen)
-		{
-			//also maybe some clean up as well, so just leaving this if statement here.
-			app.mInsertNativeLoginScreen = new InsertLoginScreen(app);
 
-		}
-		else
-		{
-			app.mInsertNativeLoginScreen = new InsertLoginScreen(app);
-		}
-                document.getElementById("insert_native_login_screen_nav_id").className += " active";
-		app.mInsertNativeLoginScreen.show();
+		app.setCurrentScreen(new InsertLoginScreen(app));
+
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -304,27 +296,20 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXECUTE");        
 		}
-		var screen = app.mInsertNativeLoginScreen;
+		
+		app.getCurrentScreen().processData();
 
-		screen.processData();
-
-		if (screen.mJson)
+		if (app.getCurrentScreen().mJson)
 		{
-			if (screen.mJson.persons)
+			if (app.getCurrentScreen().mJson.persons)
 			{
-				console.log('fake click main');
-				document.getElementById('main_nav_id').click();
-				//app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-			}
-			else
-			{
-				console.log('no persons');
+				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
 			}
 		}
               
-                if (app.mInsertNativeLoginScreen.mData)
+                if (app.getCurrentScreen.mData)
 		{
-			if (app.mInsertNativeLoginScreen.mCode == -101)
+			if (app.getCurrentScreen().mCode == -101)
                 	{
 				document.getElementById("insert_native_login_screen_link_id").style.display = "block";
                         }
@@ -337,15 +322,13 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXIT");        
 		}
-		app.mInsertNativeLoginScreen.mCode = 0;
-		app.mInsertNativeLoginScreen.mData = null;
-		app.mInsertNativeLoginScreen.mJson = null;
+
+		app.getCurrentScreen().exit();
 
 		//hide it for now maybe delete later
 		var element = document.getElementById("insert_native_login_screen_nav_id");
                 element.className = element.className.replace(/\active\b/g, "");
 
-		app.mInsertNativeLoginScreen.hide();
 	}
 }
 

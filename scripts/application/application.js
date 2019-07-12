@@ -109,12 +109,9 @@ class Application
 	setCurrentScreen(screen)
 	{
 		this.mCurrentScreen = screen;
-		console.log('set mCcurrent screen:' + this.mCurrentScreen);
-		console.log('set current screen:' + screen);
 	}
 	getCurrentScreen()
 	{
-		console.log('cur:' + this.mCurrentScreen);
 		return this.mCurrentScreen;
 	}
 

@@ -22,6 +22,7 @@ class InsertLoginScreen extends Screen
 
 		document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 
+		this.setMenuItem(document.getElementById("insert_native_login_screen_nav_id"));
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
 	}
 
@@ -46,8 +47,7 @@ class InsertLoginScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-					console.log('responseTextyo:' + this.responseText);
-					APPLICATION.mInsertNativeLoginScreen.mData = this.responseText;
+					APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
                         }
                 };
