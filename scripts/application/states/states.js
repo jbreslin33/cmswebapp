@@ -186,6 +186,7 @@ class LOGIN_APPLICATION extends State
 		{
 			if (app.mCurrentScreen.mCode == -102)
 			{
+				//todo make this a 101
                 		document.getElementById('login_screen_email_message_id').style.color = 'red';
                         	document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
 				document.getElementById('login_screen_password_message_id').innerHTML = '';
