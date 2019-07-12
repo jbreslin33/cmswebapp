@@ -178,35 +178,8 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXECUTE");        
 		}
-                
-                app.getCurrentScreen().processData();
 
-		if (app.getCurrentScreen().mData)
-		{
-			/*
-			if (app.getCurrentScreen().mCode == -102)
-			{
-				//todo make this a 101
-                		document.getElementById('login_screen_email_message_id').style.color = 'red';
-                        	document.getElementById('login_screen_email_message_id').innerHTML = 'email does not exist. Please enter a valid email.';
-				document.getElementById('login_screen_password_message_id').innerHTML = '';
-			}
-			if (app.getCurrentScreen().mCode == -105)
-			{
-                		document.getElementById('login_screen_password_message_id').style.color = 'red';
-                        	document.getElementById('login_screen_password_message_id').innerHTML = 'Incorrect password.';
-				document.getElementById('login_screen_email_message_id').innerHTML = '';
-			}
-			*/
-		}
-                
-		if (app.getCurrentScreen().mJson)
-                {
-                        if (app.getCurrentScreen().mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
+		app.getCurrentScreen().execute()
 	}
 
         exit(app)
@@ -295,16 +268,8 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXECUTE");        
 		}
 		
-		app.getCurrentScreen().processData();
+		app.getCurrentScreen().execute();
 
-		if (app.getCurrentScreen().mJson)
-		{
-			if (app.getCurrentScreen().mJson.persons)
-			{
-				app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-			}
-		}
-              
                 if (app.getCurrentScreen.mData)
 		{
 			if (app.getCurrentScreen().mCode == -101)

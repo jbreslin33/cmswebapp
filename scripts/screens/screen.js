@@ -188,7 +188,15 @@ class Screen
 
 	execute()
 	{
+                this.processData();
 
+                if (this.mJson)
+                {
+                        if (this.mJson.persons)
+                        {
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                        }
+                }
 	}
 
 	exit()
