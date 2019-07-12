@@ -322,13 +322,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXIT");        
 		}
-
 		app.getCurrentScreen().exit();
-
-		//hide it for now maybe delete later
-		var element = document.getElementById("insert_native_login_screen_nav_id");
-                element.className = element.className.replace(/\active\b/g, "");
-
 	}
 }
 
