@@ -89,4 +89,16 @@ class InsertLoginScreen extends Screen
               document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 	}
 
+	execute()
+	{
+ 		super.execute();
+
+                if (this.mData)
+               	{
+                       if (this.mCode == -101)
+                       {
+                               document.getElementById("insert_native_login_screen_link_id").style.display = "block";
+                       }
+                }
+	}
 }

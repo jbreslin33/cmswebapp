@@ -269,14 +269,6 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		}
 		
 		app.getCurrentScreen().execute();
-
-                if (app.getCurrentScreen.mData)
-		{
-			if (app.getCurrentScreen().mCode == -101)
-                	{
-				document.getElementById("insert_native_login_screen_link_id").style.display = "block";
-                        }
-                }
 	}
 
         exit(app)
