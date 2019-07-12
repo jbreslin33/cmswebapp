@@ -95,6 +95,10 @@ class Screen
 
                                 this.processJsonData();
                         }
+                        if (this.mCode == -101)
+			{
+				this.setMessage(dataArray[1],'red');
+			}
 		}
 	}
 

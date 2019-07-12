@@ -905,7 +905,7 @@ DECLARE
 BEGIN
     	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
 	IF found_email_id > 0 THEN
-		result_set = '-101';
+		result_set = '-101, Email already exists. Do you want to login instead?';
 	ELSE
 		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
 		IF x > 0 THEN
