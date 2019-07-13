@@ -18,8 +18,10 @@ class InsertClubScreen extends Screen
 		
 		document.getElementById("addclubscreenbuttonid").onclick = this.hit.bind(this);
 
+          	this.setHtml(document.getElementById("insert_club_screen_html_id"));
                 this.setMenuItem(document.getElementById("insert_club_nav_id"));
                 this.setMessageElement(document.getElementById("insert_club_screen_message_id"));
+          	this.setForm(document.getElementById("insert_club_screen_form_id"));
 	}
 
 	hit()
@@ -29,26 +31,10 @@ class InsertClubScreen extends Screen
 
 		var select = document.getElementById("person_select_id");
 		var person_id = select.options[select.selectedIndex].value;
-		var url = "/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id; 
 
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-					APPLICATION.getCurrentScreen().mData = this.responseText;
-                                }
-                        }
-                };
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
 
-		var form = document.getElementById('insert_club_screen_html_id');
-		if (form.checkValidity() == true) 
-		{
-			request.open('POST', url);
-                	request.send();
-		}
+		APPLICATION.getCurrentScreen().ajax();
 	}
         
 	show()

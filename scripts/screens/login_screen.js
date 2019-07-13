@@ -39,6 +39,7 @@ class LoginScreen extends Screen
 		this.ajax();
 	}
 
+	//overide from screen
 	checkValidity()
 	{
 		if (APPLICATION.getCurrentScreen().mGoogleLoginHit)
@@ -49,7 +50,6 @@ class LoginScreen extends Screen
 		{
 			super.checkValidity();
 		}
-	
 	}
        
         googleLogin()

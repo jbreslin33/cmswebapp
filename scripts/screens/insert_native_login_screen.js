@@ -45,6 +45,7 @@ class InsertLoginScreen extends Screen
 		this.ajax();
 	}
 
+	//overide from screen
 	send()
 	{
         	var passwordMatch = false;
