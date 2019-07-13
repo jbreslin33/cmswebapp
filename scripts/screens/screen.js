@@ -91,14 +91,12 @@ class Screen
 
         showSpinner()
         {
-		console.log('show sp');
                 this.getHtml().style.visibility = "hidden";
                 this.getSpinner().style.visibility = "visible";
         }
 
         show()
         {
-		console.log('show???');
                 this.getHtml().style.display = "block";
                 this.getHtml().style.visibility = "visible";
                 this.getSpinner().style.visibility = "hidden";
