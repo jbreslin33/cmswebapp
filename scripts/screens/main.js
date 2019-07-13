@@ -8,9 +8,11 @@ class Main extends Screen
                	
 		location.hash = 'main_screen';
 
-                //html ids 
-                this.mSpinnerId = "main_screen_spinner_id";
-                this.mHtmlId = "main_screen_html_id";
+		this.setHtml(document.getElementById("main_screen_html_id"));
+                this.setMenuItem(document.getElementById("main_nav_id"));
+                this.setMessageElement(document.getElementById("main_screen_message_id"));
+                this.setSpinner(document.getElementById("main_screen_spinner_id"));
+
 		this.mCloneArray = new Array();
         }
         get()

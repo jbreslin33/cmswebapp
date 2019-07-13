@@ -64,7 +64,7 @@ class LoginScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-                                        APPLICATION.mCurrentScreen.mData = this.responseText;
+                                        APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
                         }
                 };
@@ -81,12 +81,12 @@ class LoginScreen extends Screen
         	// The ID token you need to pass to your backend:
         	var id_token = googleUser.getAuthResponse().id_token;
 	
-		APPLICATION.mCurrentScreen.mEmail = profile.getEmail();	
-		APPLICATION.mCurrentScreen.mGoogleID = profile.getId();	
-		APPLICATION.mCurrentScreen.mIDToken = id_token;	
-		APPLICATION.mCurrentScreen.mFirstName = profile.getGivenName();	
-		APPLICATION.mCurrentScreen.mLastName = profile.getFamilyName();	
-		APPLICATION.mCurrentScreen.mImageUrl = profile.getImageUrl();	
+		APPLICATION.getCurrentScreen().mEmail = profile.getEmail();	
+		APPLICATION.getCurrentScreen().mGoogleID = profile.getId();	
+		APPLICATION.getCurrentScreen().mIDToken = id_token;	
+		APPLICATION.getCurrentScreen().mFirstName = profile.getGivenName();	
+		APPLICATION.getCurrentScreen().mLastName = profile.getFamilyName();	
+		APPLICATION.getCurrentScreen().mImageUrl = profile.getImageUrl();	
 
 		this.googleLogin();
 	}

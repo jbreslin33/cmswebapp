@@ -1,28 +1,16 @@
 function onSignIn(googleUser) 
 {
-	if (APPLICATION.mLogin)
+	if (APPLICATION.getCurrentScreen())
 	{
-		console.log('in onSignin mLogin');
-		APPLICATION.mLogin.googleSignIn(googleUser);
-	}
-
-	if (APPLICATION.mInsertNativeLoginClubScreen)
-	{
-		console.log('in onSignin mInsertNativeLLoginClub');
-		APPLICATION.mInsertNativeLoginClubScreen.googleSignIn(googleUser);
+		console.log('in onSignin');
+		APPLICATION.getCurrentScreen().googleSignIn(googleUser);
 	}
 }
 
 function signOut() 
 {
-	if (APPLICATION.mLogin)
+	if (APPLICATION.getCurrentScreen())
 	{
-		APPLICATION.mLogin.googleSignOut();
-	}
-
-	if (APPLICATION.mInsertNativeLoginClubScreen)
-	{
-
-		APPLICATION.mInsertNativeLoginClubScreen.googleSignOut();
+		APPLICATION.getCurrentScreen().googleSignOut();
 	}
 }

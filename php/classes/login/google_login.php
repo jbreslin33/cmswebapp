@@ -50,6 +50,7 @@ class GoogleLogin
                 $return_value = pg_fetch_result($result, 0);
 
                 $result_set = $database->formatResultSet($return_value);
+		error_log($result_set);
                 echo $result_set;
         }
 }

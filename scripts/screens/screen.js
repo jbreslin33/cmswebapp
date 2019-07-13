@@ -106,7 +106,7 @@ class Screen
 
         hide()
         {
-                document.getElementById(this.mHtmlId).style.display = "none";
+                this.getHtml().style.display = "none";
         }
 
 	processData()
