@@ -42,7 +42,8 @@ class InsertLoginScreen extends Screen
 
 		this.setUrl("/php/classes/insert/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1); 
 
-
+		this.ajax();
+/*
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
@@ -73,9 +74,10 @@ class InsertLoginScreen extends Screen
           			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
 			}
 		}
+		*/
 	}
 
-	checkValidity()
+	send()
 	{
         	var passwordMatch = false;
 

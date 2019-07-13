@@ -50,14 +50,14 @@ class Screen
 
                 if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true)
                 {
-                        APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
-                        APPLICATION.getCurrentScreen().getRequest().send();
+			APPLICATION.getCurrentScreen().send();
                 }
 	}
 
-	checkValidity()
+	send()
 	{
-
+        	APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
+                APPLICATION.getCurrentScreen().getRequest().send();
 	}
 
 	setForm(form)
