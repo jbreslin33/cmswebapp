@@ -8,10 +8,6 @@ class InsertClubScreen extends Screen
 
 		location.hash = 'insert_club_screen';
 
-
-		this.mCode = 0;
-		this.mData = null;
-
 		//sql php vars
 		this.mName = null;
 		this.mAddress = null;
@@ -37,15 +33,4 @@ class InsertClubScreen extends Screen
 
 		APPLICATION.getCurrentScreen().ajax();
 	}
-/*        
-	show()
-	{
-              document.getElementById("insert_club_screen_html_id").style.display = "block";
-	}
-
-	hide()
-	{
-              document.getElementById("insert_club_screen_html_id").style.display = "none";
-	}
-	*/
 }
