@@ -43,38 +43,6 @@ class InsertLoginScreen extends Screen
 		this.setUrl("/php/classes/insert/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1); 
 
 		this.ajax();
-/*
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-					APPLICATION.getCurrentScreen().mData = this.responseText;
-                                }
-                        }
-                };
-
-		if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true) 
-		{
-			var passwordMatch = false;
-
-			if (this.mPassword1 == this.mPassword2)
-			{
-				request.open('POST', APPLICATION.getCurrentScreen().getUrl());
-                		request.send();
-
-          			document.getElementById('password_message_id').style.color = 'green';
-          			document.getElementById('password_message_id').innerHTML = 'passwords are matching';
-			}
-			else
-			{
-          			document.getElementById('password_message_id').style.color = 'red';
-          			document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
-			}
-		}
-		*/
 	}
 
 	send()
@@ -99,7 +67,7 @@ class InsertLoginScreen extends Screen
 	show()
 	{
 		super.show();
-              	//document.getElementById("insert_native_login_screen_html_id").style.display = "block";
+		
 		//hide link
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
 		document.getElementById("insert_native_login_screen_email_div_id").style.display = "block";

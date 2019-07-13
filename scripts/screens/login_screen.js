@@ -25,6 +25,8 @@ class LoginScreen extends Screen
                 this.setSpinner(document.getElementById("login_screen_spinner_id"));
                 
 		this.setForm(document.getElementById("login_screen_form_id"));
+
+		this.mGoogleLoginHit = false;
 	}
 
 	hit()
@@ -36,25 +38,26 @@ class LoginScreen extends Screen
 
 		this.ajax();
 	}
+
+	checkValidity()
+	{
+		if (APPLICATION.getCurrentScreen().mGoogleLoginHit)
+		{
+			APPLICATION.getCurrentScreen().send();
+		}
+		else
+		{
+			super.checkValidity();
+		}
+	
+	}
        
         googleLogin()
         {
-                var url = "/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName;
+		APPLICATION.getCurrentScreen().mGoogleLoginHit = true;
+                this.setUrl("/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName);
 
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        APPLICATION.getCurrentScreen().mData = this.responseText;
-                                }
-                        }
-                };
-
-                request.open('POST', url);
-                request.send();
+		this.ajax();
         }
 
 	googleSignIn(googleUser)

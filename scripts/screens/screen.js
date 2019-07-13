@@ -48,6 +48,12 @@ class Screen
                         }
                 };
 
+		APPLICATION.getCurrentScreen().checkValidity();
+
+	}
+
+	checkValidity()
+	{
                 if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true)
                 {
 			APPLICATION.getCurrentScreen().send();
