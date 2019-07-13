@@ -73,6 +73,25 @@ class InsertLoginScreen extends Screen
 			}
 		}
 	}
+
+	checkValidity()
+	{
+        	var passwordMatch = false;
+
+                if (this.mPassword1 == this.mPassword2)
+                {
+                	request.open('POST', APPLICATION.getCurrentScreen().getUrl());
+                        request.send();
+
+                        document.getElementById('password_message_id').style.color = 'green';
+                        document.getElementById('password_message_id').innerHTML = 'passwords are matching';
+                }
+               	else
+                {
+                	document.getElementById('password_message_id').style.color = 'red';
+                        document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
+                }
+	}
         
 	show()
 	{

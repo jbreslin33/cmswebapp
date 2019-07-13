@@ -20,6 +20,7 @@ class Screen
 
 		this.mForm = null;
 		this.mUrl = null;
+		this.mRequest = null;
 
 		this.mMessageElement = null;
 		this.mMenuItem = null;
@@ -35,12 +36,12 @@ class Screen
 
 	ajax()
 	{
-	        var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
+	        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
+                APPLICATION.getCurrentScreen().getRequest().onreadystatechange = function()
                 {
-                        if (request.readyState === XMLHttpRequest.DONE)
+                        if (APPLICATION.getCurrentScreen().getRequest().readyState === XMLHttpRequest.DONE)
                         {
-                                if (request.status === 200)
+                                if (APPLICATION.getCurrentScreen().getRequest().status === 200)
                                 {
                                         APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
@@ -49,9 +50,14 @@ class Screen
 
                 if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true)
                 {
-                        request.open('POST', APPLICATION.getCurrentScreen().getUrl());
-                        request.send();
+                        APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
+                        APPLICATION.getCurrentScreen().getRequest().send();
                 }
+	}
+
+	checkValidity()
+	{
+
 	}
 
 	setForm(form)
@@ -72,6 +78,16 @@ class Screen
 	getUrl()
 	{
 		return this.mUrl;
+	}
+
+	setRequest(request)
+	{
+		this.mRequest = request;
+	}
+
+	getRequest()
+	{
+		return this.mRequest;
 	}
 	
 	setSpinner(spinner)
