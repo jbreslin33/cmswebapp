@@ -19,8 +19,6 @@ class InsertTeamScreen extends Screen
 
 	hit()
 	{
-		this.mHit = true;
-
 		var name  = document.getElementById("insert_team_screen_name_id").value;
 		var person_select = document.getElementById("person_select_id");
 		var club_select = document.getElementById("club_select_id");

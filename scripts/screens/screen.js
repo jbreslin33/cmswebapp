@@ -34,6 +34,11 @@ class Screen
                 this.mStateMachine = null;
 	}
 
+	hit()
+	{
+
+	}
+
 	ajax()
 	{
 	        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
