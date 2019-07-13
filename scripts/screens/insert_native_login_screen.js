@@ -42,6 +42,7 @@ class InsertLoginScreen extends Screen
 
 		this.setUrl("/php/classes/insert/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1); 
 
+
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
@@ -80,8 +81,8 @@ class InsertLoginScreen extends Screen
 
                 if (this.mPassword1 == this.mPassword2)
                 {
-                	request.open('POST', APPLICATION.getCurrentScreen().getUrl());
-                        request.send();
+                	APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
+                        APPLICATION.getCurrentScreen().getRequest().send();
 
                         document.getElementById('password_message_id').style.color = 'green';
                         document.getElementById('password_message_id').innerHTML = 'passwords are matching';
