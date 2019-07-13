@@ -1357,7 +1357,7 @@ BEGIN
         WHERE name = $1;
 
         IF found_club_id THEN
-                return_code = '-106';
+                return_code = '-101, Club name already taken.';
        	ELSE
 		CALL p_insert_club($1,$2,email_id,person_id,x);
 		IF x > 0 THEN

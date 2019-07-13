@@ -17,6 +17,9 @@ class InsertClubScreen extends Screen
 		this.mAddress = null;
 		
 		document.getElementById("addclubscreenbuttonid").onclick = this.hit.bind(this);
+
+                this.setMenuItem(document.getElementById("insert_club_nav_id"));
+                this.setMessageElement(document.getElementById("insert_club_screen_message_id"));
 	}
 
 	hit()
@@ -28,8 +31,6 @@ class InsertClubScreen extends Screen
 		var person_id = select.options[select.selectedIndex].value;
 		var url = "/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id; 
 
-		console.log('burl:' + url); 
-
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
                 {
@@ -37,7 +38,7 @@ class InsertClubScreen extends Screen
                         {
                                 if (request.status === 200)
                                 {
-					APPLICATION.mInsertClubScreen.mData = this.responseText;
+					APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
                         }
                 };

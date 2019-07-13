@@ -92,11 +92,12 @@ class Screen
 	{
                 if (this.mData)
                 {
+			console.log('data:' + this.mData);
                         var dataArray = this.mData.split(",");
                         this.mCode = dataArray[0];
                         if (this.mCode == -100)
                         {
-                                this.mApplication.setJWT(dataArray[1]); //set jwt
+				this.mApplication.setJWT(dataArray[1]); //set jwt
                                 
                                 //JSON
                                 dataArray.shift(); //remove mCode
@@ -194,11 +195,20 @@ class Screen
                 {
                         if (this.mJson.persons)
                         {
+				console.log('did we get in persons to goto main');
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                         }
                 }
 	}
-
+	/*
+                if (screen.mJson)
+                {
+                        if (screen.mJson.persons)
+                        {
+                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
+                        }
+                }
+*/
 	exit()
 	{
                 this.hide();

@@ -188,7 +188,6 @@ class LOGIN_APPLICATION extends State
 		{
 			console.log("LOGIN_APPLICATION: EXIT");        
 		}
-	
 		app.mCurrentScreen.exit();
 	}
 }
@@ -643,15 +642,9 @@ class INSERT_CLUB_APPLICATION extends State
 		{
 			console.log("INSERT_CLUB_APPLICATION: ENTER");        
 		}
-		if (app.mInsertClubScreen)
-		{
-			app.mInsertClubScreen = new InsertClubScreen(app);
-		}
-		else
-		{
-			app.mInsertClubScreen = new InsertClubScreen(app);
-		}
-		app.mInsertClubScreen.show();
+
+		app.setCurrentScreen(new InsertClubScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -660,29 +653,8 @@ class INSERT_CLUB_APPLICATION extends State
 		{
 			console.log("INSERT_CLUB_APPLICATION: EXECUTE");        
 		}
-		
-		var screen = app.mInsertClubScreen;
 
-		screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
-
-		if (screen.mData)
-                {
-                        if (screen.mCode == -106)
-                        {
-                                document.getElementById('insert_club_screen_name_message_id').style.color = 'red';
-                                document.getElementById('insert_club_screen_name_message_id').innerHTML = 'Club Name already exists.';
-				app.mInsertClubScreen.mCode = 0;
-				app.mInsertClubScreen.mData = null;
-                        }
-                }
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -691,10 +663,8 @@ class INSERT_CLUB_APPLICATION extends State
 		{
 			console.log("INSERT_CLUB_APPLICATION: EXIT");        
 		}
-		app.mInsertClubScreen.hide();
-		app.mInsertClubScreen.mCode = 0;
-		app.mInsertClubScreen.mData = null;
-		app.mInsertClubScreen.mJson = null;
+
+		app.getCurrentScreen().exit();
 	}
 }
 
