@@ -18,7 +18,6 @@ class GLOBAL_APPLICATION extends State
 
         execute(app)
         {
-		console.log('D:' + location.hash);
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 

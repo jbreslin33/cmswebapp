@@ -40,7 +40,6 @@ class InsertInviteClubMemberScreen extends Screen
                         	{
                                 	if (request.status === 200)
                                 	{
-						console.log('response:' + this.responseText);
                                         	APPLICATION.mInsertInviteClubMemberScreen.mData = this.responseText;
                                 	}
                         	}

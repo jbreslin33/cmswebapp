@@ -36,7 +36,6 @@ class InsertPracticeScreen extends Screen
                         		{
                                 		if (request.status === 200)
                                 		{
-							console.log('response:' + this.responseText);
                                         		APPLICATION.mInsertPracticeScreen.mData = this.responseText;
                                 		}
                         		}

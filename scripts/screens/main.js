@@ -15,10 +15,8 @@ class Main extends Screen
         }
         get()
         {
-		console.log('getting');
 		if (APPLICATION.getJWT())
                 {
-			console.log('in if getting');
                 	var url = "/php/classes/select/select_events.php?jwt=" + APPLICATION.getJWT();
                         var request = new XMLHttpRequest();
                         request.onreadystatechange = function()
@@ -27,7 +25,6 @@ class Main extends Screen
                                 {
                                 	if (request.status === 200)
                                         {
-                                        	console.log('response:' + this.responseText);
                                                 APPLICATION.mMain.mData = this.responseText;
                                         }
                                 }
