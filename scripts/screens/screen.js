@@ -34,11 +34,6 @@ class Screen
                 this.mStateMachine = null;
 	}
 
-	hit()
-	{
-
-	}
-
 	ajax()
 	{
 	        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
@@ -288,15 +283,7 @@ class Screen
                         }
                 }
 	}
-	/*
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
-*/
+	
 	exit()
 	{
                 this.hide();
