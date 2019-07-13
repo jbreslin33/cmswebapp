@@ -8,13 +8,13 @@ class InsertTeamScreen extends Screen
 
 		location.hash = 'insert_team_screen';
 
-		//html ids 
-		this.mSpinnerId = "insert_team_screen_spinner_id";
-		this.mHtmlId = "insert_team_screen_html_id";
-
 		document.getElementById("insertteamscreenbuttonid").onclick = this.hit.bind(this);
 		
-		this.setMessageElement(document.getElementById("insert_team_screen_message_id"));
+                this.setHtml(document.getElementById("insert_team_screen_html_id"));
+                this.setMenuItem(document.getElementById("insert_team_nav_id"));
+                this.setMessageElement(document.getElementById("insert_team_screen_message_id"));
+                this.setForm(document.getElementById("insert_team_screen_form_id"));
+                this.setSpinner(document.getElementById("insert_team_screen_spinner_id"));
 	}
 
 	hit()
@@ -30,26 +30,9 @@ class InsertTeamScreen extends Screen
                		var club_id = club_select.options[club_select.selectedIndex].value;
                		var person_id = person_select.options[person_select.selectedIndex].value;
 
-			var url = "/php/classes/insert/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name;
+			APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name);
 
-                	var request = new XMLHttpRequest();
-                	request.onreadystatechange = function()
-                	{
-                        	if (request.readyState === XMLHttpRequest.DONE)
-                        	{
-                                	if (request.status === 200)
-                                	{
-						APPLICATION.mInsertTeamScreen.mData = this.responseText;
-                                	}
-                        	}
-                	};
-
-			var form = document.getElementById('insert_team_screen_html_id');
-			if (form.checkValidity() == true) 
-			{
-				request.open('POST', url);
-                		request.send();
-			}
+			APPLICATION.getCurrentScreen().ajax();
 		}
 		else
 		{
