@@ -9,8 +9,8 @@ class Screen
 		location.hash = null;
 
 		//html ids
-		this.mSpinnerId = null;
-		this.mHtmlId = null;
+		this.mSpinner = null;
+		this.mHtml = null;
 
 		this.mCode = 0;
 		this.mData = null;
@@ -28,6 +28,26 @@ class Screen
                 this.mStateExitLogs = false;
 
                 this.mStateMachine = null;
+	}
+	
+	setSpinner(spinner)
+	{
+		this.mSpinner = spinner;
+	}
+
+	getSpinner()
+	{
+		return this.mSpinner;
+	}
+
+	setHtml(html)
+	{
+		this.mHtml = html;
+	}
+
+	getHtml()
+	{
+		return this.mHtml;
 	}
 
 	setMessageElement(messageElement)
@@ -71,16 +91,17 @@ class Screen
 
         showSpinner()
         {
-		console.log('showspinner');
-                document.getElementById(this.mHtmlId).style.visibility = "hidden";
-                document.getElementById(this.mSpinnerId).style.visibility = "visible";
+		console.log('show sp');
+                this.getHtml().style.visibility = "hidden";
+                this.getSpinner().style.visibility = "visible";
         }
 
         show()
         {
-                document.getElementById(this.mHtmlId).style.display = "block";
-                document.getElementById(this.mHtmlId).style.visibility = "visible";
-                document.getElementById(this.mSpinnerId).style.visibility = "hidden";
+		console.log('show???');
+                this.getHtml().style.display = "block";
+                this.getHtml().style.visibility = "visible";
+                this.getSpinner().style.visibility = "hidden";
         }
 
         hide()

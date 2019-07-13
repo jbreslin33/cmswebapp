@@ -7,8 +7,6 @@ class InsertLoginScreen extends Screen
                 super(application);
 
 		location.hash = 'insert_native_login_screen';
-		this.mCode = 0;
-                this.mData = null;
 
 		//sql php vars
 		this.mFirstName = null;
@@ -24,6 +22,8 @@ class InsertLoginScreen extends Screen
 
 		this.setMenuItem(document.getElementById("insert_native_login_screen_nav_id"));
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
+		this.setHtml(document.getElementById("insert_native_login_screen_html_id"));
+		this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));
 	}
 
 	hit()
@@ -75,7 +75,8 @@ class InsertLoginScreen extends Screen
         
 	show()
 	{
-              	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
+		super.show();
+              	//document.getElementById("insert_native_login_screen_html_id").style.display = "block";
 		//hide link
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
 		document.getElementById("insert_native_login_screen_email_div_id").style.display = "block";

@@ -8,10 +8,6 @@ class LoginScreen extends Screen
 	
     		location.hash = 'login_screen';
 
-                //html ids
-                this.mSpinnerId = "login_screen_spinner_id";
-                this.mHtmlId = "login_screen_html_id";
-
 		//sql php vars
 		this.mEmail = null;
 		this.mPassword = null;
@@ -22,8 +18,11 @@ class LoginScreen extends Screen
 		this.mImageUrl = null;	
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
-               	this.setMessageElement(document.getElementById("login_screen_message_id"));
+
+                this.setHtml(document.getElementById("login_screen_html_id"));
 		this.setMenuItem(document.getElementById("login_nav_id"));
+               	this.setMessageElement(document.getElementById("login_screen_message_id"));
+                this.setSpinner(document.getElementById("login_screen_spinner_id"));
 	}
 
 	hit()
