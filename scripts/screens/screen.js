@@ -18,6 +18,9 @@ class Screen
 
 		this.mHit = false;
 
+		this.mForm = null;
+		this.mUrl = null;
+
 		this.mMessageElement = null;
 		this.mMenuItem = null;
 
@@ -28,6 +31,47 @@ class Screen
                 this.mStateExitLogs = false;
 
                 this.mStateMachine = null;
+	}
+
+	ajax()
+	{
+	        var request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                        if (request.readyState === XMLHttpRequest.DONE)
+                        {
+                                if (request.status === 200)
+                                {
+                                        APPLICATION.getCurrentScreen().mData = this.responseText;
+                                }
+                        }
+                };
+
+                if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true)
+                {
+                        request.open('POST', APPLICATION.getCurrentScreen().getUrl());
+                        request.send();
+                }
+	}
+
+	setForm(form)
+	{
+		this.mForm = form;
+	}
+
+	getForm()
+	{
+		return this.mForm;
+	}
+
+	setUrl(url)
+	{
+		this.mUrl = url;
+	}
+
+	getUrl()
+	{
+		return this.mUrl;
 	}
 	
 	setSpinner(spinner)

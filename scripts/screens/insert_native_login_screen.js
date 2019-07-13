@@ -24,6 +24,8 @@ class InsertLoginScreen extends Screen
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
 		this.setHtml(document.getElementById("insert_native_login_screen_html_id"));
 		this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));
+
+		this.setForm(document.getElementById("insert_native_login_screen_form_id"));
 	}
 
 	hit()
@@ -38,7 +40,7 @@ class InsertLoginScreen extends Screen
                	this.mPassword1  = document.getElementById("insert_native_login_screen_password1_id").value;
                	this.mPassword2  = document.getElementById("insert_native_login_screen_password2_id").value;
 
-		var url = "/php/classes/insert/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1; 
+		this.setUrl("/php/classes/insert/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1); 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
@@ -52,14 +54,13 @@ class InsertLoginScreen extends Screen
                         }
                 };
 
-		var form = document.getElementById('insert_native_login_screen_form_id');
-		if (form.checkValidity() == true) 
+		if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true) 
 		{
 			var passwordMatch = false;
 
 			if (this.mPassword1 == this.mPassword2)
 			{
-				request.open('POST', url);
+				request.open('POST', APPLICATION.getCurrentScreen().getUrl());
                 		request.send();
 
           			document.getElementById('password_message_id').style.color = 'green';

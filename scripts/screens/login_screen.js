@@ -23,6 +23,8 @@ class LoginScreen extends Screen
 		this.setMenuItem(document.getElementById("login_nav_id"));
                	this.setMessageElement(document.getElementById("login_screen_message_id"));
                 this.setSpinner(document.getElementById("login_screen_spinner_id"));
+                
+		this.setForm(document.getElementById("login_screen_form_id"));
 	}
 
 	hit()
@@ -30,27 +32,9 @@ class LoginScreen extends Screen
                 this.mEmail    = document.getElementById("login_screen_email_id").value;
                 this.mPassword  = document.getElementById("login_screen_password_id").value;
 
-		var url = "/php/classes/login/native_login.php?email=" + this.mEmail + "&password=" + this.mPassword; 
+		this.setUrl("/php/classes/login/native_login.php?email=" + this.mEmail + "&password=" + this.mPassword); 
 
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        APPLICATION.getCurrentScreen().mData = this.responseText;
-                                }
-                        }
-                };
-	        
-		var form = document.getElementById('login_screen_form_id');
-                
-		if (form.checkValidity() == true)
-                {
-			request.open('POST', url);
-                        request.send();
-                }
+		this.ajax();
 	}
        
         googleLogin()
