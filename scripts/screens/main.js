@@ -116,10 +116,12 @@ class Main extends Screen
 					//title.innerHTML = events[i].event_date;
 					if (events[i].type == 'game')
 					{
+						console.log("GAME DATE:" + events[i].event_date);
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
 					}
 					if (events[i].type == 'practice')
 					{
+						console.log("PRACTICE DATE:" + events[i].event_date);
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
 					}
 					//var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
