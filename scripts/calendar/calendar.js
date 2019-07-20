@@ -9,13 +9,13 @@ class Calendar
 	
 		//day and month
 		this.mDayArray = new Array();
+		this.mDayArray.push('Sunday');
 		this.mDayArray.push('Monday');
 		this.mDayArray.push('Tuesday');
 		this.mDayArray.push('Wednesday');
 		this.mDayArray.push('Thursday');
 		this.mDayArray.push('Friday');
 		this.mDayArray.push('Saturday');
-		this.mDayArray.push('Sunday');
 		
 		this.mMonthArray = new Array();
 		this.mMonthArray.push('January');
@@ -35,12 +35,23 @@ class Calendar
         convertDate(data)
         {
 		console.log('data:' + data);
-                var date = new Date(data);
+
+
+		var dateArray = data.split("-");
+		console.log('0:' + dateArray[0]);
+		dateArray[1]--;
+		console.log('1:' + dateArray[1]);
+		console.log('2:' + dateArray[2]);
+                
+		var date = new Date(dateArray[0], dateArray[1], dateArray[2]);
+
                 var dayElement = date.getDay();
 		console.log('dayEl:' + dayElement);
+
                 var monthElement = date.getMonth();
 		console.log('monthEl:' + monthElement);
-                var dayOfMonth = date.getDate() + 1;
+
+                var dayOfMonth = date.getDate();
 		console.log('dayOfMonth:' + dayOfMonth);
 
                 return this.mDayArray[dayElement] + ' ' + this.mMonthArray[monthElement] + ' ' + dayOfMonth;
