@@ -269,6 +269,7 @@ class Screen
 	{
 		this.getMenuItem().className += " active";
 		this.show();
+		this.get();
 	}
 
 	execute()

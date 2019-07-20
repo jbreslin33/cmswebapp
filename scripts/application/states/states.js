@@ -878,9 +878,9 @@ class INSERT_PRACTICE_APPLICATION extends State
 		{
 			console.log("INSERT_PRACTICE_APPLICATION: ENTER");        
 		}
-                app.setCurrentScreen(new InsertPracticScreen(app));
-                app.getCurrentScreen().show();
-                app.getCurrentScreen().get();
+
+                app.setCurrentScreen(new InsertPracticeScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -890,16 +890,7 @@ class INSERT_PRACTICE_APPLICATION extends State
 			console.log("INSERT_PRACTICE_APPLICATION: EXECUTE");        
 		}
 
-		var screen = app.mInsertPracticeScreen;
-                screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -908,11 +899,8 @@ class INSERT_PRACTICE_APPLICATION extends State
 		{
 			console.log("INSERT_PRACTICE_APPLICATION: EXIT");        
 		}
-		var screen = app.mInsertPracticeScreen;
-		screen.hide();
-		screen.mCode = 0;
-		screen.mData = null;
-		screen.mJson = null;
+
+		app.getCurrentScreen().exit();
 	}
 }
 

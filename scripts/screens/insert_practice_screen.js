@@ -30,7 +30,11 @@ class InsertPracticeScreen extends Screen
 
 			if (APPLICATION.getJWT())
 			{
-                        	var url = "/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id;
+
+
+                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
+                        	APPLICATION.getCurrentScreen().ajax();
+				/*
 		        	var request = new XMLHttpRequest();
                 		request.onreadystatechange = function()
                 		{
@@ -44,6 +48,7 @@ class InsertPracticeScreen extends Screen
                 		};
                         	request.open('POST', url);
                         	request.send();
+				*/
 			}
 		}
 	}
