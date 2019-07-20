@@ -917,16 +917,9 @@ class INSERT_GAME_APPLICATION extends State
 		{
 			console.log("INSERT_GAME_APPLICATION: ENTER");        
 		}
-		if (app.mInsertGameScreen)
-		{
-			app.mInsertGameScreen = new InsertGameScreen(app);
-		}
-		else
-		{
-			app.mInsertGameScreen = new InsertGameScreen(app);
-		}
-		app.mInsertGameScreen.show();
-		app.mInsertGameScreen.get();
+                
+		app.setCurrentScreen(new InsertGameScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -936,18 +929,7 @@ class INSERT_GAME_APPLICATION extends State
 			console.log("INSERT_GAME_APPLICATION: EXECUTE");        
 		}
 
-		var screen = app.mInsertGameScreen;
-                screen.processData();
-
-                if (screen.mJson)
-                {
-			console.log('got mJson in exe');
-                        if (screen.mJson.persons)
-                        {
-				console.log('got persons in exe');
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -956,13 +938,7 @@ class INSERT_GAME_APPLICATION extends State
 		{
 			console.log("INSERT_GAME_APPLICATION: EXIT");        
 		}
-		var screen = app.mInsertGameScreen;
-		screen.hide();
-		screen.mCode = 0;
-		screen.mData = null;
-		screen.mJson = null;
+		
+		app.getCurrentScreen().exit();
 	}
 }
-
-
-

@@ -30,25 +30,8 @@ class InsertPracticeScreen extends Screen
 
 			if (APPLICATION.getJWT())
 			{
-
-
                         	APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
                         	APPLICATION.getCurrentScreen().ajax();
-				/*
-		        	var request = new XMLHttpRequest();
-                		request.onreadystatechange = function()
-                		{
-                        		if (request.readyState === XMLHttpRequest.DONE)
-                        		{
-                                		if (request.status === 200)
-                                		{
-                                        		APPLICATION.mInsertPracticeScreen.mData = this.responseText;
-                                		}
-                        		}
-                		};
-                        	request.open('POST', url);
-                        	request.send();
-				*/
 			}
 		}
 	}
@@ -82,30 +65,9 @@ class InsertPracticeScreen extends Screen
                 {
                         var team_id = team_select.options[team_select.selectedIndex].value;
 
-                        //APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name);
                         APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name);
                         
 			APPLICATION.getCurrentScreen().ajax();
-/*
-                	var request = new XMLHttpRequest();
-                	request.onreadystatechange = function()
-                	{
-                        	if (request.readyState === XMLHttpRequest.DONE)
-                        	{
-                                	if (request.status === 200)
-                                	{
-						APPLICATION.mInsertPracticeScreen.mData = this.responseText;
-                                	}
-                        	}
-                	};
-
-			var form = document.getElementById('insert_practice_screen_html_id');
-			if (form.checkValidity() == true) 
-			{
-				request.open('POST', url);
-                		request.send();
-			}
-			*/
 		}
 	}
 
