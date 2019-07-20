@@ -34,25 +34,14 @@ class Calendar
 
         convertDate(data)
         {
-		console.log('data:' + data);
-
-
 		var dateArray = data.split("-");
-		console.log('0:' + dateArray[0]);
 		dateArray[1]--;
-		console.log('1:' + dateArray[1]);
-		console.log('2:' + dateArray[2]);
                 
 		var date = new Date(dateArray[0], dateArray[1], dateArray[2]);
 
                 var dayElement = date.getDay();
-		console.log('dayEl:' + dayElement);
-
                 var monthElement = date.getMonth();
-		console.log('monthEl:' + monthElement);
-
                 var dayOfMonth = date.getDate();
-		console.log('dayOfMonth:' + dayOfMonth);
 
                 return this.mDayArray[dayElement] + ' ' + this.mMonthArray[monthElement] + ' ' + dayOfMonth;
         }
