@@ -6,16 +6,18 @@ class InsertGameScreen extends Screen
 	{
 		super(application);
 
-		location.hash = 'insert_game_screen';
+                location.hash = 'insert_game_screen';
 
-		//html ids 
-		this.mSpinnerId = "insert_game_screen_spinner_id";
-		this.mHtmlId = "insert_game_screen_html_id";
+                document.getElementById("insertgamescreenbuttonid").onclick = this.hit.bind(this);
 
-		document.getElementById("insertgamescreenbuttonid").onclick = this.hit.bind(this);
+                this.setHtml(document.getElementById("insert_game_screen_html_id"));
+                this.setMenuItem(document.getElementById("insert_game_nav_id"));
+                this.setMessageElement(document.getElementById("insert_game_screen_message_id"));
+                this.setForm(document.getElementById("insert_game_screen_form_id"));
+                this.setSpinner(document.getElementById("insert_game_screen_spinner_id"));
 
-               	//set todays date
-               	document.getElementById('insert_game_screen_date_id').valueAsDate = new Date();
+		//set todays date
+		document.getElementById('insert_game_screen_date_id').valueAsDate = new Date();
 	}
 
 	get()
@@ -28,20 +30,8 @@ class InsertGameScreen extends Screen
 
 			if (APPLICATION.getJWT())
 			{
-                        	var url = "/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id;
-		        	var request = new XMLHttpRequest();
-                		request.onreadystatechange = function()
-                		{
-                        		if (request.readyState === XMLHttpRequest.DONE)
-                        		{
-                                		if (request.status === 200)
-                                		{
-                                        		APPLICATION.mInsertGameScreen.mData = this.responseText;
-                                		}
-                        		}
-                		};
-                        	request.open('POST', url);
-                        	request.send();
+                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
+                        	APPLICATION.getCurrentScreen().ajax();
 			}
 		}
 	}
@@ -61,6 +51,7 @@ class InsertGameScreen extends Screen
               
 		var pitch_id = null;	
 		var pitch_select = document.getElementById("insert_game_screen_pitch_id");
+
                 if (pitch_select.length)
                 {
                         var pitch_id = pitch_select.options[pitch_select.selectedIndex].value;
@@ -69,37 +60,18 @@ class InsertGameScreen extends Screen
 		var field_name = document.getElementById("insert_game_screen_field_id").value;
 
 		var team_id = null;
-		console.log('loe:' + team_select.length);
-                if (team_select.length > 0)
+                
+		if (team_select.length > 0)
                 {
                         var team_id = team_select.options[team_select.selectedIndex].value;
 
-                        var url = "/php/classes/insert/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name;
-
-			console.log('url:' + url);
-
-                	var request = new XMLHttpRequest();
-                	request.onreadystatechange = function()
-                	{
-                        	if (request.readyState === XMLHttpRequest.DONE)
-                        	{
-                                	if (request.status === 200)
-                                	{
-						APPLICATION.mInsertGameScreen.mData = this.responseText;
-                                	}
-                        	}
-                	};
-
-			var form = document.getElementById('insert_game_screen_html_id');
-			if (form.checkValidity() == true) 
-			{
-				request.open('POST', url);
-                		request.send();
-			}
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name);
+                        
+			APPLICATION.getCurrentScreen().ajax();
 		}
 	}
 
-	processJsonData()
+        processJsonData()
         {
                 super.processJsonData();
 
@@ -117,6 +89,5 @@ class InsertGameScreen extends Screen
                                 select.appendChild(opt);
                         }
                 }
-        }
-
+	}
 }
