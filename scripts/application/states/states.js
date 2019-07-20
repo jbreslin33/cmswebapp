@@ -850,6 +850,9 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			console.log("INSERT_TEAM_APPLICATION: EXECUTE");        
 		}
+
+		app.getCurrentScreen().execute();
+		/*
                 var screen = app.getCurrentScreen();
 
                 screen.processData();
@@ -871,6 +874,7 @@ class INSERT_TEAM_APPLICATION extends State
                                 app.mInsertTeamScreen.mData = null;
                         }
                 }
+		*/
 	}
 
         exit(app)
