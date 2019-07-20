@@ -839,16 +839,9 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			console.log("INSERT_TEAM_APPLICATION: ENTER");        
 		}
-		if (app.mInsertTeamScreen)
-		{
-			app.mInsertTeamScreen = new InsertTeamScreen(app);
-		}
-		else
-		{
-			app.mInsertTeamScreen = new InsertTeamScreen(app);
-		}
-		app.setCurrentScreen(app.mInsertTeamScreen);
-		app.mInsertTeamScreen.show();
+		
+		app.setCurrentScreen(new InsertTeamScreen(app));
+		app.getCurrentScreen().show();
 	}
 
         execute(app)
@@ -857,7 +850,7 @@ class INSERT_TEAM_APPLICATION extends State
 		{
 			console.log("INSERT_TEAM_APPLICATION: EXECUTE");        
 		}
-                var screen = app.mInsertTeamScreen;
+                var screen = app.getCurrentScreen();
 
                 screen.processData();
 
@@ -904,16 +897,9 @@ class INSERT_PRACTICE_APPLICATION extends State
 		{
 			console.log("INSERT_PRACTICE_APPLICATION: ENTER");        
 		}
-		if (app.mInsertPracticeScreen)
-		{
-			app.mInsertPracticeScreen = new InsertPracticeScreen(app);
-		}
-		else
-		{
-			app.mInsertPracticeScreen = new InsertPracticeScreen(app);
-		}
-		app.mInsertPracticeScreen.show();
-		app.mInsertPracticeScreen.get();
+                app.setCurrentScreen(new InsertPracticScreen(app));
+                app.getCurrentScreen().show();
+                app.getCurrentScreen().get();
 	}
 
         execute(app)

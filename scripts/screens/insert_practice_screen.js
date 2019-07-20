@@ -72,16 +72,16 @@ class InsertPracticeScreen extends Screen
 		var field_name = document.getElementById("insert_practice_screen_field_id").value;
 
 		var team_id = null;
-		console.log('loe:' + team_select.length);
-                if (team_select.length > 0)
+                
+		if (team_select.length > 0)
                 {
-			console.log('in if');
                         var team_id = team_select.options[team_select.selectedIndex].value;
 
-                        var url = "/php/classes/insert/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name;
-
-			console.log('url:' + url);
-
+                        //APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name);
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name);
+                        
+			APPLICATION.getCurrentScreen().ajax();
+/*
                 	var request = new XMLHttpRequest();
                 	request.onreadystatechange = function()
                 	{
@@ -100,6 +100,7 @@ class InsertPracticeScreen extends Screen
 				request.open('POST', url);
                 		request.send();
 			}
+			*/
 		}
 	}
 
