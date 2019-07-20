@@ -24,7 +24,6 @@ class InsertLoginScreen extends Screen
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
 		this.setHtml(document.getElementById("insert_native_login_screen_html_id"));
 		this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));
-
 		this.setForm(document.getElementById("insert_native_login_screen_form_id"));
 	}
 

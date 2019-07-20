@@ -6,13 +6,15 @@ class InsertPracticeScreen extends Screen
 	{
 		super(application);
 
-		location.hash = 'insert_practice_screen';
+                location.hash = 'insert_practice_screen';
 
-		//html ids 
-		this.mSpinnerId = "insert_practice_screen_spinner_id";
-		this.mHtmlId = "insert_practice_screen_html_id";
+                document.getElementById("insertpracticescreenbuttonid").onclick = this.hit.bind(this);
 
-		document.getElementById("insertpracticescreenbuttonid").onclick = this.hit.bind(this);
+                this.setHtml(document.getElementById("insert_practice_screen_html_id"));
+                this.setMenuItem(document.getElementById("insert_practice_nav_id"));
+                this.setMessageElement(document.getElementById("insert_practice_screen_message_id"));
+                this.setForm(document.getElementById("insert_practice_screen_form_id"));
+                this.setSpinner(document.getElementById("insert_practice_screen_spinner_id"));
 
 		//set todays date
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
