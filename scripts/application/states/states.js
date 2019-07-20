@@ -841,7 +841,7 @@ class INSERT_TEAM_APPLICATION extends State
 		}
 		
 		app.setCurrentScreen(new InsertTeamScreen(app));
-		app.getCurrentScreen().show();
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -852,29 +852,6 @@ class INSERT_TEAM_APPLICATION extends State
 		}
 
 		app.getCurrentScreen().execute();
-		/*
-                var screen = app.getCurrentScreen();
-
-                screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
-
-                if (screen.mData)
-                {
-                        if (screen.mCode == -106)
-                        {
-				app.mCurrentScreen.setMessage("Team name already exists", "red");
-                                app.mInsertTeamScreen.mCode = 0;
-                                app.mInsertTeamScreen.mData = null;
-                        }
-                }
-		*/
 	}
 
         exit(app)
