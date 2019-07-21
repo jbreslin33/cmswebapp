@@ -7,50 +7,23 @@ class InsertForgotPasswordScreen extends Screen
 		super(application);
 
 		location.hash = 'insert_forgot_password_screen';
-
-		//html ids 
-		this.mSpinnerId = "insert_forgot_password_screen_spinner_id";
-		this.mHtmlId = "insert_forgot_password_screen_html_id";
-
-		//sql php vars
-		this.mEmail = null;
 		
 		document.getElementById("insertforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
-                
-                this.mStateMachine = new StateMachine(this);
-                this.mINIT_INSERT_FORGOT_PASSWORD_SCREEN            = new INIT_INSERT_FORGOT_PASSWORD_SCREEN();
-                this.mGLOBAL_INSERT_FORGOT_PASSWORD_SCREEN            = new GLOBAL_INSERT_FORGOT_PASSWORD_SCREEN();
-                this.mWAIT_INSERT_FORGOT_PASSWORD_SCREEN            = new WAIT_INSERT_FORGOT_PASSWORD_SCREEN();
 
-                this.mStateMachine.setGlobalState(this.mGLOBAL_INSERT_FORGOT_PASSWORD_SCREEN);
-                this.mStateMachine.changeState(this.mINIT_INSERT_FORGOT_PASSWORD_SCREEN);
+                this.setHtml(document.getElementById("insert_forgot_password_screen_html_id"));
+                this.setMenuItem(document.getElementById("insert_forgot_password_nav_id"));
+                this.setMessageElement(document.getElementById("insert_forgot_password_screen_message_id"));
+                this.setForm(document.getElementById("insert_forgot_password_screen_form_id"));
+                this.setSpinner(document.getElementById("insert_forgot_password_screen_spinner_id"));
 	}
 
 	hit()
 	{
 		this.mHit = true;
 
-      		this.mEmail  = document.getElementById("insert_forgot_password_screen_email_id").value;
+      		var email  = document.getElementById("insert_forgot_password_screen_email_id").value;
 
-		var url = "/php/classes/insert/insert_forgot_password.php?email=" + this.mEmail; 
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-					APPLICATION.mInsertForgotPasswordScreen.mData = this.responseText;
-                                }
-                        }
-                };
-
-		var form = document.getElementById('insert_forgot_password_screen_html_id');
-		if (form.checkValidity() == true) 
-		{
-			request.open('POST', url);
-                	request.send();
-		}
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_forgot_password.php?email=" + this.mEmail); 
+                APPLICATION.getCurrentScreen().ajax();
 	}
 }

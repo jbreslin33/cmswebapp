@@ -370,15 +370,9 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("INSERT_FORGOT_PASSWORD_APPLICATION: ENTER");        
 		}
-		if (app.mInsertForgotPasswordScreen)
-		{
-			app.mInsertForgotPasswordScreen = new InsertForgotPasswordScreen(app);
-		}
-		else
-		{
-			app.mInsertForgotPasswordScreen = new InsertForgotPasswordScreen(app);
-		}
-		app.mInsertForgotPasswordScreen.show();
+		
+		app.setCurrentScreen(new InsertForgotPasswordScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -387,6 +381,9 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("INSERT_FORGOT_PASSWORD_APPLICATION: EXECUTE");        
 		}
+
+		app.getCurrentScreen().execute();
+
 	}
 
         exit(app)
@@ -395,10 +392,9 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("INSERT_FORGOT_PASSWORD_APPLICATION: EXIT");        
 		}
-		this.mHit = false;
-		app.mInsertForgotPasswordScreen.hide();
-		app.mInsertForgotPasswordScreen.mCode = 0;
-		app.mInsertForgotPasswordScreen.mData = null;
+
+		app.getCurrentScreen().exit();
+
 	}
 }
 
