@@ -29,7 +29,7 @@ class InsertClubScreen extends Screen
 		var select = document.getElementById("person_select_id");
 		var person_id = select.options[select.selectedIndex].value;
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
 
 		APPLICATION.getCurrentScreen().ajax();
 	}

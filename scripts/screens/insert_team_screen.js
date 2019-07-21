@@ -28,7 +28,7 @@ class InsertTeamScreen extends Screen
                		var club_id = club_select.options[club_select.selectedIndex].value;
                		var person_id = person_select.options[person_select.selectedIndex].value;
 
-			APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name);
+			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name);
 
 			APPLICATION.getCurrentScreen().ajax();
 		}
