@@ -901,7 +901,7 @@ RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
 	result_set text;
-	DECLARE x int := -111; --for bad insert attempt
+	DECLARE x int := -1; 
 BEGIN
     	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
 	IF found_email_id > 0 THEN
@@ -912,6 +912,7 @@ BEGIN
 			result_set = f_format_result_set(x);
                 ELSE
                 	result_set = '-105';
+			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
 	END IF;
 RETURN result_set;
