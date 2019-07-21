@@ -29,7 +29,7 @@ class InsertPersonScreen extends Screen
                	this.mPhone = document.getElementById("insert_person_screen_phone_id").value;
                	this.mAddress = document.getElementById("insert_person_screen_address_id").value;
 
-		var url = "/php/classes/insert/insert_person.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT(); 
+		var url = "/php/classes/screens/insert_person.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT(); 
 
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function()
