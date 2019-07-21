@@ -27,14 +27,12 @@ class InsertTeam extends Screen
                         $name = $_GET['name'];
                 }
 
-                $database = new Database("localhost","cms","postgres","mibesfat");
                 $sql = 'select f_insert_team($1,$2,$3,$4)';
-                $prepare_result = pg_prepare($database->mConnection, "f_insert_team", $sql);
-                $result = pg_execute($database->mConnection, "f_insert_team", array( $this->getSenderEmailId(), $club_id, $person_id, $name));
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_team", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_team", array( $this->getSenderEmailId(), $club_id, $person_id, $name));
 
                 return pg_fetch_result($result, 0);
         }
-
 }
 
 $insertTeam = new InsertTeam();	
