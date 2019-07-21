@@ -6,7 +6,7 @@ class InsertForgotPassword
 {
 	function __construct($email) 
 	{
-
+		error_log($email);
                 $database = new Database("localhost","cms","postgres","mibesfat");
 
 		//create mail

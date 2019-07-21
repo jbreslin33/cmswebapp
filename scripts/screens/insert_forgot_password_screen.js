@@ -23,7 +23,7 @@ class InsertForgotPasswordScreen extends Screen
 
       		var email  = document.getElementById("insert_forgot_password_screen_email_id").value;
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_forgot_password.php?email=" + this.mEmail); 
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_forgot_password.php?email=" + email); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
 }
