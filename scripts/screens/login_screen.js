@@ -34,7 +34,7 @@ class LoginScreen extends Screen
                 this.mEmail    = document.getElementById("login_screen_email_id").value;
                 this.mPassword  = document.getElementById("login_screen_password_id").value;
 
-		this.setUrl("/php/classes/login/native_login.php?email=" + this.mEmail + "&password=" + this.mPassword); 
+		this.setUrl("/php/classes/screens/native_login.php?email=" + this.mEmail + "&password=" + this.mPassword); 
 
 		this.ajax();
 	}
@@ -55,7 +55,7 @@ class LoginScreen extends Screen
         googleLogin()
         {
 		APPLICATION.getCurrentScreen().mGoogleLoginHit = true;
-                this.setUrl("/php/classes/login/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName);
+                this.setUrl("/php/classes/screens/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName);
 
 		this.ajax();
         }
