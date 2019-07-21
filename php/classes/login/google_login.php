@@ -1,12 +1,15 @@
 <?php
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class GoogleLogin
+class GoogleLogin extends Screen
 {
         function __construct()
         {
+		parent::__construct();
+	}
+
+	function getResult()
+	{
 		$email = null;
 		$google_id = null;
 		$id_token = null;
@@ -39,19 +42,11 @@ class GoogleLogin
 			$club_invite_token = $_GET['club_invite_token'];
 		}
 
-                $database = new Database("localhost","cms","postgres","mibesfat");
-
                 $sql = 'select f_google_login($1,$2,$3,$4,$5,$6)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_google_login", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_google_login", array( $email ,$google_id, $id_token, $first_name, $last_name, $club_invite_token));
 
-                $prepare_result = pg_prepare($database->mConnection, "f_google_login", $sql);
-
-                $result = pg_execute($database->mConnection, "f_google_login", array( $email ,$google_id, $id_token, $first_name, $last_name, $club_invite_token));
-
-                $return_value = pg_fetch_result($result, 0);
-
-                $result_set = $database->formatResultSet($return_value);
-		error_log($result_set);
-                echo $result_set;
+                return pg_fetch_result($result, 0);
         }
 }
         $googleLogin = new GoogleLogin();
