@@ -1,4 +1,6 @@
 <?php 
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
+
 class Database 
 {
 	function __construct($host,$dbname,$user,$password) 

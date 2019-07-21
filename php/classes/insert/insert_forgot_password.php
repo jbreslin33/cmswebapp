@@ -28,7 +28,8 @@ class InsertForgotPassword
 
 		//result to user
                 $return_value = pg_fetch_result($result, 0);
-		
+
+	//maybe format with a different function	
 		$result_set = $database->formatResultSet($return_value);
                 echo $result_set;
 

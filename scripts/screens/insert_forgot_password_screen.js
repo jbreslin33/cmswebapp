@@ -26,4 +26,49 @@ class InsertForgotPasswordScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_forgot_password.php?email=" + email); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
+        
+	execute()
+        {
+                this.processData();
+
+	//	if (
+/*
+                if (this.mJson)
+                {
+                        if (this.mJson.persons)
+                        {
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                        }
+                }
+		*/
+        }
+
+        processData()
+        {
+                if (this.mData)
+                {
+                        var dataArray = this.mData.split(",");
+                        this.mCode = dataArray[0];
+                        if (this.mCode == -100)
+                        {
+
+                                //this.mApplication.setJWT(dataArray[1]); //set jwt
+
+                                //JSON
+                                //dataArray.shift(); //remove mCode
+                                //dataArray.shift(); //remove mJwt
+                                //dataArray.join();
+                                //this.mJson = JSON.parse(dataArray);
+
+                                //this.processJsonData();
+                                this.setMessage(dataArray[1],'green');
+                        }
+                        if (this.mCode == -101)
+                        {
+                                this.setMessage(dataArray[1],'red');
+                        }
+                }
+        }
+
+
 }

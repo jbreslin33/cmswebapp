@@ -1626,21 +1626,22 @@ RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
         returning_forgot_passwords_id forgot_passwords.id%TYPE;
-        return_code text;
+        result_set text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 		delete from forgot_passwords where email_id = found_email_id; 
 		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
-			return_code = '-100';
+			--result_set = '-101, Success. We sent you an email to help you login.';
+                     	result_set = f_format_result_set(found_email_id);
 		ELSE
-			return_code = '-111';
+			result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 		END IF;
 	ELSE
-		return_code = '-102';
+		result_set = '-101, That email does not exist in our system. Please try a valid email address.';
 	END IF;
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
