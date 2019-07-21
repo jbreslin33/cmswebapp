@@ -1349,21 +1349,20 @@ CREATE OR REPLACE FUNCTION f_insert_club(TEXT, TEXT, email_id int, person_id int
 RETURNS text AS $$
 DECLARE
         found_club_id clubs.id%TYPE;
-        return_code text;
-	DECLARE x int := -111;
+	DECLARE x int := -1;
 	result_set text;
 BEGIN
         SELECT id INTO found_club_id FROM clubs
         WHERE name = $1;
 
-        IF found_club_id THEN
-                return_code = '-101, Club name already taken.';
+        IF found_club_id > 0 THEN
+                result_set = '-101, Club name already taken.';
        	ELSE
 		CALL p_insert_club($1,$2,email_id,person_id,x);
 		IF x > 0 THEN
 			result_set = f_format_result_set(email_id);
 		ELSE
-			result_set = x;
+                	result_set = '-101, Something went wrong with adding club. Sorry!';
 		END IF;
         END IF;
 RETURN result_set;
@@ -1589,7 +1588,7 @@ CREATE OR REPLACE FUNCTION f_insert_team(int,int,int,text)
 RETURNS text AS $$
 DECLARE
 	result_set text;
-	DECLARE x int := -111;
+	DECLARE x int := -1;
 	found_club_administrator_id club_administrators.id%TYPE;
 	found_club_members_id club_members.id%TYPE;
 	found_team_id teams.id%TYPE;
@@ -1597,14 +1596,13 @@ BEGIN
 		
 	select id into found_team_id from teams where name = $4;  	
 
-	IF found_team_id > 0 THEN
-		result_set = '-106';
+        IF found_team_id > 0 THEN
+                result_set = '-101, Team name already taken.';
 	ELSE
 		--are you a club admin of club $2????
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
 
-
-		IF found_club_administrator_id THEN
+		IF found_club_administrator_id > 0 THEN
 			--lets get your club_members.id so we can make pass in to p function and make you a team_manager
 			select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
 
@@ -1613,10 +1611,10 @@ BEGIN
 			IF x > 0 THEN
                      		result_set = f_format_result_set($1);
 			ELSE
-				result_set = x;
+                		result_set = '-101, Something went wrong with adding team. Sorry!';
 			END IF;
 		ELSE
-			result_set = '-121';
+                	result_set = '-101, You are not a club administrator. So you cannot add a team to this club.';
 		END IF;
 	END IF;
 RETURN result_set;

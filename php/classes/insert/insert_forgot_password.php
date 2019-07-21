@@ -28,10 +28,36 @@ class InsertForgotPassword
 
 		//result to user
                 $return_value = pg_fetch_result($result, 0);
-		$return_value .= ",";
-                echo $return_value;
+		
+		$result_set = $database->formatResultSet($return_value);
+                echo $result_set;
+
+		//$return_value .= ",";
+                //echo $return_value;
 
 		$mail = new Mail($this->mEmail,$this->mSubject,$this->mBody);
+
+
+
+		//new
+                //prep db
+		/*
+                $database = new Database("localhost","cms","postgres","mibesfat");
+                $sql = 'select f_insert_team($1,$2,$3,$4)';
+                $prepare_result = pg_prepare($database->mConnection, "f_insert_team", $sql);
+
+                //get id of sender
+                $oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
+                $email_id = $payload->email_id;
+
+                //result for sender
+                $result = pg_execute($database->mConnection, "f_insert_team", array( $email_id, $club_id, $person_id, $name));
+                $return_value = pg_fetch_result($result, 0);
+
+                $result_set = $database->formatResultSet($return_value);
+                echo $result_set;
+		 */
         }
 }
 $email = $_GET['email'];
