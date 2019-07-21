@@ -38,6 +38,5 @@ class InsertTeam extends Screen
 }
 
 $insertTeam = new InsertTeam();	
-$insertTeam->sendToClient();
 
 ?>
