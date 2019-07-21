@@ -1,27 +1,23 @@
 <?php
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class NativeLogin
+class NativeLogin extends Screen
 {
-        function __construct($email,$password)
+        function __construct()
         {
-                $database = new Database("localhost","cms","postgres","mibesfat");
+		parent::__construct();
+	}
 
+	function getResult()
+	{
                 $sql = 'select f_native_login($1,$2)';
-                $prepare_result = pg_prepare($database->mConnection, "f_native_login", $sql);
-                $result = pg_execute($database->mConnection, "f_native_login", array( $email,$password));
-
-                $return_value = pg_fetch_result($result, 0);
-
-                $result_set = $database->formatResultSet($return_value);
-                echo $result_set;
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_native_login", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_native_login", array( $_GET['email'],$_GET['password']));
+		
+		return pg_fetch_result($result, 0);
 	}
 }
 
-$email = $_GET['email']; 
-$password = $_GET['password']; 
+$nativeLogin = new NativeLogin();
 
-$nativeLogin = new NativeLogin($email,$password);
 ?>
