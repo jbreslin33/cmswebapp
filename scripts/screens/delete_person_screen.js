@@ -4,64 +4,31 @@ class DeletePersonScreen extends Screen
 {
 	constructor(application)
 	{
-		super(application);
+                super(application);
 
-		location.hash = 'delete_person_screen';
+                location.hash = 'delete_person_screen';
 
-		//html ids 
-		this.mSpinnerId = "delete_person_screen_spinner_id";
-		this.mHtmlId = "delete_person_screen_html_id";
+                document.getElementById("deletepersonscreenbuttonid").onclick = this.hit.bind(this);
 
-		//sql php vars
-		this.mEmail = null;
-		
-		document.getElementById("deletepersonscreenbuttonid").onclick = this.hit.bind(this);
+                this.setHtml(document.getElementById("delete_person_screen_html_id"));
+                this.setMenuItem(document.getElementById("delete_person_nav_id"));
+                this.setMessageElement(document.getElementById("delete_person_screen_message_id"));
+                this.setForm(document.getElementById("delete_person_screen_form_id"));
+                this.setSpinner(document.getElementById("delete_person_screen_spinner_id"));
 	}
 
 	get()
 	{
-		if (APPLICATION.getJWT())
-		{
-			var select = document.getElementById("person_select_id");
-                	var person_id = select.options[select.selectedIndex].value;
-			var url = "/php/classes/select/select_persons.php?jwt=" + APPLICATION.getJWT(); 
-		        var request = new XMLHttpRequest();
-                	request.onreadystatechange = function()
-                	{
-                        	if (request.readyState === XMLHttpRequest.DONE)
-                        	{
-                                	if (request.status === 200)
-                                	{
-                                        	APPLICATION.mDeletePersonScreen.mData = this.responseText;
-                                	}
-                        	}
-                	};
-
-                        request.open('POST', url);
-                        request.send();
-		}
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_persons.php?jwt=" + APPLICATION.getJWT()); 
+                APPLICATION.getCurrentScreen().ajax();
 	}
 
 	hit()
 	{
-		this.mHit = true;
-
 		var select = document.getElementById("delete_person_screen_select_id");
                 var person_id = select.options[select.selectedIndex].value;
-		var url = "/php/classes/delete/delete_person.php?name=" + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id;
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-					APPLICATION.mDeletePersonScreen.mData = this.responseText;
-                                }
-                        }
-                };
-		request.open('POST', url);
-                request.send();
+		
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/delete_person.php?name=" + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id);
+                APPLICATION.getCurrentScreen().ajax();
 	}
 }

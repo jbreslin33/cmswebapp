@@ -8,10 +8,6 @@ class InsertClubScreen extends Screen
 
 		location.hash = 'insert_club_screen';
 
-		//sql php vars
-		this.mName = null;
-		this.mAddress = null;
-		
 		document.getElementById("addclubscreenbuttonid").onclick = this.hit.bind(this);
 
           	this.setHtml(document.getElementById("insert_club_screen_html_id"));
@@ -23,14 +19,13 @@ class InsertClubScreen extends Screen
 
 	hit()
 	{
-      		this.mName  = document.getElementById("insert_club_screen_name_id").value;
-               	this.mAddress = document.getElementById("insert_club_screen_address_id").value;
+      		var name  = document.getElementById("insert_club_screen_name_id").value;
+               	var address = document.getElementById("insert_club_screen_address_id").value;
 
 		var select = document.getElementById("person_select_id");
 		var person_id = select.options[select.selectedIndex].value;
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_club.php?name=" + this.mName + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
-
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_club.php?name=" + name + "&address=" + address + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
 		APPLICATION.getCurrentScreen().ajax();
 	}
 }

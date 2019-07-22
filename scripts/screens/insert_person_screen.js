@@ -6,58 +6,26 @@ class InsertPersonScreen extends Screen
 	{
 		super(application);
 
-		location.hash = 'insert_person_screen';
+                location.hash = 'insert_person_screen';
 
-		this.mCode = 0;
-		this.mData = null;
+		document.getElementById("insertpersonscreenbuttonid").onclick = this.hit.bind(this);
 
-		//sql php vars
-		this.mFirstName = null;
-		this.mMiddleName = null;
-		this.mLastName = null;
-		this.mPhone = null;
-		this.mAddress = null;
-		
-		document.getElementById("addpersonscreenbuttonid").onclick = this.hit.bind(this);
+                this.setHtml(document.getElementById("insert_person_screen_html_id"));
+                this.setMenuItem(document.getElementById("insert_person_nav_id"));
+                this.setMessageElement(document.getElementById("insert_person_screen_message_id"));
+                this.setForm(document.getElementById("insert_person_screen_form_id"));
+                this.setSpinner(document.getElementById("insert_person_screen_spinner_id"));
 	}
 
 	hit()
 	{
-      		this.mFirstName  = document.getElementById("insert_person_screen_first_name_id").value;
-      		this.mMiddleName  = document.getElementById("insert_person_screen_middle_name_id").value;
-      		this.mLastName  = document.getElementById("insert_person_screen_last_name_id").value;
-               	this.mPhone = document.getElementById("insert_person_screen_phone_id").value;
-               	this.mAddress = document.getElementById("insert_person_screen_address_id").value;
+      		var firstName  = document.getElementById("insert_person_screen_first_name_id").value;
+      		var middleName  = document.getElementById("insert_person_screen_middle_name_id").value;
+      		var lastName  = document.getElementById("insert_person_screen_last_name_id").value;
+              	var phone = document.getElementById("insert_person_screen_phone_id").value;
+               	var address = document.getElementById("insert_person_screen_address_id").value;
 
-		var url = "/php/classes/screens/insert_person.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&jwt=" + APPLICATION.getJWT(); 
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-					APPLICATION.mInsertPersonScreen.mData = this.responseText;
-                                }
-                        }
-                };
-
-		var form = document.getElementById('insert_person_screen_html_id');
-		if (form.checkValidity() == true) 
-		{
-			request.open('POST', url);
-                	request.send();
-		}
-	}
-        
-	show()
-	{
-              document.getElementById("insert_person_screen_html_id").style.display = "block";
-	}
-
-	hide()
-	{
-              document.getElementById("insert_person_screen_html_id").style.display = "none";
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_person.php?first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName + "&phone=" + phone + "&address=" + address + "&jwt=" + APPLICATION.getJWT()); 
+                APPLICATION.getCurrentScreen().ajax();
 	}
 }

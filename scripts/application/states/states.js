@@ -676,15 +676,9 @@ class INSERT_PERSON_APPLICATION extends State
 		{
 			console.log("INSERT_PERSON_APPLICATION: ENTER");        
 		}
-		if (app.mInsertPersonScreen)
-		{
-			app.mInsertPersonScreen = new InsertPersonScreen(app);
-		}
-		else
-		{
-			app.mInsertPersonScreen = new InsertPersonScreen(app);
-		}
-		app.mInsertPersonScreen.show();
+
+		app.setCurrentScreen(new InsertPersonScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -693,32 +687,8 @@ class INSERT_PERSON_APPLICATION extends State
 		{
 			console.log("INSERT_PERSON_APPLICATION: EXECUTE");        
 		}
-		var screen = app.mInsertPersonScreen;
 
-                screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
-
-             
-		if (screen.mData)
-                {
-                        var dataArray = app.mInsertPersonScreen.mData.split(",");
-                        screen.mCode = dataArray[0];
-
-                        if (app.mInsertPersonScreen.mCode == -106)
-                        {
-                                document.getElementById('insert_person_screen_name_message_id').style.color = 'red';
-                                document.getElementById('insert_person_screen_name_message_id').innerHTML = 'Person Name already exists.';
-				app.mInsertPersonScreen.mCode = 0;
-				app.mInsertPersonScreen.mData = null;
-                        }
-                }
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -727,10 +697,8 @@ class INSERT_PERSON_APPLICATION extends State
 		{
 			console.log("INSERT_PERSON_APPLICATION: EXIT");        
 		}
-		app.mInsertPersonScreen.hide();
-		app.mInsertPersonScreen.mCode = 0;
-		app.mInsertPersonScreen.mData = null;
-		app.mInsertPersonScreen.mJson = null;
+
+		app.getCurrentScreen().exit();
 	}
 }
 
@@ -747,66 +715,19 @@ class DELETE_PERSON_APPLICATION extends State
 		{
 			console.log("DELETE_PERSON_APPLICATION: ENTER");        
 		}
-		if (app.mDeletePersonScreen)
-		{
-			app.mDeletePersonScreen = new DeletePersonScreen(app);
-		}
-		else
-		{
-			app.mDeletePersonScreen = new DeletePersonScreen(app);
-		}
-		app.mDeletePersonScreen.get();
-		app.mDeletePersonScreen.show();
+		
+		app.setCurrentScreen(new DeletePersonScreen(app));
+		app.getCurrentScreen().enter();
 	}
-	/*
-                var screen = app.mInsertTeamScreen;
 
-                screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.persons)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-                }
-*/
         execute(app)
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
 			console.log("DELETE_PERSON_APPLICATION: EXECUTE");        
 		}
-
-		var screen = app.mDeletePersonScreen;
-                screen.processData();
-
-                if (screen.mJson)
-                {
-                        if (screen.mJson.clubs)
-                        {
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        }
-			else if(screen.mJson.persons)
-                        {
-				screen.mCode = 0;
-				screen.mData = null;
-				screen.mJson = null;
-			}
-                }
-                
-		if (screen.mCode == -131)
-		{
-               		document.getElementById('delete_person_screen_message_id').innerHTML = 'Sorry you cannot delete only person.';
-			screen.mCode = 0;
-			screen.mData = null;
-		}
-                if (screen.mCode == -132)
-		{	
-                        document.getElementById('delete_person_screen_message_id').innerHTML = 'Sorry you cannot delete this person as they are involved in club.';
-			screen.mCode = 0;
-			screen.mData = null;
-		}
+		
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -815,9 +736,8 @@ class DELETE_PERSON_APPLICATION extends State
 		{
 			console.log("DELETE_PERSON_APPLICATION: EXIT");        
 		}
-		app.mDeletePersonScreen.hide();
-		app.mDeletePersonScreen.mCode = 0;
-		app.mDeletePersonScreen.mData = null;
+		
+		app.getCurrentScreen().exit();
 	}
 }
 
