@@ -179,18 +179,15 @@ class Screen
                 {
                         var dataArray = this.mData.split(",");
                         this.mCode = dataArray[0];
-			console.log('mCode:' + this.mCode);
                         if (this.mCode == -100)
                         {
 				this.mApplication.setJWT(dataArray[1]); //set jwt
-				console.log('dataArray[1]:' + dataArray[1]);
                                 
                                 //JSON
                                 dataArray.shift(); //remove mCode
                                 dataArray.shift(); //remove mJwt
                                 dataArray.join();
                                 this.mJson = JSON.parse(dataArray);
-				console.log('json:' + this.mJson);
 
                                 this.processJsonData();
                         }

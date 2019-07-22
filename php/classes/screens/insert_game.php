@@ -1,15 +1,15 @@
 <?php 
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/jwt/jwt.php");
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/onering/onering.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class InsertGame 
+class InsertGame extends Screen
 {
 	function __construct() 
 	{
+		parent::__construct();
+	}
 
-		//handle variables from sender's javascript
-		$jwt = null;
+	function getResult()
+	{
 		$team_id = null;
 		$event_date = null;
 		$arrival_time = null;
@@ -20,10 +20,6 @@ class InsertGame
 		$pitch_id = null;
 		$field_name = null;
 	
-		if (isset($_GET['jwt']))
-		{
-			$jwt = $_GET['jwt'];
-		}
 		if (isset($_GET['team_id']))
 		{
 			$team_id = $_GET['team_id'];
@@ -61,31 +57,14 @@ class InsertGame
 			$field_name = $_GET['field_name'];
 		}
 
-		error_log($field_name);
-
-		//insert
 		if ($event_date)
 		{
 			//prep db
-                	$database = new Database("localhost","cms","postgres","mibesfat");
 			$sql = 'select f_insert_game($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)';
-			$prepare_result = pg_prepare($database->mConnection, "f_insert_game", $sql);
-
-			$oneRing = new OneRing();
-                	$payload = JWT::decode($jwt, $oneRing->mOneRing);
-			$email_id = $payload->email_id;
-
-			//result for sender
-			$result = pg_execute($database->mConnection, "f_insert_game", array( $email_id, $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
-               		$return_value = pg_fetch_result($result, 0);
-
-                	$result_set = $database->formatResultSet($return_value);
-                	echo $result_set;
-		}
-		//get pitches
-		else
-		{
-
+			$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_game", $sql);
+			$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
+			
+			return pg_fetch_result($result, 0);
 		}
         }
 }

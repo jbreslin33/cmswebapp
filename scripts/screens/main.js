@@ -19,16 +19,13 @@ class Main extends Screen
 
         get()
         {
-		console.log('get in main');
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/main.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
         processJsonData()
 	{
-		console.log('before processJsonData');
 		super.processJsonData();
-		console.log('after processJsonData');
 
 		var events = [];
 
@@ -91,12 +88,10 @@ class Main extends Screen
 					
 					if (events[i].type == 'game')
 					{
-						console.log("GAME DATE:" + events[i].event_date);
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
 					}
 					if (events[i].type == 'practice')
 					{
-						console.log("PRACTICE DATE:" + events[i].event_date);
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
 					}
 				}
