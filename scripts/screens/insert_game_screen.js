@@ -30,7 +30,7 @@ class InsertGameScreen extends Screen
 
 			if (APPLICATION.getJWT())
 			{
-                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
+                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
                         	APPLICATION.getCurrentScreen().ajax();
 			}
 		}
@@ -65,7 +65,7 @@ class InsertGameScreen extends Screen
                 {
                         var team_id = team_select.options[team_select.selectedIndex].value;
 
-                        APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name);
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name);
                         
 			APPLICATION.getCurrentScreen().ajax();
 		}

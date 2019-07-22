@@ -14,9 +14,6 @@ class MainScreen extends Screen
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
                 $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId()));
 	
-		error_log("heere");
-		error_log($result);
-		
 		return pg_fetch_result($result, 0);
 	}
 }
