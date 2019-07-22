@@ -30,7 +30,7 @@ class InsertGameScreen extends Screen
 
 			if (APPLICATION.getJWT())
 			{
-                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
+                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id);
                         	APPLICATION.getCurrentScreen().ajax();
 			}
 		}

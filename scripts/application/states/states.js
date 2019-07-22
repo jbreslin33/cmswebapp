@@ -556,18 +556,9 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: ENTER");        
 		}
-		if (app.mMain)
-		{
-                      app.mMain = new Main(app);
-                }
-                else
-                {
-                      app.mMain = new Main(app);
-                }
-             	document.getElementById("main_nav_id").className += " active";
-
-                app.mMain.show();
-                app.mMain.get();
+		
+		app.setCurrentScreen(new Main(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -576,27 +567,8 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: EXECUTE");        
 		}
-                var screen = app.mMain;
-                screen.processData();
-
-                if (screen.mJson)
-                {
-			/*
-                        if (screen.mJson.persons)
-                        {
-                                //app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-				//instead we will display data (schedule)
-                        }
-                        if (screen.mJson.pitches)
-                        {
-                                console.log('got pitches');
-                        }
-			*/
-                        if (screen.mJson.practices)
-                        {
-                                console.log('got practices');
-                        }
-                }
+		
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -605,22 +577,18 @@ class MAIN_APPLICATION extends State
 		{
 			console.log("MAIN_APPLICATION: EXIT");        
 		}
+		
                	
-		var element = document.getElementById("main_nav_id");
-                element.className = element.className.replace(/\active\b/g, "");
-
-                var screen = app.mMain;
-                screen.hide();
-                screen.mCode = 0;
-                screen.mData = null;
-                screen.mJson = null;
-
 		//need to delete cards
 		//while (screen.mCloneArray.length > 0)
-		for (i = 0; i < screen.mCloneArray.length; i++)
+		if (app.getCurrentScreen().mCloneArray)
 		{
-			screen.mCloneArray[i].remove();
+			for (i = 0; i < app.getCurrentScreen().mCloneArray.length; i++)
+			{
+				app.getCurrentScreen().mCloneArray[i].remove();
+			}
 		}
+		app.getCurrentScreen().exit();
 	}
 }
 

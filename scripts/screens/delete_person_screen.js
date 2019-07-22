@@ -19,7 +19,6 @@ class DeletePersonScreen extends Screen
 
 	get()
 	{
-		console.log('get is called in delete');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_persons.php?jwt=" + APPLICATION.getJWT()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
@@ -40,16 +39,6 @@ class DeletePersonScreen extends Screen
         {
                 this.processData();
 
-                if (this.mJson)
-                {
-                        if (this.mJson.persons)
-                        {
-				console.log('fill select');
-
-                                //this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
-                        }
-                }
-
                 if (this.mJson && this.mHit)
                 {
                         if (this.mJson.persons)
@@ -61,6 +50,5 @@ class DeletePersonScreen extends Screen
 		this.mCode = 0;
                 this.mData = null;
                 this.mJson = null;
-
         }
 }

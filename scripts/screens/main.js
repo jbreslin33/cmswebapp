@@ -12,33 +12,23 @@ class Main extends Screen
                 this.setMenuItem(document.getElementById("main_nav_id"));
                 this.setMessageElement(document.getElementById("main_screen_message_id"));
                 this.setSpinner(document.getElementById("main_screen_spinner_id"));
+                this.setForm(document.getElementById("main_screen_form_id"));
 
 		this.mCloneArray = new Array();
         }
+
         get()
         {
-		if (APPLICATION.getJWT())
-                {
-                	var url = "/php/classes/select/select_events.php?jwt=" + APPLICATION.getJWT();
-                        var request = new XMLHttpRequest();
-                        request.onreadystatechange = function()
-                        {
-                        	if (request.readyState === XMLHttpRequest.DONE)
-                                {
-                                	if (request.status === 200)
-                                        {
-                                                APPLICATION.mMain.mData = this.responseText;
-                                        }
-                                }
-                        };
-                        request.open('POST', url);
-                        request.send();
-                }
+		console.log('get in main');
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/main.php?jwt=" + APPLICATION.getJWT());
+                APPLICATION.getCurrentScreen().ajax();
         }
 
         processJsonData()
 	{
+		console.log('before processJsonData');
 		super.processJsonData();
+		console.log('after processJsonData');
 
 		var events = [];
 
@@ -88,21 +78,6 @@ class Main extends Screen
 
 				//add to array
 				this.mCloneArray.push(div);
-/*
-				var divHeader = document.createElement('div');
-				divHeader.setAttribute('class','card-header');
-				div.appendChild(divHeader);
-			
-
-				if (events[i].type == 'game')
-				{
-					divHeader.innerHTML = "GAME";
-				}
-				if (events[i].type == 'practice')
-				{
-					divHeader.innerHTML = "PRACTICE";
-				}
-*/
 
 				var divBody = document.createElement('div');
 				divBody.setAttribute('class','card-body');
@@ -113,7 +88,7 @@ class Main extends Screen
 					var title = document.createElement('h5');
 					title.setAttribute('class','card-title');
 					divBody.appendChild(title);
-					//title.innerHTML = events[i].event_date;
+					
 					if (events[i].type == 'game')
 					{
 						console.log("GAME DATE:" + events[i].event_date);
@@ -124,7 +99,6 @@ class Main extends Screen
 						console.log("PRACTICE DATE:" + events[i].event_date);
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
 					}
-					//var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
 				}
 				
 				var textArray = new Array();

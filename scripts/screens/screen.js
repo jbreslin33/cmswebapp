@@ -179,15 +179,18 @@ class Screen
                 {
                         var dataArray = this.mData.split(",");
                         this.mCode = dataArray[0];
+			console.log('mCode:' + this.mCode);
                         if (this.mCode == -100)
                         {
 				this.mApplication.setJWT(dataArray[1]); //set jwt
+				console.log('dataArray[1]:' + dataArray[1]);
                                 
                                 //JSON
                                 dataArray.shift(); //remove mCode
                                 dataArray.shift(); //remove mJwt
                                 dataArray.join();
                                 this.mJson = JSON.parse(dataArray);
+				console.log('json:' + this.mJson);
 
                                 this.processJsonData();
                         }
@@ -195,6 +198,7 @@ class Screen
 			{
 				this.setMessage(dataArray[1],'red');
 			}
+			//ok we processed data so now lets reset so we can make room for more precious data
 		}
 	}
 
@@ -283,6 +287,7 @@ class Screen
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                         }
                 }
+		this.resetDataVariables();
 	}
 	
 	exit()
@@ -296,5 +301,12 @@ class Screen
                 //element.className = element.className.replace(/\active\b/g, "");
                 
 		this.mApplication.setCurrentScreen(null);
+	}
+
+	resetDataVariables()
+	{
+		this.mCode = 0;
+		this.mData = null;
+		this.mJson = null;
 	}
 }
