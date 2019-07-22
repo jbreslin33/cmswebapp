@@ -8,7 +8,7 @@ class MainScreen extends Screen
 		parent::__construct();	
 	}
 
-	function getResults()
+	function getResult()
 	{
                 $sql = 'select f_select_events($1)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
