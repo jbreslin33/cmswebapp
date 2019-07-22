@@ -46,9 +46,7 @@ class DeletePersonScreen extends Screen
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                         }
                 }
-               
-		this.mCode = 0;
-                this.mData = null;
-                this.mJson = null;
+              
+		this.resetDataVariables();
         }
 }
