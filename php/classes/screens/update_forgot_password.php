@@ -4,13 +4,12 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 
 class UpdateForgotPassword extends Screen
 {
-	function __construct($forgot_password_token,$password) 
+	function __construct() 
 	{
-
 		parent::__construct();
 	}
 
-	getResult()
+	function getResult()
 	{
 		$forgot_password_token = $_GET['forgot_password_token'];
 		$password = $_GET['password'];
@@ -25,8 +24,8 @@ class UpdateForgotPassword extends Screen
 		$this->mBody .= $this->mURL;
 
                 $sql = 'select f_update_forgot_password($1,$2)';
-                $prepare_result = pg_prepare($database->mConnection, "f_update_forgot_password", $sql);
-                $result = pg_execute($database->mConnection, "f_update_forgot_password", array( $forgot_password_token, $password));
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_update_forgot_password", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_update_forgot_password", array( $forgot_password_token, $password));
 		
 		$mail = new Mail($this->mEmail,$this->mSubject,$this->mBody);
 
