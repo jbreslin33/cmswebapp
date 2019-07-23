@@ -517,15 +517,9 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("UPDATE_FORGOT_PASSWORD_APPLICATION: ENTER");        
 		}
-		if (app.mUpdateForgotPasswordScreen)
-		{
-			app.mUpdateForgotPasswordScreen = new UpdateForgotPasswordScreen(app);
-		}
-		else
-		{
-			app.mUpdateForgotPasswordScreen = new UpdateForgotPasswordScreen(app);
-		}
-		app.mUpdateForgotPasswordScreen.show();
+
+		app.setCurrentScreen(new UpdateForgotPasswordScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -534,6 +528,7 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("UPDATE_FORGOT_PASSWORD_APPLICATION: EXECUTE");        
 		}
+		app.getCurrentScreen().execute();
 	}
 
         exit(app)
@@ -542,9 +537,7 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 		{
 			console.log("UPDATE_FORGOT_PASSWORD_APPLICATION: EXIT");        
 		}
-		app.mUpdateForgotPasswordScreen.hide();
-		app.mUpdateForgotPasswordScreen.mCode = 0;
-		app.mUpdateForgotPasswordScreen.mData = null;
+		app.getCurrentScreen().exit();
 	}
 }
 

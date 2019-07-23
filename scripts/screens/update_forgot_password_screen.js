@@ -7,24 +7,17 @@ class UpdateForgotPasswordScreen extends Screen
                 super(application);
 
 		location.hash = 'update_forgot_password_screen';
-
-		//html ids
-               	this.mSpinnerId = "update_forgot_password_screen_spinner_id";
-                this.mHtmlId = "update_forgot_password_screen_html_id";
-
-                //sql php vars
-		this.mPassword1 = null;
-		this.mPassword2 = null;
-
+		
 		document.getElementById("updateforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
 
-                this.mStateMachine = new StateMachine(this);
-                this.mINIT_UPDATE_FORGOT_PASSWORD_SCREEN            = new INIT_UPDATE_FORGOT_PASSWORD_SCREEN();
-                this.mGLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN            = new GLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN();
-                this.mWAIT_UPDATE_FORGOT_PASSWORD_SCREEN            = new WAIT_UPDATE_FORGOT_PASSWORD_SCREEN();
+                this.setHtml(document.getElementById("update_forgot_password_screen_html_id"));
+                //this.setMenuItem(document.getElementById("update_forgot_password_nav_id"));
+                this.setMessageElement(document.getElementById("update_forgot_password_screen_message_id"));
+                this.setForm(document.getElementById("update_forgot_password_screen_form_id"));
+                this.setSpinner(document.getElementById("update_forgot_password_screen_spinner_id"));
 
-                this.mStateMachine.setGlobalState(this.mGLOBAL_UPDATE_FORGOT_PASSWORD_SCREEN);
-                this.mStateMachine.changeState(this.mINIT_UPDATE_FORGOT_PASSWORD_SCREEN);
+		this.mPassword1 = null;
+		this.mPassword2 = null;
 	}
 
 	hit()
@@ -32,36 +25,24 @@ class UpdateForgotPasswordScreen extends Screen
 		this.mHit = true;
 
 		//get vars
-               	this.mPassword1  = document.getElementById("update_forgot_password_screen_password1_id").value;
-               	this.mPassword2  = document.getElementById("update_forgot_password_screen_password2_id").value;
+               	this.mPassword1 = document.getElementById("update_forgot_password_screen_password1_id").value;
+               	this.mPassword2 = document.getElementById("update_forgot_password_screen_password2_id").value;
+                
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/update/update_forgot_password.php?&forgot_password_token=" + this.mApplication.mForgotPasswordToken + "&password=" + this.mPassword1); 
+                APPLICATION.getCurrentScreen().ajax();
+	}
+        
+	checkValidity()
+	{
+		var form = APPLICATION.getCurrentScreen().getForm();
 
-		var url = "/php/classes/update/update_forgot_password.php?&forgot_password_token=" + this.mApplication.mForgotPasswordToken + "&password=" + this.mPassword1; 
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                        if (request.readyState === XMLHttpRequest.DONE)
-                        {
-                                if (request.status === 200)
-                                {
-                                        var data = this.responseText;
-                                        if (data)
-                                        {
-						APPLICATION.mUpdateForgotPasswordScreen.mData = data;
-                                        }
-                                }
-                        }
-                };
-
-		var form = document.getElementById('update_forgot_password_screen_html_id');
 		if (form.checkValidity() == true) 
 		{
 			var passwordMatch = false;
 
 			if (this.mPassword1 == this.mPassword2)
 			{
-				request.open('POST', url);
-                		request.send();
+                        	APPLICATION.getCurrentScreen().send();
 
           			document.getElementById('update_forgot_password_screen_password_message_id').style.color = 'green';
           			document.getElementById('update_forgot_password_screen_password_message_id').innerHTML = 'passwords are matching';

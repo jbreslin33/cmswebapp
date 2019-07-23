@@ -268,7 +268,10 @@ class Screen
 	
 	enter()
 	{
-		this.getMenuItem().className += " active";
+		if (this.getMenuItem())
+		{
+			this.getMenuItem().className += " active";
+		}
 		this.show();
 		this.get();
 	}
@@ -293,9 +296,10 @@ class Screen
                 this.mCode = 0;
                 this.mData = null;
                 this.mJson = null;
-
-            	this.getMenuItem().className = this.getMenuItem().className.replace(/\active\b/g, "");
-                //element.className = element.className.replace(/\active\b/g, "");
+		if (this.getMenuItem())
+		{
+            		this.getMenuItem().className = this.getMenuItem().className.replace(/\active\b/g, "");
+		}
                 
 		this.mApplication.setCurrentScreen(null);
 	}
