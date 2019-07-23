@@ -134,7 +134,12 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
-		if (application.getJWT())
+
+		if (application.mForgotPasswordToken)
+		{
+			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
+		}
+		else if (application.getJWT())
 		{
 			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 		}

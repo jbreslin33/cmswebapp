@@ -667,6 +667,7 @@
 
 	for (var y = 0; y < parameterNamesArray.length; y++)
 	{
+		console.log('parameterNamesArray ' + y + ':' + parameterNamesArray[y]); 
 		if (parameterNamesArray[y] == 'club_invite_name')
 		{
 			clubInviteName = parameterValuesArray[y];
@@ -680,6 +681,7 @@
 		
 		if (parameterNamesArray[y] == 'forgot_password_token')
 		{
+			console.log('in if for forgot');
 			forgotPasswordToken = parameterValuesArray[y];
 		}
 	}

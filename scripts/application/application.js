@@ -16,6 +16,7 @@ class Application
 		this.mClubInviteName = clubInviteName; 
 		this.mClubInviteToken = clubInviteToken; 
 		this.mForgotPasswordToken = forgotPasswordToken; 
+		console.log('value:' + this.mForgotPasswordToken);
 
 		//utilities
 		this.mUtility = new Utility();
@@ -69,10 +70,6 @@ class Application
 	{
 		this.mStateMachine.update();
 
-		if (this.mInsertForgotPasswordScreen)
-		{
-			this.mInsertForgotPasswordScreen.update(timestamp);
-		}
 		if (this.mUpdateForgotPasswordScreen)
 		{
 			this.mUpdateForgotPasswordScreen.update(timestamp);
@@ -80,18 +77,6 @@ class Application
 		if (this.mInsertInviteClubMemberScreen)
 		{
 			this.mInsertInviteClubMemberScreen.update(timestamp);
-		}
-		if (this.mInsertTeamScreen)
-		{
-			this.mInsertTeamScreen.update(timestamp);
-		}
-		if (this.mInsertPracticeScreen)
-		{
-			this.mInsertPracticeScreen.update(timestamp);
-		}
-		if (this.mDailySchedule)
-		{
-			this.mDailySchedule.update(timestamp);
 		}
 
 		//run again
