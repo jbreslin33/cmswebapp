@@ -832,22 +832,13 @@ CREATE OR REPLACE FUNCTION f_update_forgot_password(update_forgot_password_token
 RETURNS text AS $$
 DECLARE
         found_email_id forgot_passwords.email_id%TYPE;
-        --found_email emails.email%TYPE;
-        --email_person_id emails_persons.id%TYPE;
         result_set text;
         DECLARE x int := -1;
 BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW() and forgot_password_token = update_forgot_password_token;
-	--SELECT email into found_email from emails where id = found_email_id;
         IF found_email_id THEN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-		--select id into email_person_id from emails_persons where email_id = email_id;
-		--A
-                --select into json_result j_select_persons(email_person_id);
-                --result_set = CONCAT_WS(',',found_email,email_person_id,json_result);
-
                 result_set = f_format_result_set(found_email_id);
-		--B
         ELSE
                 result_set = '-101, Something went wrong can you submit a new request please?';
         END IF;
