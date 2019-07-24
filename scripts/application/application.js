@@ -17,8 +17,6 @@ class Application
 		this.mClubInviteToken = clubInviteToken; 
 		this.mForgotPasswordToken = forgotPasswordToken; 
 		this.mForgotPasswordEmail = forgotPasswordEmail; 
-		console.log('value token:' + this.mForgotPasswordToken);
-		console.log('value email:' + this.mForgotPasswordEmail);
 
 		//utilities
 		this.mUtility = new Utility();
