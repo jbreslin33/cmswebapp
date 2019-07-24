@@ -18,7 +18,8 @@ class InsertForgotPassword extends Screen
 		$this->mForgotPasswordToken = bin2hex(random_bytes(32));
 		
 		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-    			'forgot_password_token' => $this->mForgotPasswordToken
+    			'forgot_password_token' => $this->mForgotPasswordToken,
+    			'email' => $email
 			]));
 		$this->mBody = "Click the link to change password: ";
 		$this->mBody .= $this->mUrl; 

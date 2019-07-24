@@ -645,6 +645,7 @@
 	var clubInviteName      = null;
 	var clubInviteToken     = null;
 	var forgotPasswordToken = null;
+	var forgotPasswordEmail = null;
 
 	var hash = window.location.hash.substr(1);
 
@@ -682,12 +683,17 @@
 		
 		if (parameterNamesArray[y] == 'forgot_password_token')
 		{
-			console.log('in if for forgot');
+			console.log('in if for forgot password token');
 			forgotPasswordToken = parameterValuesArray[y];
+		}
+		if (parameterNamesArray[y] == 'email')
+		{
+			console.log('in if for forgot email');
+			forgotPasswordEmail = parameterValuesArray[y];
 		}
 	}
 
-	var APPLICATION = new Application(clubInviteName,clubInviteToken,forgotPasswordToken);
+	var APPLICATION = new Application(clubInviteName,clubInviteToken,forgotPasswordToken,forgotPasswordEmail);
 
         //update loop
         window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
