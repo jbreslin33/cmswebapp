@@ -417,14 +417,8 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                         console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: ENTER");
 		}
 
-                if (app.mInsertInviteClubMemberScreen)
-                {
-                        app.mInsertInviteClubMemberScreen = new InsertInviteClubMemberScreen(app);
-                }
-                else
-                {
-                        app.mInsertInviteClubMemberScreen = new InsertInviteClubMemberScreen(app);
-                }
+		app.setCurrentScreen(new InsertInviteClubMemberScreen(app));
+		app.getCurrentScreen().enter();
         }
 
         execute(app)
@@ -433,6 +427,7 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                 {
                         console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: EXECUTE");
                 }
+		app.getCurrentScreen().execute();
         }
 
         exit(app)
@@ -441,6 +436,7 @@ class INSERT_INVITE_CLUB_MEMBER_APPLICATION extends State
                 {
                         console.log("INSERT_INVITE_CLUB_MEMBER_APPLICATION: EXIT");
                 }
+		app.getCurrentScreen().exit();
         }
 }
 

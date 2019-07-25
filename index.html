@@ -476,29 +476,24 @@
         <!-- END INSERT FORGOT PASSWORD HTML  -->
 
         <!-- INSERT INVITE CLUB MEMBER HTML  -->
+        <div id="insert_invite_club_member_screen_html_id">
+	
+        	<form id="insert_invite_club_member_screen_form_id" onsubmit="return false;" class="needs-validation">
+                	<div class="form-row">
 
-        <form id="insert_invite_club_member_screen_html_id" onsubmit="return false;" class="needs-validation">
-                <div class="form-row">
+                       	 	<div class="col-md-4 mb-3">
+                                	<label id="insert_invite_club_member_screen_label_id" for="insert_invite_club_member_screen_email_id">Email</label>
+                                	<input type="text" class="form-control" id="insert_invite_club_member_screen_email_id" placeholder="Email" value="Email" required>
+                                	<span id='insert_invite_club_member_screen_email_message_id'></span>
+                        	</div>
+                	</div>
+                	<div id="insert_invite_club_member_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        	<span class="sr-only">Loading...</span>
+                	</div>
 
-			<div id="insert_invite_club_member_screen_div_id" class="form-group col-md-4">
-      				<label for="insert_invite_club_member_screen_select_id">Club</label>
-      				<select id="insert_invite_club_member_screen_select_id" class="form-control">
-      				</select>
-    			</div>
-
-                        <div class="col-md-4 mb-3">
-                                <label id="insert_invite_club_member_screen_label_id" for="insert_invite_club_member_screen_email_id">Email</label>
-                                <input type="text" class="form-control" id="insert_invite_club_member_screen_email_id" placeholder="Email" value="Email" required>
-                                <span id='insert_invite_club_member_screen_email_message_id'></span>
-                        </div>
-
-                </div>
-                <div id="insert_invite_club_member_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
-
-                <button id="insertinviteclubmemberscreenbuttonid" class="btn btn-primary">Submit</button>
-        </form>
+                	<button id="insertinviteclubmemberscreenbuttonid" class="btn btn-primary">Submit</button>
+        	</form>
+	</div>
 
         <!-- END INSERT INVITE CLUB MEMBER HTML  -->
 
