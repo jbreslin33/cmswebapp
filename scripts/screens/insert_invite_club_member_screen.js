@@ -21,10 +21,22 @@ class InsertInviteClubMemberScreen extends Screen
 	{
 		this.mHit = true;
 
-      		this.mEmail  = document.getElementById("insert_invite_club_member_screen_email_id").value;
+      		var email  = document.getElementById("insert_invite_club_member_screen_email_id").value;
+                var person_select = document.getElementById("person_select_id");
+                var club_select = document.getElementById("club_select_id");
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_invite_club_member.php?email=" + this.mEmail + '&club_id=' + document.getElementById("insert_invite_club_member_screen_select_id").value + '&jwt=' + APPLICATION.getJWT());
+                if (club_select.length > 0 && person_select.length > 0)
+                {
+                        var club_id = club_select.options[club_select.selectedIndex].value;
+                        var person_id = person_select.options[person_select.selectedIndex].value;
 
-                APPLICATION.getCurrentScreen().ajax();
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_invite_club_member.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&email=' + email);
+
+                        APPLICATION.getCurrentScreen().ajax();
+                }
+                else
+                {
+                        this.setMessage("You must select a club first","red");
+                }
 	}
 }
