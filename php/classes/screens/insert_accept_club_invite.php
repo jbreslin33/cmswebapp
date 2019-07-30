@@ -3,8 +3,9 @@ include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
 
 class InsertAcceptClubInvite 
 {
-	function __construct($clubInviteToken) 
+	function __construct() 
 	{
+		$clubInviteToken = $_GET['club_invite_token'];
 		error_log('yo in InserAccClub');
 		error_log($clubInviteToken);
 		
@@ -22,7 +23,6 @@ class InsertAcceptClubInvite
         }
 }
 
-$clubInviteToken = $_GET['club_invite_token'];
-$insertAcceptClubInvite = new InsertAcceptClubInvite($clubInviteToken);	
+$insertAcceptClubInvite = new InsertAcceptClubInvite();	
 
 ?>

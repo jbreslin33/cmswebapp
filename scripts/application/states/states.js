@@ -143,6 +143,10 @@ class INIT_APPLICATION extends State
 		{
 			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 		}
+		else if (application.mClubInviteToken)
+		{
+			application.mStateMachine.changeState(application.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
+		}
 		else
 		{
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
@@ -453,15 +457,9 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: ENTER");
 		}
-                if (app.mInsertAcceptClubInviteScreen)
-                {
-                        app.mInsertAcceptClubInviteScreen = new InsertAcceptClubInviteScreen(app);
-                }
-                else
-                {
-                        app.mInsertAcceptClubInviteScreen = new InsertAcceptClubInviteScreen(app);
-                }
-		app.mInsertAcceptClubInviteScreen.get();
+		
+		app.setCurrentScreen(new InsertAcceptClubInviteScreen(app));
+		app.getCurrentScreen().enter();
         }
         
 	execute(app)
@@ -470,6 +468,8 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXECUTE");
                 }
+		app.getCurrentScreen().execute();
+/*
                 if (app.mInsertAcceptClubInviteScreen.mData)
 		{
                 	var dataArray = app.mInsertAcceptClubInviteScreen.mData.split(",");
@@ -487,6 +487,7 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
 			console.log('lets redirect its a 104 to a join as there is no user yet');
                         app.mStateMachine.changeState(app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
                 }
+		*/
         }
 
         exit(app)
@@ -495,8 +496,7 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                 {
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXIT");
                 }
-                app.mInsertAcceptClubInviteScreen.mCode = 0;
-                app.mInsertAcceptClubInviteScreen.mData = null;
+		app.getCurrentScreen().exit();
         }
 }
 

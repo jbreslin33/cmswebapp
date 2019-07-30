@@ -157,20 +157,36 @@ class Screen
 
         showSpinner()
         {
-                this.getHtml().style.visibility = "hidden";
-                this.getSpinner().style.visibility = "visible";
+		if (this.getHtml())
+		{
+                	this.getHtml().style.visibility = "hidden";
+		}
+
+		if (this.getSpinner())
+		{
+                	this.getSpinner().style.visibility = "visible";
+		}
         }
 
         show()
         {
-                this.getHtml().style.display = "block";
-                this.getHtml().style.visibility = "visible";
-                this.getSpinner().style.visibility = "hidden";
+		if (this.getHtml())
+		{
+                	this.getHtml().style.display = "block";
+                	this.getHtml().style.visibility = "visible";
+		}
+		if (this.getSpinner())
+		{
+                	this.getSpinner().style.visibility = "hidden";
+		}
         }
 
         hide()
         {
-                this.getHtml().style.display = "none";
+		if (this.getHtml)
+		{
+                	this.getHtml().style.display = "none";
+		}
         }
 
 	processData()

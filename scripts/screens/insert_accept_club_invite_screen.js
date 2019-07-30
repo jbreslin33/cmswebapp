@@ -12,27 +12,18 @@ class InsertAcceptClubInviteScreen extends Screen
 		super(application);
 
 		location.hash = 'insert_accept_club_invite_screen';
-
-		//html ids 
-		this.mSpinnerId = "insert_accept_club_invite_screen_spinner_id";
-		this.mHtmlId = "insert_accept_club_invite_screen_html_id";
+/*                
+		this.setHtml(document.getElementById("insert_accept_club_invite_screen_html_id"));
+                this.setMenuItem(document.getElementById("insert_accept_club_invite_nav_id"));
+                this.setMessageElement(document.getElementById("insert_accept_club_invite_screen_message_id"));
+                this.setForm(document.getElementById("insert_accept_club_invite_screen_form_id"));
+                this.setSpinner(document.getElementById("insert_accept_club_invite_screen_spinner_id"));
+		*/
 	}
 
 	get()
 	{
-		var url = "/php/classes/insert/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken; 
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken); 
 		var request = new XMLHttpRequest();
-                request.onreadystatechange = function()
-                {
-                      	if (request.readyState === XMLHttpRequest.DONE)
-                       	{
-                               	if (request.status === 200)
-                               	{
-					APPLICATION.mInsertAcceptClubInviteScreen.mData = this.responseText;
-                               	}
-                       	}
-                };
-                request.open('POST', url);
-                request.send();
 	}
 }
