@@ -20,10 +20,13 @@ class InsertAcceptClubInviteScreen extends Screen
                 this.setSpinner(document.getElementById("insert_accept_club_invite_screen_spinner_id"));
 		*/
 	}
+//                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_club.php?name=" + name + "&address=" + address + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id);
+//                APPLICATION.getCurrentScreen().ajax();
 
 	get()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/insert/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken); 
-		var request = new XMLHttpRequest();
+		console.log('yo');
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken); 
+	 	APPLICATION.getCurrentScreen().ajax();
 	}
 }

@@ -54,10 +54,17 @@ class Screen
 
 	checkValidity()
 	{
-                if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true)
-                {
+                if (APPLICATION.getCurrentScreen().getForm())
+		{
+                	if (APPLICATION.getCurrentScreen().getForm().checkValidity() == true)
+                	{
+				APPLICATION.getCurrentScreen().send();
+                	}
+		}
+		else //send if no form, one case that uses this is insert_accept_club_invite_screen system.
+		{
 			APPLICATION.getCurrentScreen().send();
-                }
+		}
 	}
 
 	send()

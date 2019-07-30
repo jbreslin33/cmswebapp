@@ -1,8 +1,9 @@
 <?php 
-include_once(getenv("DOCUMENT_ROOT") . "/php/classes/database/database.php");
+include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class InsertAcceptClubInvite 
+class InsertAcceptClubInvite extends Screen
 {
+	/*
 	function __construct() 
 	{
 		$clubInviteToken = $_GET['club_invite_token'];
@@ -21,6 +22,25 @@ class InsertAcceptClubInvite
 
                 echo $return_value;
         }
+	 */
+        function __construct()
+        {
+                parent::__construct();
+		error_log('yo in InserAccClub');
+        }
+
+        function getResult()
+        {
+		error_log('yo in InserAccClub get');
+		/*
+                $sql = 'select f_insert_club($1,$2,$3,$4)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_club", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $this->getSenderEmailId(), $_GET['person_id']));
+
+                return pg_fetch_result($result, 0);
+		 */
+        }
+
 }
 
 $insertAcceptClubInvite = new InsertAcceptClubInvite();	
