@@ -895,6 +895,7 @@ DECLARE
 	result_set text;
 	DECLARE x int := -1; 
 BEGIN
+
     	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
 	IF found_email_id > 0 THEN
 		result_set = '-101, Email already exists. Do you want to login instead?';
@@ -1294,44 +1295,58 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+	--RAISE INFO 'information message %', now() ;
+  	--RAISE LOG 'log message %', now();
+  	--RAISE DEBUG 'debug message %', now();
+  	--RAISE WARNING 'warning message %', now();
+  	--RAISE NOTICE 'notice message %', now();
+
 CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
-        --found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
 	result_set text;
+	DECLARE x int := -1;
 BEGIN
 	select email_id into found_email_id from invite_club_members where club_invite_token = $1; 
-        --select id, person_id into found_user_id, found_person_id from users where email_id = found_email_id;  
+	--RAISE INFO 'found_email_id: %', found_email_id;
+  	RAISE LOG 'found_email_id: %', found_email_id;
 
 	IF found_email_id > 0 THEN
+		--lets grab the club_id then add all persons to club from email_id
 		SELECT club_id INTO found_club_id FROM invite_club_members WHERE club_invite_token = $1;
-        	--insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
-		--migght need to loop the above
-                result_set = f_format_result_set(found_email_id);
+		CALL p_insert_club_members(found_club_id,found_email_id,x);
+		IF x > 0 THEN
+                	result_set = f_format_result_set(found_email_id);
+		ELSE
+                	result_set = '-101, Something went wrong adding your persons to club.';
+		END IF;
 	ELSE
                 result_set = '-101, You need to fill out form to finish signup.';
-
+	
 	END IF;
-
-
-
---	IF found_user_id > 0 THEN --we have a user already so add the user to club and move on...
---		SELECT club_id INTO found_club_id FROM invite_club_members WHERE club_invite_token = $1;
- --       	insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
-		
-		
-
-
---		return_code = '-100';
---	ELSE -- we do not have a user so we need to signal user to a join page where they will join and we will auto add them to club
---		return_code = '-104';
---	END IF;
 
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
+--INSERT CLUB MEMBERS
+CREATE OR REPLACE PROCEDURE p_insert_club_members(club_id int,email_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_club_member_id integer;
+        rec RECORD;
+BEGIN
+        FOR rec IN
+                select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $3
+        LOOP
+                insert into club_members (club_id, person_id) values (club_id, rec.id) returning id into returning_club_member_id;
+        END LOOP;
+END;
+$$;
 
 
 --INSERT CLUB
