@@ -156,10 +156,36 @@ class Screen
        
 	update(timestamp)
 	{
+		//console.log('update:' + timestamp);
 		if (this.mStateMachine)
 		{
 			this.mStateMachine.update();
 		}
+                if (this.getRequest())
+		{
+
+                	if (this.getRequest().readyState === XMLHttpRequest.UNSENT)
+			{
+				this.hideSpinner();
+			}
+                	if (this.getRequest().readyState === XMLHttpRequest.OPENED)
+			{
+				this.showSpinner();
+			}
+                	if (this.getRequest().readyState === XMLHttpRequest.HEADERS_RECEIVED)
+			{
+				this.showSpinner();
+			}
+                	if (this.getRequest().readyState === XMLHttpRequest.LOADING)
+			{
+				this.showSpinner();
+			}
+                	if (this.getRequest().readyState === XMLHttpRequest.DONE)
+			{
+				this.hideSpinner();
+			}
+		}
+
 	}
 
         showSpinner()
@@ -175,6 +201,14 @@ class Screen
                 	this.getSpinner().style.visibility = "visible";
 		}
         }
+
+        hideSpinner()
+	{
+		if (this.getSpinner())
+		{
+                	this.getSpinner().style.visibility = "hidden";
+		}
+	}
 
         show()
         {

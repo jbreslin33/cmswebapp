@@ -70,14 +70,11 @@ class Application
 	{
 		this.mStateMachine.update();
 
-		if (this.mUpdateForgotPasswordScreen)
+		if (this.getCurrentScreen())
 		{
-			this.mUpdateForgotPasswordScreen.update(timestamp);
+			this.getCurrentScreen().update(timestamp);
 		}
-		if (this.mInsertInviteClubMemberScreen)
-		{
-			this.mInsertInviteClubMemberScreen.update(timestamp);
-		}
+
 
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
