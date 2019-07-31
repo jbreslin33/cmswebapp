@@ -130,8 +130,12 @@ class Screen
 
 	setMessage(message, color)
 	{
-                this.mMessageElement.innerHTML = message;
-		this.mMessageElement.style.color = color;
+		if (this.mMessageElement)
+		{
+                	this.mMessageElement.innerHTML = message;
+			this.mMessageElement.style.color = color;
+		}
+		console.log('attempting to setMessage but there is no mMessageElement: ' + message);
 	}
 
 	setMenuItem(menuItem)
