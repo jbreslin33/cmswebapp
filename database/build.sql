@@ -1671,15 +1671,16 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, int, TEXT, int) --email,club_id,token,user_id associated with club_admin
+CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, int, TEXT, int) --email,club_id,token,person_id associated with club_admin
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
+        found_administrator_email_id emails.id%TYPE;
         returning_email_id emails.id%TYPE;
         returning_invite_club_member_id invite_club_members.id%TYPE;
         found_invite_club_member_id invite_club_members.id%TYPE;
         found_club_administrator_id club_administrators.id%TYPE;
-        return_code text;
+        result_set text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
@@ -1706,8 +1707,11 @@ BEGIN
 		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
 
 	END IF;
-	return_code = '-100';
-RETURN return_code;
+	select email_id into found_administrator_email_id from emails_persons where person_id = $4;
+	--either way whether the email existed or we had to create it lets take the adminstrator back to main
+        result_set = f_format_result_set(found_administrator_email_id);
+	--result_set = '-100';
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
