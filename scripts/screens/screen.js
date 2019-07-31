@@ -164,6 +164,7 @@ class Screen
 
         showSpinner()
         {
+		console.log('trying to show spinner');
 		if (this.getHtml())
 		{
                 	this.getHtml().style.visibility = "hidden";
