@@ -190,7 +190,7 @@ class Screen
 
         hide()
         {
-		if (this.getHtml)
+		if (this.getHtml())
 		{
                 	this.getHtml().style.display = "none";
 		}

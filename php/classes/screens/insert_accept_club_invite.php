@@ -13,9 +13,7 @@ class InsertAcceptClubInvite extends Screen
 		$database = new Database("localhost","cms","postgres","mibesfat");
 
 		$sql = 'select f_insert_accept_club_invite($1)';
-		
 		$prepare_result = pg_prepare($database->mConnection, "f_insert_accept_club_invite", $sql);
-
 		$result = pg_execute($database->mConnection, "f_insert_accept_club_invite", array( $clubInviteToken));
 
                	$return_value = pg_fetch_result($result, 0);
@@ -32,6 +30,15 @@ class InsertAcceptClubInvite extends Screen
         function getResult()
         {
 		error_log('yo in InserAccClub get');
+		
+		$clubInviteToken = $_GET['club_invite_token'];
+		
+		$sql = 'select f_insert_accept_club_invite($1)';
+		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_accept_club_invite", $sql);
+		$result = pg_execute($this->mDatabase->mConnection, "f_insert_accept_club_invite", array( $clubInviteToken));
+		
+		return pg_fetch_result($result, 0);
+
 		/*
                 $sql = 'select f_insert_club($1,$2,$3,$4)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_club", $sql);
