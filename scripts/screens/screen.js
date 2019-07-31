@@ -185,12 +185,11 @@ class Screen
 				this.hideSpinner();
 			}
 		}
-
 	}
 
         showSpinner()
         {
-		console.log('trying to show spinner');
+		//console.log('showSpinner');
 		if (this.getHtml())
 		{
                 	this.getHtml().style.visibility = "hidden";

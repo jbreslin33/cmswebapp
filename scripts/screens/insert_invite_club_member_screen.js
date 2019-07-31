@@ -15,6 +15,7 @@ class InsertInviteClubMemberScreen extends Screen
                 this.setMessageElement(document.getElementById("insert_invite_club_member_screen_message_id"));
                 this.setForm(document.getElementById("insert_invite_club_member_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_invite_club_member_screen_spinner_id"));
+							 //insert_invite_club_member_screen_spinner_id
 	}
 	
 	hit()
