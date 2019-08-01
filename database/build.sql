@@ -1337,13 +1337,12 @@ CREATE OR REPLACE PROCEDURE p_insert_club_members(club_id int,email_id int, INOU
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        returning_club_member_id integer;
         rec RECORD;
 BEGIN
         FOR rec IN
                 select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $3
         LOOP
-                insert into club_members (club_id, person_id) values (club_id, rec.id) returning id into returning_club_member_id;
+                insert into club_members (club_id, person_id) values (club_id, rec.id) returning id into x;
         END LOOP;
 END;
 $$;

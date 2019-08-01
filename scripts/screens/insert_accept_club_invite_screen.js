@@ -21,7 +21,8 @@ class InsertAcceptClubInviteScreen extends Screen
 
 	get()
 	{
-		console.log('yo get');
+		console.log('lets send a php request to find out if I have a email_person entry or if I need to go to join screen');
+		console.log('if we have a jwt lets send it then we will have email_id or do we simple auto login person if they are already members and have magic link????');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken); 
 	 	APPLICATION.getCurrentScreen().ajax();
 	}
