@@ -882,8 +882,17 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
-
+CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_members(int,TEXT)
+RETURNS text AS $$
+DECLARE
+        json_result_invite_club_members text;
+        result_set text;
+BEGIN
+        select into json_result_invite_club_members j_select_invite_club_members($2);
+        result_set = CONCAT($1,',','{',json_result_invite_club_members,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 
 
 --NATIVE INSERT LOGIN
@@ -1071,6 +1080,33 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
+
+--select * from invite_club_members;
+-- id | email_id | club_id |                        club_invite_token                         |          expires           |         created_at 
+--BEGIN J_SELECT INVITE CLUB MEMBERS
+--params:club_id
+CREATE OR REPLACE FUNCTION j_select_invite_club_members(text)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select invite_club_members.id, invite_club_members.email_id, invite_club_members.club_id, invite_club_members.club_invite_token from invite_club_members where club_invite_token = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"invite_club_members": []', raw_json);
+        ELSE
+                result_set = CONCAT('"invite_club_members": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT INVITE_CLUB_MEMBERS
 
 
 CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, INOUT x int)
@@ -1317,10 +1353,11 @@ BEGIN
 		--lets grab the club_id then add all persons to club from email_id
 		SELECT club_id INTO found_club_id FROM invite_club_members WHERE club_invite_token = $1;
 		CALL p_insert_club_members(found_club_id,found_email_id,x);
-		IF x > 0 THEN
+		IF x > 0 THEN --we are already a member so give normal result set to send to main
                 	result_set = f_format_result_set(found_email_id);
-		ELSE
-                	result_set = '-101, Something went wrong adding your persons to club.';
+		ELSE -- we were not already a member so a join club needs to be done.
+                	result_set = f_format_result_set_invite_club_members(found_email_id,$1);
+                	--result_set = '-101, Something went wrong adding your persons to club.';
 		END IF;
 	ELSE
                 result_set = '-101, You need to fill out form to finish signup.';
@@ -1340,7 +1377,7 @@ DECLARE
         rec RECORD;
 BEGIN
         FOR rec IN
-                select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $3
+                select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $2
         LOOP
                 insert into club_members (club_id, person_id) values (club_id, rec.id) returning id into x;
         END LOOP;
