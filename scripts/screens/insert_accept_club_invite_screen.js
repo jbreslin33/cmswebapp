@@ -26,4 +26,26 @@ class InsertAcceptClubInviteScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_accept_club_invite.php?club_invite_token=" + this.mApplication.mClubInviteToken); 
 	 	APPLICATION.getCurrentScreen().ajax();
 	}
+	
+	execute()
+        {
+		//lets do a quick check to see if we have invite_club_members
+
+                this.processData();
+                
+		if (this.mJson)
+                {
+                        if (this.mJson.invite_club_members)
+                        {
+				console.log('invite_club_members make me go to main');
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                        }
+			else if (this.mJson.persons)
+                        {
+				console.log('persons make me go to main');
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                        }
+                }
+                this.resetDataVariables();
+        }
 }
