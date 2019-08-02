@@ -1,3 +1,6 @@
+ we should be getting a notice when trying to join with same email
+
+--------------------------------
 next after we fix yahoo bug we simply need a change_password jawn just like forgot_password
 ------------------
 actually we need to check right on first load now....
