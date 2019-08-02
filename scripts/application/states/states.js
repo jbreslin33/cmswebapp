@@ -303,18 +303,8 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: ENTER");        
 		}
-		if (app.mInsertNativeLoginClubScreen)
-		{
-			//also maybe some clean up as well, so just leaving this if statement here.
-			app.mInsertNativeLoginClubScreen = new InsertLoginClubScreen(app);
-
-		}
-		else
-		{
-			app.mInsertNativeLoginClubScreen = new InsertLoginClubScreen(app);
-		}
-                document.getElementById("insert_native_login_club_screen_nav_id").className += " active";
-		app.mInsertNativeLoginClubScreen.show();
+		app.setCurrentScreen(new InsertLoginClubScreen(app));
+		app.getCurrentScreen().enter();
 	}
 
         execute(app)
@@ -323,7 +313,8 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXECUTE");        
 		}
-              
+		app.getCurrentScreen().execute();
+             /* 
                 if (app.mInsertNativeLoginClubScreen.mData)
                 {
                         var dataArray = app.mInsertNativeLoginClubScreen.mData.split(",");
@@ -346,6 +337,7 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 				document.getElementById("insert_native_login_screen_link_id").style.display = "block";
                         }
                 }
+		*/
 	}
 
         exit(app)
@@ -354,6 +346,8 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 		{
 			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXIT");        
 		}
+		app.getCurrentScreen().exit();
+		/*
 		app.mInsertNativeLoginClubScreen.mCode = 0;
 		app.mInsertNativeLoginClubScreen.mData = null;
 
@@ -362,6 +356,7 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
                 element.className = element.className.replace(/\active\b/g, "");
 
 		app.mInsertNativeLoginClubScreen.hide();
+		*/
 	}
 }
 
