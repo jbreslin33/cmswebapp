@@ -265,7 +265,6 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 		}
 
 		app.setCurrentScreen(new InsertLoginScreen(app));
-
 		app.getCurrentScreen().enter();
 	}
 

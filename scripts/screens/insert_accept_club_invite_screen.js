@@ -38,7 +38,7 @@ class InsertAcceptClubInviteScreen extends Screen
                         if (this.mJson.invite_club_members)
                         {
 				console.log('invite_club_members make me go to main');
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                         }
 			else if (this.mJson.persons)
                         {
