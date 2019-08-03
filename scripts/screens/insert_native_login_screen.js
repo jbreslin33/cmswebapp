@@ -51,8 +51,9 @@ class InsertLoginScreen extends Screen
 
                 if (this.mPassword1 == this.mPassword2)
                 {
-                	APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
-                        APPLICATION.getCurrentScreen().getRequest().send();
+			super.send();
+                	//APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
+                        //APPLICATION.getCurrentScreen().getRequest().send();
 
                         document.getElementById('password_message_id').style.color = 'green';
                         document.getElementById('password_message_id').innerHTML = 'passwords are matching';
@@ -63,34 +64,4 @@ class InsertLoginScreen extends Screen
                         document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
                 }
 	}
-/*        
-	show()
-	{
-		super.show();
-		
-		//hide link
-		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
-		document.getElementById("insert_native_login_screen_email_div_id").style.display = "block";
-		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Join Cmswebapp";
-		document.getElementById("insert_native_login_screen_email_id").required = true;
-
-	}
-
-	hide()
-	{
-              document.getElementById("insert_native_login_screen_html_id").style.display = "none";
-	}
-	execute()
-	{
- 		super.execute();
-
-                if (this.mData)
-               	{
-                       if (this.mCode == -101)
-                       {
-                               document.getElementById("insert_native_login_screen_link_id").style.display = "block";
-                       }
-                }
-	}
-*/
 }
