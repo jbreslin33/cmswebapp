@@ -11,6 +11,8 @@ class InsertLoginClubScreen extends InsertLoginScreen
                 //html ids
                 this.setSpinner(document.getElementById("insert_native_login_club_screen_spinner_id"));
                 this.setHtml(document.getElementById("insert_native_login_club_screen_html_id"));
+		
+		console.log('toek in cons:' + APPLICATION.mClubInviteToken);
 	}
 
         hit()
@@ -25,7 +27,9 @@ class InsertLoginClubScreen extends InsertLoginScreen
                 this.mPassword1  = document.getElementById("insert_native_login_screen_password1_id").value;
                 this.mPassword2  = document.getElementById("insert_native_login_screen_password2_id").value;
 
-                this.setUrl("/php/classes/insert/insert_native_login_club.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1 + "&club_invite_token=" + APPLICATION.mClubInviteToken);
+		console.log('toek in hit:' + APPLICATION.mClubInviteToken);
+
+                this.setUrl("/php/classes/screens/insert_native_login_club.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1 + "&club_invite_token=" + APPLICATION.mClubInviteToken);
 		this.ajax();
 
 /*
