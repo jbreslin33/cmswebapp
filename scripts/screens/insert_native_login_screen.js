@@ -63,7 +63,7 @@ class InsertLoginScreen extends Screen
                         document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
                 }
 	}
-        
+/*        
 	show()
 	{
 		super.show();
@@ -80,7 +80,6 @@ class InsertLoginScreen extends Screen
 	{
               document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 	}
-
 	execute()
 	{
  		super.execute();
@@ -93,4 +92,5 @@ class InsertLoginScreen extends Screen
                        }
                 }
 	}
+*/
 }
