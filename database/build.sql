@@ -1153,6 +1153,7 @@ BEGIN
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
         --insert into users (person_id, email_id) values (x, $1);
 	insert into club_members (club_id,person_id) values ($2,x);
+	--insert email_persons....
 END;
 $$;
 

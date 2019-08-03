@@ -11,8 +11,6 @@ class InsertLoginClubScreen extends InsertLoginScreen
                 //html ids
                 this.setSpinner(document.getElementById("insert_native_login_club_screen_spinner_id"));
                 this.setHtml(document.getElementById("insert_native_login_club_screen_html_id"));
-		
-		console.log('toek in cons:' + APPLICATION.mClubInviteToken);
 	}
 
         hit()
@@ -31,47 +29,22 @@ class InsertLoginClubScreen extends InsertLoginScreen
 
                 this.setUrl("/php/classes/screens/insert_native_login_club.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1 + "&club_invite_token=" + APPLICATION.mClubInviteToken);
 		this.ajax();
-
-/*
-                var form = document.getElementById('insert_native_login_screen_form_id');
-                if (form.checkValidity() == true)
-                {
-                        var passwordMatch = false;
-
-                        if (this.mPassword1 == this.mPassword2)
-                        {
-                                request.open('POST', url);
-                                request.send();
-
-                                document.getElementById('password_message_id').style.color = 'green';
-                                document.getElementById('password_message_id').innerHTML = 'passwords are matching';
-                        }
-                        else
-                        {
-                                document.getElementById('password_message_id').style.color = 'red';
-                                document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
-                        }
-                }
-		*/
         }
-
 
 	show()
 	{
 		//also show google
               	document.getElementById("insert_native_login_club_screen_html_id").style.display = "block";
               	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
+		
 		//hide link
 		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
-		//document.getElementById("insert_native_login_club_screen_link_id").style.display = "none";
-		//insert_native_login_screen_email_div_id
 		document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
 insert_native_login_screen_header_div_id
 		document.getElementById("insert_native_login_screen_club_header_div_id").innerHTML = "Join Celta with google login:";
 		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Or Join Celta without google login:";
-		
-		document.getElementById("insert_native_login_screen_email_id").required = false;
 
+		document.getElementById("insert_native_login_screen_email_id").required = false;
 	}
 
 	hide()

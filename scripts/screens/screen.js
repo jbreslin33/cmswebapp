@@ -242,6 +242,7 @@ class Screen
                         this.mCode = dataArray[0];
                         if (this.mCode == -100)
                         {
+				console.log('this.mCode is:' + this.mCode);
 				this.mApplication.setJWT(dataArray[1]); //set jwt
                                 
                                 //JSON
