@@ -1151,9 +1151,8 @@ DECLARE
 BEGIN
 	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
-        --insert into users (person_id, email_id) values (x, $1);
+	insert into emails_persons (email_id, person_id) values ($1,x);
 	insert into club_members (club_id,person_id) values ($2,x);
-	--insert email_persons....
 END;
 $$;
 
