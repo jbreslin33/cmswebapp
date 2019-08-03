@@ -1128,17 +1128,17 @@ RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
 	found_club_id clubs.id%TYPE;
-	return_code text;
-	DECLARE x int := -111; --for bad insert attempt
+        result_set text;
+        DECLARE x int := -1;
 BEGIN
     	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_members WHERE club_invite_token = $7;
 	IF found_club_id > 0 THEN
 		CALL p_insert_native_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
-		return_code = x;
+                result_set = f_format_result_set(found_email_id);
 	ELSE --for some reason email does not exist
-		return_code = '-102';
+		result_set = '-101, Something went wrong dog!';
 	END IF;
-RETURN return_code;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 

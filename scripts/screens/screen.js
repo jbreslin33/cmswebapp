@@ -295,8 +295,10 @@ class Screen
 
 		if (this.mJson.persons)
 		{
+			console.log('AAAAAAAAA');
 			if (this.mJson.clubs)
 			{
+				console.log('BBBBBBBBBB');
                 		//load up persons option
                 		var select = document.getElementById("person_select_id");
 				select.length = 0;
@@ -311,6 +313,7 @@ class Screen
 			}
 			else
 			{
+				console.log('CCCCCCCCCC');
                    		//load up persons for delete option
                                 var select = document.getElementById("delete_person_screen_select_id");
                                 select.length = 0;
@@ -345,6 +348,7 @@ class Screen
                 {
                         if (this.mJson.persons)
                         {
+				console.log('found persons in this json');
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                         }
                 }
