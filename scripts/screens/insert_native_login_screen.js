@@ -80,25 +80,59 @@ class InsertLoginScreen extends Screen
         setMessage(message, color)
         {
 		super.setMessage(message,color);
-		/*
-                if (this.mMessageElement)
-                {
-                        console.log('setMessage: ' + message);
-                        this.mMessageElement.innerHTML = message;
-                        this.mMessageElement.style.color = color;
 
-                        //make sure we can see it
-                        this.getMessageElement().style.display = "block";
-                        this.getMessageElement().style.visibility = "visible";
-                }
-                else
-                {
-                        console.log('attempting to setMessage but there is no mMessageElement: ' + message);
-                }
-		*/
 		//and show login
                 this.getLoginLink().style.display = "block";
                 this.getLoginLink().style.visibility = "visible";
         }
+        show()
+        {
+		super.show();
+/*
+		if (this.getLoginLink())
+		{
+                	this.getLoginLink().style.display = "block";
+                	this.getLoginLink().style.visibility = "visible";
+		}
+		*/
+                if (this.getLoginLink())
+                {
+			console.log('call hide');
+                        this.getLoginLink().style.display = "none";
+                }
+        }
+
+        hide()
+        {
+		super.hide();
+
+                if (this.getLoginLink())
+                {
+			console.log('call hide');
+                        this.getLoginLink().style.display = "none";
+                }
+        }
+/*
+        show()
+        {
+                if (this.getHtml())
+                {
+                        this.getHtml().style.display = "block";
+                        this.getHtml().style.visibility = "visible";
+                }
+                if (this.getSpinner())
+                {
+                        this.getSpinner().style.visibility = "hidden";
+                }
+        }
+
+        hide()
+        {
+                if (this.getHtml())
+                {
+                        this.getHtml().style.display = "none";
+                }
+        }
+*/
 
 }
