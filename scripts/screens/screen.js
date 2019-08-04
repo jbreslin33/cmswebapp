@@ -127,15 +127,27 @@ class Screen
 	{
 		this.mMessageElement = messageElement;
 	}
+	getMessageElement()
+	{
+		return this.mMessageElement;
+	}
 
 	setMessage(message, color)
 	{
 		if (this.mMessageElement)
 		{
+			console.log('setMessage: ' + message);
                 	this.mMessageElement.innerHTML = message;
 			this.mMessageElement.style.color = color;
+
+                	//make sure we can see it	
+			this.getMessageElement().style.display = "block";
+                	this.getMessageElement().style.visibility = "visible";
 		}
-		console.log('attempting to setMessage but there is no mMessageElement: ' + message);
+		else
+		{
+			console.log('attempting to setMessage but there is no mMessageElement: ' + message);
+		}
 	}
 
 	setMenuItem(menuItem)

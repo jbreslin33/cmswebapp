@@ -18,9 +18,7 @@ class InsertLoginScreen extends Screen
 		this.mPassword1 = null;
 		this.mPassword2 = null;
 
-		//document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 		document.getElementById("insertnativeloginscreenbuttonid").onclick = this.hit.bind(this);
-
 
 		this.setMenuItem(document.getElementById("insert_native_login_screen_nav_id"));
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
@@ -54,8 +52,6 @@ class InsertLoginScreen extends Screen
                 if (this.mPassword1 == this.mPassword2)
                 {
 			super.send();
-                	//APPLICATION.getCurrentScreen().getRequest().open('POST', APPLICATION.getCurrentScreen().getUrl());
-                        //APPLICATION.getCurrentScreen().getRequest().send();
 
                         document.getElementById('password_message_id').style.color = 'green';
                         document.getElementById('password_message_id').innerHTML = 'passwords are matching';
