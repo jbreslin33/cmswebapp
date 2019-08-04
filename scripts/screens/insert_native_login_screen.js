@@ -18,7 +18,9 @@ class InsertLoginScreen extends Screen
 		this.mPassword1 = null;
 		this.mPassword2 = null;
 
-		document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
+		//document.getElementById("insertloginscreenbuttonid").addEventListener("click",this.hit.bind(this));
+		document.getElementById("insertnativeloginscreenbuttonid").onclick = this.hit.bind(this);
+
 
 		this.setMenuItem(document.getElementById("insert_native_login_screen_nav_id"));
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));

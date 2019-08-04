@@ -33,13 +33,15 @@ class InsertLoginClubScreen extends InsertLoginScreen
 
 	show()
 	{
+		super.show();
+		console.log('showwing');
 		//also show google
               	document.getElementById("insert_native_login_club_screen_html_id").style.display = "block";
               	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
 		
 		//hide link
-		document.getElementById("insert_native_login_screen_link_id").style.display = "none";
-		document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
+		//document.getElementById("insert_native_login_screen_link_id").style.display = "none";
+		//document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
 insert_native_login_screen_header_div_id
 		document.getElementById("insert_native_login_screen_club_header_div_id").innerHTML = "Join Celta with google login:";
 		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Or Join Celta without google login:";
