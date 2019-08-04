@@ -8,6 +8,8 @@ class InsertLoginScreen extends Screen
 
 		location.hash = 'insert_native_login_screen';
 
+		this.mLoginLink = null;
+
 		//sql php vars
 		this.mFirstName = null;
 		this.mMiddleName = null;
@@ -25,6 +27,8 @@ class InsertLoginScreen extends Screen
 		this.setHtml(document.getElementById("insert_native_login_screen_html_id"));
 		this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));
 		this.setForm(document.getElementById("insert_native_login_screen_form_id"));
+
+		this.setLoginLink(document.getElementById("insert_native_login_screen_login_id"));
 	}
 
 	hit()
@@ -42,6 +46,16 @@ class InsertLoginScreen extends Screen
 		this.setUrl("/php/classes/screens/insert_native_login.php?first_name=" + this.mFirstName + "&middle_name=" + this.mMiddleName + "&last_name=" + this.mLastName + "&phone=" + this.mPhone + "&address=" + this.mAddress + "&email=" + this.mEmail + "&password=" + this.mPassword1); 
 
 		this.ajax();
+	}
+
+	setLoginLink(loginLink)
+	{
+		this.mLoginLink = loginLink;
+	}
+
+	getLoginLink()
+	{
+		return this.mLoginLink;
 	}
 
 	//overide from screen
@@ -62,4 +76,29 @@ class InsertLoginScreen extends Screen
                         document.getElementById('password_message_id').innerHTML = 'passwords are not matching';
                 }
 	}
+
+        setMessage(message, color)
+        {
+		super.setMessage(message,color);
+		/*
+                if (this.mMessageElement)
+                {
+                        console.log('setMessage: ' + message);
+                        this.mMessageElement.innerHTML = message;
+                        this.mMessageElement.style.color = color;
+
+                        //make sure we can see it
+                        this.getMessageElement().style.display = "block";
+                        this.getMessageElement().style.visibility = "visible";
+                }
+                else
+                {
+                        console.log('attempting to setMessage but there is no mMessageElement: ' + message);
+                }
+		*/
+		//and show login
+                this.getLoginLink().style.display = "block";
+                this.getLoginLink().style.visibility = "visible";
+        }
+
 }
