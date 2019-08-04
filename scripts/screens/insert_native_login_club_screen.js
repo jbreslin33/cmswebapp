@@ -51,7 +51,7 @@ class InsertLoginClubScreen extends InsertLoginScreen
 
 		//hide link
 		//document.getElementById("insert_native_login_screen_link_id").style.display = "none";
-		//document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
+		document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
 
 		document.getElementById("insert_native_login_screen_club_header_div_id").innerHTML = "Join Celta with google login:";
 		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Or Join Celta without google login:";
