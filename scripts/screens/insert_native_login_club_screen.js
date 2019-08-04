@@ -9,7 +9,7 @@ class InsertLoginClubScreen extends InsertLoginScreen
 		location.hash = 'insert_login_club_screen';
 
                 //html ids
-                this.setSpinner(document.getElementById("insert_native_login_club_screen_spinner_id"));
+                //this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));
                 this.setHtml(document.getElementById("insert_native_login_club_screen_html_id"));
 	}
 
@@ -33,16 +33,26 @@ class InsertLoginClubScreen extends InsertLoginScreen
 
 	show()
 	{
-		super.show();
-		console.log('showwing');
-		//also show google
-              	document.getElementById("insert_native_login_club_screen_html_id").style.display = "block";
-              	document.getElementById("insert_native_login_screen_html_id").style.display = "block";
-		
+		console.log('in show pl');
+                if (this.getHtml())
+                {
+                        this.getHtml().style.display = "block";
+              		document.getElementById("insert_native_login_screen_html_id").style.display = "block";
+
+                        this.getHtml().style.visibility = "visible";
+              		document.getElementById("insert_native_login_screen_html_id").style.visibility = "visible";
+                }
+                if (this.getSpinner())
+                {
+			console.log('hide spinner yos');
+                        this.getSpinner().style.visibility = "hidden";
+                	document.getElementById("insert_native_login_screen_spinner_id").style.visibility = "hidden";
+		}
+
 		//hide link
 		//document.getElementById("insert_native_login_screen_link_id").style.display = "none";
 		//document.getElementById("insert_native_login_screen_email_div_id").style.display = "none";
-insert_native_login_screen_header_div_id
+
 		document.getElementById("insert_native_login_screen_club_header_div_id").innerHTML = "Join Celta with google login:";
 		document.getElementById("insert_native_login_screen_header_div_id").innerHTML = "Or Join Celta without google login:";
 
