@@ -1,3 +1,8 @@
+persons can be added by email or club???
+this way a club can register your person for club stuff (player, coach etc) if they are not there.
+but...
+an email can only create or delete(more on that later) a person
+if you go to delete a person that exists in a club table such as team player you will not be able to you can however edit it.
 -------------------
 we should be getting a notice when trying to join with same email
 
