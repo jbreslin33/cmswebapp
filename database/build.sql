@@ -559,29 +559,30 @@ CREATE TABLE club_players
 (
 	id SERIAL,
 	uniform_number integer,
-	club_member_id integer,
+	player_id integer,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+        FOREIGN KEY(player_id) REFERENCES players(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE club_coaches 
 (
 	id SERIAL,
-	club_member_id integer,
+	coach_id integer,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+        FOREIGN KEY(coach_id) REFERENCES coaches(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE club_managers 
 (
 	id SERIAL,
-	club_member_id integer,
+	manager_id integer,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+        FOREIGN KEY(manager_id) REFERENCES managers(id),
 	PRIMARY KEY (id)
 );
+
 --so add club will auto pop you in this table then you can add other club members into this
 CREATE TABLE club_administrators 
 (
@@ -639,13 +640,14 @@ CREATE TABLE team_members
         FOREIGN KEY(team_id) REFERENCES teams(id),
 	primary key(id)
 );
+
 --this will show when a player was added to a team....should we delete or list as not-active????
 CREATE TABLE team_players 
 (
 	id SERIAL,
-	team_member_id integer not null,
+	club_player_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
+        FOREIGN KEY(club_player_id) REFERENCES club_players(id),
 	PRIMARY KEY (id)
 );
 
@@ -653,18 +655,18 @@ CREATE TABLE team_players
 CREATE TABLE team_coaches 
 (
 	id SERIAL,
-	team_member_id integer not null,
+	club_coach_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
+        FOREIGN KEY(club_coach_id) REFERENCES club_coaches(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE team_managers 
 (
 	id SERIAL,
-	team_member_id integer not null,
+	club_manager_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(team_member_id) REFERENCES team_members(id),
+        FOREIGN KEY(club_manager_id) REFERENCES club_managers(id),
 	PRIMARY KEY (id)
 );
 
