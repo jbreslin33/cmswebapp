@@ -88,16 +88,9 @@ class InsertLoginScreen extends Screen
         show()
         {
 		super.show();
-/*
+                
 		if (this.getLoginLink())
-		{
-                	this.getLoginLink().style.display = "block";
-                	this.getLoginLink().style.visibility = "visible";
-		}
-		*/
-                if (this.getLoginLink())
                 {
-			console.log('call hide');
                         this.getLoginLink().style.display = "none";
                 }
         }
@@ -108,31 +101,7 @@ class InsertLoginScreen extends Screen
 
                 if (this.getLoginLink())
                 {
-			console.log('call hide');
                         this.getLoginLink().style.display = "none";
                 }
         }
-/*
-        show()
-        {
-                if (this.getHtml())
-                {
-                        this.getHtml().style.display = "block";
-                        this.getHtml().style.visibility = "visible";
-                }
-                if (this.getSpinner())
-                {
-                        this.getSpinner().style.visibility = "hidden";
-                }
-        }
-
-        hide()
-        {
-                if (this.getHtml())
-                {
-                        this.getHtml().style.display = "none";
-                }
-        }
-*/
-
 }

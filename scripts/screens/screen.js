@@ -136,7 +136,6 @@ class Screen
 	{
 		if (this.mMessageElement)
 		{
-			console.log('setMessage: ' + message);
                 	this.mMessageElement.innerHTML = message;
 			this.mMessageElement.style.color = color;
 
@@ -172,7 +171,6 @@ class Screen
        
 	update(timestamp)
 	{
-		//console.log('update:' + timestamp);
 		if (this.mStateMachine)
 		{
 			this.mStateMachine.update();
@@ -205,7 +203,6 @@ class Screen
 
         showSpinner()
         {
-		//console.log('showSpinner');
 		if (this.getHtml())
 		{
                 	this.getHtml().style.visibility = "hidden";
@@ -254,7 +251,6 @@ class Screen
                         this.mCode = dataArray[0];
                         if (this.mCode == -100)
                         {
-				console.log('this.mCode is:' + this.mCode);
 				this.mApplication.setJWT(dataArray[1]); //set jwt
                                 
                                 //JSON
@@ -308,10 +304,8 @@ class Screen
 
 		if (this.mJson.persons)
 		{
-			console.log('AAAAAAAAA');
 			if (this.mJson.clubs)
 			{
-				console.log('BBBBBBBBBB');
                 		//load up persons option
                 		var select = document.getElementById("person_select_id");
 				select.length = 0;
@@ -326,7 +320,6 @@ class Screen
 			}
 			else
 			{
-				console.log('CCCCCCCCCC');
                    		//load up persons for delete option
                                 var select = document.getElementById("delete_person_screen_select_id");
                                 select.length = 0;
@@ -361,7 +354,6 @@ class Screen
                 {
                         if (this.mJson.persons)
                         {
-				console.log('found persons in this json');
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                         }
                 }
