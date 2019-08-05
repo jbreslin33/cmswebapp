@@ -519,14 +519,15 @@ create TABLE forgot_passwords
 --Luke Breslin, Celta Vigo
 --actually this is officially that you are part of a club this way if the master account leaves you could also still stay, as the master email propels this to an insert
 --so if we delete club then it takes with it all club_members???
+
+--new idea than above, club members are associated with an email/club via clubs_emails table.... thus if you share an email you share a club
+--this will allow persons less power related to club membership and relate it directly to email where it belongs instead of iterating through each time email joins a club to associate all persons with said club, now instead a person will automagically be a member of club but NOT a team member, team_player etc...that is for the club to decide. Its as if anyone with an email can join a club but it is up to the club to place them in a role such as teamplayer, teamcoach etc., team parent maybe.... 
 CREATE TABLE club_members 
 (
 	id SERIAL,
-	club_id integer,
-	person_id integer,
+	club_email_id integer,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(person_id) REFERENCES persons(id), 
-        FOREIGN KEY(club_id) REFERENCES clubs(id), 
+        FOREIGN KEY(club_email_id) REFERENCES clubs_emails(id), 
 	PRIMARY KEY (id)
 );
 
@@ -636,13 +637,14 @@ create table invite_club_members_club_administrators
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 
+--new idea than above...club_members_id need be changed to person_id, person is linked back to club and email
 CREATE TABLE team_members 
 (
 	id serial,
 	team_id integer,
-	club_members_id integer,
+	person_id integer, 
 	created_at timestamp not null default now(),
-        FOREIGN KEY(club_members_id) REFERENCES club_members(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
         FOREIGN KEY(team_id) REFERENCES teams(id),
 	primary key(id)
 );
@@ -1005,7 +1007,9 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
+		--select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
+		
+		select clubs.id, clubs.name from clubs join clubs_emails on clubs_emails.club_id=clubs.id where clubs_emails.email_id = $1
         ) t;
 
 	IF raw_json is NULL THEN
@@ -1032,10 +1036,13 @@ SELECT json_agg(t) INTO raw_json
 		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, teams.name as team_name 
 		from practices
 		join teams on teams.id=practices.team_id
+
 		join team_members on team_members.team_id=teams.id
-		join club_members on club_members.id=team_members.club_members_id
-		join persons on persons.id=club_members.person_id
-		join pitches on pitches.club_id=club_members.club_id
+
+		--join club_members on club_members.id=team_members.club_members_id
+
+		join persons on persons.id=team_members.person_id
+		join pitches on pitches.club_id=teams.club_id
 		join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day' order by practices.event_date, practices.arrival_time 
         
 	) t;
@@ -1064,10 +1071,13 @@ SELECT json_agg(t) INTO raw_json
 		select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name, games.opponent
 	       	from games
 		join teams on teams.id=games.team_id
+		
 		join team_members on team_members.team_id=teams.id
-		join club_members on club_members.id=team_members.club_members_id
-		join persons on persons.id=club_members.person_id
-		join pitches on pitches.club_id=club_members.club_id
+
+		--join team_members on team_members.team_id=teams.id
+		--join club_members on club_members.id=team_members.club_members_id
+		join persons on persons.id=team_members.person_id
+		join pitches on pitches.club_id=teams.club_id
 		join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day' order by games.event_date, games.arrival_time 
         ) t;
 
