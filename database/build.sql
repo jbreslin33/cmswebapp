@@ -554,14 +554,18 @@ CREATE TABLE managers
 	PRIMARY KEY (id)
 );
 
-
+--club_members: 
+--club_id
+--email_id
 CREATE TABLE club_players 
 (
 	id SERIAL,
 	uniform_number integer,
 	player_id integer,
+	club_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
 	PRIMARY KEY (id)
 );
 
@@ -569,8 +573,10 @@ CREATE TABLE club_coaches
 (
 	id SERIAL,
 	coach_id integer,
+	club_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(coach_id) REFERENCES coaches(id),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
 	PRIMARY KEY (id)
 );
 
@@ -578,8 +584,10 @@ CREATE TABLE club_managers
 (
 	id SERIAL,
 	manager_id integer,
+	club_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(manager_id) REFERENCES managers(id),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
 	PRIMARY KEY (id)
 );
 
@@ -630,7 +638,7 @@ create table invite_club_members_club_administrators
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 
 --new idea than above...club_members_id need be changed to person_id, person is linked back to club and email
-CREATE TABLE team_members 
+CREATE TABLE team_persons 
 (
 	id serial,
 	team_id integer,
@@ -642,30 +650,36 @@ CREATE TABLE team_members
 );
 
 --this will show when a player was added to a team....should we delete or list as not-active????
-CREATE TABLE team_players 
+CREATE TABLE team_club_players 
 (
 	id SERIAL,
+	team_id integer not null,
 	club_player_id integer not null,
 	created_at timestamp not null default now(),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
         FOREIGN KEY(club_player_id) REFERENCES club_players(id),
 	PRIMARY KEY (id)
 );
 
 
-CREATE TABLE team_coaches 
+CREATE TABLE team_club_coaches 
 (
 	id SERIAL,
+	team_id integer not null,
 	club_coach_id integer not null,
 	created_at timestamp not null default now(),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
         FOREIGN KEY(club_coach_id) REFERENCES club_coaches(id),
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE team_managers 
+CREATE TABLE team_club_managers 
 (
 	id SERIAL,
+	team_id integer not null,
 	club_manager_id integer not null,
 	created_at timestamp not null default now(),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
         FOREIGN KEY(club_manager_id) REFERENCES club_managers(id),
 	PRIMARY KEY (id)
 );
@@ -674,12 +688,12 @@ CREATE TABLE sessions_players_availability
 (
         id SERIAL,
         session_id integer NOT NULL,
-       	team_player_id integer NOT NULL,
+       	team_club_player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
+	FOREIGN KEY (team_club_player_id) REFERENCES team_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
         PRIMARY KEY (id)
 );
@@ -688,11 +702,11 @@ CREATE TABLE sessions_players_attendance
 (
         id SERIAL,
         session_id integer NOT NULL,
-       	team_player_id integer NOT NULL,
+       	team_club_player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (team_player_id) REFERENCES team_players(id),
+	FOREIGN KEY (team_club_player_id) REFERENCES team_club_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
         PRIMARY KEY (id)
 );
@@ -1028,15 +1042,16 @@ SELECT json_agg(t) INTO raw_json
         (
 		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, teams.name as team_name 
 		from practices
+
 		join teams on teams.id=practices.team_id
-
-		join team_members on team_members.team_id=teams.id
-
-		--join club_members on club_members.id=team_members.club_members_id
-
-		join persons on persons.id=team_members.person_id
 		join pitches on pitches.club_id=teams.club_id
-		join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day' order by practices.event_date, practices.arrival_time 
+		join team_club_players on team_club_players.team_id=teams.id
+		join club_players on club_players.id=team_club_players.club_player_id
+		join players on players.id=club_players.player_id
+		join persons on persons.id=players.person_id
+		join emails_persons on emails_persons.person_id=persons.id 
+		
+		where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day' order by practices.event_date, practices.arrival_time 
         
 	) t;
 
@@ -1063,15 +1078,16 @@ SELECT json_agg(t) INTO raw_json
         (
 		select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name, games.opponent
 	       	from games
-		join teams on teams.id=games.team_id
 		
-		join team_members on team_members.team_id=teams.id
-
-		--join team_members on team_members.team_id=teams.id
-		--join club_members on club_members.id=team_members.club_members_id
-		join persons on persons.id=team_members.person_id
+		join teams on teams.id=games.team_id
 		join pitches on pitches.club_id=teams.club_id
-		join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day' order by games.event_date, games.arrival_time 
+		join team_club_players on team_club_players.team_id=teams.id
+		join club_players on club_players.id=team_club_players.club_player_id
+		join players on players.id=club_players.player_id
+		join persons on persons.id=players.person_id
+		join emails_persons on emails_persons.person_id=persons.id 
+		
+		where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day' order by games.event_date, games.arrival_time 
         ) t;
 
         IF raw_json is NULL THEN
@@ -1399,8 +1415,7 @@ DECLARE
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
 	insert into club_members (club_id, email_id) values (x,email_id) returning id into returning_club_member_id;
-
-        --insert into club_administrators (club_member_id) values (returning_club_member_id);
+        insert into club_administrators (club_member_id) values (returning_club_member_id);
 END;
 $$;
 
@@ -1623,21 +1638,8 @@ CREATE OR REPLACE PROCEDURE p_insert_team(int,int,int,int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-rec RECORD;
-returning_team_member_id team_members.id%TYPE;
 BEGIN
        	insert into teams (club_id,name) values ($2,$5) returning id into x;
-
-        FOR rec IN
-                select club_members.id from club_members join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id join clubs on clubs.id=club_members.club_id where emails_persons.email_id = $1
-        LOOP
-                IF rec.id = $4 THEN
-                        insert into team_members (team_id, club_members_id) values (x, rec.id) returning id into returning_team_member_id;
-                ELSE
-                        insert into team_members (team_id, club_members_id) values (x, rec.id);
-                END IF;
-        END LOOP;
-        insert into team_managers (team_member_id) values (returning_team_member_id);
 END;
 $$;
 
