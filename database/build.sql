@@ -638,16 +638,6 @@ create table invite_club_members_club_administrators
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 
 --new idea than above...club_members_id need be changed to person_id, person is linked back to club and email
-CREATE TABLE team_persons 
-(
-	id serial,
-	team_id integer,
-	person_id integer, 
-	created_at timestamp not null default now(),
-        FOREIGN KEY(person_id) REFERENCES persons(id),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
-	primary key(id)
-);
 
 --this will show when a player was added to a team....should we delete or list as not-active????
 CREATE TABLE team_club_players 
