@@ -1045,13 +1045,51 @@ SELECT json_agg(t) INTO raw_json
 
 		join teams on teams.id=practices.team_id
 		join pitches on pitches.club_id=teams.club_id
+
 		join team_club_players on team_club_players.team_id=teams.id
 		join club_players on club_players.id=team_club_players.club_player_id
 		join players on players.id=club_players.player_id
 		join persons on persons.id=players.person_id
+
 		join emails_persons on emails_persons.person_id=persons.id 
 		
-		where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day' order by practices.event_date, practices.arrival_time 
+		where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day' 
+
+		union
+
+                select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, teams.name as team_name
+                from practices
+
+                join teams on teams.id=practices.team_id
+                join pitches on pitches.club_id=teams.club_id
+
+                join team_club_coaches on team_club_coaches.team_id=teams.id
+                join club_coaches on club_coaches.id=team_club_coaches.club_coach_id
+                join coaches on coaches.id=club_coaches.coach_id
+                join persons on persons.id=coaches.person_id
+
+                join emails_persons on emails_persons.person_id=persons.id
+
+                where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
+
+		union
+
+                select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, teams.name as team_name
+                from practices
+
+                join teams on teams.id=practices.team_id
+                join pitches on pitches.club_id=teams.club_id
+
+                join team_club_managers on team_club_managers.team_id=teams.id
+                join club_managers on club_managers.id=team_club_managers.club_manager_id
+                join managers on managers.id=club_managers.manager_id
+                join persons on managers.id=managers.person_id
+
+                join emails_persons on emails_persons.person_id=persons.id
+
+                where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
+
+
         
 	) t;
 
@@ -1076,19 +1114,57 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name, games.opponent
-	       	from games
-		
-		join teams on teams.id=games.team_id
-		join pitches on pitches.club_id=teams.club_id
-		join team_club_players on team_club_players.team_id=teams.id
-		join club_players on club_players.id=team_club_players.club_player_id
-		join players on players.id=club_players.player_id
-		join persons on persons.id=players.person_id
-		join emails_persons on emails_persons.person_id=persons.id 
-		
-		where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day' order by games.event_date, games.arrival_time 
-        ) t;
+                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name
+                from games
+
+                join teams on teams.id=games.team_id
+                join pitches on pitches.club_id=teams.club_id
+
+                join team_club_players on team_club_players.team_id=teams.id
+                join club_players on club_players.id=team_club_players.club_player_id
+                join players on players.id=club_players.player_id
+                join persons on persons.id=players.person_id
+
+                join emails_persons on emails_persons.person_id=persons.id
+
+                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
+
+                union
+
+                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name
+                from games
+
+                join teams on teams.id=games.team_id
+                join pitches on pitches.club_id=teams.club_id
+
+                join team_club_coaches on team_club_coaches.team_id=teams.id
+                join club_coaches on club_coaches.id=team_club_coaches.club_coach_id
+                join coaches on coaches.id=club_coaches.coach_id
+                join persons on persons.id=coaches.person_id
+
+                join emails_persons on emails_persons.person_id=persons.id
+
+                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
+
+                union
+
+                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name
+                from games
+
+                join teams on teams.id=games.team_id
+                join pitches on pitches.club_id=teams.club_id
+
+                join team_club_managers on team_club_managers.team_id=teams.id
+                join club_managers on club_managers.id=team_club_managers.club_manager_id
+                join managers on managers.id=club_managers.manager_id
+                join persons on managers.id=managers.person_id
+
+                join emails_persons on emails_persons.person_id=persons.id
+
+                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
+        
+	
+	) t;
 
         IF raw_json is NULL THEN
                 result_set = CONCAT('"games": []', raw_json);
