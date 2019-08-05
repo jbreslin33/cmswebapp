@@ -1401,9 +1401,14 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_club_member_id integer;
+        returning_club_email_id integer;
 	rec RECORD;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
+	insert into clubs_emails (club_id, email_id) values (x,email_id) returning id into returning_club_email_id;
+--	insert into club_members
+
+	--this will be much simpler
   	FOR rec IN 
 		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $3
 	LOOP
