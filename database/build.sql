@@ -325,18 +325,6 @@ create table emails
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE clubs_emails
-(
-        id SERIAL,
-	club_id integer not null,
-	email_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
-        FOREIGN KEY(email_id) REFERENCES emails(id),
-	unique (email_id, club_id),
-        PRIMARY KEY (id)
-);
-
 CREATE TABLE emails_persons
 (
         id SERIAL,
@@ -525,10 +513,13 @@ create TABLE forgot_passwords
 CREATE TABLE club_members 
 (
 	id SERIAL,
-	club_email_id integer,
+	club_id integer not null,
+	email_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(club_email_id) REFERENCES clubs_emails(id), 
-	PRIMARY KEY (id)
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(email_id) REFERENCES emails(id),
+	unique (email_id, club_id),
+        PRIMARY KEY (id)
 );
 
 --this only gets deleted when player leaves club if you want to
@@ -1009,7 +1000,7 @@ SELECT json_agg(t) INTO raw_json
         (
 		--select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
 		
-		select clubs.id, clubs.name from clubs join clubs_emails on clubs_emails.club_id=clubs.id where clubs_emails.email_id = $1
+		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id where club_members.email_id = $1
         ) t;
 
 	IF raw_json is NULL THEN
@@ -1405,20 +1396,9 @@ DECLARE
 	rec RECORD;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
-	insert into clubs_emails (club_id, email_id) values (x,email_id) returning id into returning_club_email_id;
---	insert into club_members
+	insert into club_members (club_id, email_id) values (x,email_id) returning id into returning_club_member_id;
 
-	--this will be much simpler
-  	FOR rec IN 
-		select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $3
-	LOOP
-		IF rec.id = person_id THEN
-			insert into club_members (club_id, person_id) values (x, rec.id) returning id into returning_club_member_id;
-		ELSE
-			insert into club_members (club_id, person_id) values (x, rec.id);
-		END IF;
-	END LOOP;
-        insert into club_administrators (club_member_id) values (returning_club_member_id);
+        --insert into club_administrators (club_member_id) values (returning_club_member_id);
 END;
 $$;
 
