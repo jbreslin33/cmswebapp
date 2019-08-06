@@ -1506,7 +1506,7 @@ BEGIN
 
 	select club_persons.id into found_club_person_id from club_persons where club_persons.club_id = x AND club_persons.person_id = $4; 
 	IF found_club_person_id > 0 THEN 
-        	insert into club_administrators (club_person_id) values (returning_club_person_id);
+        	insert into club_administrators (club_person_id) values (found_club_person_id);
 	ELSE
 			
 	END IF;
