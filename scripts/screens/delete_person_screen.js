@@ -15,6 +15,7 @@ class DeletePersonScreen extends Screen
                 this.setMessageElement(document.getElementById("delete_person_screen_message_id"));
                 this.setForm(document.getElementById("delete_person_screen_form_id"));
                 this.setSpinner(document.getElementById("delete_person_screen_spinner_id"));
+		console.log('const');
 	}
 
 	get()
@@ -22,7 +23,6 @@ class DeletePersonScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_persons.php?jwt=" + APPLICATION.getJWT()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
-
 
 	hit()
 	{

@@ -203,10 +203,12 @@ class Screen
 
         showSpinner()
         {
+		/*
 		if (this.getHtml())
 		{
                 	this.getHtml().style.visibility = "hidden";
 		}
+		*/
 
 		if (this.getSpinner())
 		{
@@ -228,6 +230,7 @@ class Screen
 		{
                 	this.getHtml().style.display = "block";
                 	this.getHtml().style.visibility = "visible";
+			console.log('showing hopefull');
 		}
 		if (this.getSpinner())
 		{
@@ -237,6 +240,7 @@ class Screen
 
         hide()
         {
+			console.log('hidshowing hopefull');
 		if (this.getHtml())
 		{
                 	this.getHtml().style.display = "none";
@@ -306,6 +310,7 @@ class Screen
 		{
 			if (this.mJson.clubs)
 			{
+				console.log('got clubs');
                 		//load up persons option
                 		var select = document.getElementById("person_select_id");
 				select.length = 0;
@@ -321,6 +326,7 @@ class Screen
 			else
 			{
                    		//load up persons for delete option
+				console.log('got persons');
                                 var select = document.getElementById("delete_person_screen_select_id");
                                 select.length = 0;
                                 for (var i = 0; i < this.mJson.persons.length; i++)
