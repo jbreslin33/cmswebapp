@@ -1472,7 +1472,7 @@ $$ LANGUAGE plpgsql;
 
 
 --INSERT CLUB MEMBERS
-CREATE OR REPLACE PROCEDURE p_insert_club_persons(club_id int,email_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_persons(club_id int,email_id int, INOUT y int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1481,7 +1481,7 @@ BEGIN
         FOR rec IN
                 select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $2
         LOOP
-                insert into club_persons (club_id, person_id) values (club_id, rec.id) returning id into x;
+                insert into club_persons (club_id, person_id) values (club_id, rec.id) returning id into y;
         END LOOP;
 END;
 $$;
@@ -1494,11 +1494,23 @@ AS $$
 DECLARE
         returning_club_person_id integer;
         returning_club_email_id integer;
-	rec RECORD;
+        found_club_person_id integer;
+	DECLARE y int := -1;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
-	insert into club_persons (club_id, email_id) values (x,email_id) returning id into returning_club_person_id;
-        insert into club_administrators (club_person_id) values (returning_club_person_id);
+	insert into club_emails (club_id, email_id) values (x,$3);
+
+	--loop for other persons....
+	CALL p_insert_club_persons(x,$3,y);
+	--insert into club_persons (club_id, person_id) values (x,person_id) returning id into returning_club_person_id;
+
+	select club_persons.id into found_club_person_id from club_persons where club_persons.club_id = x AND club_persons.person_id = $4; 
+	IF found_club_person_id > 0 THEN 
+        	insert into club_administrators (club_person_id) values (returning_club_person_id);
+	ELSE
+			
+	END IF;
+
 END;
 $$;
 
