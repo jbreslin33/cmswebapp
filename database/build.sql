@@ -1729,12 +1729,12 @@ $$;
 --END INSERT PERSON
 
 --email_id,club_id,person_id,club_persons_id,name
-CREATE OR REPLACE PROCEDURE p_insert_team(int,int,int,int,text,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_team(int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
 BEGIN
-       	insert into teams (club_id,name) values ($2,$5) returning id into x;
+       	insert into teams (club_id,name) values ($1,$2) returning id into x;
 END;
 $$;
 
@@ -1756,13 +1756,11 @@ BEGIN
                 result_set = '-101, Team name already taken.';
 	ELSE
 		--are you a club admin of club $2????
-		select club_administrators.id into found_club_administrator_id from club_administrators where club_persons.email_id = $3 AND club_persons.club_id = $2; 
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
 
 		IF found_club_administrator_id > 0 THEN
-			--lets get your club_persons.id so we can make pass in to p function and make you a team_manager
-			select club_persons.id into found_club_persons_id from club_persons where club_persons.club_id = $2 AND club_persons.person_id = $3;
 
-			CALL p_insert_team($1,$2,$3,found_club_persons_id,$4,x);
+			CALL p_insert_team($2,$4,x);
 
 			IF x > 0 THEN
                      		result_set = f_format_result_set($1);
