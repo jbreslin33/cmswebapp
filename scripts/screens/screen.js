@@ -308,37 +308,18 @@ class Screen
 
 		if (this.mJson.persons)
 		{
-			if (this.mJson.clubs)
-			{
-				console.log('got clubs');
-                		//load up persons option
-                		var select = document.getElementById("person_select_id");
-				select.length = 0;
-                		for (var i = 0; i < this.mJson.persons.length; i++)
-                		{
-                			var opt = document.createElement('option');
-                       			opt.value = this.mJson.persons[i].id;
-                        		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                        		opt.innerHTML = full_name;
-                        		select.appendChild(opt);
-                		}
-			}
-			else
-			{
-                   		//load up persons for delete option
-				console.log('got persons');
-                                var select = document.getElementById("delete_person_screen_select_id");
-                                select.length = 0;
-                                for (var i = 0; i < this.mJson.persons.length; i++)
-                                {
-                                        var opt = document.createElement('option');
-                                        opt.value = this.mJson.persons[i].id;
-                                        var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                                        opt.innerHTML = full_name;
-                                        select.appendChild(opt);
-                                }
-
-			}
+			console.log('got persons in screen');
+               		//load up persons option
+               		var select = document.getElementById("person_select_id");
+			select.length = 0;
+               		for (var i = 0; i < this.mJson.persons.length; i++)
+               		{
+               			var opt = document.createElement('option');
+               			opt.value = this.mJson.persons[i].id;
+                       		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                       		opt.innerHTML = full_name;
+                       		select.appendChild(opt);
+               		}
 		}
 	}
 	
