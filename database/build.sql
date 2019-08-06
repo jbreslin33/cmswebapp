@@ -625,7 +625,7 @@ CREATE TABLE club_administrators
 --actually this is only for 
 --you have been invited to join celta click here to accept...then it takes you to either a your in or join page depending on if email exists
 --whoever you invite will have an email_id because we will create it on the fly???
-create table invite_club_persons 
+create table invite_club_emails 
 (
 	id serial,
         email_id integer,
@@ -638,13 +638,13 @@ create table invite_club_persons
 	primary key(id)
 );
 
-create table invite_club_persons_club_administrators
+create table invite_club_emails_club_administrators
 (
 	id serial,
         invite_club_person_id integer,
 	club_administrator_id integer,
 	created_at timestamp not null default now(),
- 	FOREIGN KEY(invite_club_person_id) REFERENCES invite_club_persons(id),
+ 	FOREIGN KEY(invite_club_person_id) REFERENCES invite_club_emails(id),
  	FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
 	primary key(id)
 );
@@ -898,14 +898,14 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_persons(int,TEXT)
+CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_emails(int,TEXT)
 RETURNS text AS $$
 DECLARE
-        json_result_invite_club_persons text;
+        json_result_invite_club_emails text;
         result_set text;
 BEGIN
-        select into json_result_invite_club_persons j_select_invite_club_persons($2);
-        result_set = CONCAT($1,',','{',json_result_invite_club_persons,'}');
+        select into json_result_invite_club_emails j_select_invite_club_emails($2);
+        result_set = CONCAT($1,',','{',json_result_invite_club_emails,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1169,11 +1169,7 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
---select * from invite_club_persons;
--- id | email_id | club_id |                        club_invite_token                         |          expires           |         created_at 
---BEGIN J_SELECT INVITE CLUB MEMBERS
---params:club_id
-CREATE OR REPLACE FUNCTION j_select_invite_club_persons(text)
+CREATE OR REPLACE FUNCTION j_select_invite_club_emails(text)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1183,13 +1179,13 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select invite_club_persons.id, invite_club_persons.email_id, invite_club_persons.club_id, invite_club_persons.club_invite_token from invite_club_persons where club_invite_token = $1
+                select invite_club_emails.id, invite_club_emails.email_id, invite_club_emails.club_id, invite_club_emails.club_invite_token from invite_club_emails where club_invite_token = $1
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"invite_club_persons": []', raw_json);
+                result_set = CONCAT('"invite_club_emails": []', raw_json);
         ELSE
-                result_set = CONCAT('"invite_club_persons": ', raw_json);
+                result_set = CONCAT('"invite_club_emails": ', raw_json);
         END IF;
 RETURN result_set;
 END;
@@ -1219,7 +1215,7 @@ DECLARE
         result_set text;
         DECLARE x int := -1;
 BEGIN
-    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_persons WHERE club_invite_token = $7;
+    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_emails WHERE club_invite_token = $7;
 	IF found_club_id > 0 THEN
 		CALL p_insert_native_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
                 result_set = f_format_result_set(found_email_id);
@@ -1361,7 +1357,7 @@ DECLARE
         found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
         
-	found_club_invite_token invite_club_persons.club_invite_token%TYPE;
+	found_club_invite_token invite_club_emails.club_invite_token%TYPE;
         
 	returning_person_id integer;
 
@@ -1411,7 +1407,7 @@ BEGIN
 		--do nothing
 	ELSE
 		--insert into emails (email) values ($6);
-		SELECT club_id into found_club_id from invite_club_persons where club_invite_token = $6;
+		SELECT club_id into found_club_id from invite_club_emails where club_invite_token = $6;
 		insert into club_persons (club_id, person_id) values (found_club_id, found_person_id);
 	END IF;	
 
@@ -1433,18 +1429,18 @@ DECLARE
 	result_set text;
 	DECLARE x int := -1;
 BEGIN
-	select email_id into found_email_id from invite_club_persons where club_invite_token = $1; 
+	select email_id into found_email_id from invite_club_emails where club_invite_token = $1; 
 	--RAISE INFO 'found_email_id: %', found_email_id;
   	RAISE LOG 'found_email_id: %', found_email_id;
 
 	IF found_email_id > 0 THEN
 		--lets grab the club_id then add all persons to club from email_id
-		SELECT club_id INTO found_club_id FROM invite_club_persons WHERE club_invite_token = $1;
+		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
 		CALL p_insert_club_persons(found_club_id,found_email_id,x);
 		IF x > 0 THEN --we are already a member so give normal result set to send to main
                 	result_set = f_format_result_set(found_email_id);
 		ELSE -- we were not already a member so a join club needs to be done.
-                	result_set = f_format_result_set_invite_club_persons(found_email_id,$1);
+                	result_set = f_format_result_set_invite_club_emails(found_email_id,$1);
                 	--result_set = '-101, Something went wrong adding your persons to club.';
 		END IF;
 	ELSE
@@ -1791,34 +1787,34 @@ DECLARE
         found_email_id emails.id%TYPE;
         found_administrator_email_id emails.id%TYPE;
         returning_email_id emails.id%TYPE;
-        returning_invite_club_person_id invite_club_persons.id%TYPE;
-        found_invite_club_person_id invite_club_persons.id%TYPE;
+        returning_invite_club_person_id invite_club_emails.id%TYPE;
+        found_invite_club_person_id invite_club_emails.id%TYPE;
         found_club_administrator_id club_administrators.id%TYPE;
         result_set text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 
-		select invite_club_persons.id into found_invite_club_person_id from invite_club_persons where email_id = found_email_id and club_id = $2;
+		select invite_club_emails.id into found_invite_club_person_id from invite_club_emails where email_id = found_email_id and club_id = $2;
 
-		delete from invite_club_persons_club_administrators where invite_club_person_id = found_invite_club_person_id;
+		delete from invite_club_emails_club_administrators where invite_club_person_id = found_invite_club_person_id;
 
-		delete from invite_club_persons where email_id = found_email_id and club_id = $2;
-		insert into invite_club_persons (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
+		delete from invite_club_emails where email_id = found_email_id and club_id = $2;
+		insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
-		insert into invite_club_persons_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
+		insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
 
 	ELSE --actually just do insert of email then invite...
 		insert into emails (email) values ($1) returning id into returning_email_id; 
 
-		select invite_club_persons.id into found_invite_club_person_id from invite_club_persons where email_id = returning_email_id and club_id = $2;
+		select invite_club_emails.id into found_invite_club_person_id from invite_club_emails where email_id = returning_email_id and club_id = $2;
 
-		delete from invite_club_persons_club_administrators where invite_club_person_id = found_invite_club_person_id;
+		delete from invite_club_emails_club_administrators where invite_club_person_id = found_invite_club_person_id;
 
-		delete from invite_club_persons where email_id = returning_email_id and club_id = $2;
-		insert into invite_club_persons (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
+		delete from invite_club_emails where email_id = returning_email_id and club_id = $2;
+		insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
-		insert into invite_club_persons_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
+		insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
 
 	END IF;
 	select email_id into found_administrator_email_id from emails_persons where person_id = $4;
