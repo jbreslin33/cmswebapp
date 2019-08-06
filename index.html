@@ -75,7 +75,7 @@
                         			<a id="insert_game_nav_id" class="dropdown-item" href="#insert_game_screen">TEAM MANAGER: Insert Game</a>
                         			<a id="insert_team_nav_id" class="dropdown-item" href="#insert_team_screen">TEAM MANAGER: Insert Team</a>
                         			<a id="insert_club_nav_id" class="dropdown-item" href="#insert_club_screen">CLUB ADMIN: Insert Club</a>
-                        			<a id="insert_invite_club_member_nav_id" class="dropdown-item" href="#insert_invite_club_member_screen">CLUB ADMIN: Insert Invite Club Member</a>
+                        			<a id="insert_invite_club_email_nav_id" class="dropdown-item" href="#insert_invite_club_email_screen">CLUB ADMIN: Insert Invite Club Email</a>
                         			<a id="insert_native_login_club_screen_nav_id" class="dropdown-item" href="#insert_native_login_club_screen">INVISIBLE: Join Club</a>
                 			</div>
         			</div>
@@ -481,21 +481,21 @@
         <!-- END INSERT FORGOT PASSWORD HTML  -->
 
         <!-- INSERT INVITE CLUB MEMBER HTML  -->
-        <div id="insert_invite_club_member_screen_html_id">
+        <div id="insert_invite_club_email_screen_html_id">
 	
-        	<form id="insert_invite_club_member_screen_form_id" onsubmit="return false;" class="needs-validation">
+        	<form id="insert_invite_club_email_screen_form_id" onsubmit="return false;" class="needs-validation">
                 	<div class="form-row">
 
                        	 	<div class="col-md-4 mb-3">
-                                	<label id="insert_invite_club_member_screen_label_id" for="insert_invite_club_member_screen_email_id">Email</label>
-                                	<input type="text" class="form-control" id="insert_invite_club_member_screen_email_id" placeholder="Email" value="Email" required>
-                                	<span id='insert_invite_club_member_screen_email_message_id'></span>
+                                	<label id="insert_invite_club_email_screen_label_id" for="insert_invite_club_email_screen_email_id">Email</label>
+                                	<input type="text" class="form-control" id="insert_invite_club_email_screen_email_id" placeholder="Email" value="Email" required>
+                                	<span id='insert_invite_club_email_screen_email_message_id'></span>
                         	</div>
                 	</div>
 
-                	<button id="insertinviteclubmemberscreenbuttonid" class="btn btn-primary">Submit</button>
+                	<button id="insertinviteclubemailscreenbuttonid" class="btn btn-primary">Submit</button>
         	</form>
-        	<div id="insert_invite_club_member_screen_spinner_id" class="spinner-border" role="status">
+        	<div id="insert_invite_club_email_screen_spinner_id" class="spinner-border" role="status">
           		<span class="sr-only">Loading...</span>
         	</div>
 	</div>
@@ -623,7 +623,7 @@
 	<script src="scripts/screens/insert_forgot_password_screen.js"></script>
 	
 	<!-- insert invite club member  -->
-	<script src="scripts/screens/insert_invite_club_member_screen.js"></script>
+	<script src="scripts/screens/insert_invite_club_email_screen.js"></script>
 	
 	<!-- insert accept club invite   -->
 	<script src="scripts/screens/insert_accept_club_invite_screen.js"></script>

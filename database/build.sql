@@ -1785,7 +1785,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_invite_club_person(TEXT, int, TEXT, int) --email,club_id,token,person_id associated with club_admin
+CREATE OR REPLACE FUNCTION f_insert_invite_club_email(TEXT, int, TEXT, int) --email,club_id,token,person_id associated with club_admin
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;

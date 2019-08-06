@@ -29,20 +29,18 @@ class InsertAcceptClubInviteScreen extends Screen
 	
 	execute()
         {
-		//lets do a quick check to see if we have invite_club_members
+		//lets do a quick check to see if we have invite_club_emails
 
                 this.processData();
                 
 		if (this.mJson)
                 {
-                        if (this.mJson.invite_club_members)
+                        if (this.mJson.invite_club_emails)
                         {
-				console.log('invite_club_members make me go to main');
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
                         }
 			else if (this.mJson.persons)
                         {
-				console.log('persons make me go to main');
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
                         }
                 }
