@@ -506,11 +506,12 @@ create TABLE forgot_passwords
 --familys are linked by people not logins
 --Luke Breslin, Celta Vigo
 --actually this is officially that you are part of a club this way if the master account leaves you could also still stay, as the master email propels this to an insert
---so if we delete club then it takes with it all club_members???
+--so if we delete club then it takes with it all club_persons???
 
 --new idea than above, club members are associated with an email/club via clubs_emails table.... thus if you share an email you share a club
 --this will allow persons less power related to club membership and relate it directly to email where it belongs instead of iterating through each time email joins a club to associate all persons with said club, now instead a person will automagically be a member of club but NOT a team member, team_player etc...that is for the club to decide. Its as if anyone with an email can join a club but it is up to the club to place them in a role such as teamplayer, teamcoach etc., team parent maybe.... 
-CREATE TABLE club_members 
+
+CREATE TABLE club_emails
 (
 	id SERIAL,
 	club_id integer not null,
@@ -522,10 +523,14 @@ CREATE TABLE club_members
         PRIMARY KEY (id)
 );
 
+
 --this only gets deleted when player leaves club if you want to
 --Luke Breslin is a player at Celta Vigo
 --oh crap an email should create a player....
 --so emails_players/....
+
+--PERSONS
+
 CREATE TABLE players 
 (
 	id SERIAL,
@@ -554,9 +559,21 @@ CREATE TABLE managers
 	PRIMARY KEY (id)
 );
 
---club_members: 
---club_id
---email_id
+-- CLUBS
+
+--do we need this table????? should everyone be entered here???? or just the non players,non coaches and nonmanagers
+CREATE TABLE club_persons
+(
+	id SERIAL,
+	club_id integer not null,
+	person_id integer not null,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+	unique (person_id, club_id),
+        PRIMARY KEY (id)
+);
+
 CREATE TABLE club_players 
 (
 	id SERIAL,
@@ -595,9 +612,9 @@ CREATE TABLE club_managers
 CREATE TABLE club_administrators 
 (
 	id SERIAL,
-	club_member_id integer,
+	club_person_id integer,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(club_member_id) REFERENCES club_members(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
@@ -608,7 +625,7 @@ CREATE TABLE club_administrators
 --actually this is only for 
 --you have been invited to join celta click here to accept...then it takes you to either a your in or join page depending on if email exists
 --whoever you invite will have an email_id because we will create it on the fly???
-create table invite_club_members 
+create table invite_club_persons 
 (
 	id serial,
         email_id integer,
@@ -621,13 +638,13 @@ create table invite_club_members
 	primary key(id)
 );
 
-create table invite_club_members_club_administrators
+create table invite_club_persons_club_administrators
 (
 	id serial,
-        invite_club_member_id integer,
+        invite_club_person_id integer,
 	club_administrator_id integer,
 	created_at timestamp not null default now(),
- 	FOREIGN KEY(invite_club_member_id) REFERENCES invite_club_members(id),
+ 	FOREIGN KEY(invite_club_person_id) REFERENCES invite_club_persons(id),
  	FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
 	primary key(id)
 );
@@ -637,7 +654,7 @@ create table invite_club_members_club_administrators
 --this gets deleted if player goes from a team to b team within club
 --Luke Breslin is a player for U15 Boys (which we know is part of Celta Vigo because teams table has fk club_id) 
 
---new idea than above...club_members_id need be changed to person_id, person is linked back to club and email
+--new idea than above...club_persons_id need be changed to person_id, person is linked back to club and email
 
 --this will show when a player was added to a team....should we delete or list as not-active????
 CREATE TABLE team_club_players 
@@ -881,14 +898,14 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_members(int,TEXT)
+CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_persons(int,TEXT)
 RETURNS text AS $$
 DECLARE
-        json_result_invite_club_members text;
+        json_result_invite_club_persons text;
         result_set text;
 BEGIN
-        select into json_result_invite_club_members j_select_invite_club_members($2);
-        result_set = CONCAT($1,',','{',json_result_invite_club_members,'}');
+        select into json_result_invite_club_persons j_select_invite_club_persons($2);
+        result_set = CONCAT($1,',','{',json_result_invite_club_persons,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1004,9 +1021,9 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		--select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
+		--select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join persons on persons.id=club_persons.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
 		
-		select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id where club_members.email_id = $1
+		select clubs.id, clubs.name from clubs join club_emails on club_emails.club_id=clubs.id where club_emails.email_id = $1
         ) t;
 
 	IF raw_json is NULL THEN
@@ -1166,11 +1183,11 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
---select * from invite_club_members;
+--select * from invite_club_persons;
 -- id | email_id | club_id |                        club_invite_token                         |          expires           |         created_at 
 --BEGIN J_SELECT INVITE CLUB MEMBERS
 --params:club_id
-CREATE OR REPLACE FUNCTION j_select_invite_club_members(text)
+CREATE OR REPLACE FUNCTION j_select_invite_club_persons(text)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1180,13 +1197,13 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select invite_club_members.id, invite_club_members.email_id, invite_club_members.club_id, invite_club_members.club_invite_token from invite_club_members where club_invite_token = $1
+                select invite_club_persons.id, invite_club_persons.email_id, invite_club_persons.club_id, invite_club_persons.club_invite_token from invite_club_persons where club_invite_token = $1
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"invite_club_members": []', raw_json);
+                result_set = CONCAT('"invite_club_persons": []', raw_json);
         ELSE
-                result_set = CONCAT('"invite_club_members": ', raw_json);
+                result_set = CONCAT('"invite_club_persons": ', raw_json);
         END IF;
 RETURN result_set;
 END;
@@ -1216,7 +1233,7 @@ DECLARE
         result_set text;
         DECLARE x int := -1;
 BEGIN
-    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_members WHERE club_invite_token = $7;
+    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_persons WHERE club_invite_token = $7;
 	IF found_club_id > 0 THEN
 		CALL p_insert_native_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
                 result_set = f_format_result_set(found_email_id);
@@ -1237,7 +1254,7 @@ BEGIN
 	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
 	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
 	insert into emails_persons (email_id, person_id) values ($1,x);
-	insert into club_members (club_id,person_id) values ($2,x);
+	insert into club_persons (club_id,person_id) values ($2,x);
 END;
 $$;
 
@@ -1263,14 +1280,14 @@ CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(person_id int)
    SELECT json_agg(t)
         from
         (
-                select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join club_administrators on club_administrators.club_member_id=club_members.id join persons on persons.id=club_members.person_id where persons.id = person_id
+                select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join club_administrators on club_administrators.club_person_id=club_persons.id join persons on persons.id=club_persons.person_id where persons.id = person_id
         ) t;
 $$ LANGUAGE sql;
 
 --END SAMPLE JSON
 
 
---select clubs.id, clubs.name from clubs join club_members on club_members.club_id=clubs.id join persons on persons.id=club_members.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1;
+--select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join persons on persons.id=club_persons.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1;
 
 CREATE OR REPLACE FUNCTION f_native_login(TEXT, TEXT)
 RETURNS text AS $$
@@ -1358,7 +1375,7 @@ DECLARE
         found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
         
-	found_club_invite_token invite_club_members.club_invite_token%TYPE;
+	found_club_invite_token invite_club_persons.club_invite_token%TYPE;
         
 	returning_person_id integer;
 
@@ -1408,8 +1425,8 @@ BEGIN
 		--do nothing
 	ELSE
 		--insert into emails (email) values ($6);
-		SELECT club_id into found_club_id from invite_club_members where club_invite_token = $6;
-		insert into club_members (club_id, person_id) values (found_club_id, found_person_id);
+		SELECT club_id into found_club_id from invite_club_persons where club_invite_token = $6;
+		insert into club_persons (club_id, person_id) values (found_club_id, found_person_id);
 	END IF;	
 
 RETURN result_set;
@@ -1430,18 +1447,18 @@ DECLARE
 	result_set text;
 	DECLARE x int := -1;
 BEGIN
-	select email_id into found_email_id from invite_club_members where club_invite_token = $1; 
+	select email_id into found_email_id from invite_club_persons where club_invite_token = $1; 
 	--RAISE INFO 'found_email_id: %', found_email_id;
   	RAISE LOG 'found_email_id: %', found_email_id;
 
 	IF found_email_id > 0 THEN
 		--lets grab the club_id then add all persons to club from email_id
-		SELECT club_id INTO found_club_id FROM invite_club_members WHERE club_invite_token = $1;
-		CALL p_insert_club_members(found_club_id,found_email_id,x);
+		SELECT club_id INTO found_club_id FROM invite_club_persons WHERE club_invite_token = $1;
+		CALL p_insert_club_persons(found_club_id,found_email_id,x);
 		IF x > 0 THEN --we are already a member so give normal result set to send to main
                 	result_set = f_format_result_set(found_email_id);
 		ELSE -- we were not already a member so a join club needs to be done.
-                	result_set = f_format_result_set_invite_club_members(found_email_id,$1);
+                	result_set = f_format_result_set_invite_club_persons(found_email_id,$1);
                 	--result_set = '-101, Something went wrong adding your persons to club.';
 		END IF;
 	ELSE
@@ -1455,7 +1472,7 @@ $$ LANGUAGE plpgsql;
 
 
 --INSERT CLUB MEMBERS
-CREATE OR REPLACE PROCEDURE p_insert_club_members(club_id int,email_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_persons(club_id int,email_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1464,7 +1481,7 @@ BEGIN
         FOR rec IN
                 select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $2
         LOOP
-                insert into club_members (club_id, person_id) values (club_id, rec.id) returning id into x;
+                insert into club_persons (club_id, person_id) values (club_id, rec.id) returning id into x;
         END LOOP;
 END;
 $$;
@@ -1475,13 +1492,13 @@ CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_id int,
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        returning_club_member_id integer;
+        returning_club_person_id integer;
         returning_club_email_id integer;
 	rec RECORD;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into x;
-	insert into club_members (club_id, email_id) values (x,email_id) returning id into returning_club_member_id;
-        insert into club_administrators (club_member_id) values (returning_club_member_id);
+	insert into club_persons (club_id, email_id) values (x,email_id) returning id into returning_club_person_id;
+        insert into club_administrators (club_person_id) values (returning_club_person_id);
 END;
 $$;
 
@@ -1699,7 +1716,7 @@ END;
 $$;
 --END INSERT PERSON
 
---email_id,club_id,person_id,club_members_id,name
+--email_id,club_id,person_id,club_persons_id,name
 CREATE OR REPLACE PROCEDURE p_insert_team(int,int,int,int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -1717,7 +1734,7 @@ DECLARE
 	result_set text;
 	DECLARE x int := -1;
 	found_club_administrator_id club_administrators.id%TYPE;
-	found_club_members_id club_members.id%TYPE;
+	found_club_persons_id club_persons.id%TYPE;
 	found_team_id teams.id%TYPE;
 BEGIN
 		
@@ -1727,13 +1744,13 @@ BEGIN
                 result_set = '-101, Team name already taken.';
 	ELSE
 		--are you a club admin of club $2????
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join clubs on clubs.id=club_members.club_id where club_members.person_id = $3 AND clubs.id = $2; 
+		select club_administrators.id into found_club_administrator_id from club_administrators where club_persons.email_id = $3 AND club_persons.club_id = $2; 
 
 		IF found_club_administrator_id > 0 THEN
-			--lets get your club_members.id so we can make pass in to p function and make you a team_manager
-			select club_members.id into found_club_members_id from club_members where club_members.club_id = $2 AND club_members.person_id = $3;
+			--lets get your club_persons.id so we can make pass in to p function and make you a team_manager
+			select club_persons.id into found_club_persons_id from club_persons where club_persons.club_id = $2 AND club_persons.person_id = $3;
 
-			CALL p_insert_team($1,$2,$3,found_club_members_id,$4,x);
+			CALL p_insert_team($1,$2,$3,found_club_persons_id,$4,x);
 
 			IF x > 0 THEN
                      		result_set = f_format_result_set($1);
@@ -1772,40 +1789,40 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_invite_club_member(TEXT, int, TEXT, int) --email,club_id,token,person_id associated with club_admin
+CREATE OR REPLACE FUNCTION f_insert_invite_club_person(TEXT, int, TEXT, int) --email,club_id,token,person_id associated with club_admin
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
         found_administrator_email_id emails.id%TYPE;
         returning_email_id emails.id%TYPE;
-        returning_invite_club_member_id invite_club_members.id%TYPE;
-        found_invite_club_member_id invite_club_members.id%TYPE;
+        returning_invite_club_person_id invite_club_persons.id%TYPE;
+        found_invite_club_person_id invite_club_persons.id%TYPE;
         found_club_administrator_id club_administrators.id%TYPE;
         result_set text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
 
-		select invite_club_members.id into found_invite_club_member_id from invite_club_members where email_id = found_email_id and club_id = $2;
+		select invite_club_persons.id into found_invite_club_person_id from invite_club_persons where email_id = found_email_id and club_id = $2;
 
-		delete from invite_club_members_club_administrators where invite_club_member_id = found_invite_club_member_id;
+		delete from invite_club_persons_club_administrators where invite_club_person_id = found_invite_club_person_id;
 
-		delete from invite_club_members where email_id = found_email_id and club_id = $2;
-		insert into invite_club_members (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join clubs on clubs.id=club_members.club_id where club_id = $2 and persons.id = $4; 
-		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
+		delete from invite_club_persons where email_id = found_email_id and club_id = $2;
+		insert into invite_club_persons (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
+		insert into invite_club_persons_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
 
 	ELSE --actually just do insert of email then invite...
 		insert into emails (email) values ($1) returning id into returning_email_id; 
 
-		select invite_club_members.id into found_invite_club_member_id from invite_club_members where email_id = returning_email_id and club_id = $2;
+		select invite_club_persons.id into found_invite_club_person_id from invite_club_persons where email_id = returning_email_id and club_id = $2;
 
-		delete from invite_club_members_club_administrators where invite_club_member_id = found_invite_club_member_id;
+		delete from invite_club_persons_club_administrators where invite_club_person_id = found_invite_club_person_id;
 
-		delete from invite_club_members where email_id = returning_email_id and club_id = $2;
-		insert into invite_club_members (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_member_id;	
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_members on club_members.id=club_administrators.club_member_id join persons on persons.id=club_members.person_id join clubs on clubs.id=club_members.club_id where club_id = $2 and persons.id = $4; 
-		insert into invite_club_members_club_administrators (invite_club_member_id, club_administrator_id) values (returning_invite_club_member_id, found_club_administrator_id);
+		delete from invite_club_persons where email_id = returning_email_id and club_id = $2;
+		insert into invite_club_persons (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
+		insert into invite_club_persons_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
 
 	END IF;
 	select email_id into found_administrator_email_id from emails_persons where person_id = $4;
