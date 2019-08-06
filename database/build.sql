@@ -1684,8 +1684,6 @@ BEGIN
         	CALL p_delete_person($1,$2,x);
         	IF x > 0 THEN
 			result_set = f_format_result_set($1);
-                	--select into json_result j_select_persons($1);
-                	--result_set = CONCAT_WS(',',$1,json_result);
         	ELSE
                 	result_set = '-132';
         	END IF;
@@ -1705,6 +1703,7 @@ DECLARE
         rec RECORD;
 BEGIN
 	delete from emails_persons where person_id = $2;
+	delete from club_persons where person_id = $2;
 	delete from persons where id = $2 returning id into x;
 END;
 $$;
