@@ -1780,19 +1780,17 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(TEXT, int, TEXT, int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(int, int, TEXT, int,TEXT,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        found_email_id emails.id%TYPE;
         found_administrator_email_id emails.id%TYPE;
         returning_email_id emails.id%TYPE;
         returning_invite_club_person_id invite_club_emails.id%TYPE;
         found_invite_club_person_id invite_club_emails.id%TYPE;
         found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-        select into found_email_id f_get_email_id($1);
-        IF found_email_id > 0 THEN 
+        IF $1 > 0 THEN 
 
 		select invite_club_emails.id into found_invite_club_person_id from invite_club_emails where email_id = found_email_id and club_id = $2;
 		insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
@@ -1800,7 +1798,7 @@ BEGIN
 		insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
 
 	ELSE --actually just do insert of email then invite...
-		insert into emails (email) values ($1) returning id into returning_email_id; 
+		insert into emails (email) values ($5) returning id into returning_email_id; 
 		select invite_club_emails.id into found_invite_club_person_id from invite_club_emails where email_id = returning_email_id and club_id = $2;
 		insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
@@ -1816,13 +1814,31 @@ CREATE OR REPLACE FUNCTION f_insert_invite_club_email(TEXT, int, TEXT, int) --em
 RETURNS text AS $$
 DECLARE
 	DECLARE x int := -1;
+        found_email_id emails.id%TYPE;
+        found_club_email_id club_emails.id%TYPE;
         result_set text;
 BEGIN
-	CALL p_insert_invite_club_email($1,$2,$3,$4,x);
-        
-	--result_set = f_format_result_set(found_administrator_email_id);
-	result_set = f_format_result_set(x);
+        select into found_email_id f_get_email_id($1);
 
+	IF found_email_id > 0 THEN
+		select id into found_club_email_id from club_emails where club_id = $2 AND email_id = found_email_id; 
+
+		IF found_club_email_id > 0 THEN
+			result_set = '-101, this email is already associated with this club';
+		ELSE
+			CALL p_insert_invite_club_email(found_email_id,$2,$3,$4,$1,x);
+		END IF;
+	ELSE --call without a found_email_id
+		CALL p_insert_invite_club_email(found_email_id,$2,$3,$4,$1,x);
+	END IF;
+
+	IF x > 0 THEN
+		result_set = f_format_result_set(x);
+	ELSE
+		result_set = '-101, something went wrong.';
+	END IF;
+
+        
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
