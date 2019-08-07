@@ -1425,7 +1425,7 @@ $$ LANGUAGE plpgsql;
 
 
 --INSERT CLUB MEMBERS
-CREATE OR REPLACE PROCEDURE p_insert_club_persons(club_id int,email_id int, INOUT y int)
+CREATE OR REPLACE PROCEDURE p_insert_club_persons(club_id int,email_id int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1434,8 +1434,20 @@ BEGIN
         FOR rec IN
                 select persons.id from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $2
         LOOP
-                insert into club_persons (club_id, person_id) values (club_id, rec.id) returning id into y;
+                insert into club_persons (club_id, person_id) values (club_id, rec.id);
         END LOOP;
+END;
+$$;
+
+--INSERT CLUB MEMBERS
+CREATE OR REPLACE PROCEDURE p_insert_club_administrator(club_person_id_p int, person_id_p int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_administrator_id administrators.id%TYPE;
+BEGIN
+        insert into administrators (person_id) values (person_id_p) returning id into returning_administrator_id;
+        insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, returning_administrator_id) returning id into x;
 END;
 $$;
 
@@ -1446,24 +1458,24 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_club_person_id integer;
+        returning_club_id integer;
         returning_club_email_id integer;
         found_club_person_id integer;
-	DECLARE y int := -1;
 BEGIN
-        insert into clubs (name,address) values (name,address) returning id into x;
-	insert into club_emails (club_id, email_id) values (x,$3);
+        insert into clubs (name,address) values (name,address) returning id into returning_club_id;
+	insert into club_emails (club_id, email_id) values (returning_club_id,$3);
 
 	--loop for other persons....
-	CALL p_insert_club_persons(x,$3,y);
-	--insert into club_persons (club_id, person_id) values (x,person_id) returning id into returning_club_person_id;
+	CALL p_insert_club_persons(returning_club_id,$3);
 
-	select club_persons.id into found_club_person_id from club_persons where club_persons.club_id = x AND club_persons.person_id = $4; 
+	--get the club_person that is me
+	select club_persons.id into found_club_person_id from club_persons where club_persons.club_id = returning_club_id AND club_persons.person_id = $4; 
+
+	--then if you found one insert into admistrators and club_administrators
 	IF found_club_person_id > 0 THEN 
-        	insert into club_administrators (club_person_id) values (found_club_person_id);
+		CALL p_insert_club_administrator(found_club_person_id,$4,x);
 	ELSE
-			
 	END IF;
-
 END;
 $$;
 
