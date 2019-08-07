@@ -724,6 +724,18 @@ CREATE TABLE team_club_managers
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE team_club_administrators 
+(
+	id SERIAL,
+	team_club_person_id integer not null,
+	club_administrator_id integer not null,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
+        FOREIGN KEY(club_administrator_id) REFERENCES club_administrators(id),
+	PRIMARY KEY (id)
+);
+
+
 CREATE TABLE sessions_players_availability 
 (
         id SERIAL,
@@ -1536,6 +1548,11 @@ DECLARE
         DECLARE x int := -111;
         json_result text;
 BEGIN
+	--check if you have authority to insert practice
+	--in order are  you team_club_manager, team_club_coach, club_administrator
+	select id from team_club_managers where 
+	IF  
+
         CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
 
         IF x > 0 THEN
