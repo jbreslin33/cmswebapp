@@ -530,16 +530,24 @@ CREATE TABLE club_emails
 --so emails_players/....
 
 --PERSONS
+CREATE TABLE dobs
+(
+	id SERIAL,
+	dob date not null,
+	PRIMARY KEY (id)
+);
 
 CREATE TABLE players 
 (
 	id SERIAL,
-	dob date not null,
+	dob_id int not null,
 	person_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
+        FOREIGN KEY(dob_id) REFERENCES dobs(id),
 	PRIMARY KEY (id)
 );
+
 
 CREATE TABLE coaches 
 (
@@ -559,9 +567,20 @@ CREATE TABLE managers
 	PRIMARY KEY (id)
 );
 
+--god help you
+CREATE TABLE administrators 
+(
+	id SERIAL,
+	person_id integer,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+	PRIMARY KEY (id)
+);
+
 -- CLUBS
 
---do we need this table????? should everyone be entered here???? or just the non players,non coaches and nonmanagers
+-- CLUBS
+
 CREATE TABLE club_persons
 (
 	id SERIAL,
@@ -574,37 +593,38 @@ CREATE TABLE club_persons
         PRIMARY KEY (id)
 );
 
+--to be a club player you need to be a club_person and player
 CREATE TABLE club_players 
 (
 	id SERIAL,
-	uniform_number integer,
+	club_person_id integer,
 	player_id integer,
-	club_id integer,
+	uniform_number integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(player_id) REFERENCES players(id),
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE club_coaches 
 (
 	id SERIAL,
+	club_person_id integer,
 	coach_id integer,
-	club_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(coach_id) REFERENCES coaches(id),
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE club_managers 
 (
 	id SERIAL,
+	club_person_id integer,
 	manager_id integer,
-	club_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(manager_id) REFERENCES managers(id),
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
@@ -613,8 +633,10 @@ CREATE TABLE club_administrators
 (
 	id SERIAL,
 	club_person_id integer,
+	administrator_id integer,
 	created_at timestamp not null default now(),
         FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
+        FOREIGN KEY(administrator_id) REFERENCES administrators(id),
 	PRIMARY KEY (id)
 );
 
@@ -657,13 +679,24 @@ create table invite_club_emails_club_administrators
 --new idea than above...club_persons_id need be changed to person_id, person is linked back to club and email
 
 --this will show when a player was added to a team....should we delete or list as not-active????
+
+CREATE TABLE team_club_persons 
+(
+	id SERIAL,
+	club_person_id integer not null,
+	team_id integer not null,
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE team_club_players 
 (
 	id SERIAL,
-	team_id integer not null,
+	team_club_person_id integer not null,
 	club_player_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
         FOREIGN KEY(club_player_id) REFERENCES club_players(id),
 	PRIMARY KEY (id)
 );
@@ -672,10 +705,10 @@ CREATE TABLE team_club_players
 CREATE TABLE team_club_coaches 
 (
 	id SERIAL,
-	team_id integer not null,
+	team_club_person_id integer not null,
 	club_coach_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
         FOREIGN KEY(club_coach_id) REFERENCES club_coaches(id),
 	PRIMARY KEY (id)
 );
@@ -683,10 +716,10 @@ CREATE TABLE team_club_coaches
 CREATE TABLE team_club_managers 
 (
 	id SERIAL,
-	team_id integer not null,
+	team_club_person_id integer not null,
 	club_manager_id integer not null,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
         FOREIGN KEY(club_manager_id) REFERENCES club_managers(id),
 	PRIMARY KEY (id)
 );
@@ -1051,45 +1084,14 @@ SELECT json_agg(t) INTO raw_json
                 from practices
 
                 join teams on teams.id=practices.team_id
-                join team_club_players on team_club_players.team_id=teams.id
-                join club_players on club_players.id=team_club_players.club_player_id
-                join players on players.id=club_players.player_id
-                join persons on persons.id=players.person_id
-                join pitches on pitches.club_id=teams.club_id
+		join team_club_persons on team_club_persons.team_id=teams.id
+		join club_persons on club_persons.id=team_club_persons.club_person_id
+		join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
+
+                join pitches on pitches.club_id=teams.club_id
 
                 where emails_persons.email_id = 1 AND practices.event_date > now() - interval '1 day'
-
-		union
-
-                select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, teams.name as team_name
-                from practices
-
-                join teams on teams.id=practices.team_id
-                join pitches on pitches.club_id=teams.club_id
-                join team_club_coaches on team_club_coaches.team_id=teams.id
-                join club_coaches on club_coaches.id=team_club_coaches.club_coach_id
-                join coaches on coaches.id=club_coaches.coach_id
-                join persons on persons.id=coaches.person_id
-                join emails_persons on emails_persons.person_id=persons.id
-
-                where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
-
-		union
-
-                select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, teams.name as team_name
-                from practices
-
-                join teams on teams.id=practices.team_id
-                join pitches on pitches.club_id=teams.club_id
-                join team_club_managers on team_club_managers.team_id=teams.id
-                join club_managers on club_managers.id=team_club_managers.club_manager_id
-                join managers on managers.id=club_managers.manager_id
-                join persons on managers.id=managers.person_id
-                join emails_persons on emails_persons.person_id=persons.id
-
-                where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
-        
 	) t;
 
         IF raw_json is NULL THEN
@@ -1117,45 +1119,14 @@ SELECT json_agg(t) INTO raw_json
                 from games
 
                 join teams on teams.id=games.team_id
-                join team_club_players on team_club_players.team_id=teams.id
-                join club_players on club_players.id=team_club_players.club_player_id
-                join players on players.id=club_players.player_id
-                join persons on persons.id=players.person_id
-                join pitches on pitches.club_id=teams.club_id
+                join team_club_persons on team_club_persons.team_id=teams.id
+                join club_persons on club_persons.id=team_club_persons.club_person_id
+                join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
+
+                join pitches on pitches.club_id=teams.club_id
 
                 where emails_persons.email_id = 1 AND games.event_date > now() - interval '1 day'
-
-                union
-
-                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name
-                from games
-
-                join teams on teams.id=games.team_id
-                join pitches on pitches.club_id=teams.club_id
-                join team_club_coaches on team_club_coaches.team_id=teams.id
-                join club_coaches on club_coaches.id=team_club_coaches.club_coach_id
-                join coaches on coaches.id=club_coaches.coach_id
-                join persons on persons.id=coaches.person_id
-                join emails_persons on emails_persons.person_id=persons.id
-
-                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
-
-                union
-
-                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name
-                from games
-
-                join teams on teams.id=games.team_id
-                join pitches on pitches.club_id=teams.club_id
-                join team_club_managers on team_club_managers.team_id=teams.id
-                join club_managers on club_managers.id=team_club_managers.club_manager_id
-                join managers on managers.id=club_managers.manager_id
-                join persons on managers.id=managers.person_id
-                join emails_persons on emails_persons.person_id=persons.id
-
-                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
- 
 	
 	) t;
 
