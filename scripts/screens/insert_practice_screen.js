@@ -41,6 +41,7 @@ class InsertPracticeScreen extends Screen
 		this.mHit = true;
                 
 		var team_select = document.getElementById("team_select_id");
+                var person_select = document.getElementById("person_select_id");
 
 		var event_date = document.getElementById("insert_practice_screen_date_id").value;
 		var arrival_time = document.getElementById("insert_practice_screen_arrival_time_id").value;
@@ -60,12 +61,14 @@ class InsertPracticeScreen extends Screen
 		var field_name = document.getElementById("insert_practice_screen_field_id").value;
 
 		var team_id = null;
+		var person_id = null;
                 
-		if (team_select.length > 0)
+		if (team_select.length > 0 && person_select.length > 0)
                 {
                         var team_id = team_select.options[team_select.selectedIndex].value;
+                        var person_id = person_select.options[person_select.selectedIndex].value;
 
-                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name);
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name + '&person_idi=' + person_id);
                         
 			APPLICATION.getCurrentScreen().ajax();
 		}

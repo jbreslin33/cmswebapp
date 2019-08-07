@@ -1541,25 +1541,37 @@ $$;
 
 
 --BEGIN INSERT PRACTICE
-CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text)
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
+	found_team_club_person_id team_club_persons.id%TYPE;
+	found_club_manager_id club_managers.id%TYPE;
+
 BEGIN
-	--check if you have authority to insert practice
-	--in order are  you team_club_manager, team_club_coach, club_administrator
-	select id from team_club_managers where 
-	IF  
+--cms=# select * from team_club_managers;
+-- id | team_club_person_id | club_manager_id | created_at 
 
-        CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+	select team_club_persons.id into found_team_club_person_id from team_club_persons 
+	join club_persons on club_persons.id=team_club_persons.club_person_id
+	where club_persons.person_id = $11;
 
-        IF x > 0 THEN
-                result_set = f_format_result_set($1);
-        ELSE
-                result_set = '-105';
-        END IF;
+	select club_managers.id into found_club_manager_id from club_managers 
+	join club_persons on club_persons.id=club_managers.club_person_id
+	where club_persons.person_id = $11;
+
+	IF found_team_club_person_id > 0 AND found_club_manager_id > 0 THEN
+        	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+        	IF x > 0 THEN
+                	result_set = f_format_result_set($1);
+        	ELSE
+			result_set = '-101, Something went wrong with adding practice.';
+        	END IF;
+	ELSE
+		result_set = '-101,You must be a manager of this team to create a practice. Contact your administrator.';
+	END IF;
 
 RETURN result_set;
 END;
