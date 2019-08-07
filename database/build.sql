@@ -1693,12 +1693,16 @@ $$;
 --END INSERT PERSON
 
 --email_id,club_id,person_id,club_persons_id,name
-CREATE OR REPLACE PROCEDURE p_insert_team(int,text,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_team(int,text,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+	returning_team_id teams.id%TYPE;
+	found_club_person_id club_persons.id%TYPE;
 BEGIN
-       	insert into teams (club_id,name) values ($1,$2) returning id into x;
+       	insert into teams (club_id,name) values ($1,$2) returning id into returning_team_id;
+	select id into found_club_person_id from club_persons where club_id = $1 AND person_id = $3;
+	insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into x;
 END;
 $$;
 
@@ -1724,7 +1728,7 @@ BEGIN
 
 		IF found_club_administrator_id > 0 THEN
 
-			CALL p_insert_team($2,$4,x);
+			CALL p_insert_team($2,$4,$3,x);
 
 			IF x > 0 THEN
                      		result_set = f_format_result_set($1);
