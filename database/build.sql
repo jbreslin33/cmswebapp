@@ -1737,7 +1737,6 @@ BEGIN
 	select id into found_club_person_id from club_persons where club_id = $1 AND person_id = $3;
 	insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into returning_team_club_person_id;
 
-	--yikes you need to insert into: managers, club_managers, team_club_managers
 	insert into managers (person_id) values ($3) returning id into returning_manager_id;
 	insert into club_managers (club_person_id,manager_id) values (found_club_person_id,returning_manager_id) returning id into returning_club_manager_id;
 	insert into team_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, returning_club_manager_id) returning id into x;

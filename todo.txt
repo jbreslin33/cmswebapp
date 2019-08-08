@@ -1,13 +1,16 @@
-need to break up tables more...
--------
+
 
 persons can be added by email or club???
 this way a club can register your person for club stuff (player, coach etc) if they are not there.
 but...
 an email can only create or delete(more on that later) a person
 if you go to delete a person that exists in a club table such as team player you will not be able to you can however edit it.
+
+----------
+xxxneed to break up tables more...
+-------
 -------------------
-we should be getting a notice when trying to join with same email
+xxxxxxxxxxwe should be getting a notice when trying to join with same email
 
 --------------------------------
 xxxxnext after we fix yahoo bug we simply need a change_password jawn just like forgot_password
