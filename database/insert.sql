@@ -16,10 +16,12 @@ insert into managers (person_id) values (1);
 insert into club_managers (club_person_id,manager_id) values (1,1);
 insert into team_club_managers (team_club_person_id,club_manager_id) values (1,1);
 
+--insert into persons (first_name, middle_name, last_name, email, phone, address) values ('James', 'Anthony', 'Breslin', 'jbreslin33@gmail.com', '215-828-4924', '804 East Girard Avenue, Philadelphia PA 19125'); 
 --emails 
 
----------------------------akmal Tokhirov
+---------------------------Akmal Tokhirov
 insert into emails (email) values ('tokabduaziz@gmail.com');
+insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null); 
 
 -------------------------------Alex Rodriguez
 --Liz Rodriquez
