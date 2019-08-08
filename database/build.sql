@@ -1562,7 +1562,8 @@ BEGIN
 	join club_persons on club_persons.id=club_managers.club_person_id
 	where club_persons.person_id = $11;
 
-	IF found_team_club_person_id > 0 AND found_club_manager_id > 0 THEN
+	--IF found_team_club_person_id > 0 AND found_club_manager_id > 0 THEN
+	IF found_team_club_person_id > 0 THEN
         	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
         	IF x > 0 THEN
                 	result_set = f_format_result_set($1);

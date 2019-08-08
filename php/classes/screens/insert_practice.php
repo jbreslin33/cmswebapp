@@ -61,6 +61,7 @@ class InsertPractice extends Screen
                 if (isset($_GET['person_id']))
                 {
                         $person_id = $_GET['person_id'];
+			error_log($person_id);
                 }
 
 
