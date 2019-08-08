@@ -16,6 +16,43 @@ insert into managers (person_id) values (1);
 insert into club_managers (club_person_id,manager_id) values (1,1);
 insert into team_club_managers (team_club_person_id,club_manager_id) values (1,1);
 
+--emails 
+
+--akmal Tokhirov
+insert into emails (email) values ('tokabduaziz@gmail.com');
+
+--alex rodriguez
+--Liz Rodriquez
+insert into emails (email) values ('lizrsouza13@gmail.com');
+
+--Alex Joao Rodriguez
+insert into emails (email) values ('alexjoaorodriguez@Gmail.com');
+
+--Arber Canole
+--Arber Canole
+insert into emails (email) values ('arberc11@gmail.com');
+
+--Ergita Canole
+insert into emails (email) values ('canolegita@hotmail.com');
+
+--Ben Barnieu
+--Loic Barnieu
+insert into emails (email) values ('lbarnieu@gmail.com');
+insert into emails (email) values ('Loic@sterlingpig.com');
+
+--Joanne Barnieu
+insert into emails (email) values ('jbarnieu@yahoo.com');
+
+--Yancarlos Corredor
+insert into emails (email) values ('mystical943@gmail.com');
+
+--Daniel McCallister
+--Bradley McCallister
+insert into emails (email) values ('Meek.McCallister@gmail.com');
+
+--Mom
+insert into emails (email) values ('miss.b.7712@gmail.com');
+
 
 --insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
 
