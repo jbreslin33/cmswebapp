@@ -1867,6 +1867,32 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+--------------------------------------------------------------INSERTS
+CREATE OR REPLACE PROCEDURE p_insert_caos()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+
+	insert into administrators (person_id) values (1);
+
+END;
+$$;
+--END INSERT PERSON
+
+
+--BEGIN INSERT CAOS
+CREATE OR REPLACE FUNCTION f_insert_caos()
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+	insert into administrators (person_id) values (1);
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 --100 no problems total authentication
 --101 email exists
 --102 email does not exist
