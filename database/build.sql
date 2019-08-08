@@ -1649,7 +1649,6 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
 --BEGIN INSERT PERSON
 CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int)
 RETURNS text AS $$
