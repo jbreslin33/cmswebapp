@@ -1869,7 +1869,7 @@ $$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------INSERTS
 --INSERT CAOS
-CREATE OR REPLACE PROCEDURE p_insert_caos()
+CREATE OR REPLACE PROCEDURE p_insert_caos(int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1897,9 +1897,19 @@ BEGIN
 
 	--PLAYERS
 	---------------------------Akmal Tokhirov
+
+	--EMAILS
 	insert into emails (email) values ('tokabduaziz@gmail.com') returning id into returning_email_id_player_a;
+
+	--PERSONS
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
+
+	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
+
+	--CLUB_EMAILS
+      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
+
 
 
 	-------------------------------Alex Rodriguez
@@ -2028,11 +2038,12 @@ CREATE OR REPLACE FUNCTION f_insert_celta()
 RETURNS text AS $$
 DECLARE
         result_set text;
+	returning_club_id clubs.id%TYPE;
 BEGIN
 	--clubs
 	insert into administrators (person_id) values (1);
 
-	insert into clubs (name,address) values ('RC CELTA USA', '2913 Street Rd, Bensalem, PA 19020');
+	insert into clubs (name,address) values ('RC CELTA USA', '2913 Street Rd, Bensalem, PA 19020') returning id into returning_club_id;
 
 	insert into club_persons (club_id,person_id) values (1,1);
 	insert into club_administrators (club_person_id,administrator_id) values (1,1);
@@ -2040,7 +2051,7 @@ BEGIN
 	insert into club_emails (club_id,email_id) values (1,1);
 
 	--teams
-	CALL p_insert_caos();
+	CALL p_insert_caos(returning_club_id);
 
 
 RETURN result_set;
