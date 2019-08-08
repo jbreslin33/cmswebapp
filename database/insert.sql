@@ -18,24 +18,24 @@ insert into team_club_managers (team_club_person_id,club_manager_id) values (1,1
 
 --emails 
 
---akmal Tokhirov
+---------------------------akmal Tokhirov
 insert into emails (email) values ('tokabduaziz@gmail.com');
 
---alex rodriguez
+-------------------------------Alex Rodriguez
 --Liz Rodriquez
 insert into emails (email) values ('lizrsouza13@gmail.com');
 
 --Alex Joao Rodriguez
 insert into emails (email) values ('alexjoaorodriguez@Gmail.com');
 
---Arber Canole
+-----------------------------------Arber Canole
 --Arber Canole
 insert into emails (email) values ('arberc11@gmail.com');
 
 --Ergita Canole
 insert into emails (email) values ('canolegita@hotmail.com');
 
---Ben Barnieu
+---------------------------------Ben Barnieu
 --Loic Barnieu
 insert into emails (email) values ('lbarnieu@gmail.com');
 insert into emails (email) values ('Loic@sterlingpig.com');
@@ -43,15 +43,92 @@ insert into emails (email) values ('Loic@sterlingpig.com');
 --Joanne Barnieu
 insert into emails (email) values ('jbarnieu@yahoo.com');
 
---Yancarlos Corredor
+--------------------------------Yancarlos Corredor
 insert into emails (email) values ('mystical943@gmail.com');
 
---Daniel McCallister
+----------------------------------Daniel McCallister
 --Bradley McCallister
 insert into emails (email) values ('Meek.McCallister@gmail.com');
 
 --Mom
 insert into emails (email) values ('miss.b.7712@gmail.com');
+
+---------------------------------------Dominic Evangelista
+--Amanda Evangelista
+insert into emails (email) values ('all210@comcast.net');
+
+--Paul Evangelista
+insert into emails (email) values ('paul.evangelista@comcast.net');
+
+--Dominic Evangelista
+insert into emails (email) values ('dominice1@comcast.net');
+
+---------------------------------Eric Girsh
+--Leonard Girsh
+insert into emails (email) values ('lguirch@aol.com');
+
+
+------------------------------------Fabrizio Franceschelli
+--Claudio Franceschelli
+insert into emails (email) values ('claudio11@msn.com');
+
+--Fabrizio Franceschelli
+insert into emails (email) values ('fabriziofrances@gmail.com');
+
+--Marilia Franceschelli
+insert into emails (email) values ('marilia_twins@hotmail.com');
+
+
+---------------------------------------Joshua Vidro
+--Katja Pigur
+insert into emails (email) values ('katjapigur@yahoo.com');
+
+--Joshua Vidro
+insert into emails (email) values ('josh_redninjago@yahoo.com');
+
+
+-----------------------------------Luke Breslin
+--Luke Breslin
+insert into emails (email) values ('jbreslin33@gmail.com');
+
+--------------------------------Marcelo Franceschelli
+--Marcelo Franceschelli
+insert into emails (email) values ('marcelofrance3@gmail.com');
+
+
+--------------------------------------Nacho Obando
+--Nacho Obando
+insert into emails (email) values ('Maxwell.obando27@gmail.com');
+
+--Michelle Obando
+insert into emails (email) values ('Missyobando50@gmail.com');
+
+
+----------------------------------Tedi Shaho
+--Tedi Shaho
+insert into emails (email) values ('stiljanshaho@gmail.com');
+
+
+-----------------------------------Tristan Burns
+--Kevin Burns
+insert into emails (email) values ('kdburns31@yahoo.com');
+
+--Jen Burns
+insert into emails (email) values ('Jlynn_mo@yahoo.com');
+
+--Tristan Burns
+insert into emails (email) values ('Zenbuddhaburns@gmail.com');
+
+
+----------------------------------Victor Baidal
+--Alex Baidal
+insert into emails (email) values ('alejo1016@hotmail.com');
+
+--Victor Baidal
+insert into emails (email) values ('vebaidal@gmail.com');
+
+
+
 
 
 --insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
