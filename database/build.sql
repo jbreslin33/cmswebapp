@@ -1872,6 +1872,7 @@ CREATE OR REPLACE PROCEDURE p_insert_caos()
 LANGUAGE plpgsql
 AS $$
 DECLARE
+        returning_person_id persons.id%TYPE;
 BEGIN
 
 	--TEAM
@@ -1885,7 +1886,9 @@ BEGIN
 	--PLAYERS
 	---------------------------Akmal Tokhirov
 	insert into emails (email) values ('tokabduaziz@gmail.com');
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null);
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id;
+
+	--insert into club_persons
 
 	-------------------------------Alex Rodriguez
 	--Liz Rodriquez
