@@ -1873,8 +1873,18 @@ CREATE OR REPLACE PROCEDURE p_insert_caos()
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        returning_person_id persons.id%TYPE;
-        returning_email_id emails.id%TYPE;
+        returning_person_id_player_a persons.id%TYPE;
+        returning_person_id_player_b persons.id%TYPE;
+        returning_person_id_father persons.id%TYPE;
+        returning_person_id_mother persons.id%TYPE;
+        returning_person_id_other persons.id%TYPE;
+
+        returning_email_id_player_a emails.id%TYPE;
+        returning_email_id_player_b emails.id%TYPE;
+        returning_email_id_father emails.id%TYPE;
+        returning_email_id_mother emails.id%TYPE;
+        returning_email_id_other emails.id%TYPE;
+
 BEGIN
 
 	--TEAM
@@ -1887,20 +1897,29 @@ BEGIN
 
 	--PLAYERS
 	---------------------------Akmal Tokhirov
-	insert into emails (email) values ('tokabduaziz@gmail.com') returning id into returning_email_id;
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id;
-	insert into emails_persons (email_id, person_id) values (returning_email_id, returning_person_id);
-
-	--insert into club_persons
---insert into club_emails (club_id, email_id) values (returning_club_id,$3);
+	insert into emails (email) values ('tokabduaziz@gmail.com') returning id into returning_email_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
+	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
 
 
 	-------------------------------Alex Rodriguez
-	--Liz Rodriquez
-	insert into emails (email) values ('lizrsouza13@gmail.com');
+	--EMAILS
+	insert into emails (email) values ('alexjoaorodriguez@Gmail.com') returning id into returning_email_id_player_a;
+	insert into emails (email) values ('lizrsouza13@gmail.com') returning id into returning_email_id_mother;
 
-	--Alex Joao Rodriguez
-	insert into emails (email) values ('alexjoaorodriguez@Gmail.com');
+	--PERSONS
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', 'Joao', 'Rodriquez', '+1 (267)528-5061', null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', null, 'Rodriquez', '(732)930-3314', null) returning id into returning_person_id_father;
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Liz', null, 'Rodriquez', '(908)205-4535', null) returning id into returning_person_id_mother;
+
+	--EMAILS_PERSONS
+	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
+
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	-----------------------------------Arber Canole
 	--Arber Canole
