@@ -8,6 +8,14 @@ insert into club_administrators (club_person_id,administrator_id) values (1,1);
 
 insert into club_emails (club_id,email_id) values (1,1);
 
+--teams
+insert into teams (club_id,name) values (1,'u16 Caos');
+insert into team_club_persons (team_id,club_person_id) values (1,1);
+
+insert into managers (person_id) values (1);
+insert into club_managers (club_person_id,manager_id) values (1,1);
+insert into team_club_managers (team_club_person_id,club_manager_id) values (1,1);
+
 
 --insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
 
