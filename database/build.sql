@@ -1903,14 +1903,16 @@ BEGIN
 
 	--PERSONS
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
+	
+	--CLUB_PERSONS
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a);
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
 
 	--CLUB_EMAILS
       	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-
-
+	
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
@@ -1921,6 +1923,11 @@ BEGIN
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', 'Joao', 'Rodriquez', '+1 (267)528-5061', null) returning id into returning_person_id_player_a;
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', null, 'Rodriquez', '(732)930-3314', null) returning id into returning_person_id_father;
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Liz', null, 'Rodriquez', '(908)205-4535', null) returning id into returning_person_id_mother;
+	
+	--CLUB_PERSONS
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a);
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_father);
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother);
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
