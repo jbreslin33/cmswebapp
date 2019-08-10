@@ -1886,6 +1886,9 @@ DECLARE
         returning_email_id_other emails.id%TYPE;
         
 	returning_dob_id dobs.id%TYPE;
+	returning_club_person_id club_persons.id%TYPE;
+	
+	returning_player_id players.id%TYPE;
 
 BEGIN
 
@@ -1906,8 +1909,6 @@ BEGIN
 	--PERSONS
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
 	
-	--CLUB_PERSONS
-	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a);
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -1916,9 +1917,14 @@ BEGIN
       	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
 
 
+	--CLUB_PERSONS
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id;
+
 	--PLAYERS
 	insert into dobs (dob) values ('2004-08-25') returning id into returning_dob_id;
-	insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a);
+	insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
+
+	insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id, returning_player_id, 7);
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
