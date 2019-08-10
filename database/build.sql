@@ -1889,7 +1889,10 @@ DECLARE
         
 	returning_dob_id dobs.id%TYPE;
 
-	returning_club_person_id club_persons.id%TYPE;
+	returning_club_person_id_player_a club_persons.id%TYPE;
+	returning_club_person_id_father club_persons.id%TYPE;
+	returning_club_person_id_mother club_persons.id%TYPE;
+
 	returning_player_id players.id%TYPE;
 	returning_club_player_id club_players.id%TYPE;
 	returning_team_club_person_id team_club_persons.id%TYPE;
@@ -1912,7 +1915,6 @@ BEGIN
 
 	--PERSONS
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
-	
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -1920,25 +1922,21 @@ BEGIN
 	--CLUB_EMAILS
       	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
 
-
 	--CLUB_PERSONS
-	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id;
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
 
 	--PLAYERS
 	insert into dobs (dob) values ('2004-08-25') returning id into returning_dob_id;
 	insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
 
 	--CLUB_PLAYERS
-	insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id, returning_player_id, 7) returning id into returning_club_player_id;
+	insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 7) returning id into returning_club_player_id;
 
 	--TEAM_CLUB_PERSONS
-	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id, returning_team_id) returning id into returning_team_club_person_id;
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
-
-
-
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
@@ -1963,6 +1961,19 @@ BEGIN
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
+	
+	--CLUB_EMAILS
+      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
+      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
+
+	--CLUB_PERSONS
+	--insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
+	--insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
+	--insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother) returning id into returning_club_person_id_mother;
+
+	--PLAYERS
+	--insert into dobs (dob) values ('2005-08-30') returning id into returning_dob_id;
+	--insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
 
 	-----------------------------------Arber Canole
 	--Arber Canole
