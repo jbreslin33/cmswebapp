@@ -1884,6 +1884,8 @@ DECLARE
         returning_email_id_father emails.id%TYPE;
         returning_email_id_mother emails.id%TYPE;
         returning_email_id_other emails.id%TYPE;
+        
+	returning_dob_id dobs.id%TYPE;
 
 BEGIN
 
@@ -1912,7 +1914,11 @@ BEGIN
 
 	--CLUB_EMAILS
       	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-	
+
+
+	--PLAYERS
+	insert into dobs (dob) values ('2004-08-25') returning id into returning_dob_id;
+	insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a);
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
@@ -2045,8 +2051,18 @@ CREATE OR REPLACE FUNCTION f_insert_celta()
 RETURNS text AS $$
 DECLARE
         result_set text;
+	returning_person_id persons.id%TYPE;
+	returning_email_id emails.id%TYPE;
 	returning_club_id clubs.id%TYPE;
 BEGIN
+	--JOE
+	insert into persons (first_name, last_name, phone, address) values ('Joe', 'Hurst', '215-555-1212', '2913 Street Road, Bensalem PA 19020') returning id into returning_person_id;
+	insert into emails (email) values ('jbreslin33@yahoo.com') returning id into returning_email_id;
+	insert into emails_persons (email_id, person_id) values (returning_email_id, returning_person_id);
+	insert into native_logins (email_id, password) values (returning_email_id,'$1$X4BpfXnz$G2rqMRjrK0DiTi9P7XdJL.');
+
+
+
 	--clubs
 	insert into administrators (person_id) values (1);
 
