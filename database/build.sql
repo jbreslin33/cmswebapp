@@ -1873,6 +1873,8 @@ CREATE OR REPLACE PROCEDURE p_insert_caos(int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+        returning_team_id teams.id%TYPE;
+
         returning_person_id_player_a persons.id%TYPE;
         returning_person_id_player_b persons.id%TYPE;
         returning_person_id_father persons.id%TYPE;
@@ -1886,14 +1888,16 @@ DECLARE
         returning_email_id_other emails.id%TYPE;
         
 	returning_dob_id dobs.id%TYPE;
+
 	returning_club_person_id club_persons.id%TYPE;
-	
 	returning_player_id players.id%TYPE;
+	returning_club_player_id club_players.id%TYPE;
+	returning_team_club_person_id team_club_persons.id%TYPE;
 
 BEGIN
 
 	--TEAM
-	insert into teams (club_id,name) values (1,'u16 Caos');
+	insert into teams (club_id,name) values (1,'u16 Caos') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1);
 
 	insert into managers (person_id) values (1);
@@ -1924,7 +1928,17 @@ BEGIN
 	insert into dobs (dob) values ('2004-08-25') returning id into returning_dob_id;
 	insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
 
-	insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id, returning_player_id, 7);
+	--CLUB_PLAYERS
+	insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id, returning_player_id, 7) returning id into returning_club_player_id;
+
+	--TEAM_CLUB_PERSONS
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id, returning_team_id) returning id into returning_team_club_person_id;
+	
+	--TEAM_CLUB_PLAYERS
+	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+
+
+
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
