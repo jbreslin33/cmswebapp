@@ -1969,6 +1969,15 @@ BEGIN
 	--PLAYERS
 	insert into dobs (dob) values ('2005-08-30') returning id into returning_dob_id;
 	insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
+	
+	--CLUB_PLAYERS
+	insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 2) returning id into returning_club_player_id;
+
+	--TEAM_CLUB_PERSONS
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
+	
+	--TEAM_CLUB_PLAYERS
+	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	-----------------------------------Arber Canole
 	--Arber Canole
