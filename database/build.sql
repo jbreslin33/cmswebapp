@@ -1948,11 +1948,6 @@ BEGIN
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', null, 'Rodriquez', '(732)930-3314', null) returning id into returning_person_id_father;
 	insert into persons (first_name, middle_name, last_name, phone, address) values ('Liz', null, 'Rodriquez', '(908)205-4535', null) returning id into returning_person_id_mother;
 	
-	--CLUB_PERSONS
-	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a);
-	insert into club_persons (club_id, person_id) values ($1, returning_person_id_father);
-	insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother);
-
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
@@ -1967,9 +1962,9 @@ BEGIN
       	insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
 
 	--CLUB_PERSONS
-	--insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
-	--insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
-	--insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother) returning id into returning_club_person_id_mother;
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
+	insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother) returning id into returning_club_person_id_mother;
 
 	--PLAYERS
 	--insert into dobs (dob) values ('2005-08-30') returning id into returning_dob_id;
