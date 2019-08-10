@@ -2082,19 +2082,5 @@ END;
 $$ LANGUAGE plpgsql;
 
 
---100 no problems total authentication
---101 email exists
---102 email does not exist
---103 users exists
---104 user does not exist
---105 bad password
---106 club exists
---107 person exists
---111 generic bad insert
---112 generic bad update
---113 generic no result
---131 cant delete only person
---132 delete failed because of constraints
---121 only club administrators can perform this action....
---190 temp result stay in state
-
+--RUN STORED PROCEDURES
+SELECT f_insert_celta();
