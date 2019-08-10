@@ -1883,7 +1883,8 @@ DECLARE
 
         returning_email_id_player_a emails.id%TYPE;
         returning_email_id_player_b emails.id%TYPE;
-        returning_email_id_father emails.id%TYPE;
+        returning_email_id_father_a emails.id%TYPE;
+        returning_email_id_father_b emails.id%TYPE;
         returning_email_id_mother emails.id%TYPE;
         returning_email_id_other emails.id%TYPE;
         
@@ -2017,12 +2018,36 @@ BEGIN
 	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	---------------------------------Ben Barnieu
+
+	--EMAILS
+	insert into emails (email) values ('lbarnieu@gmail.com') returning id into returning_email_id_father_a;
+	insert into emails (email) values ('Loic@sterlingpig.com') returning id into returning_email_id_father_b;
+	insert into emails (email) values ('jbarnieu@yahoo.com') returning id into returning_email_id_mother;
+	
+	--PERSONS
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Ben', null, 'Barnieu', null, null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Loic', null, 'Barnieu', null, null) returning id into returning_person_id_father;
+	insert into persons (first_name, middle_name, last_name, phone, address) values ('Joanne', null, 'Barnieu', null, null) returning id into returning_person_id_mother;
+
+	--EMAILS_PERSONS
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
+	
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_b, returning_person_id_player_a);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_b, returning_person_id_father);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_b, returning_person_id_mother);
+
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
+
 	--Loic Barnieu
-	insert into emails (email) values ('lbarnieu@gmail.com');
-	insert into emails (email) values ('Loic@sterlingpig.com');
+	--insert into emails (email) values ('lbarnieu@gmail.com');
+	--insert into emails (email) values ('Loic@sterlingpig.com');
 
 	--Joanne Barnieu
-	insert into emails (email) values ('jbarnieu@yahoo.com');
+	--insert into emails (email) values ('jbarnieu@yahoo.com');
 
 	--------------------------------Yancarlos Corredor
 	insert into emails (email) values ('mystical943@gmail.com');
