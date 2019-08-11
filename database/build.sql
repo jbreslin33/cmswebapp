@@ -310,7 +310,7 @@ CREATE TABLE persons
     	first_name text not null,
     	middle_name text,
     	last_name text not null,
-    	phone text,
+	phones text [],
 	address text,
 	coordinates text,
 	created_at timestamp not null default now(),
@@ -958,7 +958,7 @@ $$ LANGUAGE plpgsql;
 
 --NATIVE INSERT LOGIN
 
-CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT)
+CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
@@ -1176,7 +1176,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT INVITE_CLUB_MEMBERS
 
 
-CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
@@ -1184,7 +1184,7 @@ DECLARE
 BEGIN
 	insert into emails (email) values (email_name) returning id into x;
 	insert into native_logins (email_id, password) values (x, CRYPT($2, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
+	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, phones, address) returning id into returning_person_id;
 	insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
@@ -1209,7 +1209,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_native_login_club(int, int, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_native_login_club(int, int, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
@@ -1217,7 +1217,7 @@ DECLARE
 	returning_native_login_id integer;
 BEGIN
 	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into x;
+	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, phones, address) returning id into x;
 	insert into emails_persons (email_id, person_id) values ($1,x);
 	insert into club_persons (club_id,person_id) values ($2,x);
 END;
@@ -1669,14 +1669,14 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phone TEXT, address TEXT, int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_person_id integer;
 	rec RECORD;
 BEGIN
-        insert into persons (first_name, middle_name, last_name, phone, address) values (first_name, middle_name, last_name, phone, address) returning id into returning_person_id;
+        insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, phones, address) returning id into returning_person_id;
 	insert into emails_persons (email_id, person_id) values ($6, returning_person_id) returning id into x; 
 END;
 $$;
@@ -1915,7 +1915,7 @@ BEGIN
 	insert into emails (email) values ('tokabduaziz@gmail.com') returning id into returning_email_id_player_a;
 
 	--PERSONS
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Akmal', null, 'Tokhirov', null, null) returning id into returning_person_id_player_a;
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -1945,9 +1945,9 @@ BEGIN
 	insert into emails (email) values ('lizrsouza13@gmail.com') returning id into returning_email_id_mother;
 
 	--PERSONS
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', 'Joao', 'Rodriquez', '+1 (267)528-5061', null) returning id into returning_person_id_player_a;
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Alex', null, 'Rodriquez', '(732)930-3314', null) returning id into returning_person_id_father;
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Liz', null, 'Rodriquez', '(908)205-4535', null) returning id into returning_person_id_mother;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Alex', 'Joao', 'Rodriquez', ARRAY ['+1 (267)528-5061'], null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Alex', null, 'Rodriquez', ARRAY ['(732)930-3314'], null) returning id into returning_person_id_father;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Liz', null, 'Rodriquez', ARRAY ['(908)205-4535'], null) returning id into returning_person_id_mother;
 	
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -1986,8 +1986,8 @@ BEGIN
 	insert into emails (email) values ('canolegita@hotmail.com') returning id into returning_email_id_mother;
 
 	--PERSONS
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Arber', null, 'Canole', '2157157565 ', null) returning id into returning_person_id_player_a;
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Ergita', null, 'Canole', '215-900-4934', null) returning id into returning_person_id_mother;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Arber', null, 'Canole', ARRAY ['2157157565'], null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Ergita', null, 'Canole', ARRAY ['215-900-4934'], null) returning id into returning_person_id_mother;
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -2025,9 +2025,9 @@ BEGIN
 	insert into emails (email) values ('jbarnieu@yahoo.com') returning id into returning_email_id_mother;
 	
 	--PERSONS
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Ben', null, 'Barnieu', null, null) returning id into returning_person_id_player_a;
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Loic', null, 'Barnieu', null, null) returning id into returning_person_id_father;
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Joanne', null, 'Barnieu', null, null) returning id into returning_person_id_mother;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Ben', null, 'Barnieu', null, null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Loic', null, 'Barnieu', null, null) returning id into returning_person_id_father;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Joanne', null, 'Barnieu', null, null) returning id into returning_person_id_mother;
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
@@ -2070,7 +2070,7 @@ BEGIN
 	insert into emails (email) values ('mystical943@gmail.com') returning id into returning_email_id_player_a;
 
 	--PERSONS
-	insert into persons (first_name, middle_name, last_name, phone, address) values ('Yancarlo', null, 'Corredor', null, null) returning id into returning_person_id_player_a;
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Yancarlo', null, 'Corredor', null, null) returning id into returning_person_id_player_a;
 	
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -2101,9 +2101,9 @@ BEGIN
         insert into emails (email) values ('miss.b.7712@gmail.com') returning id into returning_email_id_mother;
 
         --PERSONS
-        insert into persons (first_name, middle_name, last_name, phone, address) values ('Daniel', null, 'McCallister', null, '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_player_a;
-        insert into persons (first_name, middle_name, last_name, phone, address) values ('Bradley', null, 'McCallister', '3044124514', '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_father;
-        insert into persons (first_name, middle_name, last_name, phone, address) values ('Mrs.', null, 'McCallister', '(215) 450-6211', '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_mother;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Daniel', null, 'McCallister', null, '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_player_a;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Bradley', null, 'McCallister', ARRAY ['3044124514'], '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_father;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Mrs.', null, 'McCallister', ARRAY ['(215) 450-6211'], '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_mother;
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
@@ -2144,9 +2144,9 @@ BEGIN
         insert into emails (email) values ('all210@comcast.net') returning id into returning_email_id_mother;
 
         --PERSONS
-        insert into persons (first_name, middle_name, last_name, phone, address) values ('Dominic', null, 'Evangelista', '2156808879', null) returning id into returning_person_id_player_a;
-        insert into persons (first_name, middle_name, last_name, phone, address) values ('Paul', null, 'Evangelista', '2673725358', null) returning id into returning_person_id_father;
-        insert into persons (first_name, middle_name, last_name, phone, address) values ('Amanda', null, 'Evangelista', '215-421-9909', null) returning id into returning_person_id_mother;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Dominic', null, 'Evangelista', ARRAY ['2156808879'], null) returning id into returning_person_id_player_a;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Paul', null, 'Evangelista', ARRAY ['2673725358'], null) returning id into returning_person_id_father;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Amanda', null, 'Evangelista', ARRAY ['215-421-9909'], null) returning id into returning_person_id_mother;
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
@@ -2264,7 +2264,7 @@ DECLARE
 	returning_club_id clubs.id%TYPE;
 BEGIN
 	--JOE
-	insert into persons (first_name, last_name, phone, address) values ('Joe', 'Hurst', '215-555-1212', '2913 Street Road, Bensalem PA 19020') returning id into returning_person_id;
+	insert into persons (first_name, last_name, phones, address) values ('Joe', 'Hurst', ARRAY [ '215-555-1212' ], '2913 Street Road, Bensalem PA 19020') returning id into returning_person_id;
 	insert into emails (email) values ('jbreslin33@yahoo.com') returning id into returning_email_id;
 	insert into emails_persons (email_id, person_id) values (returning_email_id, returning_person_id);
 	insert into native_logins (email_id, password) values (returning_email_id,'$1$X4BpfXnz$G2rqMRjrK0DiTi9P7XdJL.');
