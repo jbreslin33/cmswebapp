@@ -2128,7 +2128,7 @@ BEGIN
         insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
 
         --CLUB_PLAYERS
-        insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 11) returning id into returning_club_player_id;
+        insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 19) returning id into returning_club_player_id;
 
         --TEAM_CLUB_PERSONS
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
@@ -2184,13 +2184,37 @@ BEGIN
         --TEAM_CLUB_PLAYERS
         insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
-
-
-
 	---------------------------------Eric Girsh
 	--Leonard Girsh
-	insert into emails (email) values ('lguirch@aol.com');
+	insert into emails (email) values ('lguirch@aol.com') returning id into returning_email_id_father_a;
 
+        --PERSONS
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Eric', null, 'Girsh', null, 'Southampton, PA, 18966') returning id into returning_person_id_player_a;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Leonard', null, 'Girsh', ARRAY ['(215) 275-7124', '(215) 275-9133' ] , 'Southampton, PA, 18966') returning id into returning_person_id_father;
+
+        --EMAILS_PERSONS
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
+        
+	--CLUB_EMAILS
+        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
+        
+	--CLUB_PERSONS
+        insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
+        insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
+        
+        --PLAYERS
+        insert into dobs (dob) values ('2005-05-10') returning id into returning_dob_id;
+        insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
+
+        --CLUB_PLAYERS
+        insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 11) returning id into returning_club_player_id;
+
+        --TEAM_CLUB_PERSONS
+        insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
+
+        --TEAM_CLUB_PLAYERS
+        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	------------------------------------Fabrizio Franceschelli
 	--Claudio Franceschelli
