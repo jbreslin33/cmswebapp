@@ -2474,15 +2474,47 @@ BEGIN
 
 
 	-----------------------------------Tristan Burns
+	--Tristan Burns
+	insert into emails (email) values ('Zenbuddhaburns@gmail.com') returning id into returning_email_id_player_a;
+
 	--Kevin Burns
-	insert into emails (email) values ('kdburns31@yahoo.com');
+	insert into emails (email) values ('kdburns31@yahoo.com') returning id into returning_email_id_father_a;
 
 	--Jen Burns
-	insert into emails (email) values ('Jlynn_mo@yahoo.com');
+	insert into emails (email) values ('Jlynn_mo@yahoo.com') returning id into returning_email_id_mother;
 
-	--Tristan Burns
-	insert into emails (email) values ('Zenbuddhaburns@gmail.com');
+       	--PERSONS	
+	insert into persons (first_name, middle_name, last_name, phones, address) values ('Tristan', null, 'Burns', null, null) returning id into returning_person_id_player_a;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Kevin', null, 'Burns', null, null) returning id into returning_person_id_father;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Jen', null, 'Burns', null, null) returning id into returning_person_id_mother;
 
+        --EMAILS_PERSONS
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
+
+	--CLUB_EMAILS
+        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
+        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
+        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
+
+	--CLUB_PERSONS
+        insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
+        insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
+        insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother) returning id into returning_club_person_id_mother;
+
+	--PLAYER
+        insert into dobs (dob) values ('2005-01-01') returning id into returning_dob_id;
+        insert into players (dob_id,person_id) values (returning_dob_id,returning_person_id_player_a) returning id into returning_player_id;
+
+        --CLUB_PLAYERS
+        insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 5) returning id into returning_club_player_id;
+
+        --TEAM_CLUB_PERSONS
+        insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
+
+        --TEAM_CLUB_PLAYERS
+        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	----------------------------------Victor Baidal
 	--Alex Baidal
