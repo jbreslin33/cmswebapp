@@ -2217,15 +2217,45 @@ BEGIN
         insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	------------------------------------Fabrizio Franceschelli
-	--Claudio Franceschelli
-	insert into emails (email) values ('claudio11@msn.com');
-
+	--EMAILS
 	--Fabrizio Franceschelli
-	insert into emails (email) values ('fabriziofrances@gmail.com');
+	insert into emails (email) values ('fabriziofrances@gmail.com') returning id into returning_email_id_player_a;
+	
+	--Marcelo Franceschelli
+	insert into emails (email) values ('marcelofrance3@gmail.com') returning id into returning_email_id_player_b;
+	
+	--Claudio Franceschelli
+	insert into emails (email) values ('claudio11@msn.com') returning id into returning_email_id_father_a;
 
 	--Marilia Franceschelli
-	insert into emails (email) values ('marilia_twins@hotmail.com');
+	insert into emails (email) values ('marilia_twins@hotmail.com') returning id into returning_email_id_mother;
 
+        --PERSONS
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Fabrizio', null, 'Franceschelli', null, null) returning id into returning_person_id_player_a;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Marcelo', null, 'Franceschelli', null, null) returning id into returning_person_id_player_b;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Claudio', null, 'Franceschelli', null, null) returning id into returning_person_id_father;
+        insert into persons (first_name, middle_name, last_name, phones, address) values ('Marilia', null, 'Franceschelli', null, null) returning id into returning_person_id_mother;
+
+        --EMAILS_PERSONS
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_b);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
+
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_player_b);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_father);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_mother);
+
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_b);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
+        
+	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_b);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	---------------------------------------Joshua Vidro
 	--Katja Pigur
@@ -2238,10 +2268,6 @@ BEGIN
 	-----------------------------------Luke Breslin
 	--Luke Breslin
 	insert into emails (email) values ('jbreslin33@gmail.com');
-
-	--------------------------------Marcelo Franceschelli
-	--Marcelo Franceschelli
-	insert into emails (email) values ('marcelofrance3@gmail.com');
 
 
 	--------------------------------------Nacho Obando
