@@ -1184,7 +1184,7 @@ DECLARE
 BEGIN
 	insert into emails (email) values (email_name) returning id into x;
 	insert into native_logins (email_id, password) values (x, CRYPT($2, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, phones, address) returning id into returning_person_id;
+	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY[phones], address) returning id into returning_person_id;
 	insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
@@ -1217,7 +1217,7 @@ DECLARE
 	returning_native_login_id integer;
 BEGIN
 	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, phones, address) returning id into x;
+	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY[phones], address) returning id into x;
 	insert into emails_persons (email_id, person_id) values ($1,x);
 	insert into club_persons (club_id,person_id) values ($2,x);
 END;
@@ -1676,7 +1676,7 @@ DECLARE
         returning_person_id integer;
 	rec RECORD;
 BEGIN
-        insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, phones, address) returning id into returning_person_id;
+        insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY [phones], address) returning id into returning_person_id;
 	insert into emails_persons (email_id, person_id) values ($6, returning_person_id) returning id into x; 
 END;
 $$;
