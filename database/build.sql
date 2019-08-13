@@ -2596,6 +2596,9 @@ BEGIN
 
 	insert into club_emails (club_id,email_id) values (1,1);
 
+	--pitches
+	insert into pitches (name, club_id) values ('Field 1', returning_club_id);
+
 	--teams
 	CALL p_insert_caos(returning_club_id);
 
