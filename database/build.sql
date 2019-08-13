@@ -1869,6 +1869,7 @@ $$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------INSERTS
 --INSERT CAOS
+--
 CREATE OR REPLACE PROCEDURE p_insert_caos(int)
 LANGUAGE plpgsql
 AS $$
@@ -1899,15 +1900,19 @@ DECLARE
 	returning_club_player_id club_players.id%TYPE;
 	returning_team_club_person_id team_club_persons.id%TYPE;
 
-BEGIN
 
+BEGIN
 	--TEAM
 	insert into teams (club_id,name) values (1,'u16 Caos') returning id into returning_team_id;
-	insert into team_club_persons (team_id,club_person_id) values (1,1);
+	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 
 	insert into managers (person_id) values (1);
 	insert into club_managers (club_person_id,manager_id) values (1,1);
+
+	insert into team_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 	insert into team_club_managers (team_club_person_id,club_manager_id) values (1,1);
+
+
 
 	--PLAYERS
 	---------------------------Akmal Tokhirov
