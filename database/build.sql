@@ -2413,10 +2413,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
 	
-	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
-        
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
