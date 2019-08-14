@@ -38,6 +38,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
                 }
+		else if (location.hash == '#insert_native_login_email_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION);
+                }
 		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
@@ -113,6 +117,7 @@ class INIT_APPLICATION extends State
 		}
 		//hide evertthing except nav_bar_id
 		document.getElementById("nav_bar_id").style.display = "block";
+		document.getElementById("insert_native_login_email_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
@@ -250,7 +255,7 @@ class LOGOUT_APPLICATION extends State
 	}
 }
 
-class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
+class INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -261,10 +266,10 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: ENTER");        
+			console.log("INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION: ENTER");        
 		}
 
-		app.setCurrentScreen(new InsertLoginScreen(app));
+		app.setCurrentScreen(new InsertLoginEmailScreen(app));
 		app.getCurrentScreen().enter();
 	}
 
@@ -272,7 +277,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXECUTE");        
+			console.log("INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION: EXECUTE");        
 		}
 		
 		app.getCurrentScreen().execute();
@@ -282,14 +287,13 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXIT");        
+			console.log("INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION: EXIT");        
 		}
 		app.getCurrentScreen().exit();
 	}
 }
 
-
-
+//what
 class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 {
 	constructor() 
@@ -314,30 +318,6 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXECUTE");        
 		}
 		app.getCurrentScreen().execute();
-             /* 
-                if (app.mInsertNativeLoginClubScreen.mData)
-                {
-                        var dataArray = app.mInsertNativeLoginClubScreen.mData.split(",");
-                        app.mInsertNativeLoginClubScreen.mCode = dataArray[0];
-                        console.log('CODE:::' + app.mInsertNativeLoginClubScreen.mCode);
-
-
-                        if (app.mInsertNativeLoginClubScreen.mCode == -100)
-                        {
-                                app.setJWT(dataArray[1]); //set jwt
-
-                                app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                        	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = '';
-                        }
-                        if (app.mInsertNativeLoginClubScreen.mCode == -102)
-                        {
-				document.getElementById('insert_native_login_screen_email_message_id').style.color = 'red';
-                        	document.getElementById('insert_native_login_screen_email_message_id').innerHTML = 'Email already exists. Do you want to log in instead?';
-				//show link as well
-				document.getElementById("insert_native_login_screen_link_id").style.display = "block";
-                        }
-                }
-		*/
 	}
 
         exit(app)
@@ -347,16 +327,6 @@ class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
 			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXIT");        
 		}
 		app.getCurrentScreen().exit();
-		/*
-		app.mInsertNativeLoginClubScreen.mCode = 0;
-		app.mInsertNativeLoginClubScreen.mData = null;
-
-		//hide it for now maybe delete later
-		var element = document.getElementById("insert_native_login_club_screen_nav_id");
-                element.className = element.className.replace(/\active\b/g, "");
-
-		app.mInsertNativeLoginClubScreen.hide();
-		*/
 	}
 }
 
@@ -464,27 +434,7 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
                         console.log("INSERT_ACCEPT_CLUB_INVITE_APPLICATION: EXECUTE");
                 }
 		app.getCurrentScreen().execute();
-/*
-                if (app.mInsertAcceptClubInviteScreen.mData)
-		{
-                	var dataArray = app.mInsertAcceptClubInviteScreen.mData.split(",");
-                	app.mInsertAcceptClubInviteScreen.mCode = dataArray[0];
-		}
-		//you joined club welcome
-               	if (app.mInsertAcceptClubInviteScreen.mCode == -100)
-                {
-			console.log('we should have already joined in db and this is confirm message 100');
-                        app.mStateMachine.changeState(app.mMAIN_APPLICATION);
-                }
-		//we need to have you join and get a user and person and user_person entry
-                if (app.mInsertAcceptClubInviteScreen.mCode == -104)
-               	{    
-			console.log('lets redirect its a 104 to a join as there is no user yet');
-                        app.mStateMachine.changeState(app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
-                }
-		*/
-        }
-
+	}
         exit(app)
         {
                 if (app.mStateLogs || app.mStateExitLogs)
@@ -494,7 +444,8 @@ class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State
 		app.getCurrentScreen().exit();
         }
 }
-
+//what
+//
 class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 {
 	constructor() 
@@ -531,7 +482,8 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 		app.getCurrentScreen().exit();
 	}
 }
-
+//what
+//n
 class MAIN_APPLICATION extends State
 {
 	constructor() 
@@ -649,15 +601,52 @@ class INSERT_PERSON_APPLICATION extends State
 	}
 
         exit(app)
-        {
+	{
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("INSERT_PERSON_APPLICATION: EXIT");        
 		}
+	}
+}
 
+class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: ENTER");        
+		}
+
+		app.setCurrentScreen(new InsertLoginScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: EXIT");        
+		}
 		app.getCurrentScreen().exit();
 	}
 }
+
 
 class DELETE_PERSON_APPLICATION extends State
 {

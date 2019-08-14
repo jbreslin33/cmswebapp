@@ -494,6 +494,17 @@ create TABLE forgot_passwords
 	PRIMARY KEY (id)
 );
 
+create TABLE join_emails 
+(
+        id serial,
+        email_id integer,
+        join_email_token text,
+        expires timestamp,
+	created_at timestamp not null default now(),
+ 	FOREIGN KEY(email_id) REFERENCES emails(id),
+	PRIMARY KEY (id)
+);
+
 
 --chance for email for luke or no email for grace or multiple emails for luke
 --this table could we leave it and use it or not but it has nothing to do with logins???? so this would be a way for me to send luke updates to his email but he would not need a login..then once in a while we can ask him if he wants his own login???
@@ -956,6 +967,31 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+--NATIVE INSERT EMAIL LOGIN
+
+CREATE OR REPLACE FUNCTION f_insert_native_email_login(email_name TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email_id emails.id%TYPE;
+	result_set text;
+	DECLARE x int := -1; 
+BEGIN
+
+    	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
+	IF found_email_id > 0 THEN
+		result_set = '-101, Email already exists. Do you want to login instead?';
+	ELSE
+		CALL p_insert_native_email_login($1,x);
+		IF x > 0 THEN
+			result_set = f_format_result_set(x);
+                ELSE
+			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
+		END IF;
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 --NATIVE INSERT LOGIN
 
 CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT)
@@ -974,13 +1010,13 @@ BEGIN
 		IF x > 0 THEN
 			result_set = f_format_result_set(x);
                 ELSE
-                	result_set = '-105';
 			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
 	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --BEGIN J_SELECT PITCHES
 --params:club_id
@@ -1175,7 +1211,18 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT INVITE_CLUB_MEMBERS
 
+--insert_native_email_login
+--do we send email link for signup????? 
+CREATE OR REPLACE PROCEDURE p_insert_native_email_login(email_name TEXT, INOUT x int)
+LANGUAGE plpgsql    
+AS $$
+DECLARE
+BEGIN
+	insert into emails (email) values (email_name) returning id into x;
+END;
+$$;
 
+--insert_native_login
 CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
@@ -1778,7 +1825,7 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
+-------
 CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
@@ -1802,6 +1849,32 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+--------
+
+-------
+CREATE OR REPLACE FUNCTION f_insert_join_email(TEXT, TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id emails.id%TYPE;
+        returning_join_email_id join_emails.id%TYPE;
+        result_set text;
+BEGIN
+        select into found_email_id f_get_email_id($1);
+        IF found_email_id > 0 THEN 
+		result_set = '-101, That email already exists in our system. Would you like to login instead? Or perhaps you just forgot your password? Just click forgot passord under menu.';
+	ELSE
+		delete from join_emails where email_id = found_email_id; 
+		insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
+		IF returning_join_email_id > 0 THEN
+                     	result_set = f_format_result_set(found_email_id);
+		ELSE
+			result_set = '-101, Something went wrong with process. Sorry! Please try again.';
+		END IF;
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--------
 
 CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(int, int, TEXT, int,TEXT,INOUT x int)
 LANGUAGE plpgsql
