@@ -1855,20 +1855,43 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION f_insert_join_email(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
+	DECLARE x int := -1;
         found_email_id emails.id%TYPE;
+        found_native_login_id native_logins.id%TYPE;
         returning_join_email_id join_emails.id%TYPE;
         result_set text;
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
-		result_set = '-101, That email already exists in our system. Would you like to login instead? Or perhaps you just forgot your password? Just click forgot passord under menu.';
-	ELSE
-		delete from join_emails where email_id = found_email_id; 
-		insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
-		IF returning_join_email_id > 0 THEN
-                     	result_set = f_format_result_set(found_email_id);
+		--check if there is a native login....
+		select id into found_native_login_id from native_logins where email_id = found_email_id;
+
+		IF found_native_login_id > 0 THEN
+			result_set = '-101, You already have an account. Click here to login.';
 		ELSE
-			result_set = '-101, Something went wrong with process. Sorry! Please try again.';
+			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
+			delete from join_emails where email_id = found_email_id; 
+			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
+			IF returning_join_email_id > 0 THEN
+				result_set = '-101, We sent you a link to your email to finish joining.';
+			ELSE
+				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
+			END IF;
+		END IF;
+	ELSE
+		--no email or native login lets get them both
+		CALL p_insert_native_email_login($1,x);
+		IF x > 0 THEN 
+			--there could not have been native login because email did not exist so...
+			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
+			delete from join_emails where email_id = found_email_id; 
+			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
+			IF returning_join_email_id > 0 THEN
+				result_set = '-101, We sent you a link to your email to finish joining.';
+			ELSE
+				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
+			END IF;
+		ELSE
 		END IF;
 	END IF;
 RETURN result_set;

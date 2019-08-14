@@ -16,10 +16,10 @@ class InsertNativeEmailLogin extends Screen
                 $this->mSubject = "Forgot Password Link";
                 //$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
                 $this->mAbsoluteURL = "http://elacore.org/#insert_native_login_screen&";
-                $this->mForgotPasswordToken = bin2hex(random_bytes(32));
+                $this->mJoinEmailToken = bin2hex(random_bytes(32));
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-                        'forgot_password_token' => $this->mForgotPasswordToken,
+                        'forgot_password_token' => $this->mJoinEmailToken,
                         'email' => $email
                         ]));
                 $this->mBody = "Click the link to join Club Management System: ";
@@ -27,7 +27,7 @@ class InsertNativeEmailLogin extends Screen
 
                 $sql = 'select f_insert_join_email($1,$2)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_join_email", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_insert_join_email", array( $email, $this->mForgotPasswordToken));
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_join_email", array( $email, $this->mJoinEmailToken));
 
                 $mail = new Mail($email,$this->mSubject,$this->mBody);
 
