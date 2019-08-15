@@ -44,7 +44,6 @@ class GLOBAL_APPLICATION extends State
                 }
 		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
 		else if (location.hash == '#insert_native_login_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION)
                 {
@@ -141,7 +140,11 @@ class INIT_APPLICATION extends State
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
 
-		if (application.mForgotPasswordToken)
+		if (application.mJoinEmailToken)
+		{
+			application.mStateMachine.changeState(application.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
+		}
+		else if (application.mForgotPasswordToken)
 		{
 			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
 		}

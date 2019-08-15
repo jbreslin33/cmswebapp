@@ -13,13 +13,13 @@ class InsertNativeEmailLogin extends Screen
 	{
                 //create mail
                 $email = $_GET['email'];
-                $this->mSubject = "Forgot Password Link";
+                $this->mSubject = "Join Club Management System Link";
                 //$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
                 $this->mAbsoluteURL = "http://elacore.org/#insert_native_login_screen&";
                 $this->mJoinEmailToken = bin2hex(random_bytes(32));
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-                        'forgot_password_token' => $this->mJoinEmailToken,
+                        'join_email_token' => $this->mJoinEmailToken,
                         'email' => $email
                         ]));
                 $this->mBody = "Click the link to join Club Management System: ";
