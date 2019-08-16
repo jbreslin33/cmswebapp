@@ -994,7 +994,7 @@ $$ LANGUAGE plpgsql;
 
 --NATIVE INSERT LOGIN
 
-CREATE OR REPLACE FUNCTION f_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT)
+CREATE OR REPLACE FUNCTION f_insert_native_login(join_email_token_p TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
@@ -1002,16 +1002,16 @@ DECLARE
 	DECLARE x int := -1; 
 BEGIN
 
-    	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
+    	SELECT email_id INTO found_email_id FROM join_emails WHERE join_email_token = join_email_token_p;
 	IF found_email_id > 0 THEN
-		result_set = '-101, Email already exists. Do you want to login instead?';
-	ELSE
-		CALL p_insert_native_login($1,$2,$3,$4,$5,$6,$7,x);
+		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
 			result_set = f_format_result_set(x);
                 ELSE
 			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
+	ELSE
+		result_set = '-101, that email is not authorized to join. Do you want to login instead?';
 	END IF;
 RETURN result_set;
 END;
@@ -1222,17 +1222,17 @@ BEGIN
 END;
 $$;
 
---insert_native_login
-CREATE OR REPLACE PROCEDURE p_insert_native_login(email_name TEXT, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, INOUT x int)
+--insert_native_login  INOUT x int
+CREATE OR REPLACE PROCEDURE p_insert_native_login(email_id int, password TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
 	returning_person_id integer;
 BEGIN
-	insert into emails (email) values (email_name) returning id into x;
-	insert into native_logins (email_id, password) values (x, CRYPT($2, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY[phones], address) returning id into returning_person_id;
-	insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
+	--insert into emails (email) values (email_name) returning id into x;
+	insert into native_logins (email_id, password) values (email_id, CRYPT($2, GEN_SALT('md5'))) returning id into x;
+	--insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY[phones], address) returning id into returning_person_id;
+	--insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
 

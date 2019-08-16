@@ -10,9 +10,9 @@ class InsertNativeLogin extends Screen
 		
 	function getResult()
 	{
-		$sql = 'select f_insert_native_login($1,$2,$3,$4,$5,$6,$7)';
+		$sql = 'select f_insert_native_login($1,$2)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_native_login", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_insert_native_login", array( $_GET['email'] , $_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address']));
+		$result = pg_execute($this->mDatabase->mConnection, "f_insert_native_login", array( $_GET['join_email_token'] , $_GET['password']));
                 return pg_fetch_result($result, 0);
 	}
 }
