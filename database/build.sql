@@ -1006,7 +1006,7 @@ BEGIN
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(x);
+			result_set = f_format_result_set(found_email_id);
                 ELSE
 			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
