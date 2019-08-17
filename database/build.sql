@@ -1915,7 +1915,7 @@ BEGIN
 			IF returning_join_email_id > 0 THEN
 				--result_set = '-101, We sent you a link to your email to finish joining.';
 				message = 'We sent you a link to your email to finish joining.';
-				result_set = f_format_result_set(found_email_id, message,0); 
+				result_set = f_format_result_set(found_email_id, message,-100); -- we want you to clear screen but stay on screen and display message... 
 			ELSE
 				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 			END IF;

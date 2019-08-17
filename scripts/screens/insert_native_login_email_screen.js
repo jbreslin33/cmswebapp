@@ -34,6 +34,22 @@ class InsertLoginEmailScreen extends Screen
 		this.ajax();
 	}
 
+        execute()
+        {
+                this.processData();
+/*
+                if (this.mJson)
+                {
+                        if (this.mJson.persons)
+                        {
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                        }
+                }
+		*/
+                this.resetDataVariables();
+        }
+
+
 	setLoginLink(loginLink)
 	{
 		this.mLoginLink = loginLink;

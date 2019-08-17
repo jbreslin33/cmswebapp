@@ -328,6 +328,8 @@ class Screen
                		for (var i = 0; i < this.mJson.messages.length; i++)
 			{
                         	console.log('message: ' + this.mJson.messages[i].message);
+				//this.setMessage(this.mDataArray[1],'red');
+				this.setMessage(this.mJson.messages[i].message,'red');
 			}
 		}
 	}
