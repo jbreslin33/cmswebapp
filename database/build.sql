@@ -918,9 +918,10 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT)
+CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT,int)
 RETURNS text AS $$
 DECLARE
+        json_result_codes text;
         json_result_messages text;
         json_result_persons text;
         json_result_teams text;
@@ -929,10 +930,11 @@ DECLARE
 BEGIN
 
 	select into json_result_messages j_select_messages($2);
+	select into json_result_codes j_select_codes($3);
 	select into json_result_persons j_select_persons($1);
 	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
-        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,'}');
+        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -968,20 +970,6 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION f_format_result_set_messages(int,TEXT)
-RETURNS text AS $$
-DECLARE
-        json_result_invite_club_emails text;
-        result_set text;
-BEGIN
-        select into json_result_invite_club_emails j_select_invite_club_emails($2);
-        result_set = CONCAT($1,',','{',json_result_invite_club_emails,'}');
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
-
 
 
 --NATIVE INSERT EMAIL LOGIN
@@ -1059,7 +1047,6 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PITCHES
 
-
 --BEGIN J_SELECT MESSAGES
 CREATE OR REPLACE FUNCTION j_select_messages(message_p text)
 RETURNS text AS $$
@@ -1075,6 +1062,22 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT MESSAGES
+
+--BEGIN J_SELECT CODES
+CREATE OR REPLACE FUNCTION j_select_codes(code_p int)
+RETURNS text AS $$
+DECLARE
+result_set text;
+BEGIN
+		IF code_p is NULL THEN 
+                	result_set = CONCAT('"codes": []');
+		ELSE
+               		result_set = CONCAT('"codes": [ { "code": "', code_p, '" } ]');
+		END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT CODES
 
 
 --BEGIN J_SELECT PERSONS
@@ -1912,7 +1915,7 @@ BEGIN
 			IF returning_join_email_id > 0 THEN
 				--result_set = '-101, We sent you a link to your email to finish joining.';
 				message = 'We sent you a link to your email to finish joining.';
-				result_set = f_format_result_set(found_email_id, message); 
+				result_set = f_format_result_set(found_email_id, message,0); 
 			ELSE
 				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 			END IF;
