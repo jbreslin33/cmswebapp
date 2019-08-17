@@ -32,9 +32,13 @@ class Screen
 
         public function formatResultSet($result)
         {
+		//explode result so we can grab email_id at first elememt
         	$result_array = explode(",",$result);
 
+		//grab email_id
                 $email_id = array_shift($result_array);
+
+		//put array into a string
                 $data = implode(",",$result_array);
 
                 if ($data)
@@ -43,16 +47,15 @@ class Screen
                        	$oneRing = new OneRing();
                        	$encoded_token = array();
 
+			//encode email_id into jwt 
                        	$encoded_token['email_id'] = $email_id;
                        	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
-                       	//$txt =  "-100," . $jwt . "," . $data;
-			// we need an extra brace at beginning because we took it away in stored procedures
+			// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
 			$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
 
-			//for now on always send -100 and jwt or 0 for jwt and then a json data object even for messages
+			//send only a json object client
 			$txt = $jwt_json . $data;
-			error_log($txt);
               		return $txt;
 		}
         }
