@@ -361,9 +361,10 @@ class Screen
                 this.hide();
                 this.mCode = 0;
                 this.mData = null;
-		//this.mDataArray.length = 0;
-                this.mDataArray = new Array();
-                this.mDataArray = null;
+		if (this.mDataArray)
+		{
+			this.mDataArray.length = 0;
+		}
                 this.mJson = null;
 		if (this.getMenuItem())
 		{
