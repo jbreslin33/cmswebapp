@@ -253,29 +253,30 @@ class Screen
 	{
                 if (this.mData)
                 {
-                        this.mDataArray = this.mData.split(",");
-                        this.mCode = this.mDataArray[0];
-                        if (this.mCode == -100)
-                        {
-				this.mApplication.setJWT(this.mDataArray[1]); //set jwt
+                        //this.mDataArray = this.mData.split(",");
+			//this.mApplication.setJWT(this.mDataArray[1]); //set jwt
                                 
-                                //JSON
-                                this.mDataArray.shift(); //remove mCode
-                                this.mDataArray.shift(); //remove mJwt
-                                this.mDataArray.join();
-                                this.mJson = JSON.parse(this.mDataArray);
+                        //JSON
+                         //       this.mDataArray.shift(); //remove mJwt
+                        //this.mDataArray.join();
+                        //this.mJson = JSON.parse(this.mDataArray);
+                        this.mJson = JSON.parse(this.mData);
 
-                                this.processJsonData();
-                        }
-                        if (this.mCode == -101)
-			{
-				this.setMessage(this.mDataArray[1],'red');
-			}
+                        this.processJsonData();
 		}
 	}
 
 	processJsonData()
 	{
+
+                if (this.mJson.jwts)
+                {
+                        for (var i = 0; i < this.mJson.jwts.length; i++)
+                        {
+                                console.log('jwt: ' + this.mJson.jwts[i].jwt);
+				this.mApplication.setJWT(this.mJson.jwts[i].jwt); //set jwt
+                        }
+                }
 
 		//load up clubs option
 		if (this.mJson.clubs)

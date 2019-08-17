@@ -934,7 +934,8 @@ BEGIN
 	select into json_result_persons j_select_persons($1);
 	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
-        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        --result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -954,7 +955,7 @@ BEGIN
         select into json_result_clubs j_select_clubs($1);
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,'}');
+        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1352,7 +1353,7 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id > 0 THEN
-			 result_set = f_format_result_set(found_email_id);
+			 result_set = f_format_result_set(found_email_id,null,0);
                 ELSE
 			result_set = '-101, Bad password.';
                 END IF;

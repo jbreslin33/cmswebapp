@@ -34,30 +34,26 @@ class Screen
         {
         	$result_array = explode(",",$result);
 
-		//error if -101
-		if ($result_array[0] == -101)
-		{
-			return $result;	
-		}
-		//success send jwt and data
-		else
-		{
-                	$email_id = array_shift($result_array);
-                	$data = implode(",",$result_array);
+                $email_id = array_shift($result_array);
+                $data = implode(",",$result_array);
 
-                	if ($data)
-                	{
-                		//encode
-                        	$oneRing = new OneRing();
-                        	$encoded_token = array();
+                if ($data)
+                {
+                	//encode
+                       	$oneRing = new OneRing();
+                       	$encoded_token = array();
 
-                        	$encoded_token['email_id'] = $email_id;
-                        	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
+                       	$encoded_token['email_id'] = $email_id;
+                       	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 
-                        	$txt =  "-100," . $jwt . "," . $data;
-				//for now on always send -100 and jwt or 0 for jwt and then a json data object even for messages
-                       		return $txt;
-                	}
+                       	//$txt =  "-100," . $jwt . "," . $data;
+			// we need an extra brace at beginning because we took it away in stored procedures
+			$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
+
+			//for now on always send -100 and jwt or 0 for jwt and then a json data object even for messages
+			$txt = $jwt_json . $data;
+			error_log($txt);
+              		return $txt;
 		}
         }
 
