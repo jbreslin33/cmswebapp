@@ -939,9 +939,11 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set_events(int)
+CREATE OR REPLACE FUNCTION f_format_result_set_events(int,TEXT,int)
 RETURNS text AS $$
 DECLARE
+        json_result_codes text;
+        json_result_messages text;
         json_result_persons text;
         json_result_teams text;
         json_result_clubs text;
@@ -949,23 +951,25 @@ DECLARE
         json_result_games text;
 	result_set text;
 BEGIN
+	select into json_result_messages j_select_messages($2);
+	select into json_result_codes j_select_codes($3);
 	select into json_result_persons j_select_persons($1);
 	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,'}');
+        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_emails(int,TEXT)
+CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_emails(int,TEXT,int,TEXT)
 RETURNS text AS $$
 DECLARE
         json_result_invite_club_emails text;
         result_set text;
 BEGIN
-        select into json_result_invite_club_emails j_select_invite_club_emails($2);
+        select into json_result_invite_club_emails j_select_invite_club_emails($4);
         result_set = CONCAT($1,',','{',json_result_invite_club_emails,'}');
 RETURN result_set;
 END;
@@ -988,7 +992,7 @@ BEGIN
 	ELSE
 		CALL p_insert_native_email_login($1,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(x);
+			result_set = f_format_result_set(x,null,0);
                 ELSE
 			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
@@ -1011,7 +1015,7 @@ BEGIN
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(found_email_id);
+			result_set = f_format_result_set(found_email_id,null,0);
                 ELSE
 			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
@@ -1284,7 +1288,7 @@ BEGIN
     	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_emails WHERE club_invite_token = $7;
 	IF found_club_id > 0 THEN
 		CALL p_insert_native_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
-                result_set = f_format_result_set(found_email_id);
+                result_set = f_format_result_set(found_email_id,null,0);
 	ELSE --for some reason email does not exist
 		result_set = '-101, Something went wrong dog!';
 	END IF;
@@ -1464,7 +1468,7 @@ BEGIN
 
 
         IF found_email_id > 0 THEN
-		result_set = f_format_result_set(found_email_id);
+		result_set = f_format_result_set(found_email_id,null,0);
         ELSE
                 result_set = '-105';
         END IF;
@@ -1504,9 +1508,9 @@ BEGIN
 		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
 		CALL p_insert_club_persons(found_club_id,found_email_id,x);
 		IF x > 0 THEN --we are already a member so give normal result set to send to main
-                	result_set = f_format_result_set(found_email_id);
+                	result_set = f_format_result_set(found_email_id,null,0);
 		ELSE -- we were not already a member so a join club needs to be done.
-                	result_set = f_format_result_set_invite_club_emails(found_email_id,$1);
+                	result_set = f_format_result_set_invite_club_emails(found_email_id,null,0,$1);
                 	--result_set = '-101, Something went wrong adding your persons to club.';
 		END IF;
 	ELSE
@@ -1589,7 +1593,7 @@ BEGIN
        	ELSE
 		CALL p_insert_club($1,$2,email_id,person_id,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(email_id);
+			result_set = f_format_result_set(email_id,null,0);
 		ELSE
                 	result_set = '-101, Something went wrong with adding club. Sorry!';
 		END IF;
@@ -1649,7 +1653,7 @@ BEGIN
 	IF found_team_club_person_id > 0 THEN
         	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
         	IF x > 0 THEN
-                	result_set = f_format_result_set($1);
+                	result_set = f_format_result_set($1,null,0);
         	ELSE
 			result_set = '-101, Something went wrong with adding practice.';
         	END IF;
@@ -1673,7 +1677,7 @@ BEGIN
         CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
 
         IF x > 0 THEN
-                result_set = f_format_result_set($1);
+                result_set = f_format_result_set($1,null,0);
         ELSE
                 result_set = '-105';
         END IF;
@@ -1710,7 +1714,7 @@ BEGIN
         --select into json_result_events j_select_events($1);
         --result_set = CONCAT($1,',','{',json_result_events,'}');
 --	     result_set = f_format_result_set(x);
-	result_set = f_format_result_set_events(email_id);
+	result_set = f_format_result_set_events(email_id,null,0);
 
 RETURN result_set;
 END;
@@ -1743,7 +1747,7 @@ BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
 
         IF x > 0 THEN
-		result_set = f_format_result_set(email_id);
+		result_set = f_format_result_set(email_id,null,0);
         ELSE
                 result_set = '-105';
         END IF;
@@ -1778,7 +1782,7 @@ BEGIN
 	IF total_persons > 1 THEN
         	CALL p_delete_person($1,$2,x);
         	IF x > 0 THEN
-			result_set = f_format_result_set($1);
+			result_set = f_format_result_set($1,null,0);
         	ELSE
                 	result_set = '-132';
         	END IF;
@@ -1850,7 +1854,7 @@ BEGIN
 			CALL p_insert_team($2,$4,$3,x);
 
 			IF x > 0 THEN
-                     		result_set = f_format_result_set($1);
+                     		result_set = f_format_result_set($1,null,0);
 			ELSE
                 		result_set = '-101, Something went wrong with adding team. Sorry!';
 			END IF;
@@ -1875,7 +1879,7 @@ BEGIN
 		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
 			--result_set = '-101, Success. We sent you an email to help you login.';
-                     	result_set = f_format_result_set(found_email_id);
+                     	result_set = f_format_result_set(found_email_id,null,0);
 		ELSE
 			result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 		END IF;
@@ -1907,7 +1911,7 @@ BEGIN
 			--result_set = '-101, You already have an account. Click here to login.';
 
 			message = 'You already have an account. Click here to login.';
-			result_set = f_format_result_set(found_email_id, message); 
+			result_set = f_format_result_set(found_email_id,null,0); 
 		ELSE
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
 			delete from join_emails where email_id = found_email_id; 
@@ -1916,7 +1920,7 @@ BEGIN
 				--result_set = '-101, We sent you a link to your email to finish joining.';
 				message = 'We sent you a link to your email to finish joining.';
 				--even though we know the email_id we should not send it????
-				result_set = f_format_result_set(0, message,-100); -- we want you to clear screen but stay on screen and display message... 
+				result_set = f_format_result_set(0, message,0); -- we want you to clear screen but stay on screen and display message... 
 			ELSE
 				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 			END IF;
@@ -1995,7 +1999,7 @@ BEGIN
 	END IF;
 
 	IF x > 0 THEN
-		result_set = f_format_result_set(x);
+		result_set = f_format_result_set(x,null,0);
 	ELSE
 		result_set = '-101, something went wrong.';
 	END IF;
