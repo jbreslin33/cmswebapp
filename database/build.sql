@@ -934,7 +934,6 @@ BEGIN
 	select into json_result_persons j_select_persons($1);
 	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
-        --result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
@@ -1916,7 +1915,8 @@ BEGIN
 			IF returning_join_email_id > 0 THEN
 				--result_set = '-101, We sent you a link to your email to finish joining.';
 				message = 'We sent you a link to your email to finish joining.';
-				result_set = f_format_result_set(found_email_id, message,-100); -- we want you to clear screen but stay on screen and display message... 
+				--even though we know the email_id we should not send it????
+				result_set = f_format_result_set(0, message,-100); -- we want you to clear screen but stay on screen and display message... 
 			ELSE
 				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 			END IF;

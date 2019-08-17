@@ -48,11 +48,19 @@ class Screen
                        	$encoded_token = array();
 
 			//encode email_id into jwt 
-                       	$encoded_token['email_id'] = $email_id;
-                       	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
-
-			// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
-			$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
+			if ($email_id > 0)
+			{
+                       		$encoded_token['email_id'] = $email_id;
+                       		$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
+				
+				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
+				$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
+			}
+			else
+			{
+				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
+				$jwt_json = '{ ';
+			}
 
 			//send only a json object client
 			$txt = $jwt_json . $data;
