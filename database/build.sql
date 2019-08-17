@@ -910,7 +910,7 @@ BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW() and forgot_password_token = update_forgot_password_token;
         IF found_email_id THEN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-                result_set = f_format_result_set(found_email_id);
+                result_set = f_format_result_set(found_email_id,null,0);
         ELSE
                 result_set = '-101, Something went wrong can you submit a new request please?';
         END IF;
@@ -1069,10 +1069,10 @@ RETURNS text AS $$
 DECLARE
 result_set text;
 BEGIN
-		IF code_p is NULL THEN 
-                	result_set = CONCAT('"codes": []');
-		ELSE
+		IF code_p > 0 THEN 
                		result_set = CONCAT('"codes": [ { "code": "', code_p, '" } ]');
+		ELSE
+                	result_set = CONCAT('"codes": []');
 		END IF;
 RETURN result_set;
 END;
