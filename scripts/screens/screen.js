@@ -14,7 +14,9 @@ class Screen
 
 		this.mCode = 0;
 		this.mData = null;
+		this.mDataArray = null;
 		this.mJson = null;
+
 
 		this.mHit = false;
 
@@ -251,25 +253,24 @@ class Screen
 	{
                 if (this.mData)
                 {
-                        var dataArray = this.mData.split(",");
-                        this.mCode = dataArray[0];
+                        this.mDataArray = this.mData.split(",");
+                        this.mCode = this.mDataArray[0];
                         if (this.mCode == -100)
                         {
-				this.mApplication.setJWT(dataArray[1]); //set jwt
+				this.mApplication.setJWT(this.mDataArray[1]); //set jwt
                                 
                                 //JSON
-                                dataArray.shift(); //remove mCode
-                                dataArray.shift(); //remove mJwt
-                                dataArray.join();
-                                this.mJson = JSON.parse(dataArray);
+                                this.mDataArray.shift(); //remove mCode
+                                this.mDataArray.shift(); //remove mJwt
+                                this.mDataArray.join();
+                                this.mJson = JSON.parse(this.mDataArray);
 
                                 this.processJsonData();
                         }
                         if (this.mCode == -101)
 			{
-				this.setMessage(dataArray[1],'red');
+				this.setMessage(this.mDataArray[1],'red');
 			}
-			//ok we processed data so now lets reset so we can make room for more precious data
 		}
 	}
 
@@ -321,6 +322,14 @@ class Screen
                        		select.appendChild(opt);
                		}
 		}
+
+		if (this.mJson.messages)
+		{
+               		for (var i = 0; i < this.mJson.messages.length; i++)
+			{
+                        	console.log('message: ' + this.mJson.messages[i].message);
+			}
+		}
 	}
 	
 	enter()
@@ -352,6 +361,9 @@ class Screen
                 this.hide();
                 this.mCode = 0;
                 this.mData = null;
+		//this.mDataArray.length = 0;
+                this.mDataArray = new Array();
+                this.mDataArray = null;
                 this.mJson = null;
 		if (this.getMenuItem())
 		{

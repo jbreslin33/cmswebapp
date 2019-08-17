@@ -918,18 +918,21 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set(int)
+CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT)
 RETURNS text AS $$
 DECLARE
+        json_result_messages text;
         json_result_persons text;
         json_result_teams text;
         json_result_clubs text;
 	result_set text;
 BEGIN
+
+	select into json_result_messages j_select_messages($2);
 	select into json_result_persons j_select_persons($1);
 	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
-        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
+        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -965,6 +968,20 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_format_result_set_messages(int,TEXT)
+RETURNS text AS $$
+DECLARE
+        json_result_invite_club_emails text;
+        result_set text;
+BEGIN
+        select into json_result_invite_club_emails j_select_invite_club_emails($2);
+        result_set = CONCAT($1,',','{',json_result_invite_club_emails,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 
 --NATIVE INSERT EMAIL LOGIN
@@ -1011,12 +1028,11 @@ BEGIN
 			result_set = '-101, Something went wrong with signup. Sorry! Please try again.';
 		END IF;
 	ELSE
-		result_set = '-101, that email is not authorized to join. Do you want to login instead?';
+		result_set = '-101, Something went wrong. Please resend email email.';
 	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
 
 --BEGIN J_SELECT PITCHES
 --params:club_id
@@ -1030,7 +1046,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select pitches.id, pitches.name from pitches where club_id = $1 
+                select pitches.id, pitches.name from pitches where club_id = $1
         ) t;
 
         IF raw_json is NULL THEN
@@ -1042,6 +1058,23 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PITCHES
+
+
+--BEGIN J_SELECT MESSAGES
+CREATE OR REPLACE FUNCTION j_select_messages(message_p text)
+RETURNS text AS $$
+DECLARE
+result_set text;
+BEGIN
+		IF message_p is NULL THEN 
+                	result_set = CONCAT('"messages": []');
+		ELSE
+               		result_set = CONCAT('"messages": [ { "message": "', message_p, '" } ]');
+		END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT MESSAGES
 
 
 --BEGIN J_SELECT PERSONS
@@ -1092,6 +1125,8 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
 
 --BEGIN J_SELECT CLUBS
+--        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
+
 CREATE OR REPLACE FUNCTION j_select_clubs(email_id int)
 RETURNS text AS $$
 DECLARE
@@ -1102,8 +1137,6 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		--select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join persons on persons.id=club_persons.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1
-		
 		select clubs.id, clubs.name from clubs join club_emails on club_emails.club_id=clubs.id where club_emails.email_id = $1
         ) t;
 
@@ -1859,6 +1892,7 @@ DECLARE
         found_email_id emails.id%TYPE;
         found_native_login_id native_logins.id%TYPE;
         returning_join_email_id join_emails.id%TYPE;
+        message text;
         result_set text;
 BEGIN
         select into found_email_id f_get_email_id($1);
@@ -1867,13 +1901,18 @@ BEGIN
 		select id into found_native_login_id from native_logins where email_id = found_email_id;
 
 		IF found_native_login_id > 0 THEN
-			result_set = '-101, You already have an account. Click here to login.';
+			--result_set = '-101, You already have an account. Click here to login.';
+
+			message = 'You already have an account. Click here to login.';
+			result_set = f_format_result_set(found_email_id, message); 
 		ELSE
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
 			delete from join_emails where email_id = found_email_id; 
 			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
 			IF returning_join_email_id > 0 THEN
-				result_set = '-101, We sent you a link to your email to finish joining.';
+				--result_set = '-101, We sent you a link to your email to finish joining.';
+				message = 'We sent you a link to your email to finish joining.';
+				result_set = f_format_result_set(found_email_id, message); 
 			ELSE
 				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
 			END IF;

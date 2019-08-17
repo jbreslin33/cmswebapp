@@ -50,9 +50,12 @@ class Screen
                 		//encode
                         	$oneRing = new OneRing();
                         	$encoded_token = array();
+
                         	$encoded_token['email_id'] = $email_id;
                         	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
+
                         	$txt =  "-100," . $jwt . "," . $data;
+				//for now on always send -100 and jwt or 0 for jwt and then a json data object even for messages
                        		return $txt;
                 	}
 		}
