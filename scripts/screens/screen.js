@@ -232,7 +232,6 @@ class Screen
 		{
                 	this.getHtml().style.display = "block";
                 	this.getHtml().style.visibility = "visible";
-			console.log('showing hopefull');
 		}
 		if (this.getSpinner())
 		{
@@ -242,7 +241,6 @@ class Screen
 
         hide()
         {
-			console.log('hidshowing hopefull');
 		if (this.getHtml())
 		{
                 	this.getHtml().style.display = "none";
@@ -273,7 +271,6 @@ class Screen
                 {
                         for (var i = 0; i < this.mJson.jwts.length; i++)
                         {
-                                console.log('jwt: ' + this.mJson.jwts[i].jwt);
 				this.mApplication.setJWT(this.mJson.jwts[i].jwt); //set jwt
                         }
                 }
@@ -310,7 +307,6 @@ class Screen
 
 		if (this.mJson.persons)
 		{
-			console.log('got persons in screen');
                		//load up persons option
                		var select = document.getElementById("person_select_id");
 			select.length = 0;
@@ -328,7 +324,6 @@ class Screen
 		{
                		for (var i = 0; i < this.mJson.messages.length; i++)
 			{
-                        	console.log('message: ' + this.mJson.messages[i].message);
 				//this.setMessage(this.mDataArray[1],'red');
 				this.setMessage(this.mJson.messages[i].message,'red');
 			}
@@ -361,7 +356,6 @@ class Screen
 	
 	exit()
 	{
-		console.log('calling exit');
                 this.hide();
                 this.mCode = 0;
                 this.mData = null;
