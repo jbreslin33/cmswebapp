@@ -14,7 +14,6 @@ class Screen
 
 		this.mCode = 0;
 		this.mData = null;
-		this.mDataArray = null;
 		this.mJson = null;
 
 
@@ -251,15 +250,7 @@ class Screen
 	{
                 if (this.mData)
                 {
-                        //this.mDataArray = this.mData.split(",");
-			//this.mApplication.setJWT(this.mDataArray[1]); //set jwt
-                                
-                        //JSON
-                         //       this.mDataArray.shift(); //remove mJwt
-                        //this.mDataArray.join();
-                        //this.mJson = JSON.parse(this.mDataArray);
                         this.mJson = JSON.parse(this.mData);
-
                         this.processJsonData();
 		}
 	}
@@ -324,8 +315,33 @@ class Screen
 		{
                		for (var i = 0; i < this.mJson.messages.length; i++)
 			{
-				//this.setMessage(this.mDataArray[1],'red');
 				this.setMessage(this.mJson.messages[i].message,'red');
+			}
+		}
+		
+		if (this.mJson.codes)
+		{
+			var code = 0;
+               		for (var i = 0; i < this.mJson.codes.length; i++)
+			{
+				code = this.mJson.codes[i];
+			}
+
+			//definite success so send to main
+			if (code == -100) 
+			{
+				if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
+				{
+					//do nothing
+				}
+				else
+				{
+                                	this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+				}
+			}
+			else if (code == -101)
+			{
+				//standard error code so stay in state and display message if their is one.
 			}
 		}
 	}
@@ -343,27 +359,15 @@ class Screen
 	execute()
 	{
                 this.processData();
-
-                if (this.mJson)
-                {
-                        if (this.mJson.persons)
-                        {
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
-                        }
-                }
 		this.resetDataVariables();
 	}
 	
 	exit()
 	{
                 this.hide();
-                this.mCode = 0;
-                this.mData = null;
-		if (this.mDataArray)
-		{
-			this.mDataArray.length = 0;
-		}
-                this.mJson = null;
+
+		this.resetDataVariables();
+
 		if (this.getMenuItem())
 		{
             		this.getMenuItem().className = this.getMenuItem().className.replace(/\active\b/g, "");

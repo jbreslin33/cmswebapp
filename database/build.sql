@@ -1356,7 +1356,7 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id > 0 THEN
-			 result_set = f_format_result_set(found_email_id,null,0);
+			 result_set = f_format_result_set(found_email_id,null,-100);
                 ELSE
 			result_set = '-101, Bad password.';
                 END IF;
@@ -1747,9 +1747,9 @@ BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
 
         IF x > 0 THEN
-		result_set = f_format_result_set(email_id,null,0);
-        ELSE
 		result_set = f_format_result_set(email_id,'Person not added',-101);
+        ELSE
+		result_set = f_format_result_set(email_id,null,0);
         END IF;
 
 RETURN result_set;

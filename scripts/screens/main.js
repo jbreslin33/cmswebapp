@@ -30,21 +30,24 @@ class Main extends Screen
 		var events = [];
 
 		//make new array containing games and practices together
-                if (this.mJson.practices)
+		if (this.mJson)
 		{
-                        for (var i = 0; i < this.mJson.practices.length; i++)
+                	if (this.mJson.practices)
 			{
-				events.push(this.mJson.practices[i]);
-				this.mJson.practices[i].type = 'practice';
+                        	for (var i = 0; i < this.mJson.practices.length; i++)
+				{
+					events.push(this.mJson.practices[i]);
+					this.mJson.practices[i].type = 'practice';
+				}
 			}
-		}
 
-		if (this.mJson.games)
-		{
-                        for (var i = 0; i < this.mJson.games.length; i++)
+			if (this.mJson.games)
 			{
-				events.push(this.mJson.games[i]);
-				this.mJson.games[i].type = 'game';
+                       		for (var i = 0; i < this.mJson.games.length; i++)
+				{
+					events.push(this.mJson.games[i]);
+					this.mJson.games[i].type = 'game';
+				}
 			}
 		}
 
@@ -156,10 +159,5 @@ class Main extends Screen
 				}
                         }
                 }
-                
-		//after processing data reset
-	      	this.mCode = 0;
-                this.mData = null;
-                this.mJson = null;
 	}
 }
