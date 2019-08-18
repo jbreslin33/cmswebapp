@@ -1747,7 +1747,7 @@ BEGIN
         IF x > 0 THEN
 		result_set = f_format_result_set(email_id,'Person not added',-101);
         ELSE
-		result_set = f_format_result_set(email_id,null,0);
+		result_set = f_format_result_set(email_id,null,-100);
         END IF;
 
 RETURN result_set;

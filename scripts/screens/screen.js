@@ -329,6 +329,7 @@ class Screen
 			//definite success so send to main
 			if (code == '-100') 
 			{
+				console.log('code in if:' + code);
 				if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
 				{
 					//do nothing
@@ -341,7 +342,9 @@ class Screen
 			else if (code == '-101')
 			{
 				//standard error code so stay in state and display message if their is one.
+				console.log('code in else:' + code);
 			}
+			console.log('code:' + code);
 		}
 	}
 	
