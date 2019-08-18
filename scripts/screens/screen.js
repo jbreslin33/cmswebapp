@@ -204,13 +204,6 @@ class Screen
 
         showSpinner()
         {
-		/*
-		if (this.getHtml())
-		{
-                	this.getHtml().style.visibility = "hidden";
-		}
-		*/
-
 		if (this.getSpinner())
 		{
                 	this.getSpinner().style.visibility = "visible";
@@ -248,7 +241,6 @@ class Screen
 
 	processData()
 	{
-		console.log('data:' + this.mData);
                 if (this.mData)
                 {
                         this.mJson = JSON.parse(this.mData);
@@ -258,7 +250,6 @@ class Screen
 
 	processJsonData()
 	{
-
                 if (this.mJson.jwts)
                 {
                         for (var i = 0; i < this.mJson.jwts.length; i++)
@@ -330,7 +321,6 @@ class Screen
 			//definite success so send to main
 			if (code == '-100') 
 			{
-				console.log('code in if:' + code);
 				if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
 				{
 					//do nothing
@@ -343,9 +333,7 @@ class Screen
 			else if (code == '-101')
 			{
 				//standard error code so stay in state and display message if their is one.
-				console.log('code in else:' + code);
 			}
-			console.log('code:' + code);
 		}
 	}
 	
