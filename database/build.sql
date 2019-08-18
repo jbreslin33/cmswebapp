@@ -930,10 +930,13 @@ DECLARE
 BEGIN
 
 	select into json_result_messages j_select_messages($2);
+  	RAISE LOG 'code 3: %', $3;
 	select into json_result_codes j_select_codes($3);
 	select into json_result_persons j_select_persons($1);
 	select into json_result_teams j_select_teams($1);
         select into json_result_clubs j_select_clubs($1);
+  	--RAISE LOG 'log message %', now();
+  	RAISE LOG 'codes: %', json_result_codes;
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
@@ -1073,10 +1076,10 @@ RETURNS text AS $$
 DECLARE
 result_set text;
 BEGIN
-		IF code_p > 0 THEN 
-               		result_set = CONCAT('"codes": [ { "code": "', code_p, '" } ]');
-		ELSE
+		IF code_p = 0 THEN 
                 	result_set = CONCAT('"codes": []');
+		ELSE
+               		result_set = CONCAT('"codes": [ { "code": "', code_p, '" } ]');
 		END IF;
 RETURN result_set;
 END;
@@ -1358,11 +1361,11 @@ BEGIN
 		IF found_native_login_id > 0 THEN
 			 result_set = f_format_result_set(found_email_id,null,-100);
                 ELSE
-			result_set = '-101, Bad password.';
+			 result_set = f_format_result_set(found_email_id,'Bad password',-101);
                 END IF;
 
 	ELSE
-		result_set = '-101, Email does not exist.';
+		 result_set = f_format_result_set(found_email_id,'Email does not exist',-101);
 	END IF;
 RETURN result_set;
 END;

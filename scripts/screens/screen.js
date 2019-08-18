@@ -324,11 +324,12 @@ class Screen
 			var code = 0;
                		for (var i = 0; i < this.mJson.codes.length; i++)
 			{
-				code = this.mJson.codes[i];
+				code = this.mJson.codes[i].code;
+				console.log('what this si code:' + code);
 			}
-
+			console.log('this si code:' + code);
 			//definite success so send to main
-			if (code == -100) 
+			if (code == '-100') 
 			{
 				if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
 				{
@@ -339,7 +340,7 @@ class Screen
                                 	this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
 				}
 			}
-			else if (code == -101)
+			else if (code == '-101')
 			{
 				//standard error code so stay in state and display message if their is one.
 			}
