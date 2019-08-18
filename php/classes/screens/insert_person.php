@@ -40,8 +40,8 @@ class InsertPerson extends Screen
 		$sql = 'select f_insert_person($1,$2,$3,$4,$5,$6)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_person", $sql);
 		$result = pg_execute($this->mDatabase->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $this->getSenderEmailId()));
-
                	return pg_fetch_result($result, 0);
+
         }
 }
 

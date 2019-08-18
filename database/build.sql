@@ -1745,10 +1745,14 @@ DECLARE
 	json_result text; 
 BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
+	RAISE LOG 'email_id --> %', email_id;
+	RAISE LOG 'x --> %', x;
 
         IF x > 0 THEN
+		RAISE LOG 'if x --> %', x;
 		result_set = f_format_result_set(email_id,null,0);
         ELSE
+		RAISE LOG 'else x --> %', x;
                 result_set = '-105';
         END IF;
 

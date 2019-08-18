@@ -361,6 +361,7 @@ class Screen
 	
 	exit()
 	{
+		console.log('calling exit');
                 this.hide();
                 this.mCode = 0;
                 this.mData = null;

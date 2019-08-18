@@ -609,6 +609,7 @@ class INSERT_PERSON_APPLICATION extends State
 		{
 			console.log("INSERT_PERSON_APPLICATION: EXIT");        
 		}
+		app.getCurrentScreen().exit();
 	}
 }
 
