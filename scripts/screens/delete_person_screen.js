@@ -15,12 +15,11 @@ class DeletePersonScreen extends Screen
                 this.setMessageElement(document.getElementById("delete_person_screen_message_id"));
                 this.setForm(document.getElementById("delete_person_screen_form_id"));
                 this.setSpinner(document.getElementById("delete_person_screen_spinner_id"));
-		console.log('const');
 	}
 
 	get()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/select/select_persons.php?jwt=" + APPLICATION.getJWT()); 
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?jwt=" + APPLICATION.getJWT()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
@@ -34,7 +33,7 @@ class DeletePersonScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/delete_person.php?name=" + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id);
                 APPLICATION.getCurrentScreen().ajax();
 	}
-
+/*
         execute()
         {
                 this.processData();
@@ -49,7 +48,8 @@ class DeletePersonScreen extends Screen
               
 		this.resetDataVariables();
         }
-
+*/
+	/*
 	processJsonData()
 	{
                if (this.mJson.persons)
@@ -69,4 +69,5 @@ class DeletePersonScreen extends Screen
                 }
 
 	}
+	*/
 }

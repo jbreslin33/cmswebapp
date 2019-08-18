@@ -248,6 +248,7 @@ class Screen
 
 	processData()
 	{
+		console.log('data:' + this.mData);
                 if (this.mData)
                 {
                         this.mJson = JSON.parse(this.mData);
