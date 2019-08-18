@@ -325,9 +325,7 @@ class Screen
                		for (var i = 0; i < this.mJson.codes.length; i++)
 			{
 				code = this.mJson.codes[i].code;
-				console.log('what this si code:' + code);
 			}
-			console.log('this si code:' + code);
 			//definite success so send to main
 			if (code == '-100') 
 			{
