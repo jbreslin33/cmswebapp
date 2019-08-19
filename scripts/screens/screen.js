@@ -250,6 +250,16 @@ class Screen
 
 	processJsonData()
 	{
+		this.processJwts();
+		this.processClubs();
+		this.processTeams();
+		this.processPersons();
+		this.processMessages();
+		this.processCodes();
+	}
+
+	processJwts()
+	{
                 if (this.mJson.jwts)
                 {
                         for (var i = 0; i < this.mJson.jwts.length; i++)
@@ -257,7 +267,10 @@ class Screen
 				this.mApplication.setJWT(this.mJson.jwts[i].jwt); //set jwt
                         }
                 }
+	}
 
+	processClubs()
+	{
 		//load up clubs option
 		if (this.mJson.clubs)
 		{
@@ -272,7 +285,10 @@ class Screen
                         	select.appendChild(opt);
                 	}
 		}
-		
+	}	
+
+	processTeams()
+	{
 		//load up teams option
 		if (this.mJson.teams)
 		{
@@ -287,7 +303,10 @@ class Screen
                         	select.appendChild(opt);
                 	}
 		}
+	}
 
+	processPersons()
+	{
 		if (this.mJson.persons)
 		{
                		//load up persons option
@@ -302,7 +321,10 @@ class Screen
                        		select.appendChild(opt);
                		}
 		}
+	}
 
+	processMessages()
+	{
 		if (this.mJson.messages)
 		{
                		for (var i = 0; i < this.mJson.messages.length; i++)
@@ -310,7 +332,10 @@ class Screen
 				this.setMessage(this.mJson.messages[i].message,'red');
 			}
 		}
-		
+	}	
+
+	processCodes()
+	{
 		if (this.mJson.codes)
 		{
 			var code = 0;
