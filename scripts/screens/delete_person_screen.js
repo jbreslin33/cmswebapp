@@ -71,6 +71,7 @@ class DeletePersonScreen extends Screen
 
         processCodes()
         {
+		/*
                 if (this.mJson.codes)
                 {
                         var code = 0;
@@ -78,47 +79,7 @@ class DeletePersonScreen extends Screen
                         {
                                 code = this.mJson.codes[i].code;
                         }
-                        //definite success so send to main
-                        if (code == '-100')
-                        {
-				/*
-                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
-                                {
-                                        //do nothing
-                                }
-                                else
-                                {
-                                        this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
-                                }
-				*/
-                        }
-                        else if (code == '-101')
-                        {
-                                //standard error code so stay in state and display message if their is one.
-                        }
                 }
+		*/
         }
-
-        execute()
-        {
-                this.processData();
-                this.resetDataVariables();
-        }
-
-/*
-        execute()
-        {
-                this.processData();
-
-                if (this.mJson && this.mHit)
-                {
-                        if (this.mJson.persons)
-                        {
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
-                        }
-                }
-              
-		this.resetDataVariables();
-        }
-*/
 }
