@@ -1538,9 +1538,15 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
         returning_administrator_id administrators.id%TYPE;
+        found_administrator_id administrators.id%TYPE;
 BEGIN
-        insert into administrators (person_id) values (person_id_p) returning id into returning_administrator_id;
-        insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, returning_administrator_id) returning id into x;
+	select id into found_administrator_id from administrators where person_id = person_id_p; 
+	IF found_administrator_id > 0 THEN
+        	insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, found_administrator_id) returning id into x;
+	ELSE
+        	insert into administrators (person_id) values (person_id_p) returning id into returning_administrator_id;
+        	insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, returning_administrator_id) returning id into x;
+	END IF;
 END;
 $$;
 
