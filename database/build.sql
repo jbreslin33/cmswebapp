@@ -939,6 +939,24 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_format_result_set_pitches(int,TEXT,int,int)
+RETURNS text AS $$
+DECLARE
+        json_result_codes text;
+        json_result_messages text;
+        json_result_pitches text;
+        result_set text;
+BEGIN
+
+        select into json_result_messages j_select_messages($2);
+        select into json_result_codes j_select_codes($3);
+        select into json_result_pitches j_select_pitches($4);
+        result_set = CONCAT($1,',',json_result_pitches,',',json_result_messages,',',json_result_codes,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE FUNCTION f_format_result_set_events(int,TEXT,int)
 RETURNS text AS $$
 DECLARE
@@ -1687,18 +1705,13 @@ END;
 $$ LANGUAGE plpgsql;
 --END INSERT GAME
 
-
 --BEGIN SELECT PITCHES
-CREATE OR REPLACE FUNCTION f_select_pitches(club_id int)
+CREATE OR REPLACE FUNCTION f_select_pitches(email_id_p int,club_id_p int)
 RETURNS text AS $$
 DECLARE
         result_set text;
-        DECLARE x int := -111;
-        json_result_pitches text;
-        json_result text;
 BEGIN
-        select into json_result_pitches j_select_pitches($1);
-        result_set = CONCAT($1,',','{',json_result_pitches,'}');
+        result_set = f_format_result_set_pitches(email_id_p,null,-100,club_id_p);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1726,9 +1739,6 @@ DECLARE
         json_result text;
 BEGIN
 	result_set = f_format_result_set(email_id,null,-100);
-
-        --select into json_result_persons j_select_persons($1);
-        --result_set = CONCAT($1,',','{',json_result_persons,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
