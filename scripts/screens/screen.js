@@ -250,6 +250,7 @@ class Screen
 
 	processJsonData()
 	{
+		console.log('JWt PRINT:' + JSON.stringify(this.mJson));
 		this.processJwts();
 		this.processClubs();
 		this.processTeams();

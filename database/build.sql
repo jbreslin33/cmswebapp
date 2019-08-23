@@ -952,6 +952,11 @@ BEGIN
         select into json_result_codes j_select_codes($3);
         select into json_result_pitches j_select_pitches($4);
         result_set = CONCAT($1,',',json_result_pitches,',',json_result_messages,',',json_result_codes,'}');
+
+  	--RAISE LOG 'log message %', now();
+	
+  	RAISE LOG '$1: %', $1;
+  	RAISE LOG 'pitches: %', json_result_pitches;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

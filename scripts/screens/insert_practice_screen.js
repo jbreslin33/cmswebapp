@@ -88,10 +88,12 @@ class InsertPracticeScreen extends Screen
 */
         processJsonData()
         {
+		console.log('going once');
                 super.processJsonData();
 
                 if (this.mJson.pitches)
                 {
+			console.log('do o got pithes bitches?');
                         //load up pitches option
                         var select = document.getElementById("insert_practice_screen_pitch_id");
                         select.length = 0;
