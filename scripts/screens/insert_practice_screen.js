@@ -75,18 +75,28 @@ class InsertPracticeScreen extends Screen
 			APPLICATION.getCurrentScreen().ajax();
 		}
 	}
-/*
-        processJsonData()
-        {
-                this.processJwts();
-                this.processClubs();
-                this.processTeams();
-                this.processPersons();
-                this.processMessages();
-                this.processCodes();
-        }
-*/
-        processJsonData()
+        
+	processCodes()
+	{
+		if (this.mJson.codes)
+		{
+			var code = 0;
+			for (var i = 0; i < this.mJson.codes.length; i++)
+			{
+				code = this.mJson.codes[i].code;
+				if (code == '-100')
+				{
+					//do nothing	
+				}
+				else if (code == '-101')
+				{
+					//do nothing	
+				}
+			}
+		}
+	}
+	
+	processJsonData()
         {
 		console.log('going once');
                 super.processJsonData();
