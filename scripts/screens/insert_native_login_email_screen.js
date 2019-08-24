@@ -8,10 +8,9 @@ class InsertLoginEmailScreen extends Screen
 
 		location.hash = 'insert_native_login_email_screen';
 
-		this.mLoginLink = null;
-
 		//sql php vars
 		this.mEmail = null;
+		this.mLoginLink = null;
 
 		document.getElementById("insertnativeloginemailscreenbuttonid").onclick = this.hit.bind(this);
 
@@ -22,6 +21,7 @@ class InsertLoginEmailScreen extends Screen
 		this.setForm(document.getElementById("insert_native_login_email_screen_form_id"));
 
 		this.setLoginLink(document.getElementById("insert_native_login_email_screen_login_id"));
+
 	}
 
 	hit()
@@ -34,19 +34,37 @@ class InsertLoginEmailScreen extends Screen
 		this.ajax();
 	}
 
-        execute()
+        processCodes()
         {
-                this.processData();
-/*
-                if (this.mJson)
+                if (this.mJson.codes)
                 {
-                        if (this.mJson.persons)
+                        var code = 0;
+                        for (var i = 0; i < this.mJson.codes.length; i++)
                         {
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                code = this.mJson.codes[i].code;
                         }
+                        //definite success so send to main
+                        if (code == '-100')
+                        {
+                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
+                                {
+                                        //do nothing
+                                }
+                                else
+                                {
+                                        this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                }
+                        }
+                        else if (code == '-101')
+                        {
+                                //standard error code so stay in state and display message if their is one.
+                        }
+                        else if (code == '-102')
+                        {
+                       		//show login link
+				this.showLogin();
+			}
                 }
-		*/
-                this.resetDataVariables();
         }
 
 
@@ -64,27 +82,32 @@ class InsertLoginEmailScreen extends Screen
         {
 		super.setMessage(message,color);
 
+        }
+
+	showLogin()
+	{
 		//and show login
                 this.getLoginLink().style.display = "block";
                 this.getLoginLink().style.visibility = "visible";
-        }
-        show()
-        {
-		super.show();
-                
+	}
+
+	hideLogin()
+	{
 		if (this.getLoginLink())
                 {
                         this.getLoginLink().style.display = "none";
                 }
+	}
+
+        show()
+        {
+		super.show();
+		this.hideLogin();
         }
 
         hide()
         {
 		super.hide();
-
-                if (this.getLoginLink())
-                {
-                        this.getLoginLink().style.display = "none";
-                }
+		this.hideLogin();
         }
 }

@@ -32,13 +32,6 @@ class InsertNativeEmailLogin extends Screen
                 $mail = new Mail($email,$this->mSubject,$this->mBody);
 
                 return pg_fetch_result($result, 0);
-
-//old
-
-		$sql = 'select f_insert_native_email_login($1)';
-		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_native_email_login", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_insert_native_email_login", array( $_GET['email']));
-                return pg_fetch_result($result, 0);
 	}
 }
 

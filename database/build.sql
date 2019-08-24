@@ -1920,14 +1920,12 @@ BEGIN
 		select id into found_native_login_id from native_logins where email_id = found_email_id;
 
 		IF found_native_login_id > 0 THEN
-			result_set = f_format_result_set(found_email_id,null,-100); 
+			result_set = f_format_result_set(0,'That email already has a login associated with it. Would you like to login?',-102); 
 		ELSE
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
-			delete from join_emails where email_id = found_email_id; 
 			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
 			IF returning_join_email_id > 0 THEN
 				message = 'We sent you a link to your email to finish joining.';
-				--even though we know the email_id we should not send it????
 				result_set = f_format_result_set(0, message,-101); -- we want you to clear screen but stay on screen and display message... 
 			ELSE
 				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101); -- we want you to clear screen but stay on screen and display message.. 
@@ -1939,12 +1937,11 @@ BEGIN
 		IF x > 0 THEN 
 			--there could not have been native login because email did not exist so...
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
-			delete from join_emails where email_id = found_email_id; 
 			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
 			IF returning_join_email_id > 0 THEN
-				result_set = '-101, We sent you a link to your email to finish joining.';
+				result_set = f_format_result_set(0,'We sent you a link to your email to finish joining.',-101);
 			ELSE
-				result_set = '-101, Something went wrong with process. Sorry! Please try again.';
+				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
 			END IF;
 		ELSE
 		END IF;
