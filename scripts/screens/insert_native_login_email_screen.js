@@ -21,7 +21,6 @@ class InsertLoginEmailScreen extends Screen
 		this.setForm(document.getElementById("insert_native_login_email_screen_form_id"));
 
 		this.setLoginLink(document.getElementById("insert_native_login_email_screen_login_id"));
-
 	}
 
 	hit()
@@ -32,6 +31,8 @@ class InsertLoginEmailScreen extends Screen
 		this.setUrl("/php/classes/screens/insert_native_email_login.php?email=" + this.mEmail); 
 
 		this.ajax();
+	
+		this.hideAfterHit()
 	}
 
         processCodes()
@@ -110,4 +111,26 @@ class InsertLoginEmailScreen extends Screen
 		super.hide();
 		this.hideLogin();
         }
+	hideAfterHit()
+	{
+		//insert_native_login_screen_email_div_id
+        	var textBox = document.getElementById("insert_native_login_screen_email_div_id");
+                textBox.style.display = "none";
+                //textBox.style.visibility = "visible";
+
+
+        	//var button  = document.getElementById("insertnativeloginemailscreenbuttonid");
+/*
+		document.getE
+           <div class="form-row">
+                        
+                                        <div class="col-md-4 mb-3" id="insert_native_login_screen_email_div_id">
+                                                <label for="insert_native_login_screen_email_id">Email</label>
+                                                <input type="text" class="form-control" id="insert_native_login_email_screen_email_id" placeholder="Email" required>
+                                        </div>
+                                </div>
+
+                                <button id="insertnativeloginemailscreenbuttonid" class="btn btn-primary">Submit</button>
+*/
+	}
 }
