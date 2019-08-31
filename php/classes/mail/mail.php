@@ -24,8 +24,8 @@ class Mail
     			$this->mPhpMailer->SMTPAuth = true;                               // Enable SMTP authentication
     			$this->mPhpMailer->Username = 'jbreslin33@gmail.com';                 // SMTP username
     			$this->mPhpMailer->Password = 'Star5567';                           // SMTP password
-    			$this->mPhpMailer->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    			$this->mPhpMailer->Port = 587;                                    // TCP port to connect to
+    			$this->mPhpMailer->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+    			$this->mPhpMailer->Port = 465;                                    // TCP port to connect to
 
 			//from old forgot password
 		        $this->mPhpMailer->setFrom('jbreslin33@gmail.com', 'Mailer');
@@ -41,7 +41,7 @@ class Mail
 
                         $this->mPhpMailer->send();
 
-			error_log($this->mEmail);
+			//error_log($this->mEmail);
 		} 
 		catch (Exception $e) 
 		{
