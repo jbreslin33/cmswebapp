@@ -40,6 +40,8 @@ class Mail
                         $this->mPhpMailer->AltBody = $body;
 
                         $this->mPhpMailer->send();
+
+			error_log($this->mEmail);
 		} 
 		catch (Exception $e) 
 		{

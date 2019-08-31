@@ -952,11 +952,8 @@ BEGIN
         select into json_result_codes j_select_codes($3);
         select into json_result_pitches j_select_pitches($4);
         result_set = CONCAT($1,',',json_result_pitches,',',json_result_messages,',',json_result_codes,'}');
-
   	--RAISE LOG 'log message %', now();
 	
-  	RAISE LOG '$1: %', $1;
-  	RAISE LOG 'pitches: %', json_result_pitches;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1933,6 +1930,8 @@ BEGIN
 		END IF;
 	ELSE
 		--no email or native login lets get them both
+		RAISE LOG 'email: %', $1;
+		RAISE LOG 'token: %', $2;
 		CALL p_insert_native_email_login($1,x);
 		IF x > 0 THEN 
 			--there could not have been native login because email did not exist so...
