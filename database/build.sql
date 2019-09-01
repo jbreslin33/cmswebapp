@@ -1038,12 +1038,12 @@ BEGIN
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(found_email_id,null,-100);
+			result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
                 ELSE
-			result_set = f_format_result_set(found_email_id,'Something went wrong with signup. Sorry! Please try again.',-101);
+			result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong with signup. Sorry! Please try again.',-101);
 		END IF;
 	ELSE
-		result_set = f_format_result_set(found_email_id,'Something went wrong. Please resend email email.',-101);
+		result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong. Please resend email email.',-101);
 	END IF;
 RETURN result_set;
 END;
