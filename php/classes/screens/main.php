@@ -12,7 +12,7 @@ class MainScreen extends Screen
 	{
                 $sql = 'select f_select_events($1)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId()));
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this.mTeamId));
 	
 		return pg_fetch_result($result, 0);
 	}

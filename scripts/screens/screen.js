@@ -16,6 +16,10 @@ class Screen
 		this.mData = null;
 		this.mJson = null;
 
+		//selects 
+		this.mPersonId = 0;
+		this.mClubId = 0;
+		this.mTeamId = 0;
 
 		this.mHit = false;
 

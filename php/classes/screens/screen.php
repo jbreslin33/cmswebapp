@@ -9,6 +9,23 @@ class Screen
 	{
 		$this->mDatabase = new Database("localhost","cms","postgres","mibesfat");
 
+               	$this->mPersonId = 0;
+                $this->mClubId = 0;
+                $this->mTeamId = 0;
+
+                if (isset($_GET['person_id']))
+                {
+                        $this->mPersonId = $_GET['person_id'];
+                }
+                if (isset($_GET['club_id']))
+                {
+                        $this->mClubId = $_GET['club_id'];
+                }
+                if (isset($_GET['team_id']))
+                {
+                        $this->mTeamId = $_GET['team_id'];
+                }
+
 		$this->sendToClient();	
 	}
 
