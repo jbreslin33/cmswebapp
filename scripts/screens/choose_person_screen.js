@@ -40,7 +40,6 @@ class ChoosePersonScreen extends Screen
                 if (this.mJson.persons)
                 {
                         //load up persons option
-                        //var select = document.getElementById("person_select_id");
                         var select = document.getElementById("choose_person_screen_select_id");
                         select.length = 0;
                         for (var i = 0; i < this.mJson.persons.length; i++)

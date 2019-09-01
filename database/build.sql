@@ -1399,6 +1399,18 @@ $$ LANGUAGE plpgsql;
 
 --END NATIVE
 
+--BEGIN CHOOSE PERSON
+CREATE OR REPLACE FUNCTION f_choose_person(int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+	result_set = f_format_result_set($1,$2,0,0,null,-100);
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END CHOOSE PERSON
+
 
 --GOOGLE
 
@@ -1790,8 +1802,6 @@ CREATE OR REPLACE FUNCTION f_delete_person(int, int)
 RETURNS text AS $$
 DECLARE
         result_set text;
-        DECLARE x int := -111;
-        json_result text;
 	total_persons int;
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
