@@ -91,6 +91,33 @@ class Application
 		return localStorage.getItem("mJWT");
 	}
 
+	setPersonId(id)
+	{
+		localStorage.setItem('mPersonId', id);
+	}
+	getPersonId()
+	{
+		return localStorage.getItem("mPersonId");
+	}
+	
+	setClubId(id)
+	{
+		localStorage.setItem('mClubId', id);
+	}
+	getClubId()
+	{
+		return localStorage.getItem("mClubId");
+	}
+	
+	setTeamId(id)
+	{
+		localStorage.setItem('mTeamId', id);
+	}
+	getTeamId()
+	{
+		return localStorage.getItem("mTeamId");
+	}
+
 	setCurrentScreen(screen)
 	{
 		this.mCurrentScreen = screen;

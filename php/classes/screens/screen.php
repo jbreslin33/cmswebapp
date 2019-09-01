@@ -68,10 +68,15 @@ class Screen
 			if ($email_id > 0)
 			{
                        		$encoded_token['email_id'] = $email_id;
+                       		$encoded_token['person_id'] = $this->mPersonId;
+                       		$encoded_token['club_id'] = $this->mClubId;
+                       		$encoded_token['team_id'] = $this->mTeamId;
                        		$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
 				
 				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
-				$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
+				// also add person_id club_id team_id
+				//$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
+				$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '","person_id":' . $this->mPersonId . ',"club_id":' . $this->mClubId . ',"team_id":' . $this->mTeamId . '} ] ,';
 			}
 			else
 			{
