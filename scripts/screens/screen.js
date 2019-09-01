@@ -169,9 +169,28 @@ class Screen
 	
 	}
 
-	get()
-	{
+        get()
+        {
+                var person_select = document.getElementById("person_select_id");
+                if (person_select.length)
+                {
+                        this.mPersonId = person_select.options[person_select.selectedIndex].value;
+                }
 
+                var club_select = document.getElementById("club_select_id");
+                if (club_select.length)
+                {
+                        this.mClubId = club_select.options[club_select.selectedIndex].value;
+                }
+
+                var team_select = document.getElementById("team_select_id");
+                if (team_select.length)
+                {
+                        this.mTeamId = team_select.options[team_select.selectedIndex].value;
+                }
+
+                //APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/main.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + this.mPersonId + '&club_id=' + this.mClubId + '&team_id=' + this.mTeamId);
+                //APPLICATION.getCurrentScreen().ajax();
 	}
        
 	update(timestamp)
