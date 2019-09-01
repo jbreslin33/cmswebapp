@@ -919,7 +919,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION f_format_result_set(int,int,int,int,TEXT,int) --email_id, person_id, club_id, team_id, message, code
---CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT,int)
 RETURNS text AS $$
 DECLARE
         json_result_codes text;
@@ -1747,11 +1746,8 @@ CREATE OR REPLACE FUNCTION f_select_person(email_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
-        DECLARE x int := -111;
-        json_result_persons text;
-        json_result text;
 BEGIN
-	result_set = f_format_result_set(email_id,null,-100);
+	result_set = f_format_result_set(email_id,0,0,0,null,-102);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

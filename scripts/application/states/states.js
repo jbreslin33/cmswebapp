@@ -26,6 +26,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGIN_APPLICATION);
                 }
+		else if (location.hash == '#choose_person_screen' && app.mStateMachine.mCurrentState != app.mCHOOSE_PERSON_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mCHOOSE_PERSON_APPLICATION);
+                }
 		else if (location.hash == '#logout_screen' && app.mStateMachine.mCurrentState != app.mLOGOUT_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGOUT_APPLICATION);
@@ -120,6 +124,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
+		document.getElementById("choose_person_screen_html_id").style.display = "none";
 		document.getElementById("main_screen_html_id").style.display = "none";
 		document.getElementById("insert_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_person_screen_html_id").style.display = "none";
@@ -208,6 +213,46 @@ class LOGIN_APPLICATION extends State
 		app.mCurrentScreen.exit();
 	}
 }
+
+class CHOOSE_PERSON_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("CHOOSE_PERSON_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new ChoosePersonScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("CHOOSE_PERSON_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("CHOOSE_PERSON_APPLICATION: EXIT");        
+		}
+		
+		app.getCurrentScreen().exit();
+	}
+}
+
 
 class LOGOUT_APPLICATION extends State
 {
