@@ -114,4 +114,8 @@ class LoginScreen extends Screen
                         }
                 }
         }
+
+	processPersons()
+	{
+	}
 }

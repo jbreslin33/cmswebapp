@@ -38,7 +38,7 @@ class Screen
 
                 this.mStateMachine = null;
 	}
-
+	
 	ajax()
 	{
 	        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
@@ -252,6 +252,7 @@ class Screen
 		{
                 	this.getSpinner().style.visibility = "hidden";
 		}
+
         }
 
         hide()
