@@ -8,13 +8,13 @@ class ChoosePersonScreen extends Screen
 
                 location.hash = 'choose_person_screen';
 
-                document.getElementById("deletepersonscreenbuttonid").onclick = this.hit.bind(this);
+                document.getElementById("choosepersonscreenbuttonid").onclick = this.hit.bind(this);
 
-                this.setHtml(document.getElementById("delete_person_screen_html_id"));
-                this.setMenuItem(document.getElementById("delete_person_nav_id"));
-                this.setMessageElement(document.getElementById("delete_person_screen_message_id"));
-                this.setForm(document.getElementById("delete_person_screen_form_id"));
-                this.setSpinner(document.getElementById("delete_person_screen_spinner_id"));
+                this.setHtml(document.getElementById("choose_person_screen_html_id"));
+                this.setMenuItem(document.getElementById("choose_person_nav_id"));
+                this.setMessageElement(document.getElementById("choose_person_screen_message_id"));
+                this.setForm(document.getElementById("choose_person_screen_form_id"));
+                this.setSpinner(document.getElementById("choose_person_screen_spinner_id"));
 	}
 
 	get()
@@ -37,51 +37,21 @@ class ChoosePersonScreen extends Screen
 	processPersons()
         {
 		super.processPersons();
-		if (this.mJson)
-		{
-                	if (this.mJson.persons)
-                	{
-                		//load up choose persons option
-                		var select = document.getElementById("choose_person_screen_select_id");
-                                select.length = 0;
-                                for (var i = 0; i < this.mJson.persons.length; i++)
-                                {
-                                        var opt = document.createElement('option');
-                                        opt.value = this.mJson.persons[i].id;
-                                        var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                                        opt.innerHTML = full_name;
-                                        select.appendChild(opt);
-                                }
-                        }
-		}
-        }
-/*
-        processCodes()
-        {
-                if (this.mJson.codes)
+                if (this.mJson.persons)
                 {
-                        var code = 0;
-                        for (var i = 0; i < this.mJson.codes.length; i++)
+                        //load up persons option
+                        //var select = document.getElementById("person_select_id");
+                        var select = document.getElementById("choose_person_screen_select_id");
+                        select.length = 0;
+                        for (var i = 0; i < this.mJson.persons.length; i++)
                         {
-                                code = this.mJson.codes[i].code;
-                        }
-                        //definite success so send to main
-                        if (code == '-100')
-                        {
-                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mCHOOSE_PERSON_APPLICATION)
-                                {
-                                        //do nothing
-                                }
-                                else
-                                {
-                                        this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);
-                                }
-                        }
-                        else if (code == '-101')
-                        {
-                                //standard error code so stay in state and display message if their is one.
+                                var opt = document.createElement('option');
+                                opt.value = this.mJson.persons[i].id;
+                                var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+				console.log('full_name:' + full_name);
+                                opt.innerHTML = full_name;
+                                select.appendChild(opt);
                         }
                 }
-        }
-*/
+	}
 }
