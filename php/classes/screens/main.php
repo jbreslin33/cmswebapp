@@ -10,9 +10,9 @@ class MainScreen extends Screen
 
 	function getResult()
 	{
-                $sql = 'select f_select_events($1)';
+                $sql = 'select f_select_events($1,$2,$3,$4)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this.mTeamId));
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId));
 	
 		return pg_fetch_result($result, 0);
 	}
