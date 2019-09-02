@@ -116,4 +116,8 @@ class InsertLoginEmailScreen extends Screen
         	var textBox = document.getElementById("insert_native_login_screen_email_div_id");
                 textBox.style.display = "none";
 	}
+	processPersons()
+	{
+
+	}
 }

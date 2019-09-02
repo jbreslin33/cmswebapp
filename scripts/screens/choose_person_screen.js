@@ -36,7 +36,6 @@ class ChoosePersonScreen extends Screen
 
 	processPersons()
         {
-		//super.processPersons();
                 if (this.mJson.persons)
                 {
                         //load up persons option

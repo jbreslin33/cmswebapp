@@ -120,5 +120,9 @@ class InsertLoginScreen extends Screen
                         }
                 }
         }
+	processPersons()
+	{
+
+	}
 
 }
