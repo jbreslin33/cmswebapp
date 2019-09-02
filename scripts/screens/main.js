@@ -20,8 +20,8 @@ class Main extends Screen
         get()
         {
 		super.get();
-
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/main.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + this.mPersonId + '&club_id=' + this.mClubId + '&team_id=' + this.mTeamId);
+		
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/main.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + APPLICATION.getPersonId() + '&club_id=' + APPLICATION.getClubId() + '&team_id=' + APPLICATION.getTeamId());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
