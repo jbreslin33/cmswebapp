@@ -38,6 +38,11 @@ class Screen
 
                 this.mStateMachine = null;
 	}
+
+	getParameters()
+	{
+		return '&person_id=' + APPLICATION.getPersonId() + '&club_id=' + APPLICATION.getClubId() + '&team_id=' + APPLICATION.getTeamId();
+	}
 	
 	ajax()
 	{
@@ -48,7 +53,6 @@ class Screen
                         {
                                 if (APPLICATION.getCurrentScreen().getRequest().status === 200)
                                 {
-					console.log('i should not be here');
                                         APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
                         }
