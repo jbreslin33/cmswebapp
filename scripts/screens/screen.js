@@ -48,6 +48,7 @@ class Screen
                         {
                                 if (APPLICATION.getCurrentScreen().getRequest().status === 200)
                                 {
+					console.log('i should not be here');
                                         APPLICATION.getCurrentScreen().mData = this.responseText;
                                 }
                         }
@@ -263,8 +264,10 @@ class Screen
 
 	processData()
 	{
+		console.log('o this.mData:' + this.mData);
                 if (this.mData)
                 {
+			console.log('i this.mData:' + this.mData);
                         this.mJson = JSON.parse(this.mData);
                         this.processJsonData();
 		}

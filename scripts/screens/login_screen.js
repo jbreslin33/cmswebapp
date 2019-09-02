@@ -54,6 +54,7 @@ class LoginScreen extends Screen
        
         googleLogin()
         {
+		console.log('is google login called');
 		APPLICATION.getCurrentScreen().mGoogleLoginHit = true;
                 this.setUrl("/php/classes/screens/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName);
 

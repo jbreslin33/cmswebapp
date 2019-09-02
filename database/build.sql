@@ -1468,7 +1468,6 @@ DECLARE
         found_email_id emails.id%TYPE;
         found_google_login_id google_logins.id%TYPE;
         found_email_person_id emails_persons.id%TYPE;
-        --returning_user_id users.id%TYPE;
         found_person_id persons.id%TYPE;
         found_club_id clubs.id%TYPE;
         
@@ -1494,16 +1493,10 @@ BEGIN
                 SELECT id INTO found_email_person_id FROM emails_persons
                 WHERE email_id = found_email_id;
                 IF found_email_person_id > 0 THEN
-                	--SELECT person_id INTO found_person_id FROM emails_persons
-			--where emailperson_id = found_person_id;
-
-                        --update persons set first_name = $4 , last_name = $5
-			--where id = found_person_id;
-			--return_code = found_person_id;
+			--do nothing
                 ELSE
         		insert into persons (first_name, last_name) values ($4,$5) returning id into found_person_id;
                         insert into emails_persons (email_id,person_id) values (found_email_id,found_person_id);
-			--return_code = found_email_id;
                 END IF;
 
         ELSE --if there is no email then logically you cannot have the other tables so do a full insert, also we wont have an invite as we would have made an insert into email
@@ -1513,9 +1506,9 @@ BEGIN
 
 
         IF found_email_id > 0 THEN
-		result_set = f_format_result_set(found_email_id,null,-100);
+		result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
         ELSE
-		result_set = f_format_result_set(found_email_id,'Could not find email.',-101);
+		result_set = f_format_result_set(found_email_id,0,0,0,'Could not find email.',-101);
         END IF;
 
 	IF $6 is NULL THEN
