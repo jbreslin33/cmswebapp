@@ -14,5 +14,9 @@ select distinct teams.id, teams.name from teams
 	join emails_persons on emails_persons.person_id=persons.id
 	where persons.id = 1 AND clubs.id = 1; 
 
+select clubs.id, clubs.name from clubs join club_emails on club_emails.club_id=clubs.id where club_emails.email_id = 1;
 
-	--insert into team_club_persons (club_person_id, team_id) values (10,1);
+select clubs.id, clubs.name from clubs 
+join club_persons on club_persons.club_id=clubs.id 
+join persons on persons.id=club_persons.person_id
+where persons.id = 1;
