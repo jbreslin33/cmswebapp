@@ -25,8 +25,6 @@ class InsertPersonScreen extends Screen
               	var phone = document.getElementById("insert_person_screen_phone_id").value;
                	var address = document.getElementById("insert_person_screen_address_id").value;
 
-		console.log('params:' + this.getParameters());
-
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_person.php?first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName + "&phone=" + phone + "&address=" + address + "&jwt=" + APPLICATION.getJWT() + this.getParameters()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}

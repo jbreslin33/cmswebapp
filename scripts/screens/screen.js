@@ -268,10 +268,8 @@ class Screen
 
 	processData()
 	{
-		console.log('o this.mData:' + this.mData);
                 if (this.mData)
                 {
-			console.log('i this.mData:' + this.mData);
                         this.mJson = JSON.parse(this.mData);
                         this.processJsonData();
 		}
@@ -279,7 +277,6 @@ class Screen
 
 	processJsonData()
 	{
-		console.log('JWt PRINT:' + JSON.stringify(this.mJson));
 		this.processJwts();
 		this.processClubs();
 		this.processTeams();
