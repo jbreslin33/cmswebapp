@@ -18,6 +18,19 @@ class GLOBAL_APPLICATION extends State
 
         execute(app)
         {
+		/*
+       		var url = window.location.hash.substr(1);
+		var hash = null;
+
+        	var urlArray = url.split('&');
+
+		if (urlArray.length > 0)
+		{
+			hash = urlArray[0];		
+		}
+
+		console.log('hash:' + hash);
+*/
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
@@ -46,8 +59,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION);
                 }
-		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
+		else if (hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
 		else if (location.hash == '#insert_native_login_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION)
                 {
@@ -64,7 +78,7 @@ class GLOBAL_APPLICATION extends State
 		else if (location.hash == '#delete_person_screen' && app.mStateMachine.mCurrentState != app.mDELETE_PERSON_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mDELETE_PERSON_APPLICATION);
-                }
+              	} 
 		else if (location.hash == '#insert_team_screen' && app.mStateMachine.mCurrentState != app.mINSERT_TEAM_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
