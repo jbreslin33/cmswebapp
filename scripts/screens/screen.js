@@ -359,6 +359,32 @@ class Screen
                		}
 		}
 	}
+	
+	processSelects()
+	{
+		if (this.mJson.selects)
+		{
+                       	//change persons option
+                        var select = document.getElementById("person_select_id");
+
+                        console.log('length:' + this.mJson.selects.length);
+                        for (var i = 0; i < this.mJson.selects.length; i++)
+                        {
+
+				console.log(this.mJson.selects[i].person_select_id); 
+				select.value = this.mJson.selects[i].person_select_id; 
+/*
+                                var opt = document.createElement('option');
+                                opt.value = this.mJson.persons[i].id;
+                                var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                                opt.innerHTML = full_name;
+                                select.appendChild(opt);
+				*/
+                        }
+
+		}
+	}
+	
 
 	processMessages()
 	{
@@ -396,14 +422,6 @@ class Screen
 			{
 				//standard error code so stay in state and display message if their is one.
 			}
-		}
-	}
-	
-	processSelects()
-	{
-		if (this.mJson.codes)
-		{
-
 		}
 	}
 	

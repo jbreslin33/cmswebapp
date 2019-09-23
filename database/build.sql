@@ -939,7 +939,7 @@ BEGIN
 
 	select into json_result_selects j_selects($1); --based on ?? 
 
-	json_result_selects = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
+	json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
 
 
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
@@ -979,6 +979,7 @@ DECLARE
         json_result_clubs text;
         json_result_practices text;
         json_result_games text;
+        json_result_selects text;
 	result_set text;
 BEGIN
 	select into json_result_messages j_select_messages($5);
@@ -990,7 +991,10 @@ BEGIN
 
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
+	
+	json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
+
+        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
