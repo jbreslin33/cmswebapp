@@ -367,12 +367,13 @@ class Screen
                        	//change persons option
                         var select = document.getElementById("person_select_id");
 
-                        console.log('length:' + this.mJson.selects.length);
-                        for (var i = 0; i < this.mJson.selects.length; i++)
+                        console.log('selects length:' + this.mJson.selects.length);
+                        
+			for (var i = 0; i < this.mJson.selects.length; i++)
                         {
 
 				console.log(this.mJson.selects[i].person_select_id); 
-				select.value = this.mJson.selects[i].person_select_id; 
+				select.selectedIndex = this.mJson.selects[i].person_select_id; 
 /*
                                 var opt = document.createElement('option');
                                 opt.value = this.mJson.persons[i].id;
