@@ -926,6 +926,7 @@ DECLARE
         json_result_persons text;
         json_result_teams text;
         json_result_clubs text;
+        json_result_selects text;
 	result_set text;
 BEGIN
 
@@ -935,7 +936,15 @@ BEGIN
 	select into json_result_persons j_select_persons($1); --based on email_id
         select into json_result_clubs j_select_clubs($2); --based on person_id
 	select into json_result_teams j_select_teams($2,$3); --based on person_id AND club_id
-        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+
+	select into json_result_selects j_selects($1); --based on ?? 
+
+	json_result_selects = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
+
+
+        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
+  	RAISE LOG 'log message %', result_set;
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1129,6 +1138,23 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PERSONS
+
+--BEGIN J_SELECTS
+CREATE OR REPLACE FUNCTION j_selects(email_id int)
+RETURNS text AS $$
+DECLARE
+result_set text;
+BEGIN
+
+result_set = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
+--result_set = CONCAT('"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]');
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT PERSONS
+
+
 
 --BEGIN J_SELECT TEAMS
 CREATE OR REPLACE FUNCTION j_select_teams(person_id int, club_id int)

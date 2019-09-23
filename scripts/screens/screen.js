@@ -277,12 +277,19 @@ class Screen
 
 	processJsonData()
 	{
-		this.processJwts();
-		this.processClubs();
-		this.processTeams();
-		this.processPersons();
-		this.processMessages();
-		this.processCodes();
+		if (this.mJson)
+		{
+			this.processJwts();
+			this.processClubs();
+			this.processTeams();
+			this.processPersons();
+			this.processSelects();
+			this.processMessages();
+			this.processCodes();
+		}
+		else
+		{
+		}
 	}
 
 	processJwts()
@@ -389,6 +396,14 @@ class Screen
 			{
 				//standard error code so stay in state and display message if their is one.
 			}
+		}
+	}
+	
+	processSelects()
+	{
+		if (this.mJson.codes)
+		{
+
 		}
 	}
 	
