@@ -991,8 +991,9 @@ BEGIN
 
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
+	select into json_result_selects j_selects($1);
 	
-	json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
+	--json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
 
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
 RETURN result_set;
@@ -1151,6 +1152,9 @@ result_set text;
 BEGIN
 
 result_set = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
+
+
+
 --result_set = CONCAT('"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]');
 
 RETURN result_set;
