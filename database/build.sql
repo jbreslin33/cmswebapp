@@ -937,13 +937,9 @@ BEGIN
         select into json_result_clubs j_select_clubs($2); --based on person_id
 	select into json_result_teams j_select_teams($2,$3); --based on person_id AND club_id
 
-	select into json_result_selects j_selects($1); --based on ?? 
-
-	--json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
-
+	select into json_result_selects j_selects($2); --based on person_id?? 
 
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
-  	RAISE LOG 'log message %', result_set;
 
 RETURN result_set;
 END;
@@ -962,7 +958,6 @@ BEGIN
         select into json_result_codes j_select_codes($3);
         select into json_result_pitches j_select_pitches($4);
         result_set = CONCAT($1,',',json_result_pitches,',',json_result_messages,',',json_result_codes,'}');
-  	--RAISE LOG 'log message %', now();
 	
 RETURN result_set;
 END;
@@ -991,10 +986,8 @@ BEGIN
 
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-	select into json_result_selects j_selects($1);
+	select into json_result_selects j_selects($2);
 	
-	--json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
-
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
 RETURN result_set;
 END;
@@ -1145,21 +1138,13 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PERSONS
 
 --BEGIN J_SELECTS
-CREATE OR REPLACE FUNCTION j_selects(email_id int)
+CREATE OR REPLACE FUNCTION j_selects(person_id int)
 RETURNS text AS $$
 DECLARE
 result_set text;
 BEGIN
 
---result_set = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
-result_set = '"selects": [ { "person_select_id":' || 1 || ', "club_select_id":' || 1 || ', "team_select_id":' || 1 || ' } ]';
---result_set = '"selects": [ { "person_select_id":%, "club_select_id":%, "team_select_id":% } ]',1,1,1;
---RAISE LOG 'email: %', $1;
-
-
-
-
---result_set = CONCAT('"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]');
+result_set = '"selects": [ { "person_select_id":' || $1 || ', "club_select_id":' || 0 || ', "team_select_id":' || 0 || ' } ]';
 
 RETURN result_set;
 END;
@@ -1982,8 +1967,6 @@ BEGIN
 		END IF;
 	ELSE
 		--no email or native login lets get them both
-		RAISE LOG 'email: %', $1;
-		RAISE LOG 'token: %', $2;
 		CALL p_insert_native_email_login($1,x);
 		IF x > 0 THEN 
 			--there could not have been native login because email did not exist so...
