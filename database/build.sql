@@ -1151,7 +1151,11 @@ DECLARE
 result_set text;
 BEGIN
 
-result_set = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
+--result_set = '"selects": [ { "person_select_id":1, "club_select_id":1, "team_select_id":1 } ]';
+result_set = '"selects": [ { "person_select_id":' || 1 || ', "club_select_id":' || 1 || ', "team_select_id":' || 1 || ' } ]';
+--result_set = '"selects": [ { "person_select_id":%, "club_select_id":%, "team_select_id":% } ]',1,1,1;
+--RAISE LOG 'email: %', $1;
+
 
 
 
