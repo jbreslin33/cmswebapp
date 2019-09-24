@@ -939,7 +939,7 @@ BEGIN
 
 	select into json_result_selects j_selects($1); --based on ?? 
 
-	json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
+	--json_result_selects = '"selects": [ { "person_select_id":2, "club_select_id":1, "team_select_id":1 } ]';
 
 
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
