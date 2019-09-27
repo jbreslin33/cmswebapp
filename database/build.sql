@@ -1784,6 +1784,19 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--BEGIN SELECTED PERSON
+CREATE OR REPLACE FUNCTION f_selected_person(email_id int, person_id int, club_id int, team_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+        result_set = f_format_result_set(email_id,person_id, club_id, team_id,null,-100);
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 --BEGIN INSERT PERSON
 CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int, person_id int, club_id int, team_id int)
 RETURNS text AS $$
@@ -1803,6 +1816,9 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
 
 CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, int, INOUT x int)
 LANGUAGE plpgsql

@@ -47,6 +47,10 @@ class Screen
 	{
 		var select = document.getElementById("person_select_id");
 		console.log('personSelected:' + select.value); 
+		APPLICATION.setPersonId(select.value);
+
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
+                APPLICATION.getCurrentScreen().ajax();
 	}
 
 	getParameters()
