@@ -37,6 +37,16 @@ class Screen
                 this.mStateExitLogs = false;
 
                 this.mStateMachine = null;
+
+		//document.getElementById("choosepersonscreenbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
+
+	}
+
+	personSelected()
+	{
+		var select = document.getElementById("person_select_id");
+		console.log('personSelected:' + select.value); 
 	}
 
 	getParameters()
