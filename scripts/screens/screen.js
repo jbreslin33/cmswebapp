@@ -366,28 +366,14 @@ class Screen
 		{
                        	//change persons option
                         var select = document.getElementById("person_select_id");
-
-
-                        //console.log('selects length:' + this.mJson.selects.length);
-			select.value = this.mJson.selects[0].person_select_id; 
-
-			/*
-			for (var i = 0; i < this.mJson.selects.length; i++)
-                        {
-
-				console.log(this.mJson.selects[i].person_select_id); 
-				select.selectedIndex = this.mJson.selects[i].person_select_id; 
-                                var opt = document.createElement('option');
-                                opt.value = this.mJson.persons[i].id;
-                                var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                                opt.innerHTML = full_name;
-                                select.appendChild(opt);
-                        }
-			*/
+			
+			if (this.mJson.selects[0]) 
+			{
+				select.value = this.mJson.selects[0].person_select_id; 
+			}
 		}
 	}
 	
-
 	processMessages()
 	{
 		if (this.mJson.messages)
