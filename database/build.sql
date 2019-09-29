@@ -1825,7 +1825,7 @@ DECLARE
 	DECLARE x int := -111;
 	json_result text; 
 BEGIN
-	CALL p_insert_person($1,$2,$3,$4,$5,email_id,x);
+	CALL p_insert_person($1,$2,$3,$4,$5,$6,$7,x);
 
         IF x > 0 THEN
 		result_set = f_format_result_set(email_id,person_id, club_id, team_id,null,-100);
@@ -1838,9 +1838,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
-
-CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, int, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1848,8 +1846,13 @@ DECLARE
 	rec RECORD;
 BEGIN
         insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY [phones], address) returning id into returning_person_id;
-	insert into emails_persons (email_id, person_id) values ($6, returning_person_id) returning id into x; 
+	FOR rec IN
+		select distinct email_id from emails_persons where person_id = $7
+	LOOP
+		insert into emails_persons (email_id, person_id) values (rec.email_id, returning_person_id) returning id into x; 
+	END LOOP;
 END;
+
 $$;
 --END INSERT PERSON
 
