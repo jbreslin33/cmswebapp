@@ -38,19 +38,40 @@ class Screen
 
                 this.mStateMachine = null;
 
-		//document.getElementById("choosepersonscreenbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
-
+		document.getElementById("club_select_id").onclick = this.clubSelected.bind(this);
+		document.getElementById("team_select_id").onclick = this.teamSelected.bind(this);
 	}
 
 	personSelected()
 	{
 		var select = document.getElementById("person_select_id");
-		console.log('personSelected:' + select.value); 
 		APPLICATION.setPersonId(select.value);
 
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
                 APPLICATION.getCurrentScreen().ajax();
+	}
+
+	clubSelected()
+	{
+		/*
+		var select = document.getElementById("club_select_id");
+		APPLICATION.setClubId(select.value);
+
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_club.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
+                APPLICATION.getCurrentScreen().ajax();
+		*/
+	}
+
+	teamSelected()
+	{
+		/*
+		var select = document.getElementById("team_select_id");
+		APPLICATION.setTeamId(select.value);
+
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_team.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
+                APPLICATION.getCurrentScreen().ajax();
+		*/
 	}
 
 	getParameters()
@@ -192,21 +213,30 @@ class Screen
         {
 		//if there are information selected then set keys
                 var person_select = document.getElementById("person_select_id");
-                if (person_select.length)
+                if (person_select.length > 0)
                 {
-                        APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
+			if (person_select.selectedIndex)
+			{
+                       		APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
+			}
                 }
 
                 var club_select = document.getElementById("club_select_id");
-                if (club_select.length)
+                if (club_select.length > 0)
                 {
-                        APPLICATION.setClubId(club_select.options[club_select.selectedIndex].value);
+			if (club_select.selectedIndex)
+			{
+                        	APPLICATION.setClubId(club_select.options[club_select.selectedIndex].value);
+			}
                 }
 
                 var team_select = document.getElementById("team_select_id");
-                if (team_select.length)
+                if (team_select.length > 0)
                 {
-                        APPLICATION.setTeamId(team_select.options[team_select.selectedIndex].value);
+			if (team_select.selectedIndex)
+			{
+                        	APPLICATION.setTeamId(team_select.options[team_select.selectedIndex].value);
+			}
                 }
 	}
        
@@ -319,7 +349,7 @@ class Screen
                         }
                 }
 	}
-
+//later we need to set Club if possible from saved clubs in localstorage
 	processClubs()
 	{
 		//load up clubs option
@@ -338,6 +368,7 @@ class Screen
 		}
 	}	
 
+//later we need to set Team if possible from saved clubs in localstorage
 	processTeams()
 	{
 		//load up teams option

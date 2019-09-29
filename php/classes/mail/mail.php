@@ -34,14 +34,10 @@ class Mail
 
                         $this->mPhpMailer->isHTML(true);                                  // Set email format to HTML
                         $this->mPhpMailer->Subject = $this->mSubject;
-                        //$body = "Click this link:";
-                        //$body .= $this->mUrl;
-                        $this->mPhpMailer->Body    = $body;
+			$this->mPhpMailer->Body    = $body;
                         $this->mPhpMailer->AltBody = $body;
 
                         $this->mPhpMailer->send();
-
-			//error_log($this->mEmail);
 		} 
 		catch (Exception $e) 
 		{

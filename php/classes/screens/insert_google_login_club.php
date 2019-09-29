@@ -16,7 +16,6 @@ class InsertGoogleLoginClub
 		$result = pg_execute($database->mConnection, "f_insert_google_login_club", array( $_GET['password'], $_GET['first_name'], $_GET['middle_name'], $_GET['last_name'], $_GET['phone'], $_GET['address'], $_GET['club_invite_token']));
 
 		$return_value = pg_fetch_result($result, 0); 
-		error_log($return_value);
 
                	if ($return_value < -100  && $return_value > -200)
                 {

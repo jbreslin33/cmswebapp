@@ -9,13 +9,11 @@ class AvailabilityUpdate extends Update
 		if (isset($_GET['eventoss_users_availability_id']))
                 {
                         $this->mEventosUsersAvailabilityID = $_GET['eventoss_users_availability_id'];
-			error_log('got 1');
                 }
 
 		if (isset($_GET['availability_id']))
                 {
                         $this->mAvailabilityID = $_GET['availability_id'];
-			error_log('got 2');
                 }
 
 		parent::__construct();
@@ -23,7 +21,6 @@ class AvailabilityUpdate extends Update
 
 	public function update()
 	{
-		error_log('calling update');
 		$this->mSQL = "
 				update eventoss_users_availability set availability_id = " . 
 				$this->mAvailabilityID .

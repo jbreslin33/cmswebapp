@@ -75,7 +75,6 @@ class Screen
 				
 				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
 				// also add person_id club_id team_id
-				//$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '" } ] ,';
 				$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '","person_id":' . $this->mPersonId . ',"club_id":' . $this->mClubId . ',"team_id":' . $this->mTeamId . '} ] ,';
 			}
 			else

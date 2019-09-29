@@ -918,6 +918,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--goto format_result
 CREATE OR REPLACE FUNCTION f_format_result_set(int,int,int,int,TEXT,int) --email_id, person_id, club_id, team_id, message, code
 RETURNS text AS $$
 DECLARE
@@ -929,13 +930,17 @@ DECLARE
         json_result_selects text;
 	result_set text;
 BEGIN
+	--RAISE LOG 'log message %', now();
+	RAISE LOG 'email_id %', $1;
+	RAISE LOG 'person_id %', $2;
+
 
 	select into json_result_messages j_select_messages($5);
 	select into json_result_codes j_select_codes($6);
 
 	select into json_result_persons j_select_persons($1); --based on email_id
-        select into json_result_clubs j_select_clubs($2); --based on person_id
-	select into json_result_teams j_select_teams($2,$3); --based on person_id AND club_id
+        select into json_result_clubs j_select_clubs($1); --based on email_id
+	select into json_result_teams j_select_teams($1); --based on email_id
 
 	select into json_result_selects j_selects($2); --based on person_id?? 
 
@@ -982,7 +987,7 @@ BEGIN
 
 	select into json_result_persons j_select_persons($1);
         select into json_result_clubs j_select_clubs($2);
-	select into json_result_teams j_select_teams($2,$3);
+	select into json_result_teams j_select_teams($1);
 
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
@@ -1154,7 +1159,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN J_SELECT TEAMS
-CREATE OR REPLACE FUNCTION j_select_teams(person_id int, club_id int)
+CREATE OR REPLACE FUNCTION j_select_teams(int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1164,13 +1169,16 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
+
 		select distinct teams.id, teams.name from teams
-        		join team_club_persons on team_club_persons.team_id=teams.id
-        		join club_persons on club_persons.id=team_club_persons.club_person_id
-			join clubs on clubs.id=club_persons.club_id
-        		join persons on persons.id=club_persons.person_id
-        		join emails_persons on emails_persons.person_id=persons.id
-        		where persons.id = $1 AND clubs.id = $2 
+                join team_club_persons on team_club_persons.team_id=teams.id
+                join club_persons on club_persons.id=team_club_persons.club_person_id
+
+                join persons on persons.id=club_persons.person_id
+                join emails_persons on emails_persons.person_id=persons.id
+                join emails on emails.id=emails_persons.email_id
+                where email_id = $1 
+
 
         ) t;
 
@@ -1187,7 +1195,8 @@ $$ LANGUAGE plpgsql;
 --BEGIN J_SELECT CLUBS
 --        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
 
-CREATE OR REPLACE FUNCTION j_select_clubs(email_id int)
+--takes email_id
+CREATE OR REPLACE FUNCTION j_select_clubs(int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1197,10 +1206,17 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select clubs.id, clubs.name from clubs
-		join club_persons on club_persons.club_id=clubs.id
-		join persons on persons.id=club_persons.person_id
-		where persons.id = $1
+		--select clubs.id, clubs.name from clubs
+		--join club_persons on club_persons.club_id=clubs.id
+		--join persons on persons.id=club_persons.person_id
+		--where persons.id = $1
+
+		select distinct clubs.id, clubs.name from clubs
+                join club_persons on club_persons.club_id=clubs.id
+                join persons on persons.id=club_persons.person_id
+                join emails_persons on emails_persons.person_id=persons.id
+                join emails on emails.id=emails_persons.email_id
+                where email_id = $1
 
         ) t;
 
@@ -1432,6 +1448,10 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
+	--RAISE LOG 'log message %', now();
+	RAISE LOG 'f_choose_person email_id %', $1;
+	RAISE LOG 'f_choose_person person_id %', $2;
+
 	result_set = f_format_result_set($1,$2,0,0,null,-100);
 RETURN result_set;
 END;
@@ -1774,12 +1794,12 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN SELECT PERSON
-CREATE OR REPLACE FUNCTION f_select_person(email_id int)
+CREATE OR REPLACE FUNCTION f_select_person(email_id int, person_id int, club_id int, team_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set(email_id,0,0,0,null,-102);
+	result_set = f_format_result_set(email_id,person_id,club_id,team_id,null,-102);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1839,17 +1859,18 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 	total_persons int;
+	DECLARE x int := -111;
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
         	CALL p_delete_person($1,$2,x);
         	IF x > 0 THEN
-			result_set = f_format_result_set($1,null,-100);
+			result_set = f_format_result_set($1,0,0,0,null,-100);
         	ELSE
-			result_set = f_format_result_set($1,'Person could not be deleted.',-101);
+			result_set = f_format_result_set($1,0,0,0,'Person could not be deleted.',-101);
         	END IF;
 	ELSE
-		result_set = f_format_result_set($1,'Total persons less than 2 so we cannot delete.',-101);
+		result_set = f_format_result_set($1,0,0,0,'Total persons less than 2 so we cannot delete.',-101);
 		--not enuf persons prob get rid of this
 	END IF;
 RETURN result_set;

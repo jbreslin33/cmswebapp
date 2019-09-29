@@ -6,13 +6,10 @@ class InsertAcceptClubInvite extends Screen
         function __construct()
         {
                 parent::__construct();
-		error_log('yo in InserAccClub');
         }
 
         function getResult()
         {
-		error_log('yo in InserAccClub get');
-		
 		$clubInviteToken = $_GET['club_invite_token'];
 		
 		$sql = 'select f_insert_accept_club_invite($1)';

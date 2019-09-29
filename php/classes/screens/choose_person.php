@@ -14,6 +14,7 @@ class ChoosePerson extends Screen
                 {
                         $this->mPersonId = $_GET['person_id'];
                 }
+		//error_log($this->mPersonId);
 
 		$sql = 'select f_choose_person($1,$2)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_choose_person", $sql);

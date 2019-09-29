@@ -19,7 +19,7 @@ class DeletePersonScreen extends Screen
 
 	get()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?jwt=" + APPLICATION.getJWT()); 
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?jwt=" + APPLICATION.getJWT() + this.getParameters()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
 

@@ -60,10 +60,6 @@ class Delete
 			$this->mSuccess = false;
 		}
 
-  		$text = "Id deleted: ";
-               	$text .= $this->mID;
-               	error_log($text);
-
 		return $this->mID;
 	}
 }
