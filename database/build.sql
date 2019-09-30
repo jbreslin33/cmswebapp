@@ -1858,7 +1858,6 @@ BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
         	CALL p_delete_person($5,x);
-		RAISE LOG 'log message delete_person_id: %', $5;
 
         	IF x > 0 THEN
 			result_set = f_format_result_set($1,$2,$3,$4,null,-100);
