@@ -30,7 +30,7 @@ class DeletePersonScreen extends Screen
 		var select = document.getElementById("delete_person_screen_select_id");
                 var person_id = select.options[select.selectedIndex].value;
 		
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/delete_person.php?name=" + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/delete_person.php?name=" + "&jwt=" +APPLICATION.getJWT() + this.getParameters() + '&person_id=' + person_id);
                 APPLICATION.getCurrentScreen().ajax();
 	}
 

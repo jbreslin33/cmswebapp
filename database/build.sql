@@ -1848,7 +1848,7 @@ $$;
 --END INSERT PERSON
 
 --BEGIN DELETE PERSON
-CREATE OR REPLACE FUNCTION f_delete_person(int, int)
+CREATE OR REPLACE FUNCTION f_delete_person(int, int, int, int, int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -1857,14 +1857,14 @@ DECLARE
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
-        	CALL p_delete_person($1,$2,x);
+        	CALL p_delete_person($1,$5,x);
         	IF x > 0 THEN
-			result_set = f_format_result_set($1,0,0,0,null,-100);
+			result_set = f_format_result_set($1,$2,$3,$4,null,-100);
         	ELSE
-			result_set = f_format_result_set($1,0,0,0,'Person could not be deleted.',-101);
+			result_set = f_format_result_set($1,$2,$3,$4,'Person could not be deleted.',-101);
         	END IF;
 	ELSE
-		result_set = f_format_result_set($1,0,0,0,'Total persons less than 2 so we cannot delete.',-101);
+		result_set = f_format_result_set($1,$2,$3,$4,'Total persons less than 2 so we cannot delete.',-101);
 		--not enuf persons prob get rid of this
 	END IF;
 RETURN result_set;
