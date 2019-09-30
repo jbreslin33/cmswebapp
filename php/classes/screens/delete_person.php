@@ -10,16 +10,16 @@ class DeletePerson extends Screen
 
 	function getResult()
 	{
-		$person_id = null;
+		$delete_person_id = null;
 
-               	if (isset($_GET['person_id']))
+               	if (isset($_GET['delete_person_id']))
                 {
-                        $person_id = $_GET['person_id'];
+                        $delete_person_id = $_GET['delete_person_id'];
                 }
 
 		$sql = 'select f_delete_person($1,$2,$3,$4,$5)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_person", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_person", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId, $person_id));
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_person", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId, $delete_person_id));
 
                	return pg_fetch_result($result, 0);
         }

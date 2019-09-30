@@ -1857,7 +1857,9 @@ DECLARE
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
-        	CALL p_delete_person($1,$5,x);
+        	CALL p_delete_person($5,x);
+		RAISE LOG 'log message delete_person_id: %', $5;
+
         	IF x > 0 THEN
 			result_set = f_format_result_set($1,$2,$3,$4,null,-100);
         	ELSE
@@ -1871,16 +1873,14 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_person(int, int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_person(int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        returning_person_id integer;
-        rec RECORD;
 BEGIN
-	delete from emails_persons where person_id = $2;
-	delete from club_persons where person_id = $2;
-	delete from persons where id = $2 returning id into x;
+	delete from emails_persons where person_id = $1;
+	delete from club_persons where person_id = $1;
+	delete from persons where id = $1 returning id into x;
 END;
 $$;
 --END INSERT PERSON

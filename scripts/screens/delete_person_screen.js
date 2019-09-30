@@ -28,9 +28,10 @@ class DeletePersonScreen extends Screen
 		this.mHit = true;
 
 		var select = document.getElementById("delete_person_screen_select_id");
-                var person_id = select.options[select.selectedIndex].value;
+                var delete_person_id = select.options[select.selectedIndex].value;
+		console.log('delete_person_id:' + delete_person_id);
 		
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/delete_person.php?name=" + "&jwt=" +APPLICATION.getJWT() + this.getParameters() + '&person_id=' + person_id);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/delete_person.php?name=" + "&jwt=" +APPLICATION.getJWT() + this.getParameters() + '&delete_person_id=' + delete_person_id);
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
