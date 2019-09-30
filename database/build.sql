@@ -1438,12 +1438,12 @@ $$ LANGUAGE plpgsql;
 --END NATIVE
 
 --BEGIN CHOOSE PERSON
-CREATE OR REPLACE FUNCTION f_choose_person(int,int)
+CREATE OR REPLACE FUNCTION f_choose_person(int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set($1,$2,0,0,null,-100);
+	result_set = f_format_result_set($1,$2,$3,$4,null,-100);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

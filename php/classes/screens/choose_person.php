@@ -10,15 +10,9 @@ class ChoosePerson extends Screen
 
 	function getResult()
 	{
-               	if (isset($_GET['person_id']))
-                {
-                        $this->mPersonId = $_GET['person_id'];
-                }
-		//error_log($this->mPersonId);
-
-		$sql = 'select f_choose_person($1,$2)';
+		$sql = 'select f_choose_person($1,$2,$3,$4)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_choose_person", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_choose_person", array( $this->getSenderEmailId(), $this->mPersonId));
+		$result = pg_execute($this->mDatabase->mConnection, "f_choose_person", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId));
 
                	return pg_fetch_result($result, 0);
         }

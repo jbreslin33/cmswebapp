@@ -29,9 +29,9 @@ class ChoosePersonScreen extends Screen
 
 		var select = document.getElementById("choose_person_screen_select_id");
                 var person_id = select.options[select.selectedIndex].value;
+		APPLICATION.setPersonId(person_id);
 		
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id);
-		console.log(APPLICATION.getCurrentScreen().getUrl());
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
