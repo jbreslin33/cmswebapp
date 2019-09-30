@@ -930,11 +930,6 @@ DECLARE
         json_result_selects text;
 	result_set text;
 BEGIN
-	--RAISE LOG 'log message %', now();
-	RAISE LOG 'email_id %', $1;
-	RAISE LOG 'person_id %', $2;
-
-
 	select into json_result_messages j_select_messages($5);
 	select into json_result_codes j_select_codes($6);
 
@@ -1448,10 +1443,6 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	--RAISE LOG 'log message %', now();
-	RAISE LOG 'f_choose_person email_id %', $1;
-	RAISE LOG 'f_choose_person person_id %', $2;
-
 	result_set = f_format_result_set($1,$2,0,0,null,-100);
 RETURN result_set;
 END;

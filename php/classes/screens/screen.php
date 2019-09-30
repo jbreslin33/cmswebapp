@@ -85,7 +85,6 @@ class Screen
 
 			//send only a json object client
 			$txt = $jwt_json . $data;
-			error_log($txt);
               		return $txt;
 		}
         }
