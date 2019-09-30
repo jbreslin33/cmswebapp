@@ -908,7 +908,7 @@ DECLARE
         DECLARE x int := -1;
 BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW() and forgot_password_token = update_forgot_password_token;
-        IF found_email_id THEN
+        IF found_email_id > 0 THEN
 		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
                 result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
         ELSE
