@@ -215,7 +215,8 @@ class Screen
                 var person_select = document.getElementById("person_select_id");
                 if (person_select.length > 0)
                 {
-			if (person_select.selectedIndex)
+			//if (person_select.selectedIndex)
+			if (person_select.options[person_select.selectedIndex])
 			{
                        		APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
 			}
