@@ -410,12 +410,15 @@ class Screen
 	{
 		if (this.mJson.selects)
 		{
-                       	//change persons option
-                        var select = document.getElementById("person_select_id");
-			
-			if (this.mJson.selects[0]) 
+			//if no local person storage set to first in list
+                        if (APPLICATION.getPersonId() == 0)
 			{
-				select.value = this.mJson.selects[0].person_select_id; 
+                        	APPLICATION.setPersonId(this.mJson.persons[0].id);
+			}
+			else
+			{
+               			var select = document.getElementById("person_select_id");
+				select.value = APPLICATION.getPersonId(); 
 			}
 		}
 	}
