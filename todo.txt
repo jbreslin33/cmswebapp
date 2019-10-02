@@ -1,5 +1,8 @@
-
-
+soccer game
+join at any time...
+if goal is scored you get 3 points if you are scored on you lose 1 or some sort. 
+this allows joining in at any time.
+------------------------
 persons can be added by email or club???
 this way a club can register your person for club stuff (player, coach etc) if they are not there.
 but...
