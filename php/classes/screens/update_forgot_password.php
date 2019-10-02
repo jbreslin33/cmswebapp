@@ -12,12 +12,9 @@ class UpdateForgotPassword extends Screen
 	function getResult()
 	{
 		// need to get GET email from here 
-		
-		
 		$forgot_password_token = $_GET['forgot_password_token'];
 		$password = $_GET['password'];
 		$email = $_GET['email'];
-		//$email = "jbreslin33@yahoo.com";
 		
 		//mail that you changed password
                	$this->mEmail = $email;

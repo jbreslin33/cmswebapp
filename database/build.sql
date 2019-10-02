@@ -904,13 +904,25 @@ CREATE OR REPLACE FUNCTION f_update_forgot_password(update_forgot_password_token
 RETURNS text AS $$
 DECLARE
         found_email_id forgot_passwords.email_id%TYPE;
+        found_native_login_id native_logins.id%TYPE;
         result_set text;
         DECLARE x int := -1;
 BEGIN
         SELECT email_id INTO found_email_id FROM forgot_passwords WHERE expires > NOW() and forgot_password_token = update_forgot_password_token;
         IF found_email_id > 0 THEN
-		update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-                result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+		--we need to check if you have a native login associated with email if not insert one
+		SELECT id INTO found_native_login_id FROM native_logins WHERE email_id = found_email_id;		
+        	IF found_native_login_id > 0 THEN
+			update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
+                	result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+		ELSE
+			CALL p_insert_native_login(found_email_id,$2,x);
+			IF x > 0 THEN
+                		result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+			ELSE
+                		result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong can you submit a new request please?',-101);
+			END IF;
+		END IF;
         ELSE
                 result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong can you submit a new request please?',-101);
         END IF;
@@ -1337,10 +1349,7 @@ AS $$
 DECLARE
 	returning_person_id integer;
 BEGIN
-	--insert into emails (email) values (email_name) returning id into x;
 	insert into native_logins (email_id, password) values (email_id, CRYPT($2, GEN_SALT('md5'))) returning id into x;
-	--insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY[phones], address) returning id into returning_person_id;
-	--insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
 
