@@ -16,6 +16,8 @@ class Screen
 		this.mData = null;
 		this.mJson = null;
 
+		this.mNavigationBar = null;
+
 		//selects 
 		this.mPersonId = 0;
 		this.mClubId = 0;
@@ -41,6 +43,9 @@ class Screen
 		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
 		document.getElementById("club_select_id").onclick = this.clubSelected.bind(this);
 		document.getElementById("team_select_id").onclick = this.teamSelected.bind(this);
+
+	        this.setNavigationBar(document.getElementById("nav_bar_id"));
+
 	}
 
 	personSelected()
@@ -206,6 +211,16 @@ class Screen
 		return this.mMenuItem;
 	}
 
+	setNavigationBar(navigationBar)
+	{
+		this.mNavigationBar = navigationBar;
+	}
+	
+	getNavigationBar()
+	{
+		return this.mNavigationBar;
+	}
+
 	hit()
 	{
 	
@@ -312,6 +327,23 @@ class Screen
                 	this.getHtml().style.display = "none";
 		}
         }
+	
+	showNavigationBar()
+	{
+		if (this.getNavigationBar())
+		{
+                	this.getNavigationBar().style.display = "block";
+                	this.getNavigationBar().style.visibility = "visible";
+		}
+	}
+
+	hideNavigationBar()
+	{
+		if (this.getNavigationBar())
+		{
+                	this.getNavigationBar().style.display = "none";
+		}
+	}
 
 	processData()
 	{

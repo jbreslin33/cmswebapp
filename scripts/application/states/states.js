@@ -244,6 +244,7 @@ class CHOOSE_PERSON_APPLICATION extends State
 		
 		app.setCurrentScreen(new ChoosePersonScreen(app));
 		app.getCurrentScreen().enter();
+		app.getCurrentScreen().hideNavigationBar();
 	}
 
         execute(app)
@@ -263,6 +264,7 @@ class CHOOSE_PERSON_APPLICATION extends State
 			console.log("CHOOSE_PERSON_APPLICATION: EXIT");        
 		}
 		
+		app.getCurrentScreen().showNavigationBar();
 		app.getCurrentScreen().exit();
 	}
 }
