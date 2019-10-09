@@ -47,9 +47,11 @@ class Screen
 	{
 		var select = document.getElementById("person_select_id");
 		APPLICATION.setPersonId(select.value);
-
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
-                APPLICATION.getCurrentScreen().ajax();
+		if (APPLICATION.getPersonId() > 0)
+		{
+                	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
+                	APPLICATION.getCurrentScreen().ajax();
+		}
 	}
 
 	clubSelected()
