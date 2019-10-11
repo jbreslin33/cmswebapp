@@ -30,19 +30,23 @@ class InsertForgotPasswordScreen extends Screen
 	execute()
         {
                 this.processData();
-
-	//	if (
-/*
-                if (this.mJson)
-                {
-                        if (this.mJson.persons)
-                        {
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
-                        }
-                }
-		*/
         }
 
+	processJsonData()
+        {
+                if (this.mJson)
+                {
+                        this.processJwts();
+                        this.processClubs();
+                        this.processTeams();
+                        this.processPersons();
+                        this.processSelects();
+                        this.processMessages();
+                        this.processCodes();
+                }
+        }
+
+/*
         processData()
         {
                 if (this.mData)
@@ -51,16 +55,6 @@ class InsertForgotPasswordScreen extends Screen
                         this.mCode = dataArray[0];
                         if (this.mCode == -100)
                         {
-
-                                //this.mApplication.setJWT(dataArray[1]); //set jwt
-
-                                //JSON
-                                //dataArray.shift(); //remove mCode
-                                //dataArray.shift(); //remove mJwt
-                                //dataArray.join();
-                                //this.mJson = JSON.parse(dataArray);
-
-                                //this.processJsonData();
                                 this.setMessage(dataArray[1],'green');
                         }
                         if (this.mCode == -101)
@@ -68,7 +62,33 @@ class InsertForgotPasswordScreen extends Screen
                                 this.setMessage(dataArray[1],'red');
                         }
                 }
+       	}
+*/
+	processCodes()
+        {
+                if (this.mJson.codes)
+                {
+                        var code = 0;
+                        for (var i = 0; i < this.mJson.codes.length; i++)
+                        {
+                                code = this.mJson.codes[i].code;
+                        }
+                        //definite success so send to main
+                        if (code == '-100')
+                        {
+                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
+                                {
+                                        //do nothing
+                                }
+                                else
+                                {
+                                        this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                }
+                        }
+                        else if (code == '-101')
+                        {
+                                //standard error code so stay in state and display message if their is one.
+                        }
+                }
         }
-
-
 }

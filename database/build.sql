@@ -1964,7 +1964,7 @@ BEGIN
 		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
 			--result_set = '-101, Success. We sent you an email to help you login.';
-                     	result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+                     	result_set = f_format_result_set(found_email_id,0,0,0,'Success. We sent you an email to help you login.',-101);
 		ELSE
                      	result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong with process. Sorry! Please try again.',-101);
 		END IF;
