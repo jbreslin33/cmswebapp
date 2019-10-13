@@ -1710,7 +1710,9 @@ $$;
 
 
 --BEGIN INSERT PRACTICE
-CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
+--$this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId), $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name)
+--CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,int,int,date,time,time,time,text,text,int,text)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -1735,12 +1737,13 @@ BEGIN
 	IF found_team_club_person_id > 0 THEN
         	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
         	IF x > 0 THEN
+                	--result_set = f_format_result_set($1,null,-100);
                 	result_set = f_format_result_set($1,null,-100);
         	ELSE
-                	result_set = f_format_result_set($1,'Something went wrong with adding practice.',-101);
+                	--result_set = f_format_result_set($1,'Something went wrong with adding practice.',-101);
         	END IF;
 	ELSE
-                result_set = f_format_result_set($1,'You must be a manager of this team to create a practice. Contact your administrator.',-101);
+                --result_set = f_format_result_set($1,'You must be a manager of this team to create a practice. Contact your administrator.',-101);
 	END IF;
 
 RETURN result_set;
@@ -1964,7 +1967,8 @@ BEGIN
 		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
 			--result_set = '-101, Success. We sent you an email to help you login.';
-                     	result_set = f_format_result_set(found_email_id,0,0,0,'Success. We sent you an email to help you login.',-101);
+                     	--result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+                     	result_set = f_format_result_set(found_email_id,0,0,0,'We sent you an email to change password.',-101);
 		ELSE
                      	result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong with process. Sorry! Please try again.',-101);
 		END IF;
