@@ -379,9 +379,9 @@ class Screen
                         for (var i = 0; i < this.mJson.jwts.length; i++)
                         {
 				this.mApplication.setJWT(this.mJson.jwts[i].jwt); //set jwt
-				this.mApplication.setPersonId(this.mJson.jwts[i].person_id); //set jwt
-				this.mApplication.setClubId(this.mJson.jwts[i].club_id); //set jwt
-				this.mApplication.setTeamId(this.mJson.jwts[i].team_id); //set jwt
+				//this.mApplication.setPersonId(this.mJson.jwts[i].person_id); //set jwt
+				//this.mApplication.setClubId(this.mJson.jwts[i].club_id); //set jwt
+				//this.mApplication.setTeamId(this.mJson.jwts[i].team_id); //set jwt
                         }
                 }
 	}
@@ -448,6 +448,7 @@ class Screen
 			//if no local person storage set to first in list
                         if (APPLICATION.getPersonId() == 0)
 			{
+				console.log('personID was set to 0');
                         	APPLICATION.setPersonId(this.mJson.persons[0].id);
 			}
 			else
