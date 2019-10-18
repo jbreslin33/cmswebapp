@@ -13,6 +13,13 @@ class Screen
                 $this->mClubId = 0;
                 $this->mTeamId = 0;
 
+		$this->parseParameters();
+
+		$this->sendToClient();	
+	}
+
+	function parseParameters()
+	{
                 if (isset($_GET['person_id']))
                 {
                         $this->mPersonId = $_GET['person_id'];
@@ -25,8 +32,6 @@ class Screen
                 {
                         $this->mTeamId = $_GET['team_id'];
                 }
-
-		$this->sendToClient();	
 	}
 
 	function getSenderEmailId()
@@ -55,7 +60,7 @@ class Screen
 		//grab email_id
                 $email_id = array_shift($result_array);
 
-		//put array into a string
+		//put array back into a string
                 $data = implode(",",$result_array);
 
                 if ($data)
@@ -65,25 +70,9 @@ class Screen
                        	$encoded_token = array();
 
 			//encode email_id into jwt 
-			if ($email_id > 0)
-			{
-                       		$encoded_token['email_id'] = $email_id;
-                       		//$encoded_token['person_id'] = $this->mPersonId;
-                       		//$encoded_token['club_id'] = $this->mClubId;
-                       		//$encoded_token['team_id'] = $this->mTeamId;
-                       		$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
-				
-				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
-				// also add person_id club_id team_id
-				//$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '","person_id":' . $this->mPersonId . ',"club_id":' . $this->mClubId . ',"team_id":' . $this->mTeamId . '} ] ,';
-				$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
-				//$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
-			}
-			else
-			{
-				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
-				$jwt_json = '{ ';
-			}
+                       	$encoded_token['email_id'] = $email_id;
+                       	$jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
+			$jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
 
 			//send only a json object client
 			$txt = $jwt_json . $data;

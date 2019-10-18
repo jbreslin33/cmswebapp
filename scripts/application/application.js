@@ -90,34 +90,88 @@ class Application
 	{
 		return localStorage.getItem("mJWT");
 	}
+	
+	//----------------PERSONS
 
 	setPersonId(id)
 	{
 		localStorage.setItem('mPersonId', id);
 	}
+
+	//used to get from selects
 	getPersonId()
+	{
+                var select = document.getElementById("person_select_id");
+		if (select.value == "")
+		{
+			return 0;
+		}
+		else
+		{
+                	return select.value;
+		}
+	}
+
+	//used to set selects onload from localstorage
+	getPersonIdFromLocalStorage()
 	{
 		return localStorage.getItem("mPersonId");
 	}
+	
+	//----------------CLUBS
 	
 	setClubId(id)
 	{
 		localStorage.setItem('mClubId', id);
 	}
+	
+	//used to get from selects
 	getClubId()
+	{
+                var select = document.getElementById("club_select_id");
+		if (select.value == "")
+		{
+			return 0;
+		}
+		else
+		{
+                	return select.value;
+		}
+	}
+	
+	//used to set selects onload from localstorage
+	getClubIdFromLocalStorage()
 	{
 		return localStorage.getItem("mClubId");
 	}
 	
+
+	//----------------TEAMS
 	setTeamId(id)
 	{
 		localStorage.setItem('mTeamId', id);
 	}
+
+	//used to get from selects
 	getTeamId()
+	{
+                var select = document.getElementById("team_select_id");
+		if (select.value == "")
+		{
+			return 0;
+		}
+		else
+		{
+                	return select.value;
+		}
+	}
+
+	getTeamIdFromLocalStorage()
 	{
 		return localStorage.getItem("mTeamId");
 	}
 
+	//------------------SCREENS
 	setCurrentScreen(screen)
 	{
 		this.mCurrentScreen = screen;
