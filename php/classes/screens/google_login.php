@@ -47,6 +47,36 @@ class GoogleLogin extends Screen
                 $result = pg_execute($this->mDatabase->mConnection, "f_google_login", array( $email ,$google_id, $id_token, $first_name, $last_name, $club_invite_token));
 
                 return pg_fetch_result($result, 0);
+
+        }
+
+	public function formatResultSet($result)
+        {
+                error_log($result);
+                //explode result so we can grab email_id at first elememt
+                $result_array = explode(",",$result);
+
+                //grab email_id
+                $email_id = array_shift($result_array);
+
+                //put array back into a string
+                $data = implode(",",$result_array);
+
+                if ($data)
+                {
+                        //encode
+                        $oneRing = new OneRing();
+                        $encoded_token = array();
+
+                        //encode email_id into jwt
+                        $encoded_token['email_id'] = $email_id;
+                        $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
+                        $jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
+
+                        //send only a json object client
+                        $txt = $jwt_json . $data;
+                        return $txt;
+                }
         }
 }
         $googleLogin = new GoogleLogin();

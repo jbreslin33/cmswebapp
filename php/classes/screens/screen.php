@@ -51,9 +51,20 @@ class Screen
 	{
 
 	}
+	//why are we sending jwt back and forth????? it should be sent to client once at a login....
+	//then client can send it for authorization but no need to send jwt back.
 
         public function formatResultSet($result)
+	{
+		$bracket = '{ ';
+		$txt = $bracket . $result;
+		return $txt;
+	}
+
+/*
+        public function formatResultSet($result)
         {
+		error_log($result);
 		//explode result so we can grab email_id at first elememt
         	$result_array = explode(",",$result);
 
@@ -79,7 +90,15 @@ class Screen
               		return $txt;
 		}
         }
+ */
+	/*
 
+			else
+			{
+				// make a jwt json object. Also we need an extra brace at beginning because we took it away in stored procedures
+				$jwt_json = '{ ';
+			}
+	 */
 	function sendToClient()
 	{
 		echo $this->formatResultSet($this->getResult());

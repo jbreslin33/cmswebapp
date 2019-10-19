@@ -931,7 +931,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 --goto format_result
-CREATE OR REPLACE FUNCTION f_format_result_set(int,int,int,int,TEXT,int) --email_id, person_id, club_id, team_id, message, code
+
+CREATE OR REPLACE FUNCTION f_format_result_set_jwt(int,TEXT,int) --email_id, person_id, club_id, team_id, message, code
 RETURNS text AS $$
 DECLARE
         json_result_codes text;
@@ -940,18 +941,47 @@ DECLARE
         json_result_teams text;
         json_result_clubs text;
         json_result_selects text;
+        result_set text;
+BEGIN
+        select into json_result_messages j_select_messages($2);
+        select into json_result_codes j_select_codes($3);
+
+        select into json_result_persons j_select_persons($1); --based on email_id
+        select into json_result_clubs j_select_clubs($1); --based on email_id
+        select into json_result_teams j_select_teams($1); --based on email_id
+
+        --select into json_result_selects j_selects($2); --based on person_id?? 
+
+        --result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
+        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT,int) --email_id, person_id, club_id, team_id, message, code
+RETURNS text AS $$
+DECLARE
+        json_result_codes text;
+        json_result_messages text;
+        json_result_persons text;
+        json_result_teams text;
+        json_result_clubs text;
+        --json_result_selects text;
 	result_set text;
 BEGIN
-	select into json_result_messages j_select_messages($5);
-	select into json_result_codes j_select_codes($6);
+	select into json_result_messages j_select_messages($2);
+	select into json_result_codes j_select_codes($3);
 
 	select into json_result_persons j_select_persons($1); --based on email_id
         select into json_result_clubs j_select_clubs($1); --based on email_id
 	select into json_result_teams j_select_teams($1); --based on email_id
 
-	select into json_result_selects j_selects($2); --based on person_id?? 
+	--select into json_result_selects j_selects($2); --based on person_id?? 
 
-        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
+        --result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
+        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
 END;
@@ -986,7 +1016,7 @@ DECLARE
         json_result_clubs text;
         json_result_practices text;
         json_result_games text;
-        json_result_selects text;
+        --json_result_selects text;
 	result_set text;
 BEGIN
 	select into json_result_messages j_select_messages($5);
@@ -998,9 +1028,9 @@ BEGIN
 
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-	select into json_result_selects j_selects($2);
+	--select into json_result_selects j_selects($2);
 	
-        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
+        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1447,12 +1477,12 @@ $$ LANGUAGE plpgsql;
 --END NATIVE
 
 --BEGIN CHOOSE PERSON
-CREATE OR REPLACE FUNCTION f_choose_person(int,int,int,int)
+CREATE OR REPLACE FUNCTION f_choose_person(int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set($1,$2,$3,$4,null,-100);
+	result_set = f_format_result_set($1,null,-100);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1549,9 +1579,9 @@ BEGIN
 
 
         IF found_email_id > 0 THEN
-		result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+		result_set = f_format_result_set_jwt(found_email_id,null,-100);
         ELSE
-		result_set = f_format_result_set(found_email_id,0,0,0,'Could not find email.',-101);
+		result_set = f_format_result_set_jwt(found_email_id,'Could not find email.',-101);
         END IF;
 
 	IF $6 is NULL THEN
@@ -1797,12 +1827,12 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN SELECT PERSON
-CREATE OR REPLACE FUNCTION f_select_person(email_id int, person_id int, club_id int, team_id int)
+CREATE OR REPLACE FUNCTION f_select_person(email_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set(email_id,person_id,club_id,team_id,null,-102);
+	result_set = f_format_result_set(email_id,null,-102);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
