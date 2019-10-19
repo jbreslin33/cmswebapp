@@ -968,7 +968,6 @@ DECLARE
         json_result_persons text;
         json_result_teams text;
         json_result_clubs text;
-        --json_result_selects text;
 	result_set text;
 BEGIN
 	select into json_result_messages j_select_messages($2);
@@ -978,9 +977,6 @@ BEGIN
         select into json_result_clubs j_select_clubs($1); --based on email_id
 	select into json_result_teams j_select_teams($1); --based on email_id
 
-	--select into json_result_selects j_selects($2); --based on person_id?? 
-
-        --result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
         result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
@@ -1243,11 +1239,6 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		--select clubs.id, clubs.name from clubs
-		--join club_persons on club_persons.club_id=clubs.id
-		--join persons on persons.id=club_persons.person_id
-		--where persons.id = $1
-
 		select distinct clubs.id, clubs.name from clubs
                 join club_persons on club_persons.club_id=clubs.id
                 join persons on persons.id=club_persons.person_id
