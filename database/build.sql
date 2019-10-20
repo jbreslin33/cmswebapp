@@ -1002,7 +1002,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION f_format_result_set_events(int,int,int,int,TEXT,int)
+CREATE OR REPLACE FUNCTION f_format_result_set_events(int,TEXT,int)
 RETURNS text AS $$
 DECLARE
         json_result_codes text;
@@ -1012,19 +1012,17 @@ DECLARE
         json_result_clubs text;
         json_result_practices text;
         json_result_games text;
-        --json_result_selects text;
 	result_set text;
 BEGIN
-	select into json_result_messages j_select_messages($5);
-	select into json_result_codes j_select_codes($6);
+	select into json_result_messages j_select_messages($2);
+	select into json_result_codes j_select_codes($3);
 
 	select into json_result_persons j_select_persons($1);
-        select into json_result_clubs j_select_clubs($2);
+        select into json_result_clubs j_select_clubs($1);
 	select into json_result_teams j_select_teams($1);
 
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
-	--select into json_result_selects j_selects($2);
 	
         result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
@@ -1805,12 +1803,12 @@ END;
 $$ LANGUAGE plpgsql;
 
 --BEGIN SELECT EVENTS
-CREATE OR REPLACE FUNCTION f_select_events(email_id int, person_id int, club_id int, team_id int)
+CREATE OR REPLACE FUNCTION f_select_events(email_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set_events(email_id, person_id, club_id, team_id, null,-100);
+	result_set = f_format_result_set_events(email_id, null,-100);
 
 RETURN result_set;
 END;
