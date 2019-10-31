@@ -59,6 +59,8 @@ class GoogleLogin extends Screen
                 //grab email_id
                 $email_id = array_shift($result_array);
 
+		$authorization_id = 2;
+
                 //put array back into a string
                 $data = implode(",",$result_array);
 
@@ -70,6 +72,7 @@ class GoogleLogin extends Screen
 
                         //encode email_id into jwt
                         $encoded_token['email_id'] = $email_id;
+                        $encoded_token['authorization_id'] = $authorization_id; //0 none, 1 native, 2 google, 3 ???
                         $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
                         $jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
 
