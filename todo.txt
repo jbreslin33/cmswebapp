@@ -1,3 +1,6 @@
+make insert forgot passsword give you a jwt but it should have authorization_id = 0
+and it should let you know that you are currently not logged in but in view mode....
+------------
 soccer game
 join at any time...
 if goal is scored you get 3 points if you are scored on you lose 1 or some sort. 
