@@ -14,9 +14,6 @@ class ChoosePerson extends Screen
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_choose_person", $sql);
 		$result = pg_execute($this->mDatabase->mConnection, "f_choose_person", array( $this->getSenderEmailId()));
 
-		error_log('id:');
-		error_log($this->getSenderEmailId());
-
                	return pg_fetch_result($result, 0);
         }
 }

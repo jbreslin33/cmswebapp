@@ -52,7 +52,6 @@ class GoogleLogin extends Screen
 
 	public function formatResultSet($result)
         {
-                error_log($result);
                 //explode result so we can grab email_id at first elememt
                 $result_array = explode(",",$result);
 
