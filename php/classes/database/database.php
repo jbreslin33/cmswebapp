@@ -31,34 +31,7 @@ class Database
   		$this->mResult = pg_query($this->mConnection,$query);
 		return $this->mResult;
 	}
-
-	public function formatResultSet($return_value)
-	{
-                if ($return_value < -100  && $return_value > -200)
-                {
-                        return $return_value;
-                }
-                else
-                {
-                        $return_value_array = explode(",",$return_value);
-                        $email_id = array_shift($return_value_array);
-                        $data = implode(",",$return_value_array);
-
-                        if ($data)
-                        {
-                        	//encode
-                                $oneRing = new OneRing();
-                                $encoded_token = array();
-                                $encoded_token['email_id'] = $email_id;
-                                $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
-
-                                $txt =  "-100," . $jwt . "," . $data;
-                                return $txt;
-                        }
-                }
-	}
 }
-
 
 ?>
 
