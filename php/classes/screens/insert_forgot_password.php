@@ -32,8 +32,8 @@ class InsertForgotPassword extends Screen
 
                 return pg_fetch_result($result, 0);
         }
-	/*
-        public function formatResultSet($result)
+	
+	public function formatResultSet($result)
         {
                 //explode result so we can grab email_id at first elememt
                 $result_array = explode(",",$result);
@@ -41,7 +41,7 @@ class InsertForgotPassword extends Screen
                 //grab email_id
                 $email_id = array_shift($result_array);
 
-                $authorization_id = 2;
+                $authorization_id = 0; //as you are not logged in but we do know email
 
                 //put array back into a string
                 $data = implode(",",$result_array);
@@ -63,8 +63,6 @@ class InsertForgotPassword extends Screen
                         return $txt;
                 }
         }
-	 */
-
 }
 
 $insertForgotPassword = new InsertForgotPassword();	

@@ -950,9 +950,6 @@ BEGIN
         select into json_result_clubs j_select_clubs($1); --based on email_id
         select into json_result_teams j_select_teams($1); --based on email_id
 
-        --select into json_result_selects j_selects($2); --based on person_id?? 
-
-        --result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,',',json_result_selects,'}');
         result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
@@ -1987,12 +1984,12 @@ BEGIN
 		IF returning_forgot_passwords_id > 0 THEN
 			--result_set = '-101, Success. We sent you an email to help you login.';
                      	--result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
-                     	result_set = f_format_result_set(found_email_id,'We sent you an email to change password.',-101);
+                     	result_set = f_format_result_set_jwt(found_email_id,'We sent you an email to change password.',-101);
 		ELSE
-                     	result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101);
+                     	result_set = f_format_result_set_jwt(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101);
 		END IF;
 	ELSE
-                result_set = f_format_result_set(found_email_id,'That email does not exist in our system. Please try a valid email address.',-101);
+                result_set = f_format_result_set_jwt(found_email_id,'That email does not exist in our system. Please try a valid email address.',-101);
 	END IF;
 RETURN result_set;
 END;
