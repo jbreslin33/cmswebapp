@@ -33,38 +33,6 @@ class InsertForgotPasswordScreen extends Screen
                 this.processData();
         }
 
-	processJsonData()
-        {
-                if (this.mJson)
-                {
-                        this.processJwts();
-                        this.processClubs();
-                        this.processTeams();
-                        this.processPersons();
-                        this.processSelects();
-                        this.processMessages();
-                        this.processCodes();
-                }
-        }
-
-/*
-        processData()
-        {
-                if (this.mData)
-                {
-                        var dataArray = this.mData.split(",");
-                        this.mCode = dataArray[0];
-                        if (this.mCode == -100)
-                        {
-                                this.setMessage(dataArray[1],'green');
-                        }
-                        if (this.mCode == -101)
-                        {
-                                this.setMessage(dataArray[1],'red');
-                        }
-                }
-       	}
-*/
 	processCodes()
         {
                 if (this.mJson.codes)
