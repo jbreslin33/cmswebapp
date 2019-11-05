@@ -68,8 +68,6 @@ class InsertPracticeScreen extends Screen
                 {
                         var team_id = team_select.options[team_select.selectedIndex].value;
                         var person_id = person_select.options[person_select.selectedIndex].value;
-			console.log('person_id:' + person_id);
-			console.log('t4eam_id:' + team_id);
 
                         APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + team_id + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + pitch_id + '&field_name=' + field_name + '&person_id=' + person_id);
                         
@@ -99,12 +97,10 @@ class InsertPracticeScreen extends Screen
 	
 	processJsonData()
         {
-		console.log('going once');
                 super.processJsonData();
 
                 if (this.mJson.pitches)
                 {
-			console.log('do o got pithes bitches?');
                         //load up pitches option
                         var select = document.getElementById("insert_practice_screen_pitch_id");
                         select.length = 0;
