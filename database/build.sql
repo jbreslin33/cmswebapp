@@ -1721,9 +1721,9 @@ BEGIN
 	IF found_team_club_manager_id > 0 THEN
         	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
         	IF x > 0 THEN
-                	result_set = f_format_result_set_events($1,null,-100);
+                	result_set = f_format_result_set($1,null,-100);
         	ELSE
-                	result_set = f_format_result_set_events($1,'Something went wrong with adding practice.',-101);
+                	result_set = f_format_result_set($1,'Something went wrong with adding practice.',-101);
         	END IF;
 	ELSE
                 --result_set = f_format_result_set($1,'You must be a manager of this team to create a practice. Contact your administrator.',-101);
@@ -1765,9 +1765,9 @@ BEGIN
 	IF found_team_club_manager_id > 0 THEN
         	CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
         	IF x > 0 THEN
-                	result_set = f_format_result_set_events($1,null,-100);
+                	result_set = f_format_result_set($1,null,-100);
         	ELSE
-                	result_set = f_format_result_set_events($1,'Something went wrong with adding game.',-101);
+                	result_set = f_format_result_set($1,'Something went wrong with adding game.',-101);
         	END IF;
 	ELSE
                 --result_set = f_format_result_set($1,'You must be a manager of this team to create a game. Contact your administrator.',-101);
