@@ -41,8 +41,6 @@ class Screen
                 this.mStateMachine = null;
 
 		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
-		document.getElementById("club_select_id").onclick = this.clubSelected.bind(this);
-		document.getElementById("team_select_id").onclick = this.teamSelected.bind(this);
 
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
@@ -57,28 +55,6 @@ class Screen
                 	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
                 	APPLICATION.getCurrentScreen().ajax();
 		}
-	}
-
-	clubSelected()
-	{
-		/*
-		var select = document.getElementById("club_select_id");
-		APPLICATION.setClubId(select.value);
-
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_club.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
-                APPLICATION.getCurrentScreen().ajax();
-		*/
-	}
-
-	teamSelected()
-	{
-		/*
-		var select = document.getElementById("team_select_id");
-		APPLICATION.setTeamId(select.value);
-
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_team.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
-                APPLICATION.getCurrentScreen().ajax();
-		*/
 	}
 
 	getParameters()
@@ -490,10 +466,6 @@ class Screen
 				{
                                 	this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
 				}
-			}
-			else if (code == '-101')
-			{
-				//standard error code so stay in state and display message if their is one.
 			}
 		}
 	}
