@@ -1701,17 +1701,6 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
---BEGIN INSERT PRACTICE
-CREATE OR REPLACE PROCEDURE p_insert_practice(int,date,time,time,time,text,text,int,text,INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-
-BEGIN
-	insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
-END;
-$$;
---END INSERT PRACTICE
 
 --BEGIN INSERT GAME
 CREATE OR REPLACE PROCEDURE p_insert_game(int,date,time,time,time,text,text,int,text,INOUT x int)
@@ -1725,39 +1714,28 @@ END;
 $$;
 --END INSERT GAME
 
-
 --BEGIN INSERT PRACTICE
---$this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId), $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name)
---CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
-CREATE OR REPLACE FUNCTION f_insert_practice(int,int,int,int,date,time,time,time,text,text,int,text)
+--$this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
-	found_team_club_person_id team_club_persons.id%TYPE;
-	found_club_manager_id club_managers.id%TYPE;
-
+	found_team_club_manager_id team_club_managers.id%TYPE;
 BEGIN
---cms=# select * from team_club_managers;
--- id | team_club_person_id | club_manager_id | created_at 
+        select team_club_managers.id into found_team_club_manager_id 
+	from team_club_managers
+        join team_club_persons on team_club_persons.id=team_club_managers.team_club_person_id
+        join teams on teams.id=team_club_persons.team_id
+        where teams.id = $2;
 
-	select team_club_persons.id into found_team_club_person_id from team_club_persons 
-	join club_persons on club_persons.id=team_club_persons.club_person_id
-	where club_persons.person_id = $11;
-
-	select club_managers.id into found_club_manager_id from club_managers 
-	join club_persons on club_persons.id=club_managers.club_person_id
-	where club_persons.person_id = $11;
-
-	--IF found_team_club_person_id > 0 AND found_club_manager_id > 0 THEN
-	IF found_team_club_person_id > 0 THEN
+	IF found_team_club_manager_id > 0 THEN
         	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
         	IF x > 0 THEN
-                	--result_set = f_format_result_set($1,null,-100);
-                	result_set = f_format_result_set($1,null,-100);
+                	result_set = f_format_result_set_events($1,null,-100);
         	ELSE
-                	--result_set = f_format_result_set($1,'Something went wrong with adding practice.',-101);
+                	result_set = f_format_result_set_events($1,'Something went wrong with adding practice.',-101);
         	END IF;
 	ELSE
                 --result_set = f_format_result_set($1,'You must be a manager of this team to create a practice. Contact your administrator.',-101);
@@ -1766,6 +1744,18 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+--END INSERT PRACTICE
+
+--BEGIN INSERT PRACTICE
+CREATE OR REPLACE PROCEDURE p_insert_practice(int,date,time,time,time,text,text,int,text,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+BEGIN
+	insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+END;
+$$;
 --END INSERT PRACTICE
 
 --BEGIN INSERT GAME
