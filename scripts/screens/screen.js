@@ -342,7 +342,6 @@ class Screen
 	{
                 if (this.mData)
                 {
-			console.log('mData:' + this.mData);
                         this.mJson = JSON.parse(this.mData);
                         this.processJsonData();
 		}
@@ -420,7 +419,6 @@ class Screen
 	{
 		if (this.mJson.persons)
 		{
-			console.log('person');
                		//load up persons option
                		var select = document.getElementById("person_select_id");
 			select.length = 0;
@@ -429,6 +427,7 @@ class Screen
                			var opt = document.createElement('option');
                			opt.value = this.mJson.persons[i].id;
                        		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                        	opt.innerHTML = full_name;
                        		select.appendChild(opt);
                		}
 		}
@@ -441,7 +440,6 @@ class Screen
 			//if no local person storage set to first in list
                         if (APPLICATION.getPersonId() == 0)
 			{
-				console.log('personID was set to 0');
                         	APPLICATION.setPersonId(this.mJson.persons[0].id);
 			}
 			else
