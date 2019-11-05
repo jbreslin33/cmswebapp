@@ -1703,20 +1703,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
---BEGIN INSERT GAME
-CREATE OR REPLACE PROCEDURE p_insert_game(int,date,time,time,time,text,text,int,text,INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-
-BEGIN
-	insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
-END;
-$$;
---END INSERT GAME
-
 --BEGIN INSERT PRACTICE
---$this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id
 CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
 RETURNS text AS $$
 DECLARE
@@ -1759,26 +1746,50 @@ END;
 $$;
 --END INSERT PRACTICE
 
+
 --BEGIN INSERT GAME
-CREATE OR REPLACE FUNCTION f_insert_game(int,int,date,time,time,time,text,text,int,text)
+CREATE OR REPLACE FUNCTION f_insert_game(int,int,date,time,time,time,text,text,int,text,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
+	found_team_club_manager_id team_club_managers.id%TYPE;
 BEGIN
-        CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+        select team_club_managers.id into found_team_club_manager_id 
+	from team_club_managers
+        join team_club_persons on team_club_persons.id=team_club_managers.team_club_person_id
+        join teams on teams.id=team_club_persons.team_id
+        where teams.id = $2;
 
-        IF x > 0 THEN
-                result_set = f_format_result_set($1,null,-100);
-        ELSE
-                result_set = f_format_result_set($1,'Could not insert game.',-101);
-        END IF;
+	IF found_team_club_manager_id > 0 THEN
+        	CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+        	IF x > 0 THEN
+                	result_set = f_format_result_set_events($1,null,-100);
+        	ELSE
+                	result_set = f_format_result_set_events($1,'Something went wrong with adding game.',-101);
+        	END IF;
+	ELSE
+                --result_set = f_format_result_set($1,'You must be a manager of this team to create a game. Contact your administrator.',-101);
+	END IF;
 
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END INSERT GAME
+
+--BEGIN INSERT GAME
+CREATE OR REPLACE PROCEDURE p_insert_game(int,date,time,time,time,text,text,int,text,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+BEGIN
+	insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+END;
+$$;
+--END INSERT GAME
+
 
 --BEGIN SELECT PITCHES
 CREATE OR REPLACE FUNCTION f_select_pitches(email_id_p int,club_id_p int)

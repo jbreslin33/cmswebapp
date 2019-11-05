@@ -19,6 +19,7 @@ class InsertGame extends Screen
 		$coordinates = null;
 		$pitch_id = null;
 		$field_name = null;
+		$person_id = null;
 	
 		if (isset($_GET['team_id']))
 		{
@@ -57,12 +58,17 @@ class InsertGame extends Screen
 			$field_name = $_GET['field_name'];
 		}
 
+                if (isset($_GET['person_id']))
+                {
+                        $person_id = $_GET['person_id'];
+                }
+
 		if ($event_date)
 		{
 			//prep db
-			$sql = 'select f_insert_game($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)';
+			$sql = 'select f_insert_game($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)';
 			$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_game", $sql);
-			$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name));
+			$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id));
 			
 			return pg_fetch_result($result, 0);
 		}
