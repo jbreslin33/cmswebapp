@@ -1022,6 +1022,7 @@ BEGIN
 	select into json_result_practices j_select_practices($1);
 	select into json_result_games j_select_games($1);
 	
+      --result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
         result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
 END;
@@ -1785,7 +1786,7 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set_pitches(email_id_p,null,-100,club_id_p);
+        result_set = f_format_result_set_pitches(email_id_p,null,-102,club_id_p);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

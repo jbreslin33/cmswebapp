@@ -74,7 +74,7 @@ class InsertPracticeScreen extends Screen
 			APPLICATION.getCurrentScreen().ajax();
 		}
 	}
-        
+/*        
 	processCodes()
 	{
 		if (this.mJson.codes)
@@ -94,24 +94,28 @@ class InsertPracticeScreen extends Screen
 			}
 		}
 	}
-	
+*/	
 	processJsonData()
         {
                 super.processJsonData();
 
-                if (this.mJson.pitches)
-                {
-                        //load up pitches option
-                        var select = document.getElementById("insert_practice_screen_pitch_id");
-                        select.length = 0;
-                        for (var i = 0; i < this.mJson.pitches.length; i++)
-                        {
-                                var opt = document.createElement('option');
-                                opt.value = this.mJson.pitches[i].id;
-                                var name = this.mJson.pitches[i].name;
-                                opt.innerHTML = name;
-                                select.appendChild(opt);
-                        }
-                }
+		if (this.mJson)
+		{
+
+                	if (this.mJson.pitches)
+                	{
+                        	//load up pitches option
+                        	var select = document.getElementById("insert_practice_screen_pitch_id");
+                        	select.length = 0;
+                        	for (var i = 0; i < this.mJson.pitches.length; i++)
+                        	{
+                               		var opt = document.createElement('option');
+                                	opt.value = this.mJson.pitches[i].id;
+                                	var name = this.mJson.pitches[i].name;
+                                	opt.innerHTML = name;
+                                	select.appendChild(opt);
+                        	}
+                	}
+		}
 	}
 }
