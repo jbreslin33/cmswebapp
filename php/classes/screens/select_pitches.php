@@ -19,7 +19,7 @@ class SelectPitches extends Screen
 
                 $sql = 'select f_select_pitches($1,$2)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_pitches", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_pitches", array( $this->getSenderEmailId(), $club_id));
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_pitches", array( $this->getSenderEmailId(), $this->mClubId));
 
                 return pg_fetch_result($result, 0);
         }
