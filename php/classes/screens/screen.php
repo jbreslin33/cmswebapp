@@ -47,6 +47,19 @@ class Screen
 		return $payload->email_id;
 	}
 
+        function getAuthorizationId()
+        {
+                if (isset($_GET['jwt']))
+                {
+                        $jwt = $_GET['jwt'];
+                }
+
+                //get id of sender
+                $oneRing = new OneRing();
+                $payload = JWT::decode($jwt, $oneRing->mOneRing);
+                return $payload->authorization_id;
+        }
+
 	function getResult()
 	{
 	}
