@@ -12,7 +12,7 @@ class SelectedPerson extends Screen
 	{
 		$sql = 'select f_selected_person($1,$2,$3,$4)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_selected_person", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_selected_person", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId));
+		$result = pg_execute($this->mDatabase->mConnection, "f_selected_person", array( $this->getSenderEmailId(), $this->getParameters());
                	return pg_fetch_result($result, 0);
         }
 }

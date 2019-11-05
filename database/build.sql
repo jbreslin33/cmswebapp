@@ -1832,7 +1832,8 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set(email_id,person_id, club_id, team_id,null,-100);
+        --result_set = f_format_result_set(email_id,person_id, club_id, team_id,null,-100);
+        result_set = f_format_result_set(email_id,null,-100);
 
 RETURN result_set;
 END;
