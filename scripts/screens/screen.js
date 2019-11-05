@@ -296,6 +296,23 @@ class Screen
 
         }
 
+	showForm()
+	{
+                if (this.getForm())
+                {
+                        this.getForm().style.display = "block";
+                        this.getForm().style.visibility = "visible";
+                }
+	}
+
+	hideForm()
+	{
+		if (this.getForm())
+		{
+                	this.getForm().style.display = "none";
+		}
+	}
+
         hide()
         {
 		if (this.getHtml())
@@ -403,6 +420,7 @@ class Screen
 	{
 		if (this.mJson.persons)
 		{
+			console.log('person');
                		//load up persons option
                		var select = document.getElementById("person_select_id");
 			select.length = 0;
@@ -411,7 +429,6 @@ class Screen
                			var opt = document.createElement('option');
                			opt.value = this.mJson.persons[i].id;
                        		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                       		opt.innerHTML = full_name;
                        		select.appendChild(opt);
                		}
 		}
@@ -450,13 +467,13 @@ class Screen
 	{
 		if (this.mJson.codes)
 		{
-			var code = 0;
+			this.mCode = 0;
                		for (var i = 0; i < this.mJson.codes.length; i++)
 			{
-				code = this.mJson.codes[i].code;
+				this.mCode = this.mJson.codes[i].code;
 			}
 			//definite success so send to main
-			if (code == '-100') 
+			if (this.mCode == '-100') 
 			{
 				if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
 				{
