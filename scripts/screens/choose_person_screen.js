@@ -27,13 +27,6 @@ class ChoosePersonScreen extends Screen
 	{
 		this.mHit = true;
 
-		//set the person_id in local storage so we don't have to ask??? or should we ask everytime???
-		/*
-		var select = document.getElementById("choose_person_screen_select_id");
-                var person_id = select.options[select.selectedIndex].value;
-		APPLICATION.setPersonId(person_id);
-		*/
-		
 		//just send jwt authorization
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();

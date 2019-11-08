@@ -39,12 +39,17 @@ class Screen
 		if (isset($_GET['jwt']))
 		{
 			$jwt = $_GET['jwt'];
-		}
 		
-		//get id of sender
-		$oneRing = new OneRing();
-                $payload = JWT::decode($jwt, $oneRing->mOneRing);
-		return $payload->email_id;
+			//get id of sender
+			$oneRing = new OneRing();
+                	$payload = JWT::decode($jwt, $oneRing->mOneRing);
+			return $payload->email_id;
+		}
+
+		else
+		{
+			error_log('no jwt');
+		}
 	}
 
         function getAuthorizationId()

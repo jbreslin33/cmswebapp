@@ -54,6 +54,7 @@ class InsertForgotPassword extends Screen
 
                         //encode email_id into jwt
                         $encoded_token['email_id'] = $email_id;
+			$authorization_id = 0;
                         $encoded_token['authorization_id'] = $authorization_id; //0 none, 1 native, 2 google, 3 ???
                         $jwt = JWT::encode($encoded_token, $oneRing->mOneRing);
                         $jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
