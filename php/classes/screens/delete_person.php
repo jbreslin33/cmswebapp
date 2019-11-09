@@ -17,9 +17,9 @@ class DeletePerson extends Screen
                         $delete_person_id = $_GET['delete_person_id'];
                 }
 
-		$sql = 'select f_delete_person($1,$2,$3,$4,$5)';
+		$sql = 'select f_delete_person($1,$2)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_person", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_person", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $this->mTeamId, $delete_person_id));
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_person", array( $this->getSenderEmailId(), $delete_person_id));
 
                	return pg_fetch_result($result, 0);
         }
