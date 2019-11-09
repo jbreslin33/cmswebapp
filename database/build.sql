@@ -1841,7 +1841,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN INSERT PERSON
-CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int, person_id int, club_id int, team_id int)
+CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int, person_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -1851,9 +1851,9 @@ BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,$6,$7,x);
 
         IF x > 0 THEN
-		result_set = f_format_result_set(email_id,person_id, club_id, team_id,null,-100);
+		result_set = f_format_result_set(email_id,null,-100);
         ELSE
-		result_set = f_format_result_set(email_id,person_id,club_id,team_id,'Person not added',-101);
+		result_set = f_format_result_set(email_id,'Person not added',-101);
         END IF;
 
 RETURN result_set;
