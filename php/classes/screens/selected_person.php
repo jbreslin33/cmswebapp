@@ -10,9 +10,9 @@ class SelectedPerson extends Screen
 	
 	function getResult()
 	{
-		$sql = 'select f_selected_person($1,$2,$3,$4)';
+		$sql = 'select f_selected_person($1,$2)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_selected_person", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_selected_person", array( $this->getSenderEmailId(), $this->getParameters());
+		$result = pg_execute($this->mDatabase->mConnection, "f_selected_person", array( $this->getSenderEmailId(), $this->mPersonId ));
                	return pg_fetch_result($result, 0);
         }
 }

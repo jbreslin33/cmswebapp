@@ -48,12 +48,9 @@ class Screen
 
 	personSelected()
 	{
-		var select = document.getElementById("person_select_id");
-		APPLICATION.setPersonId(select.value);
-		if (APPLICATION.getPersonId() > 0)
+		if (person_select.options[person_select.selectedIndex])
 		{
-                	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/selected_person.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
-                	APPLICATION.getCurrentScreen().ajax();
+                	APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
 		}
 	}
 
@@ -371,9 +368,6 @@ class Screen
                         for (var i = 0; i < this.mJson.jwts.length; i++)
                         {
 				this.mApplication.setJWT(this.mJson.jwts[i].jwt); //set jwt
-				//this.mApplication.setPersonId(this.mJson.jwts[i].person_id); //set jwt
-				//this.mApplication.setClubId(this.mJson.jwts[i].club_id); //set jwt
-				//this.mApplication.setTeamId(this.mJson.jwts[i].team_id); //set jwt
                         }
                 }
 	}
