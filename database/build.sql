@@ -915,21 +915,16 @@ BEGIN
         	IF found_native_login_id > 0 THEN
 			update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
                 	result_set = f_format_result_set_jwt(found_email_id,null,-100);
-			RAISE INFO 'found_email_id z: %', found_email_id;
 		ELSE
 			CALL p_insert_native_login(found_email_id,$2,x);
 			IF x > 0 THEN
                 		result_set = f_format_result_set_jwt(found_email_id,null,-100);
-				RAISE INFO 'found_email_id a: %', found_email_id;
 			ELSE
                 		result_set = f_format_result_set_jwt(found_email_id,'Something went wrong can you submit a new request please?',-101);
-				RAISE INFO 'found_email_id b: %', found_email_id;
 			END IF;
 		END IF;
         ELSE
                 result_set = f_format_result_set_jwt(found_email_id,'Something went wrong can you submit a new request please?',-101);
-		RAISE INFO 'found_email_id c: %', found_email_id;
-
         END IF;
 RETURN result_set;
 END;

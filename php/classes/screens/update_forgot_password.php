@@ -28,7 +28,6 @@ class UpdateForgotPassword extends Screen
                 }
 
 		$txt = 'forgot_password_token:' . $forgot_password_token . ' password:' . $password . ' email:' . $email;
-		error_log($txt);
 
 		//mail that you changed password
                	$this->mEmail = $email;
@@ -54,14 +53,13 @@ class UpdateForgotPassword extends Screen
                 //grab email_id
                 $email_id = array_shift($result_array);
 
-                $authorization_id = 2;
+                $authorization_id = 1;
 
                 //put array back into a string
                 $data = implode(",",$result_array);
 
                 if ($data)
                 {
-			error_log($data);
                         //encode
                         $oneRing = new OneRing();
                         $encoded_token = array();
