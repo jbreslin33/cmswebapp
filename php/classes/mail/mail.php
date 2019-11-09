@@ -23,7 +23,7 @@ class Mail
     			$this->mPhpMailer->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     			$this->mPhpMailer->SMTPAuth = true;                               // Enable SMTP authentication
     			$this->mPhpMailer->Username = 'jbreslin33@gmail.com';                 // SMTP username
-    			$this->mPhpMailer->Password = 'Star5567';                           // SMTP password
+    			$this->mPhpMailer->Password = 'Celta2020';                           // SMTP password
     			$this->mPhpMailer->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     			$this->mPhpMailer->Port = 465;                                    // TCP port to connect to
 
