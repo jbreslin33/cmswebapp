@@ -1893,7 +1893,7 @@ BEGIN
         	IF x > 0 THEN
 			result_set = f_format_result_set($1,null,-100);
         	ELSE
-			result_set = f_format_result_set($1,'Person could not be deleted.',-101);
+			result_set = f_format_result_set($1,'You do not have permission to delete Person. They are on a team',-101);
         	END IF;
 	ELSE
 		result_set = f_format_result_set($1,'Total persons less than 2 so we cannot delete.',-101);
@@ -1908,6 +1908,7 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
 BEGIN
+	--delete from club_players where person_id = $1;
 	delete from emails_persons where person_id = $1;
 	delete from club_persons where person_id = $1;
 	delete from persons where id = $1 returning id into x;
