@@ -1900,7 +1900,8 @@ BEGIN
 			--we have a player on a team the only way to delete is if the deletor is a team manager
 	
 			RAISE LOG 'information message %', found_team_club_player_id;
-			result_set = f_format_result_set($1,'You do not have permission to delete Person. They are on a team',-101);
+			result_set = f_format_result_set($1,'You do not have permission to delete Person. They are on a team. Let your team manager know.',-101);
+			--this is good enough as you should delete players on another screen.
 
 		ELSE
 			--no worries this person is not a player on a team go ahead and delete
