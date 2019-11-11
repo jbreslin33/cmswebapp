@@ -48,9 +48,12 @@ class Screen
 
 	personSelected()
 	{
-		if (person_select.options[person_select.selectedIndex])
+		if (person_select)
 		{
-                	APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
+			if (person_select.options[person_select.selectedIndex])
+			{
+                		APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
+			}
 		}
 	}
 

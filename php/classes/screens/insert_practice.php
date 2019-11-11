@@ -67,7 +67,6 @@ class InsertPractice extends Screen
 		{
 			if ($this->getAuthorizationId() > 0)
 			{
-				error_log('authorized');
 				//prep db
 				$sql = 'select f_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)';
 				$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_practice", $sql);
@@ -77,7 +76,6 @@ class InsertPractice extends Screen
 			}
 			else
 			{
-				error_log('not authorized');
                                 //prep db
                                 $sql = 'select f_format_result_set($1,$2,$3)';
                                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);

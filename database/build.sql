@@ -1879,22 +1879,31 @@ $$;
 --END INSERT PERSON
 
 --BEGIN DELETE PERSON
-CREATE OR REPLACE FUNCTION f_delete_person(int, int)
+CREATE OR REPLACE FUNCTION f_delete_person(int, int, int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 	total_persons int;
 	DECLARE x int := -111;
+	found_team_club_player_id team_club_players.id%TYPE;
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
-        	CALL p_delete_person($2,x);
+        
+		select team_club_players.id into found_team_club_player_id from team_club_players
+        	join team_club_persons on team_club_persons.id=team_club_players.team_club_person_id
+        	join club_persons on club_persons.id=team_club_persons.club_person_id
+        	where club_persons.person_id = $3;
+	
+		RAISE LOG 'information message %', found_team_club_player_id;
 
-        	IF x > 0 THEN
-			result_set = f_format_result_set($1,null,-100);
-        	ELSE
-			result_set = f_format_result_set($1,'You do not have permission to delete Person. They are on a team',-101);
-        	END IF;
+        	--CALL p_delete_person($2,$3,x);
+
+        	--IF x > 0 THEN
+		--	result_set = f_format_result_set($1,null,-100);
+        	--ELSE
+		--	result_set = f_format_result_set($1,'You do not have permission to delete Person. They are on a team',-101);
+        	--END IF;
 	ELSE
 		result_set = f_format_result_set($1,'Total persons less than 2 so we cannot delete.',-101);
 		--not enuf persons prob get rid of this
@@ -1903,15 +1912,25 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_person(int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_person(int, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+	found_team_club_player_id team_club_players.id%TYPE;
 BEGIN
-	--delete from club_players where person_id = $1;
-	delete from emails_persons where person_id = $1;
-	delete from club_persons where person_id = $1;
-	delete from persons where id = $1 returning id into x;
+	--RAISE INFO 'information message %', now() ;
+        select team_club_players.id into found_team_club_player_id from team_club_players
+        join team_club_persons on team_club_persons.id=team_club_players.team_club_person_id
+        join club_persons on club_persons.id=team_club_persons.club_person_id
+        where club_persons.person_id = $2;
+	
+	RAISE INFO 'information message %', found_team_club_player_id;
+
+
+
+	--delete from emails_persons where person_id = $1;
+	--delete from club_persons where person_id = $1;
+	--delete from persons where id = $1 returning id into x;
 END;
 $$;
 --END INSERT PERSON
