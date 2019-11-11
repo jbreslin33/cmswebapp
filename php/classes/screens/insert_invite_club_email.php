@@ -33,7 +33,6 @@ class InsertInviteClubMember extends Screen
                 $this->mBody .= $this->mUrl;
 
                 //send mail
-                //$mail = new Mail($email, $this->mUrl,$this->mSubject);
                 $mail = new Mail($email,$this->mSubject,$this->mBody);
 
 		return pg_fetch_result($result, 0);
