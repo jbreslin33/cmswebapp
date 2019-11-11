@@ -16,9 +16,12 @@ class InsertInviteClubMember extends Screen
 
 		$email = $_GET['email'];
 
-                $sql = 'select f_insert_invite_club_email($1,$2,$3,$4)';
+                $sql = 'select f_insert_invite_club_email($1,$2,$3,$4,$5)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_invite_club_email", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_insert_invite_club_email", array( $email, $_GET['club_id'], $this->mClubInviteToken, $_GET['person_id']));
+	        //$result = pg_execute($this->mDatabase->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $this->getSenderEmailId(), $this->mPersonId));
+		//-email_id, person_id, club_id, email,token
+
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_invite_club_email", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $email, $this->mClubInviteToken));
 
                 //create mail
                 $this->mEmail = $email;

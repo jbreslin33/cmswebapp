@@ -48,6 +48,7 @@ class Screen
 
 	personSelected()
 	{
+                var person_select = document.getElementById("person_select_id");
 		if (person_select)
 		{
 			if (person_select.options[person_select.selectedIndex])

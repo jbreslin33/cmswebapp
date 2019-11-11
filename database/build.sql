@@ -2066,63 +2066,51 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --------
-
-CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(int, int, TEXT, int,TEXT,INOUT x int)
+--email_id old guy, person_id, club_id, email_id of new guy,token
+CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(int, int, int, int, TEXT, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        found_administrator_email_id emails.id%TYPE;
-        returning_email_id emails.id%TYPE;
         returning_invite_club_person_id invite_club_emails.id%TYPE;
-        found_invite_club_person_id invite_club_emails.id%TYPE;
         found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-        IF $1 > 0 THEN 
+	insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values ($4, $3, $5, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $3 and persons.id = $2; 
+	insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
 
-		select invite_club_emails.id into found_invite_club_person_id from invite_club_emails where email_id = found_email_id and club_id = $2;
-		insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values (found_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
-		insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
-
-	ELSE --actually just do insert of email then invite...
-		insert into emails (email) values ($5) returning id into returning_email_id; 
-		select invite_club_emails.id into found_invite_club_person_id from invite_club_emails where email_id = returning_email_id and club_id = $2;
-		insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values (returning_email_id, $2, $3, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $2 and persons.id = $4; 
-		insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
-
-	END IF;
-	select email_id into x from emails_persons where person_id = $4;
+	select email_id into x from emails_persons where person_id = $2;
 END;
 $$;
 
 
-CREATE OR REPLACE FUNCTION f_insert_invite_club_email(TEXT, int, TEXT, int) --email,club_id,token,person_id associated with club_admin
+CREATE OR REPLACE FUNCTION f_insert_invite_club_email(int, int, int, TEXT, TEXT) --email_id, person_id, club_id, email,token
 RETURNS text AS $$
 DECLARE
 	DECLARE x int := -1;
         found_email_id emails.id%TYPE;
+        returning_email_id emails.id%TYPE;
         found_club_email_id club_emails.id%TYPE;
         result_set text;
 BEGIN
-        select into found_email_id f_get_email_id($1);
+        select into found_email_id f_get_email_id($4);
 
 	IF found_email_id > 0 THEN
-		select id into found_club_email_id from club_emails where club_id = $2 AND email_id = found_email_id; 
+		select id into found_club_email_id from club_emails where club_id = $3 AND email_id = found_email_id; 
 
 		IF found_club_email_id > 0 THEN
-			result_set = '-101, this email is already associated with this club';
+			result_set = f_format_result_set($1,'This email is already associated with this club',-100);
 		ELSE
-			CALL p_insert_invite_club_email(found_email_id,$2,$3,$4,$1,x);
+			CALL p_insert_invite_club_email($1,$2,$3,found_email_id,$5,x);
 		END IF;
 	ELSE --call without a found_email_id
-		CALL p_insert_invite_club_email(found_email_id,$2,$3,$4,$1,x);
+		insert into emails (email) values ($4) returning id into returning_email_id; 
+		CALL p_insert_invite_club_email($1,$2,$3,returning_email_id,$5,x);
 	END IF;
 
 	IF x > 0 THEN
-		result_set = f_format_result_set(x,null,-100);
+		result_set = f_format_result_set($1,null,-100);
 	ELSE
-		result_set = f_format_result_set(x,'Something went wrong.',-101);
+		result_set = f_format_result_set($1,'Something went wrong.',-101);
 	END IF;
 
         
