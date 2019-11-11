@@ -18,8 +18,6 @@ class InsertInviteClubMember extends Screen
 
                 $sql = 'select f_insert_invite_club_email($1,$2,$3,$4,$5)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_invite_club_email", $sql);
-	        //$result = pg_execute($this->mDatabase->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $this->getSenderEmailId(), $this->mPersonId));
-		//-email_id, person_id, club_id, email,token
 
                 $result = pg_execute($this->mDatabase->mConnection, "f_insert_invite_club_email", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $email, $this->mClubInviteToken));
 
@@ -31,9 +29,12 @@ class InsertInviteClubMember extends Screen
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
                         'club_invite_token' => $this->mClubInviteToken
                         ]));
+                $this->mBody = "Click the link to join club: ";
+                $this->mBody .= $this->mUrl;
 
                 //send mail
-                $mail = new Mail($email, $this->mUrl,$this->mSubject);
+                //$mail = new Mail($email, $this->mUrl,$this->mSubject);
+                $mail = new Mail($email,$this->mSubject,$this->mBody);
 
 		return pg_fetch_result($result, 0);
         }
