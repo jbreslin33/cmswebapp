@@ -1598,18 +1598,13 @@ DECLARE
 	DECLARE x int := -1;
 BEGIN
 	select email_id into found_email_id from invite_club_emails where club_invite_token = $1; 
-	RAISE INFO 'found_email_id: %', found_email_id;
+	RAISE LOG 'found_email_id: %', found_email_id;
 
 	IF found_email_id > 0 THEN
 		--lets grab the club_id then add all persons to club from email_id
 		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
 		CALL p_insert_club_persons(found_club_id,found_email_id);
-		--IF x > 0 THEN --we are already a member so give normal result set to send to main
-                --	result_set = f_format_result_set(found_email_id,null,-100);
-		--ELSE -- we were not already a member so a join club needs to be done.
-               -- 	result_set = f_format_result_set_invite_club_emails(found_email_id,'Something went wrong adding your persons to club.',-101);
-		--END IF;
-                result_set = f_format_result_set(found_email_id,null,-100);
+                result_set = f_format_result_set_jwt(found_email_id,null,-100);
 	ELSE
                 result_set = f_format_result_set_invite_club_emails(found_email_id,'You need to fill out form to finish signup.',-101);
 	END IF;
