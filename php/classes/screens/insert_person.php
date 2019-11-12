@@ -37,10 +37,22 @@ class InsertPerson extends Screen
                         $address = $_GET['address'];
                 }
 
-		$sql = 'select f_insert_person($1,$2,$3,$4,$5,$6,$7)';
-		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_person", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $this->getSenderEmailId(), $this->mPersonId));
-               	return pg_fetch_result($result, 0);
+               	if ($this->getAuthorizationId() > 0)
+                {
+			$sql = 'select f_insert_person($1,$2,$3,$4,$5,$6,$7)';
+			$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_person", $sql);
+			$result = pg_execute($this->mDatabase->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $this->getSenderEmailId(), $this->mPersonId));
+               		return pg_fetch_result($result, 0);
+		}
+		else
+		{
+                	//prep db
+                        $sql = 'select f_format_result_set($1,$2,$3)';
+                       	$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);
+                        $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'not authorized', -101));
+
+                        return pg_fetch_result($result, 0);
+		}
         }
 }
 
