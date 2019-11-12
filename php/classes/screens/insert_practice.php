@@ -79,7 +79,7 @@ class InsertPractice extends Screen
                                 //prep db
                                 $sql = 'select f_format_result_set($1,$2,$3)';
                                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);
-                                $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'not authorized', -101));
+                                $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'You are in view only mode. You must login to insert a practice.', -101));
 
                                 return pg_fetch_result($result, 0);
 
