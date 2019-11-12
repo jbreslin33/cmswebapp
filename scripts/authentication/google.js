@@ -13,3 +13,5 @@ function signOut()
 		APPLICATION.getCurrentScreen().googleSignOut();
 	}
 }
+
+

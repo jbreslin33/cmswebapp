@@ -33,7 +33,6 @@ class InsertLoginClubScreen extends InsertLoginScreen
 
 	show()
 	{
-		console.log('in show pl');
                 if (this.getHtml())
                 {
                         this.getHtml().style.display = "block";
@@ -85,32 +84,4 @@ class InsertLoginClubScreen extends InsertLoginScreen
                 request.open('POST', url);
                 request.send();
         }
-
-        googleSignIn(googleUser)
-        {
-                // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicProfile();
-
-                // The ID token you need to pass to your backend:
-                var id_token = googleUser.getAuthResponse().id_token;
-
-                APPLICATION.mInsertNativeLoginClubScreen.mEmail = profile.getEmail();
-                APPLICATION.mInsertNativeLoginClubScreen.mGoogleID = profile.getId();
-                APPLICATION.mInsertNativeLoginClubScreen.mIDToken = id_token;
-                APPLICATION.mInsertNativeLoginClubScreen.mFirstName = profile.getGivenName();
-                APPLICATION.mInsertNativeLoginClubScreen.mLastName = profile.getFamilyName();
-                APPLICATION.mInsertNativeLoginClubScreen.mImageUrl = profile.getImageUrl();
-
-                this.googleLogin();
-        }
-
-        googleSignOut()
-        {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function ()
-                {
-                        console.log('User signed out.');
-                });
-        }
-
 }
