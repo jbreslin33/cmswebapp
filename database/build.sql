@@ -1028,14 +1028,14 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_emails(int,TEXT,int,TEXT)
+CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_emails(TEXT)
 RETURNS text AS $$
 DECLARE
         json_result_invite_club_emails text;
         result_set text;
 BEGIN
-        select into json_result_invite_club_emails j_select_invite_club_emails($4);
-        result_set = CONCAT($1,',','{',json_result_invite_club_emails,'}');
+        select into json_result_invite_club_emails j_select_invite_club_emails($1);
+        result_set = CONCAT(json_result_invite_club_emails,'}');
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1606,7 +1606,7 @@ BEGIN
 		CALL p_insert_club_persons(found_club_id,found_email_id);
                 result_set = f_format_result_set_jwt(found_email_id,null,-100);
 	ELSE
-                result_set = f_format_result_set_invite_club_emails(found_email_id,'You need to fill out form to finish signup.',-101);
+                result_set = f_format_result_set_invite_club_emails($1);
 	END IF;
 RETURN result_set;
 END;
