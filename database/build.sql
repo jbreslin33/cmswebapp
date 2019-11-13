@@ -1604,6 +1604,7 @@ BEGIN
 		--lets grab the club_id then add all persons to club from email_id
 		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
 		CALL p_insert_club_persons(found_club_id,found_email_id);
+
                 result_set = f_format_result_set_jwt(found_email_id,null,-100);
 	ELSE
                 result_set = f_format_result_set_invite_club_emails($1);
