@@ -27,11 +27,8 @@ class InsertLoginEmailScreen extends Screen
 	{
 		//get vars
                	this.mEmail    	 = document.getElementById("insert_native_login_email_screen_email_id").value;
-
 		this.setUrl("/php/classes/screens/insert_native_email_login.php?email=" + this.mEmail); 
-
 		this.ajax();
-	
 		this.hideAfterHit()
 	}
 
@@ -68,7 +65,7 @@ class InsertLoginEmailScreen extends Screen
                 }
         }
 
-
+	//For login Link
 	setLoginLink(loginLink)
 	{
 		this.mLoginLink = loginLink;
