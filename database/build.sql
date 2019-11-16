@@ -1867,6 +1867,14 @@ BEGIN
 	select id into found_emails_persons_id from emails_persons where person_id = x;
 
 	IF $7 > 0 THEN
+		--old one
+		FOR rec IN
+			select distinct email_id from emails_persons where person_id = $7
+		LOOP
+			insert into emails_persons (email_id, person_id) values (rec.email_id, x); 
+		END LOOP;
+	
+	ELSE
 		--new one for brand new unaffilated persons
 		IF found_emails_persons_id > 0 THEN
 			--do nothing		
@@ -1881,13 +1889,6 @@ BEGIN
 			insert into emails_persons (email_id, person_id) values (rec.email_id, x); 
 		END LOOP;
 
-	ELSE
-		--old one
-		FOR rec IN
-			select distinct email_id from emails_persons where person_id = $7
-		LOOP
-			insert into emails_persons (email_id, person_id) values (rec.email_id, x); 
-		END LOOP;
 	END IF;
 END;
 
