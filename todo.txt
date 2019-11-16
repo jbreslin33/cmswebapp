@@ -1,3 +1,5 @@
+need to handle no pitch gracefully
+--------
 make insert forgot passsword give you a jwt but it should have authorization_id = 0
 and it should let you know that you are currently not logged in but in view mode....
 ------------
