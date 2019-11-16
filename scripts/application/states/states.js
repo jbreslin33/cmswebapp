@@ -244,7 +244,6 @@ class CHOOSE_PERSON_APPLICATION extends State
 		
 		app.setCurrentScreen(new ChoosePersonScreen(app));
 		app.getCurrentScreen().enter();
-		app.getCurrentScreen().hideNavigationBar();
 	}
 
         execute(app)
@@ -263,8 +262,6 @@ class CHOOSE_PERSON_APPLICATION extends State
 		{
 			console.log("CHOOSE_PERSON_APPLICATION: EXIT");        
 		}
-		
-		app.getCurrentScreen().showNavigationBar();
 		app.getCurrentScreen().exit();
 	}
 }
@@ -283,7 +280,6 @@ class LOGOUT_APPLICATION extends State
 		{
 			console.log("LOGOUT_APPLICATION: ENTER");        
 		}
-		
 
 		//clear mJWT from localstorage
 		localStorage.removeItem("mJWT");

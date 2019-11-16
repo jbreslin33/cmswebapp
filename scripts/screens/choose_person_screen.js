@@ -32,6 +32,17 @@ class ChoosePersonScreen extends Screen
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
+	enter()
+	{
+		super.enter();
+               	this.hideNavigationBar();
+	}
+	exit()
+	{
+   		this.showNavigationBar();
+		super.exit();
+	}
+
 	processPersons()
         {
                 if (this.mJson.persons)
