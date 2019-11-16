@@ -32,6 +32,17 @@ class InsertLoginEmailScreen extends Screen
 		this.hideAfterHit()
 	}
 
+        enter()
+        {
+                super.enter();
+                this.hideNavigationBar();
+        }
+        exit()
+        {
+                this.showNavigationBar();
+                super.exit();
+        }
+
         processCodes()
         {
                 if (this.mJson.codes)

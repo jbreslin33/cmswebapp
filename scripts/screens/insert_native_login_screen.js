@@ -35,7 +35,7 @@ class InsertLoginScreen extends Screen
 
 		this.ajax();
 	}
-
+        
 	setLoginLink(loginLink)
 	{
 		this.mLoginLink = loginLink;
