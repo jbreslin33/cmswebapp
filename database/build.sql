@@ -1077,15 +1077,16 @@ DECLARE
 BEGIN
 
     	SELECT email_id INTO found_email_id FROM join_emails WHERE join_email_token = join_email_token_p;
+  	RAISE LOG 'found_email_id: %', now();
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
+			result_set = f_format_result_set(found_email_id,null,-100);
                 ELSE
-			result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong with signup. Sorry! Please try again.',-101);
+			result_set = f_format_result_set(found_email_id,'Something went wrong with signup. Sorry! Please try again.',-101);
 		END IF;
 	ELSE
-		result_set = f_format_result_set(found_email_id,0,0,0,'Something went wrong. Please resend email email.',-101);
+		result_set = f_format_result_set(found_email_id,'Something went wrong. Please resend email email.',-101);
 	END IF;
 RETURN result_set;
 END;
@@ -2049,9 +2050,9 @@ BEGIN
 		IF x > 0 THEN 
 			--there could not have been native login because email did not exist so...
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
-			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
+			insert into join_emails (email_id, join_email_token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
 			IF returning_join_email_id > 0 THEN
-				result_set = f_format_result_set(found_email_id,'We sent you a link to your email to finish joining.',-101);
+				result_set = f_format_result_set(x,'We sent you a link to your email to finish joining.',-101);
 			ELSE
 				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
 			END IF;
