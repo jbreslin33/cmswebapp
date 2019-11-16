@@ -1077,16 +1077,15 @@ DECLARE
 BEGIN
 
     	SELECT email_id INTO found_email_id FROM join_emails WHERE join_email_token = join_email_token_p;
-  	RAISE LOG 'found_email_id: %', now();
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set(found_email_id,null,-100);
+			result_set = f_format_result_set_jwt(found_email_id,null,-100);
                 ELSE
-			result_set = f_format_result_set(found_email_id,'Something went wrong with signup. Sorry! Please try again.',-101);
+			result_set = f_format_result_set(0,'Something went wrong with signup. Sorry! Please try again.',-101);
 		END IF;
 	ELSE
-		result_set = f_format_result_set(found_email_id,'Something went wrong. Please resend email email.',-101);
+		result_set = f_format_result_set(0,'Something went wrong. Please resend email email.',-101);
 	END IF;
 RETURN result_set;
 END;
@@ -1856,7 +1855,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
+--I can see maybe if there are no emails_persons associated we need to add one
 CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, int, int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -2027,7 +2026,6 @@ DECLARE
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
-  		RAISE LOG 'IF %', found_email_id;
 		--check if there is a native login....
 		select id into found_native_login_id from native_logins where email_id = found_email_id;
 
@@ -2044,7 +2042,6 @@ BEGIN
 			END IF;
 		END IF;
 	ELSE
-		RAISE LOG 'ELSE %', found_email_id;
 		--no email or native login lets get them both
 		CALL p_insert_native_email_login($1,x);
 		IF x > 0 THEN 
