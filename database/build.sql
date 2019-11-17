@@ -1446,17 +1446,19 @@ BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
 	IF found_email_id > 0 THEN
+  		--RAISE LOG 'found_email_id: %', found_email_id;
 
         	SELECT id INTO found_native_login_id FROM native_logins 
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id > 0 THEN
-			 result_set = f_format_result_set(found_email_id,null,-100);
+  			 RAISE LOG 'found_email_id: %', found_email_id;
+			 result_set = f_format_result_set_jwt(found_email_id,null,-100);
                 ELSE
 			 result_set = f_format_result_set(found_email_id,'Bad password.',-101);
                 END IF;
 	ELSE
-		 result_set = f_format_result_set(found_email_id,'Email does not exist',-101);
+		result_set = f_format_result_set(found_email_id,'Email does not exist',-101);
 	END IF;
 RETURN result_set;
 END;
