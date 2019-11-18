@@ -23,9 +23,18 @@ class InsertClubScreen extends Screen
                	var address = document.getElementById("insert_club_screen_address_id").value;
 
 		var select = document.getElementById("person_select_id");
-		var person_id = select.options[select.selectedIndex].value;
+		var person_id = 0;
+		if (select.options[select.selectedIndex])
+		{
+			person_id = select.options[select.selectedIndex].value;
+			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_club.php?name=" + name + "&address=" + address + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
+			APPLICATION.getCurrentScreen().ajax();
+		}
+		else
+		{
+			this.setMessage('You need to select a person. If there are no persons yet you need to create one.','red');
+		}
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_club.php?name=" + name + "&address=" + address + "&jwt=" + APPLICATION.getJWT() + '&person_id=' + person_id); 
-		APPLICATION.getCurrentScreen().ajax();
+
 	}
 }

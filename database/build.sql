@@ -1687,13 +1687,18 @@ BEGIN
         WHERE name = $1;
 
         IF found_club_id > 0 THEN
-                result_set = '-101, Club name already taken.';
+		result_set = f_format_result_set(email_id,'Club name already exists',-101);
        	ELSE
-		CALL p_insert_club($1,$2,email_id,person_id,x);
-		IF x > 0 THEN
-			result_set = f_format_result_set(email_id,null,-100);
+		IF person_id > 0 THEN
+
+			CALL p_insert_club($1,$2,email_id,person_id,x);
+			IF x > 0 THEN
+				result_set = f_format_result_set(email_id,null,-100);
+			ELSE
+				result_set = f_format_result_set(email_id,'Something went wrong with adding club. Sorry!',-101);
+			END IF;
 		ELSE
-			result_set = f_format_result_set(email_id,'Something went wrong with adding club. Sorry!',-101);
+			result_set = f_format_result_set(email_id,'You must add a person to this account before you add a club.',-101);
 		END IF;
         END IF;
 RETURN result_set;
