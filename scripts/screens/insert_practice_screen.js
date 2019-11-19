@@ -50,7 +50,7 @@ class InsertPracticeScreen extends Screen
 		var address = document.getElementById("insert_practice_screen_address_id").value;
 		var coordinates = document.getElementById("insert_practice_screen_coordinates_id").value;
               
-		var pitch_id = null;	
+		var pitch_id = 0;	
 		var pitch_select = document.getElementById("insert_practice_screen_pitch_id");
 
                 if (pitch_select.length)

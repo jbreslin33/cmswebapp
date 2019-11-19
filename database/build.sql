@@ -1745,7 +1745,11 @@ DECLARE
 
 BEGIN
   	RAISE LOG 'pitch_id: %', $8;
-	insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+	IF $8 > 0 THEN
+		insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+	ELSE
+		insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+	END IF;
 END;
 $$;
 --END INSERT PRACTICE
