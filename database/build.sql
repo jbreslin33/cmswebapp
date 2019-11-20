@@ -1980,6 +1980,9 @@ BEGIN
 	insert into managers (person_id) values ($3) returning id into returning_manager_id;
 	insert into club_managers (club_person_id,manager_id) values (found_club_person_id,returning_manager_id) returning id into returning_club_manager_id;
 	insert into team_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, returning_club_manager_id) returning id into x;
+	
+	--insert into team_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	--insert into team_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 END;
 $$;
 
