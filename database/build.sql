@@ -701,7 +701,7 @@ CREATE TABLE team_club_persons
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE team_club_players 
+CREATE TABLE team_club_persons_club_players 
 (
 	id SERIAL,
 	team_club_person_id integer not null,
@@ -713,7 +713,7 @@ CREATE TABLE team_club_players
 );
 
 
-CREATE TABLE team_club_coaches 
+CREATE TABLE team_club_persons_club_coaches 
 (
 	id SERIAL,
 	team_club_person_id integer not null,
@@ -724,7 +724,7 @@ CREATE TABLE team_club_coaches
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE team_club_managers 
+CREATE TABLE team_club_persons_club_managers 
 (
 	id SERIAL,
 	team_club_person_id integer not null,
@@ -735,7 +735,7 @@ CREATE TABLE team_club_managers
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE team_club_administrators 
+CREATE TABLE team_club_persons_club_administrators 
 (
 	id SERIAL,
 	team_club_person_id integer not null,
@@ -756,7 +756,7 @@ CREATE TABLE sessions_players_availability
 	notes text,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (team_club_player_id) REFERENCES team_club_players(id),
+	FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
         PRIMARY KEY (id)
 );
@@ -769,7 +769,7 @@ CREATE TABLE sessions_players_attendance
 	attendance_id integer NOT NULL,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (team_club_player_id) REFERENCES team_club_players(id),
+	FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
         PRIMARY KEY (id)
 );
@@ -1713,11 +1713,11 @@ DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
-	found_team_club_manager_id team_club_managers.id%TYPE;
+	found_team_club_manager_id team_club_persons_club_managers.id%TYPE;
 BEGIN
-        select team_club_managers.id into found_team_club_manager_id 
-	from team_club_managers
-        join team_club_persons on team_club_persons.id=team_club_managers.team_club_person_id
+        select team_club_persons_club_managers.id into found_team_club_manager_id 
+	from team_club_persons_club_managers
+        join team_club_persons on team_club_persons.id=team_club_persons_club_managers.team_club_person_id
         join teams on teams.id=team_club_persons.team_id
         where teams.id = $2;
 
@@ -1762,11 +1762,11 @@ DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
-	found_team_club_manager_id team_club_managers.id%TYPE;
+	found_team_club_manager_id team_club_persons_club_managers.id%TYPE;
 BEGIN
-        select team_club_managers.id into found_team_club_manager_id 
-	from team_club_managers
-        join team_club_persons on team_club_persons.id=team_club_managers.team_club_person_id
+        select team_club_persons_club_managers.id into found_team_club_manager_id 
+	from team_club_persons_club_managers
+        join team_club_persons on team_club_persons.id=team_club_persons_club_managers.team_club_person_id
         join teams on teams.id=team_club_persons.team_id
         where teams.id = $2;
 
@@ -1914,13 +1914,13 @@ DECLARE
         result_set text;
 	total_persons int;
 	DECLARE x int := -111;
-	found_team_club_player_id team_club_players.id%TYPE;
+	found_team_club_player_id team_club_persons_club_players.id%TYPE;
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
         
-		select team_club_players.id into found_team_club_player_id from team_club_players
-        	join team_club_persons on team_club_persons.id=team_club_players.team_club_person_id
+		select team_club_persons_club_players.id into found_team_club_player_id from team_club_persons_club_players
+        	join team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
         	join club_persons on club_persons.id=team_club_persons.club_person_id
         	where club_persons.person_id = $3;
 
@@ -1953,7 +1953,7 @@ CREATE OR REPLACE PROCEDURE p_delete_person(int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-	found_team_club_player_id team_club_players.id%TYPE;
+	found_team_club_player_id team_club_persons_club_players.id%TYPE;
 BEGIN
 	delete from emails_persons where person_id = $1;
 	delete from club_persons where person_id = $1;
@@ -1979,10 +1979,10 @@ BEGIN
 
 	insert into managers (person_id) values ($3) returning id into returning_manager_id;
 	insert into club_managers (club_person_id,manager_id) values (found_club_person_id,returning_manager_id) returning id into returning_club_manager_id;
-	insert into team_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, returning_club_manager_id) returning id into x;
+	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, returning_club_manager_id) returning id into x;
 	
-	--insert into team_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
-	--insert into team_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 END;
 $$;
 
@@ -2191,8 +2191,8 @@ BEGIN
 	insert into managers (person_id) values (1);
 	insert into club_managers (club_person_id,manager_id) values (1,1);
 
-	insert into team_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
-	insert into team_club_managers (team_club_person_id,club_manager_id) values (1,1);
+	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 
 
 
@@ -2225,7 +2225,7 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
@@ -2266,7 +2266,7 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	-----------------------------------Arber Canole
 	--EMAILS
@@ -2303,7 +2303,7 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	---------------------------------Ben Barnieu
 
@@ -2351,7 +2351,7 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	--------------------------------Yancarlos Corredor
 	--EMAILS
@@ -2380,7 +2380,7 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	
 
 	----------------------------------Daniel McCallister
@@ -2422,7 +2422,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	---------------------------------------Dominic Evangelista
         
@@ -2470,7 +2470,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	---------------------------------Eric Girsh
 	--Leonard Girsh
@@ -2502,7 +2502,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	------------------------------------Fabrizio Franceschelli
 	--EMAILS
@@ -2568,7 +2568,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	
 	--PLAYERS Fabrizio
         insert into dobs (dob) values ('2004-01-01') returning id into returning_dob_id;
@@ -2581,7 +2581,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_b, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	---------------------------------------Joshua Vidro
 	--Joshua Vidro
@@ -2624,7 +2624,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	-----------------------------------Luke Breslin
 
@@ -2675,7 +2675,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	--------------------------------------Nacho Obando
 	--EMAILS
@@ -2719,7 +2719,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 
 	----------------------------------Tedi Shaho
@@ -2752,7 +2752,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 
 
@@ -2805,7 +2805,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	----------------------------------Victor Baidal
 	--Victor Baidal
@@ -2844,7 +2844,7 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	------------------------------------------------------------------------------------------------------
 END;
