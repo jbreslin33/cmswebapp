@@ -1972,6 +1972,7 @@ DECLARE
 	returning_team_club_person_id team_club_persons.id%TYPE;
 	returning_manager_id managers.id%TYPE;
 	returning_club_manager_id club_managers.id%TYPE;
+	returning_club_administrator_id club_administrators.id%TYPE;
 BEGIN
        	insert into teams (club_id,name) values ($1,$2) returning id into returning_team_id;
 	select id into found_club_person_id from club_persons where club_id = $1 AND person_id = $3;
@@ -1980,9 +1981,11 @@ BEGIN
 	insert into managers (person_id) values ($3) returning id into returning_manager_id;
 	insert into club_managers (club_person_id,manager_id) values (found_club_person_id,returning_manager_id) returning id into returning_club_manager_id;
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, returning_club_manager_id) returning id into x;
+
+	select id into returning_club_administrator_id from club_administrators where club_person_id = found_club_person_id; 
 	
 	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
-	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, returning_club_administrator_id);
 END;
 $$;
 
