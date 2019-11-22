@@ -232,7 +232,7 @@ class Screen
 	{
 	
 	}
-       
+
 	//used to get from selects
         getPersonId()
         {
@@ -246,6 +246,11 @@ class Screen
                         return select.value;
                 }
         }
+
+	getStandardParameters()
+	{
+		return "jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId();
+	}
 
 	getClubId()
 	{
