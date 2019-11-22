@@ -1446,13 +1446,10 @@ BEGIN
 	select into found_email_id f_get_native_email_id($1);	
 
 	IF found_email_id > 0 THEN
-  		--RAISE LOG 'found_email_id: %', found_email_id;
-
         	SELECT id INTO found_native_login_id FROM native_logins 
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id > 0 THEN
-  			 RAISE LOG 'found_email_id: %', found_email_id;
 			 result_set = f_format_result_set_jwt(found_email_id,null,-100);
                 ELSE
 			 result_set = f_format_result_set(found_email_id,'Bad password.',-101);
@@ -1744,7 +1741,6 @@ AS $$
 DECLARE
 
 BEGIN
-  	RAISE LOG 'pitch_id: %', $8;
 	IF $8 > 0 THEN
 		insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
 	ELSE
