@@ -93,23 +93,9 @@ class Application
 	
 	//----------------PERSONS
 
-	setPersonId(id)
+	setPersonIdInLocalStorage(id)
 	{
 		localStorage.setItem('mPersonId', id);
-	}
-
-	//used to get from selects
-	getPersonId()
-	{
-                var select = document.getElementById("person_select_id");
-		if (select.value == "")
-		{
-			return 0;
-		}
-		else
-		{
-                	return select.value;
-		}
 	}
 
 	//used to set selects onload from localstorage
@@ -120,23 +106,9 @@ class Application
 	
 	//----------------CLUBS
 	
-	setClubId(id)
+	setClubIdInLocalStorage(id)
 	{
 		localStorage.setItem('mClubId', id);
-	}
-	
-	//used to get from selects
-	getClubId()
-	{
-                var select = document.getElementById("club_select_id");
-		if (select.value == "")
-		{
-			return 0;
-		}
-		else
-		{
-                	return select.value;
-		}
 	}
 	
 	//used to set selects onload from localstorage
@@ -147,23 +119,9 @@ class Application
 	
 
 	//----------------TEAMS
-	setTeamId(id)
+	setTeamIdInLocalStorage(id)
 	{
 		localStorage.setItem('mTeamId', id);
-	}
-
-	//used to get from selects
-	getTeamId()
-	{
-                var select = document.getElementById("team_select_id");
-		if (select.value == "")
-		{
-			return 0;
-		}
-		else
-		{
-                	return select.value;
-		}
 	}
 
 	getTeamIdFromLocalStorage()

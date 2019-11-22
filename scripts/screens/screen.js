@@ -33,6 +33,9 @@ class Screen
 		this.mClubId = 0;
 		this.mTeamId = 0;
 
+		this.mClubSelect = null;
+		this.mTeamSelect = null;
+
 		this.mHit = false;
 
 		this.mForm = null;
@@ -63,16 +66,11 @@ class Screen
 		{
 			if (person_select.options[person_select.selectedIndex])
 			{
-                		APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
+                		APPLICATION.setPersonIdInLocalStorage(person_select.options[person_select.selectedIndex].value);
 			}
 		}
 	}
 
-	getParameters()
-	{
-		return '&person_id=' + APPLICATION.getPersonId() + '&club_id=' + APPLICATION.getClubId() + '&team_id=' + APPLICATION.getTeamId();
-	}
-	
 	ajax()
 	{
 	        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
@@ -112,6 +110,7 @@ class Screen
                 APPLICATION.getCurrentScreen().getRequest().send();
 	}
 
+	//form
 	setForm(form)
 	{
 		this.mForm = form;
@@ -122,6 +121,7 @@ class Screen
 		return this.mForm;
 	}
 
+	//url
 	setUrl(url)
 	{
 		this.mUrl = url;
@@ -208,41 +208,58 @@ class Screen
 		return this.mNavigationBar;
 	}
 
+	setClubSelect(select)
+	{
+		this.mClubSelect = select;
+	}
+
+	getClubSelect()
+	{
+		return this.mClubSelect;
+	}
+	
+	setTeamSelect(select)
+	{
+		this.mTeamSelect = select;
+	}
+
+	getTeamSelect()
+	{
+		return this.mTeamSelect;
+	}
+
 	hit()
 	{
 	
 	}
+       
+	//used to get from selects
+        getPersonId()
+        {
+                var select = document.getElementById("person_select_id");
+                if (select.value == "")
+                {
+                        return 0;
+                }
+                else
+                {
+                        return select.value;
+                }
+        }
+
+	getClubId()
+	{
+
+	}
+	
+	getTeamId()
+	{
+
+	}
+
 
         get()
         {
-		//if there are information selected then set keys
-                var person_select = document.getElementById("person_select_id");
-                if (person_select.length > 0)
-                {
-			//if (person_select.selectedIndex)
-			if (person_select.options[person_select.selectedIndex])
-			{
-                       		APPLICATION.setPersonId(person_select.options[person_select.selectedIndex].value);
-			}
-                }
-
-                var club_select = document.getElementById("club_select_id");
-                if (club_select.length > 0)
-                {
-			if (club_select.selectedIndex)
-			{
-                        	APPLICATION.setClubId(club_select.options[club_select.selectedIndex].value);
-			}
-                }
-
-                var team_select = document.getElementById("team_select_id");
-                if (team_select.length > 0)
-                {
-			if (team_select.selectedIndex)
-			{
-                        	APPLICATION.setTeamId(team_select.options[team_select.selectedIndex].value);
-			}
-                }
 	}
        
 	update(timestamp)
@@ -385,42 +402,48 @@ class Screen
                         }
                 }
 	}
-//later we need to set Club if possible from saved clubs in localstorage
+
+	//later we need to set Club if possible from saved clubs in localstorage
 	processClubs()
 	{
 		//load up clubs option
 		if (this.mJson.clubs)
 		{
-                	var select = document.getElementById("club_select_id");
-			select.length = 0;
-               		for (var i = 0; i < this.mJson.clubs.length; i++)
-                	{
-                		var opt = document.createElement('option');
-                        	opt.value = this.mJson.clubs[i].id;
-                        	var name = this.mJson.clubs[i].name;
-                        	opt.innerHTML = name;
-                        	select.appendChild(opt);
-                	}
-		}
-	}	
-
-//later we need to set Team if possible from saved clubs in localstorage
+			var select = this.getClubSelect();
+			if (select)
+			{
+				select.length = 0;
+               			for (var i = 0; i < this.mJson.clubs.length; i++)
+                		{
+                			var opt = document.createElement('option');
+                        		opt.value = this.mJson.clubs[i].id;
+                        		var name = this.mJson.clubs[i].name;
+                        		opt.innerHTML = name;
+                        		select.appendChild(opt);
+                		}
+			}
+		}		
+	}
+	
 	processTeams()
 	{
-		//load up teams option
+		//load up clubs option
 		if (this.mJson.teams)
 		{
-                	var select = document.getElementById("team_select_id");
-			select.length = 0;
-               		for (var i = 0; i < this.mJson.teams.length; i++)
-                	{
-                		var opt = document.createElement('option');
-                        	opt.value = this.mJson.teams[i].id;
-                        	var name = this.mJson.teams[i].name;
-                        	opt.innerHTML = name;
-                        	select.appendChild(opt);
-                	}
-		}
+			var select = this.getTeamSelect();
+			if (select)
+			{
+				select.length = 0;
+               			for (var i = 0; i < this.mJson.teams.length; i++)
+                		{
+                			var opt = document.createElement('option');
+                        		opt.value = this.mJson.teams[i].id;
+                        		var name = this.mJson.teams[i].name;
+                        		opt.innerHTML = name;
+                        		select.appendChild(opt);
+                		}
+			}
+		}		
 	}
 
 	processPersons()

@@ -16,23 +16,25 @@ class InsertPracticeScreen extends Screen
                 this.setForm(document.getElementById("insert_practice_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_practice_screen_spinner_id"));
 
+		//club and team
+                this.setClubSelect(document.getElementById("insert_practice_screen_club_div_id"));
+                this.setTeamSelect(document.getElementById("insert_practice_screen_team_div_id"));
+
 		//set todays date
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
 	}
 
 	get()
 	{
-                var club_select = document.getElementById("club_select_id");
-
-                if (club_select.length)
-                {
-                        var club_id = club_select.options[club_select.selectedIndex].value;
-
-			if (APPLICATION.getJWT())
-			{
-                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + this.getParameters());
-                        	APPLICATION.getCurrentScreen().ajax();
-			}
+		//overide get
+		//we will send nothing except person_id 
+		//person id will be enough to get a list of clubs we will then on server select the first club and return that clubs teams we are manager of.....
+		//first check if we are a club_manager
+                
+		if (APPLICATION.getJWT())
+		{
+                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
+                       	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
 
