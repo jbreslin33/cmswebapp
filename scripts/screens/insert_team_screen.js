@@ -15,7 +15,24 @@ class InsertTeamScreen extends Screen
                 this.setMessageElement(document.getElementById("insert_team_screen_message_id"));
                 this.setForm(document.getElementById("insert_team_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_team_screen_spinner_id"));
+
+		this.setClubSelect(document.getElementById("insert_team_screen_club_div_id"));
 	}
+      
+	get()
+        {
+                //overide get
+                //we will send nothing except person_id
+                //person id will be enough to get a list of clubs we will then on server select the first club and return that clubs teams we are manager of.....
+                //first check if we are a club_manager
+
+                if (APPLICATION.getJWT())
+                {
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());
+                        APPLICATION.getCurrentScreen().ajax();
+                }
+        }
+
 
 	hit()
 	{

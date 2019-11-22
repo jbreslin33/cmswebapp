@@ -1985,6 +1985,18 @@ BEGIN
 END;
 $$;
 
+
+--BEGIN SELECT ADMINISTRATED CLUBS
+CREATE OR REPLACE FUNCTION f_select_administrated_clubs(email_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+	result_set = f_format_result_set(email_id,null,-102);
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 --not using person id to check if club admin but need too!!!!!!!!!!!!!
 --email_id,club_id,person_id,name
 CREATE OR REPLACE FUNCTION f_insert_team(int,int,int,text)
