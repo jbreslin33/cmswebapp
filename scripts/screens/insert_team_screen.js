@@ -16,7 +16,7 @@ class InsertTeamScreen extends Screen
                 this.setForm(document.getElementById("insert_team_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_team_screen_spinner_id"));
 
-		this.setClubSelect(document.getElementById("insert_team_screen_club_div_id"));
+		this.setClubSelect(document.getElementById("insert_team_screen_club_id"));
 	}
       
 	get()
