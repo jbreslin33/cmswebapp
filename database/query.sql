@@ -28,3 +28,4 @@
                 left outer join pitches on pitches.club_id=teams.club_id
 
                 where emails_persons.email_id = 34 AND practices.event_date > now() - interval '1 day'
+

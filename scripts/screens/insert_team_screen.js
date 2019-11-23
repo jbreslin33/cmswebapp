@@ -33,7 +33,6 @@ class InsertTeamScreen extends Screen
                 }
         }
 
-
 	hit()
 	{
 		var name  = document.getElementById("insert_team_screen_name_id").value;
