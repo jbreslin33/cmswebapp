@@ -58,7 +58,8 @@ class Screen
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
 		this.setPersonSelect(document.getElementById("person_select_id"));
-		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
+	//	document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
+		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 
 	}
