@@ -33,6 +33,7 @@ class Screen
 		this.mClubId = 0;
 		this.mTeamId = 0;
 
+		this.mPersonSelect = null;
 		this.mClubSelect = null;
 		this.mTeamSelect = null;
 
@@ -53,15 +54,18 @@ class Screen
 
                 this.mStateMachine = null;
 
-		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
 
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
+
+		this.setPersonSelect(document.getElementById("person_select_id"));
+		document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
+
 
 	}
 
 	personSelected()
 	{
-                var person_select = document.getElementById("person_select_id");
+                var person_select = this.getPersonSelect();
 		if (person_select)
 		{
 			if (person_select.options[person_select.selectedIndex])
@@ -207,6 +211,16 @@ class Screen
 	{
 		return this.mNavigationBar;
 	}
+	
+	setPersonSelect(select)
+	{
+		this.mPersonSelect = select;
+	}
+
+	getPersonSelect()
+	{
+		return this.mPersonSelect;
+	}
 
 	setClubSelect(select)
 	{
@@ -236,7 +250,7 @@ class Screen
 	//used to get from selects
         getPersonId()
         {
-                var select = document.getElementById("person_select_id");
+                var select = this.getPersonSelect();
                 if (select.value == "")
                 {
                         return 0;
@@ -456,7 +470,7 @@ class Screen
 		if (this.mJson.persons)
 		{
                		//load up persons option
-               		var select = document.getElementById("person_select_id");
+               		var select = this.getPersonSelect();
 			select.length = 0;
                		for (var i = 0; i < this.mJson.persons.length; i++)
                		{
@@ -480,8 +494,7 @@ class Screen
 			}
 			else
 			{
-               			var select = document.getElementById("person_select_id");
-				select.value = APPLICATION.getPersonId(); 
+				this.getPersonSelect().value = APPLICATION.getPersonId(); 
 			}
 		}
 	}
