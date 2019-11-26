@@ -1,3 +1,5 @@
+below and should i even be showing in clubs the clubs person is not an admin of? 
+---------------
 need to handle no pitch gracefully
 --------
 make insert forgot passsword give you a jwt but it should have authorization_id = 0
