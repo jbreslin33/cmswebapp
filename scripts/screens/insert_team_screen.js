@@ -21,11 +21,6 @@ class InsertTeamScreen extends Screen
       
 	get()
         {
-                //overide get
-                //we will send nothing except person_id
-                //person id will be enough to get a list of clubs we will then on server select the first club and return that clubs teams we are manager of.....
-                //first check if we are a club_manager
-
                 if (APPLICATION.getJWT())
                 {
                         APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());

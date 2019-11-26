@@ -18,19 +18,6 @@ class GLOBAL_APPLICATION extends State
 
         execute(app)
         {
-		/*
-       		var url = window.location.hash.substr(1);
-		var hash = null;
-
-        	var urlArray = url.split('&');
-
-		if (urlArray.length > 0)
-		{
-			hash = urlArray[0];		
-		}
-
-		console.log('hash:' + hash);
-*/
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
@@ -82,6 +69,10 @@ class GLOBAL_APPLICATION extends State
 		else if (location.hash == '#insert_team_screen' && app.mStateMachine.mCurrentState != app.mINSERT_TEAM_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
+                }
+		else if (location.hash == '#insert_pitch_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PITCH_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PITCH_APPLICATION);
                 }
 		else if (location.hash == '#insert_practice_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PRACTICE_APPLICATION)
                 {
@@ -144,6 +135,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_person_screen_html_id").style.display = "none";
 		document.getElementById("delete_person_screen_html_id").style.display = "none";
 		document.getElementById("insert_team_screen_html_id").style.display = "none";
+		document.getElementById("insert_pitch_screen_html_id").style.display = "none";
 		document.getElementById("insert_practice_screen_html_id").style.display = "none";
 		document.getElementById("insert_game_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
@@ -748,7 +740,6 @@ class DELETE_PERSON_APPLICATION extends State
 	}
 }
 
-
 class INSERT_TEAM_APPLICATION extends State
 {
 	constructor() 
@@ -782,6 +773,45 @@ class INSERT_TEAM_APPLICATION extends State
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("INSERT_TEAM_APPLICATION: EXIT");        
+		}
+		app.getCurrentScreen().exit();
+	}
+}
+
+
+class INSERT_PITCH_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("INSERT_PITCH_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new InsertPitchScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("INSERT_PITCH_APPLICATION: EXECUTE");        
+		}
+
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("INSERT_PITCH_APPLICATION: EXIT");        
 		}
 		app.getCurrentScreen().exit();
 	}

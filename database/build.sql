@@ -2026,7 +2026,18 @@ BEGIN
 	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, returning_club_administrator_id);
 END;
 $$;
+--------------------
+CREATE OR REPLACE PROCEDURE p_insert_pitch(int,text,int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+        insert into pitches (club_id,name) values ($1,$2) returning id into x;
+END;
+$$;
 
+
+----------------
 
 --BEGIN SELECT ADMINISTRATED CLUBS
 CREATE OR REPLACE FUNCTION f_select_administrated_clubs(email_id int, person_id int)
@@ -2076,6 +2087,44 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 -------
+
+CREATE OR REPLACE FUNCTION f_insert_pitch(int,int,int,text)
+RETURNS text AS $$
+DECLARE
+	result_set text;
+	DECLARE x int := -1;
+	found_club_administrator_id club_administrators.id%TYPE;
+	found_club_persons_id club_persons.id%TYPE;
+	found_pitch_id pitches.id%TYPE;
+BEGIN
+		
+	select id into found_pitch_id from pitches where name = $4;  	
+
+        IF found_pitch_id > 0 THEN
+                result_set = '-101, Pitch name already taken.';
+	ELSE
+		--are you a club admin of club $2????
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
+
+		IF found_club_administrator_id > 0 THEN
+
+			CALL p_insert_pitch($2,$4,$3,x);
+
+			IF x > 0 THEN
+                     		result_set = f_format_result_set($1,null,-100);
+			ELSE
+                     		result_set = f_format_result_set($1,'Something went wrong with adding pitch. Sorry!',-101);
+			END IF;
+		ELSE
+                     	result_set = f_format_result_set($1,'You are not a club administrator. So you cannot add a pitch to this club.',-101);
+		END IF;
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+-------
+
+
 CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE

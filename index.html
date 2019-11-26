@@ -70,6 +70,7 @@
                         			<a id="insert_practice_nav_id" class="dropdown-item" href="#insert_practice_screen">TEAM MANAGER: Insert Practice</a>
                         			<a id="insert_game_nav_id" class="dropdown-item" href="#insert_game_screen">TEAM MANAGER: Insert Game</a>
                         			<a id="insert_team_nav_id" class="dropdown-item" href="#insert_team_screen">TEAM MANAGER: Insert Team</a>
+                        			<a id="insert_pitch_nav_id" class="dropdown-item" href="#insert_pitch_screen">TEAM MANAGER: Insert Pitch</a>
                         			<a id="insert_club_nav_id" class="dropdown-item" href="#insert_club_screen">CLUB ADMIN: Insert Club</a>
                         			<a id="insert_invite_club_email_nav_id" class="dropdown-item" href="#insert_invite_club_email_screen">CLUB ADMIN: Insert Invite Club Email</a>
                         			<a id="insert_native_login_club_screen_nav_id" class="dropdown-item" href="#insert_native_login_club_screen">INVISIBLE: Join Club</a>
@@ -313,7 +314,6 @@
 
         <!-- END DELETE PERSON HTML  -->
 
-	
 	<!-- INSERT TEAM HTML  -->
 
         <div id="insert_team_screen_html_id">
@@ -342,6 +342,40 @@
     			</div>
 		<button id="insertteamscreenbuttonid" class="btn btn-primary">Submit</button>
 		<span id='insert_team_screen_message_id'></span>
+		</form>
+    	</div>
+
+	<!-- END INSERT TEAM HTML  -->
+	
+	
+	<!-- INSERT PITCH HTML  -->
+
+        <div id="insert_pitch_screen_html_id">
+
+                <div id="insert_pitch_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                </div>
+
+		<form id="insert_pitch_screen_form_id" onsubmit="return false;" class="needs-validation">
+
+			<div class="form-row">
+                		<div id="insert_pitch_screen_club_div_id" class="form-group col-md-4">
+                			<label for="insert_pitch_screen_club_id">Club:</label>
+                        		<select id="insert_pitch_screen_club_id" class="form-control">
+                        		</select>
+                		</div>
+			</div>
+
+  			<div class="form-row">
+
+    				<div class="col-md-4 mb-3">
+      					<label for="insert_pitch_name_id">Pitch Name</label>
+      					<input type="text" class="form-control" id="insert_pitch_screen_name_id" placeholder="Team Name" value="Team Name" required>
+					<span id='insert_pitch_screen_name_message_id'></span>
+    				</div>
+    			</div>
+		<button id="insertpitchscreenbuttonid" class="btn btn-primary">Submit</button>
+		<span id='insert_pitch_screen_message_id'></span>
 		</form>
     	</div>
 
@@ -661,6 +695,9 @@
 	
 	<!-- insert team -->
 	<script src="scripts/screens/insert_team_screen.js"></script>
+	
+	<!-- insert pitch -->
+	<script src="scripts/screens/insert_pitch_screen.js"></script>
 	
 	<!-- insert practice -->
 	<script src="scripts/screens/insert_practice_screen.js"></script>
