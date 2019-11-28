@@ -17,8 +17,8 @@ class InsertPracticeScreen extends Screen
                 this.setSpinner(document.getElementById("insert_practice_screen_spinner_id"));
 
 		//club and team
-                this.setClubSelect(document.getElementById("insert_practice_screen_club_div_id"));
-                this.setTeamSelect(document.getElementById("insert_practice_screen_team_div_id"));
+                this.setClubSelect(document.getElementById("insert_practice_screen_club_id"));
+                this.setTeamSelect(document.getElementById("insert_practice_screen_team_id"));
 
 		//set todays date
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
@@ -33,7 +33,8 @@ class InsertPracticeScreen extends Screen
                 
 		if (APPLICATION.getJWT())
 		{
-                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
+                       	//APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
+                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
@@ -99,4 +100,26 @@ class InsertPracticeScreen extends Screen
                 	}
 		}
 	}
+
+        processClubs()
+        {
+                //load up clubs option
+                if (this.mJson.clubs)
+                {
+                        var select = this.getClubSelect();
+                        if (select)
+                        {
+                                select.length = 0;
+                                for (var i = 0; i < this.mJson.clubs.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        opt.value = this.mJson.clubs[i].id;
+                                        var name = this.mJson.clubs[i].name;
+                                        opt.innerHTML = name;
+                                        select.appendChild(opt);
+                                }
+                        }
+                }
+        }
+
 }
