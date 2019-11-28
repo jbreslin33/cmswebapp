@@ -1191,10 +1191,17 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select distinct clubs.id, clubs.name from clubs
+                --select distinct clubs.id, clubs.name from clubs
+                --join club_persons on club_persons.club_id=clubs.id
+                --join club_administrators on club_administrators.club_person_id=club_persons.id
+                --where club_persons.person_id = $1
+
+               	select distinct clubs.id, clubs.name from clubs
                 join club_persons on club_persons.club_id=clubs.id
-                join club_administrators on club_administrators.club_person_id=club_persons.id
-                where club_persons.person_id = $1
+                join team_club_persons on team_club_persons.club_person_id=club_persons.id
+                join team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
+                where club_persons.person_id = $1 
+
         ) t;
 
         IF raw_json is NULL THEN
