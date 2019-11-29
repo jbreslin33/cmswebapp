@@ -144,6 +144,11 @@ class Main extends Screen
 					textArray.push('Field: ' + events[i].field_name);
 				}
 				
+				if (events[i].club_name)
+				{
+					textArray.push('Club: ' + events[i].club_name);
+				}
+				
 				if (events[i].team_name)
 				{
 					textArray.push('Team: ' + events[i].team_name);

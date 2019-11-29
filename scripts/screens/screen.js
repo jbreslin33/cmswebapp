@@ -446,6 +446,7 @@ class Screen
 			this.processClubs();
 			this.processTeams();
 			this.processPersons();
+			this.processPitches();
 			this.processSelects();
 			this.processMessages();
 			this.processCodes();
