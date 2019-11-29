@@ -31,16 +31,10 @@ class InsertTeamScreen extends Screen
 	hit()
 	{
 		var name  = document.getElementById("insert_team_screen_name_id").value;
-		var person_select = this.getPersonSelect();
-		var club_select   = this.getClubSelect();
 
-		if (club_select.length > 0 && person_select.length > 0)
+		if (this.getClubId() > 0)
 		{
-               		var person_id = person_select.options[person_select.selectedIndex].value;
-               		var club_id   = club_select.options[club_select.selectedIndex].value;
-
-			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_team.php?jwt=" + APPLICATION.getJWT() + '&club_id=' + club_id + '&person_id=' + person_id + '&name=' + name);
-
+			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_team.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&name=' + name);
 			APPLICATION.getCurrentScreen().ajax();
 		}
 		else
