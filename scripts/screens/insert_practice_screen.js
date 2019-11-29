@@ -46,8 +46,8 @@ class InsertPracticeScreen extends Screen
 	{
 		this.mHit = true;
                 
-		var team_select = document.getElementById("team_select_id");
-                var person_select = document.getElementById("person_select_id");
+		var team_select = this.getTeamSelect();
+                var person_select = this.getPersonSelect();
 
 		var event_date = document.getElementById("insert_practice_screen_date_id").value;
 		var arrival_time = document.getElementById("insert_practice_screen_arrival_time_id").value;
