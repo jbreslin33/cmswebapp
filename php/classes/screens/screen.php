@@ -43,7 +43,6 @@ class Screen
 			//get id of sender
 			$oneRing = new OneRing();
                 	$payload = JWT::decode($jwt, $oneRing->mOneRing);
-			error_log($payload->email_id);
 			return $payload->email_id;
 		}
 

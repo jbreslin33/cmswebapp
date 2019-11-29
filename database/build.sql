@@ -1171,8 +1171,6 @@ SELECT json_agg(t) INTO raw_json
                 where club_persons.person_id = $1
         ) t;
 
-  	RAISE LOG 'log message %', raw_json;
-
         IF raw_json is NULL THEN
                 result_set = CONCAT('"clubs": []', raw_json);
         ELSE
@@ -1734,6 +1732,8 @@ BEGIN
 	select email_id into found_email_id from invite_club_emails where club_invite_token = $1; 
 
 	IF found_email_id > 0 THEN
+  		RAISE LOG 'log message %', found_email_id;
+		
 		--lets grab the club_id then add all persons to club from email_id
 		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
 		CALL p_insert_club_persons(found_club_id,found_email_id);
@@ -2320,6 +2320,8 @@ BEGIN
 	insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values ($4, $3, $5, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
 	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $3 and persons.id = $2; 
 	insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
+
+	insert into club_emails (club_id, email_id) values ($3,$4);
 
 	select email_id into x from emails_persons where person_id = $2;
 END;
