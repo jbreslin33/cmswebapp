@@ -1171,6 +1171,8 @@ SELECT json_agg(t) INTO raw_json
                 where club_persons.person_id = $1
         ) t;
 
+  	RAISE LOG 'log message %', raw_json;
+
         IF raw_json is NULL THEN
                 result_set = CONCAT('"clubs": []', raw_json);
         ELSE
