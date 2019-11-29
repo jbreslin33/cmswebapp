@@ -1433,30 +1433,31 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-               	select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, teams.name as team_name
+                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name
                 from games
 
                 join teams on teams.id=games.team_id
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
+                join clubs on clubs.id=club_persons.club_id
                 join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
 
-                join pitches on pitches.club_id=teams.club_id
+                left outer join pitches on pitches.club_id=teams.club_id
 
-                where emails_persons.email_id = 1 AND games.event_date > now() - interval '1 day'
-	
-	) t;
+                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
+        ) t;
 
         IF raw_json is NULL THEN
                 result_set = CONCAT('"games": []', raw_json);
-        ELSE
+	ELSE
                 result_set = CONCAT('"games": ', raw_json);
         END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
+
 
 CREATE OR REPLACE FUNCTION j_select_invite_club_emails(text)
 RETURNS text AS $$
@@ -1834,7 +1835,6 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
 --BEGIN INSERT PRACTICE
 CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
 RETURNS text AS $$
@@ -1882,7 +1882,6 @@ END;
 $$;
 --END INSERT PRACTICE
 
-
 --BEGIN INSERT GAME
 CREATE OR REPLACE FUNCTION f_insert_game(int,int,date,time,time,time,text,text,int,text,int)
 RETURNS text AS $$
@@ -1921,10 +1920,18 @@ AS $$
 DECLARE
 
 BEGIN
-	insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+	IF $8 > 0 THEN
+		insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+	ELSE
+		insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+	END IF;
 END;
 $$;
---END INSERT GAME
+--END INSERT PRACTICE
+
+
+
+
 
 
 --BEGIN SELECT PITCHES
