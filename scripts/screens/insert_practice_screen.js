@@ -60,7 +60,7 @@ class InsertPracticeScreen extends Screen
                         
 		APPLICATION.getCurrentScreen().ajax();
 	}
-	
+/*	
 	processJsonData()
         {
                 super.processJsonData();
@@ -83,6 +83,7 @@ class InsertPracticeScreen extends Screen
                 	}
 		}
 	}
+	*/
 
         processClubs()
         {
