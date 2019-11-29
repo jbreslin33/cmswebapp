@@ -18,7 +18,7 @@ class InsertAcceptClubInviteScreen extends Screen
                 //this.setForm(document.getElementById("insert_accept_club_invite_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_accept_club_invite_screen_spinner_id"));
 	}
-
+/*
 	get()
 	{
 		console.log('lets send a php request to find out if I have a email_person entry or if I need to go to join screen');
@@ -28,6 +28,7 @@ class InsertAcceptClubInviteScreen extends Screen
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 	 	APPLICATION.getCurrentScreen().ajax();
 	}
+	*/
 /*	
 	execute()
         {

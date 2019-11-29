@@ -170,7 +170,8 @@ class INIT_APPLICATION extends State
 		}
 		else if (application.mClubInviteToken)
 		{
-			application.mStateMachine.changeState(application.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
+			//application.mStateMachine.changeState(application.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
+			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
 		}
 		else
 		{
@@ -681,7 +682,7 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 			console.log("INSERT_NATIVE_LOGIN_SCREEN_APPLICATION: ENTER");        
 		}
 
-		app.setCurrentScreen(new InsertLoginScreen(app));
+		app.setCurrentScreen(new InsertNativeLoginScreen(app));
 		app.getCurrentScreen().enter();
 	}
 

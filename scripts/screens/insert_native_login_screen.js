@@ -1,10 +1,12 @@
 'use strict';
 
-class InsertLoginScreen extends Screen
+class InsertNativeLoginScreen extends Screen
 {
         constructor(application)
         {
                 super(application);
+
+		console.log('InsertNativeLoginScreen Con');
 
 		location.hash = 'insert_native_login_screen';
 
