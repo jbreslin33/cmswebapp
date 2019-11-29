@@ -32,10 +32,12 @@ class Screen
 		this.mPersonId = 0;
 		this.mClubId = 0;
 		this.mTeamId = 0;
+		this.mPitchId = 0;
 
 		this.mPersonSelect = null;
 		this.mClubSelect = null;
 		this.mTeamSelect = null;
+		this.mPitchSelect = null;
 
 		this.mHit = false;
 
@@ -243,6 +245,17 @@ class Screen
 		return this.mTeamSelect;
 	}
 
+        setPitchSelect(select)
+        {
+                this.mPitchSelect = select;
+        }
+
+        getPitchSelect()
+        {
+                return this.mPitchSelect;
+        }
+
+
 	hit()
 	{
 	
@@ -282,8 +295,30 @@ class Screen
 	
 	getTeamId()
 	{
-
+                var select = this.getTeamSelect();
+                if (select.value == "")
+                {
+                        return 0;
+                }
+                else
+                {
+                        return select.value;
+                }
 	}
+
+        getPitchId()
+        {
+                var select = this.getPitchSelect();
+                if (select.value == "")
+                {
+                        return 0;
+                }
+                else
+                {
+                        return select.value;
+                }
+        }
+
 
 
         get()
