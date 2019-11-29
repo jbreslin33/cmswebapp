@@ -18,12 +18,15 @@ class GLOBAL_APPLICATION extends State
 
         execute(app)
         {
+
+		console.log('location.hash:' + location.hash);
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
                         console.log("GLOBAL_APPLICATION: EXECUTE"); 
                 }
 		if (location.hash == '#login_screen' && app.mStateMachine.mCurrentState != app.mLOGIN_APPLICATION)
                 {
+			console.log('heere 1');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGIN_APPLICATION);
                 }
 		else if (location.hash == '#choose_person_screen' && app.mStateMachine.mCurrentState != app.mCHOOSE_PERSON_APPLICATION)
@@ -46,8 +49,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION);
                 }
-		else if (hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
+		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
+			console.log('heere 2');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
 		else if (location.hash == '#insert_native_login_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION)
@@ -56,6 +60,7 @@ class GLOBAL_APPLICATION extends State
                 }
 		else if (location.hash == '#insert_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_CLUB_APPLICATION)
                 {
+			console.log('heere 3');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
 		else if (location.hash == '#insert_person_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PERSON_APPLICATION)

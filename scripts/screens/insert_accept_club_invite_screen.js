@@ -28,7 +28,7 @@ class InsertAcceptClubInviteScreen extends Screen
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 	 	APPLICATION.getCurrentScreen().ajax();
 	}
-	
+/*	
 	execute()
         {
 		//lets do a quick check to see if we have invite_club_emails
@@ -48,4 +48,5 @@ class InsertAcceptClubInviteScreen extends Screen
                 }
                 this.resetDataVariables();
         }
+	*/
 }
