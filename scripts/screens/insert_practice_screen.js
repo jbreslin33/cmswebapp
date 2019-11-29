@@ -26,15 +26,18 @@ class InsertPracticeScreen extends Screen
 
 	get()
 	{
-		//overide get
-		//we will send nothing except person_id 
-		//person id will be enough to get a list of clubs we will then on server select the first club and return that clubs teams we are manager of.....
-		//first check if we are a club_manager
-                
 		if (APPLICATION.getJWT())
 		{
-                       	//APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
+                       	APPLICATION.getCurrentScreen().ajax();
+		}
+	}
+	
+	getPitchesAndTeams()
+	{
+		if (APPLICATION.getJWT())
+		{
+                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches_and_teams.php?jwt=" + APPLICATION.getJWT() + "&club_id=" + this.getClubId() + "&person_id=" + this.getPersonId());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
@@ -119,6 +122,7 @@ class InsertPracticeScreen extends Screen
                                         select.appendChild(opt);
                                 }
                         }
+			this.getPitchesAndTeams();
                 }
         }
 

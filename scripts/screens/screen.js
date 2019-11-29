@@ -269,7 +269,15 @@ class Screen
 
 	getClubId()
 	{
-
+                var select = this.getClubSelect();
+                if (select.value == "")
+                {
+                        return 0;
+                }
+                else
+                {
+                        return select.value;
+                }
 	}
 	
 	getTeamId()

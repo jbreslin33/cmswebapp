@@ -1,7 +1,7 @@
 <?php
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class SelectPitches extends Screen
+class SelectPitchesAndTeams extends Screen
 {
         function __construct()
         {
@@ -17,13 +17,13 @@ class SelectPitches extends Screen
                         $club_id = $_GET['club_id'];
                 }
 
-                $sql = 'select f_select_pitches($1,$2)';
-                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_pitches", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_pitches", array( $this->getSenderEmailId(), $this->mClubId));
+                $sql = 'select f_select_pitches_and_teams($1,$2,$3)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_pitches_and_teams", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_pitches_and_teams", array( $this->getSenderEmailId(), $this->mClubId, $this->mPersonId));
 
                 return pg_fetch_result($result, 0);
         }
 }
-$selectPitches = new SelectPitches();
+$selectPitchesAndTeams = new SelectPitchesAndTeams();
 ?>
 

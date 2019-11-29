@@ -979,20 +979,22 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION f_format_result_set_pitches(int,TEXT,int,int)
+--email_id,message,code,club_id,person_id
+CREATE OR REPLACE FUNCTION f_format_result_set_pitches_and_teams(int,TEXT,int,int,int)
 RETURNS text AS $$
 DECLARE
         json_result_codes text;
         json_result_messages text;
         json_result_pitches text;
+        json_result_teams text;
         result_set text;
 BEGIN
 
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
         select into json_result_pitches j_select_pitches($4);
-        result_set = CONCAT(json_result_pitches,',',json_result_messages,',',json_result_codes,'}');
+        select into json_result_teams j_select_teams_managed($4,$5);
+        result_set = CONCAT(json_result_pitches,',',json_result_teams,',',json_result_messages,',',json_result_codes,'}');
 	
 RETURN result_set;
 END;
@@ -1285,8 +1287,6 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PERSONS
 
-
-
 --BEGIN J_SELECT TEAMS
 CREATE OR REPLACE FUNCTION j_select_teams(int)
 RETURNS text AS $$
@@ -1320,6 +1320,38 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
+
+--BEGIN J_SELECT TEAMS MANAGED
+CREATE OR REPLACE FUNCTION j_select_teams_managed(int,int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+
+		select distinct teams.id, teams.name from teams
+                join team_club_persons on team_club_persons.team_id=teams.id
+                join club_persons on club_persons.id=team_club_persons.club_person_id
+                join persons on persons.id=club_persons.person_id
+
+                where club_persons.club_id = $1 AND persons.id = $2
+
+
+        ) t;
+
+	IF raw_json is NULL THEN
+		result_set = CONCAT('"teams": []', raw_json);
+	ELSE
+		result_set = CONCAT('"teams": ', raw_json);
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT TEAMS MANAGED
 
 --BEGIN J_SELECT CLUBS
 --        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
@@ -1895,12 +1927,12 @@ $$;
 
 
 --BEGIN SELECT PITCHES
-CREATE OR REPLACE FUNCTION f_select_pitches(email_id_p int,club_id_p int)
+CREATE OR REPLACE FUNCTION f_select_pitches_and_teams(email_id_p int,club_id_p int,person_id_p int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set_pitches(email_id_p,null,-102,club_id_p);
+        result_set = f_format_result_set_pitches_and_teams(email_id_p,null,-102,club_id_p, person_id_p);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
