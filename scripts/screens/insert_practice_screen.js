@@ -67,7 +67,6 @@ class InsertPracticeScreen extends Screen
 
 		if (this.mJson)
 		{
-
                 	if (this.mJson.pitches)
                 	{
                         	//load up pitches option
@@ -87,24 +86,10 @@ class InsertPracticeScreen extends Screen
 
         processClubs()
         {
-                //load up clubs option
+		super.processClubs();
                 if (this.mJson.clubs)
-                {
-                        var select = this.getClubSelect();
-                        if (select)
-                        {
-                                select.length = 0;
-                                for (var i = 0; i < this.mJson.clubs.length; i++)
-                                {
-                                        var opt = document.createElement('option');
-                                        opt.value = this.mJson.clubs[i].id;
-                                        var name = this.mJson.clubs[i].name;
-                                        opt.innerHTML = name;
-                                        select.appendChild(opt);
-                                }
-                        }
+		{
 			this.getPitchesAndTeams();
-                }
+		}
         }
-
 }
