@@ -132,7 +132,6 @@ class INIT_APPLICATION extends State
 		document.getElementById("nav_bar_id").style.display = "block";
 		document.getElementById("insert_native_login_email_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
-		document.getElementById("insert_native_login_club_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
 		document.getElementById("choose_person_screen_html_id").style.display = "none";
 		document.getElementById("main_screen_html_id").style.display = "none";
@@ -350,44 +349,6 @@ class INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION extends State
 		app.getCurrentScreen().exit();
 	}
 }
-
-//what
-class INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION extends State
-{
-	constructor() 
-	{
-		super();
-	}
-
-        enter(app)
-        {
-		if (app.mStateLogs || app.mStateEnterLogs)
-		{
-			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: ENTER");        
-		}
-		app.setCurrentScreen(new InsertLoginClubScreen(app));
-		app.getCurrentScreen().enter();
-	}
-
-        execute(app)
-        {
-		if (app.mStateLogs || app.mStateExecuteLogs)
-		{
-			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXECUTE");        
-		}
-		app.getCurrentScreen().execute();
-	}
-
-        exit(app)
-        {
-		if (app.mStateLogs || app.mStateExitLogs)
-		{
-			console.log("INSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION: EXIT");        
-		}
-		app.getCurrentScreen().exit();
-	}
-}
-
 
 class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 {
