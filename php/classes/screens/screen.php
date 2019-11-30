@@ -18,6 +18,11 @@ class Screen
 		$this->sendToClient();	
 	}
 
+	function getToken()
+	{
+        	return bin2hex(random_bytes(32));
+	}
+
 	function parseParameters()
 	{
                 if (isset($_GET['person_id']))

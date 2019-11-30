@@ -29,6 +29,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 create extension pgcrypto;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 --****************************************************************
 --***************************************************************
 --******************  CREATE TABLES *************************
@@ -321,9 +322,20 @@ create table emails
 (
 	id serial,
 	email text not null unique,
+	token uuid DEFAULT uuid_generate_v4 (),
 	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
+
+create table confirm_emails 
+(
+	id serial,
+	email_id integer,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(email_id) REFERENCES emails(id),
+	PRIMARY KEY (id)
+);
+
 
 CREATE TABLE emails_persons
 (
@@ -461,6 +473,8 @@ create table follow_schedules
 --jbreslin33@gmail.com this is if you want a login???
 --some person needs to own this????
 --user preferences could be placed here like see whole family etc
+--you need a native_login, native_login_token_sents AND native_login_tokens_received THEN it replaces the previous
+--so for update password make a new native_logins insert and a native_login_token_sent
 CREATE TABLE native_logins 
 (
 	id SERIAL,
@@ -1104,8 +1118,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --NATIVE INSERT LOGIN
-
-CREATE OR REPLACE FUNCTION f_insert_native_login(email_p TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION f_insert_native_login(join_email_token_p TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
@@ -1113,9 +1126,7 @@ DECLARE
 	DECLARE x int := -1; 
 BEGIN
 
-    	SELECT id INTO found_email_id FROM emails WHERE email = email_p;
-  	RAISE LOG 'log message %', email_p;
-
+    	SELECT email_id INTO found_email_id FROM join_emails WHERE join_email_token = join_email_token_p;
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN

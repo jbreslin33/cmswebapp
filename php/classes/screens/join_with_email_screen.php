@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class InsertNativeLogin extends Screen 
+class JoinWithEmailScreen extends Screen 
 {
 	function __construct() 
 	{
@@ -10,9 +10,33 @@ class InsertNativeLogin extends Screen
 		
 	function getResult()
 	{
-		$sql = 'select f_insert_native_login($1,$2)';
-		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_native_login", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_insert_native_login", array( $_GET['join_email_token'] , $_GET['password']));
+                //create mail
+		$token = $this->getToken();
+                $email = $_GET['email'];
+                $this->mSubject = "Confirm email Link";
+                $this->mAbsoluteURL = "http://elacore.org/#confirm_email_screen&";
+
+                $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
+                        'token' => $token,
+                        'email' => $email
+                        ]));
+                $this->mBody = "Click the link to confirm email: ";
+                $this->mBody .= $this->mUrl;
+
+		//essentially if you have a native_login entry in db you are confirmed
+
+		//so at this point we are looking at email not existing,
+		          //then send join with email
+			  //which will insert email with token then send email to make a native login
+	 	//OR email existing THEN
+			//if existing 
+				//send back to login or update password
+		$sql = 'select f_join_with_email($1,$2,$3)';
+		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_join_with_email", $sql);
+		$result = pg_execute($this->mDatabase->mConnection, "f_join_with_email", array( $_GET['email'], $token));
+
+	       	$mail = new Mail($email,$this->mSubject,$this->mBody);
+
                 return pg_fetch_result($result, 0);
 	}
 
