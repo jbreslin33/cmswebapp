@@ -66,12 +66,12 @@ class InsertLoginEmailScreen extends Screen
                         }
                         else if (code == '-101')
                         {
-                                //standard error code so stay in state and display message if their is one.
+				this.showLogin();
                         }
                         else if (code == '-102')
                         {
                        		//show login link
-				this.showLogin();
+				//this.showLogin();
 			}
                 }
         }
