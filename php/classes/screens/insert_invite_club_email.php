@@ -27,7 +27,7 @@ class InsertInviteClubMember extends Screen
                 $this->mAbsoluteURL = "http://elacore.org/#insert_accept_club_invite_screen&";
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
-                        'club_invite_token' => $this->mClubInviteToken
+                        'join_email' => $email
                         ]));
                 $this->mBody = "Click the link to join club: ";
                 $this->mBody .= $this->mUrl;

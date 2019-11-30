@@ -1105,7 +1105,7 @@ $$ LANGUAGE plpgsql;
 
 --NATIVE INSERT LOGIN
 
-CREATE OR REPLACE FUNCTION f_insert_native_login(join_email_token_p TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION f_insert_native_login(email_p TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
@@ -1113,7 +1113,9 @@ DECLARE
 	DECLARE x int := -1; 
 BEGIN
 
-    	SELECT email_id INTO found_email_id FROM join_emails WHERE join_email_token = join_email_token_p;
+    	SELECT id INTO found_email_id FROM emails WHERE email = email_p;
+  	RAISE LOG 'log message %', email_p;
+
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
