@@ -40,36 +40,4 @@ class LoginScreen extends Screen
 			super.checkValidity();
 		}
 	}
-       
-	processCodes()
-        {
-                if (this.mJson.codes)
-                {
-                        var code = 0;
-                        for (var i = 0; i < this.mJson.codes.length; i++)
-                        {
-                                code = this.mJson.codes[i].code;
-                        }
-                        //definite success so send to main
-                        if (code == '-100')
-                        {
-                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mCHOOSE_PERSON_APPLICATION)
-                                {
-                                        //do nothing
-                                }
-                                else
-                                {
-                                        this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);
-                                }
-                        }
-                        else if (code == '-101')
-                        {
-                                //standard error code so stay in state and display message if their is one.
-                        }
-                }
-        }
-
-	processPersons()
-	{
-	}
 }

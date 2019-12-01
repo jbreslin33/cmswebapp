@@ -156,12 +156,6 @@ class INIT_APPLICATION extends State
 		{
 			application.mStateMachine.changeState(application.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
 		}
-/*
-		if (application.mJoinEmail)
-		{
-			application.mStateMachine.changeState(application.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
-		}
-		*/
 		else if (application.mForgotPasswordToken)
 		{
 			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);
@@ -170,13 +164,6 @@ class INIT_APPLICATION extends State
 		{
 			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
 		}
-		/*
-		else if (application.mClubInviteToken)
-		{
-			//application.mStateMachine.changeState(application.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
-			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);
-		}
-		*/
 		else
 		{
 			application.mStateMachine.changeState(application.mLOGIN_APPLICATION);

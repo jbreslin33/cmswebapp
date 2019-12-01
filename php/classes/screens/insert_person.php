@@ -39,6 +39,7 @@ class InsertPerson extends Screen
 
                	if ($this->getAuthorizationId() > 0)
                 {
+			error_log('auth');
 			$sql = 'select f_insert_person($1,$2,$3,$4,$5,$6,$7)';
 			$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_person", $sql);
 			$result = pg_execute($this->mDatabase->mConnection, "f_insert_person", array( $first_name, $middle_name, $last_name, $phone, $address, $this->getSenderEmailId(), $this->mPersonId));
@@ -46,6 +47,7 @@ class InsertPerson extends Screen
 		}
 		else
 		{
+			error_log('0 auth');
                 	//prep db
                         $sql = 'select f_format_result_set($1,$2,$3)';
                        	$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);

@@ -68,6 +68,8 @@ class Screen
 
 	personSelected()
 	{
+		this.mApplication.mUserSelectedPerson = true
+		/*
                 var person_select = this.getPersonSelect();
 		if (person_select)
 		{
@@ -76,6 +78,7 @@ class Screen
                 		APPLICATION.setPersonIdInLocalStorage(person_select.options[person_select.selectedIndex].value);
 			}
 		}
+		*/
 	}
 
 	ajax()
@@ -447,7 +450,6 @@ class Screen
 			this.processTeams();
 			this.processPersons();
 			this.processPitches();
-			this.processSelects();
 			this.processMessages();
 			this.processCodes();
 		}
@@ -545,22 +547,6 @@ class Screen
                 }
 	}
 	
-	processSelects()
-	{
-		if (this.mJson.selects)
-		{
-			//if no local person storage set to first in list
-                        if (APPLICATION.getPersonId() == 0)
-			{
-                        	APPLICATION.setPersonId(this.mJson.persons[0].id);
-			}
-			else
-			{
-				this.getPersonSelect().value = APPLICATION.getPersonId(); 
-			}
-		}
-	}
-	
 	processMessages()
 	{
 		if (this.mJson.messages)
@@ -584,13 +570,24 @@ class Screen
 			//definite success so send to main
 			if (this.mCode == '-100') 
 			{
-				if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
+				if (this.mApplication.mUserSelectedPerson)
 				{
-					//do nothing
+
+					if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
+					{
+						//do nothing
+					}
+					else
+					{
+                                		this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+					}
 				}
 				else
 				{
-                                	this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mCHOOSE_PERSON_APPLICATION)
+					{
+                                		this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);
+					}
 				}
 			}
 		}

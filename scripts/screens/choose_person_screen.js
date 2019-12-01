@@ -15,6 +15,8 @@ class ChoosePersonScreen extends Screen
                 this.setMessageElement(document.getElementById("choose_person_screen_message_id"));
                 this.setForm(document.getElementById("choose_person_screen_form_id"));
                 this.setSpinner(document.getElementById("choose_person_screen_spinner_id"));
+                        
+                this.setPersonSelect(document.getElementById("choose_person_screen_select_id"));
 	}
 
 	get()
@@ -30,6 +32,8 @@ class ChoosePersonScreen extends Screen
 		//just send jwt authorization
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
+		
+		APPLICATION.mUserSelectedPerson = true;
 	}
 
 	enter()
@@ -48,24 +52,26 @@ class ChoosePersonScreen extends Screen
                 if (this.mJson.persons)
                 {
                         //load up persons option
-                        var select = document.getElementById("choose_person_screen_select_id");
-                        select.length = 0;
-			if (select.length > 0)
+			var select = this.getPersonSelect();
+			select.length = 0;
+                        for (var i = 0; i < this.mJson.persons.length; i++)
+                        {
+				console.log('a person:' + i);
+                        	var opt = document.createElement('option');
+                               	opt.value = this.mJson.persons[i].id;
+                               	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
+                               	opt.innerHTML = full_name;
+                               	select.appendChild(opt);
+			}
+			if (select.length < 1)
 			{
-				console.log('persons');
-                        	for (var i = 0; i < this.mJson.persons.length; i++)
-                        	{
-                               		var opt = document.createElement('option');
-                                	opt.value = this.mJson.persons[i].id;
-                                	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                                	opt.innerHTML = full_name;
-                                	select.appendChild(opt);
-                        	}
+				console.log('select.length:' + select.length + ' so goto insert person');
+                        	APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
 			}
 			else
 			{
-				console.log('no persons');
-                        	APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
+				console.log('select.length:' + select.length + ' so stay in choose like normal');
+
 			}
 		}
 	}

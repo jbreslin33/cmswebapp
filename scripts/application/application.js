@@ -9,6 +9,9 @@ class Application
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
 
+		//user variables
+		this.mUserSelectedPerson = false;
+
 		//state changed
 		window.onhashchange = this.locationHashChanged;
 
@@ -92,44 +95,6 @@ class Application
 		return localStorage.getItem("mJWT");
 	}
 	
-	//----------------PERSONS
-
-	setPersonIdInLocalStorage(id)
-	{
-		localStorage.setItem('mPersonId', id);
-	}
-
-	//used to set selects onload from localstorage
-	getPersonIdFromLocalStorage()
-	{
-		return localStorage.getItem("mPersonId");
-	}
-	
-	//----------------CLUBS
-	
-	setClubIdInLocalStorage(id)
-	{
-		localStorage.setItem('mClubId', id);
-	}
-	
-	//used to set selects onload from localstorage
-	getClubIdFromLocalStorage()
-	{
-		return localStorage.getItem("mClubId");
-	}
-	
-
-	//----------------TEAMS
-	setTeamIdInLocalStorage(id)
-	{
-		localStorage.setItem('mTeamId', id);
-	}
-
-	getTeamIdFromLocalStorage()
-	{
-		return localStorage.getItem("mTeamId");
-	}
-
 	//------------------SCREENS
 	setCurrentScreen(screen)
 	{

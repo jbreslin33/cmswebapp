@@ -954,7 +954,6 @@ DECLARE
         json_result_persons text;
         json_result_teams text;
         json_result_clubs text;
-        json_result_selects text;
         result_set text;
 BEGIN
         select into json_result_messages j_select_messages($2);
