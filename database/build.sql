@@ -508,11 +508,11 @@ create TABLE forgot_passwords
 	PRIMARY KEY (id)
 );
 
-create TABLE join_emails 
+create TABLE insert_native_login_tokens 
 (
         id serial,
         email_id integer,
-        join_email_token text,
+        token text,
         expires timestamp,
 	created_at timestamp not null default now(),
  	FOREIGN KEY(email_id) REFERENCES emails(id),
@@ -1118,7 +1118,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --NATIVE INSERT LOGIN
-CREATE OR REPLACE FUNCTION f_insert_native_login(join_email_token_p TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION f_insert_native_login(token_p TEXT, password TEXT)
 RETURNS text AS $$
 DECLARE
 	found_email_id emails.id%TYPE;
@@ -1126,7 +1126,7 @@ DECLARE
 	DECLARE x int := -1; 
 BEGIN
 
-    	SELECT email_id INTO found_email_id FROM join_emails WHERE join_email_token = join_email_token_p;
+    	SELECT email_id INTO found_email_id FROM insert_native_login_tokens WHERE token = token_p;
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
@@ -2282,7 +2282,7 @@ DECLARE
 	DECLARE x int := -1;
         found_email_id emails.id%TYPE;
         found_native_login_id native_logins.id%TYPE;
-        returning_join_email_id join_emails.id%TYPE;
+        returning_insert_native_login_token_id insert_native_login_tokens.id%TYPE;
         message text;
         result_set text;
 BEGIN
@@ -2295,12 +2295,12 @@ BEGIN
 			result_set = f_format_result_set(found_email_id,'That email already has a login associated with it. Would you like to login?',-102); 
 		ELSE
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
-			insert into join_emails (email_id, join_email_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
-			IF returning_join_email_id > 0 THEN
+			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
+			IF returning_insert_native_login_token_id > 0 THEN
 				message = 'We sent you a link to your email to finish joining.';
-				result_set = f_format_result_set(returning_join_email_id,message,-101); -- we want you to clear screen but stay on screen and display message... 
+				result_set = f_format_result_set(found_email_id,message,-101); -- we want you to clear screen but stay on screen and display message... 
 			ELSE
-				result_set = f_format_result_set(returning_join_email_id,'Something went wrong with process. Sorry! Please try again.',-101); -- we want you to clear screen but stay on screen and display message.. 
+				result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101); -- we want you to clear screen but stay on screen and display message.. 
 			END IF;
 		END IF;
 	ELSE
@@ -2309,8 +2309,8 @@ BEGIN
 		IF x > 0 THEN 
 			--there could not have been native login because email did not exist so...
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
-			insert into join_emails (email_id, join_email_token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_join_email_id;	
-			IF returning_join_email_id > 0 THEN
+			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
+			IF returning_insert_native_login_token_id > 0 THEN
 				result_set = f_format_result_set(x,'We sent you a link to your email to finish joining.',-101);
 			ELSE
 				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
