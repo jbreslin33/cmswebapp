@@ -14,7 +14,6 @@ class Application
 
 		//forgot_password
 		this.mInsertNativeLoginToken = insertNativeLoginToken; 
-		console.log('mJoinEmailToken:' + this.mJoinEmailToken);
 		this.mJoinEmail = joinEmail; 
 		this.mClubInviteName = clubInviteName; 
 		this.mClubInviteToken = clubInviteToken; 

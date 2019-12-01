@@ -5,7 +5,6 @@ class InsertEmailScreen extends Screen
         constructor(application)
         {
                 super(application);
-		console.log('InsertEmailScreen Constructor');
 
 		location.hash = 'insert_email_screen';
 
