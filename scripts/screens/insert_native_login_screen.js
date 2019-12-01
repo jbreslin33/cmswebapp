@@ -113,8 +113,9 @@ class InsertNativeLoginScreen extends Screen
                                 {
                                         this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);
                                 }
+			
                         }
-                        else if (code == '-101')
+                        else if (code == '-102')
                         {
                                 //standard error code so stay in state and display message if their is one.
                         }

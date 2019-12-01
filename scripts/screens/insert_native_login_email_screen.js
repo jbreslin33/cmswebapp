@@ -5,6 +5,7 @@ class InsertLoginEmailScreen extends Screen
         constructor(application)
         {
                 super(application);
+		console.log('InsertLoginEmailScreen Constu breslin');
 
 		location.hash = 'insert_native_login_email_screen';
 
@@ -66,12 +67,11 @@ class InsertLoginEmailScreen extends Screen
                         }
                         else if (code == '-101')
                         {
-				this.showLogin();
+				this.hideLogin();
                         }
                         else if (code == '-102')
                         {
-                       		//show login link
-				//this.showLogin();
+				this.showLogin();
 			}
                 }
         }
