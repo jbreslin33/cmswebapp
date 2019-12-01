@@ -1106,7 +1106,7 @@ BEGIN
 	IF found_email_id > 0 THEN
 		result_set = '-101, Email already exists. Do you want to login instead?';
 	ELSE
-		CALL p_insert_native_email_login($1,x);
+		CALL p_insert_email($1,x);
 		IF x > 0 THEN
 			result_set = f_format_result_set(x,null,-100);
                 ELSE
@@ -1497,7 +1497,7 @@ $$ LANGUAGE plpgsql;
 
 --insert_native_email_login
 --do we send email link for signup????? 
-CREATE OR REPLACE PROCEDURE p_insert_native_email_login(email_name TEXT, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_email(email_name TEXT, INOUT x int)
 LANGUAGE plpgsql    
 AS $$
 DECLARE
@@ -2276,7 +2276,7 @@ $$ LANGUAGE plpgsql;
 --------
 
 -------
-CREATE OR REPLACE FUNCTION f_insert_join_email(TEXT, TEXT)
+CREATE OR REPLACE FUNCTION f_insert_email(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
 	DECLARE x int := -1;
@@ -2305,7 +2305,7 @@ BEGIN
 		END IF;
 	ELSE
 		--no email or native login lets get them both
-		CALL p_insert_native_email_login($1,x);
+		CALL p_insert_email($1,x);
 		IF x > 0 THEN 
 			--there could not have been native login because email did not exist so...
 			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	

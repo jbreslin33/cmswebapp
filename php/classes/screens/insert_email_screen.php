@@ -2,7 +2,7 @@
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/mail/mail.php");
 
-class InsertNativeEmailLogin extends Screen 
+class InsertEmailScreen extends Screen 
 {
 	function __construct() 
 	{
@@ -24,9 +24,9 @@ class InsertNativeEmailLogin extends Screen
                 $this->mBody = "Click the link to join Club Management System: ";
                 $this->mBody .= $this->mUrl;
 
-                $sql = 'select f_insert_join_email($1,$2)';
-                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_join_email", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_insert_join_email", array( $email, $this->mJoinEmailToken));
+                $sql = 'select f_insert_email($1,$2)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_email", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_email", array( $email, $this->mJoinEmailToken));
 
                 $mail = new Mail($email,$this->mSubject,$this->mBody);
 
@@ -34,6 +34,6 @@ class InsertNativeEmailLogin extends Screen
 	}
 }
 
-$insertNativeEmailLogin = new InsertNativeEmailLogin();	
+$insertEmailScreen = new InsertEmailScreen();	
 
 ?>

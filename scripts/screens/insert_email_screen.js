@@ -28,7 +28,7 @@ class InsertEmailScreen extends Screen
 	{
 		//get vars
                	this.mEmail    	 = document.getElementById("insert_email_screen_email_id").value;
-		this.setUrl("/php/classes/screens/insert_native_email_login.php?email=" + this.mEmail); 
+		this.setUrl("/php/classes/screens/insert_email_screen.php?email=" + this.mEmail); 
 		this.ajax();
 		this.hideAfterHit()
 	}
