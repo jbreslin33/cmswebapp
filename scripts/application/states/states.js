@@ -156,6 +156,10 @@ class INIT_APPLICATION extends State
 		{
 			application.mStateMachine.changeState(application.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
 		}
+		else if (application.mJoinEmail)
+		{
+			application.mStateMachine.changeState(application.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
+		}
 		else if (application.mForgotPasswordToken)
 		{
 			application.mStateMachine.changeState(application.mUPDATE_FORGOT_PASSWORD_APPLICATION);

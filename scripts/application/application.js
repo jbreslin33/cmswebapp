@@ -2,7 +2,7 @@
 
 class Application 
 {
-	constructor(insertNativeLoginToken,joinEmail,clubInviteName,clubInviteToken,forgotPasswordToken) 
+	constructor(insertNativeLoginToken,joinEmail,forgotPasswordToken,forgotPasswordEmail) 
 	{
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true;
@@ -18,8 +18,6 @@ class Application
 		//forgot_password
 		this.mInsertNativeLoginToken = insertNativeLoginToken; 
 		this.mJoinEmail = joinEmail; 
-		this.mClubInviteName = clubInviteName; 
-		this.mClubInviteToken = clubInviteToken; 
 		this.mForgotPasswordToken = forgotPasswordToken; 
 		this.mForgotPasswordEmail = forgotPasswordEmail; 
 
