@@ -749,7 +749,7 @@
 
   	<script> 
 	
-	var joinEmailToken      = null;
+	var insertNativeLoginToken = null;
 	var joinEmail           = null;
 	var clubInviteName      = null;
 	var clubInviteToken     = null;
@@ -788,9 +788,9 @@
 		{
 			clubInviteToken = parameterValuesArray[y];
 		}
-		if (parameterNamesArray[y] == 'join_email_token')
+		if (parameterNamesArray[y] == 'insert_native_login_token')
 		{
-			joinEmailToken = parameterValuesArray[y];
+			insertNativeLoginToken = parameterValuesArray[y];
 		}
 		if (parameterNamesArray[y] == 'join_email')
 		{
@@ -821,7 +821,7 @@ ws.onopen = function () {
 		ws.send("Hello WebSockets server!");
 	};	
 */
-	var APPLICATION = new Application(joinEmailToken,joinEmail,clubInviteName,clubInviteToken,forgotPasswordToken,forgotPasswordEmail);
+	var APPLICATION = new Application(insertNativeLoginToken,joinEmail,clubInviteName,clubInviteToken,forgotPasswordToken,forgotPasswordEmail);
 
         //update loop
         window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));

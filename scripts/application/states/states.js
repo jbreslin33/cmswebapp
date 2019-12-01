@@ -49,11 +49,13 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EMAIL_SCREEN_APPLICATION);
                 }
+
 		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
 			console.log('heere 2');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
                 }
+
 		else if (location.hash == '#insert_native_login_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_CLUB_SCREEN_APPLICATION);
@@ -154,7 +156,7 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: EXECUTE");        
 		}
-		if (application.mJoinEmailToken)
+		if (application.mInsertNativeLoginToken)
 		{
 			application.mStateMachine.changeState(application.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION);
 		}

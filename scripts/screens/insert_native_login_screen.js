@@ -31,7 +31,7 @@ class InsertNativeLoginScreen extends Screen
                	this.mPassword1  = document.getElementById("insert_native_login_screen_password1_id").value;
                	this.mPassword2  = document.getElementById("insert_native_login_screen_password2_id").value;
 
-		this.setUrl("/php/classes/screens/insert_native_login.php?password=" + this.mPassword1 + "&join_email_token=" + this.mApplication.mJoinEmailToken); 
+		this.setUrl("/php/classes/screens/insert_native_login_screen.php?password=" + this.mPassword1 + "&insert_native_login_token=" + this.mApplication.mInsertNativeLoginToken); 
 
 		this.ajax();
 	}

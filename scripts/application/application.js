@@ -2,7 +2,7 @@
 
 class Application 
 {
-	constructor(joinEmailToken,joinEmail,clubInviteName,clubInviteToken,forgotPasswordToken) 
+	constructor(insertNativeLoginToken,joinEmail,clubInviteName,clubInviteToken,forgotPasswordToken) 
 	{
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true;
@@ -13,7 +13,7 @@ class Application
 		window.onhashchange = this.locationHashChanged;
 
 		//forgot_password
-		this.mJoinEmailToken = joinEmailToken; 
+		this.mInsertNativeLoginToken = insertNativeLoginToken; 
 		console.log('mJoinEmailToken:' + this.mJoinEmailToken);
 		this.mJoinEmail = joinEmail; 
 		this.mClubInviteName = clubInviteName; 
