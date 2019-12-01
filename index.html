@@ -62,7 +62,7 @@
                         			<a id="login_nav_id" class="dropdown-item" href="#login_screen">Login</a>
                         			<a id="logout_nav_id" class="dropdown-item" href="#logout_screen">Logout</a>
                         			<a id="insert_native_login_screen_nav_id" class="dropdown-item" href="#insert_native_login_screen">INVISIBLE: Join</a>
-                        			<a id="insert_native_login_email_screen_nav_id" class="dropdown-item" href="#insert_native_login_email_screen">Join</a>
+                        			<a id="insert_email_screen_nav_id" class="dropdown-item" href="#insert_email_screen">Join</a>
                         			<a id="main_nav_id" class="dropdown-item" href="#main_screen">Main</a>
                         			<a id="insert_person_nav_id" class="dropdown-item" href="#insert_person_screen">Insert Person</a>
                         			<a id="delete_person_nav_id" class="dropdown-item" href="#delete_person_screen">Delete Person</a>
@@ -103,23 +103,23 @@
 
         <!-- END CHOOSE PERSON HTML  -->
 
-	<!-- INSERT NATIVE LOGIN EMAIL HTML  -->
+	<!-- INSERT EMAIL HTML  -->
 	
-	<div class="card" id="insert_native_login_email_screen_html_id">
+	<div class="card" id="insert_email_screen_html_id">
 
-		<span id='insert_native_login_email_screen_message_id'></span>
+		<span id='insert_email_screen_message_id'></span>
 		
-		<a id="insert_native_login_email_screen_login_id" href="#login_screen" class="card-link">Login</a>
+		<a id="insert_email_screen_login_id" href="#login_screen" class="card-link">Login</a>
 
-  		<div class="card-header" id="insert_native_login_email_screen_header_div_id">
+  		<div class="card-header" id="insert_email_screen_header_div_id">
     			 Join Club Management System
   		</div>
 
   		<div class="card-body">
 
-			<form id="insert_native_login_email_screen_form_id" onsubmit="return false;" class="needs-validation">
+			<form id="insert_email_screen_form_id" onsubmit="return false;" class="needs-validation">
 
-                		<div id="insert_native_login_email_screen_spinner_id" class="spinner-border text-primary" role="status">
+                		<div id="insert_email_screen_spinner_id" class="spinner-border text-primary" role="status">
                         		<span class="sr-only">Loading...</span>
                 		</div>
 
@@ -127,8 +127,8 @@
 			
 					<div class="col-md-4 mb-3" id="insert_native_login_screen_email_div_id">
 						<label for="insert_native_login_screen_email_id">Email</label>
-      						<input type="text" class="form-control" id="insert_native_login_email_screen_email_id" placeholder="Email" required>
-                				<button id="insertnativeloginemailscreenbuttonid" class="btn btn-primary">Submit</button>
+      						<input type="text" class="form-control" id="insert_email_screen_email_id" placeholder="Email" required>
+                				<button id="insertemailscreenbuttonid" class="btn btn-primary">Submit</button>
     					</div>
     				</div>
 
@@ -137,7 +137,7 @@
                	</div>
 	</div>
 
-	<!-- END INSERT NATAIVE LOGIN HTML  -->
+	<!-- END INSERT EMAIL HTML  -->
 
 	<!-- INSERT NATIVE LOGIN HTML  -->
 	
@@ -661,7 +661,7 @@
 				<div class="card-body">
     					<h5 class="card-title">Dont have one of the accounts above? You can simply signup with your email.</h5>
     					<p class="card-text">Click to join up below.</p>
-					<a href="#insert_native_login_email_screen" class="btn btn-primary">JOIN</a>
+					<a href="#insert_email_screen" class="btn btn-primary">JOIN</a>
   				</div>
 
 
@@ -689,7 +689,7 @@
 	<script src="scripts/screens/screen.js"></script>
 
 	<!-- join -->
-	<script src="scripts/screens/insert_native_login_email_screen.js"></script>
+	<script src="scripts/screens/insert_email_screen.js"></script>
 	<script src="scripts/screens/insert_native_login_screen.js"></script>
 	
 	<!-- choose person -->

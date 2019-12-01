@@ -1,33 +1,33 @@
 'use strict';
 
-class InsertLoginEmailScreen extends Screen
+class InsertEmailScreen extends Screen
 {
         constructor(application)
         {
                 super(application);
-		console.log('InsertLoginEmailScreen Constu breslin');
+		console.log('InsertEmailScreen Constructor');
 
-		location.hash = 'insert_native_login_email_screen';
+		location.hash = 'insert_email_screen';
 
 		//sql php vars
 		this.mEmail = null;
 		this.mLoginLink = null;
 
-		document.getElementById("insertnativeloginemailscreenbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertemailscreenbuttonid").onclick = this.hit.bind(this);
 
-		this.setMenuItem(document.getElementById("insert_native_login_email_screen_nav_id"));
-                this.setMessageElement(document.getElementById("insert_native_login_email_screen_message_id"));
-		this.setHtml(document.getElementById("insert_native_login_email_screen_html_id"));
-		this.setSpinner(document.getElementById("insert_native_login_email_screen_spinner_id"));
-		this.setForm(document.getElementById("insert_native_login_email_screen_form_id"));
+		this.setMenuItem(document.getElementById("insert_email_screen_nav_id"));
+                this.setMessageElement(document.getElementById("insert_email_screen_message_id"));
+		this.setHtml(document.getElementById("insert_email_screen_html_id"));
+		this.setSpinner(document.getElementById("insert_email_screen_spinner_id"));
+		this.setForm(document.getElementById("insert_email_screen_form_id"));
 
-		this.setLoginLink(document.getElementById("insert_native_login_email_screen_login_id"));
+		this.setLoginLink(document.getElementById("insert_email_screen_login_id"));
 	}
 
 	hit()
 	{
 		//get vars
-               	this.mEmail    	 = document.getElementById("insert_native_login_email_screen_email_id").value;
+               	this.mEmail    	 = document.getElementById("insert_email_screen_email_id").value;
 		this.setUrl("/php/classes/screens/insert_native_email_login.php?email=" + this.mEmail); 
 		this.ajax();
 		this.hideAfterHit()
@@ -121,8 +121,8 @@ class InsertLoginEmailScreen extends Screen
         }
 	hideAfterHit()
 	{
-        	var textBox = document.getElementById("insert_native_login_screen_email_div_id");
-                textBox.style.display = "none";
+        	var div = document.getElementById("insert_email_screen_form_id");
+                div.style.display = "none";
 	}
 	processPersons()
 	{

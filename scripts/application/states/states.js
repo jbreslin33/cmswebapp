@@ -45,9 +45,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
                 }
-		else if (location.hash == '#insert_native_login_email_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION)
+		else if (location.hash == '#insert_email_screen' && app.mStateMachine.mCurrentState != app.mINSERT_EMAIL_SCREEN_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EMAIL_SCREEN_APPLICATION);
                 }
 		else if (location.hash == '#insert_native_login_screen' && app.mStateMachine.mCurrentState != app.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION)
                 {
@@ -130,7 +130,7 @@ class INIT_APPLICATION extends State
 		}
 		//hide evertthing except nav_bar_id
 		document.getElementById("nav_bar_id").style.display = "block";
-		document.getElementById("insert_native_login_email_screen_html_id").style.display = "none";
+		document.getElementById("insert_email_screen_html_id").style.display = "none";
 		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
 		document.getElementById("login_screen_html_id").style.display = "none";
 		document.getElementById("choose_person_screen_html_id").style.display = "none";
@@ -319,7 +319,7 @@ class LOGOUT_APPLICATION extends State
 	}
 }
 
-class INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION extends State
+class INSERT_EMAIL_SCREEN_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -330,10 +330,10 @@ class INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION: ENTER");        
+			console.log("INSERT_EMAIL_SCREEN_APPLICATION: ENTER");        
 		}
 
-		app.setCurrentScreen(new InsertLoginEmailScreen(app));
+		app.setCurrentScreen(new InsertEmailScreen(app));
 		app.getCurrentScreen().enter();
 	}
 
@@ -341,7 +341,7 @@ class INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION: EXECUTE");        
+			console.log("INSERT_EMAIL_SCREEN_APPLICATION: EXECUTE");        
 		}
 		
 		app.getCurrentScreen().execute();
@@ -351,7 +351,7 @@ class INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("INSERT_NATIVE_LOGIN_EMAIL_SCREEN_APPLICATION: EXIT");        
+			console.log("INSERT_EMAIL_SCREEN_APPLICATION: EXIT");        
 		}
 		app.getCurrentScreen().exit();
 	}
