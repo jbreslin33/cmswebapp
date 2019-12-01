@@ -17,6 +17,9 @@ class ChoosePersonScreen extends Screen
                 this.setSpinner(document.getElementById("choose_person_screen_spinner_id"));
                         
                 this.setPersonSelect(document.getElementById("choose_person_screen_select_id"));
+
+		this.mPersonsExists = -1;
+
 	}
 
 	get()
@@ -32,8 +35,8 @@ class ChoosePersonScreen extends Screen
 		//just send jwt authorization
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
-		
-		APPLICATION.mUserSelectedPerson = true;
+
+		this.mApplication.mUserSelectedPerson = true;
 	}
 
 	enter()
@@ -41,6 +44,23 @@ class ChoosePersonScreen extends Screen
 		super.enter();
                	this.hideNavigationBar();
 	}
+
+        execute()
+        {
+                this.processData();
+		
+		//do work here
+                this.resetDataVariables();
+		if (this.mPersonsExist == 0)
+		{
+                	APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
+		}
+		else
+		{
+			//do nothing 
+		}
+        }
+
 	exit()
 	{
    		this.showNavigationBar();
@@ -63,16 +83,7 @@ class ChoosePersonScreen extends Screen
                                	opt.innerHTML = full_name;
                                	select.appendChild(opt);
 			}
-			if (select.length < 1)
-			{
-				console.log('select.length:' + select.length + ' so goto insert person');
-                        	APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
-			}
-			else
-			{
-				console.log('select.length:' + select.length + ' so stay in choose like normal');
-
-			}
+			this.mPersonsExist = select.length;
 		}
 	}
 }

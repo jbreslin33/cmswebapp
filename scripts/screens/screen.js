@@ -68,7 +68,7 @@ class Screen
 
 	personSelected()
 	{
-		this.mApplication.mUserSelectedPerson = true
+		//this.mApplication.mUserSelectedPerson = true;
 		/*
                 var person_select = this.getPersonSelect();
 		if (person_select)
@@ -573,17 +573,15 @@ class Screen
 				if (this.mApplication.mUserSelectedPerson)
 				{
 
-					if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
-					{
-						//do nothing
-					}
-					else
+					console.log('true');
+					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mMAIN_APPLICATION)
 					{
                                 		this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
 					}
 				}
 				else
 				{
+					console.log('false');
 					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mCHOOSE_PERSON_APPLICATION)
 					{
                                 		this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);
