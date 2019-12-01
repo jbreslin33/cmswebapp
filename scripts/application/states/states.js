@@ -89,9 +89,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
                 }
-		else if (location.hash == '#insert_invite_club_email_screen' && app.mStateMachine.mCurrentState != app.mINSERT_INVITE_CLUB_EMAIL_APPLICATION)
+		else if (location.hash == '#insert_email_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_EMAIL_CLUB_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_INVITE_CLUB_EMAIL_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EMAIL_CLUB_APPLICATION);
                 }
 		else if (location.hash == '#insert_accept_club_invite_screen' && app.mStateMachine.mCurrentState != app.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION)
                 {
@@ -141,7 +141,7 @@ class INIT_APPLICATION extends State
 		document.getElementById("insert_practice_screen_html_id").style.display = "none";
 		document.getElementById("insert_game_screen_html_id").style.display = "none";
 		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
-		document.getElementById("insert_invite_club_email_screen_html_id").style.display = "none";
+		document.getElementById("insert_email_club_screen_html_id").style.display = "none";
 		document.getElementById("insert_accept_club_invite_screen_html_id").style.display = "none";
 		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
 	}
@@ -387,7 +387,7 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 	}
 }
 
-class INSERT_INVITE_CLUB_EMAIL_APPLICATION extends State
+class INSERT_EMAIL_CLUB_APPLICATION extends State
 {
         constructor()
         {
@@ -398,10 +398,10 @@ class INSERT_INVITE_CLUB_EMAIL_APPLICATION extends State
         {
                 if (app.mStateLogs || app.mStateEnterLogs)
                 {
-                        console.log("INSERT_INVITE_CLUB_EMAIL_APPLICATION: ENTER");
+                        console.log("INSERT_EMAIL_CLUB_APPLICATION: ENTER");
 		}
 
-		app.setCurrentScreen(new InsertInviteClubEmailScreen(app));
+		app.setCurrentScreen(new InsertEmailClubScreen(app));
 		app.getCurrentScreen().enter();
         }
 
@@ -409,7 +409,7 @@ class INSERT_INVITE_CLUB_EMAIL_APPLICATION extends State
         {
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
-                        console.log("INSERT_INVITE_CLUB_EMAIL_APPLICATION: EXECUTE");
+                        console.log("INSERT_EMAI_CLUB_APPLICATION: EXECUTE");
                 }
 		app.getCurrentScreen().execute();
         }
@@ -418,7 +418,7 @@ class INSERT_INVITE_CLUB_EMAIL_APPLICATION extends State
         {
                 if (app.mStateLogs || app.mStateExitLogs)
                 {
-                        console.log("INSERT_INVITE_CLUB_EMAIL_APPLICATION: EXIT");
+                        console.log("INSERT_EMAIL_CLUB_APPLICATION: EXIT");
                 }
 		app.getCurrentScreen().exit();
         }
