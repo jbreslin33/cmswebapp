@@ -9,11 +9,10 @@ class Application
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
 
+		//hash
+		
 		//user variables
 		this.mUserSelectedPerson = false;
-
-		//state changed
-		//window.onhashchange = this.locationHashChanged;
 
 		//forgot_password
 		this.mInsertNativeLoginToken = insertNativeLoginToken; 
@@ -84,6 +83,7 @@ class Application
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
 	}
+
 	setJWT(jwt)
 	{
 		localStorage.setItem('mJWT', jwt);

@@ -6,7 +6,7 @@ class Screen
 	{
 		this.mApplication = application;
 
-		location.hash = null;
+		//location.hash = 'main_screen';
                 
 		//authentication google
                 this.mEmail = null;
