@@ -23,6 +23,17 @@ class InsertPracticeScreen extends Screen
 
 		//set todays date
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
+
+		//checkbox
+		this.mRecurringCheckbox = document.getElementById("insert_practice_screen_recurring_id");
+		this.mRecurringCheckbox.onclick = this.recurringCheckboxClicked.bind(this);
+		//this.getPersonSelect().onclick = this.personSelected.bind(this);
+
+	}
+
+	recurringCheckboxClicked()
+	{
+		console.log('checked or not checked');
 	}
 
 	get()

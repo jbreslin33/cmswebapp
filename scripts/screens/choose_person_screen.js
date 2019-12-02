@@ -76,7 +76,6 @@ class ChoosePersonScreen extends Screen
 			select.length = 0;
                         for (var i = 0; i < this.mJson.persons.length; i++)
                         {
-				console.log('a person:' + i);
                         	var opt = document.createElement('option');
                                	opt.value = this.mJson.persons[i].id;
                                	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
