@@ -25,11 +25,14 @@ class InsertPracticeScreen extends Screen
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
 
 		//checkbox
+		this.mRecurringHtml = null;
+		this.mRecurringCheckbox = null;
                 this.setRecurringHtml(document.getElementById("insert_practice_screen_recurring_html_id"));
+                this.setRecurringCheckbox(document.getElementById("insert_practice_screen_recurring_id"));
 
-		this.mRecurringCheckbox = document.getElementById("insert_practice_screen_recurring_id");
-		this.mRecurringCheckbox.onclick = this.recurringCheckboxClicked.bind(this);
+		this.getRecurringCheckbox().onclick = this.recurringCheckboxClicked.bind(this);
 	}
+
 	setRecurringHtml(h)
 	{
 		this.mRecurringHtml = h;
@@ -38,6 +41,16 @@ class InsertPracticeScreen extends Screen
 	getRecurringHtml()
 	{
 		return this.mRecurringHtml;
+	}
+	
+	setRecurringCheckbox(c)
+	{
+		this.mRecurringCheckbox = c;
+	}
+
+	getRecurringCheckbox()
+	{
+		return this.mRecurringCheckbox;
 	}
 	
 	hideRecurring()
