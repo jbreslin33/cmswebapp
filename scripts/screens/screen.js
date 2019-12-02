@@ -573,7 +573,6 @@ class Screen
 				if (this.mApplication.mUserSelectedPerson)
 				{
 
-					console.log('true');
 					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mMAIN_APPLICATION)
 					{
                                 		this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
@@ -581,7 +580,6 @@ class Screen
 				}
 				else
 				{
-					console.log('false');
 					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mCHOOSE_PERSON_APPLICATION)
 					{
                                 		this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);

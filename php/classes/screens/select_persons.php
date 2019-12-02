@@ -13,7 +13,6 @@ class SelectPersons extends Screen
 	   	$sql = 'select f_select_person($1)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_person", $sql);
                 $result = pg_execute($this->mDatabase->mConnection, "f_select_person", array( $this->getSenderEmailId() ) );
-		error_log($this->getSenderEmailId());
                 return pg_fetch_result($result, 0);
         }
 }
