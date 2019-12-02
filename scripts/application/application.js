@@ -13,7 +13,7 @@ class Application
 		this.mUserSelectedPerson = false;
 
 		//state changed
-		window.onhashchange = this.locationHashChanged;
+		//window.onhashchange = this.locationHashChanged;
 
 		//forgot_password
 		this.mInsertNativeLoginToken = insertNativeLoginToken; 
