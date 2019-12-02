@@ -27,13 +27,18 @@ class InsertPracticeScreen extends Screen
 		//checkbox
 		this.mRecurringCheckbox = document.getElementById("insert_practice_screen_recurring_id");
 		this.mRecurringCheckbox.onclick = this.recurringCheckboxClicked.bind(this);
-		//this.getPersonSelect().onclick = this.personSelected.bind(this);
-
 	}
 
 	recurringCheckboxClicked()
 	{
-		console.log('checked or not checked');
+		if (this.mRecurringCheckbox.checked == true)
+		{
+			console.log('display recurring html');
+		}
+		else
+		{
+			console.log('hide recurring html');
+		}
 	}
 
 	get()
