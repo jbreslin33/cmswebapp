@@ -33,7 +33,7 @@ class InsertEmailClubScreen extends Screen
 	{
       		var email  = document.getElementById("insert_email_club_screen_email_id").value;
 
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_invite_club_email.php?" + this.getStandardParameters() + '&email=' + email + '&club_id=' + this.getClubId());
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_email_club_screen.php?" + this.getStandardParameters() + '&email=' + email + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
 	}
 }

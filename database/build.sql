@@ -2274,7 +2274,6 @@ END;
 $$ LANGUAGE plpgsql;
 --------
 
--------
 CREATE OR REPLACE FUNCTION f_insert_email(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
@@ -2287,13 +2286,11 @@ DECLARE
 BEGIN
         select into found_email_id f_get_email_id($1);
         IF found_email_id > 0 THEN 
-		--check if there is a native login....
 		select id into found_native_login_id from native_logins where email_id = found_email_id;
 
 		IF found_native_login_id > 0 THEN
 			result_set = f_format_result_set(found_email_id,'That email already has a login associated with it. Would you like to login?',-102); 
 		ELSE
-			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
 			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
 				message = 'We sent you a link to your email to finish joining.';
@@ -2303,11 +2300,8 @@ BEGIN
 			END IF;
 		END IF;
 	ELSE
-		--no email or native login lets get them both
 		CALL p_insert_email($1,x);
 		IF x > 0 THEN 
-			--there could not have been native login because email did not exist so...
-			--ok we have an email but no native login this is normal lets send insert into join_emails and send link 	
 			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
 				result_set = f_format_result_set(x,'We sent you a link to your email to finish joining.',-101);
@@ -2320,7 +2314,63 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+-------
+
+CREATE OR REPLACE FUNCTION f_insert_email_club(TEXT, TEXT, int)
+RETURNS text AS $$
+DECLARE
+	DECLARE x int := -1;
+        found_email_id emails.id%TYPE;
+        found_native_login_id native_logins.id%TYPE;
+        returning_insert_native_login_token_id insert_native_login_tokens.id%TYPE;
+        message text;
+        result_set text;
+BEGIN
+        select into found_email_id f_get_email_id($1);
+        IF found_email_id > 0 THEN 
+		select id into found_native_login_id from native_logins where email_id = found_email_id;
+
+		IF found_native_login_id > 0 THEN
+			result_set = f_format_result_set(found_email_id,'That email already has a login associated with it. But we added it to your club.',-101); 
+		ELSE
+			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
+			IF returning_insert_native_login_token_id > 0 THEN
+				message = 'We sent an email to your invitee to finish joining.';
+				result_set = f_format_result_set(found_email_id,message,-100); --  
+			ELSE
+				result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101); -- we want you to clear screen but stay on screen and display message.. 
+			END IF;
+		END IF;
+	ELSE
+		CALL p_insert_email($1,x);
+		IF x > 0 THEN 
+			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
+			IF returning_insert_native_login_token_id > 0 THEN
+				result_set = f_format_result_set(x,'We a link to your invitee to finish joining.',-100);
+			ELSE
+				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
+			END IF;
+		ELSE
+		END IF;
+	END IF;
+
+
+	--for the clubs
+	IF found_email_id > 0 THEN
+		insert into club_emails (club_id, email_id) values ($3,found_email_id);
+	END IF;
+	
+	IF x > 0 THEN
+		insert into club_emails (club_id, email_id) values ($3,x);
+	END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 --------
+
+
+
 --email_id old guy, person_id, club_id, email_id of new guy,token
 CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(int, int, int, int, TEXT, INOUT x int)
 LANGUAGE plpgsql
