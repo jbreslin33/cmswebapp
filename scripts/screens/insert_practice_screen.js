@@ -25,18 +25,42 @@ class InsertPracticeScreen extends Screen
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
 
 		//checkbox
+                this.setRecurringHtml(document.getElementById("insert_practice_screen_recurring_html_id"));
+
 		this.mRecurringCheckbox = document.getElementById("insert_practice_screen_recurring_id");
 		this.mRecurringCheckbox.onclick = this.recurringCheckboxClicked.bind(this);
+	}
+	setRecurringHtml(h)
+	{
+		this.mRecurringHtml = h;
+	}
+
+	getRecurringHtml()
+	{
+		return this.mRecurringHtml;
+	}
+	
+	hideRecurring()
+	{
+		this.getRecurringHtml().style.display = "block";
+		this.getRecurringHtml().style.visibility = "visible";
+	}
+
+	showRecurring()
+	{
+		this.getRecurringHtml().style.display = "none";
 	}
 
 	recurringCheckboxClicked()
 	{
 		if (this.mRecurringCheckbox.checked == true)
 		{
+			this.showRecurring();
 			console.log('display recurring html');
 		}
 		else
 		{
+			this.hideRecurring();
 			console.log('hide recurring html');
 		}
 	}
