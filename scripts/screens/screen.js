@@ -595,6 +595,7 @@ class Screen
 		{
 			this.getMenuItem().className += " active";
 		}
+		this.setMessage('','green');
 		this.show();
 		this.get();
 	}
