@@ -33,6 +33,13 @@ class InsertPracticeScreen extends Screen
 		this.getRecurringCheckbox().onclick = this.recurringCheckboxClicked.bind(this);
 	}
 
+	enter()
+	{
+		super.enter();
+		this.hideRecurring();
+		console.log('recurring hide');
+	}	
+
 	setRecurringHtml(h)
 	{
 		this.mRecurringHtml = h;
@@ -55,13 +62,13 @@ class InsertPracticeScreen extends Screen
 	
 	hideRecurring()
 	{
-		this.getRecurringHtml().style.display = "block";
-		this.getRecurringHtml().style.visibility = "visible";
+		this.getRecurringHtml().style.display = "none";
 	}
 
 	showRecurring()
 	{
-		this.getRecurringHtml().style.display = "none";
+		this.getRecurringHtml().style.display = "block";
+		this.getRecurringHtml().style.visibility = "visible";
 	}
 
 	recurringCheckboxClicked()
