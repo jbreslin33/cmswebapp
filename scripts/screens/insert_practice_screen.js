@@ -67,11 +67,11 @@ class InsertPracticeScreen extends Screen
 		}
 	}
 
+
 	hit()
 	{
 		this.mHit = true;
                 
-		var event_date = document.getElementById("insert_practice_screen_date_id").value;
 		var arrival_time = document.getElementById("insert_practice_screen_arrival_time_id").value;
 		var start_time = document.getElementById("insert_practice_screen_start_time_id").value;
 		var end_time = document.getElementById("insert_practice_screen_end_time_id").value;
@@ -91,11 +91,29 @@ class InsertPracticeScreen extends Screen
 
 		if (this.getClubId() > 0 && this.getTeamId() > 0)
 		{
-
-                	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+			if (this.mRecurringCheckbox.checked == true)
+			{
+				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
                         
-			APPLICATION.getCurrentScreen().ajax();
+				APPLICATION.getCurrentScreen().ajax();
+			}
+			else
+			{
+				var event_date = document.getElementById("insert_practice_screen_date_id").value;
+				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+                        
+				APPLICATION.getCurrentScreen().ajax();
+			}
 		}
+	}
+
+	hitNormal()
+	{
+	}
+
+	hitRecurring()
+	{
+
 	}
 
 	//new functions
