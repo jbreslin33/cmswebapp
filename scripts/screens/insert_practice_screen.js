@@ -130,9 +130,22 @@ class InsertPracticeScreen extends Screen
               
 		var field_name = document.getElementById("insert_practice_screen_field_id").value;
 
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+		if (this.getClubId() == 0)
+		{
+			this.setMessage("You must select a club to enter a practice. You don't have any clubs that you are a manager on.");
+		}
+		else if (this.getTeamId() == 0)
+		{
+			this.setMessage("You must select a team to enter a practice. You don't have any teams that you are a manager on.");
+		}
+
+		if (this.getClubId() > 0 && this.getTeamId() > 0)
+		{
+
+                	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
                         
-		APPLICATION.getCurrentScreen().ajax();
+			APPLICATION.getCurrentScreen().ajax();
+		}
 	}
 
         processClubs()
