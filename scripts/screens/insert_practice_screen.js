@@ -132,11 +132,11 @@ class InsertPracticeScreen extends Screen
 
 		if (this.getClubId() == 0)
 		{
-			this.setMessage("You must select a club to enter a practice. You don't have any clubs that you are a manager on.");
+			this.setMessage("You must select a club to enter a practice. You don't have any clubs that you are a manager on.",'red');
 		}
 		else if (this.getTeamId() == 0)
 		{
-			this.setMessage("You must select a team to enter a practice. You don't have any teams that you are a manager on.");
+			this.setMessage("You must select a team to enter a practice. You don't have any teams that you are a manager on.",'red');
 		}
 
 		if (this.getClubId() > 0 && this.getTeamId() > 0)
