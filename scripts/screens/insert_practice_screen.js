@@ -29,7 +29,7 @@ class InsertPracticeScreen extends Screen
 		this.mRecurringCheckbox = null;
                 this.setRecurringHtml(document.getElementById("insert_practice_screen_recurring_html_id"));
                 this.setRecurringCheckbox(document.getElementById("insert_practice_screen_recurring_id"));
-
+		this.setDateHtml(document.getElementById("insert_practice_screen_date_html_id"));
 		this.getRecurringCheckbox().onclick = this.recurringCheckboxClicked.bind(this);
 	}
 
@@ -37,7 +37,6 @@ class InsertPracticeScreen extends Screen
 	{
 		super.enter();
 		this.hideRecurring();
-		console.log('recurring hide');
 	}	
 
 	setRecurringHtml(h)
@@ -48,6 +47,16 @@ class InsertPracticeScreen extends Screen
 	getRecurringHtml()
 	{
 		return this.mRecurringHtml;
+	}
+
+	setDateHtml(d)
+	{
+		this.mDateSelect = d;	
+	}
+
+	getDateHtml()
+	{
+		return this.mDateSelect;
 	}
 	
 	setRecurringCheckbox(c)
@@ -63,12 +72,19 @@ class InsertPracticeScreen extends Screen
 	hideRecurring()
 	{
 		this.getRecurringHtml().style.display = "none";
+		
+		//regule date should show when in regular mode
+		this.getDateHtml().style.display = "block";
+		this.getDateHtml().style.visibility = "visible";
 	}
 
 	showRecurring()
 	{
 		this.getRecurringHtml().style.display = "block";
 		this.getRecurringHtml().style.visibility = "visible";
+
+		//regule date should hide when in recurring mode
+		this.getDateHtml().style.display = "none";
 	}
 
 	recurringCheckboxClicked()
@@ -76,12 +92,10 @@ class InsertPracticeScreen extends Screen
 		if (this.mRecurringCheckbox.checked == true)
 		{
 			this.showRecurring();
-			console.log('display recurring html');
 		}
 		else
 		{
 			this.hideRecurring();
-			console.log('hide recurring html');
 		}
 	}
 
