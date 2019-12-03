@@ -66,12 +66,34 @@ class InsertPracticeScreen extends Screen
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
+/*
+ *
+ <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="insert_practice_screen_saturday_checkbox_id" value="saturday">
+                                        <label class="form-check-label" for="insert_practice_screen_saturday_checkbox_id">Saturday</label>
+                                </div>
 
+                                <div class="form-group row">
+                                        <label for="insert_practice_screen_start_date_id" class="col-2 col-form-label">Starting Date:</label>
+                                        <div class="col-10">
+                                                <input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_start_date_id">
+                                        </div>
+                                </div>
+
+                                <div class="form-group row">
+                                        <label for="insert_practice_screen_end_date_id" class="col-2 col-form-label">Ending Date:</label>
+                                        <div class="col-10">
+                                                <input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_end_date_id">
+                                        </div>
+                                </div>
+*
+ * */
 
 	hit()
 	{
 		this.mHit = true;
-                
+
+		//both normal and recurring
 		var arrival_time = document.getElementById("insert_practice_screen_arrival_time_id").value;
 		var start_time = document.getElementById("insert_practice_screen_start_time_id").value;
 		var end_time = document.getElementById("insert_practice_screen_end_time_id").value;
@@ -93,12 +115,25 @@ class InsertPracticeScreen extends Screen
 		{
 			if (this.mRecurringCheckbox.checked == true)
 			{
-				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+				//recurring
+				var start_date = document.getElementById("insert_practice_screen_start_date_id").value;
+				var end_date = document.getElementById("insert_practice_screen_end_date_id").value;
+				
+				var sunday_checked = document.getElementById("insert_practice_screen_sunday_checkbox_id").value;
+				var monday_checked = document.getElementById("insert_practice_screen_monday_checkbox_id").value;
+				var tuesday_checked = document.getElementById("insert_practice_screen_tuesday_checkbox_id").value;
+				var wednesday_checked = document.getElementById("insert_practice_screen_wednesday_checkbox_id").value;
+				var thursday_checked = document.getElementById("insert_practice_screen_thursday_checkbox_id").value;
+				var friday_checked = document.getElementById("insert_practice_screen_friday_checkbox_id").value;
+				var saturday_checked = document.getElementById("insert_practice_screen_saturday_checkbox_id").value;
+
+				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice_recurring.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
                         
 				APPLICATION.getCurrentScreen().ajax();
 			}
 			else
 			{
+				//normal
 				var event_date = document.getElementById("insert_practice_screen_date_id").value;
 				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
                         
