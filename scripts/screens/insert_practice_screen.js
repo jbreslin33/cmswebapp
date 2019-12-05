@@ -127,7 +127,7 @@ class InsertPracticeScreen extends Screen
 				var friday_checked = document.getElementById("insert_practice_screen_friday_checkbox_id").value;
 				var saturday_checked = document.getElementById("insert_practice_screen_saturday_checkbox_id").value;
 
-				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice_recurring.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&start_date=' + start_date + '&end_date=' + end_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId() + '&sunday_checked=' + sunday_checked + '&monday_checked=' + monday_checked + '&tuesday_checked=' + tuesday_checked + '&wednesday_checked=' + wednesday_checked + '&thurday_checked=' + thursday_checked + '&friday_checked=' + friday_checked + '&saturday_checked=' + saturday_checked);
                         
 				APPLICATION.getCurrentScreen().ajax();
 			}

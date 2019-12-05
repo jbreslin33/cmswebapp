@@ -20,6 +20,16 @@ class InsertPractice extends Screen
 		$pitch_id = null;
 		$field_name = null;
 		$person_id = null;
+		
+		$start_date = null;
+		$end_date = null;
+		$sunday_checked = null;
+		$monday_checked = null;
+		$tuesday_checked = null;
+		$wednesday_checked = null;
+		$thursday_checked = null;
+		$friday_checked = null;
+		$saturday_checked = null;
 	
 		if (isset($_GET['team_id']))
 		{
@@ -62,6 +72,45 @@ class InsertPractice extends Screen
                 {
                         $person_id = $_GET['person_id'];
                 }
+		
+		if (isset($_GET['start_date']))
+		{
+			$event_date = $_GET['start_date'];
+		}
+
+		if (isset($_GET['start_date']))
+		{
+			$event_date = $_GET['start_date'];
+		}
+		
+		if (isset($_GET['sunday_checked']))
+		{
+			$sunday_checked = $_GET['sunday_checked'];
+		}
+		if (isset($_GET['monday_checked']))
+		{
+			$monday_checked = $_GET['monday_checked'];
+		}
+		if (isset($_GET['tuesday_checked']))
+		{
+			$tuesday_checked = $_GET['tuesday_checked'];
+		}
+		if (isset($_GET['wednesday_checked']))
+		{
+			$wednesday_checked = $_GET['wednesday_checked'];
+		}
+		if (isset($_GET['thursday_checked']))
+		{
+			$thursday_checked = $_GET['thursday_checked'];
+		}
+		if (isset($_GET['friday_checked']))
+		{
+			$friday_checked = $_GET['friday_checked'];
+		}
+		if (isset($_GET['saturday_checked']))
+		{
+			$saturday_checked = $_GET['saturday_checked'];
+		}
 
 		if ($event_date)
 		{
@@ -82,7 +131,6 @@ class InsertPractice extends Screen
                                 $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'You are in view only mode. You must login to insert a practice.', -101));
 
                                 return pg_fetch_result($result, 0);
-
 			}
 		}
         }
