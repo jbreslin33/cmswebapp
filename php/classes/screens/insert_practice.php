@@ -111,27 +111,24 @@ class InsertPractice extends Screen
 		{
 			$saturday_checked = $_GET['saturday_checked'];
 		}
-
-		if ($event_date)
+		
+		if ($this->getAuthorizationId() > 0)
 		{
-			if ($this->getAuthorizationId() > 0)
-			{
-				//prep db
-				$sql = 'select f_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)';
-				$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_practice", $sql);
-				$result = pg_execute($this->mDatabase->mConnection, "f_insert_practice", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id, $start_date, $end_date, $sunday_checked, $monday_checked, $tuesday_checked, $wednesday_checked, $thursday_checked, $friday_checked, $saturday_checked));
-			
-				return pg_fetch_result($result, 0);
-			}
-			else
-			{
-                                //prep db
-                                $sql = 'select f_format_result_set($1,$2,$3)';
-                                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);
-                                $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'You are in view only mode. You must login to insert a practice.', -101));
+			//prep db
+			$sql = 'select f_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)';
+			$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_practice", $sql);
+			$result = pg_execute($this->mDatabase->mConnection, "f_insert_practice", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id, $start_date, $end_date, $sunday_checked, $monday_checked, $tuesday_checked, $wednesday_checked, $thursday_checked, $friday_checked, $saturday_checked));
+		
+			return pg_fetch_result($result, 0);
+		}
+		else
+		{
+                        //prep db
+                        $sql = 'select f_format_result_set($1,$2,$3)';
+                	$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);
+                        $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'You are in view only mode. You must login to insert a practice.', -101));
 
-                                return pg_fetch_result($result, 0);
-			}
+                       	return pg_fetch_result($result, 0);
 		}
         }
 }
