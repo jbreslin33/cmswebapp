@@ -122,12 +122,12 @@ class InsertPracticeScreen extends Screen
 				
 				var sunday_checked = document.getElementById("insert_practice_screen_sunday_checkbox_id").value;
 				console.log('sunday.value:' + sunday_checked);
-				var monday_checked = document.getElementById("insert_practice_screen_monday_checkbox_id").value;
-				var tuesday_checked = document.getElementById("insert_practice_screen_tuesday_checkbox_id").value;
-				var wednesday_checked = document.getElementById("insert_practice_screen_wednesday_checkbox_id").value;
-				var thursday_checked = document.getElementById("insert_practice_screen_thursday_checkbox_id").value;
-				var friday_checked = document.getElementById("insert_practice_screen_friday_checkbox_id").value;
-				var saturday_checked = document.getElementById("insert_practice_screen_saturday_checkbox_id").value;
+				var monday_checked = document.getElementById("insert_practice_screen_monday_checkbox_id").checked;
+				var tuesday_checked = document.getElementById("insert_practice_screen_tuesday_checkbox_id").checked;
+				var wednesday_checked = document.getElementById("insert_practice_screen_wednesday_checkbox_id").checked;
+				var thursday_checked = document.getElementById("insert_practice_screen_thursday_checkbox_id").checked;
+				var friday_checked = document.getElementById("insert_practice_screen_friday_checkbox_id").checked;
+				var saturday_checked = document.getElementById("insert_practice_screen_saturday_checkbox_id").checked;
 
 				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&start_date=' + start_date + '&end_date=' + end_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId() + '&sunday_checked=' + sunday_checked + '&monday_checked=' + monday_checked + '&tuesday_checked=' + tuesday_checked + '&wednesday_checked=' + wednesday_checked + '&thurday_checked=' + thursday_checked + '&friday_checked=' + friday_checked + '&saturday_checked=' + saturday_checked);
 				console.log('url:' + APPLICATION.getCurrentScreen().getUrl());
