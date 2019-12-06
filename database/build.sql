@@ -1849,8 +1849,8 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
---BEGIN INSERT PRACTICE
-CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int)
+--BEGIN INSERT PRACTICE --11                                                               --11
+CREATE OR REPLACE FUNCTION f_insert_practice(int,int,date,time,time,time,text,text,int,text,int, date,date,boolean,boolean,boolean,boolean,boolean,boolean,boolean)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -1864,8 +1864,8 @@ BEGIN
         join teams on teams.id=team_club_persons.team_id
         where teams.id = $2;
 
-	IF found_team_club_manager_id > 0 THEN
-        	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+	IF found_team_club_manager_id > 0 THEN                     --dont need 11 because it is person id
+        	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,$12,$13,$14,$15,$16,$17,$18,$19,$20,x);
         	IF x > 0 THEN
                 	result_set = f_format_result_set($1,null,-100);
         	ELSE
@@ -1880,17 +1880,26 @@ END;
 $$ LANGUAGE plpgsql;
 --END INSERT PRACTICE
 
---BEGIN INSERT PRACTICE
-CREATE OR REPLACE PROCEDURE p_insert_practice(int,date,time,time,time,text,text,int,text,INOUT x int)
+--BEGIN INSERT PRACTICE                                                                  --date
+CREATE OR REPLACE PROCEDURE p_insert_practice(int,date,time,time,time,text,text,int,text,date,date,boolean,boolean,boolean,boolean,boolean,boolean,boolean,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
 
 BEGIN
+
 	IF $8 > 0 THEN
+  		--RAISE LOG 'log message %', now();
 		insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
 	ELSE
-		insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+	
+		IF $10 is null THEN
+  			RAISE LOG '10 null %', $10;
+			insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+		ELSE
+  			RAISE LOG '10 not null %', $10;
+			insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+		END IF;
 	END IF;
 END;
 $$;

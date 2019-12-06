@@ -75,12 +75,12 @@ class InsertPractice extends Screen
 		
 		if (isset($_GET['start_date']))
 		{
-			$event_date = $_GET['start_date'];
+			$start_date = $_GET['start_date'];
 		}
 
-		if (isset($_GET['start_date']))
+		if (isset($_GET['end_date']))
 		{
-			$event_date = $_GET['start_date'];
+			$end_date = $_GET['end_date'];
 		}
 		
 		if (isset($_GET['sunday_checked']))
@@ -117,9 +117,9 @@ class InsertPractice extends Screen
 			if ($this->getAuthorizationId() > 0)
 			{
 				//prep db
-				$sql = 'select f_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)';
+				$sql = 'select f_insert_practice($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)';
 				$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_practice", $sql);
-				$result = pg_execute($this->mDatabase->mConnection, "f_insert_practice", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id));
+				$result = pg_execute($this->mDatabase->mConnection, "f_insert_practice", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id, $start_date, $end_date, $sunday_checked, $monday_checked, $tuesday_checked, $wednesday_checked, $thursday_checked, $friday_checked, $saturday_checked));
 			
 				return pg_fetch_result($result, 0);
 			}
