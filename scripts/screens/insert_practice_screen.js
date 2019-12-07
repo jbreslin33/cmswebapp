@@ -68,29 +68,7 @@ class InsertPracticeScreen extends Screen
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
-/*
- *
- <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="insert_practice_screen_saturday_checkbox_id" value="saturday">
-                                        <label class="form-check-label" for="insert_practice_screen_saturday_checkbox_id">Saturday</label>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label for="insert_practice_screen_start_date_id" class="col-2 col-form-label">Starting Date:</label>
-                                        <div class="col-10">
-                                                <input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_start_date_id">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label for="insert_practice_screen_end_date_id" class="col-2 col-form-label">Ending Date:</label>
-                                        <div class="col-10">
-                                                <input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_end_date_id">
-                                        </div>
-                                </div>
-*
- * */
-
+	
 	hit()
 	{
 		this.mHit = true;
@@ -131,7 +109,7 @@ class InsertPracticeScreen extends Screen
 				var friday_checked = document.getElementById("insert_practice_screen_friday_checkbox_id").checked;
 				var saturday_checked = document.getElementById("insert_practice_screen_saturday_checkbox_id").checked;
 
-				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&start_date=' + start_date + '&end_date=' + end_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId() + '&sunday_checked=' + sunday_checked + '&monday_checked=' + monday_checked + '&tuesday_checked=' + tuesday_checked + '&wednesday_checked=' + wednesday_checked + '&thurday_checked=' + thursday_checked + '&friday_checked=' + friday_checked + '&saturday_checked=' + saturday_checked);
+				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&start_date=' + start_date + '&end_date=' + end_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId() + '&sunday_checked=' + sunday_checked + '&monday_checked=' + monday_checked + '&tuesday_checked=' + tuesday_checked + '&wednesday_checked=' + wednesday_checked + '&thursday_checked=' + thursday_checked + '&friday_checked=' + friday_checked + '&saturday_checked=' + saturday_checked);
 				console.log('url:' + APPLICATION.getCurrentScreen().getUrl());
                         
 				APPLICATION.getCurrentScreen().ajax();
