@@ -1926,6 +1926,7 @@ DECLARE
 next_date DATE := $10;
 duration  INTERVAL;
 day       INTERVAL;
+day_of_week int;
 
 
 BEGIN
@@ -1940,14 +1941,17 @@ BEGIN
 			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$2,$3,$4,$5,$6,$7,$9) returning id into x;
 			insert into practices (practice_id,event_date) values (x,$2);
 		ELSE
-  			RAISE LOG '10 not null %', $10;
+  			--RAISE LOG '10 not null %', $10;
 
 		        duration := '1 day'::interval;
 
         		WHILE next_date <= $11 LOOP
-            			--RETURN NEXT next_date;
+
             			next_date := next_date + duration;
-  				RAISE LOG 'next_date %', next_date;
+				SELECT EXTRACT(ISODOW FROM DATE '2006-01-01') INTO day_of_week;
+				--SELECT EXTRACT(ISODOW FROM DATE '2006-01-01');
+
+  				RAISE LOG 'day_of_week: %', day_of_week;
 
         		END LOOP;
 
