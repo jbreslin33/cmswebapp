@@ -9,7 +9,7 @@
                 join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
 
-                --full outer join pitches on pitches.club_id=teams.club_id
+                left outer join pitches on pitches.club_id=teams.club_id
 
                 where emails_persons.email_id = 23 AND practices.event_date > now() - interval '1 day';
 
