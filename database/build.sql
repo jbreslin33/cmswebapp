@@ -1936,7 +1936,11 @@ BEGIN
 			insert into practices (practice_id,event_date) values (x,$2);
 		ELSE
   			RAISE LOG '10 not null %', $10;
-			insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
+			insert into practices (practice_id,event_date) values (x,$10);
+
+
+			--insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
 		END IF;
 	END IF;
 END;

@@ -23,6 +23,8 @@ class InsertPracticeScreen extends Screen
 
 		//set todays date
 		document.getElementById('insert_practice_screen_date_id').valueAsDate = new Date();
+		document.getElementById('insert_practice_screen_start_date_id').valueAsDate = new Date();
+		document.getElementById('insert_practice_screen_end_date_id').valueAsDate = new Date();
 
 		//checkbox
 		this.mRecurringHtml = null;
