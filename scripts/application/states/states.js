@@ -277,13 +277,8 @@ class LOGOUT_APPLICATION extends State
 		//clear mJWT from localstorage
 		localStorage.removeItem("mJWT");
 
-		//clear personal selects
-		var club_select = document.getElementById("club_select_id");
-                club_select.length = 0;
-		var team_select = document.getElementById("team_select_id");
-                team_select.length = 0;
-		var person_select = document.getElementById("person_select_id");
-                person_select.length = 0;
+		//clear person selects
+		document.getElementById("person_select_id").length = 0;
 	}
 
         execute(app)
