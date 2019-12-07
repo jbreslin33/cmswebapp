@@ -1928,8 +1928,43 @@ duration  INTERVAL;
 day       INTERVAL;
 day_of_week int;
 
+sunday_num    int := -1;
+monday_num    int := -1;
+tuesday_num   int := -1;
+wednesday_num int := -1;
+thursday_num  int := -1;
+friday_num    int := -1;
+saturday_num  int := -1;
 
 BEGIN
+	IF $12 THEN
+		sunday_num = 0;
+	END IF;
+
+	IF $13 THEN
+		monday_num = 1;
+	END IF;
+
+	IF $14 THEN
+		tuesday_num = 2;
+	END IF;
+
+	IF $15 THEN
+		wednesday_num = 3;
+	END IF;
+
+	IF $16 THEN
+		thursday_num = 4;
+	END IF;
+
+	IF $17 THEN
+		friday_num = 5;
+	END IF;
+
+	IF $18 THEN
+		saturday_num = 6;
+	END IF;
+	
 
 	IF $8 > 0 THEN
   		--RAISE LOG 'log message %', now();
@@ -1941,25 +1976,24 @@ BEGIN
 			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$2,$3,$4,$5,$6,$7,$9) returning id into x;
 			insert into practices (practice_id,event_date) values (x,$2);
 		ELSE
-  			--RAISE LOG '10 not null %', $10;
+			--insert a practice no matter what
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
 
+			--loop to insert practices
 		        duration := '1 day'::interval;
 
         		WHILE next_date <= $11 LOOP
 
             			next_date := next_date + duration;
 				SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
-				--SELECT EXTRACT(ISODOW FROM DATE '2006-01-01');
-
-  				RAISE LOG 'day_of_week: %', day_of_week;
-
+		
+				IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN 	
+					insert into practices (practice_id,event_date) values (x,next_date);
+  					RAISE LOG 'day_of_week: %', day_of_week;
+				ELSE
+					--do nothing
+				END IF;
         		END LOOP;
-
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
-			insert into practices (practice_id,event_date) values (x,$10);
-
-
-			--insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
 		END IF;
 	END IF;
 END;
