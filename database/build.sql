@@ -1923,6 +1923,11 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
 
+next_date DATE := $10;
+duration  INTERVAL;
+day       INTERVAL;
+
+
 BEGIN
 
 	IF $8 > 0 THEN
@@ -1936,6 +1941,16 @@ BEGIN
 			insert into practices (practice_id,event_date) values (x,$2);
 		ELSE
   			RAISE LOG '10 not null %', $10;
+
+		        duration := '1 day'::interval;
+
+        		WHILE next_date <= $11 LOOP
+            			--RETURN NEXT next_date;
+            			next_date := next_date + duration;
+  				RAISE LOG 'next_date %', next_date;
+
+        		END LOOP;
+
 			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
 			insert into practices (practice_id,event_date) values (x,$10);
 
