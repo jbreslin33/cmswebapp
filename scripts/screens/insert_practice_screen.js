@@ -40,6 +40,15 @@ class InsertPracticeScreen extends Screen
 	{
 		super.enter();
 		this.hideRecurring();
+		//clear checkboxes
+		this.getRecurringCheckbox().checked = false;
+		document.getElementById("insert_practice_screen_sunday_checkbox_id").checked = false;
+		document.getElementById("insert_practice_screen_monday_checkbox_id").checked = false;
+		document.getElementById("insert_practice_screen_tuesday_checkbox_id").checked = false;
+		document.getElementById("insert_practice_screen_wednesday_checkbox_id").checked = false;
+		document.getElementById("insert_practice_screen_thursday_checkbox_id").checked = false;
+		document.getElementById("insert_practice_screen_friday_checkbox_id").checked = false;
+		document.getElementById("insert_practice_screen_saturday_checkbox_id").checked = false;
 	}	
         
 	processClubs()
