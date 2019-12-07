@@ -1,5 +1,5 @@
 
-		select practices.id, practices.event_date, practice.arrival_time, practice.start_time, practice.end_time, practice.address, practice.coordinates, practice.pitch_id, practice.field_name, clubs.name as club_name, teams.name as team_name
+		select practices.id, practices.event_date, practice.arrival_time, practice.start_time, practice.end_time, practice.address, practice.coordinates, (select pitches.name from pitches where practice.pitch_id = pitches.id), practice.field_name, clubs.name as club_name, teams.name as team_name
                 from practices
                 join practice on practice.id=practices.practice_id
                 join teams on teams.id=practice.team_id
