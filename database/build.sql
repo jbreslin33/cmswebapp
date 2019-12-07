@@ -218,21 +218,58 @@ CREATE TABLE teams_periodizations
         PRIMARY KEY (id)
 );
 
-CREATE TABLE practices 
+CREATE TABLE practice
 (
-        id SERIAL,
-	event_date date,
+	id SERIAL,
+
+	--dates
+	start_date date,
+	end_date date,
+	
+	--time
         arrival_time time, --only 1 arrival time leave it
         start_time time, --only 1 start time leave it
         end_time time,
-        address text,
+       
+	--info
+	address text,
         coordinates text,
 	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
+
+	--day of week	
+	sunday_checked boolean,
+	monday_checked boolean,
+	tuesday_checked boolean,
+	wednesday_checked boolean,
+	thursday_checked boolean,
+	friday_checked boolean,
+	saturday_checked boolean,
+
+	--meta
 	created_at timestamp not null default now(),
+
+	--keys
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE practices 
+(
+	--keys
+        id SERIAL,
+	practice_id integer not null,
+
+	--data
+	event_date date, --the date of this instance of practice
+
+	--meta
+	created_at timestamp not null default now(),
+
+	--keys
+	FOREIGN KEY (practice_id) REFERENCES practice(id),
 	PRIMARY KEY (id)
 );
 
@@ -1409,10 +1446,10 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name
+		select practices.id, practices.event_date, practice.arrival_time, practice.start_time, practice.end_time, practice.address, practice.coordinates, pitches.name as pitch_name, practice.field_name, clubs.name as club_name, teams.name as team_name
                 from practices
-
-                join teams on teams.id=practices.team_id
+		join practice on practice.id=practices.practice_id
+                join teams on teams.id=practice.team_id
 		join team_club_persons on team_club_persons.team_id=teams.id
 		join club_persons on club_persons.id=team_club_persons.club_person_id
 		join clubs on clubs.id=club_persons.club_id
@@ -1895,7 +1932,8 @@ BEGIN
 	
 		IF $10 is null THEN
   			RAISE LOG '10 null %', $10;
-			insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+			insert into practices (practice_id,event_date) values (x,$2);
 		ELSE
   			RAISE LOG '10 not null %', $10;
 			insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
