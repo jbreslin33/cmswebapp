@@ -1948,7 +1948,7 @@ BEGIN
         		WHILE next_date <= $11 LOOP
 
             			next_date := next_date + duration;
-				SELECT EXTRACT(ISODOW FROM DATE '2006-01-01') INTO day_of_week;
+				SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
 				--SELECT EXTRACT(ISODOW FROM DATE '2006-01-01');
 
   				RAISE LOG 'day_of_week: %', day_of_week;
