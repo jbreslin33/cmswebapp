@@ -1965,37 +1965,37 @@ BEGIN
 		saturday_num = 6;
 	END IF;
 	
-
-	IF $8 > 0 THEN
-  		--RAISE LOG 'log message %', now();
-		insert into practices (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
-	ELSE
-	
-		IF $10 is null THEN
-  			RAISE LOG '10 null %', $10;
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$2,$3,$4,$5,$6,$7,$9) returning id into x;
-			insert into practices (practice_id,event_date) values (x,$2);
+	--insert practice
+	IF $10 is null THEN
+		IF $8 > 0 THEN
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values ($1,$2,$2,$3,$4,$5,$6,$7,$9,$8) returning id into x;
 		ELSE
-			--insert a practice no matter what
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
-
-			--loop to insert practices
-		        duration := '1 day'::interval;
-
-        		WHILE next_date <= $11 LOOP
-
-            			next_date := next_date + duration;
-				SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
-		
-				IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN 	
-					insert into practices (practice_id,event_date) values (x,next_date);
-  					RAISE LOG 'day_of_week: %', day_of_week;
-				ELSE
-					--do nothing
-				END IF;
-        		END LOOP;
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$2,$3,$4,$5,$6,$7,$9) returning id into x;
 		END IF;
+		insert into practices (practice_id,event_date) values (x,$2);
+	ELSE
+       		IF $8 > 0 THEN
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values ($1,$10,$11,$3,$4,$5,$6,$7,$9,$8) returning id into x;
+                ELSE
+			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
+                END IF;
 	END IF;
+
+	--insert practices
+	duration := '1 day'::interval;
+
+        WHILE next_date <= $11 LOOP
+
+        	next_date := next_date + duration;
+		SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
+	
+		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN 	
+			insert into practices (practice_id,event_date) values (x,next_date);
+		ELSE
+			--do nothing
+		END IF;
+        END LOOP;
+
 END;
 $$;
 --END INSERT PRACTICE
