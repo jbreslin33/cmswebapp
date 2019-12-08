@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
   		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
 
@@ -18,9 +19,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   		 <!--END BOOTSRAP CDN-->
 		
-		 <!-- WHAT
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-  		 END WHAT-->
 
 		<title>CMS</title>
 
@@ -82,27 +80,28 @@
 
         <!-- CHOOSE PERSON HTML  -->
 
-        <div class="card" id="choose_person_screen_html_id">
+        <div class="container" id="choose_person_screen_html_id">
+	
+        	<div class="row">
+               		<label for="choose_person_screen_select_id">Person:</label>
+			<select id="choose_person_screen_select_id" class="form-control"> </select>
+                </div>
+        	
+		<div class="row">
 
-		<div class="card-header" id="insert_email_screen_header_div_id">
-    			 Choose Person Screen
-  		</div>
-
-                <form id="choose_person_screen_form_id" onsubmit="return false;" class="needs-validation">
-                        <div class="form-row">
-                                <div id="choose_person_screen_div_id" class="form-group col-md-4">
-                                        <label for="choose_person_screen_select_id">Person:</label>
-					<select id="choose_person_screen_select_id" class="form-control"> </select>
-				
-                                </div>
-                        </div>
                         <div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
                                 <span class="sr-only">Loading...</span>
                         </div>
-                        <span id='choose_person_screen_message_id'></span>
+                </div>
 
+		<div class="row">
+                        <span id='choose_person_screen_message_id'></span>
+                </div>
+
+		<div class="row">
                         <button id="choosepersonscreenbuttonid" class="btn btn-primary">Submit</button>
-                </form>
+                </div>
+
         </div>
 
         <!-- END CHOOSE PERSON HTML  -->
@@ -144,7 +143,6 @@
 	<!-- END INSERT EMAIL HTML  -->
 
 	<!-- INSERT NATIVE LOGIN HTML  -->
-	
 	<div class="card" id="insert_native_login_screen_html_id"> 
   		
 		<div class="card-header" id="insert_native_login_screen_header_div_id">
@@ -725,46 +723,124 @@
 	<!-- LOGIN_HTML -->
 
 	<div class="container" id="login_screen_html_id">
-		<form id="login_screen_form_id" onsubmit="return false;" class="needs-validation">
 
-			<span id='login_screen_team_message_id'></span>
-
-			<img class="mx-auto d-block" src="/images/celta-big.png" alt="Celta Vigo">
-
-    			<div class="input-group">
-      				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
-    			</div>
-
-    			<div class="input-group">
-      				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
-    			</div>
-			<span id='login_screen_message_id'></span>
- 				
-			<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
-			
-			<br>   			
-			<br>   			
-			<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-			<a id="google_sign_out_id" href="#" onclick="signOut();">Sign out</a>
-			
-			<div class="card text-center" style="width: 18rem;">
-  
-				<div class="card-body">
-    					<h5 class="card-title">Dont have one of the accounts above? You can simply signup with your email.</h5>
-    					<p class="card-text">Click to join up below.</p>
-					<a href="#insert_email_screen" class="btn btn-primary">JOIN</a>
+		<div class="row">
+			<div class="card">
+  				<div class="card-body">
+    					LOGIN
   				</div>
-
-
 			</div>
-                <div id="login_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
+  		</div>
+		
+		<div class="row">
+			<div class="column">
+      				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="column">
+      				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="column">
+				<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="column">
+				<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+				<a id="google_sign_out_id" href="#" onclick="signOut();">Sign out</a>
+			</div>
+		</div>
+		
 
-		</form>
+
+			<!--
+			<div class="column">
+				<img class="mx-auto d-block" src="/images/celta-big.png" alt="Celta Vigo">
+			</div>
+			-->
+			<!--
+			<div class="column">
+				<span id='login_screen_team_message_id'></span>
+			</div>
+			<div class="column">
+				<form id="login_screen_form_id" onsubmit="return false;" class="needs-validation">
+			</div>
+
+			<div class="column">
+      				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+			</div>
+			
+			<div class="column">
+      				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+			</div>
+		  
+			<div class="w-100"></div>	
+
+			<div class="column">
+				<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
+			</div>
+			
+			<div class="w-100"></div>	
+			
+			<div class="column">
+				<br>   			
+			</div>
+					
+			<div class="column">
+				<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			</div>
+			-->
+
 	</div>
+
+
+<!--
+				<form id="login_screen_form_id" onsubmit="return false;" class="needs-validation">
+
+					<span id='login_screen_team_message_id'></span>
+
+    					<div class="input-group">
+      						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      						<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+    					</div>
+
+    					<div class="input-group">
+      						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      						<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+    					</div>
+					<span id='login_screen_message_id'></span>
+ 				
+					<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
+			
+					<br>   			
+					<br>   			
+					<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+					<a id="google_sign_out_id" href="#" onclick="signOut();">Sign out</a>
+			
+					<div class="card text-center" style="width: 18rem;">
+  
+						<div class="card-body">
+    							<h5 class="card-title">Dont have one of the accounts above? You can simply signup with your email.</h5>
+    							<p class="card-text">Click to join up below.</p>
+							<a href="#insert_email_screen" class="btn btn-primary">JOIN</a>
+
+					</div>
+               		 		
+					<div id="login_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        			<span class="sr-only">Loading...</span>
+                			</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+-->
 
 	<!-- END LOGIN_HTML -->
 
