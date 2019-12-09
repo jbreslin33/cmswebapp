@@ -68,6 +68,7 @@ class Application
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
+
 	}
 	
 	update(timestamp)

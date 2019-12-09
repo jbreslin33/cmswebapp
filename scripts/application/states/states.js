@@ -297,8 +297,6 @@ class LOGOUT_APPLICATION extends State
 			console.log("LOGOUT_APPLICATION: EXIT");        
 		}
 
-		var element = document.getElementById("logout_nav_id");
-		element.className = element.className.replace(/\active\b/g, "");
 		location.hash = "login_screen";
 	}
 }

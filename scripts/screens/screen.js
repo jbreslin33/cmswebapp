@@ -598,6 +598,9 @@ class Screen
 		this.setMessage('','red');
 		this.show();
 		this.get();
+
+                //hide collapse menu
+                $(".collapse").collapse('hide');
 	}
 
 	execute()
