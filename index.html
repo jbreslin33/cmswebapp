@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
   		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
 
@@ -37,33 +37,50 @@
 <body>
 
 	<!-- BEGIN NAV_BAR HTML -->
-        
-	<div class="container" id="nav_bar_id">
-		<div class="pos-f-t">
-  			<div class="collapse" id="navbarToggleExternalContent">
-    				<div class="bg-dark p-4">
 
-    					<a class="btn btn-primary" href="#login_screen" role="button">Login</a>
-    					<a class="btn btn-primary" href="#logout_screen" role="button">Logout</a>
-    					<a class="btn btn-primary" href="#insert_email_screen" role="button">Join</a>
-    					<a class="btn btn-primary" href="#main_screen" role="button">Main</a>
-    					<a class="btn btn-primary" href="#insert_person_screen" role="button">Insert Person</a>
-    					<a class="btn btn-primary" href="#delete_person_screen" role="button">Delete Person</a>
-    					<a class="btn btn-primary" href="#insert_forgot_password_screen" role="button">Insert Forgot Password</a>
+	<div class="pos-f-t" id="nav_bar_id">
+  		<div class="collapse" id="navbarToggleExternalContent">
+    			<div class="bg-dark p-4">
 
-    					<a class="btn btn-primary" href="#insert_practice_screen" role="button">TEAM MANAGER: Insert Practice</a>
-    					<a class="btn btn-primary" href="#insert_game_screen" role="button">TEAM MANAGER: Insert Game</a>
-    					<a class="btn btn-primary" href="#insert_pitch_screen" role="button">TEAM MANAGER: Insert Pitch</a>
+   				<a class="btn btn-primary" href="#login_screen" role="button">Login</a>
+    				<a class="btn btn-primary" href="#logout_screen" role="button">Logout</a>
+    				<a class="btn btn-primary" href="#insert_email_screen" role="button">Join</a>
+    				<a class="btn btn-primary" href="#main_screen" role="button">Main</a>
+    				<a class="btn btn-primary" href="#insert_person_screen" role="button">Insert Person</a>
+    				<a class="btn btn-primary" href="#delete_person_screen" role="button">Delete Person</a>
+    				<a class="btn btn-primary" href="#insert_forgot_password_screen" role="button">Insert Forgot Password</a>
 
-    					<a class="btn btn-primary" href="#insert_team_screen" role="button">CLUB ADMIN: Insert Team</a>
-    					<a class="btn btn-primary" href="#insert_email_club_screen" role="button">CLUB ADMIN: Invite to Club</a>
+				<a class="btn btn-primary" href="#insert_practice_screen" role="button">TEAM MANAGER: Insert Practice</a>
+    				<a class="btn btn-primary" href="#insert_game_screen" role="button">TEAM MANAGER: Insert Game</a>
+    				<a class="btn btn-primary" href="#insert_pitch_screen" role="button">TEAM MANAGER: Insert Pitch</a>
+
+				<a class="btn btn-primary" href="#insert_team_screen" role="button">CLUB ADMIN: Insert Team</a>
+    				<a class="btn btn-primary" href="#insert_email_club_screen" role="button">CLUB ADMIN: Invite to Club</a>
 					
-					<a class="btn btn-primary" href="#insert_club_screen" role="button">ADMIN: Add Club</a>
+				<a class="btn btn-primary" href="#insert_club_screen" role="button">ADMIN: Add Club</a>
 
-    					
-					<select id="person_select_id" class="form-control"> </select>
+				<select id="person_select_id" class="form-control"> </select>
+    			
+			</div>
+  		</div>
+  
+		<nav class="navbar navbar-dark bg-dark">
+   
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      				<span class="navbar-toggler-icon"></span>
+    			</button>
+  		</nav>
+	</div>
+      <!--  
+	<div class="container" id="nav_bar_id">
+		<div class="row">
+			<div class="pos-f-t">
+  				<div class="collapse" id="navbarToggleExternalContent">
+    					<div class="bg-dark p-4">
 
-    				</div>
+						<select id="person_select_id" class="form-control"> </select>
+    					</div>
+  				</div>
   			</div>
   
 			<nav class="navbar navbar-dark bg-dark">
@@ -72,10 +89,11 @@
     				</button>
   			</nav>
 		</div>
+      -->
         	
+<!--
 		<div class="row">
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-
 
 					<div class="col">
 						<img src="/images/celta-big.png" width="30" height="30" alt="">
@@ -84,7 +102,7 @@
 				</nav>
 			</div>
 		</div>
-	</div>
+					-->
 
 	<!-- END NAV_BAR HTML -->
 
@@ -731,7 +749,15 @@
 
 
 	<!-- LOGIN_HTML -->
+	<div class="container" id="login_screen_html_id">
+		<div class="row">
+			<div class="col-xs-12">
+				<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
+			</div>
+		</div>
+	</div>
 
+	<!--
 	<div class="container" id="login_screen_html_id">
 
 		<div class="row">
@@ -769,46 +795,8 @@
 		
 
 
-			<!--
-			<div class="column">
-				<img class="mx-auto d-block" src="/images/celta-big.png" alt="Celta Vigo">
-			</div>
-			-->
-			<!--
-			<div class="column">
-				<span id='login_screen_team_message_id'></span>
-			</div>
-			<div class="column">
-				<form id="login_screen_form_id" onsubmit="return false;" class="needs-validation">
-			</div>
-
-			<div class="column">
-      				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
-			</div>
-			
-			<div class="column">
-      				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
-			</div>
-		  
-			<div class="w-100"></div>	
-
-			<div class="column">
-				<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
-			</div>
-			
-			<div class="w-100"></div>	
-			
-			<div class="column">
-				<br>   			
-			</div>
-					
-			<div class="column">
-				<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-			</div>
-			-->
-
 	</div>
-
+	-->
 
 <!--
 				<form id="login_screen_form_id" onsubmit="return false;" class="needs-validation">
