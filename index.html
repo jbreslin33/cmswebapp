@@ -749,13 +749,44 @@
 
 
 	<!-- LOGIN_HTML -->
-	<div id="login_screen_html_id">
-      				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+	<form id="login_screen_html_id" style="max-width: 18rem;">
 
-      				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+		<div class="form-group">
+			<div class="form-row">
+    				<div class="col">
+
+  					<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+
+				</div>
+			</div>
+
+			<div class="form-row">
+    				<div class="col">
+
+					<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+				</div>
+			</div>
+
+			<div class="form-row">
+    				<div class="col">
+	
+					<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
+
+				</div>
+			</div>
+		</div>
+				
+		<div class="form-group">
+			<div class="form-row">
+    				<div class="col">
 		
-				<button id="loginscreenbuttonid" type="button" class="btn btn-primary">LOGIN</button>
-	</div>
+				<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+				<a id="google_sign_out_id" href="#" onclick="signOut();">Sign out</a>
+			
+				</div>
+			</div>
+		</div>
+	</form>
 	<!--
 	<div class="container" id="login_screen_html_id">
 
