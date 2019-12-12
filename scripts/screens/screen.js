@@ -68,6 +68,7 @@ class Screen
 
 	personSelected()
 	{
+
 		//this.mApplication.mUserSelectedPerson = true;
 		/*
                 var person_select = this.getPersonSelect();
