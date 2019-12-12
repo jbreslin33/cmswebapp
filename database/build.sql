@@ -1310,7 +1310,8 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
 	from
         (
-		select persons.id, first_name, middle_name, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
+		select persons.id, first_name, case when middle_name IS NULL THEN '' ELSE middle_name END, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
+		select first_name, case when middle_name IS NULL THEN '' ELSE middle_name END,  last_name from persons;
         ) t;
 	IF raw_json is NULL THEN
 		result_set = CONCAT('"persons": []', raw_json);
