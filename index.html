@@ -235,36 +235,38 @@
 	
 	
 	<!-- INSERT CLUB HTML  -->
+        <form id="insert_club_screen_html_id" style="max-width: 18rem;">
 
-	<div class="card" id="insert_club_screen_html_id">
-		
-		<div class="card-header" id="insert_club_screen_header_div_id">
-    			 Add Club
-  		</div>
+                <div class="form-group">
+                        <div class="form-row">
+                                <div class="col">
+                                        <div class="card text-center" style="max-width: 18rem;">
 
-		<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
+                                                <div class="card-header">
+                                                        ADD CLUB
+                                                </div>
 
-		<form id="insert_club_screen_form_id" onsubmit="return false;" class="needs-validation">
-  			<div class="form-row">
-    				<div class="col-md-4 mb-3">
-      					<label for="insert_club_name_id">Club Name</label>
-      					<input type="text" class="form-control" id="insert_club_screen_name_id" placeholder="Club Name" value="Club Name" required>
-					<span id='insert_club_screen_message_id'></span>
-    				</div>
-    			</div>
-		
-			<div class="form-row">
+                                                <div class="card-body">
+							<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        					<span class="sr-only">Loading...</span>
+                					</div>
+      							
+							<label for="insert_club_name_id">Club Name</label>
+      							<input type="text" class="form-control" id="insert_club_screen_name_id" placeholder="Club Name" value="Club Name" required>
+							<span id='insert_club_screen_message_id'></span>
+      					
+							<label for="insert_club_screen_address_id">Address</label>
+      							<input type="text" class="form-control" id="insert_club_screen_address_id" placeholder="Club Address" required>
+			
+							<button id="addclubscreenbuttonid" class="btn btn-primary">Submit</button>
+                                                </div>
+                               		</div>
+                               	</div>
+	         	</div>
+	         </div>
+	</form>
 
-    				<div class="col-md-6 mb-3">
-      					<label for="insert_club_screen_address_id">Address</label>
-      					<input type="text" class="form-control" id="insert_club_screen_address_id" placeholder="Club Address" required>
-    				</div>
-  			</div>
-			<button id="addclubscreenbuttonid" class="btn btn-primary">Submit</button>
-		</form>
-  	</div>
+
 
 	<!-- END INSERT CLUB HTML  -->
 	
