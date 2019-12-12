@@ -107,30 +107,32 @@
 	<!-- END NAV_BAR HTML -->
 
         <!-- CHOOSE PERSON HTML  -->
+        <form id="choose_person_screen_html_id" style="max-width: 18rem;">
 
-        <div class="container" id="choose_person_screen_html_id">
-	
-        	<div class="row">
-               		<label for="choose_person_screen_select_id">Person:</label>
-			<select id="choose_person_screen_select_id" class="form-control"> </select>
-                </div>
-        	
-		<div class="row">
+                <div class="form-group">
+                        <div class="form-row">
+                                <div class="col">
+                                        <div class="card text-center" style="max-width: 18rem;">
 
-                        <div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                        </div>
-                </div>
+                                                <div class="card-header">
+                                                        LOGIN
+                                                </div>
 
-		<div class="row">
-                        <span id='choose_person_screen_message_id'></span>
-                </div>
+                                                <div class="card-body">
+               						<label for="choose_person_screen_select_id">Person:</label>
+							<select id="choose_person_screen_select_id" class="form-control"> </select>
+                        				<span id='choose_person_screen_message_id'></span>
+                        				<div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
+                                				<span class="sr-only">Loading...</span>
+                        				</div>
+                        				<button id="choosepersonscreenbuttonid" class="btn btn-primary">Submit</button>
+                                                </div>
+                               		</div>
+                               	</div>
+	         	</div>
+	         </div>
+	</form>
 
-		<div class="row">
-                        <button id="choosepersonscreenbuttonid" class="btn btn-primary">Submit</button>
-                </div>
-
-        </div>
 
         <!-- END CHOOSE PERSON HTML  -->
 
