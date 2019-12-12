@@ -60,14 +60,15 @@ class Screen
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
 		this.setPersonSelect(document.getElementById("person_select_id"));
-	//	document.getElementById("person_select_id").onclick = this.personSelected.bind(this);
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
-
+		this.setNavMessageElement(document.getElementById("nav_message_id"));
 	}
 
 	personSelected()
 	{
+
+		this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
 
 		//this.mApplication.mUserSelectedPerson = true;
 		/*
@@ -173,29 +174,56 @@ class Screen
 		return this.mHtml;
 	}
 
-	setMessageElement(messageElement)
+        setMessageElement(messageElement)
+        {
+                this.mMessageElement = messageElement;
+        }
+        getMessageElement()
+        {
+                return this.mMessageElement;
+        }
+
+        setMessage(message, color)
+        {
+                if (this.mMessageElement)
+                {
+                        this.mMessageElement.innerHTML = message;
+                        this.mMessageElement.style.color = color;
+
+                        //make sure we can see it
+                        this.getMessageElement().style.display = "block";
+                        this.getMessageElement().style.visibility = "visible";
+                }
+                else
+                {
+                        console.log('attempting to setMessage but there is no mMessageElement: ' + message);
+                }
+        }
+
+
+	setNavMessageElement(navMessageElement)
 	{
-		this.mMessageElement = messageElement;
+		this.mNavMessageElement = navMessageElement;
 	}
-	getMessageElement()
+	getNavMessageElement()
 	{
-		return this.mMessageElement;
+		return this.mNavMessageElement;
 	}
 
-	setMessage(message, color)
+	setNavMessage(message, color)
 	{
-		if (this.mMessageElement)
+		if (this.mNavMessageElement)
 		{
-                	this.mMessageElement.innerHTML = message;
-			this.mMessageElement.style.color = color;
+                	this.mNavMessageElement.innerHTML = message;
+			this.mNavMessageElement.style.color = color;
 
                 	//make sure we can see it	
-			this.getMessageElement().style.display = "block";
-                	this.getMessageElement().style.visibility = "visible";
+			this.getNavMessageElement().style.display = "block";
+                	this.getNavMessageElement().style.visibility = "visible";
 		}
 		else
 		{
-			console.log('attempting to setMessage but there is no mMessageElement: ' + message);
+			console.log('attempting to setNavMessage but there is no mNavMessageElement: ' + message);
 		}
 	}
 
