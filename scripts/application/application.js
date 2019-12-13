@@ -69,6 +69,22 @@ class Application
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
+
+		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
+
+	}
+
+	hit ()
+	{
+		console.log('hit');
+		//if ($(".collapse").attr('aria-expanded'))
+		if ( $(".collapse").is( ":visible" ) )
+		{
+			console.log('are is exp');
+  			$(".collapse").collapse('hide');
+		}
+		// $(".collapse").collapse('hide');
+
 	}
 	
 	update(timestamp)
