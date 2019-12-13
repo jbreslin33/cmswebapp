@@ -28,6 +28,19 @@ class LoginScreen extends Screen
 		this.ajax();
 	}
 
+	enter()
+	{
+		super.enter();
+		if (this.mApplication.getJWT())
+		{
+			console.log('true jwt');
+		}
+		else
+		{
+			console.log('false jwt');
+		}
+	}
+
 	//overide from screen
 	checkValidity()
 	{
