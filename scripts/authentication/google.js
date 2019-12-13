@@ -12,6 +12,8 @@ function signOut()
 	{
 		APPLICATION.getCurrentScreen().googleSignOut();
 	}
+      
+	localStorage.removeItem("mJWT");
 }
 
 
