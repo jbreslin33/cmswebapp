@@ -71,20 +71,32 @@ class Application
 
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
+		
+		document.getElementById("insertpracticenavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertgamenavbuttonid").onclick = this.hit.bind(this);
+		
+		document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertpitchnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertemailclubnavbuttonid").onclick = this.hit.bind(this);
+		
+		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(this);
+		
+		document.getElementById("insertemailnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(this);
+		
+		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
 
 	}
 
 	hit ()
 	{
-		console.log('hit');
-		//if ($(".collapse").attr('aria-expanded'))
 		if ( $(".collapse").is( ":visible" ) )
 		{
-			console.log('are is exp');
   			$(".collapse").collapse('hide');
 		}
-		// $(".collapse").collapse('hide');
-
 	}
 	
 	update(timestamp)

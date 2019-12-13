@@ -35,11 +35,11 @@ class InsertEmailScreen extends Screen
         enter()
         {
                 super.enter();
-                this.hideNavigationBar();
+                //this.hideNavigationBar();
         }
         exit()
         {
-                this.showNavigationBar();
+                //this.showNavigationBar();
                 super.exit();
         }
 
