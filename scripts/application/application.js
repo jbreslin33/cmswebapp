@@ -69,7 +69,7 @@ class Application
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
-
+		// nav bar buttons clicked
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
