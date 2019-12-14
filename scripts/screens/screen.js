@@ -8,16 +8,6 @@ class Screen
 
 		//location.hash = 'main_screen';
                 
-		//authentication google
-                this.mEmail = null;
-                this.mPassword = null;
-                this.mGoogleID = null;
-                this.mGoogleIDToken = null;
-                this.mFirstName = null;
-                this.mLastName = null;
-                this.mImageUrl = null;
-                this.mGoogleLoginHit = false;
-
 		//html ids
 		this.mSpinner = null;
 		this.mHtml = null;
@@ -664,37 +654,9 @@ class Screen
 
 	googleLogin()
 	{
-                APPLICATION.getCurrentScreen().mGoogleLoginHit = true;
-                this.setUrl("/php/classes/screens/google_login.php?email=" + this.mEmail + "&google_id=" + this.mGoogleID + "&id_token=" + this.mIDToken + "&first_name=" + this.mFirstName + "&last_name=" + this.mLastName);
+                APPLICATION.mGoogleLoginHit = true;
+                this.setUrl("/php/classes/screens/google_login.php?email=" + this.mApplication.mEmail + "&google_id=" + this.mApplication.mGoogleID + "&id_token=" + this.mApplication.mIDToken + "&first_name=" + this.mApplication.mFirstName + "&last_name=" + this.mApplication.mLastName);
 
                 this.ajax();
         }
-
-        googleSignIn(googleUser)
-        {
-                // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicProfile();
-
-                // The ID token you need to pass to your backend:
-                var id_token = googleUser.getAuthResponse().id_token;
-
-                APPLICATION.getCurrentScreen().mEmail = profile.getEmail();
-                APPLICATION.getCurrentScreen().mGoogleID = profile.getId();
-                APPLICATION.getCurrentScreen().mIDToken = id_token;
-                APPLICATION.getCurrentScreen().mFirstName = profile.getGivenName();
-                APPLICATION.getCurrentScreen().mLastName = profile.getFamilyName();
-                APPLICATION.getCurrentScreen().mImageUrl = profile.getImageUrl();
-
-                this.googleLogin();
-        }
-
-        googleSignOut()
-        {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function ()
-                {
-                        console.log('User signed out.');
-                });
-        }
-
 }

@@ -1,17 +1,11 @@
 function onSignIn(googleUser) 
 {
-	if (APPLICATION.getCurrentScreen())
-	{
-		APPLICATION.getCurrentScreen().googleSignIn(googleUser);
-	}
+	APPLICATION.googleSignIn(googleUser);
 }
 
 function signOut() 
 {
-	if (APPLICATION.getCurrentScreen())
-	{
-		APPLICATION.getCurrentScreen().googleSignOut();
-	}
+	APPLICATION.googleSignOut();
       
 	localStorage.removeItem("mJWT");
 }

@@ -9,6 +9,17 @@ class Application
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
 
+                //authentication google
+                this.mEmail = null;
+                this.mPassword = null;
+                this.mGoogleID = null;
+                this.mGoogleIDToken = null;
+                this.mFirstName = null;
+                this.mLastName = null;
+                this.mImageUrl = null;
+                this.mGoogleLoginHit = false;
+
+
 		//hash
 		
 		//user variables
@@ -131,5 +142,33 @@ class Application
 	{
 		return this.mCurrentScreen;
 	}
+
+	//GOOGLE
+        googleSignIn(googleUser)
+        {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+
+                this.mEmail = profile.getEmail();
+                this.mGoogleID = profile.getId();
+                this.mIDToken = id_token;
+                this.mFirstName = profile.getGivenName();
+                this.mLastName = profile.getFamilyName();
+                this.mImageUrl = profile.getImageUrl();
+
+                this.getCurrentScreen().googleLogin();
+        }
+
+        googleSignOut()
+        {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function ()
+                {
+                        console.log('User signed out.');
+                });
+        }
 
 }

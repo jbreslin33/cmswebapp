@@ -274,11 +274,16 @@ class LOGOUT_APPLICATION extends State
 			console.log("LOGOUT_APPLICATION: ENTER");        
 		}
 
-		//clear mJWT from localstorage
-		localStorage.removeItem("mJWT");
+		// no logout class so 
+		//
+                //clear mJWT from localstorage
+                localStorage.removeItem("mJWT");
 
-		//clear person selects
-		document.getElementById("person_select_id").length = 0;
+                //clear person selects
+                document.getElementById("person_select_id").length = 0;
+
+		app.googleSignOut();
+
 	}
 
         execute(app)
