@@ -457,6 +457,7 @@ class Screen
 	{
 		if (this.getNavigationBar())
 		{
+			console.log('hide bar');
                 	this.getNavigationBar().style.display = "none";
 		}
 	}
