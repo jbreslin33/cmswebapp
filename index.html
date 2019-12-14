@@ -262,20 +262,21 @@
 	
 
 	<!-- BEGIN MAIN HTML -->
+        <form id="main_screen_html_id" style="max-width: 18rem;">
+        	<div class="card text-center" style="max-width: 18rem;">
 
-	<div class="card" id="main_screen_html_id">
+               		<div class="card-header">
+                        	SCHEDULE
 
-		<div class="card-header" id="main_screen_header_div_id">
-    			 Schedule
+				<div id="main_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        		<span class="sr-only">Loading...</span>
+                		</div>
+
+	    			<span id='main_screen_message_id'></span>
+			</div>
   		</div>
+	</form>	
 
-		<form id="main_screen_form_id" onsubmit="return false;" class="needs-validation">
-			<div id="main_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        	<span class="sr-only">Loading...</span>
-                	</div>
-	    		<span id='main_screen_message_id'></span>
-		</form>	
-	</div>
 
 	<!-- END MAIN HTML -->	
 	
