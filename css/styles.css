@@ -1,4 +1,5 @@
-.collapsible {
+/* nav */
+.nav-collapsible {
   background-color: #777;
   color: white;
   cursor: pointer;
@@ -10,7 +11,7 @@
   font-size: 15px;
 }
 
-.active, .collapsible:hover {
+.active, .nav-collapsible:hover {
   background-color: #555;
 }
 
@@ -21,3 +22,5 @@
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
 }
+
+
