@@ -23,7 +23,19 @@ class InsertGameScreen extends Screen
 
 		//set todays date
 		document.getElementById('insert_game_screen_date_id').valueAsDate = new Date();
+
+		//checkbox
+		this.setDateHtml(document.getElementById("insert_game_screen_date_html_id"));
 	}
+
+	processClubs()
+        {
+		super.processClubs();
+                if (this.mJson.clubs)
+		{
+			this.getPitchesAndTeams();
+		}
+        }
 
 	get()
 	{
@@ -42,12 +54,12 @@ class InsertGameScreen extends Screen
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
-
+	
 	hit()
 	{
 		this.mHit = true;
-                
-		var event_date = document.getElementById("insert_game_screen_date_id").value;
+
+		//both normal and recurring
 		var arrival_time = document.getElementById("insert_game_screen_arrival_time_id").value;
 		var start_time = document.getElementById("insert_game_screen_start_time_id").value;
 		var end_time = document.getElementById("insert_game_screen_end_time_id").value;
@@ -56,17 +68,32 @@ class InsertGameScreen extends Screen
               
 		var field_name = document.getElementById("insert_game_screen_field_id").value;
 
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+		if (this.getClubId() == 0)
+		{
+			this.setMessage("You must select a club to enter a game. You don't have any clubs that you are a manager on.",'red');
+		}
+		else if (this.getTeamId() == 0)
+		{
+			this.setMessage("You must select a team to enter a game. You don't have any teams that you are a manager on.",'red');
+		}
+
+		if (this.getClubId() > 0 && this.getTeamId() > 0)
+		{
+			//normal
+			var event_date = document.getElementById("insert_game_screen_date_id").value;
+			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
                         
-		APPLICATION.getCurrentScreen().ajax();
+			APPLICATION.getCurrentScreen().ajax();
+		}
 	}
 
-        processClubs()
-        {
-		super.processClubs();
-                if (this.mJson.clubs)
-		{
-			this.getPitchesAndTeams();
-		}
-        }
+	setDateHtml(d)
+	{
+		this.mDateSelect = d;	
+	}
+
+	getDateHtml()
+	{
+		return this.mDateSelect;
+	}
 }

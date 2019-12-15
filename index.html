@@ -604,92 +604,67 @@
 
 	
 	<!-- INSERT GAME HTML  -->
-        <div class="card" id="insert_game_screen_html_id">
+        <form id="insert_game_screen_html_id" style="max-width: 18rem;" onsubmit="return false;" class="needs-validation">
+
+                <div class="card text-center" style="max-width: 18rem;">
+
+                        <div class="card-header">
+                                ADD GAME
+                        </div>
+
+                        <div class="card-body">
+
+  				<label for="insert_game_screen_date_id">Date:</label>
+    				<input class="form-control" type="date" value="2019-05-25" id="insert_game_screen_date_id">
+
+  				<label for="insert_game_screen_arrival_time_id">Arrival Time:</label>
+    				<input class="form-control" type="time" value="17:45:00" id="insert_game_screen_arrival_time_id">
+
+  				<label for="insert_game_screen_start_time_id">Start Time:</label>
+    				<input class="form-control" type="time" value="18:00:00" id="insert_game_screen_start_time_id">
 		
-		<div class="card-header" id="insert_game_screen_header_div_id">
-    			 Add Game
-  		</div>
-
-		<form id="insert_game_screen_form_id" onsubmit="return false;" class="needs-validation">
-
-			<div class="form-group row">
-  				<label for="insert_game_screen_date_id" class="col-2 col-form-label">Date:</label>
-  				<div class="col-10">
-    					<input class="form-control" type="date" value="2019-05-25" id="insert_game_screen_date_id">
-  				</div>
-			</div>
-
-			<div class="form-group row">
-  				<label for="insert_game_screen_arrival_time_id" class="col-2 col-form-label">Arrival Time:</label>
-  				<div class="col-10">
-    					<input class="form-control" type="time" value="17:45:00" id="insert_game_screen_arrival_time_id">
-  				</div>
-			</div>
-
-			<div class="form-group row">
-  				<label for="insert_game_screen_start_time_id" class="col-2 col-form-label">Start Time:</label>
-  				<div class="col-10">
-    					<input class="form-control" type="time" value="18:00:00" id="insert_game_screen_start_time_id">
-  				</div>
-			</div>
-		
-			<div class="form-group row">
-  				<label for="insert_game_screen_end_time_id" class="col-2 col-form-label">End Time:</label>
-  				<div class="col-10">
-    					<input class="form-control" type="time" value="19:30:00" id="insert_game_screen_end_time_id">
-  				</div>
-			</div>
+  				<label for="insert_game_screen_end_time_id">End Time:</label>
+    				<input class="form-control" type="time" value="19:30:00" id="insert_game_screen_end_time_id">
     			
-			<div class="form-group row">
       				<label for="insert_game_screen_address_id">Address:</label>
       				<input type="text" class="form-control" id="insert_game_screen_address_id">
-    			</div>
 
-			<div class="form-group row">
       				<label for="insert_game_screen_coordinates_id">Coordinates:</label>
       				<input type="text" class="form-control" id="insert_game_screen_coordinates_id">
-    			</div>
 
-			<div class="form-row">
-                		<div id="insert_game_screen_club_div_id" class="form-group col-md-4">
+       				<div id="insert_practice_screen_club_div_id">
                 			<label for="insert_game_screen_club_id">Club:</label>
                         		<select id="insert_game_screen_club_id" class="form-control">
                         		</select>
                 		</div>
-			</div>
 
-			<div class="form-row">
-                		<div id="insert_game_screen_team_div_id" class="form-group col-md-4">
+       				<div id="insert_practice_screen_team_div_id">
                 			<label for="insert_game_screen_team_id">Team:</label>
                         		<select id="insert_game_screen_team_id" class="form-control">
-                        		</select>
+                			</select>
                 		</div>
-			</div>
   		
-			<div class="form-row">
-                		<div id="insert_game_screen_pitch_div_id" class="form-group col-md-4">
+                		<div id="insert_game_screen_pitch_div_id">
                 			<label for="insert_game_screen_pitch_id">Pitch:</label>
                         		<select id="insert_game_screen_pitch_id" class="form-control">
                         		</select>
                 		</div>
-			</div>
 		
-			<div class="form-group row">
       				<label for="insert_game_screen_field_id">Field Name:</label>
       				<input type="text" class="form-control" id="insert_game_screen_field_id">
-    			</div>
 
-			<div id="insert_game_screen_spinner_id" class="spinner-border text-primary" role="status">
- 				<span class="sr-only">Loading...</span>
-			</div>
+				<div id="insert_game_screen_spinner_id" class="spinner-border text-primary" role="status">
+ 					<span class="sr-only">Loading...</span>
+				</div>
 		
-			<span id='insert_game_screen_message_id'></span>
-			<button id="insertgamescreenbuttonid" class="btn btn-primary">Submit</button>
+				<span id='insert_game_screen_message_id'></span>
+				<button id="insertgamescreenbuttonid" class="btn btn-primary">Submit</button>
 
-		</form>
-	</div>
+			</div>
+		</div>
+	</form>
 
-	<!-- END INSERT PRACTICE HTML  -->
+	<!-- END INSERT GAME HTML  -->
 
 
 
