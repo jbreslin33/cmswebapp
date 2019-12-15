@@ -127,23 +127,91 @@ class INIT_APPLICATION extends State
 			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
 		//hide evertthing except nav_bar_id
-		document.getElementById("nav_bar_id").style.display = "block";
-		document.getElementById("insert_email_screen_html_id").style.display = "none";
-		document.getElementById("insert_native_login_screen_html_id").style.display = "none";
-		document.getElementById("login_screen_html_id").style.display = "none";
-		document.getElementById("choose_person_screen_html_id").style.display = "none";
-		document.getElementById("main_screen_html_id").style.display = "none";
-		document.getElementById("insert_club_screen_html_id").style.display = "none";
-		document.getElementById("insert_person_screen_html_id").style.display = "none";
-		document.getElementById("delete_person_screen_html_id").style.display = "none";
-		document.getElementById("insert_team_screen_html_id").style.display = "none";
-		document.getElementById("insert_pitch_screen_html_id").style.display = "none";
-		document.getElementById("insert_practice_screen_html_id").style.display = "none";
-		document.getElementById("insert_game_screen_html_id").style.display = "none";
-		document.getElementById("insert_forgot_password_screen_html_id").style.display = "none";
-		document.getElementById("insert_email_club_screen_html_id").style.display = "none";
-		document.getElementById("insert_accept_club_invite_screen_html_id").style.display = "none";
-		document.getElementById("update_forgot_password_screen_html_id").style.display = "none";
+		if (application.getNavBarHtml())
+		{
+			application.getNavBarHtml().style.display = "block";
+		}
+
+		if (application.getInsertEmailScreenHtml())
+		{
+			application.getInsertEmailScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertNativeLoginScreenHtml())
+		{
+			application.getInsertNativeLoginScreenHtml().style.display = "none";
+		}
+		
+		if (application.getLoginScreenHtml())
+		{
+			application.getLoginScreenHtml().style.display = "none";
+		}
+		
+		if (application.getChoosePersonScreenHtml())
+		{
+			application.getChoosePersonScreenHtml().style.display = "none";
+		}
+		
+		if (application.getMainScreenHtml())
+		{
+			application.getMainScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertClubScreenHtml())
+		{
+			application.getInsertClubScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertPersonScreenHtml())
+		{
+			application.getInsertPersonScreenHtml().style.display = "none";
+		}
+		
+		if (application.getDeletePersonScreenHtml())
+		{
+			application.getDeletePersonScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertTeamScreenHtml())
+		{
+			application.getInsertTeamScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertPitchScreenHtml())
+		{
+			application.getInsertPitchScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertPracticeScreenHtml())
+		{
+			application.getInsertPracticeScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertGameScreenHtml())
+		{
+			application.getInsertGameScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertForgotPasswordScreenHtml())
+		{
+			application.getInsertForgotPasswordScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertEmailClubScreenHtml())
+		{
+			application.getInsertEmailClubScreenHtml().style.display = "none";
+		}
+		
+		if (application.getInsertAcceptClubInviteScreenHtml())
+		{
+			application.getInsertAcceptClubInviteScreenHtml().style.display = "none";
+		}
+
+		if (application.getUpdateForgotPasswordScreenHtml())
+		{
+			application.getUpdateForgotPasswordScreenHtml().style.display = "none";
+		}
+
 	}
         
 	execute(application)

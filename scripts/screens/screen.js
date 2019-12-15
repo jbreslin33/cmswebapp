@@ -620,7 +620,7 @@ class Screen
 		this.get();
 
                 //hide collapse menu
-                $(".collapse").collapse('hide');
+                //$(".collapse").collapse('hide');
 	}
 
 	execute()

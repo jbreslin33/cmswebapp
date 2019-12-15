@@ -19,8 +19,44 @@ class Application
                 this.mImageUrl = null;
                 this.mGoogleLoginHit = false;
 
+		//html
+               	this.mNavBarHtml = null; 
+               	this.mInsertEmailScreenHtml = null; 
+               	this.mInsertNativeLoginScreenHtml = null; 
+               	this.mLoginScreenHtml = null; 
+               	this.mChoosePersonScreenHtml = null; 
+               	this.mMainScreenHtml = null; 
+               	this.mInsertClubScreenHtml = null; 
+               	this.mInsertPersonScreenHtml = null; 
+               	this.mDeletePersonScreenHtml = null; 
+               	this.mInsertTeamScreenHtml = null; 
+               	this.mInsertPitchScreenHtml = null; 
+               	this.mInsertPracticeScreenHtml = null; 
+               	this.mInsertGameScreenHtml = null; 
+               	this.mInsertForgotPasswordScreenHtml = null; 
+               	this.mInsertEmailClubInviteScreenHtml = null; 
+               	this.mInsertAcceptClubInInviteScreenHtml = null; 
+               	this.mUpdateForgotPasswordScreenHtml = null; 
 
-		//hash
+		//set html 
+               	this.setNavBarHtml                         ( document.getElementById("nav_bar_id")                               ); 
+               	this.setInsertEmailScreenHtml              ( document.getElementById("insert_email_screen_html_id")              ); 
+               	this.setInsertNativeLoginScreenHtml        ( document.getElementById("insert_native_login_screen_html_id")       ); 
+               	this.setLoginScreenHtml                    ( document.getElementById("login_screen_html_id")                     ); 
+               	this.setChoosePersonScreenHtml             ( document.getElementById("choose_person_screen_html_id")             ); 
+               	this.setMainScreenHtml                     ( document.getElementById("main_screen_html_id")                      );
+               	this.setInsertClubScreenHtml        	   ( document.getElementById("insert_club_screen_html_id")               ); 
+               	this.setInsertPersonScreenHtml             ( document.getElementById("insert_person_screen_html_id")             );  
+               	this.setDeletePersonScreenHtml             ( document.getElementById("delete_person_screen_html_id")             );  
+               	this.setInsertTeamScreenHtml               ( document.getElementById("insert_team_screen_html_id")               ); 
+               	this.setInsertPitchScreenHtml              ( document.getElementById("insert_pitch_screen_html_id")              ); 
+               	this.setInsertPracticeScreenHtml    	   ( document.getElementById("insert_practice_screen_html_id")           ); 
+               	this.setInsertGameScreenHtml               ( document.getElementById("insert_game_screen_html_id")               ); 
+               	this.setInsertForgotPasswordScreenHtml     ( document.getElementById("insert_forgot_password_screen_html_id")    );
+               	this.setInsertEmailClubScreenHtml          ( document.getElementById("insert_email_club_screen_html_id")         ); 
+               	this.setInsertAcceptClubInInviteScreenHtml ( document.getElementById("insert_accept_club_invite_screen_html_id") );
+               	this.setUpdateForgotPasswordScreenHtml     ( document.getElementById("update_forgot_password_screen_html_id")    ); 
+		
 		
 		//user variables
 		this.mUserSelectedPerson = false;
@@ -81,6 +117,7 @@ class Application
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
 		// nav bar buttons clicked
+		/*
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
@@ -99,6 +136,27 @@ class Application
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(this);
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
+		*/
+
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+
+		for (i = 0; i < coll.length; i++) 
+		{
+  			coll[i].addEventListener("click", function() 
+			{
+    				this.classList.toggle("active");
+    				var content = this.nextElementSibling;
+    				if (content.style.maxHeight)
+				{
+      					content.style.maxHeight = null;
+    				} 
+				else 
+				{
+      					content.style.maxHeight = content.scrollHeight + "px";
+    				}
+  			});
+		}
 
 	}
 
@@ -170,5 +228,161 @@ class Application
                         console.log('User signed out.');
                 });
         }
+
+	setNavBarHtml(h)
+	{
+		this.mNavBarHtml = h;
+	}
+	getNavBarHtml()
+	{
+		return this.mNavBarHtml;
+	}
+
+                
+	setInsertEmailScreenHtml(h)
+	{
+		this.mInsertEmailScreenHtml = h;
+	}
+	getInsertEmailScreenHtml()
+	{
+		return this.mInsertEmailScreenHtml;
+	}
+
+        setInsertNativeLoginScreenHtml(h)
+	{
+                this.mInsertNativeLoginScreenHtml = h;
+	}
+        getInsertNativeLoginScreenHtml()
+	{
+                return this.mInsertNativeLoginScreenHtml;
+	}
+
+        setLoginScreenHtml(h)
+	{
+                this.mLoginScreenHtml = h;
+	}
+        getLoginScreenHtml()
+	{
+                return this.mLoginScreenHtml;
+	}
+
+
+        setChoosePersonScreenHtml(h)
+	{
+                this.mChoosePersonScreenHtml = h;
+	}
+        getChoosePersonScreenHtml()
+	{
+                return this.mChoosePersonScreenHtml;
+	}
+
+        setMainScreenHtml(h)
+	{
+                this.mMainScreenHtml = h; 
+	}
+        getMainScreenHtml()
+	{
+                return this.mMainScreenHtml; 
+	}
+
+
+        setInsertClubScreenHtml(h)
+	{
+                this.mInsertClubScreenHtml = h;
+	}
+        getInsertClubScreenHtml()
+	{
+               return this.mInsertClubScreenHtml;
+	}
+
+        setInsertPersonScreenHtml(h)
+	{
+                this.mInsertPersonScreenHtml = h;
+	}	
+        getInsertPersonScreenHtml()
+	{
+                return this.mInsertPersonScreenHtml;
+	}	
+
+        setDeletePersonScreenHtml(h)
+	{
+                this.mDeletePersonScreenHtml = h;
+	}
+        getDeletePersonScreenHtml()
+	{
+                return this.mDeletePersonScreenHtml;
+	}
+
+        setInsertTeamScreenHtml(h)
+	{
+                this.mInsertTeamScreenHtml = h;
+	}
+        getInsertTeamScreenHtml()
+	{
+                return this.mInsertTeamScreenHtml;
+	}
+
+        setInsertPitchScreenHtml(h)
+	{
+                this.mInsertPitchScreenHtml = h;
+	}
+        getInsertPitchScreenHtml()
+	{
+                return this.mInsertPitchScreenHtml;
+	}
+
+        setInsertPracticeScreenHtml(h)
+	{
+                this.mInsertPracticeScreenHtml = h;
+	}
+        getInsertPracticeScreenHtml()
+	{
+                return this.mInsertPracticeScreenHtml;
+	}
+
+        setInsertGameScreenHtml(h)
+	{
+                this.mInsertGameScreenHtml = h;
+	}
+        getInsertGameScreenHtml()
+	{
+                return this.mInsertGameScreenHtml;
+	}
+
+        setInsertForgotPasswordScreenHtml(h)
+	{
+                this.mInsertForgotPasswordScreenHtml = h;
+	}
+        getInsertForgotPasswordScreenHtml()
+	{
+                return this.mInsertForgotPasswordScreenHtml;
+	}
+
+        setInsertEmailClubScreenHtml(h)
+	{
+                this.mInsertEmailClubScreenHtml = h;
+	}
+        getInsertEmailClubScreenHtml()
+	{
+                return this.mInsertEmailClubScreenHtml;
+	}
+
+        setInsertAcceptClubInInviteScreenHtml(h)
+	{
+                this.mInsertAcceptClubInInviteScreenHtml = h;
+	}
+        getInsertAcceptClubInviteScreenHtml()
+	{
+                return this.mInsertAcceptClubInInviteScreenHtml;
+	}
+
+        setUpdateForgotPasswordScreenHtml(h)
+	{
+                this.mUpdateForgotPasswordScreenHtml = h;
+	}
+        getUpdateForgotPasswordScreenHtml()
+	{
+                return this.mUpdateForgotPasswordScreenHtml;
+	}
 
 }
