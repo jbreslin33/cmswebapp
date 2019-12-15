@@ -117,7 +117,6 @@ class Application
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
 		// nav bar buttons clicked
-		/*
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
@@ -136,7 +135,6 @@ class Application
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(this);
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
-		*/
 
 		var coll = document.getElementsByClassName("collapsible");
 		var i;
