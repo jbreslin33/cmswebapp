@@ -16,10 +16,12 @@
 		<link rel="stylesheet" href="css/styles.css">
 
 		<!-- BOOTSRAP CDN -->
+		<!--
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+-->
   		 <!--END BOOTSRAP CDN-->
 		
 
@@ -44,20 +46,101 @@
 
 	<div class="content">
 
-		<select id="person_select_id" class="form-control"> </select>
-    		<a id="mainnavbuttonid" class="btn btn-primary" href="#main_screen" role="button">Main</a>
-   		<a id="loginnavbuttonid" class="btn btn-primary" href="#login_screen" role="button">Login</a>
-    		<a id="logoutnavbuttonid" class="btn btn-primary" href="#logout_screen" role="button">Logout</a>
-		<a id="insertpracticenavbuttonid" class="btn btn-primary" href="#insert_practice_screen" role="button">Insert Practice</a>
-    		<a id="insertgamenavbuttonid" class="btn btn-primary" href="#insert_game_screen" role="button">Insert Game</a>
-		<a id="insertteamnavbuttonid" class="btn btn-primary" href="#insert_team_screen" role="button">Insert Team</a>
-		<a id="insertpitchnavbuttonid" class="btn btn-primary" href="#insert_pitch_screen" role="button">Insert Pitch</a>
-    		<a id="insertemailclubnavbuttonid" class="btn btn-primary" href="#insert_email_club_screen" role="button">CLUB ADMIN: Invite to Club</a>
-    		<a id="insertpersonnavbuttonid" class="btn btn-primary" href="#insert_person_screen" role="button">Insert Person</a>
-    		<a id="deletepersonnavbuttonid" class="btn btn-primary" href="#delete_person_screen" role="button">Delete Person</a>
-    		<a id="insertemailnavbuttonid" class="btn btn-primary" href="#insert_email_screen" role="button">Join</a>
-    		<a id="insertforgotnavbuttonid" class="btn btn-primary" href="#insert_forgot_password_screen" role="button">Insert Forgot Password</a>
-		<a id="insertclubnavbuttonid" class="btn btn-primary" href="#insert_club_screen" role="button">ADMIN: Add Club</a>
+		<div class="card">
+
+  			<div class="container">
+    				<h4><b>Change Person</b></h4>
+				<select id="person_select_id" class="form-control"> </select>
+  			</div>
+
+		</div>
+		
+		<div class="card">
+
+  			<div class="container">
+
+    				<h4><b>Main</b></h4>
+    				<button id="mainnavbuttonid" href="#main_screen">Main</a>
+   				<button id="loginnavbuttonid" href="#login_screen">Login</a>
+    				<button id="logoutnavbuttonid" href="#logout_screen">Logout</a>
+  			
+			</div>
+
+		</div>
+		
+		<div class="card">
+
+  			<div class="container">
+
+    				<h4><b>Manager</b></h4>
+				<button id="insertpracticenavbuttonid" href="#insert_practice_screen">Insert Practice</a>
+    				<button id="insertgamenavbuttonid" href="#insert_game_screen">Insert Game</a>
+  			
+			</div>
+
+		</div>
+
+		<div class="card">
+
+  			<div class="container">
+
+    				<h4><b>Club Administrator</b></h4>
+				<button id="insertteamnavbuttonid" href="#insert_team_screen">Insert Team</a>
+				<button id="insertpitchnavbuttonid" href="#insert_pitch_screen">Insert Pitch</a>
+    				<button id="insertemailclubnavbuttonid" href="#insert_email_club_screen">CLUB ADMIN: Invite to Club</a>
+  			
+			</div>
+
+		</div>
+
+
+		<div class="card">
+
+  			<div class="container">
+
+    				<h4><b>Users</b></h4>
+    				<button id="insertpersonnavbuttonid" href="#insert_person_screen">Insert Person</a>
+				<button id="deletepersonnavbuttonid" href="#delete_person_screen">Delete Person</a>
+  			
+			</div>
+
+		</div>
+		
+		<div class="card">
+
+  			<div class="container">
+
+    				<h4><b>Account Management</b></h4>
+    				<button id="insertemailnavbuttonid" href="#insert_email_screen">Join</a>
+    				<button id="insertforgotnavbuttonid" href="#insert_forgot_password_screen">Insert Forgot Password</a>
+  			
+			</div>
+
+		</div>
+
+
+		<div class="card">
+
+  			<div class="container">
+
+    				<h4><b>Administration</b></h4>
+				<button id="insertclubnavbuttonid" href="#insert_club_screen">Add Club</a>
+  			
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
 	</div>
 
 
