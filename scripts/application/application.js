@@ -140,17 +140,26 @@ class Application
 
 	}
 
+	collapseNav()
+	{
+        	this.getNavBarHtml().style.display = "none";
+	}
+
+	uncollapseNav()
+	{
+        	this.getNavBarHtml().style.display = "block";
+                this.getNavBarHtml().style.visibility = "visible";
+	}
+
 	hitNavButton ()
 	{
                 if (this.getNavBarHtml().style.display === "none" )
                 {
-                        this.getNavBarHtml().style.display = "block";
-                        this.getNavBarHtml().style.visibility = "visible";
-
+			this.uncollapseNav();
                 }
 		else
 		{
-                        this.getNavBarHtml().style.display = "none";
+			this.collapseNav();
 		}
 	}
 

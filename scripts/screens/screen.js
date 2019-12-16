@@ -619,8 +619,8 @@ class Screen
 		this.show();
 		this.get();
 
-                //hide collapse menu
-                //$(".collapse").collapse('hide');
+                //hide collapse nav menu
+		this.mApplication.collapseNav();
 	}
 
 	execute()
