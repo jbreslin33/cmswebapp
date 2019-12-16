@@ -117,6 +117,8 @@ class Application
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
 		// nav bar buttons clicked
+		document.getElementById("navbuttonid").onclick = this.hitNavButton.bind(this);
+
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
@@ -136,11 +138,12 @@ class Application
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
 
+/*
 		var coll = document.getElementsByClassName("nav-collapsible");
 		var i;
-
 		for (i = 0; i < coll.length; i++) 
 		{
+			console.log('i:' + i);
   			coll[i].addEventListener("click", function() 
 			{
     				this.classList.toggle("active");
@@ -155,15 +158,35 @@ class Application
     				}
   			});
 		}
+		*/
 
+	}
+
+	hitNavButton ()
+	{
+		console.log('hit nav button');
+                if (this.getNavBarHtml().style.display === "none" )
+                {
+			console.log('block it');
+                        this.getNavBarHtml().style.display = "block";
+                        this.getNavBarHtml().style.visibility = "visible";
+
+                }
+		else
+		{
+			console.log('none it');
+                        this.getNavBarHtml().style.display = "none";
+
+		}
 	}
 
 	hit ()
 	{
-		if ( $(".collapse").is( ":visible" ) )
-		{
-  			$(".collapse").collapse('hide');
-		}
+		console.log('hit a button inside nav');
+                if (this.getNavBarHtml())
+                {
+                        this.getNavBarHtml().style.display = "none";
+                }
 	}
 	
 	update(timestamp)
@@ -233,7 +256,14 @@ class Application
 	}
 	getNavBarHtml()
 	{
-		return this.mNavBarHtml;
+		if (this.mNavBarHtml)
+		{
+			return this.mNavBarHtml;
+		}
+		else
+		{
+			console.log("nothing");
+		}
 	}
 
                 
