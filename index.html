@@ -15,16 +15,6 @@
 		<!-- CSS -->
 		<link rel="stylesheet" href="css/styles.css">
 
-		<!-- BOOTSRAP CDN -->
-		<!--
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
--->
-  		 <!--END BOOTSRAP CDN-->
-		
-
 		<title>CMS</title>
 
   		<!-- TODO add manifest here -->
@@ -35,6 +25,7 @@
   		<meta name="apple-mobile-web-app-status-bar-style" content="black">
   		<meta name="apple-mobile-web-app-title" content="Weather PWA">
   		<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+
 		<!-- <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png"> -->
 		<meta name="msapplication-TileImage" content="favicon.ico>
   		<meta name="msapplication-TileColor" content="#2F3BA2">
@@ -153,7 +144,7 @@
                         				<div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
                                 				<span class="sr-only">Loading...</span>
                         				</div>
-                        				<button id="choosepersonscreenbuttonid" class="btn btn-primary">Submit</button>
+                        				<button id="choosepersonscreenbuttonid" class="button">Submit</button>
                                                 </div>
                                		</div>
                                	</div>
@@ -754,7 +745,7 @@
 
   				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
 				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
-				<button id="loginscreenbuttonid">LOGIN</button>
+				<button id="loginscreenbuttonid" class="button">LOGIN</button>
 
                         </div>
 
@@ -767,7 +758,7 @@
                                 <h4><b>Google Login</b></h4>
 
 				<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-				<a id="google_sign_out_id" href="#" onclick="signOut();">Sign out of Google</a>
+				<a id="google_sign_out_id" class="button" href="#" onclick="signOut();">Sign out of Google</a>
 						
                         </div>
 
@@ -781,7 +772,7 @@
 
                                 <h5 class="card-title">Dont have one of the accounts above? You can simply signup with your email.</h5>
                                 <p class="card-text">Click to join up below.</p>
-                                <a href="#insert_email_screen" class="btn btn-primary">JOIN</a>
+                                <a href="#insert_email_screen" class="button">JOIN</a>
 						
                         </div>
 
