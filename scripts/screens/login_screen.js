@@ -72,20 +72,14 @@ class LoginScreen extends Screen
         show()
         {
                 super.show();
-                //this.hideLogin();
-                //this.mPassword  = document.getElementById("login_screen_password_id").value;
-                var login_card = document.getElementById("login_card_id");
+                
+		var login_card = document.getElementById("login_card_id");
                 var google_login_card = document.getElementById("google_login_card_id");
                 var join_card = document.getElementById("join_card_id");
 
 		if (this.mApplication.getJWT())
 		{
 			login_card.style.display = "none";
-		}
-		else
-		{
-			//login_card.style.display = "block";
-			//login_card.style.visibility = "visible";
 		}
 
         }
