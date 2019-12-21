@@ -143,23 +143,23 @@ class Application
 
         openNav()
         {
-		console.log('cas');
-                //document.getElementById("nav_bar_id").style.width = "250px";
-                this.getNavBarHtml().style.width = "250px";
-
+                if (this.getNavBarHtml())
+		{
+                	this.getNavBarHtml().style.width = "250px";
+		}
         }
 
 
         closeNav()
         {
-		console.log('cas cl');
-                //document.getElementById("nav_bar_id").style.width = "0";
-                this.getNavBarHtml().style.width = "0";
+                if (this.getNavBarHtml())
+		{
+                	this.getNavBarHtml().style.width = "0";
+		}
         }
 
 	hit ()
 	{
-		console.log('just hit a link so close');
                 if (this.getNavBarHtml())
                 {
 			this.closeNav();
