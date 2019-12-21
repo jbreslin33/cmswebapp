@@ -129,7 +129,7 @@ class INIT_APPLICATION extends State
 		//hide evertthing except nav_bar_id
 		if (application.getNavBarHtml())
 		{
-			application.getNavBarHtml().style.display = "none";
+			//application.getNavBarHtml().style.display = "none";
 		}
 
 		if (application.getInsertEmailScreenHtml())

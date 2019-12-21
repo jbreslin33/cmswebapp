@@ -117,7 +117,8 @@ class Application
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
 		// nav bar buttons clicked
-		document.getElementById("navbuttonid").onclick = this.hitNavButton.bind(this);
+		document.getElementById("navbuttonid").onclick = this.openNav.bind(this);
+		document.getElementById("nav_bar_close_button_id").onclick = this.closeNav.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
@@ -140,34 +141,28 @@ class Application
 
 	}
 
-	collapseNav()
-	{
-        	this.getNavBarHtml().style.display = "none";
-	}
+        openNav()
+        {
+		console.log('cas');
+                //document.getElementById("nav_bar_id").style.width = "250px";
+                this.getNavBarHtml().style.width = "250px";
 
-	uncollapseNav()
-	{
-        	this.getNavBarHtml().style.display = "block";
-                this.getNavBarHtml().style.visibility = "visible";
-	}
+        }
 
-	hitNavButton ()
-	{
-                if (this.getNavBarHtml().style.display === "none" )
-                {
-			this.uncollapseNav();
-                }
-		else
-		{
-			this.collapseNav();
-		}
-	}
+
+        closeNav()
+        {
+		console.log('cas cl');
+                //document.getElementById("nav_bar_id").style.width = "0";
+                this.getNavBarHtml().style.width = "0";
+        }
 
 	hit ()
 	{
+		console.log('just hit a link so close');
                 if (this.getNavBarHtml())
                 {
-                        this.getNavBarHtml().style.display = "none";
+			this.closeNav();
                 }
 	}
 	

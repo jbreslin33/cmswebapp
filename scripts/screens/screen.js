@@ -618,9 +618,6 @@ class Screen
 		this.setMessage('','red');
 		this.show();
 		this.get();
-
-                //hide collapse nav menu
-		this.mApplication.collapseNav();
 	}
 
 	execute()
