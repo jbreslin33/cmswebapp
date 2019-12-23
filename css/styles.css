@@ -11,7 +11,7 @@ ul {
   margin: 0;
   padding: 0;
   width: 200px;
-  background-color: #f1f1f1;
+  background-color: #87ceeb;
   border: 1px solid #555;
 }
 
@@ -32,7 +32,7 @@ li:last-child {
 }
 
 li a.active {
-  background-color: #4CAF50;
+  background-color: ##87ceeb;
   color: white;
 }
 
@@ -50,7 +50,7 @@ li a:hover:not(.active) {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #B03060;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
