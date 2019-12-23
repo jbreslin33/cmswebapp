@@ -5,12 +5,15 @@
 
 /* BEGIN SLIDE CODE */
 
-/* list */
+ /*
+  * Make buttons from links than make them sky blue background with white text
+ * */
 .btn {
   display: block;
   padding: 8px 16px;
   text-decoration: none;
   color: white;
+  text-align: center;
   background-color: #87ceeb;
 }
 
