@@ -6,37 +6,20 @@
 /* BEGIN SLIDE CODE */
 
 /* list */
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #87ceeb;
-  border: 1px solid #555;
-}
-
-li a {
+.btn {
   display: block;
-  color: #000;
   padding: 8px 16px;
   text-decoration: none;
+  color: white;
+  background-color: #87ceeb;
 }
 
-li {
-  text-align: center;
-  border-bottom: 1px solid #555;
-}
-
-li:last-child {
-  border-bottom: none;
-}
-
-li a.active {
+.btn.active {
   background-color: ##87ceeb;
   color: white;
 }
 
-li a:hover:not(.active) {
+.btn:hover:not(.active) {
   background-color: #555;
   color: white;
 }
@@ -50,10 +33,10 @@ li a:hover:not(.active) {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #B03060;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  background-color: white;
 }
 
 .sidenav .closebtn {
