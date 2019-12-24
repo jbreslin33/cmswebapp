@@ -117,8 +117,8 @@ class Application
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
 
 		// nav bar buttons clicked
-		document.getElementById("navbuttonid").onclick = this.openNav.bind(this);
-		document.getElementById("nav_bar_close_button_id").onclick = this.closeNav.bind(this);
+		document.getElementById("navbuttonid").onclick = this.toggleNav.bind(this);
+		//document.getElementById("nav_bar_close_button_id").onclick = this.closeNav.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
@@ -141,20 +141,20 @@ class Application
 
 	}
 
-        openNav()
+        toggleNav()
         {
                 if (this.getNavBarHtml())
                 {
-                        this.getNavBarHtml().style.display = "block";
-                        this.getNavBarHtml().style.visibility = "visible";
-                }
-        }
+                        if (this.getNavBarHtml().style.display == "none")
+			{
+                        	this.getNavBarHtml().style.display = "block";
+                        	this.getNavBarHtml().style.visibility = "visible";
+			}
+			else
+			{
+                        	this.getNavBarHtml().style.display = "none";
+			}
 
-        closeNav()
-        {
-                if (this.getNavBarHtml())
-                {
-                        this.getNavBarHtml().style.display = "none";
                 }
         }
 
