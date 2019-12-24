@@ -1,8 +1,3 @@
-/* GLOBAL */
-
-/* END GLOBAL */
-
-/* SAMPLE CSS */
 * {
   box-sizing: border-box;
 }
@@ -26,24 +21,6 @@ html {
   background-color: #9933cc;
   color: #ffffff;
   padding: 15px;
-}
-
-.menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li {
-  padding: 8px;
-  margin-bottom: 7px;
-  background-color: #33b5e5;
-  color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-
-.menu li:hover {
-  background-color: #0099cc;
 }
 
 .aside {
@@ -84,90 +61,21 @@ html {
   .col-12 {width: 100%;}
 }
 
-
-/* BEGIN SLIDE CODE */
-
-/*  sidenav */
-.sidenav 
-{
-	height: 100%;
-  	width: 0;
-  	position: fixed;
-  	z-index: 1;
-  	top: 0;
-  	left: 0;
-  	overflow-x: hidden;
-  	transition: 0.5s;
-  	padding-top: 60px;
-  	background-color: white;
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 50%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
 }
 
-.sidenav .closebtn 
-{
-	position: absolute;
-  	top: 0;
-  	right: 25px;
-  	font-size: 36px;
-  	margin-left: 50px;
-  	color: #87ceeb;
+.btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
 }
 
-/* media */
-@media screen and (min-width: 480px) 
-{
-	.sidenav {padding-top: 15px;}
-  	.sidenav a {font-size: 18px;}
-
-	/* shrink cards */
-	.card 
-	{
-		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-		transition: 0.3s;
-  		text-align: center;
-		width: 100%;
-  		margin-left: 0%;
-  		margin-right: 0%;
-	}
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
 }
-
-/* END SLIDE CODE */
-
- /*
-  * Make buttons from links than make them sky blue background with white text
- * */
-.btn 
-{
-	display: block;
-  	padding: 8px 16px;
-  	text-decoration: none;
-  	color: #FFFFFF;
-  	text-align: center;
-  	background-color: #87ceeb;
-}
-
-.btn:hover:not(.active) 
-{
-	background-color: #555555;
-}
-
-/* CARDS */
-.card 
-{
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	transition: 0.3s;
-  	text-align: center;
-	width: 100%;
-  	margin-left: 25%;
-  	margin-right: 25%;
-}
-
-.card:hover 
-{
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container 
-{
-	padding: 2px 16px;
-}
-
