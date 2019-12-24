@@ -52,16 +52,9 @@
   	background-color: #87ceeb;
 }
 
-.btn.active 
-{
-	background-color: #87ceeb;
-  	color: grey;
-}
-
 .btn:hover:not(.active) 
 {
-	background-color: #555;
-  	color: white;
+	background-color: #555555;
 }
 
 
