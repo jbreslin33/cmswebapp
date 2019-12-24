@@ -62,7 +62,7 @@ html {
 }
 
 .btn-group button {
-  background-color: #4CAF50; /* Green background */
+  background-color: #33b5e5; /* Blue background */
   border: 1px solid green; /* Green border */
   color: white; /* White text */
   padding: 10px 24px; /* Some padding */
@@ -76,6 +76,7 @@ html {
 }
 
 /* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
+.btn-group button:hover 
+{
+  	background-color: #4CAF50; /* Green background */
 }
