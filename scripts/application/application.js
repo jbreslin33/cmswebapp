@@ -144,18 +144,18 @@ class Application
         openNav()
         {
                 if (this.getNavBarHtml())
-		{
-                	this.getNavBarHtml().style.width = "250px";
-		}
+                {
+                        this.getNavBarHtml().style.display = "block";
+                        this.getNavBarHtml().style.visibility = "visible";
+                }
         }
-
 
         closeNav()
         {
                 if (this.getNavBarHtml())
-		{
-                	this.getNavBarHtml().style.width = "0";
-		}
+                {
+                        this.getNavBarHtml().style.display = "none";
+                }
         }
 
 	hit ()
