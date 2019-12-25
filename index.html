@@ -15,7 +15,9 @@
 		<!-- CSS -->
 		<link rel="stylesheet" href="css/styles.css">
 
-		<title>CMS</title>
+		<title>
+			CMS
+		</title>
 
   		<!-- TODO add manifest here -->
   		<link rel="manifest" href="/manifest.json">
@@ -30,314 +32,313 @@
 		<meta name="msapplication-TileImage" content="favicon.ico>
   		<meta name="msapplication-TileColor" content="#2F3BA2">
 	</head>
-<body>
+	
+	<body>
 
-<!-- BEGIN SLIDE_BAR HTML -->
-<div class="header">
-	<h1>Celta De Vigo</h1>
-</div>
-
-<div class="row">
-
-	<div class="col-3 menu">
-
-		<div class="btn-group">
-       			<button id="navbuttonid" style="font-size:30px;cursor:pointer">&#9776; Menu</button>
+		<!-- BEGIN SLIDE_BAR HTML -->
+		<div class="header">
+			<h1>Celta De Vigo</h1>
 		</div>
+
+		<div class="row">
+		
+			<div class="col-3 menu">
+
+				<div class="btn-group">
+       					<button id="navbuttonid" style="font-size:30px;cursor:pointer">&#9776; Menu</button>
+				</div>
         
-		<div id="nav_bar_id" class="sidenav">
+				<div id="nav_bar_id" class="sidenav">
 
-			<!--
-               		<a id="nav_bar_close_button_id" href="javascript:void(0)" class="closebtn">&times;</a>
-			-->
+					<form>
+               					<select id="person_select_id" class="select"> </select>
+
+						Main
+
+						<div class="btn-group">
+
+               						<button id="mainnavbuttonid" formaction="#main_screen">Main</button>
+               						<button id="loginnavbuttonid" formaction="#login_screen">Login</button>
+               						<button id="logoutnavbuttonid" formaction="#logout_screen">Logout</button>
+
+						</div>
+		
+						Managers	
+
+						<div class="btn-group">
+
+       	        					<button id="insertpracticenavbuttonid" formaction="#insert_practice_screen">Insert Practice</a>
+       	        					<button id="insertgamenavbuttonid" formaction="#insert_game_screen">Insert Game</a>
+
+						</div>
+
+						Club Administrators
+		
+						<div class="btn-group">
 	
-			<form>
-               			<select id="person_select_id" class="select"> </select>
 
-					Main
+       	        					<button id="insertteamnavbuttonid" formaction"#insert_team_screen">Insert Team</button>
+       	        					<button id="insertpitchnavbuttonid" formaction="#insert_pitch_screen">Insert Pitch</button>
+       	        					<button id="insertemailclubnavbuttonid" formaction="#insert_email_club_screen">Invite to Club</button>
 
-				<div class="btn-group">
+						</div>
 
-               				<button id="mainnavbuttonid" formaction="#main_screen">Main</button>
-               				<button id="loginnavbuttonid" formaction="#login_screen">Login</button>
-               				<button id="logoutnavbuttonid" formaction="#logout_screen">Logout</button>
-
-				</div>
+						Persons
 		
-					Managers	
+						<div class="btn-group">
 
-				<div class="btn-group">
+       	        					<button id="insertpersonnavbuttonid" formaction="#insert_person_screen">Insert Person</button>
+       	        					<button id="deletepersonnavbuttonid" formaction="#delete_person_screen">Delete Person</button>
 
-               				<button id="insertpracticenavbuttonid" formaction="#insert_practice_screen">Insert Practice</a>
-               				<button id="insertgamenavbuttonid" formaction="#insert_game_screen">Insert Game</a>
+						</div>
 
-				</div>
+						Account	
 
-					Club Administrators
+						<div class="btn-group">
+
+       	        					<button id="insertemailnavbuttonid" formaction="#insert_email_screen">Join</button>
+       	        					<button id="insertforgotnavbuttonid" formaction="#insert_forgot_password_screen">Insert Forgot Password</button>
 		
-				<div class="btn-group">
-
-
-               				<button id="insertteamnavbuttonid" formaction"#insert_team_screen">Insert Team</button>
-               				<button id="insertpitchnavbuttonid" formaction="#insert_pitch_screen">Insert Pitch</button>
-               				<button id="insertemailclubnavbuttonid" formaction="#insert_email_club_screen">Invite to Club</button>
-
-				</div>
-
-					Persons
-		
-				<div class="btn-group">
-
-               				<button id="insertpersonnavbuttonid" formaction="#insert_person_screen">Insert Person</button>
-               				<button id="deletepersonnavbuttonid" formaction="#delete_person_screen">Delete Person</button>
-
-				</div>
-
-					Account	
-
-				<div class="btn-group">
-
-               				<button id="insertemailnavbuttonid" formaction="#insert_email_screen">Join</button>
-               				<button id="insertforgotnavbuttonid" formaction="#insert_forgot_password_screen">Insert Forgot Password</button>
-		
-				</div>
+						</div>
 						
-					Administration
+						Administration
 		
-				<div class="btn-group">
+						<div class="btn-group">
 
-               				<button id="insertclubnavbuttonid" formaction="#insert_club_screen">Add Club</button>
+       	        					<button id="insertclubnavbuttonid" formaction="#insert_club_screen">Add Club</button>
 		
-				</div>
-			</form>
-  		</div>
-  	</div>
-
-
+						</div>
+					</form>
+  				</div>
+  			</div>
+		
+			<!-- END SLIDE_BAR HTML -->
   
-	<div class="col-6">
+			<div class="col-6">
 
 
-	<!-- END SLIDE_BAR HTML -->
 
-        <!-- CHOOSE PERSON HTML  -->
-        <div id="choose_person_screen_html_id">
+		        	<!-- CHOOSE PERSON HTML  -->
+        			<div id="choose_person_screen_html_id">
 
-                <div class="card">
+                			<div class="card">
 
-                        <div class="container">
-                                <h4><b>Choose Person</b></h4>
-                                <select id="choose_person_screen_select_id" class="select"> </select>
-                                <span id='choose_person_screen_message_id'></span>
-                                <div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
-                                 	<span class="sr-only">Loading...</span>
-                                </div>
+                        			<div class="container">
+                                			<h4><b>Choose Person</b></h4>
+                                			<select id="choose_person_screen_select_id" class="select"> </select>
+                                			<span id='choose_person_screen_message_id'></span>
 
-                               	<button id="choosepersonscreenbuttonid" class="button">Submit</button>
+                                			<div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
+                                 				<span class="sr-only">Loading...</span>
+                                			</div>
 
-                        </div>
-                </div>
-       	</div>
+                               				<button id="choosepersonscreenbuttonid" class="button">Submit</button>
+
+                        			</div>
+                			</div>
+       				</div>
 
 
-        <!-- END CHOOSE PERSON HTML  -->
-
-	<!-- INSERT EMAIL HTML  -->
-
-        <form id="insert_email_screen_html_id" style="max-width: 18rem;">
-
-                <div class="form-group">
-                        <div class="form-row">
-                                <div class="col">
-                                        <div class="card text-center" style="max-width: 18rem;">
-
-                                                <div class="card-header">
-    			 				Join Club Management System
-                                                </div>
-
-                                                <div class="card-body">
+        			<!-- END CHOOSE PERSON HTML  -->
 
 	
-							<span id='insert_email_screen_message_id'></span>
+				<!-- INSERT EMAIL HTML  -->
+
+        			<form id="insert_email_screen_html_id" style="max-width: 18rem;">
+
+                			<div class="form-group">
+                        			<div class="form-row">
+                                			<div class="col">
+                                        			<div class="card text-center" style="max-width: 18rem;">
+
+                                                			<div class="card-header">
+    			 							Join Club Management System
+                                                			</div>
+
+                                                			<div class="card-body">
+
+										<span id='insert_email_screen_message_id'></span>
 		
-							<a id="insert_email_screen_login_id" href="#login_screen" class="card-link">Login</a>
+										<a id="insert_email_screen_login_id" href="#login_screen" class="card-link">Login</a>
 
 
-							<div id="insert_email_screen_spinner_id" class="spinner-border text-primary" role="status">
+										<div id="insert_email_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        								<span class="sr-only">Loading...</span>
+                								</div>
+
+										<label for="insert_native_login_screen_email_id">Email</label>
+      										<input type="text" class="form-control" id="insert_email_screen_email_id" placeholder="Email" required>
+                								<button id="insertemailscreenbuttonid" class="btn btn-primary">Submit</button>
+    									</div>
+    								</div>
+    							</div>
+               					</div>
+					</div>
+				</form>
+
+				<!-- END INSERT EMAIL HTML  -->
+
+				<!-- INSERT NATIVE LOGIN HTML  -->
+				<div class="card" id="insert_native_login_screen_html_id"> 
+  		
+					<div class="card-header" id="insert_native_login_screen_header_div_id">
+    			 			To finish joining Club Management System simply set a password below...
+  					</div>
+
+					<span id='insert_native_login_screen_message_id'></span>
+
+					<a id="insert_native_login_screen_login_id" href="#login_screen" class="card-link">Login</a>
+
+  					<div class="card-body">
+
+						<form id="insert_native_login_screen_form_id" onsubmit="return false;" class="needs-validation">
+
+                					<div id="insert_native_login_screen_spinner_id" class="spinner-border text-primary" role="status">
                         					<span class="sr-only">Loading...</span>
                 					</div>
 
-							<label for="insert_native_login_screen_email_id">Email</label>
-      							<input type="text" class="form-control" id="insert_email_screen_email_id" placeholder="Email" required>
-                					<button id="insertemailscreenbuttonid" class="btn btn-primary">Submit</button>
-    						</div>
-    					</div>
-    				</div>
-               		</div>
-		</div>
-	</form>
+                					<div class="form-row">
 
-	<!-- END INSERT EMAIL HTML  -->
+                        					<div class="col-md-4 mb-3">
+                                					<label for="insert_native_login_screen_password1_id">Password</label>
+                                					<input type="password" class="form-control" id="insert_native_login_screen_password1_id" placeholder="Phone" value="Password" required>
+                        					</div>
 
-	<!-- INSERT NATIVE LOGIN HTML  -->
-	<div class="card" id="insert_native_login_screen_html_id"> 
-  		
-		<div class="card-header" id="insert_native_login_screen_header_div_id">
-    			 To finish joining Club Management System simply set a password below...
-  		</div>
+                        					<div class="col-md-4 mb-3">
+                                					<label for="insert_native_login_screen_password2_id">Re-type Password</label>
+                                					<input type="password" class="form-control" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
+									<span id='password_message_id'></span>
+                        					</div>
+                					</div>
 
-		<span id='insert_native_login_screen_message_id'></span>
+                					<button id="insertnativeloginscreenbuttonid" class="btn btn-primary">Submit</button>
 
-		<a id="insert_native_login_screen_login_id" href="#login_screen" class="card-link">Login</a>
+						</form>
+               				</div>
+				</div>
 
-
-  		<div class="card-body">
-
-			<form id="insert_native_login_screen_form_id" onsubmit="return false;" class="needs-validation">
-
-                		<div id="insert_native_login_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        		<span class="sr-only">Loading...</span>
-                		</div>
-
-                		<div class="form-row">
-
-                        		<div class="col-md-4 mb-3">
-                                		<label for="insert_native_login_screen_password1_id">Password</label>
-                                		<input type="password" class="form-control" id="insert_native_login_screen_password1_id" placeholder="Phone" value="Password" required>
-                        		</div>
-
-                        		<div class="col-md-4 mb-3">
-                                		<label for="insert_native_login_screen_password2_id">Re-type Password</label>
-                                		<input type="password" class="form-control" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
-						<span id='password_message_id'></span>
-                        		</div>
-                		</div>
-
-                		<button id="insertnativeloginscreenbuttonid" class="btn btn-primary">Submit</button>
-
-			</form>
-               	</div>
-	</div>
-
-	<!-- END INSERT NATAIVE LOGIN HTML  -->
+				<!-- END INSERT NATAIVE LOGIN HTML  -->
 	
-
-	<!-- BEGIN MAIN HTML -->
-        <form id="main_screen_html_id" style="max-width: 18rem;">
-        	<div class="card text-center" style="max-width: 18rem;">
-
-               		<div class="card-header">
-                        	SCHEDULE
-
-				<div id="main_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        		<span class="sr-only">Loading...</span>
-                		</div>
-
-	    			<span id='main_screen_message_id'></span>
-			</div>
-  		</div>
-	</form>	
-
-
-	<!-- END MAIN HTML -->	
-	
-	
-
-	<!-- INSERT CLUB HTML  -->
-	<div class="card" id="insert_club_screen_html_id">
+				<!-- BEGIN MAIN HTML -->
         
-		<div class="container">
+				<form id="main_screen_html_id" style="max-width: 18rem;">
+        				<div class="card text-center" style="max-width: 18rem;">
 
-                               	<h4><b>Add Club</b></h4>
-                               	<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
-                               		<span class="sr-only">Loading...</span>
-                       		</div>
+               					<div class="card-header">
+                        				SCHEDULE
+
+							<div id="main_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        					<span class="sr-only">Loading...</span>
+                					</div>
+
+	    						<span id='main_screen_message_id'></span>
+						</div>
+  					</div>
+				</form>	
+
+
+				<!-- END MAIN HTML -->	
+	
+
+				<!-- INSERT CLUB HTML  -->
+				<div class="card" id="insert_club_screen_html_id">
+        
+					<div class="container">
+
+                               			<h4><b>Add Club</b></h4>
+                               			<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
+                               				<span class="sr-only">Loading...</span>
+                       				</div>
                                                         
-                               	<label for="insert_club_name_id">Club Name</label>
-                               	<input type="text" id="insert_club_screen_name_id" placeholder="Club Name" value="Club Name" required>
+                               			<label for="insert_club_name_id">Club Name</label>
+                               			<input type="text" id="insert_club_screen_name_id" placeholder="Club Name" value="Club Name" required>
                                                         
-                               	<span id='insert_club_screen_message_id'></span>
+                               			<span id='insert_club_screen_message_id'></span>
                                         
-                               	<label for="insert_club_screen_address_id">Address</label>
-                               	<input type="text" id="insert_club_screen_address_id" placeholder="Club Address" required>
+                               			<label for="insert_club_screen_address_id">Address</label>
+                               			<input type="text" id="insert_club_screen_address_id" placeholder="Club Address" required>
                         
-                               	<button id="addclubscreenbuttonid" class="button">Submit</button>
-		</div>
-	</div>
+                               			<button id="addclubscreenbuttonid" class="button">Submit</button>
+					</div>
+				</div>
 
-	<!-- END INSERT CLUB HTML  -->
+				<!-- END INSERT CLUB HTML  -->
 	
 	
-	<!-- INSERT PERSON HTML  -->
+				<!-- INSERT PERSON HTML  -->
 
 
-	<div id="insert_person_screen_html_id">
+				<div id="insert_person_screen_html_id">
 
-		<div id="insert_person_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
+					<div id="insert_person_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        			<span class="sr-only">Loading...</span>
+                			</div>
 
-		<form id="insert_person_screen_form_id" onsubmit="return false;" class="needs-validation">
-  			<div class="form-row">
-    				<div class="col-md-4 mb-3">
-      					<label for="insert_person_name_id">First Name</label>
-      					<input type="text" class="form-control" id="insert_person_screen_first_name_id" placeholder="First Name" value="First Name" required>
-    				</div>
-    			</div>
+					<form id="insert_person_screen_form_id" onsubmit="return false;" class="needs-validation">
+  						<div class="form-row">
+    							<div class="col-md-4 mb-3">
+      								<label for="insert_person_name_id">First Name</label>
+      								<input type="text" class="form-control" id="insert_person_screen_first_name_id" placeholder="First Name" value="First Name" required>
+    							</div>
+    						</div>
 		
-			<div class="form-row">
-    				<div class="col-md-6 mb-3">
-      					<label for="insert_person_screen_middle_name_id">Middle Name</label>
-      					<input type="text" class="form-control" id="insert_person_screen_middle_name_id" placeholder="Middle Name" required>
-    				</div>
-  			</div>
+						<div class="form-row">
+    							<div class="col-md-6 mb-3">
+      								<label for="insert_person_screen_middle_name_id">Middle Name</label>
+      								<input type="text" class="form-control" id="insert_person_screen_middle_name_id" placeholder="Middle Name" required>
+    							</div>
+  						</div>
 		
-			<div class="form-row">
-    				<div class="col-md-6 mb-3">
-      					<label for="insert_person_screen_last_name_id">Last Name</label>
-      					<input type="text" class="form-control" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
-    				</div>
-  			</div>
+						<div class="form-row">
+    							<div class="col-md-6 mb-3">
+      								<label for="insert_person_screen_last_name_id">Last Name</label>
+      								<input type="text" class="form-control" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
+    							</div>
+  						</div>
 		
-			<div class="form-row">
-    				<div class="col-md-6 mb-3">
-      					<label for="insert_person_screen_phone_id">Phone</label>
-      					<input type="text" class="form-control" id="insert_person_screen_phone_id" placeholder="Phone" required>
-    				</div>
-  			</div>
+						<div class="form-row">
+    							<div class="col-md-6 mb-3">
+      								<label for="insert_person_screen_phone_id">Phone</label>
+      								<input type="text" class="form-control" id="insert_person_screen_phone_id" placeholder="Phone" required>
+    							</div>
+  						</div>
 		
-			<div class="form-row">
-    				<div class="col-md-6 mb-3">
-      					<label for="insert_person_screen_address_id">Address</label>
-      					<input type="text" class="form-control" id="insert_person_screen_address_id" placeholder="Address" required>
-    				</div>
-  			</div>
-			<span id='insert_person_screen_message_id'></span>
-			<button id="insertpersonscreenbuttonid" class="btn btn-primary">Submit</button>
-		</form>
-	</div>
+						<div class="form-row">
+    							<div class="col-md-6 mb-3">
+      								<label for="insert_person_screen_address_id">Address</label>
+      								<input type="text" class="form-control" id="insert_person_screen_address_id" placeholder="Address" required>
+    							</div>
+  						</div>
+			
+						<span id='insert_person_screen_message_id'></span>
+						<button id="insertpersonscreenbuttonid" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
 
-	<!-- END INSERT CLUB HTML  -->
+	
+				<!-- END INSERT CLUB HTML  -->
  
-	<!-- DELETE PERSON HTML  -->
+				<!-- DELETE PERSON HTML  -->
         
-	<div id="delete_person_screen_html_id">
-		<form id="delete_person_screen_form_id" onsubmit="return false;" class="needs-validation">
-                	<div class="form-row">
-                        	<div id="delete_person_screen_div_id" class="form-group col-md-4">
-                                	<label for="delete_person_screen_select_id">Person</label>
-                                	<select id="delete_person_screen_select_id" class="form-control">
-                                	</select>
-                        	</div>
-                	</div>
-                	<div id="delete_person_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        	<span class="sr-only">Loading...</span>
-                	</div>
-			<span id='delete_person_screen_message_id'></span>
+				<div id="delete_person_screen_html_id">
+					<form id="delete_person_screen_form_id" onsubmit="return false;" class="needs-validation">
+                				<div class="form-row">
+                        				<div id="delete_person_screen_div_id" class="form-group col-md-4">
+                                				<label for="delete_person_screen_select_id">Person</label>
+                                				<select id="delete_person_screen_select_id" class="form-control">
+                                				</select>
+                        				</div>
+                				</div>
+                			
+						<div id="delete_person_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        				<span class="sr-only">Loading...</span>
+                				</div>
+			
+						<span id='delete_person_screen_message_id'></span>
 
-                	<button id="deletepersonscreenbuttonid" class="btn btn-primary">Submit</button>
-        	</form>
-	</div>
+                				<button id="deletepersonscreenbuttonid" class="btn btn-primary">Submit</button>
+        				</form>
+				</div>
 
         <!-- END DELETE PERSON HTML  -->
 
