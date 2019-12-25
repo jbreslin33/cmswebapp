@@ -162,7 +162,7 @@ class Application
 	{
                 if (this.getNavBarHtml())
                 {
-			this.closeNav();
+			this.toggleNav();
                 }
 	}
 	
