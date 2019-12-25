@@ -340,447 +340,442 @@
         				</form>
 				</div>
 
-        <!-- END DELETE PERSON HTML  -->
+        			<!-- END DELETE PERSON HTML  -->
 
-	<!-- INSERT TEAM HTML  -->
-        <form id="insert_team_screen_html_id" style="max-width: 18rem;">
+				<!-- INSERT TEAM HTML  -->
+        			<form id="insert_team_screen_html_id" style="max-width: 18rem;">
 
-                <div class="form-group">
-                        <div class="form-row">
-                                <div class="col">
-                                        <div class="card text-center" style="max-width: 18rem;">
+                			<div class="form-group">
+                        			<div class="form-row">
+                                			<div class="col">
+                                        			<div class="card text-center" style="max-width: 18rem;">
 
-                                                <div class="card-header">
-                                                        ADD TEAM
-                                                </div>
+                                                			<div class="card-header">
+                                                        			ADD TEAM
+                                                			</div>
 
-                                                <div class="card-body">
+                                                			<div class="card-body">
 
+                								<div id="insert_team_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        								<span class="sr-only">Loading...</span>
+                								</div>
 
-                				<div id="insert_team_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        				<span class="sr-only">Loading...</span>
-                				</div>
+                								<label for="insert_team_screen_club_id">Club:</label>
+                        							<select id="insert_team_screen_club_id" class="form-control">
+                        							</select>
 
-                				<label for="insert_team_screen_club_id">Club:</label>
-                        			<select id="insert_team_screen_club_id" class="form-control">
-                        			</select>
-
-      						<label for="insert_team_name_id">Team Name</label>
-      						<input type="text" class="form-control" id="insert_team_screen_name_id" placeholder="Team Name" value="Team Name" required>
-						<span id='insert_team_screen_name_message_id'></span>
+      										<label for="insert_team_name_id">Team Name</label>
+      										<input type="text" class="form-control" id="insert_team_screen_name_id" placeholder="Team Name" value="Team Name" required>
+										<span id='insert_team_screen_name_message_id'></span>
 						
-						<button id="insertteamscreenbuttonid" class="btn btn-primary">Submit</button>
+										<button id="insertteamscreenbuttonid" class="btn btn-primary">Submit</button>
 		
-						<span id='insert_team_screen_message_id'></span>
+										<span id='insert_team_screen_message_id'></span>
 
-                                                </div>
-                               		</div>
-                               	</div>
-	         	</div>
-	         </div>
-	</form>
+                                                			</div>
+                               					</div>
+                               				</div>
+	         				</div>
+	         			</div>
+				</form>
 
-	<!-- END INSERT TEAM HTML  -->
+				<!-- END INSERT TEAM HTML  -->
 	
 	
-	<!-- INSERT PITCH HTML  -->
+				<!-- INSERT PITCH HTML  -->
 
-        <div class="card" id="insert_pitch_screen_html_id">
+        			<div class="card" id="insert_pitch_screen_html_id">
 		
-		<div class="card-header" id="insert_pitch_screen_header_div_id">
-    			 Add Pitch
-  		</div>
+					<div class="card-header" id="insert_pitch_screen_header_div_id">
+    			 			Add Pitch
+  					</div>
 
-                <div id="insert_pitch_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
+                			<div id="insert_pitch_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        			<span class="sr-only">Loading...</span>
+                			</div>
 
-		<form id="insert_pitch_screen_form_id" onsubmit="return false;" class="needs-validation">
+					<form id="insert_pitch_screen_form_id" onsubmit="return false;" class="needs-validation">
 
-			<div class="form-row">
-                		<div id="insert_pitch_screen_club_div_id" class="form-group col-md-4">
-                			<label for="insert_pitch_screen_club_id">Club:</label>
-                        		<select id="insert_pitch_screen_club_id" class="form-control">
-                        		</select>
-                		</div>
-			</div>
+						<div class="form-row">
+                					<div id="insert_pitch_screen_club_div_id" class="form-group col-md-4">
+                						<label for="insert_pitch_screen_club_id">Club:</label>
+                        					<select id="insert_pitch_screen_club_id" class="form-control">
+                        					</select>
+                					</div>
+						</div>
 
-  			<div class="form-row">
+  						<div class="form-row">
 
-    				<div class="col-md-4 mb-3">
-      					<label for="insert_pitch_name_id">Pitch Name</label>
-      					<input type="text" class="form-control" id="insert_pitch_screen_name_id" placeholder="Team Name" value="Team Name" required>
-					<span id='insert_pitch_screen_name_message_id'></span>
+    							<div class="col-md-4 mb-3">
+      								<label for="insert_pitch_name_id">Pitch Name</label>
+      								<input type="text" class="form-control" id="insert_pitch_screen_name_id" placeholder="Team Name" value="Team Name" required>
+								<span id='insert_pitch_screen_name_message_id'></span>
+    							</div>
+    						</div>
+						
+						<button id="insertpitchscreenbuttonid" class="btn btn-primary">Submit</button>
+						<span id='insert_pitch_screen_message_id'></span>
+					</form>
     				</div>
-    			</div>
-		<button id="insertpitchscreenbuttonid" class="btn btn-primary">Submit</button>
-		<span id='insert_pitch_screen_message_id'></span>
-		</form>
-    	</div>
 
-	<!-- END INSERT TEAM HTML  -->
+				<!-- END INSERT TEAM HTML  -->
 	
-	<!-- INSERT PRACTICE HTML  -->
-        <form id="insert_practice_screen_html_id" style="max-width: 18rem;" onsubmit="return false;" class="needs-validation">
+				<!-- INSERT PRACTICE HTML  -->
+        			<form id="insert_practice_screen_html_id" style="max-width: 18rem;" onsubmit="return false;" class="needs-validation">
 
-        	<div class="card text-center" style="max-width: 18rem;">
+        				<div class="card text-center" style="max-width: 18rem;">
 
-                	<div class="card-header">
-                       		ADD PRACTICE
-                        </div>
+                				<div class="card-header">
+                       					ADD PRACTICE
+                        			</div>
 
-                        <div class="card-body">
+                        			<div class="card-body">
 
-				<div class="form-check">
-  					<input class="form-check-input" type="checkbox" value="" id="insert_practice_screen_recurring_id">
-  					<label class="form-check-label" for="insert_practice_screen_recurring_id">
-    						Click for a recurring practice
-  					</label>
-				</div>
+							<div class="form-check">
+  								<input class="form-check-input" type="checkbox" value="" id="insert_practice_screen_recurring_id">
+  								<label class="form-check-label" for="insert_practice_screen_recurring_id">
+    									Click for a recurring practice
+  								</label>
+							</div>
 
-				<div id="insert_practice_screen_recurring_html_id">
+							<div id="insert_practice_screen_recurring_html_id">
 
-					<div class="form-check">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_sunday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_sunday_checkbox_id">Sunday</label>
-					</div>
+								<div class="form-check">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_sunday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_sunday_checkbox_id">Sunday</label>
+								</div>
 
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_monday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_monday_checkbox_id">Monday</label>
-					</div>
+								<div class="form-check form-check-inline">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_monday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_monday_checkbox_id">Monday</label>
+								</div>
 
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_tuesday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_tuesday_checkbox_id">Tuesday</label>
-					</div>
+								<div class="form-check form-check-inline">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_tuesday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_tuesday_checkbox_id">Tuesday</label>
+								</div>
 				
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_wednesday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_wednesday_checkbox_id">Wednesday</label>
-					</div>
+								<div class="form-check form-check-inline">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_wednesday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_wednesday_checkbox_id">Wednesday</label>
+								</div>
 				
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_thursday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_thursday_checkbox_id">Thursday</label>
-					</div>
+								<div class="form-check form-check-inline">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_thursday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_thursday_checkbox_id">Thursday</label>
+								</div>
 
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_friday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_friday_checkbox_id">Friday</label>
-					</div>
+								<div class="form-check form-check-inline">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_friday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_friday_checkbox_id">Friday</label>
+								</div>
 				
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="checkbox" id="insert_practice_screen_saturday_checkbox_id">
-  						<label class="form-check-label" for="insert_practice_screen_saturday_checkbox_id">Saturday</label>
-					</div>
+								<div class="form-check form-check-inline">
+  									<input class="form-check-input" type="checkbox" id="insert_practice_screen_saturday_checkbox_id">
+  									<label class="form-check-label" for="insert_practice_screen_saturday_checkbox_id">Saturday</label>
+								</div>
 		
-					<div class="form-group row">
-  						<label for="insert_practice_screen_start_date_id">Starting Date:</label>
-    						<input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_start_date_id">
-					</div>
+								<div class="form-group row">
+  									<label for="insert_practice_screen_start_date_id">Starting Date:</label>
+    									<input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_start_date_id">
+								</div>
 	
-					<div class="form-group row">
-  						<label for="insert_practice_screen_end_date_id">Ending Date:</label>
-    						<input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_end_date_id">
-					</div>
-				</div>
+								<div class="form-group row">
+  									<label for="insert_practice_screen_end_date_id">Ending Date:</label>
+    									<input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_end_date_id">
+								</div>
+							</div>
                                                         
 
-				<div id="insert_practice_screen_date_html_id">
-  					<label for="insert_practice_screen_date_id">Date:</label>
-    					<input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_date_id">
-				</div>
+							<div id="insert_practice_screen_date_html_id">
+  								<label for="insert_practice_screen_date_id">Date:</label>
+    								<input class="form-control" type="date" value="2019-05-25" id="insert_practice_screen_date_id">
+							</div>
 
-				<div>
-  					<label for="insert_practice_screen_arrival_time_id">Arrival Time:</label>
-    					<input class="form-control" type="time" value="17:45:00" id="insert_practice_screen_arrival_time_id">
-				</div>
+							<div>
+  								<label for="insert_practice_screen_arrival_time_id">Arrival Time:</label>
+    								<input class="form-control" type="time" value="17:45:00" id="insert_practice_screen_arrival_time_id">
+							</div>
 
-				<div>
-  					<label for="insert_practice_screen_start_time_id">Start Time:</label>
-    					<input class="form-control" type="time" value="18:00:00" id="insert_practice_screen_start_time_id">
-				</div>
+							<div>
+  								<label for="insert_practice_screen_start_time_id">Start Time:</label>
+    								<input class="form-control" type="time" value="18:00:00" id="insert_practice_screen_start_time_id">
+							</div>
 		
-				<div>
-  					<label for="insert_practice_screen_end_time_id">End Time:</label>
-    					<input class="form-control" type="time" value="19:30:00" id="insert_practice_screen_end_time_id">
-				</div>
+							<div>
+  								<label for="insert_practice_screen_end_time_id">End Time:</label>
+    								<input class="form-control" type="time" value="19:30:00" id="insert_practice_screen_end_time_id">
+							</div>
     		
-				<div>
-      					<label for="insert_practice_screen_address_id">Address:</label>
-      					<input type="text" class="form-control" id="insert_practice_screen_address_id">
-				</div>
+							<div>
+      								<label for="insert_practice_screen_address_id">Address:</label>
+      								<input type="text" class="form-control" id="insert_practice_screen_address_id">
+							</div>
 
-				<div class="form-group row">
-      					<label for="insert_practice_screen_coordinates_id">Coordinates:</label>
-      					<input type="text" class="form-control" id="insert_practice_screen_coordinates_id">
-    				</div>
+							<div class="form-group row">
+      								<label for="insert_practice_screen_coordinates_id">Coordinates:</label>
+      								<input type="text" class="form-control" id="insert_practice_screen_coordinates_id">
+    							</div>
 
-       				<div id="insert_practice_screen_club_div_id">
-       					<label for="insert_practice_screen_club_id">Club:</label>
-       					<select id="insert_practice_screen_club_id" class="form-control">
-       					</select>
-				</div>
+       							<div id="insert_practice_screen_club_div_id">
+       								<label for="insert_practice_screen_club_id">Club:</label>
+       								<select id="insert_practice_screen_club_id" class="form-control">
+       							</select>
+						</div>
 
-       				<div id="insert_practice_screen_team_div_id">
-       					<label for="insert_practice_screen_team_id">Team:</label>
-       					<select id="insert_practice_screen_team_id" class="form-control">
-       					</select>
-				</div>
+       						<div id="insert_practice_screen_team_div_id">
+       							<label for="insert_practice_screen_team_id">Team:</label>
+       							<select id="insert_practice_screen_team_id" class="form-control">
+       							</select>
+						</div>
 
-				<div id="insert_practice_screen_pitch_div_id">
-       					<label for="insert_practice_screen_pitch_id">Pitch:</label>
-       					<select id="insert_practice_screen_pitch_id" class="form-control">
-       					</select>
-				</div>
+						<div id="insert_practice_screen_pitch_div_id">
+       							<label for="insert_practice_screen_pitch_id">Pitch:</label>
+       							<select id="insert_practice_screen_pitch_id" class="form-control">
+       							</select>
+						</div>
 		
-				<label for="insert_practice_screen_field_id">Field Name:</label>
-				<input type="text" class="form-control" id="insert_practice_screen_field_id">
+						<label for="insert_practice_screen_field_id">Field Name:</label>
+						<input type="text" class="form-control" id="insert_practice_screen_field_id">
 
-				<div id="insert_practice_screen_spinner_id" class="spinner-border text-primary" role="status">
- 					<span class="sr-only">Loading...</span>
-				</div>
+						<div id="insert_practice_screen_spinner_id" class="spinner-border text-primary" role="status">
+ 							<span class="sr-only">Loading...</span>
+						</div>
 		
-				<span id='insert_practice_screen_message_id'></span>
-				<button id="insertpracticescreenbuttonid" class="btn btn-primary">Submit</button>
+						<span id='insert_practice_screen_message_id'></span>
+						<button id="insertpracticescreenbuttonid" class="btn btn-primary">Submit</button>
 
-			</div>
-		</div>
-	</form>
+						</div>
+					</div>
+				</form>
 
-	<!-- END INSERT PRACTICE HTML  -->
+				<!-- END INSERT PRACTICE HTML  -->
 
 
-	
-	<!-- INSERT GAME HTML  -->
-        <form id="insert_game_screen_html_id" style="max-width: 18rem;" onsubmit="return false;" class="needs-validation">
+				<!-- INSERT GAME HTML  -->
+        			<form id="insert_game_screen_html_id" style="max-width: 18rem;" onsubmit="return false;" class="needs-validation">
 
-                <div class="card text-center" style="max-width: 18rem;">
+                			<div class="card text-center" style="max-width: 18rem;">
 
-                        <div class="card-header">
-                                ADD GAME
-                        </div>
+                        			<div class="card-header">
+                                			ADD GAME
+                        			</div>
 
-                        <div class="card-body">
+                        			<div class="card-body">
 
-  				<label for="insert_game_screen_date_id">Date:</label>
-    				<input class="form-control" type="date" value="2019-05-25" id="insert_game_screen_date_id">
+  							<label for="insert_game_screen_date_id">Date:</label>
+    							<input class="form-control" type="date" value="2019-05-25" id="insert_game_screen_date_id">
 
-  				<label for="insert_game_screen_arrival_time_id">Arrival Time:</label>
-    				<input class="form-control" type="time" value="17:45:00" id="insert_game_screen_arrival_time_id">
+  							<label for="insert_game_screen_arrival_time_id">Arrival Time:</label>
+    							<input class="form-control" type="time" value="17:45:00" id="insert_game_screen_arrival_time_id">
 
-  				<label for="insert_game_screen_start_time_id">Start Time:</label>
-    				<input class="form-control" type="time" value="18:00:00" id="insert_game_screen_start_time_id">
+  							<label for="insert_game_screen_start_time_id">Start Time:</label>
+    							<input class="form-control" type="time" value="18:00:00" id="insert_game_screen_start_time_id">
 		
-  				<label for="insert_game_screen_end_time_id">End Time:</label>
-    				<input class="form-control" type="time" value="19:30:00" id="insert_game_screen_end_time_id">
+  							<label for="insert_game_screen_end_time_id">End Time:</label>
+    							<input class="form-control" type="time" value="19:30:00" id="insert_game_screen_end_time_id">
     			
-      				<label for="insert_game_screen_address_id">Address:</label>
-      				<input type="text" class="form-control" id="insert_game_screen_address_id">
+      							<label for="insert_game_screen_address_id">Address:</label>
+      							<input type="text" class="form-control" id="insert_game_screen_address_id">
 
-      				<label for="insert_game_screen_coordinates_id">Coordinates:</label>
-      				<input type="text" class="form-control" id="insert_game_screen_coordinates_id">
+      							<label for="insert_game_screen_coordinates_id">Coordinates:</label>
+      							<input type="text" class="form-control" id="insert_game_screen_coordinates_id">
 
-       				<div id="insert_practice_screen_club_div_id">
-                			<label for="insert_game_screen_club_id">Club:</label>
-                        		<select id="insert_game_screen_club_id" class="form-control">
-                        		</select>
-                		</div>
+       							<div id="insert_practice_screen_club_div_id">
+                						<label for="insert_game_screen_club_id">Club:</label>
+                        					<select id="insert_game_screen_club_id" class="form-control">
+                        					</select>
+                					</div>
 
-       				<div id="insert_practice_screen_team_div_id">
-                			<label for="insert_game_screen_team_id">Team:</label>
-                        		<select id="insert_game_screen_team_id" class="form-control">
-                			</select>
-                		</div>
+       							<div id="insert_practice_screen_team_div_id">
+                						<label for="insert_game_screen_team_id">Team:</label>
+                        					<select id="insert_game_screen_team_id" class="form-control">
+                						</select>
+                					</div>
   		
-                		<div id="insert_game_screen_pitch_div_id">
-                			<label for="insert_game_screen_pitch_id">Pitch:</label>
-                        		<select id="insert_game_screen_pitch_id" class="form-control">
-                        		</select>
-                		</div>
+                					<div id="insert_game_screen_pitch_div_id">
+                						<label for="insert_game_screen_pitch_id">Pitch:</label>
+                        					<select id="insert_game_screen_pitch_id" class="form-control">
+                        					</select>
+                					</div>
 		
-      				<label for="insert_game_screen_field_id">Field Name:</label>
-      				<input type="text" class="form-control" id="insert_game_screen_field_id">
+      							<label for="insert_game_screen_field_id">Field Name:</label>
+      							<input type="text" class="form-control" id="insert_game_screen_field_id">
 
-				<div id="insert_game_screen_spinner_id" class="spinner-border text-primary" role="status">
- 					<span class="sr-only">Loading...</span>
+							<div id="insert_game_screen_spinner_id" class="spinner-border text-primary" role="status">
+ 								<span class="sr-only">Loading...</span>
+							</div>
+		
+							<span id='insert_game_screen_message_id'></span>
+							<button id="insertgamescreenbuttonid" class="btn btn-primary">Submit</button>
+
+						</div>
+					</div>
+				</form>
+
+				<!-- END INSERT GAME HTML  -->
+
+
+        			<!-- INSERT FORGOT PASSWORD HTML  -->
+        			<div id="insert_forgot_password_screen_html_id">
+
+        				<form id="insert_forgot_password_screen_form_id" onsubmit="return false;" class="needs-validation">
+                				<div class="form-row">
+                        				<div class="col-md-4 mb-3">
+                                				<label id="insert_forgot_password_screen_label_id" for="insert_forgot_password_screen_email_id">Email</label>
+                                				<input type="text" class="form-control" id="insert_forgot_password_screen_email_id" placeholder="Email" value="Email" required>
+                                				<span id='insert_forgot_password_screen_email_message_id'></span>
+                        				</div>
+                				</div>
+						
+						<div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
+ 							<span class="sr-only">Loading...</span>
+						</div>
+                
+						<button id="insertforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
+        				</form>
+		
+					<span id='insert_forgot_password_screen_message_id'></span>
+
 				</div>
-		
-				<span id='insert_game_screen_message_id'></span>
-				<button id="insertgamescreenbuttonid" class="btn btn-primary">Submit</button>
 
-			</div>
-		</div>
-	</form>
+        			<!-- END INSERT FORGOT PASSWORD HTML  -->
 
-	<!-- END INSERT GAME HTML  -->
+        			<!-- INSERT EMAIL CLUB SCREEN HTML  -->
 
-
-
-        <!-- INSERT FORGOT PASSWORD HTML  -->
-        <div id="insert_forgot_password_screen_html_id">
-
-        	<form id="insert_forgot_password_screen_form_id" onsubmit="return false;" class="needs-validation">
-                	<div class="form-row">
-                        	<div class="col-md-4 mb-3">
-                                	<label id="insert_forgot_password_screen_label_id" for="insert_forgot_password_screen_email_id">Email</label>
-                                	<input type="text" class="form-control" id="insert_forgot_password_screen_email_id" placeholder="Email" value="Email" required>
-                                	<span id='insert_forgot_password_screen_email_message_id'></span>
-                        	</div>
-                	</div>
-			<div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
- 				<span class="sr-only">Loading...</span>
-			</div>
-                
-			<button id="insertforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
-        	</form>
-		
-		<span id='insert_forgot_password_screen_message_id'></span>
-
-	</div>
-
-        <!-- END INSERT FORGOT PASSWORD HTML  -->
-
-        <!-- INSERT EMAIL CLUB SCREEN HTML  -->
-
-        <div id="insert_email_club_screen_html_id">
+        			<div id="insert_email_club_screen_html_id">
 	
-        	<form id="insert_email_club_screen_form_id" onsubmit="return false;" class="needs-validation">
-                	<div class="form-row">
+        				<form id="insert_email_club_screen_form_id" onsubmit="return false;" class="needs-validation">
+                				<div class="form-row">
 
-                               	<div id="insert_email_club_screen_club_div_id" class="form-group col-md-4">
-                               		<label for="insert_email_club_screen_club_id">Club:</label>
-                                       	<select id="insert_email_club_screen_club_id" class="form-control">
-                                      	</select>
-                               	</div>
+                               				<div id="insert_email_club_screen_club_div_id" class="form-group col-md-4">
+                               					<label for="insert_email_club_screen_club_id">Club:</label>
+                                       				<select id="insert_email_club_screen_club_id" class="form-control">
+                                      				</select>
+                               				</div>
 
-                       	 	<div class="col-md-4 mb-3">
-                                	<label id="insert_email_club_screen_label_id" for="insert_email_club_screen_email_id">Email</label>
-                                	<input type="text" class="form-control" id="insert_email_club_screen_email_id" placeholder="Email" value="Email" required>
-                                	<span id='insert_email_club_screen_email_message_id'></span>
-                        	</div>
-                	</div>
+                       	 				<div class="col-md-4 mb-3">
+                                				<label id="insert_email_club_screen_label_id" for="insert_email_club_screen_email_id">Email</label>
+                                				<input type="text" class="form-control" id="insert_email_club_screen_email_id" placeholder="Email" value="Email" required>
+                                				<span id='insert_email_club_screen_email_message_id'></span>
+                        				</div>
+                				</div>
 
-                	<button id="insertemailclubscreenbuttonid" class="btn btn-primary">Submit</button>
-        	</form>
-        	<div id="insert_email_club_screen_spinner_id" class="spinner-border" role="status">
-          		<span class="sr-only">Loading...</span>
-        	</div>
-	</div>
-
-
-        <!-- END INSERT INVITE CLUB MEMBER HTML  -->
-
-        <!-- INSERT ACCEPT CLUB INVITE HTML  -->
-        <div id="insert_accept_club_invite_screen_html_id">
-                <div id="insert_accept_club_invite_screen_spinner_id" class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                </div>
-        </div>
-
-        <!-- END INSERT INVITE CLUB MEMBER HTML  -->
+                				<button id="insertemailclubscreenbuttonid" class="btn btn-primary">Submit</button>
+        				</form>
+        		
+					<div id="insert_email_club_screen_spinner_id" class="spinner-border" role="status">
+          					<span class="sr-only">Loading...</span>
+        				</div>
+				</div>
 
 
-        <!-- UPDATE FORGOT PASSWORD HTML  -->
+       				<!-- END INSERT INVITE CLUB MEMBER HTML  -->
 
-        <div id="update_forgot_password_screen_html_id">
-        	<form id="update_forgot_password_screen_form_id" onsubmit="return false;" class="needs-validation">
-                	<div class="form-row">
-                        	<div class="col-md-4 mb-3">
-                                	<label for="update_forgot_password_screen_password1_id">Password</label>
-                                	<input type="password" class="form-control" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" value="Password1" required>
-                        	</div>
-                	</div>
-                	<div class="form-row">
-                        	<div class="col-md-4 mb-3">
-                                	<label for="update_forgot_password_screen_password2_id">Password Again</label>
-                                	<input type="password" class="form-control" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" value="Password2" required>
-                                	<span id='update_forgot_password_screen_password_message_id'></span>
-                        	</div>
-                	</div>
-			<div id="update_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
- 				<span class="sr-only">Loading...</span>
-			</div>
-                <button id="updateforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
-		</form>
-        </div>
+        			<!-- INSERT ACCEPT CLUB INVITE HTML  -->
+        			<div id="insert_accept_club_invite_screen_html_id">
+                			<div id="insert_accept_club_invite_screen_spinner_id" class="spinner-border" role="status">
+                        			<span class="sr-only">Loading...</span>
+                			</div>
+        			</div>
 
-        <!-- END UPDATE FORGOT PASSWORD HTML  -->
+        			<!-- END INSERT INVITE CLUB MEMBER HTML  -->
 
 
-	<!-- LOGIN_HTML 
-	
-                var login_card = document.getElementById("login_card_id");
-                var google_login_card = document.getElementById("google_login_card_id");
-                var join_card = document.getElementById("join_card_id");
-	
-	
-	-->
+        			<!-- UPDATE FORGOT PASSWORD HTML  -->
 
-       <div id="login_screen_html_id"nav_bar_content">
+        			<div id="update_forgot_password_screen_html_id">
+        				<form id="update_forgot_password_screen_form_id" onsubmit="return false;" class="needs-validation">
+                				<div class="form-row">
+                        				<div class="col-md-4 mb-3">
+                                				<label for="update_forgot_password_screen_password1_id">Password</label>
+                                				<input type="password" class="form-control" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" value="Password1" required>
+                        				</div>
+                				</div>
+                				
+						<div class="form-row">
+                        				<div class="col-md-4 mb-3">
+                                				<label for="update_forgot_password_screen_password2_id">Password Again</label>
+                                				<input type="password" class="form-control" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" value="Password2" required>
+                                				<span id='update_forgot_password_screen_password_message_id'></span>
+                        				</div>
+                				</div>
+			
+						<div id="update_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
+ 							<span class="sr-only">Loading...</span>
+						</div>
+                	
+						<button id="updateforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
+					</form>
+        			</div>
 
-                <div class="card">
+        			<!-- END UPDATE FORGOT PASSWORD HTML  -->
 
-                        <div class="container">
+       				<div id="login_screen_html_id"nav_bar_content">
 
-                                <h4><b>Login</b></h4>
+                			<div class="card">
 
-  				<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
-				<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
-				<button id="loginscreenbuttonid" class="button">LOGIN</button>
+                        			<div class="container">
 
-                        </div>
+                                			<h4><b>Login</b></h4>
 
-                </div>
+  							<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+							<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+							
+							<button id="loginscreenbuttonid" class="button">LOGIN</button>
 
-                <div class="card">
+                        			</div>
 
-                        <div class="container">
+                			</div>
 
-                                <h4><b>Google Login</b></h4>
+                			<div class="card">
 
-				<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-				<a id="google_sign_out_id" class="button" href="#" onclick="signOut();">Sign out of Google</a>
+                        			<div class="container">
+
+                                			<h4><b>Google Login</b></h4>
+
+							<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+								<a id="google_sign_out_id" class="button" href="#" onclick="signOut();">Sign out of Google</a>
 						
-                        </div>
+                        				</div>
 
-                </div>
+                				</div>
                 
-		<div class="card">
+					<div class="card">
 
-                        <div class="container">
+						<div class="container">
 
-                                <h4><b>Join</b></h4>
+                                			<h4><b>Join</b></h4>
 
-                                <h5 class="card-title">Dont have one of the accounts above? You can simply signup with your email.</h5>
-                                <p class="card-text">Click to join up below.</p>
-                                <a href="#insert_email_screen" class="button">JOIN</a>
+                                			<h5 class="card-title">Dont have one of the accounts above? You can simply signup with your email.</h5>
+                                			<p class="card-text">Click to join up below.</p>
+                                			<a href="#insert_email_screen" class="button">JOIN</a>
 						
-                        </div>
+                        			</div>
 
-                </div>
+                			</div>
 
-                <div id="login_screen_spinner_id" class="spinner-border text-primary" role="status">
-               		<span class="sr-only">Loading...</span>
-               	</div>
+                			<div id="login_screen_spinner_id" class="spinner-border text-primary" role="status">
+               					<span class="sr-only">Loading...</span>
+               				</div>
 
-        </div>
-        </div>
+        			</div>
+        		</div>
 
-		<div class="col-3 right">
-    			<div class="aside">
-      				<h2>What?</h2>
-      				<p>Chania is a city on the island of Crete.</p>
-      				<h2>Where?</h2>
-     			 	<p>Crete is a Greek island in the Mediterranean Sea.</p>
-      				<h2>How?</h2>
-      				<p>You can reach Chania airport from all over Europe.</p>
-    			</div>
+		
+			<div class="col-3 right">
+    				<div class="aside">
+      					<h2>What?</h2>
+      					<p>Chania is a city on the island of Crete.</p>
+      					<h2>Where?</h2>
+     			 		<p>Crete is a Greek island in the Mediterranean Sea.</p>
+      					<h2>How?</h2>
+      					<p>You can reach Chania airport from all over Europe.</p>
+    				</div>
+ 			</div>
  		</div>
- 	</div>
 
-</div>
+	</div>
 
 	<!-- END LOGIN_HTML -->
 
