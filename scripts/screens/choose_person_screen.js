@@ -47,7 +47,7 @@ class ChoosePersonScreen extends Screen
 	enter()
 	{
 		super.enter();
-               	this.hideNavigationBar();
+               	//this.hideNavigationBar();
 	}
 
         execute()
@@ -68,7 +68,7 @@ class ChoosePersonScreen extends Screen
 
 	exit()
 	{
-   		this.showNavigationBar();
+   		this.mApplication.showMenu();
 		super.exit();
 	}
 
