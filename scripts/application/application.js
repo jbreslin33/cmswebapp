@@ -20,6 +20,7 @@ class Application
                 this.mGoogleLoginHit = false;
 
 		//html
+               	this.mMenuHtml = null; 
                	this.mNavBarHtml = null; 
                	this.mInsertEmailScreenHtml = null; 
                	this.mInsertNativeLoginScreenHtml = null; 
@@ -39,6 +40,7 @@ class Application
                	this.mUpdateForgotPasswordScreenHtml = null; 
 
 		//set html 
+               	this.setMenuHtml                           ( document.getElementById("menu_id")                                  ); 
                	this.setNavBarHtml                         ( document.getElementById("nav_bar_id")                               ); 
                	this.setInsertEmailScreenHtml              ( document.getElementById("insert_email_screen_html_id")              ); 
                	this.setInsertNativeLoginScreenHtml        ( document.getElementById("insert_native_login_screen_html_id")       ); 
@@ -140,6 +142,23 @@ class Application
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
 
 	}
+        
+	hideMenu()
+        {
+                if (this.getMenuHtml())
+                {
+                        this.getMenuHtml().style.display = "none";
+		}
+        }
+
+	showMenu()
+        {
+                if (this.getMenuHtml())
+                {
+                        this.getMenuHtml().style.display = "block";
+                        this.getMenuHtml().style.visibility = "visible";
+		}
+        }
 
         toggleNav()
         {
@@ -226,6 +245,22 @@ class Application
                         console.log('User signed out.');
                 });
         }
+
+	setMenuHtml(h)
+	{
+		this.mMenuHtml = h;
+	}
+	getMenuHtml()
+	{
+		if (this.mMenuHtml)
+		{
+			return this.mMenuHtml;
+		}
+		else
+		{
+			console.log("nothing");
+		}
+	}
 
 	setNavBarHtml(h)
 	{

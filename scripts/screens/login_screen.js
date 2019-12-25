@@ -31,6 +31,10 @@ class LoginScreen extends Screen
 	enter()
 	{
 		super.enter();
+		
+		//hide menu
+		this.mApplication.hideMenu();
+
 		if (this.mApplication.getJWT())
 		{
 			console.log('true jwt');
