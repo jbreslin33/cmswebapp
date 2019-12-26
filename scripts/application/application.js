@@ -125,7 +125,6 @@ class Application
 		document.getElementById("navbuttonid").onclick = this.toggleNav.bind(this);
 		
 		this.setPersonSelect(document.getElementById("person_select_id"));
-                this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
@@ -190,25 +189,6 @@ class Application
                 }
 	}
 
-       	personSelected()
-        {
-
-                //this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
-
-                //this.mApplication.mUserSelectedPerson = true;
-                /*
-                var person_select = this.getPersonSelect();
-                if (person_select)
-                {
-                        if (person_select.options[person_select.selectedIndex])
-                        {
-                                APPLICATION.setPersonIdInLocalStorage(person_select.options[person_select.selectedIndex].value);
-                        }
-                }
-                */
-        }
-
-	
 	update(timestamp)
 	{
 		this.mStateMachine.update();

@@ -49,28 +49,7 @@ class Screen
 
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
-		//this.setPersonSelect(document.getElementById("person_select_id"));
-		//this.getPersonSelect().onclick = this.personSelected.bind(this);
-
 		this.setNavMessageElement(document.getElementById("nav_message_id"));
-	}
-
-	personSelected()
-	{
-
-		//this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
-
-		//this.mApplication.mUserSelectedPerson = true;
-		/*
-                var person_select = this.getPersonSelect();
-		if (person_select)
-		{
-			if (person_select.options[person_select.selectedIndex])
-			{
-                		APPLICATION.setPersonIdInLocalStorage(person_select.options[person_select.selectedIndex].value);
-			}
-		}
-		*/
 	}
 
 	ajax()
@@ -286,7 +265,7 @@ class Screen
 	//used to get from selects
         getPersonId()
         {
-                var select = this.getPersonSelect();
+                var select = this.mApplication.getPersonSelect();
                 if (select.value == "")
                 {
                         return 0;

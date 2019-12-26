@@ -17,8 +17,6 @@ class ChoosePersonScreen extends Screen
                 this.setSpinner(document.getElementById("choose_person_screen_spinner_id"));
                         
                 this.setPersonSelect(document.getElementById("choose_person_screen_select_id"));
-                this.getPersonSelect().onclick = this.personSelected.bind(this);
-
 
 		this.mPersonsExists = -1;
 

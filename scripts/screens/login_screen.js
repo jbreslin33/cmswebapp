@@ -57,35 +57,9 @@ class LoginScreen extends Screen
 			super.checkValidity();
 		}
 	}
-/*
-        showLogin()
-        {
-                //and show login
-                this.getLoginLink().style.display = "block";
-                this.getLoginLink().style.visibility = "visible";
-        }
-
-        hideLogin()
-        {
-                if (this.getLoginLink())
-                {
-                        this.getLoginLink().style.display = "none";
-                }
-        }
-*/
         show()
         {
                 super.show();
-                
-		var login_card = document.getElementById("login_card_id");
-                var google_login_card = document.getElementById("google_login_card_id");
-                var join_card = document.getElementById("join_card_id");
-
-		if (this.mApplication.getJWT())
-		{
-			login_card.style.display = "none";
-		}
-
         }
 
         hide()
