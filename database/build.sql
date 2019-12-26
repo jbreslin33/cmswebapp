@@ -2341,10 +2341,10 @@ DECLARE
 	found_pitch_id pitches.id%TYPE;
 BEGIN
 		
-	select id into found_pitch_id from pitches where name = $4;  	
+	select id into found_pitch_id from pitches where name = $4 AND club_id = $2;  	
 
         IF found_pitch_id > 0 THEN
-                result_set = '-101, Pitch name already taken.';
+		result_set = f_format_result_set_administrated_clubs($1,'Pitch name already exists',-101,$3);
 	ELSE
 		--are you a club admin of club $2????
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
