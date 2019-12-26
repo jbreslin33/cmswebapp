@@ -1,3 +1,5 @@
+hit enter in last text box should submit
+---------------------------------
 handle dups on pitch and maybe club and team
 -------------------
 after choose person hide menu buttons
