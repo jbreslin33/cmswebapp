@@ -70,8 +70,7 @@ html
 }
 
 /* BUTTONS */
-
-.btn-group button 
+button 
 {
 	background-color: #33b5e5; /* Blue background */
   	border: 1px solid green; /* Green border */
@@ -127,3 +126,15 @@ select
 {
 	margin-top: 25px;
 }
+
+/* INPUTS */
+input
+{
+	width: 100%;
+  	padding: 12px 20px;
+  	margin: 8px 0;
+  	display: inline-block;
+  	border: 1px solid #ccc;
+  	box-sizing: border-box;
+}
+
