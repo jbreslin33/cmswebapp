@@ -2305,11 +2305,10 @@ DECLARE
 	found_club_persons_id club_persons.id%TYPE;
 	found_team_id teams.id%TYPE;
 BEGIN
-		
 	select id into found_team_id from teams where name = $4;  	
 
         IF found_team_id > 0 THEN
-                result_set = '-101, Team name already taken.';
+                result_set = f_format_result_set($1,'Team name already exists',-101);
 	ELSE
 		--are you a club admin of club $2????
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
