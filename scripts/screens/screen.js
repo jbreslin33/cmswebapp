@@ -49,8 +49,8 @@ class Screen
 
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
-		this.setPersonSelect(document.getElementById("person_select_id"));
-		this.getPersonSelect().onclick = this.personSelected.bind(this);
+		//this.setPersonSelect(document.getElementById("person_select_id"));
+		//this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 		this.setNavMessageElement(document.getElementById("nav_message_id"));
 	}
@@ -58,7 +58,7 @@ class Screen
 	personSelected()
 	{
 
-		this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
+		//this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
 
 		//this.mApplication.mUserSelectedPerson = true;
 		/*
@@ -536,8 +536,11 @@ class Screen
 	{
 		if (this.mJson.persons)
 		{
+           		//lets grab old one first
+                        var v = this.mApplication.getPersonSelect().value;
+
                		//load up persons option
-               		var select = this.getPersonSelect();
+               		var select = this.mApplication.getPersonSelect();
 			select.length = 0;
                		for (var i = 0; i < this.mJson.persons.length; i++)
                		{
@@ -547,6 +550,10 @@ class Screen
                         	opt.innerHTML = full_name;
                        		select.appendChild(opt);
                		}
+
+	           	//lets grab old one first
+                        this.mApplication.getPersonSelect().value = v;
+
 		}
 	}
 	processPitches()

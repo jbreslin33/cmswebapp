@@ -40,7 +40,14 @@ class ChoosePersonScreen extends Screen
 
 		this.mApplication.mUserSelectedPerson = true;
 
-	 	this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
+	 	//this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
+
+		//set value of person select
+		console.log('A:' + this.mApplication.getPersonSelect().value);
+		console.log('B:' + this.getPersonSelect().value);
+
+		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+		console.log('C:' + this.mApplication.getPersonSelect().value);
 
 	}
 
@@ -71,7 +78,7 @@ class ChoosePersonScreen extends Screen
    		this.mApplication.showMenu();
 		super.exit();
 	}
-
+//you need to set person after processing persons to set whoever was chosen on choose screeen
 	processPersons()
         {
                 if (this.mJson.persons)

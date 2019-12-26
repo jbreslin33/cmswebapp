@@ -19,6 +19,9 @@ class Application
                 this.mImageUrl = null;
                 this.mGoogleLoginHit = false;
 
+		//select person
+		this.mPersonSelect = null;
+
 		//html
                	this.mMenuHtml = null; 
                	this.mNavBarHtml = null; 
@@ -120,7 +123,9 @@ class Application
 
 		// nav bar buttons clicked
 		document.getElementById("navbuttonid").onclick = this.toggleNav.bind(this);
-		//document.getElementById("nav_bar_close_button_id").onclick = this.closeNav.bind(this);
+		
+		this.setPersonSelect(document.getElementById("person_select_id"));
+                this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
@@ -184,6 +189,25 @@ class Application
 			this.toggleNav();
                 }
 	}
+
+       	personSelected()
+        {
+
+                //this.setNavMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
+
+                //this.mApplication.mUserSelectedPerson = true;
+                /*
+                var person_select = this.getPersonSelect();
+                if (person_select)
+                {
+                        if (person_select.options[person_select.selectedIndex])
+                        {
+                                APPLICATION.setPersonIdInLocalStorage(person_select.options[person_select.selectedIndex].value);
+                        }
+                }
+                */
+        }
+
 	
 	update(timestamp)
 	{
@@ -424,5 +448,16 @@ class Application
 	{
                 return this.mUpdateForgotPasswordScreenHtml;
 	}
+
+        setPersonSelect(select)
+        {
+                this.mPersonSelect = select;
+        }
+
+        getPersonSelect()
+        {
+                return this.mPersonSelect;
+        }
+
 
 }
