@@ -2305,7 +2305,7 @@ DECLARE
 	found_club_persons_id club_persons.id%TYPE;
 	found_team_id teams.id%TYPE;
 BEGIN
-	select id into found_team_id from teams where name = $4;  	
+	select id into found_team_id from teams where name = $4 AND club_id = $2;  	
 
         IF found_team_id > 0 THEN
                 result_set = f_format_result_set($1,'Team name already exists',-101);
