@@ -360,38 +360,37 @@ e
 	
 				<!-- INSERT PITCH HTML  -->
 
-        			<div class="card" id="insert_pitch_screen_html_id">
+        			<div id="insert_pitch_screen_html_id">
+                                	
+					<div class="card">
+
+                                		<div class="container">
+
+							<form>
 		
-					<div class="card-header" id="insert_pitch_screen_header_div_id">
-    			 			Add Pitch
-  					</div>
+    			 					Add Pitch
 
-                			<div id="insert_pitch_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        			<span class="sr-only">Loading...</span>
-                			</div>
+                						<div id="insert_pitch_screen_spinner_id">
+                        						<span class="sr-only">Loading...</span>
+                						</div>
 
-					<form id="insert_pitch_screen_form_id" onsubmit="return false;" class="needs-validation">
+                						<div id="insert_pitch_screen_club_div_id">
+                							<label for="insert_pitch_screen_club_id">Club:</label>
+                        						<select id="insert_pitch_screen_club_id" class="form-control">
+                        						</select>
+                						</div>
 
-						<div class="form-row">
-                					<div id="insert_pitch_screen_club_div_id" class="form-group col-md-4">
-                						<label for="insert_pitch_screen_club_id">Club:</label>
-                        					<select id="insert_pitch_screen_club_id" class="form-control">
-                        					</select>
-                					</div>
-						</div>
-
-  						<div class="form-row">
-
-    							<div class="col-md-4 mb-3">
       								<label for="insert_pitch_name_id">Pitch Name</label>
       								<input type="text" class="form-control" id="insert_pitch_screen_name_id" placeholder="Team Name" value="Team Name" required>
 								<span id='insert_pitch_screen_name_message_id'></span>
-    							</div>
-    						</div>
 						
-						<button id="insertpitchscreenbuttonid" class="btn btn-primary">Submit</button>
-						<span id='insert_pitch_screen_message_id'></span>
-					</form>
+								
+								<button id="insertpitchscreenbuttonid" class="btn btn-primary">Submit</button>
+								<span id='insert_pitch_screen_message_id'></span>
+    							</form>
+    						</div>
+    					</div>
+						
     				</div>
 
 				<!-- END INSERT TEAM HTML  -->
