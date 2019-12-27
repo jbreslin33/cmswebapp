@@ -73,22 +73,20 @@ class Main extends Screen
                         for (var i = 0; i < events.length; i++)
                         {
 				var div = document.createElement('div');	
-				div.setAttribute('class','card text-white bg-primary mb-3');
-				div.style = "max-width: 18rem;";
+				div.setAttribute('class','card');
 				document.getElementById("main_screen_html_id").appendChild(div);
 
 				//add to array
 				this.mCloneArray.push(div);
 
-				var divBody = document.createElement('div');
-				divBody.setAttribute('class','card-body');
-				div.appendChild(divBody);
+				var container = document.createElement('div');
+				container.setAttribute('class','container');
+				div.appendChild(container);
 
 				if (events[i].event_date)
 				{
 					var title = document.createElement('h5');
-					title.setAttribute('class','card-title');
-					divBody.appendChild(title);
+					container.appendChild(title);
 					
 					if (events[i].type == 'game')
 					{
@@ -103,8 +101,7 @@ class Main extends Screen
 				var textArray = new Array();
 				
 				var p = document.createElement('p');
-				p.setAttribute('class','card-text');
-				divBody.appendChild(p);
+				container.appendChild(p);
 
 				if (events[i].arrival_time)
 				{
