@@ -36,7 +36,6 @@ class Screen
 		this.mRequest = null;
 
 		this.mMessageElement = null;
-		this.mAsideMessageElement = null;
 		this.mMenuItem = null;
 
                 //states
@@ -50,7 +49,6 @@ class Screen
 
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
-		this.setAsideMessageElement(document.getElementById("aside_p_id"));
 	}
 
 	ajax()
@@ -169,33 +167,6 @@ class Screen
                         console.log('attempting to setMessage but there is no mMessageElement: ' + message);
                 }
         }
-
-
-	setAsideMessageElement(e)
-	{
-		this.mAsideMessageElement = e;
-	}
-	getAsideMessageElement()
-	{
-		return this.mAsideMessageElement;
-	}
-
-	setAsideMessage(message, color)
-	{
-		if (this.mAsideMessageElement)
-		{
-                	this.mAsideMessageElement.innerHTML = message;
-			this.mAsideMessageElement.style.color = color;
-
-                	//make sure we can see it	
-			this.getAsideMessageElement().style.display = "block";
-                	this.getAsideMessageElement().style.visibility = "visible";
-		}
-		else
-		{
-			console.log('attempting to setNavMessage but there is no mNavMessageElement: ' + message);
-		}
-	}
 
 	setMenuItem(menuItem)
 	{

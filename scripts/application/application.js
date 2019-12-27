@@ -125,6 +125,7 @@ class Application
 		document.getElementById("navbuttonid").onclick = this.toggleNav.bind(this);
 		
 		this.setPersonSelect(document.getElementById("person_select_id"));
+		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
@@ -145,6 +146,43 @@ class Application
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
 
+
+		//aside
+                this.mAsideMessageElement = null;
+           	this.setAsideMessageElement(document.getElementById("aside_p_id"));
+
+	}
+
+	//aside
+        setAsideMessageElement(e)
+        {
+                this.mAsideMessageElement = e;
+        }
+        getAsideMessageElement()
+        {
+                return this.mAsideMessageElement;
+        }
+
+        setAsideMessage(message, color)
+        {
+                if (this.mAsideMessageElement)
+                {
+                        this.mAsideMessageElement.innerHTML = message;
+                        this.mAsideMessageElement.style.color = color;
+
+                        //make sure we can see it       
+                        this.getAsideMessageElement().style.display = "block";
+                        this.getAsideMessageElement().style.visibility = "visible";
+                }
+                else
+                {
+                        console.log('attempting to setNavMessage but there is no mNavMessageElement: ' + message);
+                }
+        }
+
+	personSelected()
+	{
+		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
 	}
         
 	hideMenu()

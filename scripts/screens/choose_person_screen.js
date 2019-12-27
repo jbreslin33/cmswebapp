@@ -41,7 +41,7 @@ class ChoosePersonScreen extends Screen
 		//set value of person select
 		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 
-		this.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
+		this.mApplication.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
 
 	}
 
