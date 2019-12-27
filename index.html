@@ -179,41 +179,32 @@
 				<!-- END INSERT EMAIL HTML  -->
 
 				<!-- INSERT NATIVE LOGIN HTML  -->
-				<div class="card" id="insert_native_login_screen_html_id"> 
-  		
-					<div class="card-header" id="insert_native_login_screen_header_div_id">
-    			 			To finish joining Club Management System simply set a password below...
-  					</div>
+				<div id="insert_native_login_screen_html_id"> 
 
-					<span id='insert_native_login_screen_message_id'></span>
+					<div class="card">
 
-					<a id="insert_native_login_screen_login_id" href="#login_screen" class="card-link">Login</a>
+						<div class="container">
 
-  					<div class="card-body">
 
-						<form id="insert_native_login_screen_form_id" onsubmit="return false;" class="needs-validation">
+    			 				To finish joining Club Management System simply set a password below...
 
-                					<div id="insert_native_login_screen_spinner_id" class="spinner-border text-primary" role="status">
-                        					<span class="sr-only">Loading...</span>
-                					</div>
+							<span id='insert_native_login_screen_message_id'></span>
 
-                					<div class="form-row">
+							<a id="insert_native_login_screen_login_id" href="#login_screen">Login</a>
 
-                        					<div class="col-md-4 mb-3">
-                                					<label for="insert_native_login_screen_password1_id">Password</label>
-                                					<input type="password" class="form-control" id="insert_native_login_screen_password1_id" placeholder="Phone" value="Password" required>
-                        					</div>
+							<form id="insert_native_login_screen_form_id" onsubmit="return false;" class="needs-validation">
 
-                        					<div class="col-md-4 mb-3">
-                                					<label for="insert_native_login_screen_password2_id">Re-type Password</label>
+                						<div id="insert_native_login_screen_spinner_id" class="spinner-border text-primary" role="status">
+                        						<span class="sr-only">Loading...</span>
+                                					<input type="password" id="insert_native_login_screen_password1_id" placeholder="Password" value="Password" required>
                                 					<input type="password" class="form-control" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
 									<span id='password_message_id'></span>
                         					</div>
-                					</div>
+                					</form>
 
-                					<button id="insertnativeloginscreenbuttonid" class="btn btn-primary">Submit</button>
+                					<button id="insertnativeloginscreenbuttonid">Submit</button>
 
-						</form>
+               					</div>
                				</div>
 				</div>
 
