@@ -192,14 +192,14 @@
 
 							<a id="insert_native_login_screen_login_id" href="#login_screen">Login</a>
 
-							<form id="insert_native_login_screen_form_id" onsubmit="return false;" class="needs-validation">
+							<form id="insert_native_login_screen_form_id">
 
-                						<div id="insert_native_login_screen_spinner_id" class="spinner-border text-primary" role="status">
+                						<div id="insert_native_login_screen_spinner_id">
                         						<span class="sr-only">Loading...</span>
-                                					<input type="password" id="insert_native_login_screen_password1_id" placeholder="Password" value="Password" required>
-                                					<input type="password" class="form-control" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
-									<span id='password_message_id'></span>
-                        					</div>
+								</div>
+                                				<input type="password" id="insert_native_login_screen_password1_id" placeholder="Password" value="Password" required>
+                                				<input type="password" id="insert_native_login_screen_password2_id" placeholder="Re-type Password" value="Re-type Password" required>
+								<span id='password_message_id'></span>
                 					</form>
 
                 					<button id="insertnativeloginscreenbuttonid">Submit</button>
@@ -744,8 +744,10 @@
 					<div class="card">
 
 						<div class="container">
+							<form>
 
-       	        					<button formaction="#insert_email_screen">Sign Up</a>
+       	        						<button formaction="#insert_email_screen">Sign Up</a>
+							</form>
 
                         			</div>
 
