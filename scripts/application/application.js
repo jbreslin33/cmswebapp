@@ -128,7 +128,7 @@ class Application
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
-		document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
+		//document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
 		
 		document.getElementById("insertpracticenavbuttonid").onclick = this.hit.bind(this);
