@@ -350,10 +350,13 @@ class LOGOUT_APPLICATION extends State
                 //clear mJWT from localstorage
                 localStorage.removeItem("mJWT");
 
+		app.mUserSelectedPerson = false;
+
                 //clear person selects
                 document.getElementById("person_select_id").length = 0;
 
 		app.googleSignOut();
+
 
 	}
 
