@@ -36,6 +36,7 @@ class Screen
 		this.mRequest = null;
 
 		this.mMessageElement = null;
+		this.mAsideMessageElement = null;
 		this.mMenuItem = null;
 
                 //states
@@ -49,7 +50,7 @@ class Screen
 
 	        this.setNavigationBar(document.getElementById("nav_bar_id"));
 
-		this.setNavMessageElement(document.getElementById("nav_message_id"));
+		this.setAsideMessageElement(document.getElementById("aside_p_id"));
 	}
 
 	ajax()
@@ -170,25 +171,25 @@ class Screen
         }
 
 
-	setNavMessageElement(navMessageElement)
+	setAsideMessageElement(e)
 	{
-		this.mNavMessageElement = navMessageElement;
+		this.mAsideMessageElement = e;
 	}
-	getNavMessageElement()
+	getAsideMessageElement()
 	{
-		return this.mNavMessageElement;
+		return this.mAsideMessageElement;
 	}
 
-	setNavMessage(message, color)
+	setAsideMessage(message, color)
 	{
-		if (this.mNavMessageElement)
+		if (this.mAsideMessageElement)
 		{
-                	this.mNavMessageElement.innerHTML = message;
-			this.mNavMessageElement.style.color = color;
+                	this.mAsideMessageElement.innerHTML = message;
+			this.mAsideMessageElement.style.color = color;
 
                 	//make sure we can see it	
-			this.getNavMessageElement().style.display = "block";
-                	this.getNavMessageElement().style.visibility = "visible";
+			this.getAsideMessageElement().style.display = "block";
+                	this.getAsideMessageElement().style.visibility = "visible";
 		}
 		else
 		{
