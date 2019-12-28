@@ -581,27 +581,26 @@ e
         			<!-- INSERT EMAIL CLUB SCREEN HTML  -->
 
         			<div id="insert_email_club_screen_html_id">
+					<div class="card">
+						<div class="container">
 	
-        				<form id="insert_email_club_screen_form_id" onsubmit="return false;" class="needs-validation">
-                				<div class="form-row">
+        						<form id="insert_email_club_screen_form_id">
 
-                               				<div id="insert_email_club_screen_club_div_id" class="form-group col-md-4">
                                					<label for="insert_email_club_screen_club_id">Club:</label>
                                        				<select id="insert_email_club_screen_club_id" class="form-control">
                                       				</select>
-                               				</div>
 
-                       	 				<div class="col-md-4 mb-3">
                                 				<label id="insert_email_club_screen_label_id" for="insert_email_club_screen_email_id">Email</label>
                                 				<input type="text" class="form-control" id="insert_email_club_screen_email_id" placeholder="Email" value="Email" required>
-                                				<span id='insert_email_club_screen_email_message_id'></span>
-                        				</div>
+							</form>
                 				</div>
+                			</div>
 
-                				<button id="insertemailclubscreenbuttonid" class="btn btn-primary">Submit</button>
-        				</form>
+                			<button id="insertemailclubscreenbuttonid" class="btn btn-primary">Submit</button>
+
+                                	<span id='insert_email_club_screen_email_message_id'></span>
         		
-					<div id="insert_email_club_screen_spinner_id" class="spinner-border" role="status">
+					<div id="insert_email_club_screen_spinner_id">
           					<span class="sr-only">Loading...</span>
         				</div>
 				</div>
@@ -611,6 +610,7 @@ e
 
         			<!-- INSERT ACCEPT CLUB INVITE HTML  -->
         			<div id="insert_accept_club_invite_screen_html_id">
+					
                 			<div id="insert_accept_club_invite_screen_spinner_id" class="spinner-border" role="status">
                         			<span class="sr-only">Loading...</span>
                 			</div>
