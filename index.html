@@ -611,7 +611,7 @@ e
         			<!-- INSERT ACCEPT CLUB INVITE HTML  -->
         			<div id="insert_accept_club_invite_screen_html_id">
 					
-                			<div id="insert_accept_club_invite_screen_spinner_id" class="spinner-border" role="status">
+                			<div id="insert_accept_club_invite_screen_spinner_id">
                         			<span class="sr-only">Loading...</span>
                 			</div>
         			</div>
@@ -622,28 +622,24 @@ e
         			<!-- UPDATE FORGOT PASSWORD HTML  -->
 
         			<div id="update_forgot_password_screen_html_id">
-        				<form id="update_forgot_password_screen_form_id" onsubmit="return false;" class="needs-validation">
-                				<div class="form-row">
-                        				<div class="col-md-4 mb-3">
+					<div class="card">
+						<div class="container">
+
+        						<form id="update_forgot_password_screen_form_id">
                                 				<label for="update_forgot_password_screen_password1_id">Password</label>
-                                				<input type="password" class="form-control" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" value="Password1" required>
-                        				</div>
-                				</div>
-                				
-						<div class="form-row">
-                        				<div class="col-md-4 mb-3">
+                                				<input type="password" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" value="Password1" required>
                                 				<label for="update_forgot_password_screen_password2_id">Password Again</label>
-                                				<input type="password" class="form-control" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" value="Password2" required>
+                                				<input type="password" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" value="Password2" required>
                                 				<span id='update_forgot_password_screen_password_message_id'></span>
-                        				</div>
+                        				</form>
                 				</div>
+                			</div>
 			
-						<div id="update_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
- 							<span class="sr-only">Loading...</span>
-						</div>
+					<div id="update_forgot_password_screen_spinner_id">
+ 						<span class="sr-only">Loading...</span>
+					</div>
                 	
-						<button id="updateforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
-					</form>
+					<button id="updateforgotpasswordscreenbuttonid" class="btn btn-primary">Submit</button>
         			</div>
 
         			<!-- END UPDATE FORGOT PASSWORD HTML  -->
