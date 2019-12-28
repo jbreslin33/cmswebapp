@@ -1,3 +1,5 @@
+when you hit a button you need to close side nav and or make sub menus
+---------------
 hit enter in last text box should submit
 ---------------------------------
 handle dups on pitch and maybe club and team
