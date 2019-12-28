@@ -34,7 +34,6 @@ class LoginScreen extends Screen
 		
 		//hide menus
 		this.mApplication.hideSideMenu();
-		this.mApplication.hideMenu();
 
 		if (this.mApplication.getJWT())
 		{

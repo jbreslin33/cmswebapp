@@ -63,7 +63,6 @@ class ChoosePersonScreen extends Screen
 
 	exit()
 	{
-   		this.mApplication.showMenu();
    		this.mApplication.showSideMenu();
 		super.exit();
 	}

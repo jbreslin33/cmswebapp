@@ -24,7 +24,6 @@ class Application
 
 		//html
                	this.mSideMenuHtml = null; 
-               	this.mMenuHtml = null; 
                	this.mNavBarHtml = null; 
                	this.mInsertEmailScreenHtml = null; 
                	this.mInsertNativeLoginScreenHtml = null; 
@@ -45,7 +44,6 @@ class Application
 
 		//set html 
                	this.setSideMenuHtml                       ( document.getElementById("side_menu_id")                             ); 
-               	this.setMenuHtml                           ( document.getElementById("menu_id")                                  ); 
                	this.setNavBarHtml                         ( document.getElementById("nav_bar_id")                               ); 
                	this.setInsertEmailScreenHtml              ( document.getElementById("insert_email_screen_html_id")              ); 
                	this.setInsertNativeLoginScreenHtml        ( document.getElementById("insert_native_login_screen_html_id")       ); 
@@ -122,9 +120,6 @@ class Application
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
-
-		// nav bar buttons clicked
-		document.getElementById("navbuttonid").onclick = this.toggleNav.bind(this);
 
 		//sidenav
 		document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
@@ -205,24 +200,6 @@ class Application
                         this.getSideMenuHtml().style.display = "block";
                         this.getSideMenuHtml().style.visibility = "visible";
                 }
-        }
-
-        
-	hideMenu()
-        {
-                if (this.getMenuHtml())
-                {
-                        this.getMenuHtml().style.display = "none";
-		}
-        }
-
-	showMenu()
-        {
-                if (this.getMenuHtml())
-                {
-                        this.getMenuHtml().style.display = "block";
-                        this.getMenuHtml().style.visibility = "visible";
-		}
         }
 
         toggleNav()
