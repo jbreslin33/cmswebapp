@@ -189,6 +189,24 @@ class Application
 	{
 		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
 	}
+
+        hideSideMenu()
+        {
+                if (this.getSideMenuHtml())
+                {
+                        this.getSideMenuHtml().style.display = "none";
+                }
+        }
+
+        showSideMenu()
+        {
+                if (this.getSideMenuHtml())
+                {
+                        this.getSideMenuHtml().style.display = "block";
+                        this.getSideMenuHtml().style.visibility = "visible";
+                }
+        }
+
         
 	hideMenu()
         {
