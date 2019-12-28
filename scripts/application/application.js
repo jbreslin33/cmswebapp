@@ -23,6 +23,7 @@ class Application
 		this.mPersonSelect = null;
 
 		//html
+               	this.mSideMenuHtml = null; 
                	this.mMenuHtml = null; 
                	this.mNavBarHtml = null; 
                	this.mInsertEmailScreenHtml = null; 
@@ -43,6 +44,7 @@ class Application
                	this.mUpdateForgotPasswordScreenHtml = null; 
 
 		//set html 
+               	this.setSideMenuHtml                       ( document.getElementById("side_menu_id")                             ); 
                	this.setMenuHtml                           ( document.getElementById("menu_id")                                  ); 
                	this.setNavBarHtml                         ( document.getElementById("nav_bar_id")                               ); 
                	this.setInsertEmailScreenHtml              ( document.getElementById("insert_email_screen_html_id")              ); 
@@ -123,12 +125,15 @@ class Application
 
 		// nav bar buttons clicked
 		document.getElementById("navbuttonid").onclick = this.toggleNav.bind(this);
+
+		//sidenav
+		document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
+		document.getElementById("sidenavclosebuttonid").onclick = this.closeNav.bind(this);
 		
 		this.setPersonSelect(document.getElementById("person_select_id"));
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
 		document.getElementById("mainnavbuttonid").onclick = this.hit.bind(this);
-		//document.getElementById("loginnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
 		
 		document.getElementById("insertpracticenavbuttonid").onclick = this.hit.bind(this);
@@ -227,6 +232,19 @@ class Application
                 }
 	}
 
+	//side nav
+       
+	openNav()
+        {
+        	document.getElementById("side_nav_id").style.width = "250px";
+        }
+
+        closeNav()
+        {
+        	document.getElementById("side_nav_id").style.width = "0";
+        }
+
+
 	update(timestamp)
 	{
 		this.mStateMachine.update();
@@ -297,6 +315,22 @@ class Application
 		if (this.mMenuHtml)
 		{
 			return this.mMenuHtml;
+		}
+		else
+		{
+			console.log("nothing");
+		}
+	}
+
+	setSideMenuHtml(h)
+	{
+		this.mSideMenuHtml = h;
+	}
+	getSideMenuHtml()
+	{
+		if (this.mSideMenuHtml)
+		{
+			return this.mSideMenuHtml;
 		}
 		else
 		{
