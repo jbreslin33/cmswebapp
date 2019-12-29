@@ -152,13 +152,19 @@ input
   padding-top: 60px;
 }
 
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+.sidenav button 
+{
+	padding: 8px 8px 8px 32px;
+  	text-decoration: none;
+  	color: #818181;
+  	display: block;
+  	transition: 0.3s;
+	
+  	background-color: #33b5e5; /* Blue background */
+ 	border: 1px solid green; /* Green border */
+ 	color: white; /* White text */
+  	cursor: pointer; /* Pointer/hand icon */
+	width: 100%;
 }
 
 .sidenav a:hover {
