@@ -141,7 +141,6 @@ class Application
 		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(this);
 		
-		document.getElementById("insertemailnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(this);
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
