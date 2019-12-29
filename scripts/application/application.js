@@ -145,11 +145,15 @@ class Application
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
 
-
 		//aside
                 this.mAsideMessageElement = null;
            	this.setAsideMessageElement(document.getElementById("aside_p_id"));
 
+	}
+	
+	hit()
+	{
+		this.closeNav();	
 	}
 
 	//aside
@@ -200,31 +204,6 @@ class Application
                         this.getSideMenuHtml().style.visibility = "visible";
                 }
         }
-
-        toggleNav()
-        {
-                if (this.getNavBarHtml())
-                {
-                        if (this.getNavBarHtml().style.display == "none")
-			{
-                        	this.getNavBarHtml().style.display = "block";
-                        	this.getNavBarHtml().style.visibility = "visible";
-			}
-			else
-			{
-                        	this.getNavBarHtml().style.display = "none";
-			}
-
-                }
-        }
-
-	hit ()
-	{
-                if (this.getNavBarHtml())
-                {
-			this.toggleNav();
-                }
-	}
 
 	//side nav
        
