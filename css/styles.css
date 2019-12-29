@@ -34,6 +34,11 @@ html
 	cursor: pointer;
 }
 
+#headerid
+{
+	font-size: 23px;
+}
+
 .aside 
 {
 	background-color: #33b5e5;
