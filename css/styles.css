@@ -28,6 +28,15 @@ html
  	padding: 15px;
 }
 
+#sidenavopenbuttonid
+{
+	font-size: 30px;
+	cursor: pointer;
+}
+/*
+  <span id="sidenavopenbuttonid">&#9776; Side Menu</span>
+                        <!--            <span style="font-size:30px;cursor:pointer"
+*/
 .aside 
 {
 	background-color: #33b5e5;
