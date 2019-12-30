@@ -1,2 +1,2 @@
-sudo -u postgres createdb cms
+sudo -u postgres createdb footballhome
 

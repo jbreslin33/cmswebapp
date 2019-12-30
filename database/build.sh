@@ -1,1 +1,1 @@
-sudo -u postgres psql -d cms -f database/build.sql
+sudo -u postgres psql -d footballhome -f database/build.sql
