@@ -7,7 +7,7 @@ class InsertGoogleLoginClub
 {
 	function __construct() 
 	{
-                $database = new Database("localhost","cms","postgres","mibesfat");
+                $database = new Database("localhost","footballhome","postgres","mibesfat");
 
 		$sql = 'select f_insert_google_login_club($1,$2,$3,$4,$5,$6,$7)';
 		

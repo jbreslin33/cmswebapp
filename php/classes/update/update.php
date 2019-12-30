@@ -35,7 +35,7 @@ abstract class Update
 	//run query is the machinations of running it from php to sql to return dataset
 	public function run()
 	{
-		$database = new Database("localhost","cms","postgres","mibesfat");
+		$database = new Database("localhost","footballhome","postgres","mibesfat");
 
                 $results = $database->query($this->mSQL);
 

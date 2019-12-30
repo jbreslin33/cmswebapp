@@ -7,7 +7,7 @@ class Screen
 {
 	function __construct() 
 	{
-		$this->mDatabase = new Database("localhost","cms","postgres","mibesfat");
+		$this->mDatabase = new Database("localhost","footballhome","postgres","mibesfat");
 
                	$this->mPersonId = 0;
                 $this->mClubId = 0;
