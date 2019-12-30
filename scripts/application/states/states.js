@@ -129,11 +129,6 @@ class INIT_APPLICATION extends State
 		{
 			console.log("INIT_APPLICATION_STATE: ENTER");        
 		}
-		//hide evertthing except nav_bar_id
-		if (application.getNavBarHtml())
-		{
-			application.getNavBarHtml().style.display = "none";
-		}
 
 		if (application.getInsertEmailScreenHtml())
 		{

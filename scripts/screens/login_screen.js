@@ -33,7 +33,7 @@ class LoginScreen extends Screen
 		super.enter();
 		
 		//hide menus
-		this.mApplication.hideSideMenu();
+		this.mApplication.hideSideNavOpenButtonHtml();
 
 		if (this.mApplication.getJWT())
 		{

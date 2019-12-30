@@ -45,10 +45,6 @@ class Screen
                 this.mStateExitLogs = false;
 
                 this.mStateMachine = null;
-
-
-	        this.setNavigationBar(document.getElementById("nav_bar_id"));
-
 	}
 
 	ajax()

@@ -23,8 +23,7 @@ class Application
 		this.mPersonSelect = null;
 
 		//html
-               	this.mSideMenuHtml = null; 
-               	this.mNavBarHtml = null; 
+               	this.mSideNavOpenButtonHtml = null; 
                	this.mInsertEmailScreenHtml = null; 
                	this.mInsertNativeLoginScreenHtml = null; 
                	this.mLoginScreenHtml = null; 
@@ -43,8 +42,7 @@ class Application
                	this.mUpdateForgotPasswordScreenHtml = null; 
 
 		//set html 
-               	this.setSideMenuHtml                       ( document.getElementById("side_menu_id")                             ); 
-               	this.setNavBarHtml                         ( document.getElementById("nav_bar_id")                               ); 
+               	this.setSideNavOpenButtonHtml              ( document.getElementById("sidenavopenbuttonid")                      ); 
                	this.setInsertEmailScreenHtml              ( document.getElementById("insert_email_screen_html_id")              ); 
                	this.setInsertNativeLoginScreenHtml        ( document.getElementById("insert_native_login_screen_html_id")       ); 
                	this.setLoginScreenHtml                    ( document.getElementById("login_screen_html_id")                     ); 
@@ -188,20 +186,20 @@ class Application
 		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
 	}
 
-        hideSideMenu()
+        hideSideNavOpenButtonHtml()
         {
-                if (this.getSideMenuHtml())
+                if (this.getSideNavOpenButtonHtml())
                 {
-                        this.getSideMenuHtml().style.display = "none";
+                        this.getSideNavOpenButtonHtml().style.display = "none";
                 }
         }
 
-        showSideMenu()
+        showSideNavOpenButtonHtml()
         {
-                if (this.getSideMenuHtml())
+                if (this.getSideNavOpenButtonHtml())
                 {
-                        this.getSideMenuHtml().style.display = "block";
-                        this.getSideMenuHtml().style.visibility = "visible";
+                        this.getSideNavOpenButtonHtml().style.display = "block";
+                        this.getSideNavOpenButtonHtml().style.visibility = "visible";
                 }
         }
 
@@ -295,15 +293,16 @@ class Application
 		}
 	}
 
-	setSideMenuHtml(h)
+	setSideNavOpenButtonHtml(h)
 	{
-		this.mSideMenuHtml = h;
+		this.mSideNavOpenButtonHtml = h;
 	}
-	getSideMenuHtml()
+
+	getSideNavOpenButtonHtml()
 	{
-		if (this.mSideMenuHtml)
+		if (this.mSideNavOpenButtonHtml)
 		{
-			return this.mSideMenuHtml;
+			return this.mSideNavOpenButtonHtml;
 		}
 		else
 		{
@@ -311,23 +310,6 @@ class Application
 		}
 	}
 
-	setNavBarHtml(h)
-	{
-		this.mNavBarHtml = h;
-	}
-	getNavBarHtml()
-	{
-		if (this.mNavBarHtml)
-		{
-			return this.mNavBarHtml;
-		}
-		else
-		{
-			console.log("nothing");
-		}
-	}
-
-                
 	setInsertEmailScreenHtml(h)
 	{
 		this.mInsertEmailScreenHtml = h;

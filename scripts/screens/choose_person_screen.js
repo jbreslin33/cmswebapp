@@ -63,7 +63,7 @@ class ChoosePersonScreen extends Screen
 
 	exit()
 	{
-   		this.mApplication.showSideMenu();
+   		this.mApplication.showSideNavOpenButtonHtml();
 		super.exit();
 	}
 //you need to set person after processing persons to set whoever was chosen on choose screeen
