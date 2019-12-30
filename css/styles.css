@@ -87,12 +87,19 @@ input
   	position: fixed;
   	z-index: 1;
   	top: 0;
-  	left: 0;
+  	left: 0; /* overides and puts nav at the very top left */ 
   	background-color: #ffffff;
   	overflow-x: hidden;
   	transition: 0.5s;
-  	padding-top: 20px;
+  	padding-top: 20px; 
   	padding-left: 10px;
+}
+
+.sidenav .closebtn 
+{
+  	margin-left: 10px;
+	color: #33b5e5;
+  	font-size: 36px;
 }
 
 .sidenav button 
@@ -114,23 +121,6 @@ input
 {
 	color: #4CAF50;
 }
-
-.sidenav .closebtn 
-{
-	/*
-	position: absolute;
-  	top: 0;
-  	right: 0px;
-  	font-size: 36px;
-  	margin-left: 0px;
-	color: #33b5e5;
-	position: absolute;
-	*/
-  	margin-left: 10px;
-	color: #33b5e5;
-  	font-size: 36px;
-}
-
 
 #sidenavopenbuttonid
 {
