@@ -2,66 +2,69 @@
 {
 	box-sizing: border-box;
 }
-/********************** SCREENS *****************/
-/* For mobile phones: */
-[class*="col-"] 
-{
-	width: 100%;
-}
 
-/* For everything else: */
+/***********************************************/
+/**************** TAGS *************************/
+/*********************************************/
 
-@media only screen and (min-width: 768px) 
-{
-	/* For desktop: */
-  	.col-1 {width: 8.33%;}
-  	.col-2 {width: 16.66%;}
-  	.col-3 {width: 25%;}
-  	.col-4 {width: 33.33%;}
-  	.col-5 {width: 41.66%;}
-  	.col-6 {width: 50%;}
-  	.col-7 {width: 58.33%;}
-  	.col-8 {width: 66.66%;}
-  	.col-9 {width: 75%;}
-  	.col-10 {width: 83.33%;}
-  	.col-11 {width: 91.66%;}
-  	.col-12 {width: 100%;}
-}
 
-@media screen and (max-height: 450px) 
-{
-	.sidenav {padding-top: 15px;}
-  	.sidenav a {font-size: 18px;}
-}
-
-/**************************************/
-
-/* html */
+/************* HTML *************************/
 
 html 
 {
 	font-family: "Lucida Sans", sans-serif;
 }
 
-
-/* rows */
-
-.row::after 
+/*************** BUTTONS ******************/
+button 
 {
-	content: "";
-  	clear: both;
-  	display: table;
+	background-color: #33b5e5; /* Blue background */
+  	border: 1px solid green; /* Green border */
+  	color: white; /* White text */
+ 	padding: 10px 24px; /* Some padding */
+  	cursor: pointer; /* Pointer/hand icon */
+  	display: block; /* Make the buttons appear below each other */
+	width: 100%;
 }
 
-/* cols */
-
-[class*="col-"] 
+.btn-group button:not(:last-child) 
 {
-	float: left;
-  	padding: 15px;
+	border-bottom: none; /* Prevent double borders */
 }
 
-/* header */
+/* Add a background color on hover */
+.btn-group button:hover 
+{
+  	background-color: #4CAF50; /* Green background */
+}
+
+/******************** SELECTS *******************/
+select 
+{
+	width: 100%;
+  	padding: 16px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	background-color: #33b5e5;
+}
+
+/**************** INPUTS ************************/
+input
+{
+	width: 100%;
+  	padding: 12px 20px;
+  	margin: 8px 0;
+  	display: inline-block;
+  	border: 1px solid #ccc;
+  	box-sizing: border-box;
+}
+
+/***********************************************/
+/********************** PARTITIONS *****************/
+/*********************************************/
+
+
+/****************** HEADER *****************/
 
 .header 
 {
@@ -70,7 +73,12 @@ html
  	padding: 15px;
 }
 
-/* sidenav */
+#headerid
+{
+	font-size: 23px;
+}
+
+/****************** SIDENAV *****************/
 
 .sidenav 
 {
@@ -122,12 +130,9 @@ html
 	cursor: pointer;
 }
 
-#headerid
-{
-	font-size: 23px;
-}
 
 
+/************* ASIDE 3rd column **************/
 .aside 
 {
 	background-color: #33b5e5;
@@ -171,49 +176,58 @@ html
 }
 
 
+/***********************************************/
+/********************** SCREENS *****************/
+/*********************************************/
 
-/*************** BUTTONS ******************/
-button 
-{
-	background-color: #33b5e5; /* Blue background */
-  	border: 1px solid green; /* Green border */
-  	color: white; /* White text */
- 	padding: 10px 24px; /* Some padding */
-  	cursor: pointer; /* Pointer/hand icon */
-  	display: block; /* Make the buttons appear below each other */
-	width: 100%;
-}
-
-/*************** BUTTON GROUPS ******************/
-.btn-group button:not(:last-child) 
-{
-	border-bottom: none; /* Prevent double borders */
-}
-
-/* Add a background color on hover */
-.btn-group button:hover 
-{
-  	background-color: #4CAF50; /* Green background */
-}
-
-/******************** SELECTS *******************/
-select 
+/********************** MOBILE SCREENS *****************/
+/* For mobile phones: */
+[class*="col-"] 
 {
 	width: 100%;
-  	padding: 16px 20px;
-  	border: none;
-  	border-radius: 4px;
-  	background-color: #33b5e5;
 }
 
-/**************** INPUTS ************************/
-input
+/********************** DESKTOP SCREENS *****************/
+
+@media only screen and (min-width: 768px) 
 {
-	width: 100%;
-  	padding: 12px 20px;
-  	margin: 8px 0;
-  	display: inline-block;
-  	border: 1px solid #ccc;
-  	box-sizing: border-box;
+	/* For desktop: */
+  	.col-1 {width: 8.33%;}
+  	.col-2 {width: 16.66%;}
+  	.col-3 {width: 25%;}
+  	.col-4 {width: 33.33%;}
+  	.col-5 {width: 41.66%;}
+  	.col-6 {width: 50%;}
+  	.col-7 {width: 58.33%;}
+  	.col-8 {width: 66.66%;}
+  	.col-9 {width: 75%;}
+  	.col-10 {width: 83.33%;}
+  	.col-11 {width: 91.66%;}
+  	.col-12 {width: 100%;}
 }
+
+@media screen and (max-height: 450px) 
+{
+	.sidenav {padding-top: 15px;}
+  	.sidenav a {font-size: 18px;}
+}
+
+/****************** ROWS *****************/
+
+.row::after 
+{
+	content: "";
+  	clear: both;
+  	display: table;
+}
+
+/****************** COLS *****************/
+
+[class*="col-"] 
+{
+	float: left;
+  	padding: 15px;
+}
+
+
 
