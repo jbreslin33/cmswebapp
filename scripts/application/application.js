@@ -23,7 +23,8 @@ class Application
 		this.mPersonSelect = null;
 
 		//html
-               	this.mSideNavOpenButtonHtml = null; 
+               	this.mLoggedOutHeaderHtml = null; 
+               	this.mLoggedInHeaderHtml = null; 
                	this.mInsertEmailScreenHtml = null; 
                	this.mInsertNativeLoginScreenHtml = null; 
                	this.mLoginScreenHtml = null; 
@@ -42,7 +43,9 @@ class Application
                	this.mUpdateForgotPasswordScreenHtml = null; 
 
 		//set html 
-               	this.setSideNavOpenButtonHtml              ( document.getElementById("sidenavopenbuttonid")                      ); 
+               	this.setLoggedOutHeaderHtml                ( document.getElementById("logged_out_header_html_id")                ); 
+               	this.setLoggedInHeaderHtml                 ( document.getElementById("logged_in_header_html_id")                 ); 
+
                	this.setInsertEmailScreenHtml              ( document.getElementById("insert_email_screen_html_id")              ); 
                	this.setInsertNativeLoginScreenHtml        ( document.getElementById("insert_native_login_screen_html_id")       ); 
                	this.setLoginScreenHtml                    ( document.getElementById("login_screen_html_id")                     ); 
@@ -186,21 +189,52 @@ class Application
 		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
 	}
 
-        hideSideNavOpenButtonHtml()
-        {
-                if (this.getSideNavOpenButtonHtml())
-                {
-                        this.getSideNavOpenButtonHtml().style.display = "none";
-                }
-        }
+	setLoggedOutHeaderHtml(e)
+	{
+		this.setLoggedOutHeaderHtml = e;
+	}
+	
+	setLoggedInHeaderHtml(e)
+	{
+		this.setLoggedInHeaderHtml = e;
+	}
 
-        showSideNavOpenButtonHtml()
+	getLoggedOutHeaderHtml()
+	{
+		return this.setLoggedOutHeaderHtml;
+	}
+	
+	getLoggedInHeaderHtml()
+	{
+		return this.setLoggedInHeaderHtml;
+	}
+
+        showLoggedInHeaderHtml(b)
         {
-                if (this.getSideNavOpenButtonHtml())
-                {
-                        this.getSideNavOpenButtonHtml().style.display = "block";
-                        this.getSideNavOpenButtonHtml().style.visibility = "visible";
-                }
+		if (b)
+		{
+                	if (this.getLoggedInHeaderHtml())
+                	{
+                        	this.getLoggedInHeaderHtml().style.display = "block";
+                        	this.getLoggedInHeaderHtml().style.visibility = "visible";
+                	}
+                	if (this.getLoggedOutHeaderHtml())
+                	{
+                        	this.getLoggedOutHeaderHtml().style.display = "none";
+                	}
+		}
+		else
+		{
+                	if (this.getLoggedOutHeaderHtml())
+                	{
+                        	this.getLoggedOutHeaderHtml().style.display = "block";
+                        	this.getLoggedOutHeaderHtml().style.visibility = "visible";
+                	}
+                	if (this.getLoggedInHeaderHtml())
+                	{
+                        	this.getLoggedInHeaderHtml().style.display = "none";
+                	}
+		}
         }
 
 	//side nav
