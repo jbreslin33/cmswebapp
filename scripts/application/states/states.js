@@ -35,10 +35,17 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mLOGOUT_APPLICATION);
                 }
-		else if (location.hash == '#main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
+
+		else if (location.hash == '#upcoming_screen' && app.mStateMachine.mCurrentState != app.mUPCOMING_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mMAIN_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mUPCOMING_APPLICATION);
                 }
+		
+		else if (location.hash == '#calendar_screen' && app.mStateMachine.mCurrentState != app.mCALENDAR_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mCALENDAR_APPLICATION);
+                }
+
 		else if (location.hash == '#update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPDATE_FORGOT_PASSWORD_APPLICATION);
@@ -100,10 +107,6 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
                 }
-		else if (location.hash == '#main_screen' && app.mStateMachine.mCurrentState != app.mMAIN_APPLICATION)
-                {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mMAIN_APPLICATION);
-                }
 	}
 
         exit(application)
@@ -150,9 +153,14 @@ class INIT_APPLICATION extends State
 			application.getChoosePersonScreenHtml().style.display = "none";
 		}
 		
-		if (application.getMainScreenHtml())
+		if (application.getUpcomingScreenHtml())
 		{
-			application.getMainScreenHtml().style.display = "none";
+			application.getUpcomingScreenHtml().style.display = "none";
+		}
+
+		if (application.getCalendarScreenHtml())
+		{
+			application.getCalendarScreenHtml().style.display = "none";
 		}
 		
 		if (application.getInsertClubScreenHtml())
@@ -232,7 +240,7 @@ class INIT_APPLICATION extends State
 		}
 		else if (application.getJWT())
 		{
-			application.mStateMachine.changeState(application.mMAIN_APPLICATION);
+			application.mStateMachine.changeState(application.mUPCOMING_APPLICATION);
 		}
 		else
 		{
@@ -564,9 +572,8 @@ class UPDATE_FORGOT_PASSWORD_APPLICATION extends State
 		app.getCurrentScreen().exit();
 	}
 }
-//what
-//n
-class MAIN_APPLICATION extends State
+
+class UPCOMING_APPLICATION extends State
 {
 	constructor() 
 	{
@@ -577,10 +584,10 @@ class MAIN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateEnterLogs)
 		{
-			console.log("MAIN_APPLICATION: ENTER");        
+			console.log("UPCOMING_APPLICATION: ENTER");        
 		}
 		
-		app.setCurrentScreen(new Main(app));
+		app.setCurrentScreen(new UpcomingScreen(app));
 		app.getCurrentScreen().enter();
 	}
 
@@ -588,7 +595,7 @@ class MAIN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExecuteLogs)
 		{
-			console.log("MAIN_APPLICATION: EXECUTE");        
+			console.log("UPCOMING_APPLICATION: EXECUTE");        
 		}
 		
 		app.getCurrentScreen().execute();
@@ -598,12 +605,55 @@ class MAIN_APPLICATION extends State
         {
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
-			console.log("MAIN_APPLICATION: EXIT");        
+			console.log("UPCOMING_APPLICATION: EXIT");        
 		}
 		
-               	
-		//need to delete cards
-		//while (screen.mCloneArray.length > 0)
+		if (app.getCurrentScreen().mCloneArray)
+		{
+			for (i = 0; i < app.getCurrentScreen().mCloneArray.length; i++)
+			{
+				app.getCurrentScreen().mCloneArray[i].remove();
+			}
+		}
+		app.getCurrentScreen().exit();
+	}
+}
+
+class CALENDAR_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("CALENDAR_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new CalendarScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("CALENDAR_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("CALENDAR_APPLICATION: EXIT");        
+		}
+		
 		if (app.getCurrentScreen().mCloneArray)
 		{
 			for (i = 0; i < app.getCurrentScreen().mCloneArray.length; i++)

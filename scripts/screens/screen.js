@@ -6,8 +6,6 @@ class Screen
 	{
 		this.mApplication = application;
 
-		//location.hash = 'main_screen';
-                
 		//html ids
 		this.mSpinner = null;
 		this.mHtml = null;
@@ -541,15 +539,15 @@ class Screen
 			{
 				this.mCode = this.mJson.codes[i].code;
 			}
-			//definite success so send to main
+			//definite success so send to upcoming
 			if (this.mCode == '-100') 
 			{
 				if (this.mApplication.mUserSelectedPerson)
 				{
 
-					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mMAIN_APPLICATION)
+					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mUPCOMING_APPLICATION)
 					{
-                                		this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                		this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
 					}
 				}
 				else

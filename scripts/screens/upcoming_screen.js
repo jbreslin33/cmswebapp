@@ -1,18 +1,18 @@
 'use strict';
 
-class Main extends Screen
+class UpcomingScreen extends Screen
 {
         constructor(application)
         {
                 super(application);
                	
-		location.hash = 'main_screen';
+		location.hash = 'upcoming_screen';
 
-		this.setHtml(document.getElementById("main_screen_html_id"));
-                this.setMenuItem(document.getElementById("main_nav_id"));
-                this.setMessageElement(document.getElementById("main_screen_message_id"));
-                this.setSpinner(document.getElementById("main_screen_spinner_id"));
-                this.setForm(document.getElementById("main_screen_form_id"));
+		this.setHtml(document.getElementById("upcoming_screen_html_id"));
+                this.setMenuItem(document.getElementById("upcoming_nav_id"));
+                this.setMessageElement(document.getElementById("upcoming_screen_message_id"));
+                this.setSpinner(document.getElementById("upcoming_screen_spinner_id"));
+                this.setForm(document.getElementById("upcoming_screen_form_id"));
 
 		this.mCloneArray = new Array();
         }
@@ -20,7 +20,7 @@ class Main extends Screen
         get()
         {
 		super.get();
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/main.php?jwt=" + APPLICATION.getJWT());
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
@@ -75,7 +75,7 @@ class Main extends Screen
                         {
 				var div = document.createElement('div');	
 				div.setAttribute('class','card');
-				document.getElementById("main_screen_html_id").appendChild(div);
+				document.getElementById("upcoming_screen_html_id").appendChild(div);
 
 				//add to array
 				this.mCloneArray.push(div);

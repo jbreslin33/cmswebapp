@@ -52,16 +52,16 @@ class InsertEmailScreen extends Screen
                         {
                                 code = this.mJson.codes[i].code;
                         }
-                        //definite success so send to main
+                        //definite success so send to upcoming
                         if (code == '-100')
                         {
-                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mMAIN_APPLICATION)
+                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mUPCOMING_APPLICATION)
                                 {
                                         //do nothing
                                 }
                                 else
                                 {
-                                        this.mApplication.mStateMachine.changeState(this.mApplication.mMAIN_APPLICATION);
+                                        this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
                                 }
                         }
                         else if (code == '-101')

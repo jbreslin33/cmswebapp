@@ -56,11 +56,19 @@
 
                                	<select id="person_select_id" class="select"> </select>
 
-                                Main
+                                Schedule
 
                                 <div class="btn-group">
 
-                               		<button id="mainnavbuttonid" formaction="#main_screen">Main</button>
+                               		<button id="upcomingnavbuttonid" formaction="#upcoming_screen">Upcoming View</button>
+                                        <button id="calendarnavbuttonid" formaction="#calendar_screen">Calendar View</button>
+
+                                </div>
+                                
+				Logout
+
+                                <div class="btn-group">
+
                                         <button id="logoutnavbuttonid" formaction="#logout_screen">Logout</button>
 
                                 </div>
@@ -105,8 +113,24 @@
 
 			</form>
 		</div>
+        
 	
 		<div class="row">
+
+			<!-- BEGIN CALENDAR HTML -->
+
+        		<div id="calendar_screen_html_id">
+
+        			<div id="calendar_screen_spinner_id">
+                		<span class="sr-only">Loading...</span>
+                	</div>
+
+                	<span id='calendar_screen_message_id'></span>
+
+       			</div>
+
+        		<!-- END CALENDAR HTML -->
+
 
 			<div class="col-3">
 			
@@ -206,21 +230,20 @@
 
 				<!-- END INSERT NATAIVE LOGIN HTML  -->
 	
-				<!-- BEGIN MAIN HTML -->
+				<!-- BEGIN UPCOMING HTML -->
         
-				<div id="main_screen_html_id">
-                       			Upcoming Schedule
+				<div id="upcoming_screen_html_id">
 
-					<div id="main_screen_spinner_id">
+					<div id="upcoming_screen_spinner_id">
                         			<span class="sr-only">Loading...</span>
                 			</div>
 
-	    				<span id='main_screen_message_id'></span>
+	    				<span id='upcoming_screen_message_id'></span>
 
 				</div>	
 
 
-				<!-- END MAIN HTML -->	
+				<!-- END UPCOMING HTML -->	
 	
 
 				<!-- INSERT CLUB HTML  -->
@@ -728,6 +751,7 @@ e
 	</div>
 
 
+
 	<!-- BEGIN FOOTER -->
 
 	<div class="footer">
@@ -789,8 +813,11 @@ e
 	<!-- update forgot password -->
 	<script src="scripts/screens/update_forgot_password_screen.js"></script>
 	
-	<!-- main -->
-	<script src="scripts/screens/main.js"></script>
+	<!-- upcoming screen-->
+	<script src="scripts/screens/upcoming_screen.js"></script>
+	
+	<!-- calendar screen -->
+	<script src="scripts/screens/calendar_screen.js"></script>
 
 	<!-- login -->
 	<script src="scripts/screens/login_screen.js"></script>
