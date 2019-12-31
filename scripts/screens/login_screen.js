@@ -34,15 +34,6 @@ class LoginScreen extends Screen
 		
 		//hide menus
 		this.mApplication.showLoggedInHeaderHtml(false);
-
-		if (this.mApplication.getJWT())
-		{
-			console.log('true jwt');
-		}
-		else
-		{
-			console.log('false jwt');
-		}
 	}
 
 	//overide from screen

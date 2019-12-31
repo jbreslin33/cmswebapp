@@ -160,7 +160,7 @@ class Screen
                 }
                 else
                 {
-                        console.log('attempting to setMessage but there is no mMessageElement: ' + message);
+                        //console.log('attempting to setMessage but there is no mMessageElement: ' + message);
                 }
         }
 
