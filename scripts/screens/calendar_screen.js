@@ -21,7 +21,8 @@ class CalendarScreen extends Screen
   		var n = d.getMonth();
 		var p = document.getElementById("calendar_month_p_html_id");
 		var c = new Calendar();
-		p.innerHTML = c.mMonthArray[n];  
+		p.innerHTML = c.mMonthArray[n] + ' weeks: ' + c.weekCount(2020,8);  
+
         
 	}
 
