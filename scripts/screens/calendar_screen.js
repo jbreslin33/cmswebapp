@@ -75,7 +75,7 @@ class CalendarScreen extends Screen
                         {
 				var div = document.createElement('div');	
 				div.setAttribute('class','card');
-				document.getElementById("calendar_screen_html_id").appendChild(div);
+				document.getElementById("calendar_full_screen_html_id").appendChild(div);
 
 				//add to array
 				this.mCloneArray.push(div);
