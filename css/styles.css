@@ -39,6 +39,10 @@ button
 }
 
 /*     calendar buttons            */
+.calendar-button
+{
+	font-size: 23px;
+}
 
 
 /******************** SELECTS *******************/
