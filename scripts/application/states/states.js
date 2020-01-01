@@ -38,7 +38,6 @@ class GLOBAL_APPLICATION extends State
 
 		else if (location.hash == '#upcoming_screen' && app.mStateMachine.mCurrentState != app.mUPCOMING_APPLICATION)
                 {
-			console.log("guilty b");
                         APPLICATION.mStateMachine.changeState(APPLICATION.mUPCOMING_APPLICATION);
                 }
 		

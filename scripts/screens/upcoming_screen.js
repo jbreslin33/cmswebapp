@@ -34,7 +34,6 @@ class UpcomingScreen extends Screen
 		{
                 	if (this.mJson.practices)
 			{
-				console.log('mJson.practices:' + JSON.stringify(this.mJson.practices));
                         	for (var i = 0; i < this.mJson.practices.length; i++)
 				{
 					events.push(this.mJson.practices[i]);

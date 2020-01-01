@@ -539,7 +539,6 @@ class Screen
 					{
 						if (this.mApplication.mStateMachine.currentState() != this.mApplication.mCALENDAR_APPLICATION)
 						{
-							console.log("guilty a");
                                 			this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
 						}
 					}
