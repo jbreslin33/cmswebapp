@@ -14,7 +14,6 @@ class InsertEmailScreen extends Screen
 
 		document.getElementById("insertemailscreenbuttonid").onclick = this.hit.bind(this);
 
-		this.setMenuItem(document.getElementById("insert_email_screen_nav_id"));
                 this.setMessageElement(document.getElementById("insert_email_screen_message_id"));
 		this.setHtml(document.getElementById("insert_email_screen_html_id"));
 		this.setSpinner(document.getElementById("insert_email_screen_spinner_id"));

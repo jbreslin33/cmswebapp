@@ -10,7 +10,6 @@ class JoinWithEmailScreen extends Screen
 
 		document.getElementById("joinwithemailscreenbuttonid").onclick = this.hit.bind(this);
 
-		this.setMenuItem(document.getElementById("join_with_email_screen_nav_id"));
                 this.setMessageElement(document.getElementById("join_with_email_screen_message_id"));
 		this.setHtml(document.getElementById("join_with_email_screen_html_id"));
 		this.setSpinner(document.getElementById("join_with_email_screen_spinner_id"));

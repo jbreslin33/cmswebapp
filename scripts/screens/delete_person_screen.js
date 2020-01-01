@@ -11,7 +11,6 @@ class DeletePersonScreen extends Screen
                 document.getElementById("deletepersonscreenbuttonid").onclick = this.hit.bind(this);
 
                 this.setHtml(document.getElementById("delete_person_screen_html_id"));
-                this.setMenuItem(document.getElementById("delete_person_nav_id"));
                 this.setMessageElement(document.getElementById("delete_person_screen_message_id"));
                 this.setForm(document.getElementById("delete_person_screen_form_id"));
                 this.setSpinner(document.getElementById("delete_person_screen_spinner_id"));

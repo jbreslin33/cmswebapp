@@ -11,7 +11,6 @@ class UpdateForgotPasswordScreen extends Screen
 		document.getElementById("updateforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
 
                 this.setHtml(document.getElementById("update_forgot_password_screen_html_id"));
-                //this.setMenuItem(document.getElementById("update_forgot_password_nav_id"));
                 this.setMessageElement(document.getElementById("update_forgot_password_screen_message_id"));
                 this.setForm(document.getElementById("update_forgot_password_screen_form_id"));
                 this.setSpinner(document.getElementById("update_forgot_password_screen_spinner_id"));

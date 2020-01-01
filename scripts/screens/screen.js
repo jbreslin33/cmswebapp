@@ -162,16 +162,6 @@ class Screen
                 }
         }
 
-	setMenuItem(menuItem)
-	{
-		this.mMenuItem = menuItem;
-	}
-
-	getMenuItem()
-	{
-		return this.mMenuItem;
-	}
-
 	setNavigationBar(navigationBar)
 	{
 		this.mNavigationBar = navigationBar;
@@ -567,10 +557,6 @@ class Screen
 	
 	enter()
 	{
-		if (this.getMenuItem())
-		{
-			this.getMenuItem().className += " active";
-		}
 		this.setMessage('','red');
 		this.show();
 		this.get();
@@ -585,14 +571,7 @@ class Screen
 	exit()
 	{
                 this.hide();
-
 		this.resetDataVariables();
-
-		if (this.getMenuItem())
-		{
-            		this.getMenuItem().className = this.getMenuItem().className.replace(/\active\b/g, "");
-		}
-                
 		this.mApplication.setCurrentScreen(null);
 	}
 

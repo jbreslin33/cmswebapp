@@ -13,9 +13,7 @@ class InsertAcceptClubInviteScreen extends Screen
 
 		location.hash = 'insert_accept_club_invite_screen';
 		this.setHtml(document.getElementById("insert_accept_club_invite_screen_html_id"));
-                //this.setMenuItem(document.getElementById("insert_accept_club_invite_nav_id"));
                 this.setMessageElement(document.getElementById("insert_accept_club_invite_screen_message_id"));
-                //this.setForm(document.getElementById("insert_accept_club_invite_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_accept_club_invite_screen_spinner_id"));
 	}
 }

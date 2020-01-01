@@ -16,7 +16,6 @@ class InsertNativeLoginScreen extends Screen
 
 		document.getElementById("insertnativeloginscreenbuttonid").onclick = this.hit.bind(this);
 
-		this.setMenuItem(document.getElementById("insert_native_login_screen_nav_id"));
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
 		this.setHtml(document.getElementById("insert_native_login_screen_html_id"));
 		this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));

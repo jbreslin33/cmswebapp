@@ -11,7 +11,6 @@ class LoginScreen extends Screen
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
 
                 this.setHtml(document.getElementById("login_screen_html_id"));
-		this.setMenuItem(document.getElementById("login_nav_id"));
                	this.setMessageElement(document.getElementById("login_screen_message_id"));
                 this.setSpinner(document.getElementById("login_screen_spinner_id"));
                 

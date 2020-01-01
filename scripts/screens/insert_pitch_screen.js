@@ -11,7 +11,6 @@ class InsertPitchScreen extends Screen
 		document.getElementById("insertpitchscreenbuttonid").onclick = this.hit.bind(this);
 		
                 this.setHtml(document.getElementById("insert_pitch_screen_html_id"));
-                this.setMenuItem(document.getElementById("insert_pitch_nav_id"));
                 this.setMessageElement(document.getElementById("insert_pitch_screen_message_id"));
                 this.setForm(document.getElementById("insert_pitch_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_pitch_screen_spinner_id"));

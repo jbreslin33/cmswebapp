@@ -11,7 +11,6 @@ class ChoosePersonScreen extends Screen
                 document.getElementById("choosepersonscreenbuttonid").onclick = this.hit.bind(this);
 
                 this.setHtml(document.getElementById("choose_person_screen_html_id"));
-                this.setMenuItem(document.getElementById("choose_person_nav_id"));
                 this.setMessageElement(document.getElementById("choose_person_screen_message_id"));
                 this.setForm(document.getElementById("choose_person_screen_form_id"));
                 this.setSpinner(document.getElementById("choose_person_screen_spinner_id"));

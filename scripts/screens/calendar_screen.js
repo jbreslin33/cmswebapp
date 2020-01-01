@@ -9,7 +9,6 @@ class CalendarScreen extends Screen
 		location.hash = 'calendar_screen';
 
 		this.setHtml(document.getElementById("calendar_screen_html_id"));
-                this.setMenuItem(document.getElementById("calendar_nav_id"));
                 this.setMessageElement(document.getElementById("calendar_screen_message_id"));
                 this.setSpinner(document.getElementById("calendar_screen_spinner_id"));
                 this.setForm(document.getElementById("calendar_screen_form_id"));
@@ -25,6 +24,7 @@ class CalendarScreen extends Screen
 
         
 	}
+	//so we will call get on 
 
         get()
         {

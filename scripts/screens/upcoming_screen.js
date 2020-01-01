@@ -9,7 +9,6 @@ class UpcomingScreen extends Screen
 		location.hash = 'upcoming_screen';
 
 		this.setHtml(document.getElementById("upcoming_screen_html_id"));
-                this.setMenuItem(document.getElementById("upcoming_nav_id"));
                 this.setMessageElement(document.getElementById("upcoming_screen_message_id"));
                 this.setSpinner(document.getElementById("upcoming_screen_spinner_id"));
                 this.setForm(document.getElementById("upcoming_screen_form_id"));
