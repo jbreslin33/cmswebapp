@@ -15,7 +15,15 @@ class CalendarScreen extends Screen
                 this.setForm(document.getElementById("calendar_screen_form_id"));
 
 		this.mCloneArray = new Array();
-        }
+
+		//month calendar_month_p_html_id
+		var d = new Date();
+  		var n = d.getMonth();
+		var p = document.getElementById("calendar_month_p_html_id");
+		var c = new Calendar();
+		p.innerHTML = c.mMonthArray[n];  
+        
+	}
 
         get()
         {
