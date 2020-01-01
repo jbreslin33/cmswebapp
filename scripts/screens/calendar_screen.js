@@ -24,11 +24,11 @@ class CalendarScreen extends Screen
 
         
 	}
-	//so we will call get on 
+	//so we will call get on enter into state 
+	//so we should keep that and just call get again everytime you hit a button	
 
         get()
         {
-		super.get();
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/calendar.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
         }

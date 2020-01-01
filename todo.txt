@@ -1,3 +1,5 @@
+we will call get on load but then everytime you hit forward or back button we will call get
+-----------------
 do you want to query db everytime you make a calender change like change month or go back to all days list view
 -----------------
 when you hit a button you need to close side nav and or make sub menus
