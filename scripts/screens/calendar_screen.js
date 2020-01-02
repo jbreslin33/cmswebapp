@@ -24,11 +24,21 @@ class CalendarScreen extends Screen
 
 		//month calendar_month_p_html_id
 		var date = new Date();
+		console.log('date:' + date);
   		var month = date.getMonth();
+		console.log('month:' + month);
+
   		var year = date.getYear();
+		year = parseInt(year + 1900);
+		console.log('year:' + year);
 		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
+		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
+		var dayOfWeekOfLastDay = new Date(year, month, numberOfDaysInMonth).getDay();
+
 
 		console.log('num:' + numberOfDaysInMonth);
+		console.log('first:' + dayOfWeekOfFirstDay);
+		console.log('last:' + dayOfWeekOfLastDay);
 
 		var p = document.getElementById("calendar_month_p_html_id");
 		var calendar = new Calendar();
