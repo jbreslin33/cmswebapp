@@ -178,18 +178,20 @@ class CalendarScreen extends Screen
 		//print to screen
 		if (events)
                 {
+			var div = document.createElement('div');	
+			div.setAttribute('class','card');
+			document.getElementById("calendar_full_screen_html_id").appendChild(div);
+			
+			var container = document.createElement('div');
+			container.setAttribute('class','container');
+			div.appendChild(container);
+
                         for (var i = 0; i < events.length; i++)
                         {
-				var div = document.createElement('div');	
-				div.setAttribute('class','card');
-				document.getElementById("calendar_full_screen_html_id").appendChild(div);
 
 				//add to array
 				this.mCloneArray.push(div);
 
-				var container = document.createElement('div');
-				container.setAttribute('class','container');
-				div.appendChild(container);
 
 				if (events[i].event_date)
 				{
