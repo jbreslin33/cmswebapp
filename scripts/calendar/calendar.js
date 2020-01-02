@@ -32,6 +32,23 @@ class Calendar
 		this.mMonthArray.push('December');
 	}
 
+	inflateDateString(s)
+	{
+		
+		var dateArray = s.split("-");
+		for (var i = 0; i < dateArray.length; i++)
+		{
+			if (dateArray[i] < 10)
+			{
+				//insert zero
+				dateArray[i] = '0' + dateArray[i]; 
+			}
+
+		}
+
+		return dateArray[0] + '-'  + dateArray[1] + '-' + dateArray[2];
+	}
+
         convertDate(data)
         {
 		var dateArray = data.split("-");

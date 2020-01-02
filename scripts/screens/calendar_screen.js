@@ -81,17 +81,17 @@ class CalendarScreen extends Screen
 		//append to table
 		var table = document.getElementById("calendar_table_id");
 
-		for (i = 0; i < this.mWeekCount; i++)
+		for (var i = 0; i < this.mWeekCount; i++)
 		{
 			var tr = table.insertRow(parseInt(i + 1));
-			for (y = 0; y < 7; y++)
+			for (var y = 0; y < 7; y++)
 			{
 				var td = tr.insertCell(y);
 				var date = new Date(year, month, startDay);
 				
-				td.innerHTML = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
-
-				//td.innerHTML = txt;
+				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
+				var txt = calendar.inflateDateString(s);
+				td.innerHTML = txt;
 			
 				//increment startDay
 				startDay++;
