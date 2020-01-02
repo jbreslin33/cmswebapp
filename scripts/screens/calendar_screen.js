@@ -60,17 +60,38 @@ class CalendarScreen extends Screen
 		console.log('lastDay:' + lastDay);
 */
 
+		var startDay = 0;
+		//check if its a sunday if so then we dont need to count back
+		if (dayOfWeekOfFirstDay == 0) //its a sunday so make it 1
+		{
+			startDay = 1; 	
+		}
+		if (dayOfWeekOfFirstDay == 1) //its a monday so make it 0 to go back to last month barely
+		{
+			startDay = 0; 	
+		}
+		if (dayOfWeekOfFirstDay > 1) //its another day do calc
+		{
+			startDay = parseInt( (dayOfWeekOfFirstDay - 1) * -1 ) ; 	
+		}
+		var firstDAY = new Date(year, month, startDay);
+		console.log('firstDAY:' + firstDAY);
+
+
 		//append to table
 		var table = document.getElementById("calendar_table_id");
 
 		for (i = 0; i < this.mWeekCount; i++)
 		{
-			console.log('i:' + i);
 			var tr = table.insertRow(parseInt(i + 1));
 			for (y = 0; y < 7; y++)
 			{
 				var td = tr.insertCell(y);
-				td.innerHTML = "y";
+				var txt = new Date(year, month, startDay);
+				td.innerHTML = txt;
+			
+				//increment startDay
+				startDay++;
 			}
 			
 		}
