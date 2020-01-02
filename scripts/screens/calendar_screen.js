@@ -38,13 +38,9 @@ class CalendarScreen extends Screen
 		//append to table
 		var table = document.getElementById("calendar_table_id");
 
-
-
-		// Create an empty <tr> element and add it to the 1st position of the table:
-		var row = table.insertRow(1);
-		
 		for (i = 0; i < this.mWeekCount; i++)
 		{
+			console.log('i:' + i);
 			var tr = table.insertRow(parseInt(i + 1));
 			for (y = 0; y < 7; y++)
 			{
