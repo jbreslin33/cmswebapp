@@ -70,6 +70,17 @@ input
 table
 {
 	width: 100%;
+	border-collapse: collapse;
+}
+
+table, td, th 
+{
+	border: 1px solid black;
+}
+
+td, th 
+{
+	width: 14%;
 }
 
 /***********************************************/
