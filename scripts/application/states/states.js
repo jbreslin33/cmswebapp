@@ -653,6 +653,8 @@ class CALENDAR_APPLICATION extends State
 		{
 			console.log("CALENDAR_APPLICATION: EXIT");        
 		}
+
+
 		
 		if (app.getCurrentScreen().mCloneArray)
 		{

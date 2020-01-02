@@ -12,8 +12,21 @@ class CalendarScreen extends Screen
                 this.setMessageElement(document.getElementById("calendar_screen_message_id"));
                 this.setSpinner(document.getElementById("calendar_screen_spinner_id"));
                 this.setForm(document.getElementById("calendar_screen_form_id"));
+		this.mCalendarTable = null;
+                this.setCalendarTable(document.getElementById("calendar_table_id"));
 
-		this.mCloneArray = new Array();
+		//lets delete any rows that linger
+		//var x = document.getElementById("myTable").rows.length;
+		var length = this.getCalendarTable().rows.length;
+		console.log('TOTAL ROWS:' + length);
+		for (var i = 1; i < length; i++)
+		{
+			console.log('DELETE ROW:' + i);
+			this.getCalendarTable().deleteRow(1);		
+		}
+
+		//this.mTableRowArray = new Array();
+		//this.mTableDataArray = new Array();
 
 		//mViewedMonth
 		this.mWeekCount = 0;
@@ -88,6 +101,16 @@ class CalendarScreen extends Screen
                 APPLICATION.getCurrentScreen().ajax();
         }
 
+	setCalendarTable(t)
+	{
+		this.mCalendarTable = t;
+	}
+
+	getCalendarTable()
+	{
+		return this.mCalendarTable;
+	}
+
         processJsonData()
 	{
 		super.processJsonData();
@@ -142,6 +165,7 @@ class CalendarScreen extends Screen
 				{
 					var event_date = events[i].event_date;
 					td = document.getElementById(event_date);
+					//this.mCloneArray.push(td);
 
 					console.log('event_date:' + events[i].event_date)
 					var title = document.createElement('h5');
