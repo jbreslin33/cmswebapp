@@ -43,6 +43,11 @@ class ChoosePersonScreen extends Screen
 		this.mApplication.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
 
 	}
+	enter()
+	{
+   		this.mApplication.showLoggedInHeaderHtml(false);
+		super.enter();
+	}
 
         execute()
         {
