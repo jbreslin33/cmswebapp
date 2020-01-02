@@ -155,6 +155,27 @@ class CalendarScreen extends Screen
 		if (events)
                 {
 			var td = null
+
+			var modal = document.createElement('div');
+			modal.setAttribute('class','modal');
+			document.body.appendChild(modal);
+
+			var modalContent = document.createElement('div');
+			modalContent.setAttribute('class','modal-content');
+			modal.appendChild(modalContent);
+
+			var span = document.createElement('span');
+			span.setAttribute('class','close');
+			modalContent.appendChild(span);
+
+			var p = document.createElement('p');
+			modalContent.appendChild(p);
+
+			p.innerHTML = 'HEY MON';
+			//modal.style.display = "block";
+			
+
+				
                         for (var i = 0; i < events.length; i++)
                         {
 				
