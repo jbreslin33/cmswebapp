@@ -178,6 +178,7 @@ class CalendarScreen extends Screen
 		//print to screen
 		if (events)
                 {
+			/*
 			var div = document.createElement('div');	
 			div.setAttribute('class','card');
 			document.getElementById("calendar_full_screen_html_id").appendChild(div);
@@ -185,19 +186,22 @@ class CalendarScreen extends Screen
 			var container = document.createElement('div');
 			container.setAttribute('class','container');
 			div.appendChild(container);
-
+				
+			//add to array
+			this.mCloneArray.push(div);
+			*/
+			var td = null
                         for (var i = 0; i < events.length; i++)
                         {
-
-				//add to array
-				this.mCloneArray.push(div);
-
-
+				
 				if (events[i].event_date)
 				{
+					var event_date = events[i].event_date;
+					td = document.getElementById(event_date);
+
 					console.log('event_date:' + events[i].event_date)
 					var title = document.createElement('h5');
-					container.appendChild(title);
+					td.appendChild(title);
 					
 					if (events[i].type == 'game')
 					{
@@ -212,7 +216,7 @@ class CalendarScreen extends Screen
 				var textArray = new Array();
 				
 				var p = document.createElement('p');
-				container.appendChild(p);
+				td.appendChild(p);
 
 				if (events[i].arrival_time)
 				{
