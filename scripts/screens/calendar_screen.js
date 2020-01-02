@@ -89,7 +89,7 @@ class CalendarScreen extends Screen
 				var td = tr.insertCell(y);
 				var date = new Date(year, month, startDay);
 				
-				td.innerHTML = parseInt(date.getYear() + 1900) + '-' + calendar.mMonthArray[date.getMonth()] + '-' + date.getDate();  
+				td.innerHTML = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 
 				//td.innerHTML = txt;
 			
