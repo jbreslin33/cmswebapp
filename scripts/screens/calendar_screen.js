@@ -24,21 +24,13 @@ class CalendarScreen extends Screen
 
 		//month calendar_month_p_html_id
 		var date = new Date();
-		console.log('date:' + date);
   		var month = date.getMonth();
-		console.log('month:' + month);
 
   		var year = date.getYear();
 		year = parseInt(year + 1900);
-		console.log('year:' + year);
 		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
 		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
 		var dayOfWeekOfLastDay = new Date(year, month, numberOfDaysInMonth).getDay();
-
-
-		console.log('num:' + numberOfDaysInMonth);
-		console.log('first:' + dayOfWeekOfFirstDay);
-		console.log('last:' + dayOfWeekOfLastDay);
 
 		var p = document.getElementById("calendar_month_p_html_id");
 		var calendar = new Calendar();
@@ -46,19 +38,6 @@ class CalendarScreen extends Screen
 		this.mWeekCount = calendar.weekCount(year,parseInt(month + 1)); 
 
 		p.innerHTML = calendar.mMonthArray[month] + ' weeks: ' + this.mWeekCount;  
-
-		//get first and last day of month
-/*
-		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-		console.log('firstDay:' + firstDay);
-		console.log('lastDay:' + lastDay);
-		
-		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-		console.log('firstDay:' + firstDay);
-		console.log('lastDay:' + lastDay);
-*/
 
 		var startDay = 0;
 		//check if its a sunday if so then we dont need to count back
@@ -75,7 +54,6 @@ class CalendarScreen extends Screen
 			startDay = parseInt( (dayOfWeekOfFirstDay - 1) * -1 ) ; 	
 		}
 		var firstDAY = new Date(year, month, startDay);
-		console.log('firstDAY:' + firstDAY);
 
 
 		//append to table
@@ -92,12 +70,17 @@ class CalendarScreen extends Screen
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 				var txt = calendar.inflateDateString(s);
 				td.innerHTML = txt;
+                		
+				td.setAttribute('id',txt);
 			
 				//increment startDay
 				startDay++;
 			}
 			
 		}
+                
+		var presidents = document.getElementById("2020-01-20");
+		presidents.innerHTML = "Presidents Day";
 
 		// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
 		/*
@@ -195,7 +178,6 @@ class CalendarScreen extends Screen
 		//print to screen
 		if (events)
                 {
-			/*
                         for (var i = 0; i < events.length; i++)
                         {
 				var div = document.createElement('div');	
@@ -288,7 +270,6 @@ class CalendarScreen extends Screen
 					p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
 				}
                         }
-			*/
                 }
 	}
 }
