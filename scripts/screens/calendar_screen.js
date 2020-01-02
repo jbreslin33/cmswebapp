@@ -18,10 +18,8 @@ class CalendarScreen extends Screen
 		//lets delete any rows that linger
 		//var x = document.getElementById("myTable").rows.length;
 		var length = this.getCalendarTable().rows.length;
-		console.log('TOTAL ROWS:' + length);
 		for (var i = 1; i < length; i++)
 		{
-			console.log('DELETE ROW:' + i);
 			this.getCalendarTable().deleteRow(1);		
 		}
 
@@ -122,7 +120,6 @@ class CalendarScreen extends Screen
 		{
                 	if (this.mJson.practices)
 			{
-				//console.log('mJson.practices:' + JSON.stringify(this.mJson.practices));
                         	for (var i = 0; i < this.mJson.practices.length; i++)
 				{
 					events.push(this.mJson.practices[i]);
@@ -167,7 +164,6 @@ class CalendarScreen extends Screen
 					td = document.getElementById(event_date);
 					//this.mCloneArray.push(td);
 
-					console.log('event_date:' + events[i].event_date)
 					var title = document.createElement('h5');
 					td.appendChild(title);
 					
