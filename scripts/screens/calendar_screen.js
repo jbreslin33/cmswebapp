@@ -23,10 +23,12 @@ class CalendarScreen extends Screen
 
 
 		//month calendar_month_p_html_id
-		var d = new Date();
-  		var month = d.getMonth();
-  		var year = d.getYear();
-		console.log('year:' + year);
+		var date = new Date();
+  		var month = date.getMonth();
+  		var year = date.getYear();
+		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
+
+		console.log('num:' + numberOfDaysInMonth);
 
 		var p = document.getElementById("calendar_month_p_html_id");
 		var calendar = new Calendar();
@@ -34,6 +36,19 @@ class CalendarScreen extends Screen
 		this.mWeekCount = calendar.weekCount(year,parseInt(month + 1)); 
 
 		p.innerHTML = calendar.mMonthArray[month] + ' weeks: ' + this.mWeekCount;  
+
+		//get first and last day of month
+/*
+		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		console.log('firstDay:' + firstDay);
+		console.log('lastDay:' + lastDay);
+		
+		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		console.log('firstDay:' + firstDay);
+		console.log('lastDay:' + lastDay);
+*/
 
 		//append to table
 		var table = document.getElementById("calendar_table_id");
