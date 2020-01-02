@@ -15,12 +15,10 @@ class CalendarScreen extends Screen
 
 		this.mCloneArray = new Array();
 
-
 		//mViewedMonth
 		this.mWeekCount = 0;
 		this.mMonthView = 0;
 		this.mWeekCount = 0;
-
 
 		//month calendar_month_p_html_id
 		var date = new Date();
@@ -76,58 +74,16 @@ class CalendarScreen extends Screen
 				//increment startDay
 				startDay++;
 			}
-			
 		}
                 
 		var presidents = document.getElementById("2020-01-20");
 		presidents.innerHTML = "Presidents Day";
-
-		// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-		/*
-		var cell1 = row.insertCell(0);
-		var cell2 = row.insertCell(1);
-
-		// Add some text to the new cells:
-		cell1.innerHTML = "NEW CELL1";
-		cell2.innerHTML = "NEW CELL2";
-		*/
-		
-		
-		/*
-                var div = document.createElement('div');
-                div.setAttribute('class','card');
-                document.getElementById("calendar_full_screen_html_id").appendChild(div);
-
-                //add to array
-                this.mCloneArray.push(div);
-
-                var container = document.createElement('div');
-                container.setAttribute('class','container');
-                div.appendChild(container);
-
-                var table = document.createElement('table');
-                table.setAttribute('class','table');
-                container.appendChild(table);
-*/
-
-
-/*
-		for (i = 0; i < this.mWeekCount; i++)
-		{
-                	var tr = document.createElement('div');
-			
-		}
-		*/
-
-
-        
 	}
 	//so we will call get on enter into state 
 	//so we should keep that and just call get again everytime you hit a button	
 
         get()
         {
-		
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/calendar.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
         }
@@ -178,18 +134,6 @@ class CalendarScreen extends Screen
 		//print to screen
 		if (events)
                 {
-			/*
-			var div = document.createElement('div');	
-			div.setAttribute('class','card');
-			document.getElementById("calendar_full_screen_html_id").appendChild(div);
-			
-			var container = document.createElement('div');
-			container.setAttribute('class','container');
-			div.appendChild(container);
-				
-			//add to array
-			this.mCloneArray.push(div);
-			*/
 			var td = null
                         for (var i = 0; i < events.length; i++)
                         {
