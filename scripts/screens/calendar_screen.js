@@ -15,12 +15,53 @@ class CalendarScreen extends Screen
 
 		this.mCloneArray = new Array();
 
+
+		//mViewedMonth
+		this.mWeekCount = 0;
+		this.mMonthView = 0;
+		this.mWeekCount = 0;
+
+
 		//month calendar_month_p_html_id
 		var d = new Date();
-  		var n = d.getMonth();
+  		var month = d.getMonth();
+  		var year = d.getYear();
+		console.log('year:' + year);
+
 		var p = document.getElementById("calendar_month_p_html_id");
-		var c = new Calendar();
-		p.innerHTML = c.mMonthArray[n] + ' weeks: ' + c.weekCount(2020,8);  
+		var calendar = new Calendar();
+
+		this.mWeekCount = calendar.weekCount(year,parseInt(month + 1)); 
+
+		p.innerHTML = calendar.mMonthArray[month] + ' weeks: ' + this.mWeekCount;  
+
+		//make a table
+		/*
+                var div = document.createElement('div');
+                div.setAttribute('class','card');
+                document.getElementById("calendar_full_screen_html_id").appendChild(div);
+
+                //add to array
+                this.mCloneArray.push(div);
+
+                var container = document.createElement('div');
+                container.setAttribute('class','container');
+                div.appendChild(container);
+
+                var table = document.createElement('table');
+                table.setAttribute('class','table');
+                container.appendChild(table);
+*/
+
+
+/*
+		for (i = 0; i < this.mWeekCount; i++)
+		{
+                	var tr = document.createElement('div');
+			
+		}
+		*/
+
 
         
 	}
@@ -29,6 +70,7 @@ class CalendarScreen extends Screen
 
         get()
         {
+		
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/calendar.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
         }
@@ -79,7 +121,7 @@ class CalendarScreen extends Screen
 		//print to screen
 		if (events)
                 {
-
+			/*
                         for (var i = 0; i < events.length; i++)
                         {
 				var div = document.createElement('div');	
@@ -95,6 +137,7 @@ class CalendarScreen extends Screen
 
 				if (events[i].event_date)
 				{
+					console.log('event_date:' + events[i].event_date)
 					var title = document.createElement('h5');
 					container.appendChild(title);
 					
@@ -171,6 +214,7 @@ class CalendarScreen extends Screen
 					p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
 				}
                         }
+			*/
                 }
 	}
 }
