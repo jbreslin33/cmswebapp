@@ -74,9 +74,21 @@ class CalendarScreen extends Screen
 				
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 				var txt = calendar.inflateDateString(s);
-				td.innerHTML = txt;
-                		
 				td.setAttribute('id',txt);
+
+				if (startDay < 1)
+				{
+					var lastMonth = parseInt(month - 2);
+					var numberOfDaysInMonth = new Date(year, lastMonth, 0).getDate();
+					console.log('number:' + numberOfDaysInMonth);
+					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
+					td.innerHTML = dayOfMonth;
+				}
+				else
+				{
+					td.innerHTML = startDay;
+				}
+                		
 			
 				//increment startDay
 				startDay++;
