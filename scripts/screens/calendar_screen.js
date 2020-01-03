@@ -112,8 +112,6 @@ class CalendarScreen extends Screen
 	{
 		super.processJsonData();
 
-		//var this.mEventsArray = [];
-
 		//make new array containing games and practices together
 		if (this.mJson)
 		{
@@ -154,7 +152,7 @@ class CalendarScreen extends Screen
 		if (this.mEventsArray)
                 {
 			var td = null
-
+/*
 			var modal = document.createElement('div');
 			modal.setAttribute('class','modal');
 			document.body.appendChild(modal);
@@ -171,8 +169,8 @@ class CalendarScreen extends Screen
 			modalContent.appendChild(p);
 
 			p.innerHTML = 'HEY MON';
-			//modal.style.display = "block";
-			
+*/			
+			//document.getElementById("myModal").style.display = "block";
 
 				
                         for (var i = 0; i < this.mEventsArray.length; i++)
