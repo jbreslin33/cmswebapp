@@ -16,15 +16,14 @@ class CalendarScreen extends Screen
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
 
 		//lets delete any rows that linger
-		//var x = document.getElementById("myTable").rows.length;
 		var length = this.getCalendarTable().rows.length;
 		for (var i = 1; i < length; i++)
 		{
 			this.getCalendarTable().deleteRow(1);		
 		}
 
-		//this.mTableRowArray = new Array();
-		//this.mTableDataArray = new Array();
+		this.mModalArray  = new Array();
+		this.mEventsArray = new Array();
 
 		//mViewedMonth
 		this.mWeekCount = 0;
@@ -113,7 +112,7 @@ class CalendarScreen extends Screen
 	{
 		super.processJsonData();
 
-		var events = [];
+		//var this.mEventsArray = [];
 
 		//make new array containing games and practices together
 		if (this.mJson)
@@ -122,7 +121,7 @@ class CalendarScreen extends Screen
 			{
                         	for (var i = 0; i < this.mJson.practices.length; i++)
 				{
-					events.push(this.mJson.practices[i]);
+					this.mEventsArray.push(this.mJson.practices[i]);
 					this.mJson.practices[i].type = 'practice';
 				}
 			}
@@ -131,14 +130,14 @@ class CalendarScreen extends Screen
 			{
                        		for (var i = 0; i < this.mJson.games.length; i++)
 				{
-					events.push(this.mJson.games[i]);
+					this.mEventsArray.push(this.mJson.games[i]);
 					this.mJson.games[i].type = 'game';
 				}
 			}
 		}
 
-		//sort events by date and arrival time
-		events.sort
+		//sort this.mEventsArray by date and arrival time
+		this.mEventsArray.sort
 		(
 			function(a, b)
 			{
@@ -152,7 +151,7 @@ class CalendarScreen extends Screen
 		);
                
 		//print to screen
-		if (events)
+		if (this.mEventsArray)
                 {
 			var td = null
 
@@ -176,25 +175,25 @@ class CalendarScreen extends Screen
 			
 
 				
-                        for (var i = 0; i < events.length; i++)
+                        for (var i = 0; i < this.mEventsArray.length; i++)
                         {
 				
-				if (events[i].event_date)
+				if (this.mEventsArray[i].event_date)
 				{
-					var event_date = events[i].event_date;
+					var event_date = this.mEventsArray[i].event_date;
 					td = document.getElementById(event_date);
 					//this.mCloneArray.push(td);
 
 					var title = document.createElement('h5');
 					td.appendChild(title);
 					
-					if (events[i].type == 'game')
+					if (this.mEventsArray[i].type == 'game')
 					{
-						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
+						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 					}
-					if (events[i].type == 'practice')
+					if (this.mEventsArray[i].type == 'practice')
 					{
-						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
+						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 					}
 				}
 				
@@ -203,57 +202,57 @@ class CalendarScreen extends Screen
 				var p = document.createElement('p');
 				td.appendChild(p);
 
-				if (events[i].arrival_time)
+				if (this.mEventsArray[i].arrival_time)
 				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].arrival_time);
+					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time);
 					textArray.push('Arrive by: ' + humanTime);
 				}
 				
-				if (events[i].start_time)
+				if (this.mEventsArray[i].start_time)
 				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].start_time);
+					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].start_time);
 					textArray.push('Start time: ' + humanTime);
 				}
 				
-				if (events[i].end_time)
+				if (this.mEventsArray[i].end_time)
 				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(events[i].end_time);
+					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].end_time);
 					textArray.push('End time: ' + humanTime);
 				}
 				
-				if (events[i].address)
+				if (this.mEventsArray[i].address)
 				{
-					textArray.push('Address: ' + events[i].address);
+					textArray.push('Address: ' + this.mEventsArray[i].address);
 				}
 
-				if (events[i].coordinates)
+				if (this.mEventsArray[i].coordinates)
 				{
-					textArray.push('Coordinates: ' + events[i].coordinates);
+					textArray.push('Coordinates: ' + this.mEventsArray[i].coordinates);
 				}
 				
-				if (events[i].pitch_name)
+				if (this.mEventsArray[i].pitch_name)
 				{
-					textArray.push('Pitch: ' + events[i].pitch_name);
+					textArray.push('Pitch: ' + this.mEventsArray[i].pitch_name);
 				}
 				
-				if (events[i].field_name)
+				if (this.mEventsArray[i].field_name)
 				{
-					textArray.push('Field: ' + events[i].field_name);
+					textArray.push('Field: ' + this.mEventsArray[i].field_name);
 				}
 				
-				if (events[i].club_name)
+				if (this.mEventsArray[i].club_name)
 				{
-					textArray.push('Club: ' + events[i].club_name);
+					textArray.push('Club: ' + this.mEventsArray[i].club_name);
 				}
 				
-				if (events[i].team_name)
+				if (this.mEventsArray[i].team_name)
 				{
-					textArray.push('Team: ' + events[i].team_name);
+					textArray.push('Team: ' + this.mEventsArray[i].team_name);
 				}
 				
-				if (events[i].opponent)
+				if (this.mEventsArray[i].opponent)
 				{
-					textArray.push('Opponent: ' + events[i].opponent);
+					textArray.push('Opponent: ' + this.mEventsArray[i].opponent);
 				}
 
 				for (var r = 0; r < textArray.length; r++)
