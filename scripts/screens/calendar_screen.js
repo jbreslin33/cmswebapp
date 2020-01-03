@@ -161,21 +161,19 @@ class CalendarScreen extends Screen
 					var event_date = this.mEventsArray[i].event_date;
 					td = document.getElementById(event_date);
 
-					var title = document.createElement('h5');
-					td.appendChild(title);
+					var a = document.createElement('a');
+					td.appendChild(a);
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
-						//title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 						txt = 'Game';
 					}
 					if (this.mEventsArray[i].type == 'practice')
 					{
-						//title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 						txt = 'Practice';
 					}
 					txt = txt + ' ' + this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time); 
-					title.innerHTML = txt;
+					a.innerHTML = txt;
 				}
 			}
 		}
