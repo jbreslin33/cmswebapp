@@ -175,6 +175,12 @@ class CalendarScreen extends Screen
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 					}
 				}
+			}
+		}
+	}
+
+	printModal()		
+	{
 				
 				var textArray = new Array();
 				
@@ -238,7 +244,5 @@ class CalendarScreen extends Screen
 				{
 					p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
 				}
-                        }
-                }
 	}
 }
