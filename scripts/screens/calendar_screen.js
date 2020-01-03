@@ -45,7 +45,7 @@ class CalendarScreen extends Screen
 
 		this.mWeekCount = calendar.weekCount(year,parseInt(month + 1)); 
 
-		p.innerHTML = calendar.mMonthArray[month] + ' weeks: ' + this.mWeekCount;  
+		p.innerHTML = calendar.mMonthArray[month];  
 
 		var startDay = 0;
 		//check if its a sunday if so then we dont need to count back
@@ -63,13 +63,10 @@ class CalendarScreen extends Screen
 		}
 		var firstDAY = new Date(year, month, startDay);
 
-
 		//append to table
-		var table = document.getElementById("calendar_table_id");
-
 		for (var i = 0; i < this.mWeekCount; i++)
 		{
-			var tr = table.insertRow(parseInt(i + 1));
+			var tr = this.getCalendarTable().insertRow(parseInt(i + 1));
 			for (var y = 0; y < 7; y++)
 			{
 				var td = tr.insertCell(y);
