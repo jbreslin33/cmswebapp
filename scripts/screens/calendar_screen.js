@@ -37,6 +37,7 @@ class CalendarScreen extends Screen
   		var year = date.getYear();
 		year = parseInt(year + 1900);
 		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
+		console.log('numberOfDaysInMonth:' + numberOfDaysInMonth); 
 		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
 		var dayOfWeekOfLastDay = new Date(year, month, numberOfDaysInMonth).getDay();
 
@@ -79,10 +80,15 @@ class CalendarScreen extends Screen
 				if (startDay < 1)
 				{
 					var lastMonth = parseInt(month - 2);
-					var numberOfDaysInMonth = new Date(year, lastMonth, 0).getDate();
-					console.log('number:' + numberOfDaysInMonth);
+					var daysInMonth = new Date(year, lastMonth, 0).getDate();
+					console.log('daysInMonth:' + daysInMonth);
 					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
 					td.innerHTML = dayOfMonth;
+				}
+				else if (startDay > numberOfDaysInMonth)
+				{
+					var day = startDay - numberOfDaysInMonth  	
+					td.innerHTML = day;
 				}
 				else
 				{
