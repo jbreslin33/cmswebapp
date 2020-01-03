@@ -1,3 +1,5 @@
+Use a <span class="link" ng-click="forgotPassword()"> tag. Style it with text-decoration: underline; cursor: pointer;, the color you like, etc.
+------------
 we will call get on load but then everytime you hit forward or back button we will call get
 -----------------
 do you want to query db everytime you make a calender change like change month or go back to all days list view
