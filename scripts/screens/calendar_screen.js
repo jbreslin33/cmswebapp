@@ -25,20 +25,20 @@ class CalendarScreen extends Screen
 		this.mWeekCount = 0;
 
 		//month calendar_month_p_html_id
-		var date = new Date();
-  		var month = date.getMonth();
+		var currentDate = new Date();
+  		var currentMonth = currentDate.getMonth();
 
-  		var year = date.getYear();
-		year = parseInt(year + 1900);
-		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
-		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
+  		var currentYear = currentDate.getYear();
+		currentYear = parseInt(currentYear + 1900);
+		var numberOfDaysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+		var dayOfWeekOfFirstDay = new Date(currentYear, currentMonth, 1).getDay();
 
 		var p = document.getElementById("calendar_month_p_html_id");
 		var calendar = new Calendar();
 
-		this.mWeekCount = calendar.weekCount(year,parseInt(month + 1)); 
+		this.mWeekCount = calendar.weekCount(currentYear,parseInt(currentMonth + 1)); 
 
-		p.innerHTML = calendar.mMonthArray[month];  
+		p.innerHTML = calendar.mMonthArray[currentMonth];  
 
 		var startDay = this.getStartDay(dayOfWeekOfFirstDay);
 
@@ -49,7 +49,7 @@ class CalendarScreen extends Screen
 			for (var y = 0; y < 7; y++)
 			{
 				var td = tr.insertCell(y);
-				var date = new Date(year, month, startDay);
+				var date = new Date(currentYear, currentMonth, startDay);
 				
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 				var txt = calendar.inflateDateString(s);
@@ -57,8 +57,8 @@ class CalendarScreen extends Screen
 
 				if (startDay < 1)
 				{
-					var lastMonth = parseInt(month - 2);
-					var daysInMonth = new Date(year, lastMonth, 0).getDate();
+					var lastMonth = parseInt(currentMonth - 2);
+					var daysInMonth = new Date(currentYear, lastMonth, 0).getDate();
 					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
 					td.innerHTML = dayOfMonth;
 				}
