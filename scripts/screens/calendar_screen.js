@@ -14,6 +14,9 @@ class CalendarScreen extends Screen
                 this.setForm(document.getElementById("calendar_screen_form_id"));
 		this.mCalendarTable = null;
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
+
+		//make a helper calendar instance
+		this.mCalendar = new Calendar();
 	
 		this.deleteCalendarRows()
 
@@ -33,12 +36,11 @@ class CalendarScreen extends Screen
 		var numberOfDaysInMonth = new Date(currentYear, currentMonth, 0).getDate();
 		var dayOfWeekOfFirstDay = new Date(currentYear, currentMonth, 1).getDay();
 
-		var p = document.getElementById("calendar_month_p_html_id");
-		var calendar = new Calendar();
+		this.setDisplayMonth(this.mCalendar,currentMonth);
 
-		this.mWeekCount = calendar.weekCount(currentYear,parseInt(currentMonth + 1)); 
 
-		p.innerHTML = calendar.mMonthArray[currentMonth];  
+		this.mWeekCount = this.mCalendar.weekCount(currentYear,parseInt(currentMonth + 1)); 
+
 
 		var startDay = this.getStartDay(dayOfWeekOfFirstDay);
 
@@ -52,7 +54,7 @@ class CalendarScreen extends Screen
 				var date = new Date(currentYear, currentMonth, startDay);
 				
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
-				var txt = calendar.inflateDateString(s);
+				var txt = this.mCalendar.inflateDateString(s);
 				td.setAttribute('id',txt);
 
 				if (startDay < 1)
@@ -106,6 +108,13 @@ class CalendarScreen extends Screen
 		}
 
 		return startDay;
+	}
+
+	setDisplayMonth(calendar,month)
+	{
+		//set displayed month
+		var p = document.getElementById("calendar_month_p_html_id");
+		p.innerHTML = calendar.mMonthArray[month];  
 	}
 
 	//so we will call get on enter into state 
