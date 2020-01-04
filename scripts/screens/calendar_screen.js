@@ -27,7 +27,6 @@ class CalendarScreen extends Screen
 
 		//mViewedMonth
 		this.mWeekCount = 0;
-		this.mMonthView = 0;
 		this.mWeekCount = 0;
 
 		//month calendar_month_p_html_id
@@ -37,7 +36,6 @@ class CalendarScreen extends Screen
   		var year = date.getYear();
 		year = parseInt(year + 1900);
 		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
-		console.log('numberOfDaysInMonth:' + numberOfDaysInMonth); 
 		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
 		var dayOfWeekOfLastDay = new Date(year, month, numberOfDaysInMonth).getDay();
 
@@ -49,6 +47,7 @@ class CalendarScreen extends Screen
 		p.innerHTML = calendar.mMonthArray[month];  
 
 		var startDay = 0;
+
 		//check if its a sunday if so then we dont need to count back
 		if (dayOfWeekOfFirstDay == 0) //its a sunday so make it 1
 		{
@@ -81,7 +80,6 @@ class CalendarScreen extends Screen
 				{
 					var lastMonth = parseInt(month - 2);
 					var daysInMonth = new Date(year, lastMonth, 0).getDate();
-					console.log('daysInMonth:' + daysInMonth);
 					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
 					td.innerHTML = dayOfMonth;
 				}
@@ -94,15 +92,11 @@ class CalendarScreen extends Screen
 				{
 					td.innerHTML = startDay;
 				}
-                		
 			
 				//increment startDay
 				startDay++;
 			}
 		}
-                
-		var presidents = document.getElementById("2020-01-20");
-		presidents.innerHTML = "Presidents Day";
 	}
 	//so we will call get on enter into state 
 	//so we should keep that and just call get again everytime you hit a button	
