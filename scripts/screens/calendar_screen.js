@@ -23,35 +23,36 @@ class CalendarScreen extends Screen
 		this.mModalArray  = new Array();
 		this.mEventsArray = new Array();
 
-		//mViewedMonth
-		this.mWeekCount = 0;
-		this.mWeekCount = 0;
-
 		//month calendar_month_p_html_id
 		var currentDate = new Date();
-  		var currentMonth = currentDate.getMonth();
-
-  		var currentYear = currentDate.getYear();
-		currentYear = parseInt(currentYear + 1900);
-		var numberOfDaysInMonth = new Date(currentYear, currentMonth, 0).getDate();
-		var dayOfWeekOfFirstDay = new Date(currentYear, currentMonth, 1).getDay();
-
-		this.setDisplayMonth(this.mCalendar,currentMonth);
+  		this.mCurrentMonth = currentDate.getMonth();
+  		var year = currentDate.getYear();
+		this.mCurrentYear = parseInt(year + 1900);
 
 
-		this.mWeekCount = this.mCalendar.weekCount(currentYear,parseInt(currentMonth + 1)); 
+		this.setDisplayMonth(this.mCalendar,this.mCurrentMonth);
 
+
+		this.makeEmptyCalendar()
+	}
+
+	makeEmptyCalendar()
+	{
+		var numberOfDaysInMonth = new Date(this.mCurrentYear, this.mCurrentMonth, 0).getDate();
+		var dayOfWeekOfFirstDay = new Date(this.mCurrentYear, this.mCurrentMonth, 1).getDay();
+
+		var weekCount = this.mCalendar.weekCount(this.mCurrentYear,parseInt(this.mCurrentMonth + 1)); 
 
 		var startDay = this.getStartDay(dayOfWeekOfFirstDay);
 
 		//append to table
-		for (var i = 0; i < this.mWeekCount; i++)
+		for (var i = 0; i < weekCount; i++)
 		{
 			var tr = this.getCalendarTable().insertRow(parseInt(i + 1));
 			for (var y = 0; y < 7; y++)
 			{
 				var td = tr.insertCell(y);
-				var date = new Date(currentYear, currentMonth, startDay);
+				var date = new Date(this.mCurrentYear, this.mCurrentMonth, startDay);
 				
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 				var txt = this.mCalendar.inflateDateString(s);
@@ -59,8 +60,8 @@ class CalendarScreen extends Screen
 
 				if (startDay < 1)
 				{
-					var lastMonth = parseInt(currentMonth - 2);
-					var daysInMonth = new Date(currentYear, lastMonth, 0).getDate();
+					var lastMonth = parseInt(this.mCurrentMonth - 2);
+					var daysInMonth = new Date(this.mCurrentYear, lastMonth, 0).getDate();
 					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
 					td.innerHTML = dayOfMonth;
 				}
