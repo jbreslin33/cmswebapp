@@ -14,13 +14,8 @@ class CalendarScreen extends Screen
                 this.setForm(document.getElementById("calendar_screen_form_id"));
 		this.mCalendarTable = null;
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
-
-		//lets delete any rows that linger
-		var length = this.getCalendarTable().rows.length;
-		for (var i = 1; i < length; i++)
-		{
-			this.getCalendarTable().deleteRow(1);		
-		}
+	
+		this.deleteCalendarRows()
 
 		this.mModalArray  = new Array();
 		this.mEventsArray = new Array();
@@ -96,6 +91,16 @@ class CalendarScreen extends Screen
 				//increment startDay
 				startDay++;
 			}
+		}
+	}
+
+	deleteCalendarRows()
+	{
+		//lets delete any rows that linger
+		var length = this.getCalendarTable().rows.length;
+		for (var i = 1; i < length; i++)
+		{
+			this.getCalendarTable().deleteRow(1);		
 		}
 	}
 	//so we will call get on enter into state 
