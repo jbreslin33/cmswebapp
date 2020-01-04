@@ -24,22 +24,22 @@ class CalendarScreen extends Screen
 		this.mEventsArray = new Array();
 
 		//month calendar_month_p_html_id
-		var currentDate = new Date();
-  		this.mCurrentMonth = currentDate.getMonth();
-  		var year = currentDate.getYear();
-		this.mCurrentYear = parseInt(year + 1900);
+		var date = new Date();
+  		var month = date.getMonth();
+  		var year = date.getYear();
+		year = parseInt(year + 1900);
 
-		this.setDisplayMonth(this.mCalendar,this.mCurrentMonth);
+		this.setDisplayMonth(this.mCalendar,month);
 
-		this.makeEmptyCalendar();
+		this.makeEmptyCalendar(month,year);
 	}
 
-	makeEmptyCalendar()
+	makeEmptyCalendar(month,year)
 	{
-		var numberOfDaysInMonth = new Date(this.mCurrentYear, this.mCurrentMonth, 0).getDate();
-		var dayOfWeekOfFirstDay = new Date(this.mCurrentYear, this.mCurrentMonth, 1).getDay();
+		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
+		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
 
-		var weekCount = this.mCalendar.weekCount(this.mCurrentYear,parseInt(this.mCurrentMonth + 1)); 
+		var weekCount = this.mCalendar.weekCount(year,parseInt(month + 1)); 
 
 		var startDay = this.getStartDay(dayOfWeekOfFirstDay);
 
@@ -50,16 +50,17 @@ class CalendarScreen extends Screen
 			for (var y = 0; y < 7; y++)
 			{
 				var td = tr.insertCell(y);
-				var date = new Date(this.mCurrentYear, this.mCurrentMonth, startDay);
-				
+
+				//set id td
+				var date = new Date(year, month, startDay);
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 				var txt = this.mCalendar.inflateDateString(s);
 				td.setAttribute('id',txt);
 
 				if (startDay < 1)
 				{
-					var lastMonth = parseInt(this.mCurrentMonth - 2);
-					var daysInMonth = new Date(this.mCurrentYear, lastMonth, 0).getDate();
+					var lastMonth = parseInt(month - 2);
+					var daysInMonth = new Date(year, lastMonth, 0).getDate();
 					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
 					td.innerHTML = dayOfMonth;
 				}
