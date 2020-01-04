@@ -197,11 +197,11 @@ class CalendarScreen extends Screen
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
-						txt = 'Game';
+						txt = '<br>Game';
 					}
 					if (this.mEventsArray[i].type == 'practice')
 					{
-						txt = 'Practice';
+						txt = '<br>Practice';
 					}
 					txt = txt + ' ' + this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time); 
 					a.innerHTML = txt;
