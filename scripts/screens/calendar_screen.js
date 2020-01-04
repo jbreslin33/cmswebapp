@@ -193,6 +193,7 @@ class CalendarScreen extends Screen
 					td = document.getElementById(event_date);
 
 					var a = document.createElement('a');
+					a.setAttribute('class','calendar-data');
 					td.appendChild(a);
 					
 					if (this.mEventsArray[i].type == 'game')
