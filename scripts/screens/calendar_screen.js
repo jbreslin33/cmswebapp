@@ -29,11 +29,9 @@ class CalendarScreen extends Screen
   		var year = currentDate.getYear();
 		this.mCurrentYear = parseInt(year + 1900);
 
-
 		this.setDisplayMonth(this.mCalendar,this.mCurrentMonth);
 
-
-		this.makeEmptyCalendar()
+		this.makeEmptyCalendar();
 	}
 
 	makeEmptyCalendar()
