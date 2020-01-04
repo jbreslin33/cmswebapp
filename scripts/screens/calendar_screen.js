@@ -32,7 +32,6 @@ class CalendarScreen extends Screen
 		year = parseInt(year + 1900);
 		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
 		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
-		var dayOfWeekOfLastDay = new Date(year, month, numberOfDaysInMonth).getDay();
 
 		var p = document.getElementById("calendar_month_p_html_id");
 		var calendar = new Calendar();
