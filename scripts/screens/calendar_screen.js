@@ -24,6 +24,10 @@ class CalendarScreen extends Screen
 		this.mEventsArray = new Array();
 		this.mCalendarEventButtonArray = new Array();
 
+		//for database
+		this.mFirstDayOfQuery = null;
+		this.mLastDayOfQuery = null;
+
 		//month calendar_month_p_html_id
 		var date = new Date();
   		var month = date.getMonth();
@@ -33,6 +37,8 @@ class CalendarScreen extends Screen
 		this.setDisplayMonth(this.mCalendar,month);
 
 		this.makeEmptyCalendar(month,year);
+
+
 	}
 
 	makeEmptyCalendar(month,year)
@@ -57,6 +63,18 @@ class CalendarScreen extends Screen
 				var s = parseInt(date.getYear() + 1900) + '-' + parseInt(date.getMonth() + 1) + '-' + date.getDate();  
 				var txt = this.mCalendar.inflateDateString(s);
 				td.setAttribute('id',txt);
+
+				//while we are here lets set first and last day of db query
+				if (i == 0 && y == 0)
+				{
+					this.mFirstDayOfQuery = txt;
+					console.log('firstDayOfQuery:' + txt);
+				}
+				if (i == parseInt(weekCount - 1) && y == 6)
+				{
+					this.mLastDayOfQuery = txt;
+					console.log('lastDayOfQuery:' + txt);
+				}
 
 				if (startDay < 1)
 				{
