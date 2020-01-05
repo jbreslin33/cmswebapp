@@ -227,8 +227,6 @@ class CalendarScreen extends Screen
 
 	printModal()
 	{
-		console.log('what:' + this);
-		console.log('what:' + this.getAttribute('eventsarrayelementid'));
 		var i = this.getAttribute('eventsarrayelementid'); 
 
 		var p = document.getElementById("modal_p_id");
