@@ -44,6 +44,18 @@ button
 	font-size: 23px;
 }
 
+.calendar-event-button
+{
+	background: none!important;
+	border: none;
+  	padding: 0!important;
+  	/*optional*/
+  	font-family: arial, sans-serif;
+  	/*input has OS specific font-family*/
+  	color: #069;
+  	text-decoration: underline;
+  	cursor: pointer;
+}
 
 /******************** SELECTS *******************/
 select 
@@ -82,16 +94,6 @@ td, th
 {
 	width: 14%;
 }
-
-/**************** A ************************/
-.calendar-data
-{
-	font-size: 12px;
-	text-decoration: underline; 
-	cursor: pointer;
-	color: #33b5e5;
-}
-
 
 /***********************************************/
 /********************** PARTITIONS *****************/

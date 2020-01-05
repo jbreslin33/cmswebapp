@@ -192,9 +192,21 @@ class CalendarScreen extends Screen
 					var event_date = this.mEventsArray[i].event_date;
 					td = document.getElementById(event_date);
 
-					var a = document.createElement('a');
-					a.setAttribute('class','calendar-data');
-					td.appendChild(a);
+					var calendarEventButton = document.createElement('button');
+					calendarEventButton.setAttribute('class','calendar-event-button');
+					td.appendChild(calendarEventButton);
+					//a.onclick = this.openModal();
+					//inputElement.addEventListener('click', function(){
+    //gotoNode(result.name);
+					/*
+					a.addEventListener('click', function()
+					{ 
+						this.openModal();
+					});
+					*/
+					//calendarEventButton.setAttribute('onclick','this.openModal();'); // for FF
+					calendarEventButton.onclick = this.openModal;
+					//document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
@@ -205,10 +217,16 @@ class CalendarScreen extends Screen
 						txt = '<br>Practice';
 					}
 					txt = txt + ' ' + this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time); 
-					a.innerHTML = txt;
+					calendarEventButton.innerHTML = txt;
 				}
 			}
 		}
+	}
+
+	openModal()
+	{
+		//console.log('called openModal:' + event_date);
+		console.log('called openModal:' + this.innerHTML);
 	}
 
 	//document.getElementById("myModal").style.display = "block";
