@@ -233,6 +233,8 @@ class CalendarScreen extends Screen
 
 		var p = document.getElementById("modal_p_id");
 		var textArray = new Array();
+		textArray.length = 0;
+		p.innerHTML = '';
 
 		var eventsArray = APPLICATION.getCurrentScreen().mEventsArray;
 
@@ -251,57 +253,49 @@ class CalendarScreen extends Screen
 			textArray.push('Arrive by: ' + humanTime);
 		}
 		
-		for (var r = 0; r < textArray.length; r++)
-		{
-			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
-		}
-		
-		document.getElementById("calendar_modal_id").style.display = "block";
-
-			/*	
 		if (eventsArray[i].start_time)
 		{
-			var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(eventsArray[i].start_time);
+			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].start_time);
 			textArray.push('Start time: ' + humanTime);
 		}
 				
-		if (this.eventsArray[i].end_time)
+		if (eventsArray[i].end_time)
 		{
-			var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(eventsArray[i].end_time);
+			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].end_time);
 			textArray.push('End time: ' + humanTime);
 		}
 				
-		if (this.eventsArray[i].address)
+		if (eventsArray[i].address)
 		{
 			textArray.push('Address: ' + eventsArray[i].address);
 		}
 
-		if (this.eventsArray[i].coordinates)
+		if (eventsArray[i].coordinates)
 		{
 			textArray.push('Coordinates: ' + eventsArray[i].coordinates);
 		}
 				
-		if (this.eventsArray[i].pitch_name)
+		if (eventsArray[i].pitch_name)
 		{
 			textArray.push('Pitch: ' + eventsArray[i].pitch_name);
 		}
 				
-		if (this.eventsArray[i].field_name)
+		if (eventsArray[i].field_name)
 		{
 			textArray.push('Field: ' + eventsArray[i].field_name);
 		}
 				
-		if (this.eventsArray[i].club_name)
+		if (eventsArray[i].club_name)
 		{
 			textArray.push('Club: ' + eventsArray[i].club_name);
 		}
 				
-		if (this.eventsArray[i].team_name)
+		if (eventsArray[i].team_name)
 		{
 			textArray.push('Team: ' + eventsArray[i].team_name);
 		}
 				
-		if (this.eventsArray[i].opponent)
+		if (eventsArray[i].opponent)
 		{
 			textArray.push('Opponent: ' + eventsArray[i].opponent);
 		}
@@ -310,6 +304,7 @@ class CalendarScreen extends Screen
 		{
 			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
 		}
-		*/
+		
+		document.getElementById("calendar_modal_id").style.display = "block";
 	}
 }
