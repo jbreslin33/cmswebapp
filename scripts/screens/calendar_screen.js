@@ -194,19 +194,10 @@ class CalendarScreen extends Screen
 
 					var calendarEventButton = document.createElement('button');
 					calendarEventButton.setAttribute('class','calendar-event-button');
+					calendarEventButton.setAttribute('eventsarrayelementid',i);
 					td.appendChild(calendarEventButton);
-					//a.onclick = this.openModal();
-					//inputElement.addEventListener('click', function(){
-    //gotoNode(result.name);
-					/*
-					a.addEventListener('click', function()
-					{ 
-						this.openModal();
-					});
-					*/
-					//calendarEventButton.setAttribute('onclick','this.openModal();'); // for FF
+
 					calendarEventButton.onclick = this.openModal;
-					//document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
@@ -225,8 +216,8 @@ class CalendarScreen extends Screen
 
 	openModal()
 	{
-		//console.log('called openModal:' + event_date);
 		console.log('called openModal:' + this.innerHTML);
+		console.log('called openModal eventsid:' + this.getAttribute('eventsarrayelementid'));
 	}
 
 	//document.getElementById("myModal").style.display = "block";
