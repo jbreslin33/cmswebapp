@@ -162,6 +162,13 @@ class CalendarScreen extends Screen
 			}
 		}
 
+		this.sortEventsArray();
+		this.printEventsToScreen();
+	}
+
+	sortEventsArray()
+	{
+
 		//sort this.mEventsArray by date and arrival time
 		this.mEventsArray.sort
 		(
@@ -175,8 +182,10 @@ class CalendarScreen extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
-               
-		
+	}       
+	
+	printEventsToScreen()
+	{
 		//print to screen
 		if (this.mEventsArray)
                 {
