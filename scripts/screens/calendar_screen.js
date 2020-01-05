@@ -235,7 +235,16 @@ class CalendarScreen extends Screen
 		var textArray = new Array();
 
 		var eventsArray = APPLICATION.getCurrentScreen().mEventsArray;
-				
+
+		if (eventsArray[i].type == 'game')
+		{
+			textArray.push('<b>Game<b>');
+		}
+		if (eventsArray[i].type == 'practice')
+		{
+			textArray.push('<b>Practice<b>');
+		}
+		
 		if (eventsArray[i].arrival_time)
 		{
 			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].arrival_time);
