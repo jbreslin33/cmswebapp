@@ -68,14 +68,13 @@ class CalendarScreen extends Screen
 				if (i == 0 && y == 0)
 				{
 					this.mFirstDayOfQuery = txt;
-					console.log('firstDayOfQuery:' + txt);
 				}
 				if (i == parseInt(weekCount - 1) && y == 6)
 				{
 					this.mLastDayOfQuery = txt;
-					console.log('lastDayOfQuery:' + txt);
 				}
 
+				//lets print the day of month at top of td cell
 				if (startDay < 1)
 				{
 					var lastMonth = parseInt(month - 2);
