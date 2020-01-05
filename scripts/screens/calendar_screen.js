@@ -22,6 +22,7 @@ class CalendarScreen extends Screen
 
 		this.mModalArray  = new Array();
 		this.mEventsArray = new Array();
+		this.mCalendarEventButtonArray = new Array();
 
 		//month calendar_month_p_html_id
 		var date = new Date();
@@ -206,7 +207,8 @@ class CalendarScreen extends Screen
 					calendarEventButton.setAttribute('eventsarrayelementid',i);
 					td.appendChild(calendarEventButton);
 
-					calendarEventButton.onclick = this.openModal;
+					calendarEventButton.onclick = this.printModal;
+					this.mCalendarEventButtonArray.push(calendarEventButton);
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
@@ -223,77 +225,82 @@ class CalendarScreen extends Screen
 		}
 	}
 
-	openModal()
+	printModal()
 	{
-		console.log('called openModal:' + this.innerHTML);
-		console.log('called openModal eventsid:' + this.getAttribute('eventsarrayelementid'));
-	}
+		console.log('what:' + this);
+		console.log('what:' + this.getAttribute('eventsarrayelementid'));
+		var i = this.getAttribute('eventsarrayelementid'); 
 
-	//document.getElementById("myModal").style.display = "block";
-	printModal()		
-	{
-				
-				var textArray = new Array();
-				
-				var p = document.createElement('p');
-				td.appendChild(p);
+		var p = document.getElementById("modal_p_id");
+		var textArray = new Array();
 
-				if (this.mEventsArray[i].arrival_time)
-				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time);
-					textArray.push('Arrive by: ' + humanTime);
-				}
+		var eventsArray = APPLICATION.getCurrentScreen().mEventsArray;
 				
-				if (this.mEventsArray[i].start_time)
-				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].start_time);
-					textArray.push('Start time: ' + humanTime);
-				}
-				
-				if (this.mEventsArray[i].end_time)
-				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].end_time);
-					textArray.push('End time: ' + humanTime);
-				}
-				
-				if (this.mEventsArray[i].address)
-				{
-					textArray.push('Address: ' + this.mEventsArray[i].address);
-				}
+		if (eventsArray[i].arrival_time)
+		{
+			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].arrival_time);
+			textArray.push('Arrive by: ' + humanTime);
+		}
+		
+		for (var r = 0; r < textArray.length; r++)
+		{
+			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
+		}
+		
+		document.getElementById("calendar_modal_id").style.display = "block";
 
-				if (this.mEventsArray[i].coordinates)
-				{
-					textArray.push('Coordinates: ' + this.mEventsArray[i].coordinates);
-				}
+			/*	
+		if (eventsArray[i].start_time)
+		{
+			var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(eventsArray[i].start_time);
+			textArray.push('Start time: ' + humanTime);
+		}
 				
-				if (this.mEventsArray[i].pitch_name)
-				{
-					textArray.push('Pitch: ' + this.mEventsArray[i].pitch_name);
-				}
+		if (this.eventsArray[i].end_time)
+		{
+			var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(eventsArray[i].end_time);
+			textArray.push('End time: ' + humanTime);
+		}
 				
-				if (this.mEventsArray[i].field_name)
-				{
-					textArray.push('Field: ' + this.mEventsArray[i].field_name);
-				}
-				
-				if (this.mEventsArray[i].club_name)
-				{
-					textArray.push('Club: ' + this.mEventsArray[i].club_name);
-				}
-				
-				if (this.mEventsArray[i].team_name)
-				{
-					textArray.push('Team: ' + this.mEventsArray[i].team_name);
-				}
-				
-				if (this.mEventsArray[i].opponent)
-				{
-					textArray.push('Opponent: ' + this.mEventsArray[i].opponent);
-				}
+		if (this.eventsArray[i].address)
+		{
+			textArray.push('Address: ' + eventsArray[i].address);
+		}
 
-				for (var r = 0; r < textArray.length; r++)
-				{
-					p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
-				}
+		if (this.eventsArray[i].coordinates)
+		{
+			textArray.push('Coordinates: ' + eventsArray[i].coordinates);
+		}
+				
+		if (this.eventsArray[i].pitch_name)
+		{
+			textArray.push('Pitch: ' + eventsArray[i].pitch_name);
+		}
+				
+		if (this.eventsArray[i].field_name)
+		{
+			textArray.push('Field: ' + eventsArray[i].field_name);
+		}
+				
+		if (this.eventsArray[i].club_name)
+		{
+			textArray.push('Club: ' + eventsArray[i].club_name);
+		}
+				
+		if (this.eventsArray[i].team_name)
+		{
+			textArray.push('Team: ' + eventsArray[i].team_name);
+		}
+				
+		if (this.eventsArray[i].opponent)
+		{
+			textArray.push('Opponent: ' + eventsArray[i].opponent);
+		}
+
+		for (var r = 0; r < textArray.length; r++)
+		{
+			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
+		}
+		*/
 	}
 }
