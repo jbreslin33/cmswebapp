@@ -1462,6 +1462,8 @@ SELECT json_agg(t) INTO raw_json
                 --where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
                 where emails_persons.email_id = $1 AND practices.event_date > $2 AND practices.event_date < $3
 	) t;
+  	--RAISE LOG 'log message raw_json: %', raw_json;
+  	--RAISE LOG 'log message t: %', t;
 
         IF raw_json is NULL THEN
                 result_set = CONCAT('"practices": []', raw_json);
