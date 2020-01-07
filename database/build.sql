@@ -1088,7 +1088,7 @@ $$ LANGUAGE plpgsql;
 
 
 
-CREATE OR REPLACE FUNCTION f_format_result_set_events(int,TEXT,int)
+CREATE OR REPLACE FUNCTION f_format_result_set_events(int,TEXT,int,date,date)
 RETURNS text AS $$
 DECLARE
         json_result_codes text;
@@ -1107,8 +1107,8 @@ BEGIN
         select into json_result_clubs j_select_clubs($1);
 	select into json_result_teams j_select_teams($1);
 
-	select into json_result_practices j_select_practices($1);
-	select into json_result_games j_select_games($1);
+	select into json_result_practices j_select_practices($1,$4,$5);
+	select into json_result_games j_select_games($1,$4,$5);
 	
         result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
 RETURN result_set;
@@ -1437,7 +1437,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT CLUBS
 
 --BEGIN J_SELECT PRACTICES
-CREATE OR REPLACE FUNCTION j_select_practices(email_id int)
+CREATE OR REPLACE FUNCTION j_select_practices(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1459,7 +1459,8 @@ SELECT json_agg(t) INTO raw_json
 
                 left outer join pitches on pitches.club_id=teams.club_id
 
-                where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
+                --where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
+                where emails_persons.email_id = $1 AND practices.event_date > $2 AND practices.event_date < $3
 	) t;
 
         IF raw_json is NULL THEN
@@ -1473,7 +1474,8 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
 --BEGIN J_SELECT GAMES
-CREATE OR REPLACE FUNCTION j_select_games(email_id int)
+--CREATE OR REPLACE FUNCTION j_select_games(email_id int, )
+CREATE OR REPLACE FUNCTION j_select_games(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1495,7 +1497,8 @@ SELECT json_agg(t) INTO raw_json
 
                 left outer join pitches on pitches.club_id=teams.club_id
 
-                where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
+                --where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
+                where emails_persons.email_id = $1 AND games.event_date > $2 AND games.event_date < $3
         ) t;
 
         IF raw_json is NULL THEN
@@ -2065,12 +2068,12 @@ END;
 $$ LANGUAGE plpgsql;
 
 --BEGIN SELECT EVENTS
-CREATE OR REPLACE FUNCTION f_select_events(email_id int)
+CREATE OR REPLACE FUNCTION f_select_events(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set_events(email_id, null,-100);
+	result_set = f_format_result_set_events(email_id, null,-100, first_day_of_query, last_day_of_query);
 
 RETURN result_set;
 END;

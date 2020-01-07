@@ -7,15 +7,28 @@ class UpcomingScreen extends Screen
         {
 		parent::__construct();	
 	}
-
-	function getResult()
-	{
-                $sql = 'select f_select_events($1)';
-                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId()));
 	
-		return pg_fetch_result($result, 0);
-	}
+	function getResult()
+        {
+                $first_day_of_query = null;
+                $last_day_of_query = null;
+
+                if (isset($_GET['first_day_of_query_id']))
+                {
+                        $first_day_of_query = $_GET['first_day_of_query'];
+                }
+                if (isset($_GET['last_day_of_query_id']))
+                {
+                        $last_day_of_query = $_GET['last_day_of_query'];
+                }
+
+                $sql = 'select f_select_events($1,$2,$3)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $first_day_of_query, $last_day_of_query));
+
+                return pg_fetch_result($result, 0);
+        }
+
 }
 
 $upcomingScreen = new UpcomingScreen();

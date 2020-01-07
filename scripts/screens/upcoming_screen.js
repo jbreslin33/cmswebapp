@@ -14,12 +14,17 @@ class UpcomingScreen extends Screen
                 this.setForm(document.getElementById("upcoming_screen_form_id"));
 
 		this.mCloneArray = new Array();
+
+		//temp until we write date functions
+		this.mFirstDayOfQuery = '2020-01-01';
+		this.mLastDayOfQuery = '2020-01-31';
         }
 
         get()
         {
 		super.get();
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT());
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
+
                 APPLICATION.getCurrentScreen().ajax();
         }
 
