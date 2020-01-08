@@ -30,13 +30,13 @@ class CalendarScreen extends Screen
 
 		//month calendar_month_p_html_id
 		var date = new Date();
-  		var month = date.getMonth();
-  		var year = date.getYear();
-		year = parseInt(year + 1900);
+  		this.mDisplayMonth = date.getMonth();
+  		this.mDisplayYear = date.getYear();
+		this.mDisplayYear = parseInt(this.mDisplayYear + 1900);
 
-		this.setDisplayMonth(this.mCalendar,month);
+		this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth);
 
-		this.makeEmptyCalendar(month,year);
+		this.makeEmptyCalendar(this.mDisplayMonth,this.mDisplayYear);
 
 		//navigation buttons
                	document.getElementById("calendarbackbuttonid").onclick = this.back.bind(this);
@@ -64,19 +64,17 @@ class CalendarScreen extends Screen
 		this.deleteCalendarRows();
 
                 //month calendar_month_p_html_id
-                var date = new Date();
+                var date = new Date(this.mDisplayYear,parseInt(this.mDisplayMonth + 1), 1);
+		console.log('date:' + date);
 
-		date.setMonth(this.getDisplayMonthElement(this.mCalendar));
+		//move up the display dates base on new forwarded date
+                this.mDisplayMonth = date.getMonth();
+                this.mDisplayYear = date.getYear();
+                this.mDisplayYear = parseInt(this.mDisplayYear + 1900);
 
-                var month = parseInt(date.getMonth() + 1);
-                var year = date.getYear();
-                year = parseInt(year + 1900);
+                this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth);
 
-                this.setDisplayMonth(this.mCalendar,month);
-
-
-                this.makeEmptyCalendar(month,year);
-
+                this.makeEmptyCalendar(this.mDisplayMonth,this.mDisplayYear);
 
 		this.get();
 
@@ -169,7 +167,7 @@ class CalendarScreen extends Screen
 		return startDay;
 	}
 
-	setDisplayMonth(calendar,month)
+	drawDisplayMonth(calendar,month)
 	{
 		//set displayed month
 		var p = document.getElementById("calendar_month_p_html_id");
