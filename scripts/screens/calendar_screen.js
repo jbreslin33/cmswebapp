@@ -48,6 +48,7 @@ class CalendarScreen extends Screen
 	{
 		console.log('back');	
 	}
+
 	forward()
 	{
 		//lets get current month
@@ -64,6 +65,9 @@ class CalendarScreen extends Screen
 
                 //month calendar_month_p_html_id
                 var date = new Date();
+
+		date.setMonth(this.getDisplayMonthElement(this.mCalendar));
+
                 var month = parseInt(date.getMonth() + 1);
                 var year = date.getYear();
                 year = parseInt(year + 1900);
