@@ -27,7 +27,7 @@ class UpcomingScreen extends Screen
 
 		//7 days from now
 		var future_date = new Date();
-		future_date.setDate(future_date.getDate() + 7);
+		future_date.setDate(future_date.getDate() + 5000); //over 10 years
                 var future_month = future_date.getMonth();
                 var future_year = future_date.getYear();
                 var future_string = parseInt(future_date.getYear() + 1900) + '-' + parseInt(future_date.getMonth() + 1) + '-' + future_date.getDate();
