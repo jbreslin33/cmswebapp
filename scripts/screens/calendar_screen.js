@@ -12,8 +12,13 @@ class CalendarScreen extends Screen
                 this.setMessageElement(document.getElementById("calendar_screen_message_id"));
                 this.setSpinner(document.getElementById("calendar_screen_spinner_id"));
                 this.setForm(document.getElementById("calendar_screen_form_id"));
+
 		this.mCalendarTable = null;
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
+		/*
+                this.setForwardButton(document.getElementById("calendarforwardbuttonid"));
+                this.setBackButton(document.getElementById("calendarbackbuttonid"));
+		*/
 
 		//make a helper calendar instance
 		this.mCalendar = new Calendar();
@@ -39,6 +44,18 @@ class CalendarScreen extends Screen
 		this.makeEmptyCalendar(month,year);
 
 
+               	document.getElementById("calendarbackbuttonid").onclick = this.back.bind(this);
+               	document.getElementById("calendarforwardbuttonid").onclick = this.forward.bind(this);
+
+	}
+
+	back()
+	{
+		console.log('back');	
+	}
+	forward()
+	{
+		console.log('forward');	
 	}
 
 	makeEmptyCalendar(month,year)
