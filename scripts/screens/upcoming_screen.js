@@ -91,9 +91,13 @@ class UpcomingScreen extends Screen
 		//print to screen
 		if (events)
                 {
+			//lets set message at top that there is a schedule
+			this.setMessage('Upcoming 7 days of schedule:', 'black'); 
 
                         for (var i = 0; i < events.length; i++)
                         {
+
+
 				var div = document.createElement('div');	
 				div.setAttribute('class','card');
 				document.getElementById("upcoming_screen_html_id").appendChild(div);
@@ -184,5 +188,9 @@ class UpcomingScreen extends Screen
 				}
                         }
                 }
+		else
+		{
+			this.setMessage('You have no events Upcoming in the next 7 days', 'black'); 
+		}
 	}
 }
