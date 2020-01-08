@@ -1460,7 +1460,7 @@ SELECT json_agg(t) INTO raw_json
                 left outer join pitches on pitches.club_id=teams.club_id
 
                 --where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
-                where emails_persons.email_id = $1 AND practices.event_date > $2 AND practices.event_date < $3
+                where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
 	) t;
   	--RAISE LOG 'log message raw_json: %', raw_json;
   	--RAISE LOG 'log message t: %', t;
@@ -1500,7 +1500,7 @@ SELECT json_agg(t) INTO raw_json
                 left outer join pitches on pitches.club_id=teams.club_id
 
                 --where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
-                where emails_persons.email_id = $1 AND games.event_date > $2 AND games.event_date < $3
+                where emails_persons.email_id = $1 AND games.event_date > $2 - interval '1 day' AND games.event_date < $3
         ) t;
 
         IF raw_json is NULL THEN
