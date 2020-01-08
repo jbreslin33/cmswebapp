@@ -50,7 +50,8 @@ class CalendarScreen extends Screen
 	}
 	forward()
 	{
-		console.log('forward');	
+		//lets get current month
+		console.log('forward:' + this.getDisplayMonthElement(this.mCalendar));	
 
 		//delete old events
 		this.mEventsArray.length = 0;
@@ -169,6 +170,18 @@ class CalendarScreen extends Screen
 		//set displayed month
 		var p = document.getElementById("calendar_month_p_html_id");
 		p.innerHTML = calendar.mMonthArray[month];  
+	}
+
+	getDisplayMonthElement(calendar)
+	{
+		for (var i = 0; i < calendar.mMonthArray.length; i++)
+		{
+			var p = document.getElementById("calendar_month_p_html_id");
+			if (calendar.mMonthArray[i] == p.innerHTML)
+			{
+				return i;	
+			}
+		}
 	}
 
 	//so we will call get on enter into state 
