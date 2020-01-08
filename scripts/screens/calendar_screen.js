@@ -15,10 +15,6 @@ class CalendarScreen extends Screen
 
 		this.mCalendarTable = null;
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
-		/*
-                this.setForwardButton(document.getElementById("calendarforwardbuttonid"));
-                this.setBackButton(document.getElementById("calendarbackbuttonid"));
-		*/
 
 		//make a helper calendar instance
 		this.mCalendar = new Calendar();
@@ -43,7 +39,7 @@ class CalendarScreen extends Screen
 
 		this.makeEmptyCalendar(month,year);
 
-
+		//navigation buttons
                	document.getElementById("calendarbackbuttonid").onclick = this.back.bind(this);
                	document.getElementById("calendarforwardbuttonid").onclick = this.forward.bind(this);
 
@@ -56,6 +52,17 @@ class CalendarScreen extends Screen
 	forward()
 	{
 		console.log('forward');	
+
+                //month calendar_month_p_html_id
+                var date = new Date();
+                var month = parseInt(date.getMonth() + 1);
+                var year = date.getYear();
+                year = parseInt(year + 1900);
+
+                this.setDisplayMonth(this.mCalendar,month);
+
+                this.makeEmptyCalendar(month,year);
+
 	}
 
 	makeEmptyCalendar(month,year)
