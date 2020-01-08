@@ -14,10 +14,28 @@ class UpcomingScreen extends Screen
                 this.setForm(document.getElementById("upcoming_screen_form_id"));
 
 		this.mCloneArray = new Array();
+		
+		this.mCalendar = new Calendar();
+
+		//now
+                var current_date = new Date();
+                var current_month = current_date.getMonth();
+                var current_year = current_date.getYear();
+                current_year = parseInt(current_year + 1900);
+                var current_string = parseInt(current_date.getYear() + 1900) + '-' + parseInt(current_date.getMonth() + 1) + '-' + current_date.getDate();
+                var current_date_string = this.mCalendar.inflateDateString(current_string);
+
+		//7 days from now
+		var future_date = new Date();
+		future_date.setDate(future_date.getDate() + 7);
+                var future_month = future_date.getMonth();
+                var future_year = future_date.getYear();
+                var future_string = parseInt(future_date.getYear() + 1900) + '-' + parseInt(future_date.getMonth() + 1) + '-' + future_date.getDate();
+                var future_date_string = this.mCalendar.inflateDateString(future_string);
 
 		//temp until we write date functions
-		this.mFirstDayOfQuery = '2020-01-01';
-		this.mLastDayOfQuery = '2020-01-31';
+		this.mFirstDayOfQuery = current_date_string;
+		this.mLastDayOfQuery = future_date_string;
         }
 
         get()
