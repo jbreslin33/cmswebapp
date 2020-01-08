@@ -64,7 +64,7 @@ class CalendarScreen extends Screen
 		this.deleteCalendarRows();
 
                 //month calendar_month_p_html_id
-                var date = new Date(this.mDisplayYear,parseInt(this.mDisplayMonth + 1), 1);
+                var date = new Date(this.mDisplayYear,parseInt(this.mDisplayMonth + 2), 0);
 		console.log('date:' + date);
 
 		//move up the display dates base on new forwarded date
