@@ -63,6 +63,8 @@ class CalendarScreen extends Screen
 
                 this.makeEmptyCalendar(month,year);
 
+		this.get();
+
 	}
 
 	makeEmptyCalendar(month,year)
@@ -164,6 +166,8 @@ class CalendarScreen extends Screen
 
         get()
         {
+		console.log('mFirst:' + this.mFirstDayOfQuery);
+		console.log('mLast:' + this.mLastDayOfQuery);
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/calendar.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
                 APPLICATION.getCurrentScreen().ajax();
         }
