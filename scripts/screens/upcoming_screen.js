@@ -87,12 +87,20 @@ class UpcomingScreen extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
+
+		//lets set message at top that there is a schedule
+		if (events.length > 0)
+		{
+			this.setMessage('Upcoming schedule', 'black'); 
+		}
+		else
+		{
+			this.setMessage('You have no events Upcoming. Enjoy the time off.', 'black'); 
+		}
                
 		//print to screen
 		if (events)
                 {
-			//lets set message at top that there is a schedule
-			this.setMessage('Upcoming 7 days of schedule:', 'black'); 
 
                         for (var i = 0; i < events.length; i++)
                         {
@@ -188,9 +196,5 @@ class UpcomingScreen extends Screen
 				}
                         }
                 }
-		else
-		{
-			this.setMessage('You have no events Upcoming in the next 7 days', 'black'); 
-		}
 	}
 }
