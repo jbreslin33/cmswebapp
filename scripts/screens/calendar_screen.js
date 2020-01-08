@@ -52,7 +52,6 @@ class CalendarScreen extends Screen
 	forward()
 	{
 		//lets get current month
-		console.log('forward:' + this.getDisplayMonthElement(this.mCalendar));	
 
 		//delete old events
 		this.mEventsArray.length = 0;
@@ -65,7 +64,6 @@ class CalendarScreen extends Screen
 
                 //month calendar_month_p_html_id
                 var date = new Date(this.mDisplayYear,parseInt(this.mDisplayMonth + 2), 0);
-		console.log('date:' + date);
 
 		//move up the display dates base on new forwarded date
                 this.mDisplayMonth = date.getMonth();
@@ -82,8 +80,12 @@ class CalendarScreen extends Screen
 
 	makeEmptyCalendar(month,year)
 	{
-		var numberOfDaysInMonth = new Date(year, month, 0).getDate();
-		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay();
+		console.log('month:' + month + ' year:' + year);
+		var numberOfDaysInLastMonth = new Date(year, month, 0).getDate();
+		var numberOfDaysInThisMonth = new Date(year, parseInt(month + 1), 0).getDate();
+		console.log('numberOfDaysInLastMonth:' + numberOfDaysInLastMonth);
+		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay(); //good on first
+		console.log('dayOfWeekOfFirstDay:' + dayOfWeekOfFirstDay);
 
 		var weekCount = this.mCalendar.weekCount(year,parseInt(month + 1)); 
 
@@ -118,12 +120,12 @@ class CalendarScreen extends Screen
 				{
 					var lastMonth = parseInt(month - 2);
 					var daysInMonth = new Date(year, lastMonth, 0).getDate();
-					var dayOfMonth = parseInt(numberOfDaysInMonth + startDay);
+					var dayOfMonth = parseInt(numberOfDaysInLastMonth + startDay);
 					td.innerHTML = dayOfMonth;
 				}
-				else if (startDay > numberOfDaysInMonth)
+				else if (startDay > numberOfDaysInThisMonth)
 				{
-					var day = startDay - numberOfDaysInMonth  	
+					var day = startDay - numberOfDaysInThisMonth  	
 					td.innerHTML = day;
 				}
 				else
@@ -191,8 +193,6 @@ class CalendarScreen extends Screen
 
         get()
         {
-		console.log('mFirst:' + this.mFirstDayOfQuery);
-		console.log('mLast:' + this.mLastDayOfQuery);
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/calendar.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
                 APPLICATION.getCurrentScreen().ajax();
         }
@@ -270,7 +270,6 @@ class CalendarScreen extends Screen
 				{
 					//get the table data cell that goes with this date
 					var event_date = this.mEventsArray[i].event_date;
-					console.log('event_date:' + event_date);
 					td = document.getElementById(event_date);
 
 					var calendarEventButton = document.createElement('button');
