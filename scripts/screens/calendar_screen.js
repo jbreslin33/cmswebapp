@@ -18,10 +18,9 @@ class CalendarScreen extends Screen
 
 		//make a helper calendar instance
 		this.mCalendar = new Calendar();
-	
+
 		this.deleteCalendarRows()
 
-		this.mModalArray  = new Array();
 		this.mEventsArray = new Array();
 		this.mCalendarEventButtonArray = new Array();
 
@@ -53,6 +52,15 @@ class CalendarScreen extends Screen
 	{
 		console.log('forward');	
 
+		//delete old events
+		this.mEventsArray.length = 0;
+	
+		//delete old button links
+		this.mCalendarEventButtonArray.length = 0;
+
+		//delete old rows
+		this.deleteCalendarRows();
+
                 //month calendar_month_p_html_id
                 var date = new Date();
                 var month = parseInt(date.getMonth() + 1);
@@ -61,7 +69,9 @@ class CalendarScreen extends Screen
 
                 this.setDisplayMonth(this.mCalendar,month);
 
+
                 this.makeEmptyCalendar(month,year);
+
 
 		this.get();
 
@@ -245,6 +255,7 @@ class CalendarScreen extends Screen
 				{
 					//get the table data cell that goes with this date
 					var event_date = this.mEventsArray[i].event_date;
+					console.log('event_date:' + event_date);
 					td = document.getElementById(event_date);
 
 					var calendarEventButton = document.createElement('button');
