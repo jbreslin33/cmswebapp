@@ -131,6 +131,10 @@ class UpcomingScreen extends Screen
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(events[i].event_date);
 					}
 				}
+				//availability checkbox
+				var checkbox = document.createElement("INPUT");
+  				checkbox.setAttribute("type", "checkbox");
+				container.appendChild(checkbox);
 				
 				var textArray = new Array();
 				
