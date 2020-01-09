@@ -48,6 +48,11 @@ class UpcomingScreen extends Screen
                 APPLICATION.getCurrentScreen().ajax();
         }
 
+	updateAvailability()
+	{
+		
+	}	
+
 	checkboxhit()
 	{
 		console.log('id:' + this.id);
