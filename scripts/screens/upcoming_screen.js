@@ -48,6 +48,11 @@ class UpcomingScreen extends Screen
                 APPLICATION.getCurrentScreen().ajax();
         }
 
+	checkboxhit()
+	{
+		console.log('id:' + this.id);
+	}
+
         processJsonData()
 	{
 		super.processJsonData();
@@ -107,7 +112,6 @@ class UpcomingScreen extends Screen
                         for (var i = 0; i < this.mEventsArray.length; i++)
                         {
 
-
 				var div = document.createElement('div');	
 				div.setAttribute('class','card');
 				document.getElementById("upcoming_screen_html_id").appendChild(div);
@@ -131,14 +135,19 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+
+						//availability checkbox
+						var checkbox = document.createElement("INPUT");
+  						checkbox.setAttribute("type", "checkbox");
+						var id = 'Practice_' + this.mEventsArray[i].id;
+  						checkbox.setAttribute("id", id);
+						container.appendChild(checkbox);
+				
+			 			checkbox.onclick = this.checkboxhit.bind(checkbox);
+			 			//document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(this);
 					}
 				}
-				//availability checkbox
-				var checkbox = document.createElement("INPUT");
-  				checkbox.setAttribute("type", "checkbox");
-				container.appendChild(checkbox);
 				
-			 	//document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(this);
 				
 				var textArray = new Array();
 				
