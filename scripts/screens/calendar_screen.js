@@ -34,7 +34,7 @@ class CalendarScreen extends Screen
   		this.mDisplayYear = date.getYear();
 		this.mDisplayYear = parseInt(this.mDisplayYear + 1900);
 
-		this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth);
+		this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth, this.mDisplayYear);
 
 		this.makeEmptyCalendar(this.mDisplayMonth,this.mDisplayYear);
 
@@ -70,7 +70,7 @@ class CalendarScreen extends Screen
                 this.mDisplayYear = date.getYear();
                 this.mDisplayYear = parseInt(this.mDisplayYear + 1900);
 
-                this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth);
+                this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth,this.mDisplayYear);
 
                 this.makeEmptyCalendar(this.mDisplayMonth,this.mDisplayYear);
 
@@ -169,11 +169,11 @@ class CalendarScreen extends Screen
 		return startDay;
 	}
 
-	drawDisplayMonth(calendar,month)
+	drawDisplayMonth(calendar,month,year)
 	{
 		//set displayed month
 		var p = document.getElementById("calendar_month_p_html_id");
-		p.innerHTML = calendar.mMonthArray[month];  
+		p.innerHTML = calendar.mMonthArray[month] + ' ' + year;  
 	}
 
 	getDisplayMonthElement(calendar)
