@@ -135,6 +135,7 @@ class UpcomingScreen extends Screen
 				var checkbox = document.createElement("INPUT");
   				checkbox.setAttribute("type", "checkbox");
 				container.appendChild(checkbox);
+			 	//document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(this);
 				
 				var textArray = new Array();
 				

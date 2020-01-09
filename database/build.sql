@@ -1447,7 +1447,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select practices.id, practices.event_date, practice.arrival_time, practice.start_time, practice.end_time, practice.address, practice.coordinates,(select pitches.name from pitches where practice.pitch_id = pitches.id) as pitch_name, practice.field_name, clubs.name as club_name, teams.name as team_name
+		select practices.id as practices_id, practice.id as practice_id, practices.event_date, practice.arrival_time, practice.start_time, practice.end_time, practice.address, practice.coordinates,(select pitches.name from pitches where practice.pitch_id = pitches.id) as pitch_name, practice.field_name, clubs.name as club_name, teams.name as team_name
                 from practices
 		join practice on practice.id=practices.practice_id
                 join teams on teams.id=practice.team_id
@@ -1459,7 +1459,6 @@ SELECT json_agg(t) INTO raw_json
 
                 left outer join pitches on pitches.club_id=teams.club_id
 
-                --where emails_persons.email_id = $1 AND practices.event_date > now() - interval '1 day'
                 where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
 	) t;
   	--RAISE LOG 'log message raw_json: %', raw_json;
@@ -1499,7 +1498,6 @@ SELECT json_agg(t) INTO raw_json
 
                 left outer join pitches on pitches.club_id=teams.club_id
 
-                --where emails_persons.email_id = $1 AND games.event_date > now() - interval '1 day'
                 where emails_persons.email_id = $1 AND games.event_date > $2 - interval '1 day' AND games.event_date < $3
         ) t;
 
