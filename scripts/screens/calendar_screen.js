@@ -47,12 +47,32 @@ class CalendarScreen extends Screen
 	back()
 	{
 		console.log('back');	
+		//delete old events
+		this.mEventsArray.length = 0;
+	
+		//delete old button links
+		this.mCalendarEventButtonArray.length = 0;
+
+		//delete old rows
+		this.deleteCalendarRows();
+
+                //month calendar_month_p_html_id
+                var date = new Date(this.mDisplayYear,this.mDisplayMonth, 0);
+
+		//move up the display dates base on new forwarded date
+                this.mDisplayMonth = date.getMonth();
+                this.mDisplayYear = date.getYear();
+                this.mDisplayYear = parseInt(this.mDisplayYear + 1900);
+
+                this.drawDisplayMonth(this.mCalendar,this.mDisplayMonth,this.mDisplayYear);
+
+                this.makeEmptyCalendar(this.mDisplayMonth,this.mDisplayYear);
+
+		this.get();
 	}
 
 	forward()
 	{
-		//lets get current month
-
 		//delete old events
 		this.mEventsArray.length = 0;
 	
@@ -75,17 +95,13 @@ class CalendarScreen extends Screen
                 this.makeEmptyCalendar(this.mDisplayMonth,this.mDisplayYear);
 
 		this.get();
-
 	}
 
 	makeEmptyCalendar(month,year)
 	{
-		console.log('month:' + month + ' year:' + year);
 		var numberOfDaysInLastMonth = new Date(year, month, 0).getDate();
 		var numberOfDaysInThisMonth = new Date(year, parseInt(month + 1), 0).getDate();
-		console.log('numberOfDaysInLastMonth:' + numberOfDaysInLastMonth);
 		var dayOfWeekOfFirstDay = new Date(year, month, 1).getDay(); //good on first
-		console.log('dayOfWeekOfFirstDay:' + dayOfWeekOfFirstDay);
 
 		var weekCount = this.mCalendar.weekCount(year,parseInt(month + 1)); 
 
