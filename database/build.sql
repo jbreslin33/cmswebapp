@@ -225,18 +225,6 @@ CREATE TABLE practice
 	--dates
 	start_date date,
 	end_date date,
-	
-	--time
-        arrival_time time, --only 1 arrival time leave it
-        start_time time, --only 1 start time leave it
-        end_time time,
-       
-	--info
-	address text,
-        coordinates text,
-	pitch_id integer, --all you need for a session	
-	field_name text, --field 3, field A, 9v9 field etc if nothing in db
-	team_id integer,
 
 	--day of week	
 	sunday_checked boolean,
@@ -247,11 +235,13 @@ CREATE TABLE practice
 	friday_checked boolean,
 	saturday_checked boolean,
 
+	--info	
+	team_id integer,
+
 	--meta
 	created_at timestamp not null default now(),
 
 	--keys
-	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
 );
@@ -262,13 +252,25 @@ CREATE TABLE practices
         id SERIAL,
 	practice_id integer not null,
 
-	--data
+	--dates
 	event_date date, --the date of this instance of practice
+	
+	--time
+        arrival_time time, --only 1 arrival time leave it
+        start_time time, --only 1 start time leave it
+        end_time time,
+	
+	--info
+	address text,
+        coordinates text,
+	pitch_id integer, --all you need for a session	
+	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 
 	--meta
 	created_at timestamp not null default now(),
 
 	--keys
+	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (practice_id) REFERENCES practice(id),
 	PRIMARY KEY (id)
 );
@@ -276,17 +278,27 @@ CREATE TABLE practices
 CREATE TABLE games 
 (
         id SERIAL,
+
+	--dates
 	event_date date,
+
+	--times
         arrival_time time, --only 1 arrival time leave it
         start_time time, --only 1 start time leave it
         end_time time,
+
+	--info
         address text,
         coordinates text,
 	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
 	opponent text,
+
+	--meta
 	created_at timestamp not null default now(),
+
+	--keys
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
 	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
@@ -1447,7 +1459,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select practice.id, practices.event_date, practice.arrival_time, practice.start_time, practice.end_time, practice.address, practice.coordinates,(select pitches.name from pitches where practice.pitch_id = pitches.id) as pitch_name, practice.field_name, clubs.name as club_name, teams.name as team_name
+		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates,(select pitches.name from pitches where practices.pitch_id = pitches.id) as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name
                 from practices
 		join practice on practice.id=practices.practice_id
                 join teams on teams.id=practice.team_id
@@ -1941,6 +1953,7 @@ friday_num    int := -1;
 saturday_num  int := -1;
 
 BEGIN
+  	RAISE LOG 'THE log message %', now();
 	IF $12 THEN
 		sunday_num = 0;
 	END IF;
@@ -1972,16 +1985,19 @@ BEGIN
 	--insert practice
 	IF $10 is null THEN
 		IF $8 > 0 THEN
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values ($1,$2,$2,$3,$4,$5,$6,$7,$9,$8) returning id into x;
+			insert into practice (team_id, start_date, end_date) values ($1,$2,$2) returning id into x;
+			insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (x, $2, $3,$4,$5,$6,$7,$9,$8) returning id into x;
 		ELSE
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+			insert into practice (team_id, start_date, end_date) values ($1,$2,$2) returning id into x;
+			insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, $2, $3,$4,$5,$6,$7,$9) returning id into x;
 		END IF;
-		insert into practices (practice_id,event_date) values (x,$2);
+  		RAISE LOG 'log message NEITHER: %', $8;
+		--insert into practices (practice_id,event_date) values (x,$2);
 	ELSE
        		IF $8 > 0 THEN
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values ($1,$10,$11,$3,$4,$5,$6,$7,$9,$8) returning id into x;
+			insert into practice (team_id, start_date, end_date) values ($1,$10,$11) returning id into x;
                 ELSE
-			insert into practice (team_id, start_date, end_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$10,$11,$3,$4,$5,$6,$7,$9) returning id into x;
+			insert into practice (team_id, start_date, end_date) values ($1,$10,$11) returning id into x;
                 END IF;
 	END IF;
 
@@ -1994,7 +2010,17 @@ BEGIN
 		SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
 	
 		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN 	
-			insert into practices (practice_id,event_date) values (x,next_date);
+			--you need to check pitch status here now as well....
+       			IF $8 > 0 THEN
+
+  				RAISE LOG 'log message IF: %', $8;
+				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (x, next_date, $3,$4,$5,$6,$7,$9,$8) returning id into x;
+			ELSE
+				RAISE LOG 'log message ELSE: %', $8;
+				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, next_date, $3,$4,$5,$6,$7,$9) returning id into x;
+			END IF;
+
+			--insert into practices (practice_id,event_date) values (x,next_date);
 		ELSE
 			--do nothing
 		END IF;
