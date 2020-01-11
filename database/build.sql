@@ -2008,6 +2008,7 @@ BEGIN
 
         	next_date := next_date + duration;
 		SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
+		RAISE LOG '--------------DAY OF WEEK: %', day_of_week;
 	
 		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN 	
 			--you need to check pitch status here now as well....
