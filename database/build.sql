@@ -1991,7 +1991,6 @@ BEGIN
 			insert into practice (team_id, start_date, end_date) values ($1,$2,$2) returning id into x;
 			insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, $2, $3,$4,$5,$6,$7,$9) returning id into x;
 		END IF;
-  		RAISE LOG 'log message NEITHER: %', $8;
 		--insert into practices (practice_id,event_date) values (x,$2);
 	ELSE
        		IF $8 > 0 THEN
@@ -1999,6 +1998,7 @@ BEGIN
                 ELSE
 			insert into practice (team_id, start_date, end_date) values ($1,$10,$11) returning id into x;
                 END IF;
+		RAISE LOG '--------------top X: %', x;
 	END IF;
 
 	--insert practices
@@ -2013,12 +2013,11 @@ BEGIN
 			--you need to check pitch status here now as well....
        			IF $8 > 0 THEN
 
-  				RAISE LOG 'log message IF: %', $8;
-				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (x, next_date, $3,$4,$5,$6,$7,$9,$8) returning id into x;
+				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (x, next_date, $3,$4,$5,$6,$7,$9,$8);
 			ELSE
-				RAISE LOG 'log message ELSE: %', $8;
-				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, next_date, $3,$4,$5,$6,$7,$9) returning id into x;
+				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, next_date, $3,$4,$5,$6,$7,$9);
 			END IF;
+			RAISE LOG '--------------------bot X: %', x;
 
 			--insert into practices (practice_id,event_date) values (x,next_date);
 		ELSE
