@@ -108,8 +108,7 @@ class InsertPracticeScreen extends Screen
 				var start_date = document.getElementById("insert_practice_screen_start_date_id").value;
 				var end_date = document.getElementById("insert_practice_screen_end_date_id").value;
 				
-				var sunday_checked = document.getElementById("insert_practice_screen_sunday_checkbox_id").value;
-				console.log('sunday.value:' + sunday_checked);
+				var sunday_checked = document.getElementById("insert_practice_screen_sunday_checkbox_id").checked;
 				var monday_checked = document.getElementById("insert_practice_screen_monday_checkbox_id").checked;
 				var tuesday_checked = document.getElementById("insert_practice_screen_tuesday_checkbox_id").checked;
 				var wednesday_checked = document.getElementById("insert_practice_screen_wednesday_checkbox_id").checked;

@@ -82,35 +82,50 @@ class InsertPractice extends Screen
 		{
 			$end_date = $_GET['end_date'];
 		}
-		
+		$txt = '';	
 		if (isset($_GET['sunday_checked']))
 		{
 			$sunday_checked = $_GET['sunday_checked'];
+			$txt .= 'sunday_checked:'; 
+			$txt .= $sunday_checked;
 		}
 		if (isset($_GET['monday_checked']))
 		{
 			$monday_checked = $_GET['monday_checked'];
+			$txt .= 'monday_checked:'; 
+			$txt .= $monday_checked;
 		}
 		if (isset($_GET['tuesday_checked']))
 		{
 			$tuesday_checked = $_GET['tuesday_checked'];
+			$txt .= 'tuesday_checked:'; 
+			$txt .= $tuesday_checked;
 		}
 		if (isset($_GET['wednesday_checked']))
 		{
 			$wednesday_checked = $_GET['wednesday_checked'];
+			$txt .= 'wednesday_checked:'; 
+			$txt .= $wednesday_checked;
 		}
 		if (isset($_GET['thursday_checked']))
 		{
 			$thursday_checked = $_GET['thursday_checked'];
+			$txt .= 'thursday_checked:'; 
+			$txt .= $thursday_checked;
 		}
 		if (isset($_GET['friday_checked']))
 		{
 			$friday_checked = $_GET['friday_checked'];
+			$txt .= 'friday_checked:'; 
+			$txt .= $friday_checked;
 		}
 		if (isset($_GET['saturday_checked']))
 		{
 			$saturday_checked = $_GET['saturday_checked'];
+			$txt .= 'saturday_checked:'; 
+			$txt .= $saturday_checked;
 		}
+		error_log($txt);
 		
 		if ($this->getAuthorizationId() > 0)
 		{

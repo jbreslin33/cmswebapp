@@ -1942,7 +1942,7 @@ DECLARE
 next_date DATE := $10;
 duration  INTERVAL;
 day       INTERVAL;
-day_of_week int;
+day_of_week int := -1;
 
 sunday_num    int := -1;
 monday_num    int := -1;
@@ -1953,33 +1953,40 @@ friday_num    int := -1;
 saturday_num  int := -1;
 
 BEGIN
-  	RAISE LOG 'THE log message %', now();
+  	--RAISE LOG 'THE log message %', now();
 	IF $12 THEN
 		sunday_num = 0;
+		RAISE LOG '--------------DAY OF WEEK SUN: %', $12;
 	END IF;
 
 	IF $13 THEN
 		monday_num = 1;
+		RAISE LOG '--------------DAY OF WEEK MON: %', $13;
 	END IF;
 
 	IF $14 THEN
 		tuesday_num = 2;
+		RAISE LOG '--------------DAY OF WEEK TUE: %', $14;
 	END IF;
 
 	IF $15 THEN
 		wednesday_num = 3;
+		RAISE LOG '--------------DAY OF WEEK WED: %', $15;
 	END IF;
 
 	IF $16 THEN
 		thursday_num = 4;
+		RAISE LOG '--------------DAY OF WEEK THU: %', $16;
 	END IF;
 
 	IF $17 THEN
 		friday_num = 5;
+		RAISE LOG '--------------DAY OF WEEK FRI: %', $17;
 	END IF;
 
 	IF $18 THEN
 		saturday_num = 6;
+		RAISE LOG '--------------DAY OF WEEK SAT: %', $18;
 	END IF;
 	
 	--insert practice
@@ -1998,7 +2005,7 @@ BEGIN
                 ELSE
 			insert into practice (team_id, start_date, end_date) values ($1,$10,$11) returning id into x;
                 END IF;
-		RAISE LOG '--------------top X: %', x;
+		--RAISE LOG '--------------top X: %', x;
 	END IF;
 
 	--insert practices
@@ -2007,18 +2014,20 @@ BEGIN
         WHILE next_date <= $11 LOOP
 
         	next_date := next_date + duration;
+		--RAISE LOG '--------------next_date: %', next_date;
 		SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
-		RAISE LOG '--------------DAY OF WEEK: %', day_of_week;
+		RAISE LOG '--------------DAY OF WEEK OUTSIDE: %', day_of_week;
 	
-		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN 	
+		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN
 			--you need to check pitch status here now as well....
+			RAISE LOG '--------------DAY OF WEEK INSIDE: %', day_of_week;
        			IF $8 > 0 THEN
 
 				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (x, next_date, $3,$4,$5,$6,$7,$9,$8);
 			ELSE
 				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, next_date, $3,$4,$5,$6,$7,$9);
 			END IF;
-			RAISE LOG '--------------------bot X: %', x;
+			--RAISE LOG '--------------------bot X: %', x;
 
 			--insert into practices (practice_id,event_date) values (x,next_date);
 		ELSE
