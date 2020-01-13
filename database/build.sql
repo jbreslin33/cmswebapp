@@ -1955,7 +1955,7 @@ saturday_num  int := -1;
 BEGIN
   	--RAISE LOG 'THE log message %', now();
 	IF $12 THEN
-		sunday_num = 0;
+		sunday_num = 7;
 		RAISE LOG '--------------DAY OF WEEK SUN: %', $12;
 	END IF;
 
@@ -2013,9 +2013,12 @@ BEGIN
 
         WHILE next_date <= $11 LOOP
 
-        	next_date := next_date + duration;
-		--RAISE LOG '--------------next_date: %', next_date;
+        	--next_date := next_date;
+		--next_date := next_date + duration;
+
+		RAISE LOG '--------------next_date: %', next_date;
 		SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
+		day_of_week := day_of_week;
 		RAISE LOG '--------------DAY OF WEEK OUTSIDE: %', day_of_week;
 	
 		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN
@@ -2033,6 +2036,9 @@ BEGIN
 		ELSE
 			--do nothing
 		END IF;
+
+		--increment date
+		next_date := next_date + duration;
         END LOOP;
 
 END;
