@@ -67,7 +67,6 @@ class GLOBAL_APPLICATION extends State
 
 		else if (location.hash == '#insert_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_CLUB_APPLICATION)
                 {
-			console.log('CLUB A');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
 		else if (location.hash == '#insert_person_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PERSON_APPLICATION)
@@ -80,7 +79,6 @@ class GLOBAL_APPLICATION extends State
               	} 
 		else if (location.hash == '#insert_team_screen' && app.mStateMachine.mCurrentState != app.mINSERT_TEAM_APPLICATION)
                 {
-			console.log('TEAM A');
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_TEAM_APPLICATION);
                 }
 		else if (location.hash == '#insert_pitch_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PITCH_APPLICATION)

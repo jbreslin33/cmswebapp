@@ -103,7 +103,6 @@ class InsertPracticeScreen extends Screen
 		{
 			if (this.mRecurringCheckbox.checked == true)
 			{
-				console.log('recur checked');
 				//recurring
 				var start_date = document.getElementById("insert_practice_screen_start_date_id").value;
 				var end_date = document.getElementById("insert_practice_screen_end_date_id").value;
@@ -117,13 +116,11 @@ class InsertPracticeScreen extends Screen
 				var saturday_checked = document.getElementById("insert_practice_screen_saturday_checkbox_id").checked;
 
 				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&start_date=' + start_date + '&end_date=' + end_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId() + '&sunday_checked=' + sunday_checked + '&monday_checked=' + monday_checked + '&tuesday_checked=' + tuesday_checked + '&wednesday_checked=' + wednesday_checked + '&thursday_checked=' + thursday_checked + '&friday_checked=' + friday_checked + '&saturday_checked=' + saturday_checked);
-				console.log('url:' + APPLICATION.getCurrentScreen().getUrl());
                         
 				APPLICATION.getCurrentScreen().ajax();
 			}
 			else
 			{
-				console.log('normal checked');
 				//normal
 				var event_date = document.getElementById("insert_practice_screen_date_id").value;
 				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
