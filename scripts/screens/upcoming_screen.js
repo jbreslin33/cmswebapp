@@ -19,6 +19,12 @@ class UpcomingScreen extends Screen
 
 		this.mEventsArray = new Array();
 
+		//availability
+		this.mAvailabilityPracticeArray = new Array();
+		this.mAvailabilityGamesArray = new Array();
+		this.mAvailabilityPracticeList = null;
+		this.mAvailabilityGamesList = null;
+
 		//now
                 var current_date = new Date();
                 var current_month = current_date.getMonth();
@@ -56,6 +62,45 @@ class UpcomingScreen extends Screen
 	checkboxhit()
 	{
 		console.log('id:' + this.id);
+		var a = this.id.split('_');
+		var id = 0;
+		if (a.length > 1)
+		{
+			if (a[0] == 'Practice')
+			{
+				id = a[1];	
+				APPLICATION.getCurrentScreen().makePracticeList(id);
+			}
+		}
+		APPLICATION.getCurrentScreen().updateAvailability();
+	}
+
+	makePracticeList(id,array)
+	{
+		if (id)
+		{
+			//this.mAvailabilityPracticeArray.push(id);
+			this.mAvailabilityPracticeList = id;
+		}
+		if (array)
+		{
+			for (var i=0; i < this.mAvailabilityPracticeArray.length; i++)
+			{
+				if (i == 0)
+				{
+					this.mAvailabilityPracticeList = id;
+				}
+			}
+		}
+	}
+	
+
+	updateAvailability()
+	{
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&practice=' + this.mAvailabilityPracticeList + '&games=' + this.mAvailabilityGamesList);
+		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
+
+                APPLICATION.getCurrentScreen().ajax();
 	}
 
         processJsonData()
