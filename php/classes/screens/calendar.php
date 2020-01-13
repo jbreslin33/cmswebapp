@@ -16,13 +16,11 @@ class CalendarScreen extends Screen
                 if (isset($_GET['first_day_of_query']))
                 {
                         $first_day_of_query = $_GET['first_day_of_query'];
-			error_log($first_day_of_query);
 
                 }
                 if (isset($_GET['last_day_of_query']))
                 {
                         $last_day_of_query = $_GET['last_day_of_query'];
-			error_log($last_day_of_query);
                 }
 
                 $sql = 'select f_select_events($1,$2,$3)';

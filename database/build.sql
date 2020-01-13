@@ -1473,8 +1473,6 @@ SELECT json_agg(t) INTO raw_json
 
                 where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
 	) t;
-  	--RAISE LOG 'log message raw_json: %', raw_json;
-  	--RAISE LOG 'log message t: %', t;
 
         IF raw_json is NULL THEN
                 result_set = CONCAT('"practices": []', raw_json);
@@ -1797,7 +1795,6 @@ BEGIN
 	select email_id into found_email_id from invite_club_emails where club_invite_token = $1; 
 
 	IF found_email_id > 0 THEN
-  		RAISE LOG 'log message %', found_email_id;
 		
 		--lets grab the club_id then add all persons to club from email_id
 		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
@@ -1953,40 +1950,32 @@ friday_num    int := -1;
 saturday_num  int := -1;
 
 BEGIN
-  	--RAISE LOG 'THE log message %', now();
 	IF $12 THEN
 		sunday_num = 7;
-		RAISE LOG '--------------DAY OF WEEK SUN: %', $12;
 	END IF;
 
 	IF $13 THEN
 		monday_num = 1;
-		RAISE LOG '--------------DAY OF WEEK MON: %', $13;
 	END IF;
 
 	IF $14 THEN
 		tuesday_num = 2;
-		RAISE LOG '--------------DAY OF WEEK TUE: %', $14;
 	END IF;
 
 	IF $15 THEN
 		wednesday_num = 3;
-		RAISE LOG '--------------DAY OF WEEK WED: %', $15;
 	END IF;
 
 	IF $16 THEN
 		thursday_num = 4;
-		RAISE LOG '--------------DAY OF WEEK THU: %', $16;
 	END IF;
 
 	IF $17 THEN
 		friday_num = 5;
-		RAISE LOG '--------------DAY OF WEEK FRI: %', $17;
 	END IF;
 
 	IF $18 THEN
 		saturday_num = 6;
-		RAISE LOG '--------------DAY OF WEEK SAT: %', $18;
 	END IF;
 	
 	--insert practice
@@ -2005,7 +1994,6 @@ BEGIN
                 ELSE
 			insert into practice (team_id, start_date, end_date) values ($1,$10,$11) returning id into x;
                 END IF;
-		--RAISE LOG '--------------top X: %', x;
 	END IF;
 
 	--insert practices
@@ -2016,21 +2004,17 @@ BEGIN
         	--next_date := next_date;
 		--next_date := next_date + duration;
 
-		RAISE LOG '--------------next_date: %', next_date;
 		SELECT EXTRACT(ISODOW FROM next_date) INTO day_of_week;
 		day_of_week := day_of_week;
-		RAISE LOG '--------------DAY OF WEEK OUTSIDE: %', day_of_week;
 	
 		IF day_of_week = sunday_num OR day_of_week = monday_num OR day_of_week = tuesday_num OR day_of_week = wednesday_num OR day_of_week = thursday_num OR day_of_week = friday_num OR day_of_week = saturday_num THEN
 			--you need to check pitch status here now as well....
-			RAISE LOG '--------------DAY OF WEEK INSIDE: %', day_of_week;
        			IF $8 > 0 THEN
 
 				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (x, next_date, $3,$4,$5,$6,$7,$9,$8);
 			ELSE
 				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (x, next_date, $3,$4,$5,$6,$7,$9);
 			END IF;
-			--RAISE LOG '--------------------bot X: %', x;
 
 			--insert into practices (practice_id,event_date) values (x,next_date);
 		ELSE

@@ -125,7 +125,6 @@ class InsertPractice extends Screen
 			$txt .= 'saturday_checked:'; 
 			$txt .= $saturday_checked;
 		}
-		error_log($txt);
 		
 		if ($this->getAuthorizationId() > 0)
 		{
