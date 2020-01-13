@@ -810,28 +810,28 @@ CREATE TABLE team_club_persons_club_administrators
 );
 
 
-CREATE TABLE sessions_players_availability 
+CREATE TABLE practices_players_availability 
 (
         id SERIAL,
-        session_id integer NOT NULL,
+        practice_id integer NOT NULL,
        	team_club_player_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
 	created_at timestamp not null default now(),
-	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
         PRIMARY KEY (id)
 );
 
-CREATE TABLE sessions_players_attendance 
+CREATE TABLE practices_players_attendance 
 (
         id SERIAL,
-        session_id integer NOT NULL,
+        practice_id integer NOT NULL,
        	team_club_player_id integer NOT NULL,
 	attendance_id integer NOT NULL,
 	created_at timestamp not null default now(),
-	FOREIGN KEY (session_id) REFERENCES sessions(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
         PRIMARY KEY (id)

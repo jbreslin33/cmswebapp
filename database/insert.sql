@@ -130,7 +130,10 @@ insert into emails (email) values ('alejo1016@hotmail.com');
 insert into emails (email) values ('vebaidal@gmail.com');
 
 
-
+-------------------------------Availablity
+insert into availability (name) values ('yes');
+insert into availability (name) values ('no');
+insert into availability (name) values ('maybe');
 
 
 --insert into clubs (name,address) values ('Kensington Soccer Club', '307 Dauphin St, Philadelphia, PA 19133'); 
