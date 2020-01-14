@@ -152,7 +152,7 @@ class UpcomingScreen extends Screen
 		}
 		else
 		{
-			this.setMessage('You have no this.mEventsArray Upcoming. Enjoy the time off.', 'black'); 
+			this.setMessage('You have no events upcoming. Enjoy the time off.', 'black'); 
 		}
                
 		//print to screen
