@@ -71,11 +71,6 @@ class UpcomingScreen extends Screen
 
 	}
 
-	updateAvailability()
-	{
-		
-	}	
-
 	checkboxhit()
 	{
 		console.log('id:' + this.id);
@@ -86,31 +81,14 @@ class UpcomingScreen extends Screen
 			if (a[0] == 'Practice')
 			{
 				id = a[1];	
-				APPLICATION.getCurrentScreen().makePracticeList(id);
 			}
 		}
+
+		APPLICATION.getCurrentScreen().mAvailabilityPracticeList = id;
+
+		//send to server
 		APPLICATION.getCurrentScreen().updateAvailability();
 	}
-
-	makePracticeList(id,array)
-	{
-		if (id)
-		{
-			//this.mAvailabilityPracticeArray.push(id);
-			this.mAvailabilityPracticeList = id;
-		}
-		if (array)
-		{
-			for (var i=0; i < this.mAvailabilityPracticeArray.length; i++)
-			{
-				if (i == 0)
-				{
-					this.mAvailabilityPracticeList = id;
-				}
-			}
-		}
-	}
-	
 
 	updateAvailability()
 	{
