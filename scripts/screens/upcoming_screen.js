@@ -64,7 +64,9 @@ class UpcomingScreen extends Screen
 		//document.getElementById("myCheck").checked = true;
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
-				
+			console.log('found:' + i);	
+			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
+			//document.getElementById("myCheck").checked = true;
 		}
 
 	}
