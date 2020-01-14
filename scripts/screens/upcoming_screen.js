@@ -20,10 +20,15 @@ class UpcomingScreen extends Screen
 		this.mEventsArray = new Array();
 
 		//availability
-		this.mAvailabilityPracticeArray = new Array();
-		this.mAvailabilityGamesArray = new Array();
-		this.mAvailabilityPracticeList = null;
-		this.mAvailabilityGamesList = null;
+		this.mAvailablePracticeArray = new Array();
+		this.mAvailableGamesArray = new Array();
+		this.mAvailablePracticeList = null;
+		this.mAvailableGamesList = null;
+		
+		this.mNotAvailablePracticeArray = new Array();
+		this.mNotAvailableGamesArray = new Array();
+		this.mNotAvailablePracticeList = null;
+		this.mNotAvailableGamesList = null;
 
 		//now
                 var current_date = new Date();
@@ -64,16 +69,24 @@ class UpcomingScreen extends Screen
 		//document.getElementById("myCheck").checked = true;
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
-			console.log('found:' + i);	
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
+			console.log('found:' + i);	
 			//document.getElementById("myCheck").checked = true;
 		}
 
 	}
 
+	resetLists()
+	{
+		this.mAvailablePracticeList = null;
+		this.mAvailableGamesList = null;
+		this.mNotAvailablePracticeList = null;
+		this.mNotAvailableGamesList = null;
+	}
+
 	checkboxhit()
 	{
-		console.log('id:' + this.id);
+		APPLICATION.getCurrentScreen().resetLists();
 		var a = this.id.split('_');
 		var id = 0;
 		if (a.length > 1)
@@ -81,10 +94,31 @@ class UpcomingScreen extends Screen
 			if (a[0] == 'Practice')
 			{
 				id = a[1];	
+				
+				if (this.checked == true)
+				{
+					APPLICATION.getCurrentScreen().mAvailablePracticeList = id;
+				}
+				else
+				{
+					APPLICATION.getCurrentScreen().mNotAvailablePracticeList = id;
+				}
+			}
+
+			if (a[0] == 'Game')
+			{
+				id = a[1];	
+				
+				if (this.checked == true)
+				{
+					APPLICATION.getCurrentScreen().mAvailableGameList = id;
+				}
+				else
+				{
+					APPLICATION.getCurrentScreen().mNotAvailableGameList = id;
+				}		
 			}
 		}
-
-		APPLICATION.getCurrentScreen().mAvailabilityPracticeList = id;
 
 		//send to server
 		APPLICATION.getCurrentScreen().updateAvailability();
@@ -92,7 +126,7 @@ class UpcomingScreen extends Screen
 
 	updateAvailability()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&practice=' + this.mAvailabilityPracticeList + '&games=' + this.mAvailabilityGamesList);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practice=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practice=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
                 APPLICATION.getCurrentScreen().ajax();
