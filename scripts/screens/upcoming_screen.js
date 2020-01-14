@@ -44,6 +44,10 @@ class UpcomingScreen extends Screen
 		//temp until we write date functions
 		this.mFirstDayOfQuery = current_date_string;
 		this.mLastDayOfQuery = future_date_string;
+	
+		//checkboxes at top for multiple availabilities
+		this.mCheckBoxArray = new Array();
+		document.getElementById("upcoming_available_id").onclick = this.upcomingAvailableHit.bind(document.getElementById("upcoming_available_id"));
         }
 
         get()
@@ -53,6 +57,17 @@ class UpcomingScreen extends Screen
 
                 APPLICATION.getCurrentScreen().ajax();
         }
+
+	upcomingAvailableHit()
+	{
+		console.log('up:' + document.getElementById("upcoming_available_id").id);
+		//document.getElementById("myCheck").checked = true;
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
+		{
+				
+		}
+
+	}
 
 	updateAvailability()
 	{
@@ -194,6 +209,7 @@ class UpcomingScreen extends Screen
 						container.appendChild(checkbox);
 				
 			 			checkbox.onclick = this.checkboxhit.bind(checkbox);
+						this.mCheckBoxArray.push(checkbox);
 			 			//document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(this);
 					}
 				}
