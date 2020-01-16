@@ -53,6 +53,8 @@ class UpcomingScreen extends Screen
 		//checkboxes at top for multiple availabilities
 		this.mCheckBoxArray = new Array();
 		document.getElementById("upcoming_available_id").onclick = this.upcomingAvailableHit.bind(document.getElementById("upcoming_available_id"));
+		document.getElementById("upcoming_not_available_id").onclick = this.upcomingNotAvailableHit.bind(document.getElementById("upcoming_not_available_id"));
+		document.getElementById("upcoming_maybe_available_id").onclick = this.upcomingMaybeAvailableHit.bind(document.getElementById("upcoming_maybe_available_id"));
         }
 
         get()
@@ -65,15 +67,27 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
-		console.log('up:' + document.getElementById("upcoming_available_id").id);
-		//document.getElementById("myCheck").checked = true;
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
-			console.log('found:' + i);	
-			//document.getElementById("myCheck").checked = true;
 		}
-
+	}
+	upcomingNotAvailableHit()
+	{
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
+		{
+			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = false;	
+		}
+	}
+	
+	upcomingMaybeAvailableHit()
+	{
+		/*
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
+		{
+			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
+		}
+		*/
 	}
 
 	resetLists()
