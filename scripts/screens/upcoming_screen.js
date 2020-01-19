@@ -230,17 +230,35 @@ class UpcomingScreen extends Screen
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 
 
+						//LABEL
 						var labelAvailable = document.createElement("LABEL");
+
+						//labelAvailable.setAttribute("class","radio-button");
+						
 						container.appendChild(labelAvailable);
 						labelAvailable.innerHTML = "Yo";
 
+						//INPUT
 						var inputAvailable = document.createElement("INPUT");
+
+						inputAvailable.setAttribute("type","radio");
+						inputAvailable.setAttribute("name","radio");
+
 						labelAvailable.appendChild(inputAvailable);
 
+						//SPAN PARENT
 						var spanParentAvailable = document.createElement("SPAN");
+						spanParentAvailable.innerHTML = "in parent span";
+
+						spanParentAvailable.setAttribute("class","label-visible");
+
 						inputAvailable.appendChild(spanParentAvailable);
 						
+						//SPAN CHILD
 						var spanChildAvailable = document.createElement("SPAN");
+
+						spanChildAvailable.setAttribute("class","fake-radiobutton");
+
 						spanParentAvailable.appendChild(spanChildAvailable);
 
 
