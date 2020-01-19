@@ -109,6 +109,7 @@ td, th
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+float:left;
 }
 
 /* Hide the browser's default radio button */
