@@ -67,6 +67,9 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
+		//this.setAttribute("background-color","#4CAF50");
+		this.style.backgroundColor = "#4CAF50" 
+		this.style.backgroundColor = "#4CAF50" 
 		console.log('hit av');
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
@@ -76,7 +79,7 @@ class UpcomingScreen extends Screen
 	}
 	upcomingNotAvailableHit()
 	{
-		console.log('hit na');
+		this.style.backgroundColor = "red"; 
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = false;	
@@ -86,7 +89,7 @@ class UpcomingScreen extends Screen
 	
 	upcomingMaybeAvailableHit()
 	{
-		console.log('hit ma');
+		this.style.backgroundColor = "yellow"; 
 		this.checked = true;
 		/*
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
@@ -234,6 +237,12 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+						
+						//var id = 'Practice_' + this.mEventsArray[i].id;
+  						//checkbox.setAttribute("id", id);
+				
+			 			//checkbox.onclick = this.checkboxhit.bind(checkbox);
+						//this.mCheckBoxArray.push(checkbox);
 
 						
 						var buttonAvailable = document.createElement("BUTTON");
@@ -247,82 +256,6 @@ class UpcomingScreen extends Screen
 						var buttonMaybeAvailable = document.createElement("BUTTON");
 						buttonMaybeAvailable.setAttribute("class","availability-button");
 						container.appendChild(buttonMaybeAvailable);
-
-
-/*
-                 <label class="radio-container">
-                                                Available
-                                                <input id="upcoming_available_id" type="radio" checked="checked" name="radio">
-                                                <span class="checkmark"></span>
-                                        </label>
-
-
-						//LABEL
-						var labelAvailable = document.createElement("LABEL");
-
-						labelAvailable.setAttribute("class","radio-button");
-						
-						container.appendChild(labelAvailable);
-						labelAvailable.innerHTML = "Yo";
-
-						//INPUT
-						var inputAvailable = document.createElement("INPUT");
-
-						inputAvailable.setAttribute("type","radio");
-						inputAvailable.setAttribute("name","radio");
-
-						labelAvailable.appendChild(inputAvailable);
-
-						//SPAN PARENT
-						var spanParentAvailable = document.createElement("SPAN");
-						spanParentAvailable.innerHTML = "in parent span";
-
-						spanParentAvailable.setAttribute("class","label-visible");
-
-						inputAvailable.appendChild(spanParentAvailable);
-						
-						//SPAN CHILD
-						var spanChildAvailable = document.createElement("SPAN");
-
-						spanChildAvailable.setAttribute("class","fake-radiobutton");
-
-						spanParentAvailable.appendChild(spanChildAvailable);
-
-
-*/
-
-
-					/*
-                                        <label class="radio-button" id="upcoming_available_id">
-                                                <input type="radio" name="radio">
-                                                        <span class="label-visible">
-                                                                <span class="fake-radiobutton"></span>
-                                                                Available
-                                                        </span>
-                                                </input>
-                                        </label>
-					*/
-
-						
-/*
-						var itemAvailable = document.getElementById("upcoming_available_id");
-						var cloneAvailable = itemAvailable.cloneNode(true);
-						container.appendChild(cloneAvailable);
-						
-						var itemNotAvailable = document.getElementById("upcoming_not_available_id");
-						var cloneNotAvailable = itemNotAvailable.cloneNode(true);
-						container.appendChild(cloneNotAvailable);
-						
-						var itemMaybeAvailable = document.getElementById("upcoming_maybe_available_id");
-						var cloneMaybeAvailable = itemMaybeAvailable.cloneNode(true);
-						container.appendChild(cloneMaybeAvailable);
-*/
-						//var id = 'Practice_' + this.mEventsArray[i].id;
-  						//checkbox.setAttribute("id", id);
-				
-			 			//checkbox.onclick = this.checkboxhit.bind(checkbox);
-						//this.mCheckBoxArray.push(checkbox);
-						//END OLD
 					}
 				}
 				
