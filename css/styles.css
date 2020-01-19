@@ -57,6 +57,12 @@ button:hover
   	cursor: pointer;
 }
 
+.availability-button
+{
+	float: left;
+	width: 33%;
+}
+
 /******************** SELECTS *******************/
 select 
 {
