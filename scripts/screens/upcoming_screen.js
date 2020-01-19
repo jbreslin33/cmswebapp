@@ -234,7 +234,30 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+						
+						var labelAvailable = document.createElement("LABEL");
+						labelAvailable.setAttribute("class","radio-container");
+						container.appendChild(labelAvailable);
+
+						var inputAvailable = document.createElement("INPUT");
+						labelAvailable.appendChild(inputAvailable);
+						inputAvailable.setAttribute("type","radio");
+						//inputAvailable.setAttribute("checked","checked");
+						inputAvailable.setAttribute("name","radio");
+
+						var spanAvailable = document.createElement("SPAN");
+						inputAvailable.setAttribute("class","checkmark");
+						labelAvailable.appendChild(spanAvailable);
+			
+
+
 /*
+                 <label class="radio-container">
+                                                Available
+                                                <input id="upcoming_available_id" type="radio" checked="checked" name="radio">
+                                                <span class="checkmark"></span>
+                                        </label>
+
 
 						//LABEL
 						var labelAvailable = document.createElement("LABEL");
