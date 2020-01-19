@@ -232,32 +232,21 @@ class UpcomingScreen extends Screen
 						var itemAvailable = document.getElementById("upcoming_available_id");
 						var cloneAvailable = itemAvailable.cloneNode(true);
 						container.appendChild(cloneAvailable);
+						
+						var itemNotAvailable = document.getElementById("upcoming_not_available_id");
+						var cloneNotAvailable = itemNotAvailable.cloneNode(true);
+						container.appendChild(cloneNotAvailable);
+						
+						var itemMaybeAvailable = document.getElementById("upcoming_maybe_available_id");
+						var cloneMaybeAvailable = itemMaybeAvailable.cloneNode(true);
+						container.appendChild(cloneMaybeAvailable);
 
-						//availability checkbox
-						//BEGIN OLD
-						/*
-						var checkbox = document.createElement("INPUT");
-  						checkbox.setAttribute("type", "checkbox");
-						var id = 'Practice_' + this.mEventsArray[i].id;
-  						checkbox.setAttribute("id", id);
-						container.appendChild(checkbox);
+						//var id = 'Practice_' + this.mEventsArray[i].id;
+  						//checkbox.setAttribute("id", id);
 				
-			 			checkbox.onclick = this.checkboxhit.bind(checkbox);
-						this.mCheckBoxArray.push(checkbox);
-						*/
+			 			//checkbox.onclick = this.checkboxhit.bind(checkbox);
+						//this.mCheckBoxArray.push(checkbox);
 						//END OLD
-							
-
-						/* COPY THIS
-					 <label class="radio-button">
-                                                <input type="radio" name="radio" id="upcoming_available_id">
-                                                        <span class="label-visible">
-                                                                <span class="fake-radiobutton"></span>
-                                                                Available
-                                                        </span>
-                                                </input>
-                                        </label>
-*/
 					}
 				}
 				
