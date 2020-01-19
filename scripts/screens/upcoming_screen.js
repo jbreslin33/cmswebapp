@@ -155,16 +155,21 @@ class UpcomingScreen extends Screen
 
 			if (a[0] == 'Game')
 			{
-				id = a[1];	
+				availabilityTxt = a[1];	
+				id = a[2];	
 				
-				if (this.checked == true)
+				if (availabilityTxt == 'available')
 				{
 					APPLICATION.getCurrentScreen().mAvailableGameList = id;
 				}
-				else
+				if (availabilityTxt == 'not')
 				{
 					APPLICATION.getCurrentScreen().mNotAvailableGameList = id;
-				}		
+				}
+				if (availabilityTxt == 'maybe')
+				{
+					APPLICATION.getCurrentScreen().mMaybeAvailableGameList = id;
+				}
 			}
 		}
 
