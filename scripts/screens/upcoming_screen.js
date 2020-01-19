@@ -29,6 +29,8 @@ class UpcomingScreen extends Screen
 		this.mNotAvailableGamesArray = new Array();
 		this.mNotAvailablePracticeList = null;
 		this.mNotAvailableGamesList = null;
+		this.mMaybeAvailablePracticeList = null;
+		this.mMaybeAvailableGamesList = null;
 
 		//now
                 var current_date = new Date();
@@ -51,7 +53,7 @@ class UpcomingScreen extends Screen
 		this.mLastDayOfQuery = future_date_string;
 	
 		//checkboxes at top for multiple availabilities
-		this.mCheckBoxArray = new Array();
+		this.mAvailabilityButtonArray = new Array();
 		document.getElementById("upcoming_available_id").onclick = this.upcomingAvailableHit.bind(document.getElementById("upcoming_available_id"));
 		document.getElementById("upcoming_not_available_id").onclick = this.upcomingNotAvailableHit.bind(document.getElementById("upcoming_not_available_id"));
 		document.getElementById("upcoming_maybe_available_id").onclick = this.upcomingMaybeAvailableHit.bind(document.getElementById("upcoming_maybe_available_id"));
@@ -120,26 +122,34 @@ class UpcomingScreen extends Screen
 		this.mAvailableGamesList = null;
 		this.mNotAvailablePracticeList = null;
 		this.mNotAvailableGamesList = null;
+		this.mMaybeAvailablePracticeList = null;
+		this.mMabyeAvailableGamesList = null;
 	}
 
-	checkboxhit()
+	availabilitybuttonhit()
 	{
 		APPLICATION.getCurrentScreen().resetLists();
 		var a = this.id.split('_');
 		var id = 0;
+		var availabilityTxt = null;
 		if (a.length > 1)
 		{
 			if (a[0] == 'Practice')
 			{
-				id = a[1];	
+				availabilityTxt = a[1];	
+				id = a[2];	
 				
-				if (this.checked == true)
+				if (availabilityTxt == 'available')
 				{
 					APPLICATION.getCurrentScreen().mAvailablePracticeList = id;
 				}
-				else
+				if (availabilityTxt == 'not')
 				{
 					APPLICATION.getCurrentScreen().mNotAvailablePracticeList = id;
+				}
+				if (availabilityTxt == 'maybe')
+				{
+					APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = id;
 				}
 			}
 
@@ -164,10 +174,10 @@ class UpcomingScreen extends Screen
 
 	updateAvailability()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practice=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practice=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practice=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practice=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList + '&maybe_available_practice=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGamesList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
-                APPLICATION.getCurrentScreen().ajax();
+                //APPLICATION.getCurrentScreen().ajax();
 	}
 
         processJsonData()
@@ -264,16 +274,28 @@ class UpcomingScreen extends Screen
 						buttonAvailable.setAttribute("class","availability-button");
 						buttonAvailable.innerHTML = "Available";
 						container.appendChild(buttonAvailable);
+						var id = 'Practice_available_' + this.mEventsArray[i].id;
+  						buttonAvailable.setAttribute("id", id);
+			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
+						this.mAvailabilityButtonArray.push(buttonAvailable);
 					
 						var buttonNotAvailable = document.createElement("BUTTON");
 						buttonNotAvailable.setAttribute("class","availability-button");
 						buttonNotAvailable.innerHTML = "Not Available";
 						container.appendChild(buttonNotAvailable);
+						var id = 'Practice_not_' + this.mEventsArray[i].id;
+  						buttonNotAvailable.setAttribute("id", id);
+			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
+						this.mAvailabilityButtonArray.push(buttonNotAvailable);
 						
 						var buttonMaybeAvailable = document.createElement("BUTTON");
 						buttonMaybeAvailable.setAttribute("class","availability-button");
-						buttonMaybeAvailable.innerHTML = "Mabye Available";
+						buttonMaybeAvailable.innerHTML = "Maybe Available";
 						container.appendChild(buttonMaybeAvailable);
+						var id = 'Practice_maybe_' + this.mEventsArray[i].id;
+  						buttonMaybeAvailable.setAttribute("id", id);
+			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
+						this.mAvailabilityButtonArray.push(buttonMaybeAvailable);
 					}
 				}
 				
