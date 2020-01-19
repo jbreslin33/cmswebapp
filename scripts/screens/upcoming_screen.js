@@ -229,6 +229,37 @@ class UpcomingScreen extends Screen
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 
+
+						var labelAvailable = document.createElement("LABEL");
+						container.appendChild(labelAvailable);
+						labelAvailable.innerHTML = "Yo";
+
+						var inputAvailable = document.createElement("INPUT");
+						labelAvailable.appendChild(inputAvailable);
+
+						var spanParentAvailable = document.createElement("SPAN");
+						inputAvailable.appendChild(spanParentAvailable);
+						
+						var spanChildAvailable = document.createElement("SPAN");
+						spanParentAvailable.appendChild(spanChildAvailable);
+
+
+
+
+
+					/*
+                                        <label class="radio-button" id="upcoming_available_id">
+                                                <input type="radio" name="radio">
+                                                        <span class="label-visible">
+                                                                <span class="fake-radiobutton"></span>
+                                                                Available
+                                                        </span>
+                                                </input>
+                                        </label>
+					*/
+
+						
+/*
 						var itemAvailable = document.getElementById("upcoming_available_id");
 						var cloneAvailable = itemAvailable.cloneNode(true);
 						container.appendChild(cloneAvailable);
@@ -240,7 +271,7 @@ class UpcomingScreen extends Screen
 						var itemMaybeAvailable = document.getElementById("upcoming_maybe_available_id");
 						var cloneMaybeAvailable = itemMaybeAvailable.cloneNode(true);
 						container.appendChild(cloneMaybeAvailable);
-
+*/
 						//var id = 'Practice_' + this.mEventsArray[i].id;
   						//checkbox.setAttribute("id", id);
 				
