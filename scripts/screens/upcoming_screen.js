@@ -67,21 +67,27 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
+		console.log('hit av');
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
 		}
+		this.checked = true;
 	}
 	upcomingNotAvailableHit()
 	{
+		console.log('hit na');
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = false;	
 		}
+		this.checked = true;
 	}
 	
 	upcomingMaybeAvailableHit()
 	{
+		console.log('hit ma');
+		this.checked = true;
 		/*
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
@@ -228,12 +234,12 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
-
+/*
 
 						//LABEL
 						var labelAvailable = document.createElement("LABEL");
 
-						//labelAvailable.setAttribute("class","radio-button");
+						labelAvailable.setAttribute("class","radio-button");
 						
 						container.appendChild(labelAvailable);
 						labelAvailable.innerHTML = "Yo";
@@ -262,7 +268,7 @@ class UpcomingScreen extends Screen
 						spanParentAvailable.appendChild(spanChildAvailable);
 
 
-
+*/
 
 
 					/*
