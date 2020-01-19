@@ -263,17 +263,37 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'game')
 					{
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+
+						var buttonAvailable = document.createElement("BUTTON");
+						buttonAvailable.setAttribute("class","availability-button");
+						buttonAvailable.innerHTML = "Available";
+						container.appendChild(buttonAvailable);
+						var id = 'Game_available_' + this.mEventsArray[i].id;
+  						buttonAvailable.setAttribute("id", id);
+			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
+						this.mAvailabilityButtonArray.push(buttonAvailable);
+					
+						var buttonNotAvailable = document.createElement("BUTTON");
+						buttonNotAvailable.setAttribute("class","availability-button");
+						buttonNotAvailable.innerHTML = "Not Available";
+						container.appendChild(buttonNotAvailable);
+						var id = 'Game_not_' + this.mEventsArray[i].id;
+  						buttonNotAvailable.setAttribute("id", id);
+			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
+						this.mAvailabilityButtonArray.push(buttonNotAvailable);
+						
+						var buttonMaybeAvailable = document.createElement("BUTTON");
+						buttonMaybeAvailable.setAttribute("class","availability-button");
+						buttonMaybeAvailable.innerHTML = "Maybe Available";
+						container.appendChild(buttonMaybeAvailable);
+						var id = 'Game_maybe_' + this.mEventsArray[i].id;
+  						buttonMaybeAvailable.setAttribute("id", id);
+			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
+						this.mAvailabilityButtonArray.push(buttonMaybeAvailable);
 					}
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
-						
-						//var id = 'Practice_' + this.mEventsArray[i].id;
-  						//checkbox.setAttribute("id", id);
-				
-			 			//checkbox.onclick = this.checkboxhit.bind(checkbox);
-						//this.mCheckBoxArray.push(checkbox);
-
 						
 						var buttonAvailable = document.createElement("BUTTON");
 						buttonAvailable.setAttribute("class","availability-button");
