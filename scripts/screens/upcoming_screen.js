@@ -67,10 +67,13 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
-		//this.setAttribute("background-color","#4CAF50");
+		//set this one
 		this.style.backgroundColor = "#4CAF50" 
-		this.style.backgroundColor = "#4CAF50" 
-		console.log('hit av');
+
+		//set others back to blue
+		document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
+		document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
@@ -79,7 +82,13 @@ class UpcomingScreen extends Screen
 	}
 	upcomingNotAvailableHit()
 	{
+		//set this one
 		this.style.backgroundColor = "red"; 
+		
+		//set others back to blue
+		document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
+		document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
 		{
 			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = false;	
@@ -89,7 +98,13 @@ class UpcomingScreen extends Screen
 	
 	upcomingMaybeAvailableHit()
 	{
+		//set this one
 		this.style.backgroundColor = "yellow"; 
+
+		//set others back to blue
+		document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
+		document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
+
 		this.checked = true;
 		/*
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
