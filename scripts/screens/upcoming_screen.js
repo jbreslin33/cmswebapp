@@ -145,14 +145,23 @@ class UpcomingScreen extends Screen
 				if (availabilityTxt == 'available')
 				{
 					APPLICATION.getCurrentScreen().mAvailablePracticeList = id;
+					document.getElementById('Practice_available_' + id).style.backgroundColor = "#4CAF50"; 		
+					document.getElementById('Practice_not_' + id).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_maybe_' + id).style.backgroundColor = "#33b5e5"; 		
 				}
 				if (availabilityTxt == 'not')
 				{
 					APPLICATION.getCurrentScreen().mNotAvailablePracticeList = id;
+					document.getElementById('Practice_available_' + id).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_not_' + id).style.backgroundColor = "red"; 		
+					document.getElementById('Practice_maybe_' + id).style.backgroundColor = "#33b5e5"; 		
 				}
 				if (availabilityTxt == 'maybe')
 				{
 					APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = id;
+					document.getElementById('Practice_available_' + id).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_not_' + id).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_maybe_' + id).style.backgroundColor = "yellow"; 		
 				}
 			}
 
