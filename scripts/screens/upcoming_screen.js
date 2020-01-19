@@ -262,14 +262,17 @@ class UpcomingScreen extends Screen
 						
 						var buttonAvailable = document.createElement("BUTTON");
 						buttonAvailable.setAttribute("class","availability-button");
+						buttonAvailable.innerHTML = "Available";
 						container.appendChild(buttonAvailable);
 					
-						var buttonAvailable = document.createElement("BUTTON");
-						buttonAvailable.setAttribute("class","availability-button");
-						container.appendChild(buttonAvailable);
+						var buttonNotAvailable = document.createElement("BUTTON");
+						buttonNotAvailable.setAttribute("class","availability-button");
+						buttonNotAvailable.innerHTML = "Not Available";
+						container.appendChild(buttonNotAvailable);
 						
 						var buttonMaybeAvailable = document.createElement("BUTTON");
 						buttonMaybeAvailable.setAttribute("class","availability-button");
+						buttonMaybeAvailable.innerHTML = "Mabye Available";
 						container.appendChild(buttonMaybeAvailable);
 					}
 				}
