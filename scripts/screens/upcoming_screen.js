@@ -53,7 +53,9 @@ class UpcomingScreen extends Screen
 		this.mLastDayOfQuery = future_date_string;
 	
 		//checkboxes at top for multiple availabilities
-		this.mAvailabilityButtonArray = new Array();
+		this.mAvailableButtonArray = new Array();
+		this.mNotAvailableButtonArray = new Array();
+		this.mMaybeAvailableButtonArray = new Array();
 		document.getElementById("upcoming_available_id").onclick = this.upcomingAvailableHit.bind(document.getElementById("upcoming_available_id"));
 		document.getElementById("upcoming_not_available_id").onclick = this.upcomingNotAvailableHit.bind(document.getElementById("upcoming_not_available_id"));
 		document.getElementById("upcoming_maybe_available_id").onclick = this.upcomingMaybeAvailableHit.bind(document.getElementById("upcoming_maybe_available_id"));
@@ -70,17 +72,18 @@ class UpcomingScreen extends Screen
 	upcomingAvailableHit()
 	{
 		//set this one
-		this.style.backgroundColor = "#4CAF50" 
+		this.style.backgroundColor = "#4CAF50"; 
 
 		//set others back to blue
 		document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
 		document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
 
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mAvailableButtonArray.length; i++)
 		{
-			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
+			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#4CAF50";
+			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5"; 
+			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 		}
-		this.checked = true;
 	}
 	upcomingNotAvailableHit()
 	{
@@ -90,12 +93,13 @@ class UpcomingScreen extends Screen
 		//set others back to blue
 		document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
 		document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
-
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
+		
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mNotAvailableButtonArray.length; i++)
 		{
-			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = false;	
+			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#33b5e5";
+			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "red"; 
+			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 		}
-		this.checked = true;
 	}
 	
 	upcomingMaybeAvailableHit()
@@ -106,14 +110,13 @@ class UpcomingScreen extends Screen
 		//set others back to blue
 		document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
 		document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-
-		this.checked = true;
-		/*
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mCheckBoxArray.length; i++)
+		
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray.length; i++)
 		{
-			APPLICATION.getCurrentScreen().mCheckBoxArray[i].checked = true;	
+			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#33b5e5";
+			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
+			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "yellow"; 
 		}
-		*/
 	}
 
 	resetLists()
@@ -271,7 +274,7 @@ class UpcomingScreen extends Screen
 						var id = 'Game_available_' + this.mEventsArray[i].id;
   						buttonAvailable.setAttribute("id", id);
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
-						this.mAvailabilityButtonArray.push(buttonAvailable);
+						this.mAvailabileButtonArray.push(buttonAvailable);
 					
 						var buttonNotAvailable = document.createElement("BUTTON");
 						buttonNotAvailable.setAttribute("class","availability-button");
@@ -280,7 +283,7 @@ class UpcomingScreen extends Screen
 						var id = 'Game_not_' + this.mEventsArray[i].id;
   						buttonNotAvailable.setAttribute("id", id);
 			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
-						this.mAvailabilityButtonArray.push(buttonNotAvailable);
+						this.mNotAvailableButtonArray.push(buttonNotAvailable);
 						
 						var buttonMaybeAvailable = document.createElement("BUTTON");
 						buttonMaybeAvailable.setAttribute("class","availability-button");
@@ -289,7 +292,7 @@ class UpcomingScreen extends Screen
 						var id = 'Game_maybe_' + this.mEventsArray[i].id;
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
-						this.mAvailabilityButtonArray.push(buttonMaybeAvailable);
+						this.mMaybeAvailabeButtonArray.push(buttonMaybeAvailable);
 					}
 					if (this.mEventsArray[i].type == 'practice')
 					{
@@ -302,7 +305,7 @@ class UpcomingScreen extends Screen
 						var id = 'Practice_available_' + this.mEventsArray[i].id;
   						buttonAvailable.setAttribute("id", id);
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
-						this.mAvailabilityButtonArray.push(buttonAvailable);
+						this.mAvailableButtonArray.push(buttonAvailable);
 					
 						var buttonNotAvailable = document.createElement("BUTTON");
 						buttonNotAvailable.setAttribute("class","availability-button");
@@ -311,7 +314,7 @@ class UpcomingScreen extends Screen
 						var id = 'Practice_not_' + this.mEventsArray[i].id;
   						buttonNotAvailable.setAttribute("id", id);
 			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
-						this.mAvailabilityButtonArray.push(buttonNotAvailable);
+						this.mNotAvailableButtonArray.push(buttonNotAvailable);
 						
 						var buttonMaybeAvailable = document.createElement("BUTTON");
 						buttonMaybeAvailable.setAttribute("class","availability-button");
@@ -320,7 +323,7 @@ class UpcomingScreen extends Screen
 						var id = 'Practice_maybe_' + this.mEventsArray[i].id;
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
-						this.mAvailabilityButtonArray.push(buttonMaybeAvailable);
+						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
 					}
 				}
 				
