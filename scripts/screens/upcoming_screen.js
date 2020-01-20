@@ -212,7 +212,7 @@ class UpcomingScreen extends Screen
 		}
 
 		//send to server
-		//APPLICATION.getCurrentScreen().updateAvailability();
+		APPLICATION.getCurrentScreen().updateAvailability();
 	}
 
 	updateAvailability()
