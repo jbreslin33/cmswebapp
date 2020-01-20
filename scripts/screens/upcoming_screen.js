@@ -86,20 +86,16 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#4CAF50";
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5"; 
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
-			APPLICATION.getCurrentScreen().mAvailableButtonArray
 			var id = APPLICATION.getCurrentScreen().mAvailableButtonArray[i].id.split('_');;
 			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
 		}
 		APPLICATION.getCurrentScreen().mAvailablePracticeList = APPLICATION.getCurrentScreen().mAvailablePracticeArray.join();
-		console.log('.mAvailablePracticeList:' + APPLICATION.getCurrentScreen().mAvailablePracticeList);
-		// var a = this.id.split('_');
-		//APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id;
-
-
-	//	APPLICATION.getCurrentScreen().updateAvailability();
+		APPLICATION.getCurrentScreen().updateAvailability()
 	}
 	upcomingNotAvailableHit()
 	{
+		APPLICATION.getCurrentScreen().resetLists();
+
 		//set this one
 		this.style.backgroundColor = "red"; 
 		
@@ -112,11 +108,17 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#33b5e5";
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "red"; 
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
+			var id = APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].id.split('_');;
+			APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[2]);
 		}
+		APPLICATION.getCurrentScreen().mNotAvailablePracticeList = APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.join();
+		APPLICATION.getCurrentScreen().updateAvailability()
 	}
 	
 	upcomingMaybeAvailableHit()
 	{
+		APPLICATION.getCurrentScreen().resetLists();
+
 		//set this one
 		this.style.backgroundColor = "yellow"; 
 
@@ -129,7 +131,11 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#33b5e5";
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "yellow"; 
+			var id = APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].id.split('_');;
+			APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[2]);
 		}
+		APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.join();
+		APPLICATION.getCurrentScreen().updateAvailability()
 	}
 
 	resetLists()
@@ -214,7 +220,7 @@ class UpcomingScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practice=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practice=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList + '&maybe_available_practice=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGamesList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
-                APPLICATION.getCurrentScreen().ajax();
+                //APPLICATION.getCurrentScreen().ajax();
 	}
 
         processJsonData()
