@@ -29,6 +29,9 @@ class UpcomingScreen extends Screen
 		this.mNotAvailableGamesArray = new Array();
 		this.mNotAvailablePracticeList = null;
 		this.mNotAvailableGamesList = null;
+
+		this.mMaybeAvailablePracticeArray = new Array();
+		this.mMaybeAvailableGamesArray = new Array();
 		this.mMaybeAvailablePracticeList = null;
 		this.mMaybeAvailableGamesList = null;
 
@@ -84,6 +87,10 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5"; 
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 		}
+		//APPLICATION.getCurrentScreen().mAvailablePracticeList = id;
+
+
+		APPLICATION.getCurrentScreen().updateAvailability();
 	}
 	upcomingNotAvailableHit()
 	{
@@ -194,7 +201,7 @@ class UpcomingScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practice=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practice=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList + '&maybe_available_practice=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGamesList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
-                //APPLICATION.getCurrentScreen().ajax();
+                APPLICATION.getCurrentScreen().ajax();
 	}
 
         processJsonData()
