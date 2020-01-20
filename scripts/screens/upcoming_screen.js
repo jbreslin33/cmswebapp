@@ -13,25 +13,23 @@ class UpcomingScreen extends Screen
                 this.setSpinner(document.getElementById("upcoming_screen_spinner_id"));
                 this.setForm(document.getElementById("upcoming_screen_form_id"));
 
-		this.mCloneArray = new Array();
-		
 		this.mCalendar = new Calendar();
 
 		this.mEventsArray = new Array();
 
 		//availability
 		this.mAvailablePracticeArray = new Array();
-		this.mAvailableGamesArray = new Array();
+		this.mAvailableGameArray = new Array();
 		this.mAvailablePracticeList = null;
 		this.mAvailableGamesList = null;
 		
 		this.mNotAvailablePracticeArray = new Array();
-		this.mNotAvailableGamesArray = new Array();
+		this.mNotAvailableGameArray = new Array();
 		this.mNotAvailablePracticeList = null;
 		this.mNotAvailableGamesList = null;
 
 		this.mMaybeAvailablePracticeArray = new Array();
-		this.mMaybeAvailableGamesArray = new Array();
+		this.mMaybeAvailableGameArray = new Array();
 		this.mMaybeAvailablePracticeList = null;
 		this.mMaybeAvailableGamesList = null;
 
@@ -74,6 +72,8 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
+		APPLICATION.getCurrentScreen().resetLists();
+
 		//set this one
 		this.style.backgroundColor = "#4CAF50"; 
 
@@ -86,11 +86,17 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#4CAF50";
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5"; 
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
+			APPLICATION.getCurrentScreen().mAvailableButtonArray
+			var id = APPLICATION.getCurrentScreen().mAvailableButtonArray[i].id.split('_');;
+			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
 		}
-		//APPLICATION.getCurrentScreen().mAvailablePracticeList = id;
+		APPLICATION.getCurrentScreen().mAvailablePracticeList = APPLICATION.getCurrentScreen().mAvailablePracticeArray.join();
+		console.log('.mAvailablePracticeList:' + APPLICATION.getCurrentScreen().mAvailablePracticeList);
+		// var a = this.id.split('_');
+		//APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id;
 
 
-		APPLICATION.getCurrentScreen().updateAvailability();
+	//	APPLICATION.getCurrentScreen().updateAvailability();
 	}
 	upcomingNotAvailableHit()
 	{
@@ -134,6 +140,13 @@ class UpcomingScreen extends Screen
 		this.mNotAvailableGamesList = null;
 		this.mMaybeAvailablePracticeList = null;
 		this.mMabyeAvailableGamesList = null;
+
+		this.mAvailablePracticeArray.length = 0;
+		this.mNotAvailablePracticeArray.length = 0;
+		this.mMaybeAvailablePracticeArray.length = 0;
+		this.mAvailableGameArray.length = 0;
+		this.mNotAvailableGameArray.length = 0;
+		this.mMaybeAvailableGameArray.length = 0;
 	}
 
 	availabilitybuttonhit()
@@ -193,7 +206,7 @@ class UpcomingScreen extends Screen
 		}
 
 		//send to server
-		APPLICATION.getCurrentScreen().updateAvailability();
+		//APPLICATION.getCurrentScreen().updateAvailability();
 	}
 
 	updateAvailability()
@@ -266,9 +279,6 @@ class UpcomingScreen extends Screen
 				var div = document.createElement('div');	
 				div.setAttribute('class','card');
 				document.getElementById("upcoming_screen_html_id").appendChild(div);
-
-				//add to array
-				this.mCloneArray.push(div);
 
 				var container = document.createElement('div');
 				container.setAttribute('class','container');
