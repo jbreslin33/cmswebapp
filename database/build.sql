@@ -2076,6 +2076,17 @@ END;
 $$;
 --END INSERT PRACTICE
 
+
+CREATE OR REPLACE PROCEDURE p_update_availability(int,text,int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+        insert into pitches (club_id,name) values ($1,$2) returning id into x;
+END;
+$$;
+
+
 CREATE OR REPLACE FUNCTION f_update_availability(int,text,text,text,text,text,text)
 RETURNS text AS $$
 DECLARE
