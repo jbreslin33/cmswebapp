@@ -11,25 +11,62 @@ class UpcomingAvailability extends Screen
 	function getResult()
         {
 		error_log('upcoming availablity called');
-		/*
-                $first_day_of_query = null;
-                $last_day_of_query = null;
 
-                if (isset($_GET['first_day_of_query']))
-                {
-                        $first_day_of_query = $_GET['first_day_of_query'];
-                }
-                if (isset($_GET['last_day_of_query']))
-                {
-                        $last_day_of_query = $_GET['last_day_of_query'];
-                }
+		$available_practices = null;
+		$available_games = null;
+		$not_available_practices = null;
+		$not_available_games = null;
+		$maybe_available_practices = null;
+		$maybe_available_games = null;
 
-                $sql = 'select f_select_events($1,$2,$3)';
-                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $first_day_of_query, $last_day_of_query));
+		if (isset($_GET['available_practices']))
+		{
+			$available_practices = $_GET['available_practices'];
+			$txt = 'A';
+			$txt .= $available_practices;
+			error_log($txt);
+		}
+		if (isset($_GET['available_games']))
+		{
+			$available_games = $_GET['available_games'];
+			$txt = 'B';
+			$txt .= $available_games;
+			error_log($txt);
+		}
+		if (isset($_GET['not_available_practices']))
+		{
+			$not_available_practices = $_GET['not_available_practices'];
+			$txt = 'C';
+			$txt .= $not_available_practices;
+			error_log($txt);
+		}
+		if (isset($_GET['not_available_games']))
+		{
+			$not_available_games = $_GET['not_available_games'];
+			$txt = 'D';
+			$txt .= $not_available_gmaes;
+			error_log($txt);
+		}
+		if (isset($_GET['maybe_available_practices']))
+		{
+			$maybe_available_practices = $_GET['maybe_available_practices'];
+			$txt = 'E';
+			$txt .= $maybe_available_practices;
+			error_log($txt);
+		}
+		if (isset($_GET['maybe_available_games']))
+		{
+			$maybe_available_games = $_GET['maybe_available_games'];
+			$txt = 'F';
+			$txt .= $maybe_available_games;
+			error_log($txt);
+		}
+
+                $sql = 'select f_update_availability($1,$2,$3,$4,$5,$6,$7)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_update_availability", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_update_availability", array( $this->getSenderEmailId(), $available_practices, $available_games, $not_available_practices, $not_available_games, $maybe_available_practices, $maybe_available_games));
 
                 return pg_fetch_result($result, 0);
-		 */
         }
 
 }

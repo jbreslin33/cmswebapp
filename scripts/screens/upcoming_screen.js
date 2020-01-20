@@ -217,10 +217,10 @@ class UpcomingScreen extends Screen
 
 	updateAvailability()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practice=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practice=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList + '&maybe_available_practice=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGamesList);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practices=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practices=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList + '&maybe_available_practices=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGamesList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
-                //APPLICATION.getCurrentScreen().ajax();
+                APPLICATION.getCurrentScreen().ajax();
 	}
 
         processJsonData()

@@ -2076,6 +2076,59 @@ END;
 $$;
 --END INSERT PRACTICE
 
+CREATE OR REPLACE FUNCTION f_update_availability(int,text,text,text,text,text,text)
+RETURNS text AS $$
+DECLARE
+	ids INT[];
+	i integer;
+        result_set text;
+
+
+        DECLARE x int := -111;
+        json_result text;
+	found_team_club_manager_id team_club_persons_club_managers.id%TYPE;
+BEGIN
+        IF $2 is NULL THEN
+	ELSE
+		ids = string_to_array($2,',');
+  		RAISE LOG 'first element %', ids[0];
+		FOR i IN 1 .. array_upper(ids, 1)
+		
+		LOOP
+   			--RAISE NOTICE '%', a[i];      -- single quotes!
+  			RAISE LOG 'log message %', ids[i];
+		END LOOP;
+
+		--ids = string_to_array($1,',');
+		--string_to_array(users.name, ',')
+  		--RAISE LOG 'log message %', now();
+		
+	END IF;
+        
+	IF $3 is NULL THEN
+	ELSE
+	END IF;
+
+	IF $4 is NULL THEN
+	ELSE
+	END IF;
+
+	IF $5 is NULL THEN
+	ELSE
+	END IF;
+
+	IF $6 is NULL THEN
+	ELSE
+	END IF;
+
+	IF $7 is NULL THEN
+	ELSE
+	END IF;
+
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 
 
 
@@ -2103,7 +2156,6 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
 
 --BEGIN SELECT PERSON
 CREATE OR REPLACE FUNCTION f_select_person(email_id int)
