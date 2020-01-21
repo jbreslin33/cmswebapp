@@ -809,17 +809,16 @@ CREATE TABLE team_club_persons_club_administrators
 	PRIMARY KEY (id)
 );
 
-
 CREATE TABLE practices_players_availability 
 (
         id SERIAL,
         practice_id integer NOT NULL,
-       	team_club_player_id integer NOT NULL,
+	team_club_persons_club_players_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (practice_id) REFERENCES practices(id),
-	FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
+	FOREIGN KEY (team_club_persons_club_players_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
         PRIMARY KEY (id)
 );
@@ -2093,7 +2092,7 @@ $$;
 --END INSERT PRACTICE
 
 
-CREATE OR REPLACE PROCEDURE p_update_availability(int,text,int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_update_practice_availability(int,text,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
