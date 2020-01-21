@@ -90,6 +90,7 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
+		console.log('ID:' + this.id);
 		APPLICATION.getCurrentScreen().resetLists();
 
 		//set this one
@@ -137,10 +138,22 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "red"; 
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 			var id = APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].id.split('_');;
-			APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[2]);
+
+			if (id[0] == 'Practice')
+			{
+				APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[2]);
+			}
+			if (id[0] == 'Game')
+			{
+				APPLICATION.getCurrentScreen().mNotAvailableGameArray.push(id[2]);
+			}
+
 		}
 		APPLICATION.getCurrentScreen().mNotAvailablePracticeList = APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.join();
+		APPLICATION.getCurrentScreen().mNotAvailableGameList = APPLICATION.getCurrentScreen().mNotAvailableGameArray.join();
 		APPLICATION.getCurrentScreen().updateAvailability()
+
+
 	}
 	
 	upcomingMaybeAvailableHit()
@@ -160,9 +173,19 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "yellow"; 
 			var id = APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].id.split('_');;
-			APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[2]);
+
+			if (id[0] == 'Practice')
+			{
+				APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[2]);
+			}
+			if (id[0] == 'Game')
+			{
+				APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.push(id[2]);
+			}
+
 		}
 		APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.join();
+		APPLICATION.getCurrentScreen().mMaybeAvailableGameList = APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.join();
 		APPLICATION.getCurrentScreen().updateAvailability()
 	}
 
