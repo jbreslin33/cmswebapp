@@ -824,6 +824,22 @@ CREATE TABLE practices_players_availability
         PRIMARY KEY (id)
 );
 
+CREATE TABLE games_players_availability
+(
+        id SERIAL,
+        game_id integer NOT NULL,
+        team_club_player_id integer NOT NULL,
+        availability_id integer NOT NULL,
+        notes text,
+        created_at timestamp not null default now(),
+        FOREIGN KEY (game_id) REFERENCES games(id),
+        FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
+        FOREIGN KEY (availability_id) REFERENCES availability(id),
+        PRIMARY KEY (id)
+);
+
+
+
 CREATE TABLE practices_players_attendance 
 (
         id SERIAL,
