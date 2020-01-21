@@ -79,23 +79,11 @@ class UpcomingScreen extends Screen
 		super.exit();
 
 	}
-	/*
-	                if (app.getCurrentScreen().mCloneArray)
-                {
-                        for (i = 0; i < app.getCurrentScreen().mCloneArray.length; i++)
-                        {
-                                app.getCurrentScreen().mCloneArray[i].remove();
-                        }
-                }
-                app.getCurrentScreen().exit();
-*/
-
+	
 	removeDivs()
 	{
-		//elem.parentNode.removeChild(elem);
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
 		{
-			//this.mDivArray[i].parentNode.removeChild(this.mDivArray[i]);
                         APPLICATION.getCurrentScreen().mDivArray[i].remove();
 		}
 	}
