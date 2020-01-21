@@ -15,6 +15,8 @@ class UpcomingScreen extends Screen
 
 		this.mCalendar = new Calendar();
 
+		this.mDivArray = new Array();
+
 		this.mEventsArray = new Array();
 
 		//availability
@@ -69,6 +71,34 @@ class UpcomingScreen extends Screen
 
                 APPLICATION.getCurrentScreen().ajax();
         }
+
+	exit()
+	{
+
+		this.removeDivs();
+		super.exit();
+
+	}
+	/*
+	                if (app.getCurrentScreen().mCloneArray)
+                {
+                        for (i = 0; i < app.getCurrentScreen().mCloneArray.length; i++)
+                        {
+                                app.getCurrentScreen().mCloneArray[i].remove();
+                        }
+                }
+                app.getCurrentScreen().exit();
+*/
+
+	removeDivs()
+	{
+		//elem.parentNode.removeChild(elem);
+		for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
+		{
+			//this.mDivArray[i].parentNode.removeChild(this.mDivArray[i]);
+                        APPLICATION.getCurrentScreen().mDivArray[i].remove();
+		}
+	}
 
 	upcomingAvailableHit()
 	{
@@ -283,6 +313,7 @@ class UpcomingScreen extends Screen
                         {
 
 				var div = document.createElement('div');	
+				this.mDivArray.push(div);
 				div.setAttribute('class','card');
 				document.getElementById("upcoming_screen_html_id").appendChild(div);
 
@@ -306,7 +337,7 @@ class UpcomingScreen extends Screen
 						var id = 'Game_available_' + this.mEventsArray[i].id;
   						buttonAvailable.setAttribute("id", id);
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
-						this.mAvailabileButtonArray.push(buttonAvailable);
+						this.mAvailableButtonArray.push(buttonAvailable);
 					
 						var buttonNotAvailable = document.createElement("BUTTON");
 						buttonNotAvailable.setAttribute("class","availability-button");
@@ -324,7 +355,7 @@ class UpcomingScreen extends Screen
 						var id = 'Game_maybe_' + this.mEventsArray[i].id;
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
-						this.mMaybeAvailabeButtonArray.push(buttonMaybeAvailable);
+						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
 					}
 					if (this.mEventsArray[i].type == 'practice')
 					{

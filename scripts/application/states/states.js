@@ -606,13 +606,6 @@ class UPCOMING_APPLICATION extends State
 			console.log("UPCOMING_APPLICATION: EXIT");        
 		}
 		
-		if (app.getCurrentScreen().mCloneArray)
-		{
-			for (i = 0; i < app.getCurrentScreen().mCloneArray.length; i++)
-			{
-				app.getCurrentScreen().mCloneArray[i].remove();
-			}
-		}
 		app.getCurrentScreen().exit();
 	}
 }
