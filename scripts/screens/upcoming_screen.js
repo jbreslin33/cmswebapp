@@ -23,17 +23,17 @@ class UpcomingScreen extends Screen
 		this.mAvailablePracticeArray = new Array();
 		this.mAvailableGameArray = new Array();
 		this.mAvailablePracticeList = null;
-		this.mAvailableGamesList = null;
+		this.mAvailableGameList = null;
 		
 		this.mNotAvailablePracticeArray = new Array();
 		this.mNotAvailableGameArray = new Array();
 		this.mNotAvailablePracticeList = null;
-		this.mNotAvailableGamesList = null;
+		this.mNotAvailableGameList = null;
 
 		this.mMaybeAvailablePracticeArray = new Array();
 		this.mMaybeAvailableGameArray = new Array();
 		this.mMaybeAvailablePracticeList = null;
-		this.mMaybeAvailableGamesList = null;
+		this.mMaybeAvailableGameList = null;
 
 		//now
                 var current_date = new Date();
@@ -105,9 +105,19 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5"; 
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 			var id = APPLICATION.getCurrentScreen().mAvailableButtonArray[i].id.split('_');;
-			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
+
+			if (id[0] == 'Practice')
+			{
+				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
+			}
+			if (id[0] == 'Game')
+			{
+				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[2]);
+			}
+
 		}
 		APPLICATION.getCurrentScreen().mAvailablePracticeList = APPLICATION.getCurrentScreen().mAvailablePracticeArray.join();
+		APPLICATION.getCurrentScreen().mAvailableGameList = APPLICATION.getCurrentScreen().mAvailableGameArray.join();
 		APPLICATION.getCurrentScreen().updateAvailability()
 	}
 	upcomingNotAvailableHit()
@@ -159,11 +169,11 @@ class UpcomingScreen extends Screen
 	resetLists()
 	{
 		this.mAvailablePracticeList = null;
-		this.mAvailableGamesList = null;
+		this.mAvailableGameList = null;
 		this.mNotAvailablePracticeList = null;
-		this.mNotAvailableGamesList = null;
+		this.mNotAvailableGameList = null;
 		this.mMaybeAvailablePracticeList = null;
-		this.mMabyeAvailableGamesList = null;
+		this.mMabyeAvailableGameList = null;
 
 		this.mAvailablePracticeArray.length = 0;
 		this.mNotAvailablePracticeArray.length = 0;
@@ -235,7 +245,7 @@ class UpcomingScreen extends Screen
 
 	updateAvailability()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practices=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGamesList + '&not_available_practices=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGamesList + '&maybe_available_practices=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGamesList);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practices=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGameList + '&not_available_practices=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGameList + '&maybe_available_practices=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGameList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
                 APPLICATION.getCurrentScreen().ajax();
