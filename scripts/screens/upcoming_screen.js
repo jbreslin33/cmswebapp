@@ -90,7 +90,6 @@ class UpcomingScreen extends Screen
 
 	upcomingAvailableHit()
 	{
-		console.log('ID:' + this.id);
 		APPLICATION.getCurrentScreen().resetLists();
 
 		//set this one
