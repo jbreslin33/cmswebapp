@@ -377,6 +377,7 @@ class UpcomingScreen extends Screen
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
 						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
 					}
+
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
@@ -385,7 +386,7 @@ class UpcomingScreen extends Screen
 						buttonAvailable.setAttribute("class","availability-button");
 						buttonAvailable.innerHTML = "Available";
 						container.appendChild(buttonAvailable);
-						var id = 'Practice_available_' + this.mEventsArray[i].id;
+						var id = 'Practice_available_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						buttonAvailable.setAttribute("id", id);
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
 						this.mAvailableButtonArray.push(buttonAvailable);
@@ -394,7 +395,7 @@ class UpcomingScreen extends Screen
 						buttonNotAvailable.setAttribute("class","availability-button");
 						buttonNotAvailable.innerHTML = "Not Available";
 						container.appendChild(buttonNotAvailable);
-						var id = 'Practice_not_' + this.mEventsArray[i].id;
+						var id = 'Practice_not_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						buttonNotAvailable.setAttribute("id", id);
 			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
 						this.mNotAvailableButtonArray.push(buttonNotAvailable);
@@ -403,10 +404,11 @@ class UpcomingScreen extends Screen
 						buttonMaybeAvailable.setAttribute("class","availability-button");
 						buttonMaybeAvailable.innerHTML = "Maybe Available";
 						container.appendChild(buttonMaybeAvailable);
-						var id = 'Practice_maybe_' + this.mEventsArray[i].id;
+						var id = 'Practice_maybe_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
 						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
+						console.log('id:' + id);
 					}
 				}
 				
@@ -415,6 +417,11 @@ class UpcomingScreen extends Screen
 				
 				var p = document.createElement('p');
 				container.appendChild(p);
+				
+				if (this.mEventsArray[i].first_name)
+				{
+					textArray.push('Player: ' + this.mEventsArray[i].first_name + ' ' + this.mEventsArray[i].last_name);
+				}
 
 				if (this.mEventsArray[i].arrival_time)
 				{
