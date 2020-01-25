@@ -3363,6 +3363,12 @@ DECLARE
 	returning_person_id persons.id%TYPE;
 	returning_email_id emails.id%TYPE;
 	returning_club_id clubs.id%TYPE;
+
+	--JIM as manager
+	returning_manager_id managers.id%TYPE;
+	returning_club_manager_id club_managers.id%TYPE;
+	returning_team_club_person_id team_club_persons.id%TYPE;
+
 BEGIN
 	--JOE
 	insert into persons (first_name, last_name, phones, address) values ('Joe', 'Hurst', ARRAY [ '215-555-1212' ], '2913 Street Road, Bensalem PA 19020') returning id into returning_person_id;
@@ -3387,6 +3393,13 @@ BEGIN
 
 	--teams
 	CALL p_insert_caos(returning_club_id);
+
+	--add Jim Breslin as team manager
+	insert into managers (person_id) values (28) returning id into returning_manager_id;
+	insert into club_managers (club_person_id, manager_id) values (28,returning_manager_id) returning id into returning_club_manager_id;
+	insert into team_club_persons (club_person_id, team_id) values (28,1)  returning id into returning_team_club_person_id;
+	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+
 
 
 RETURN result_set;
