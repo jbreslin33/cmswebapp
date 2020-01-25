@@ -418,7 +418,7 @@ class UpcomingScreen extends Screen
 				var p = document.createElement('p');
 				container.appendChild(p);
 				
-				if (this.mEventsArray[i].first_name)
+				if (this.mEventsArray[i].first_name) 
 				{
 					textArray.push('Player: ' + this.mEventsArray[i].first_name + ' ' + this.mEventsArray[i].last_name);
 				}
