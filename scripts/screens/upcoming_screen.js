@@ -248,15 +248,15 @@ class UpcomingScreen extends Screen
 				
 				if (availabilityTxt == 'available')
 				{
-					APPLICATION.getCurrentScreen().mAvailableGameList = id;
+					APPLICATION.getCurrentScreen().mAvailableGameList = id + ',' + a[3];
 				}
 				if (availabilityTxt == 'not')
 				{
-					APPLICATION.getCurrentScreen().mNotAvailableGameList = id;
+					APPLICATION.getCurrentScreen().mNotAvailableGameList = id + ',' + a[3];
 				}
 				if (availabilityTxt == 'maybe')
 				{
-					APPLICATION.getCurrentScreen().mMaybeAvailableGameList = id;
+					APPLICATION.getCurrentScreen().mMaybeAvailableGameList = id + ',' + a[3];
 				}
 			}
 		}
