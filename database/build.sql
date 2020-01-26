@@ -1488,7 +1488,7 @@ SELECT json_agg(t) INTO raw_json
 
 		join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id AND team_club_persons_club_players.club_player_id=club_players.id
 
-                left outer join pitches on pitches.club_id=teams.club_id
+                --left outer join pitches on pitches.club_id=teams.club_id
 		--team_club_persons_club_players
 
                 where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3

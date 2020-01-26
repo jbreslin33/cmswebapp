@@ -109,10 +109,12 @@ class UpcomingScreen extends Screen
 			if (id[0] == 'Practice')
 			{
 				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
+				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[3]);
 			}
 			if (id[0] == 'Game')
 			{
 				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[2]);
+				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[3]);
 			}
 
 		}
@@ -324,11 +326,12 @@ class UpcomingScreen extends Screen
 		{
 			this.setMessage('You have no events upcoming. Enjoy the time off.', 'black'); 
 		}
+
+		console.log('length:' + this.mEventsArray.length);
                
 		//print to screen
 		if (this.mEventsArray)
                 {
-
                         for (var i = 0; i < this.mEventsArray.length; i++)
                         {
 
