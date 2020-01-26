@@ -143,10 +143,12 @@ class UpcomingScreen extends Screen
 			if (id[0] == 'Practice')
 			{
 				APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[2]);
+				APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[3]);
 			}
 			if (id[0] == 'Game')
 			{
 				APPLICATION.getCurrentScreen().mNotAvailableGameArray.push(id[2]);
+				APPLICATION.getCurrentScreen().mNotAvailableGameArray.push(id[3]);
 			}
 
 		}
@@ -178,10 +180,12 @@ class UpcomingScreen extends Screen
 			if (id[0] == 'Practice')
 			{
 				APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[2]);
+				APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[3]);
 			}
 			if (id[0] == 'Game')
 			{
 				APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.push(id[2]);
+				APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.push(id[3]);
 			}
 
 		}
