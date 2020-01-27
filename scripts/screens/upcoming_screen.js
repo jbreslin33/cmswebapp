@@ -106,22 +106,12 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 			var id = APPLICATION.getCurrentScreen().mAvailableButtonArray[i].id.split('_');;
 
-			if (id[1] == 2)
-			{
-				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[1]);
-				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
-				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[3]);
-				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[4]);
-			}
-			if (id[1] == 1)
-			{
-				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[1]);
-				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[2]);
-				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[3]);
-				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[4]);
-			}
-
+			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[1]);
+			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
+			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[3]);
+			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[4]);
 		}
+
 		APPLICATION.getCurrentScreen().mAvailablePracticeList = APPLICATION.getCurrentScreen().mAvailablePracticeArray.join();
 		APPLICATION.getCurrentScreen().mAvailableGameList = APPLICATION.getCurrentScreen().mAvailableGameArray.join();
 		APPLICATION.getCurrentScreen().updateAvailability()
@@ -214,6 +204,26 @@ class UpcomingScreen extends Screen
 		this.mNotAvailableGameArray.length = 0;
 		this.mMaybeAvailableGameArray.length = 0;
 	}
+	    /*
+                                         *
+
+                                          4 data points
+                                          ----------------
+                                          game:     1
+                                          practice: 2
+
+                                          --------------
+                                          available: 1
+                                          maybe:     2
+                                          not:       3
+
+                                          ---------------------
+                                          game or practice id:
+
+                                          --------------------
+                                          player id:
+                                          */
+
 
 	availabilitybuttonhit()
 	{
@@ -225,29 +235,25 @@ class UpcomingScreen extends Screen
 		{
 			if (a[0] == 'Practice')
 			{
-				availabilityTxt = a[1];	
-				
-				if (availabilityTxt == 'available')
+				if (a[2] == 1)
 				{
-					APPLICATION.getCurrentScreen().mAvailablePracticeList = a[2] + ',' + a[3];
-					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
+					document.getElementById('Practice_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
 				}
-				if (availabilityTxt == 'not')
+				if (a[2] == 2)
 				{
-					APPLICATION.getCurrentScreen().mNotAvailablePracticeList = a[2] + ',' + a[3];
-					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "red"; 		
-					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
-				}
-				if (availabilityTxt == 'maybe')
-				{
-					APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = a[2] + ',' + a[3];
 					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
 					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
 					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "yellow"; 		
 				}
+				if (a[2] == 3)
+				{
+					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "red"; 		
+					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+				}
+				APPLICATION.getCurrentScreen().mList = a[1] + ',' + a[2] + '_' + a[3] + '_' + a[4];
 			}
 /*
 			if (a[0] == 'Game')
@@ -425,15 +431,6 @@ class UpcomingScreen extends Screen
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
 						this.mAvailableButtonArray.push(buttonAvailable);
 					
-						var buttonNotAvailable = document.createElement("BUTTON");
-						buttonNotAvailable.setAttribute("class","availability-button");
-						buttonNotAvailable.innerHTML = "Not Available";
-						container.appendChild(buttonNotAvailable);
-						var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						buttonNotAvailable.setAttribute("id", id);
-			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
-						this.mNotAvailableButtonArray.push(buttonNotAvailable);
-						
 						var buttonMaybeAvailable = document.createElement("BUTTON");
 						buttonMaybeAvailable.setAttribute("class","availability-button");
 						buttonMaybeAvailable.innerHTML = "Maybe Available";
@@ -442,6 +439,15 @@ class UpcomingScreen extends Screen
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
 						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
+						
+						var buttonNotAvailable = document.createElement("BUTTON");
+						buttonNotAvailable.setAttribute("class","availability-button");
+						buttonNotAvailable.innerHTML = "Not Available";
+						container.appendChild(buttonNotAvailable);
+						var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+  						buttonNotAvailable.setAttribute("id", id);
+			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
+						this.mNotAvailableButtonArray.push(buttonNotAvailable);
 					}
 				}
 				
