@@ -10,8 +10,6 @@ class UpcomingAvailability extends Screen
 	
 	function getResult()
         {
-		error_log('upcoming availablity called');
-
 		$available_practices = null;
 		$available_games = null;
 		$not_available_practices = null;
