@@ -106,15 +106,19 @@ class UpcomingScreen extends Screen
 			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
 			var id = APPLICATION.getCurrentScreen().mAvailableButtonArray[i].id.split('_');;
 
-			if (id[0] == 'Practice')
+			if (id[1] == 2)
 			{
+				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[1]);
 				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
 				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[3]);
+				APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[4]);
 			}
-			if (id[0] == 'Game')
+			if (id[1] == 1)
 			{
+				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[1]);
 				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[2]);
 				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[3]);
+				APPLICATION.getCurrentScreen().mAvailableGameArray.push(id[4]);
 			}
 
 		}
@@ -356,12 +360,13 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'game')
 					{
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+						/*
 
 						var buttonAvailable = document.createElement("BUTTON");
 						buttonAvailable.setAttribute("class","availability-button");
 						buttonAvailable.innerHTML = "Available";
 						container.appendChild(buttonAvailable);
-						var id = 'Game_available_' + this.mEventsArray[i].id;
+						var id = 'Game_1_' + this.mEventsArray[i].id;
   						buttonAvailable.setAttribute("id", id);
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
 						this.mAvailableButtonArray.push(buttonAvailable);
@@ -370,7 +375,7 @@ class UpcomingScreen extends Screen
 						buttonNotAvailable.setAttribute("class","availability-button");
 						buttonNotAvailable.innerHTML = "Not Available";
 						container.appendChild(buttonNotAvailable);
-						var id = 'Game_not_' + this.mEventsArray[i].id;
+						var id = 'Game_3_' + this.mEventsArray[i].id;
   						buttonNotAvailable.setAttribute("id", id);
 			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
 						this.mNotAvailableButtonArray.push(buttonNotAvailable);
@@ -379,11 +384,33 @@ class UpcomingScreen extends Screen
 						buttonMaybeAvailable.setAttribute("class","availability-button");
 						buttonMaybeAvailable.innerHTML = "Maybe Available";
 						container.appendChild(buttonMaybeAvailable);
-						var id = 'Game_maybe_' + this.mEventsArray[i].id;
+						var id = 'Game_2_' + this.mEventsArray[i].id;
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
 						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
+						*/
 					}
+					/*
+					 *
+					 
+					  4 data points
+					  ----------------
+					  game:     1
+					  practice: 2
+
+				          --------------	
+					  available: 1
+					  maybe:     2 
+					  not:       3 
+
+					  ---------------------
+					  game or practice id:
+					 
+					  --------------------
+					  player id:	 
+					  */
+
+
 
 					if (this.mEventsArray[i].type == 'practice')
 					{
@@ -393,7 +420,7 @@ class UpcomingScreen extends Screen
 						buttonAvailable.setAttribute("class","availability-button");
 						buttonAvailable.innerHTML = "Available";
 						container.appendChild(buttonAvailable);
-						var id = 'Practice_available_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+						var id = 'button_2_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						buttonAvailable.setAttribute("id", id);
 			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
 						this.mAvailableButtonArray.push(buttonAvailable);
@@ -402,7 +429,7 @@ class UpcomingScreen extends Screen
 						buttonNotAvailable.setAttribute("class","availability-button");
 						buttonNotAvailable.innerHTML = "Not Available";
 						container.appendChild(buttonNotAvailable);
-						var id = 'Practice_not_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+						var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						buttonNotAvailable.setAttribute("id", id);
 			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
 						this.mNotAvailableButtonArray.push(buttonNotAvailable);
@@ -411,11 +438,10 @@ class UpcomingScreen extends Screen
 						buttonMaybeAvailable.setAttribute("class","availability-button");
 						buttonMaybeAvailable.innerHTML = "Maybe Available";
 						container.appendChild(buttonMaybeAvailable);
-						var id = 'Practice_maybe_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+						var id = 'button_2_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						buttonMaybeAvailable.setAttribute("id", id);
 			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
 						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
-						console.log('id:' + id);
 					}
 				}
 				

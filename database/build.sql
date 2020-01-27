@@ -3406,6 +3406,10 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (28,1)  returning id into returning_team_club_person_id;
 	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
 
+	--insert into availability
+	insert into availability (name) values ('Going');
+	insert into availability (name) values ('Maybe');
+	insert into availability (name) values ('Not Going');
 
 
 RETURN result_set;
