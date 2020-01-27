@@ -222,31 +222,30 @@ class UpcomingScreen extends Screen
 			if (a[0] == 'Practice')
 			{
 				availabilityTxt = a[1];	
-				id = a[2];	
 				
 				if (availabilityTxt == 'available')
 				{
-					APPLICATION.getCurrentScreen().mAvailablePracticeList = id;
-					document.getElementById('Practice_available_' + id).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('Practice_not_' + id).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_maybe_' + id).style.backgroundColor = "#33b5e5"; 		
+					APPLICATION.getCurrentScreen().mAvailablePracticeList = a[2] + ',' + a[3];
+					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#4CAF50"; 		
+					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
 				}
 				if (availabilityTxt == 'not')
 				{
-					APPLICATION.getCurrentScreen().mNotAvailablePracticeList = id;
-					document.getElementById('Practice_available_' + id).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_not_' + id).style.backgroundColor = "red"; 		
-					document.getElementById('Practice_maybe_' + id).style.backgroundColor = "#33b5e5"; 		
+					APPLICATION.getCurrentScreen().mNotAvailablePracticeList = a[2] + ',' + a[3];
+					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "red"; 		
+					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
 				}
 				if (availabilityTxt == 'maybe')
 				{
-					APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = id;
-					document.getElementById('Practice_available_' + id).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_not_' + id).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_maybe_' + id).style.backgroundColor = "yellow"; 		
+					APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = a[2] + ',' + a[3];
+					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "yellow"; 		
 				}
 			}
-
+/*
 			if (a[0] == 'Game')
 			{
 				availabilityTxt = a[1];	
@@ -265,6 +264,7 @@ class UpcomingScreen extends Screen
 					APPLICATION.getCurrentScreen().mMaybeAvailableGameList = id + ',' + a[3];
 				}
 			}
+			*/
 		}
 
 		//send to server
