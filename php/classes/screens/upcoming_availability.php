@@ -44,7 +44,7 @@ class UpcomingAvailability extends Screen
 		{
 			$not_available_games = $_GET['not_available_games'];
 			$txt = 'D';
-			$txt .= $not_available_gmaes;
+			$txt .= $not_available_games;
 			error_log($txt);
 		}
 		if (isset($_GET['maybe_available_practices']))
