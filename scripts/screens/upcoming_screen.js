@@ -1,5 +1,25 @@
 'use strict';
 
+					/*
+					 *
+					 
+					  4 data points
+					  ----------------
+					  game:     1
+					  practice: 2
+
+				          --------------	
+					  available: 1
+					  maybe:     2 
+					  not:       3 
+
+					  ---------------------
+					  game or practice id:
+					 
+					  --------------------
+					  player id:	 
+					  */
+
 class UpcomingScreen extends Screen
 {
         constructor(application)
@@ -171,25 +191,6 @@ class UpcomingScreen extends Screen
 		this.mAvailabilityList = null;
 		this.mAvailabilityArray.length = 0;
 	}
-	    /*
-                                         *
-
-                                          4 data points
-                                          ----------------
-                                          game:     1
-                                          practice: 2
-
-                                          --------------
-                                          available: 1
-                                          maybe:     2
-                                          not:       3
-
-                                          ---------------------
-                                          game or practice id:
-
-                                          --------------------
-                                          player id:
-                                          */
 
 	setOneHit()
 	{
@@ -255,10 +256,10 @@ class UpcomingScreen extends Screen
 
 	updateAvailability()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availabilitye=' + this.mAvailabilityList);
-		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
-
-                APPLICATION.getCurrentScreen().ajax();
+                var screen = APPLICATION.getCurrentScreen();
+		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availabilitye=' + this.mAvailabilityList);
+		console.log('getUrl:' + screen.getUrl());
+                screen.ajax();
 	}
 
         processJsonData()
@@ -313,8 +314,6 @@ class UpcomingScreen extends Screen
 			this.setMessage('You have no events upcoming. Enjoy the time off.', 'black'); 
 		}
 
-		console.log('length:' + this.mEventsArray.length);
-               
 		//print to screen
 		if (this.mEventsArray)
                 {
@@ -338,26 +337,34 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'game')
 					{
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+
+						var button = document.createElement("BUTTON");
+                                                button.setAttribute("class","availability-button");
+                                                button.innerHTML = "Available";
+                                                container.appendChild(button);
+                                                var id = 'button_1_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+                                                button.setAttribute("id", id);
+                                                button.onclick = this.setOneHit.bind(button);
+                                                this.mButtonArray.push(button);
+
+                                                var button = document.createElement("BUTTON");
+                                                button.setAttribute("class","availability-button");
+                                                button.innerHTML = "Maybe Available";
+                                                container.appendChild(button);
+                                                var id = 'button_1_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+                                                button.setAttribute("id", id);
+                                                button.onclick = this.setOneHit.bind(button);
+                                                this.mButtonArray.push(button);
+
+                                                var button = document.createElement("BUTTON");
+                                                button.setAttribute("class","availability-button");
+                                                button.innerHTML = "Not Available";
+                                                container.appendChild(button);
+                                                var id = 'button_1_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
+                                                button.setAttribute("id", id);
+                                                button.onclick = this.setOneHit.bind(button);
+                                                this.mButtonArray.push(button);
 					}
-					/*
-					 *
-					 
-					  4 data points
-					  ----------------
-					  game:     1
-					  practice: 2
-
-				          --------------	
-					  available: 1
-					  maybe:     2 
-					  not:       3 
-
-					  ---------------------
-					  game or practice id:
-					 
-					  --------------------
-					  player id:	 
-					  */
 
 					if (this.mEventsArray[i].type == 'practice')
 					{
