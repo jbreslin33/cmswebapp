@@ -20,20 +20,8 @@ class UpcomingScreen extends Screen
 		this.mEventsArray = new Array();
 
 		//availability
-		this.mAvailablePracticeArray = new Array();
-		this.mAvailableGameArray = new Array();
-		this.mAvailablePracticeList = null;
-		this.mAvailableGameList = null;
-		
-		this.mNotAvailablePracticeArray = new Array();
-		this.mNotAvailableGameArray = new Array();
-		this.mNotAvailablePracticeList = null;
-		this.mNotAvailableGameList = null;
-
-		this.mMaybeAvailablePracticeArray = new Array();
-		this.mMaybeAvailableGameArray = new Array();
-		this.mMaybeAvailablePracticeList = null;
-		this.mMaybeAvailableGameList = null;
+		this.mAvailabilityArray = new Array();
+		this.mAvailabilityList = null;
 
 		//now
                 var current_date = new Date();
@@ -56,28 +44,24 @@ class UpcomingScreen extends Screen
 		this.mLastDayOfQuery = future_date_string;
 	
 		//checkboxes at top for multiple availabilities
-		this.mAvailableButtonArray = new Array();
-		this.mNotAvailableButtonArray = new Array();
-		this.mMaybeAvailableButtonArray = new Array();
-		document.getElementById("upcoming_available_id").onclick = this.upcomingAvailableHit.bind(document.getElementById("upcoming_available_id"));
-		document.getElementById("upcoming_not_available_id").onclick = this.upcomingNotAvailableHit.bind(document.getElementById("upcoming_not_available_id"));
-		document.getElementById("upcoming_maybe_available_id").onclick = this.upcomingMaybeAvailableHit.bind(document.getElementById("upcoming_maybe_available_id"));
+		this.mButtonArray = new Array();
+
+		document.getElementById("upcoming_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_available_id"));
+		document.getElementById("upcoming_not_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_not_available_id"));
+		document.getElementById("upcoming_maybe_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_maybe_available_id"));
         }
 
         get()
         {
 		super.get();
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
-
                 APPLICATION.getCurrentScreen().ajax();
         }
 
 	exit()
 	{
-
 		this.removeDivs();
 		super.exit();
-
 	}
 	
 	removeDivs()
@@ -88,121 +72,104 @@ class UpcomingScreen extends Screen
 		}
 	}
 
-	upcomingAvailableHit()
+	setAllHit()
 	{
-		APPLICATION.getCurrentScreen().resetLists();
-
-		//set this one
-		this.style.backgroundColor = "#4CAF50"; 
-
-		//set others back to blue
-		document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-		document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
-
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mAvailableButtonArray.length; i++)
+		var screen = APPLICATION.getCurrentScreen();
+		screen.resetLists();
+		
+		if (this.id == "upcoming_available_id")
 		{
-			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#4CAF50";
-			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5"; 
-			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
-			var id = APPLICATION.getCurrentScreen().mAvailableButtonArray[i].id.split('_');;
+			//set this one
+			this.style.backgroundColor = "#4CAF50"; 
 
-			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[1]);
-			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[2]);
-			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[3]);
-			APPLICATION.getCurrentScreen().mAvailablePracticeArray.push(id[4]);
+			//set others back to blue
+			document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
+			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+		
+			for (var i = 0; i < screen.mButtonArray.length; i++)
+			{
+				var id = screen.mButtonArray[i].id.split('_');;
+				if (id[2] == 1)
+				{
+					screen.mButtonArray[i].style.backgroundColor = "#4CAF50";
+				}
+				if (id[2] == 2 || id[3] == 3)
+				{
+					screen.mButtonArray[i].style.backgroundColor = "#33b5e5"; 
+				}
+			
+				screen.mAvailabilityArray.push(id[1]);
+				screen.mAvailabilityArray.push(id[2]);
+				screen.mAvailabilityArray.push(id[3]);
+				screen.mAvailabilityArray.push(id[4]);
+			}
 		}
 
-		APPLICATION.getCurrentScreen().mAvailablePracticeList = APPLICATION.getCurrentScreen().mAvailablePracticeArray.join();
-		APPLICATION.getCurrentScreen().mAvailableGameList = APPLICATION.getCurrentScreen().mAvailableGameArray.join();
-		APPLICATION.getCurrentScreen().updateAvailability()
-	}
-	upcomingNotAvailableHit()
-	{
-		APPLICATION.getCurrentScreen().resetLists();
+                if (this.id == "upcoming_maybe_available_id")
+                {
+                        //set this one
+                        this.style.backgroundColor = "yellow";
 
-		//set this one
-		this.style.backgroundColor = "red"; 
-		
-		//set others back to blue
-		document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-		document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
-		
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mNotAvailableButtonArray.length; i++)
-		{
-			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#33b5e5";
-			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "red"; 
-			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
-			var id = APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].id.split('_');;
+                        //set others back to blue
+                        document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
+                        document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
 
-			if (id[0] == 'Practice')
-			{
-				APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[2]);
-				APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.push(id[3]);
-			}
-			if (id[0] == 'Game')
-			{
-				APPLICATION.getCurrentScreen().mNotAvailableGameArray.push(id[2]);
-				APPLICATION.getCurrentScreen().mNotAvailableGameArray.push(id[3]);
-			}
+                        for (var i = 0; i < screen.mButtonArray.length; i++)
+                        {
+                                var id = screen.mButtonArray[i].id.split('_');;
+                                if (id[2] == 2)
+                                {
+                                        screen.mButtonArray[i].style.backgroundColor = "yellow";
+                                }
+                                if (id[2] == 1 || id[3] == 3)
+                                {
+                                        screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
+                                }
 
-		}
-		APPLICATION.getCurrentScreen().mNotAvailablePracticeList = APPLICATION.getCurrentScreen().mNotAvailablePracticeArray.join();
-		APPLICATION.getCurrentScreen().mNotAvailableGameList = APPLICATION.getCurrentScreen().mNotAvailableGameArray.join();
-		APPLICATION.getCurrentScreen().updateAvailability()
+                                screen.mAvailabilityArray.push(id[1]);
+                                screen.mAvailabilityArray.push(id[2]);
+                                screen.mAvailabilityArray.push(id[3]);
+                                screen.mAvailabilityArray.push(id[4]);
+                        }
+                }
 
+		if (this.id == "upcoming_not_available_id")
+                {
+                        //set this one
+                        this.style.backgroundColor = "red";
 
-	}
-	
-	upcomingMaybeAvailableHit()
-	{
-		APPLICATION.getCurrentScreen().resetLists();
+                        //set others back to blue
+                        document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
+                        document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
 
-		//set this one
-		this.style.backgroundColor = "yellow"; 
+                        for (var i = 0; i < screen.mButtonArray.length; i++)
+                        {
+                                var id = screen.mButtonArray[i].id.split('_');;
+                                if (id[2] == 3)
+                                {
+                                        screen.mButtonArray[i].style.backgroundColor = "red";
+                                }
+                                if (id[2] == 1 || id[3] == 2)
+                                {
+                                        screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
+                                }
 
-		//set others back to blue
-		document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-		document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-		
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray.length; i++)
-		{
-			APPLICATION.getCurrentScreen().mAvailableButtonArray[i].style.backgroundColor = "#33b5e5";
-			APPLICATION.getCurrentScreen().mNotAvailableButtonArray[i].style.backgroundColor = "#33b5e5";  
-			APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].style.backgroundColor = "yellow"; 
-			var id = APPLICATION.getCurrentScreen().mMaybeAvailableButtonArray[i].id.split('_');;
+                                screen.mAvailabilityArray.push(id[1]);
+                                screen.mAvailabilityArray.push(id[2]);
+                                screen.mAvailabilityArray.push(id[3]);
+                                screen.mAvailabilityArray.push(id[4]);
+                        }
+                }
 
-			if (id[0] == 'Practice')
-			{
-				APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[2]);
-				APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.push(id[3]);
-			}
-			if (id[0] == 'Game')
-			{
-				APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.push(id[2]);
-				APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.push(id[3]);
-			}
-
-		}
-		APPLICATION.getCurrentScreen().mMaybeAvailablePracticeList = APPLICATION.getCurrentScreen().mMaybeAvailablePracticeArray.join();
-		APPLICATION.getCurrentScreen().mMaybeAvailableGameList = APPLICATION.getCurrentScreen().mMaybeAvailableGameArray.join();
-		APPLICATION.getCurrentScreen().updateAvailability()
+		screen.mAvailabilityList = screen.mAvailabilityArray.join();
+		screen.updateAvailability()
 	}
 
 	resetLists()
 	{
-		this.mAvailablePracticeList = null;
-		this.mAvailableGameList = null;
-		this.mNotAvailablePracticeList = null;
-		this.mNotAvailableGameList = null;
-		this.mMaybeAvailablePracticeList = null;
-		this.mMabyeAvailableGameList = null;
+		this.mAvailabilityList = null;
 
-		this.mAvailablePracticeArray.length = 0;
-		this.mNotAvailablePracticeArray.length = 0;
-		this.mMaybeAvailablePracticeArray.length = 0;
-		this.mAvailableGameArray.length = 0;
-		this.mNotAvailableGameArray.length = 0;
-		this.mMaybeAvailableGameArray.length = 0;
+		this.mAvailabilityArray.length = 0;
 	}
 	    /*
                                          *
@@ -225,37 +192,69 @@ class UpcomingScreen extends Screen
                                           */
 
 
-	availabilitybuttonhit()
+	setOneHit()
 	{
-		APPLICATION.getCurrentScreen().resetLists();
+		var screen = APPLICATION.getCurrentScreen();
+		screen.resetLists();
+
 		var a = this.id.split('_');
 		var id = 0;
 		var availabilityTxt = null;
 		if (a.length > 1)
 		{
-			if (a[0] == 'Practice')
+			//game
+			if (a[1] == 1)
+			{
+				if (a[2] == 1)
+				{
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
+					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+				}
+				if (a[2] == 2)
+				{
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "yellow"; 		
+					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+				}
+				if (a[2] == 3)
+				{
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "red"; 		
+				}
+			}
+
+			//practice
+			if (a[1] == 2)
 			{
 				if (a[2] == 1)
 				{
 					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('Practice_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
 				}
 				if (a[2] == 2)
 				{
-					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "yellow"; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "yellow"; 		
+					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
 				}
 				if (a[2] == 3)
 				{
-					document.getElementById('Practice_available_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('Practice_not_' + a[2] + '_' + a[3]).style.backgroundColor = "red"; 		
-					document.getElementById('Practice_maybe_' + a[2] + '_' + a[3]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "red"; 		
 				}
-				APPLICATION.getCurrentScreen().mList = a[1] + ',' + a[2] + '_' + a[3] + '_' + a[4];
 			}
-/*
+
+			screen.mAvailabilityList = a[1] + ',' + a[2] + '_' + a[3] + '_' + a[4];
+		}
+		//send to server
+		screen.updateAvailability();
+	}
+
+			/*
 			if (a[0] == 'Game')
 			{
 				availabilityTxt = a[1];	
@@ -275,15 +274,10 @@ class UpcomingScreen extends Screen
 				}
 			}
 			*/
-		}
-
-		//send to server
-		APPLICATION.getCurrentScreen().updateAvailability();
-	}
 
 	updateAvailability()
 	{
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&available_practices=' + this.mAvailablePracticeList + '&available_games=' + this.mAvailableGameList + '&not_available_practices=' + this.mNotAvailablePracticeList + '&not_available_games=' + this.mNotAvailableGameList + '&maybe_available_practices=' + this.mMaybeAvailablePracticeList + '&maybe_available_games=' + this.mMaybeAvailableGameList);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availabilitye=' + this.mAvailabilityList);
 		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
 
                 APPLICATION.getCurrentScreen().ajax();
@@ -366,35 +360,6 @@ class UpcomingScreen extends Screen
 					if (this.mEventsArray[i].type == 'game')
 					{
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
-						/*
-
-						var buttonAvailable = document.createElement("BUTTON");
-						buttonAvailable.setAttribute("class","availability-button");
-						buttonAvailable.innerHTML = "Available";
-						container.appendChild(buttonAvailable);
-						var id = 'Game_1_' + this.mEventsArray[i].id;
-  						buttonAvailable.setAttribute("id", id);
-			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
-						this.mAvailableButtonArray.push(buttonAvailable);
-					
-						var buttonNotAvailable = document.createElement("BUTTON");
-						buttonNotAvailable.setAttribute("class","availability-button");
-						buttonNotAvailable.innerHTML = "Not Available";
-						container.appendChild(buttonNotAvailable);
-						var id = 'Game_3_' + this.mEventsArray[i].id;
-  						buttonNotAvailable.setAttribute("id", id);
-			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
-						this.mNotAvailableButtonArray.push(buttonNotAvailable);
-						
-						var buttonMaybeAvailable = document.createElement("BUTTON");
-						buttonMaybeAvailable.setAttribute("class","availability-button");
-						buttonMaybeAvailable.innerHTML = "Maybe Available";
-						container.appendChild(buttonMaybeAvailable);
-						var id = 'Game_2_' + this.mEventsArray[i].id;
-  						buttonMaybeAvailable.setAttribute("id", id);
-			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
-						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
-						*/
 					}
 					/*
 					 *
@@ -416,38 +381,36 @@ class UpcomingScreen extends Screen
 					  player id:	 
 					  */
 
-
-
 					if (this.mEventsArray[i].type == 'practice')
 					{
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 						
-						var buttonAvailable = document.createElement("BUTTON");
-						buttonAvailable.setAttribute("class","availability-button");
-						buttonAvailable.innerHTML = "Available";
-						container.appendChild(buttonAvailable);
+						var button = document.createElement("BUTTON");
+						button.setAttribute("class","availability-button");
+						button.innerHTML = "Available";
+						container.appendChild(button);
 						var id = 'button_2_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						buttonAvailable.setAttribute("id", id);
-			 			buttonAvailable.onclick = this.availabilitybuttonhit.bind(buttonAvailable);
-						this.mAvailableButtonArray.push(buttonAvailable);
-					
-						var buttonMaybeAvailable = document.createElement("BUTTON");
-						buttonMaybeAvailable.setAttribute("class","availability-button");
-						buttonMaybeAvailable.innerHTML = "Maybe Available";
-						container.appendChild(buttonMaybeAvailable);
+  						button.setAttribute("id", id);
+			 			button.onclick = this.setOneHit.bind(button);
+						this.mButtonArray.push(button);
+
+						var button = document.createElement("BUTTON");
+						button.setAttribute("class","availability-button");
+						button.innerHTML = "Maybe Available";
+						container.appendChild(button);
 						var id = 'button_2_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						buttonMaybeAvailable.setAttribute("id", id);
-			 			buttonMaybeAvailable.onclick = this.availabilitybuttonhit.bind(buttonMaybeAvailable);
-						this.mMaybeAvailableButtonArray.push(buttonMaybeAvailable);
+  						button.setAttribute("id", id);
+			 			button.onclick = this.setOneHit.bind(button);
+						this.mButtonArray.push(button);
 						
-						var buttonNotAvailable = document.createElement("BUTTON");
-						buttonNotAvailable.setAttribute("class","availability-button");
-						buttonNotAvailable.innerHTML = "Not Available";
-						container.appendChild(buttonNotAvailable);
+						var button = document.createElement("BUTTON");
+						button.setAttribute("class","availability-button");
+						button.innerHTML = "Not Available";
+						container.appendChild(button);
 						var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						buttonNotAvailable.setAttribute("id", id);
-			 			buttonNotAvailable.onclick = this.availabilitybuttonhit.bind(buttonNotAvailable);
-						this.mNotAvailableButtonArray.push(buttonNotAvailable);
+  						button.setAttribute("id", id);
+			 			button.onclick = this.setOneHit.bind(button);
+						this.mButtonArray.push(button);
 					}
 				}
 				
