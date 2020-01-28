@@ -251,7 +251,7 @@ class UpcomingScreen extends Screen
 				}
 			}
 
-			screen.mAvailabilityList = a[1] + ',' + a[2] + '_' + a[3] + '_' + a[4];
+			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
 		}
 		//send to server
 		screen.updateAvailability();
