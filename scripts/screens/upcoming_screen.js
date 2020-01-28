@@ -91,17 +91,18 @@ class UpcomingScreen extends Screen
 				var id = screen.mButtonArray[i].id.split('_');;
 				if (id[2] == 1)
 				{
+					//give active color and add to array
 					screen.mButtonArray[i].style.backgroundColor = "#4CAF50";
+					screen.mAvailabilityArray.push(id[1]);
+					screen.mAvailabilityArray.push(id[2]);
+					screen.mAvailabilityArray.push(id[3]);
+					screen.mAvailabilityArray.push(id[4]);
 				}
 				if (id[2] == 2 || id[3] == 3)
 				{
 					screen.mButtonArray[i].style.backgroundColor = "#33b5e5"; 
 				}
 			
-				screen.mAvailabilityArray.push(id[1]);
-				screen.mAvailabilityArray.push(id[2]);
-				screen.mAvailabilityArray.push(id[3]);
-				screen.mAvailabilityArray.push(id[4]);
 			}
 		}
 
@@ -119,17 +120,18 @@ class UpcomingScreen extends Screen
                                 var id = screen.mButtonArray[i].id.split('_');;
                                 if (id[2] == 2)
                                 {
+					//give active color and add to array
                                         screen.mButtonArray[i].style.backgroundColor = "yellow";
+                                	screen.mAvailabilityArray.push(id[1]);
+                                	screen.mAvailabilityArray.push(id[2]);
+                                	screen.mAvailabilityArray.push(id[3]);
+                                	screen.mAvailabilityArray.push(id[4]);
                                 }
                                 if (id[2] == 1 || id[3] == 3)
                                 {
                                         screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
 
-                                screen.mAvailabilityArray.push(id[1]);
-                                screen.mAvailabilityArray.push(id[2]);
-                                screen.mAvailabilityArray.push(id[3]);
-                                screen.mAvailabilityArray.push(id[4]);
                         }
                 }
 
@@ -147,17 +149,18 @@ class UpcomingScreen extends Screen
                                 var id = screen.mButtonArray[i].id.split('_');;
                                 if (id[2] == 3)
                                 {
+					//give active color and add to array
                                         screen.mButtonArray[i].style.backgroundColor = "red";
+                                	screen.mAvailabilityArray.push(id[1]);
+                                	screen.mAvailabilityArray.push(id[2]);
+                                	screen.mAvailabilityArray.push(id[3]);
+                                	screen.mAvailabilityArray.push(id[4]);
                                 }
                                 if (id[2] == 1 || id[3] == 2)
                                 {
                                         screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
 
-                                screen.mAvailabilityArray.push(id[1]);
-                                screen.mAvailabilityArray.push(id[2]);
-                                screen.mAvailabilityArray.push(id[3]);
-                                screen.mAvailabilityArray.push(id[4]);
                         }
                 }
 
