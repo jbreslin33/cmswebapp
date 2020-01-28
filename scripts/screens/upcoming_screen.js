@@ -118,7 +118,7 @@ class UpcomingScreen extends Screen
 					screen.mAvailabilityArray.push(id[3]);
 					screen.mAvailabilityArray.push(id[4]);
 				}
-				if (id[2] == 2 || id[3] == 3)
+				if (id[2] == 2 || id[2] == 3)
 				{
 					screen.mButtonArray[i].style.backgroundColor = "#33b5e5"; 
 				}
@@ -136,21 +136,20 @@ class UpcomingScreen extends Screen
 
                         for (var i = 0; i < screen.mButtonArray.length; i++)
                         {
-                                var id = screen.mButtonArray[i].id.split('_');;
+                                var id = screen.mButtonArray[i].id.split('_');
                                 if (id[2] == 2)
                                 {
 					//give active color and add to array
-                                        screen.mButtonArray[i].style.backgroundColor = "yellow";
+                                        screen.mButtonArray[i]style.backgroundColor = "yellow";
                                 	screen.mAvailabilityArray.push(id[1]);
                                 	screen.mAvailabilityArray.push(id[2]);
                                 	screen.mAvailabilityArray.push(id[3]);
                                 	screen.mAvailabilityArray.push(id[4]);
                                 }
-                                if (id[2] == 1 || id[3] == 3)
+                                if (id[2] == 1 || id[2] == 3)
                                 {
                                         screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
-
                         }
                 }
 
@@ -175,7 +174,7 @@ class UpcomingScreen extends Screen
                                 	screen.mAvailabilityArray.push(id[3]);
                                 	screen.mAvailabilityArray.push(id[4]);
                                 }
-                                if (id[2] == 1 || id[3] == 2)
+                                if (id[2] == 1 || id[2] == 2)
                                 {
                                         screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
