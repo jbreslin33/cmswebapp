@@ -102,7 +102,6 @@ class UpcomingScreen extends Screen
 				{
 					screen.mButtonArray[i].style.backgroundColor = "#33b5e5"; 
 				}
-			
 			}
 		}
 
@@ -160,7 +159,6 @@ class UpcomingScreen extends Screen
                                 {
                                         screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
-
                         }
                 }
 
@@ -171,7 +169,6 @@ class UpcomingScreen extends Screen
 	resetLists()
 	{
 		this.mAvailabilityList = null;
-
 		this.mAvailabilityArray.length = 0;
 	}
 	    /*
@@ -193,7 +190,6 @@ class UpcomingScreen extends Screen
                                           --------------------
                                           player id:
                                           */
-
 
 	setOneHit()
 	{
@@ -256,27 +252,6 @@ class UpcomingScreen extends Screen
 		//send to server
 		screen.updateAvailability();
 	}
-
-			/*
-			if (a[0] == 'Game')
-			{
-				availabilityTxt = a[1];	
-				id = a[2];	
-				
-				if (availabilityTxt == 'available')
-				{
-					APPLICATION.getCurrentScreen().mAvailableGameList = id + ',' + a[3];
-				}
-				if (availabilityTxt == 'not')
-				{
-					APPLICATION.getCurrentScreen().mNotAvailableGameList = id + ',' + a[3];
-				}
-				if (availabilityTxt == 'maybe')
-				{
-					APPLICATION.getCurrentScreen().mMaybeAvailableGameList = id + ',' + a[3];
-				}
-			}
-			*/
 
 	updateAvailability()
 	{
