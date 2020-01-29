@@ -1131,10 +1131,11 @@ $$;
 --END INSERT PRACTICE
 
 
-CREATE OR REPLACE PROCEDURE p_update_practice_availability(int,text,int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_update_availability(text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
+	ids INT[];
 		
 BEGIN
 	ids = string_to_array($2,',');
@@ -1152,20 +1153,14 @@ $$;
 CREATE OR REPLACE FUNCTION f_update_availability(int,text)
 RETURNS text AS $$
 DECLARE
-	ids INT[];
-	i integer;
         result_set text;
-
         DECLARE x int := -111;
         json_result text;
-	found_team_club_manager_id team_club_persons_club_managers.id%TYPE;
 BEGIN
         IF $2 is NULL THEN
 	ELSE
 
 		CALL p_update_availability($2,x);
-
-
 
 		--ids = string_to_array($1,',');
 		--string_to_array(users.name, ',')
