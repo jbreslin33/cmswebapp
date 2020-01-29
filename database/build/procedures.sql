@@ -1147,6 +1147,7 @@ BEGIN
   		RAISE LOG 'log message %', ids[i];
 
 		IF ids[i] = 1 THEN
+  			RAISE LOG 'GAME % % %', ids[i + 1], ids[i + 2], ids[i + 3];
 
 		ELSE
 
@@ -1154,6 +1155,7 @@ BEGIN
 		
 		IF ids[i] = 2 THEN
   			RAISE LOG 'PRACTICE % % %', ids[i + 1], ids[i + 2], ids[i + 3];
+
 		ELSE
 
 		END IF;
