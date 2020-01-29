@@ -1136,10 +1136,12 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
 	ids INT[];
+        DECLARE i int := 0;
 		
 BEGIN
 	ids = string_to_array($1,',');
-	FOR i IN 1 .. array_upper(ids, 1)
+
+	FOR i IN 1..array_upper(ids, 1) BY 4
 	
 	LOOP
   		RAISE LOG 'log message %', ids[i];
