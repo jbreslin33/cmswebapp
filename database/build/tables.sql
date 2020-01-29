@@ -834,6 +834,7 @@ CREATE TABLE games_players_availability
 	FOREIGN KEY (game_id) REFERENCES games(id),
 	FOREIGN KEY (team_club_persons_club_players_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
+	UNIQUE (game_id,team_club_persons_club_players_id),
         PRIMARY KEY (id)
 );
 
@@ -841,12 +842,13 @@ CREATE TABLE practices_players_attendance
 (
         id SERIAL,
         practice_id integer NOT NULL,
-       	team_club_player_id integer NOT NULL,
+       	team_club_persons_club_players_id integer NOT NULL,
 	attendance_id integer NOT NULL,
 	created_at timestamp not null default now(),
 	FOREIGN KEY (practice_id) REFERENCES practices(id),
-	FOREIGN KEY (team_club_player_id) REFERENCES team_club_persons_club_players(id),
+	FOREIGN KEY (team_club_persons_club_players_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
+	UNIQUE (practice_id,),
         PRIMARY KEY (id)
 );
 
