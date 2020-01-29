@@ -1141,13 +1141,12 @@ END;
 $$;
 
 
-CREATE OR REPLACE FUNCTION f_update_availability(int,text,text,text,text,text,text)
+CREATE OR REPLACE FUNCTION f_update_availability(int,text)
 RETURNS text AS $$
 DECLARE
 	ids INT[];
 	i integer;
         result_set text;
-
 
         DECLARE x int := -111;
         json_result text;
@@ -1156,7 +1155,7 @@ BEGIN
         IF $2 is NULL THEN
 	ELSE
 		ids = string_to_array($2,',');
-  		RAISE LOG 'first element %', ids[0];
+  		--RAISE LOG 'first element %', ids[0];
 		FOR i IN 1 .. array_upper(ids, 1)
 		
 		LOOP
@@ -1169,27 +1168,8 @@ BEGIN
   		--RAISE LOG 'log message %', now();
 		
 	END IF;
-        
-	IF $3 is NULL THEN
-	ELSE
-	END IF;
 
-	IF $4 is NULL THEN
-	ELSE
-	END IF;
-
-	IF $5 is NULL THEN
-	ELSE
-	END IF;
-
-	IF $6 is NULL THEN
-	ELSE
-	END IF;
-
-	IF $7 is NULL THEN
-	ELSE
-	END IF;
-
+        result_set = f_format_result_set($1,null,-100);
 
 RETURN result_set;
 END;
