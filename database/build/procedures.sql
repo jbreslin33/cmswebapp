@@ -1135,8 +1135,16 @@ CREATE OR REPLACE PROCEDURE p_update_practice_availability(int,text,int,INOUT x 
 LANGUAGE plpgsql
 AS $$
 DECLARE
+		
 BEGIN
-        insert into pitches (club_id,name) values ($1,$2) returning id into x;
+	ids = string_to_array($2,',');
+	FOR i IN 1 .. array_upper(ids, 1)
+	
+	LOOP
+  		RAISE LOG 'log message %', ids[i];
+	END LOOP;
+
+        --insert into pitches (club_id,name) values ($1,$2) returning id into x;
 END;
 $$;
 
@@ -1154,14 +1162,10 @@ DECLARE
 BEGIN
         IF $2 is NULL THEN
 	ELSE
-		ids = string_to_array($2,',');
-  		--RAISE LOG 'first element %', ids[0];
-		FOR i IN 1 .. array_upper(ids, 1)
-		
-		LOOP
-   			--RAISE NOTICE '%', a[i];      -- single quotes!
-  			RAISE LOG 'log message %', ids[i];
-		END LOOP;
+
+		CALL p_update_availability($2,x);
+
+
 
 		--ids = string_to_array($1,',');
 		--string_to_array(users.name, ',')
