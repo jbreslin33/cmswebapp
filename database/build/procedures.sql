@@ -1145,6 +1145,20 @@ BEGIN
 	
 	LOOP
   		RAISE LOG 'log message %', ids[i];
+
+		IF ids[i] = 1 THEN
+
+		ELSE
+
+		END IF;
+		
+		IF ids[i] = 2 THEN
+  			RAISE LOG 'PRACTICE % % %', ids[i + 1], ids[i + 2], ids[i + 3];
+		ELSE
+
+		END IF;
+
+
 	END LOOP;
 
         --insert into pitches (club_id,name) values ($1,$2) returning id into x;
