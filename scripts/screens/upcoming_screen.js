@@ -140,7 +140,7 @@ class UpcomingScreen extends Screen
                                 if (id[2] == 2)
                                 {
 					//give active color and add to array
-                                        screen.mButtonArray[i]style.backgroundColor = "yellow";
+                                        screen.mButtonArray[i].style.backgroundColor = "yellow";
                                 	screen.mAvailabilityArray.push(id[1]);
                                 	screen.mAvailabilityArray.push(id[2]);
                                 	screen.mAvailabilityArray.push(id[3]);
