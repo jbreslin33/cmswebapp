@@ -1138,7 +1138,7 @@ DECLARE
 	ids INT[];
 		
 BEGIN
-	ids = string_to_array($2,',');
+	ids = string_to_array($1,',');
 	FOR i IN 1 .. array_upper(ids, 1)
 	
 	LOOP
