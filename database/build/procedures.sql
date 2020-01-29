@@ -1155,6 +1155,7 @@ BEGIN
 		
 		IF ids[i] = 2 THEN
   			RAISE LOG 'PRACTICE % % %', ids[i + 1], ids[i + 2], ids[i + 3];
+			insert into practices_players_availability (availability_id, practice_id, team_club_persons_club_players_id) values (ids[i + 1], ids[i + 2], ids[i + 3]);  
 
 		ELSE
 
