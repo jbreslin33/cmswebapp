@@ -1144,29 +1144,15 @@ BEGIN
 	FOR i IN 1..array_upper(ids, 1) BY 4
 	
 	LOOP
-  		RAISE LOG 'log message %', ids[i];
-
-		IF ids[i] = 1 THEN
-  			RAISE LOG 'GAME % % %', ids[i + 1], ids[i + 2], ids[i + 3];
-
-		ELSE
-
-		END IF;
-		
 		IF ids[i] = 2 THEN
-  			RAISE LOG 'PRACTICE % % %', ids[i + 1], ids[i + 2], ids[i + 3];
 			insert into practices_players_availability (availability_id, practice_id, team_club_persons_club_players_id) values (ids[i + 1], ids[i + 2], ids[i + 3]) 
 			ON CONFLICT (practice_id, team_club_persons_club_players_id) 
-			--DO UPDATE SET email = EXCLUDED.email || ';' || customers.email;;  
 			DO UPDATE SET availability_id = ids[i + 1], modified = now();   
 		ELSE
 
 		END IF;
 
-
 	END LOOP;
-
-        --insert into pitches (club_id,name) values ($1,$2) returning id into x;
 END;
 $$;
 
@@ -1183,20 +1169,16 @@ BEGIN
 
 		CALL p_update_availability($2,x);
 
-		--ids = string_to_array($1,',');
-		--string_to_array(users.name, ',')
-  		--RAISE LOG 'log message %', now();
-		
+                IF x > 0 THEN
+                        result_set = f_format_result_set($1,null,-100);
+                ELSE
+                        result_set = f_format_result_set($1,'Something went wrong with setting availability. Please try again.',-101);
+                END IF;
 	END IF;
-
-        result_set = f_format_result_set($1,null,-100);
 
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
-
-
 
 
 --BEGIN SELECT PITCHES
