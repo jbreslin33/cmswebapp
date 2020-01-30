@@ -820,6 +820,7 @@ CREATE TABLE practices_players_availability
 	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_club_persons_club_players_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
+	UNIQUE (practice_id,team_club_persons_club_players_id),
         PRIMARY KEY (id)
 );
 
@@ -848,7 +849,7 @@ CREATE TABLE practices_players_attendance
 	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_club_persons_club_players_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (attendance_id) REFERENCES attendance(id),
-	UNIQUE (practice_id,),
+	UNIQUE (practice_id,team_club_persons_club_players_id),
         PRIMARY KEY (id)
 );
 
