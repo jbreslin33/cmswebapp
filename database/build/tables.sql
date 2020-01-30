@@ -816,7 +816,7 @@ CREATE TABLE practices_players_availability
 	team_club_persons_club_players_id integer NOT NULL,
 	availability_id integer NOT NULL,
 	notes text,
-	created_at timestamp not null default now(),
+	modified timestamp not null default now(),
 	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	FOREIGN KEY (team_club_persons_club_players_id) REFERENCES team_club_persons_club_players(id),
 	FOREIGN KEY (availability_id) REFERENCES availability(id),
