@@ -152,7 +152,8 @@ class Application
 		
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(this);
 		
-		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
+		//document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertclubnavbuttonid"));
 
 		//aside
                 this.mAsideMessageElement = null;
@@ -162,7 +163,15 @@ class Application
 	
 	hit()
 	{
-		this.closeNav();	
+		APPLICATION.closeNav();	
+		if (this.id == 'insertclubnavbuttonid')
+		{
+			console.log('add club');
+		}
+		else
+		{
+			console.log('not add club');
+		}
 	}
 
 	//aside
