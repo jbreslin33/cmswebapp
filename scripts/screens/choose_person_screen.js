@@ -29,8 +29,7 @@ class ChoosePersonScreen extends Screen
 
 	hit()
 	{
-		this.mHit = true;
-
+		//why are we sending to server????
 		//just send jwt authorization
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT());
                 APPLICATION.getCurrentScreen().ajax();
@@ -51,10 +50,8 @@ class ChoosePersonScreen extends Screen
 
         execute()
         {
-                this.processData();
-		
-		//do work here
-                this.resetDataVariables();
+		super.execute();
+
 		if (this.mPersonsExist == 0)
 		{
                 	APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
