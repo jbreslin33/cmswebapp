@@ -167,6 +167,7 @@ class Application
 		if (this.id == 'insertclubnavbuttonid')
 		{
 			console.log('add club');
+			location.hash = '#insert_club_screen';
 		}
 		else
 		{
