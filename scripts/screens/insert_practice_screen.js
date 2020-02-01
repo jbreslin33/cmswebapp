@@ -41,7 +41,6 @@ class InsertPracticeScreen extends Screen
 
 	clubSelected()
 	{
-		console.log('club_id:' + this.getClubId());
 		this.getPitchesAndTeams();
 	}
 
@@ -84,7 +83,6 @@ class InsertPracticeScreen extends Screen
 		if (APPLICATION.getJWT())
 		{
                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches_and_teams.php?jwt=" + APPLICATION.getJWT() + "&club_id=" + this.getClubId() + "&person_id=" + this.getPersonId());
-			console.log('url:' + APPLICATION.getCurrentScreen().getUrl());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
