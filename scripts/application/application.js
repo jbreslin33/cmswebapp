@@ -135,24 +135,23 @@ class Application
 		this.setPersonSelect(document.getElementById("person_select_id"));
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
-		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(this);
-		document.getElementById("calendarnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(document.getElementById("upcomingnavbuttonid"));
+		document.getElementById("calendarnavbuttonid").onclick = this.hit.bind(document.getElementById("calendarnavbuttonid"));
 
-		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(document.getElementById("logoutnavbuttonid"));
 		
-		document.getElementById("insertpracticenavbuttonid").onclick = this.hit.bind(this);
-		document.getElementById("insertgamenavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertpracticenavbuttonid").onclick = this.hit.bind(document.getElementById("insertpracticenavbuttonid"));
+		document.getElementById("insertgamenavbuttonid").onclick = this.hit.bind(document.getElementById("insertgamenavbuttonid"));
 		
-		document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(this);
-		document.getElementById("insertpitchnavbuttonid").onclick = this.hit.bind(this);
-		document.getElementById("insertemailclubnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(document.getElementById("insertteamnavbuttonid"));
+		document.getElementById("insertpitchnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpitchnavbuttonid"));
+		document.getElementById("insertemailclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertemailclubnavbuttonid"));
 		
-		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(this);
-		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpersonnavbuttonid"));
+		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(document.getElementById("deletepersonnavbuttonid"));
 		
-		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(this);
+		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(document.getElementById("insertforgotnavbuttonid"));
 		
-		//document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(this);
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertclubnavbuttonid"));
 
 		//aside
@@ -164,14 +163,49 @@ class Application
 	hit()
 	{
 		APPLICATION.closeNav();	
+		if (this.id == 'upcomingnavbuttonid')
+		{
+			location.hash = '#upcoming_screen';
+		}
+		if (this.id == 'calendarnavbuttonid')
+		{
+			location.hash = '#calendar_screen';
+		}
+		if (this.id == 'logoutnavbuttonid')
+		{
+			location.hash = '#logout_screen';
+		}
+		if (this.id == 'insertpracticenavbuttonid')
+		{
+			location.hash = '#insert_practice_screen';
+		}
+		if (this.id == 'insertgamenavbuttonid')
+		{
+			location.hash = '#insert_game_screen';
+		}
+		if (this.id == 'insertteamnavbuttonid')
+		{
+			location.hash = '#insert_team_screen';
+		}
+		if (this.id == 'insertpitchnavbuttonid')
+		{
+			location.hash = '#insert_pitch_screen';
+		}
+		if (this.id == 'insertemailclubnavbuttonid')
+		{
+			location.hash = '#insert_email_club_screen';
+		}
+		if (this.id == 'insertpersonnavbuttonid')
+		{
+			location.hash = '#insert_person_screen';
+		}
+		if (this.id == 'deletepersonnavbuttonid')
+		{
+			location.hash = '#delete_person_screen';
+		}
 		if (this.id == 'insertclubnavbuttonid')
 		{
-			console.log('add club');
 			location.hash = '#insert_club_screen';
-		}
-		else
-		{
-			console.log('not add club');
 		}
 	}
 
