@@ -1,9 +1,9 @@
-delete from club_emails;
-delete from team_club_persons_club_players;
-delete from club_players;
-delete from team_club_persons_club_administrators;
-delete from club_administrators;
-delete from team_club_persons_club_players;
+delete from club_emails where club_id = 1;
+delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = 1;
+delete from club_players using club_persons where club_persons.club_id = 1;
+delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = 1;
+delete from club_administrators using club_persons where club_persons.club_id = 1;
+delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = 1;
 
 delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = 1;
 
