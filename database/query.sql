@@ -1,3 +1,11 @@
+delete from club_emails;
+delete from team_club_persons_club_players;
+delete from club_players;
+delete from team_club_persons_club_administrators;
+delete from club_administrators;
+delete from team_club_persons_club_players;
+delete from team_club_persons_club_administrators;
+delete from team_club_persons_club_managers;
 
 
 delete from team_club_persons using club_persons where club_persons.club_id = 1;
