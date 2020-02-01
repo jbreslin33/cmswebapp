@@ -382,7 +382,6 @@ class Screen
 	{
 		if (this.getNavigationBar())
 		{
-			console.log('hide bar');
                 	this.getNavigationBar().style.display = "none";
 		}
 	}
@@ -530,13 +529,10 @@ class Screen
 				this.mCode = this.mJson.codes[i].code;
 			}
 			//definite success so send to upcoming
-			console.log('code:' + this.mCode);
 			if (this.mCode == '-100') 
 			{
-				console.log('this.mApplication.mUserSelectedPerson:' + this.mApplication.mUserSelectedPerson)
 				if (this.mApplication.mUserSelectedPerson)
 				{
-					console.log('if');
 					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mUPCOMING_APPLICATION)
 					{
 						if (this.mApplication.mStateMachine.currentState() != this.mApplication.mCALENDAR_APPLICATION)
@@ -547,7 +543,6 @@ class Screen
 				}
 				else
 				{
-					console.log('else');
 					if (this.mApplication.mStateMachine.currentState() != this.mApplication.mCHOOSE_PERSON_APPLICATION)
 					{
                                 		this.mApplication.mStateMachine.changeState(this.mApplication.mCHOOSE_PERSON_APPLICATION);
