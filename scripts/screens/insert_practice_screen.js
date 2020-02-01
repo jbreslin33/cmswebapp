@@ -32,6 +32,16 @@ class InsertPracticeScreen extends Screen
                 this.setRecurringCheckbox(document.getElementById("insert_practice_screen_recurring_id"));
 		this.setDateHtml(document.getElementById("insert_practice_screen_date_html_id"));
 		this.getRecurringCheckbox().onclick = this.recurringCheckboxClicked.bind(this);
+
+		//club select
+                //this.setPersonSelect(document.getElementById("person_select_id"));
+                this.getClubSelect().onchange = this.clubSelected.bind(this);
+
+	}
+
+	clubSelected()
+	{
+		console.log('club_id:' + this.getClubId());
 	}
 
 	//overides
@@ -73,6 +83,7 @@ class InsertPracticeScreen extends Screen
 		if (APPLICATION.getJWT())
 		{
                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches_and_teams.php?jwt=" + APPLICATION.getJWT() + "&club_id=" + this.getClubId() + "&person_id=" + this.getPersonId());
+			console.log('url:' + APPLICATION.getCurrentScreen().getUrl());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
