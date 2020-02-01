@@ -25,7 +25,15 @@ class InsertGameScreen extends Screen
 
 		//checkbox
 		this.setDateHtml(document.getElementById("insert_game_screen_date_html_id"));
-	}
+
+                //club select
+                this.getClubSelect().onchange = this.clubSelected.bind(this);
+        }
+
+        clubSelected()
+        {
+                this.getPitchesAndTeams();
+        }
 
 	processClubs()
         {

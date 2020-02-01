@@ -34,9 +34,7 @@ class InsertPracticeScreen extends Screen
 		this.getRecurringCheckbox().onclick = this.recurringCheckboxClicked.bind(this);
 
 		//club select
-                //this.setPersonSelect(document.getElementById("person_select_id"));
                 this.getClubSelect().onchange = this.clubSelected.bind(this);
-
 	}
 
 	clubSelected()
