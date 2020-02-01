@@ -5,7 +5,8 @@ delete from team_club_persons_club_administrators;
 delete from club_administrators;
 delete from team_club_persons_club_players;
 delete from team_club_persons_club_administrators;
-delete from team_club_persons_club_managers;
+
+delete from team_club_persons_club_managers using club_managers, club_persons  where club_persons.club_id = 1;
 
 
 delete from team_club_persons using club_persons where club_persons.club_id = 1;
