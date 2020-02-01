@@ -42,6 +42,7 @@ class InsertPracticeScreen extends Screen
 	clubSelected()
 	{
 		console.log('club_id:' + this.getClubId());
+		this.getPitchesAndTeams();
 	}
 
 	//overides
