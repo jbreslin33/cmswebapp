@@ -15,6 +15,19 @@ class LoginScreen extends Screen
                 this.setSpinner(document.getElementById("login_screen_spinner_id"));
                 
 		this.setForm(document.getElementById("login_screen_form_id"));
+
+		//login native
+		/*
+	  	<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+                <input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+		*/
+		document.getElementById("login_screen_email_id").addEventListener("keyup",this.keyHitUp.bind(this));
+
+
+	}
+	keyHitUp()
+	{
+		console.log('hit key');		
 	}
 
 	hit()
