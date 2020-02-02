@@ -21,16 +21,15 @@ class UpdateForgotPasswordScreen extends Screen
 
 	hit()
 	{
-		this.mHit = true;
-
 		//get vars
                	this.mPassword1 = document.getElementById("update_forgot_password_screen_password1_id").value;
                	this.mPassword2 = document.getElementById("update_forgot_password_screen_password2_id").value;
                 
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/update_forgot_password.php?&forgot_password_token=" + this.mApplication.mForgotPasswordToken + "&password=" + this.mPassword1 + "&email=" + this.mApplication.mForgotPasswordEmail); 
+		console.log('url:' + APPLICATION.getCurrentScreen().getUrl());
                 APPLICATION.getCurrentScreen().ajax();
 	}
-        
+       /* 
 	checkValidity()
 	{
 		var form = APPLICATION.getCurrentScreen().getForm();
@@ -53,4 +52,5 @@ class UpdateForgotPasswordScreen extends Screen
 			}
 		}
 	}
+	*/
 }
