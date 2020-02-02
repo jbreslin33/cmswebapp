@@ -14,7 +14,7 @@ class InsertEmailScreen extends Screen
                 //create mail
                 $email = $_GET['email'];
                 $this->mSubject = "Join Club Management System Link";
-                $this->mAbsoluteURL = "http://elacore.org/#insert_native_login_screen&";
+                $this->mAbsoluteURL = "http://footballhome.org/#insert_native_login_screen&";
                 $token = $this->getToken();
 
                 $this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([

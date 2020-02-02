@@ -32,7 +32,7 @@ class UpdateForgotPassword extends Screen
 		//mail that you changed password
                	$this->mEmail = $email;
                	$this->mSubject = "Password has been changed.";
-               	$this->mURL = "http://elacore.org/#insert_forgot_password_screen";
+               	$this->mURL = "http://footballhome.org/#insert_forgot_password_screen";
 		$this->mBody = "You have recently changed your password. If this was not you. Click here: ";
 		$this->mBody .= $this->mURL;
 

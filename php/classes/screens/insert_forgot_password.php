@@ -14,7 +14,7 @@ class InsertForgotPassword extends Screen
 		//create mail
 		$email = $_GET['email'];
 		$this->mSubject = "Forgot Password Link";
-		$this->mAbsoluteURL = "http://elacore.org/#update_forgot_password_screen&";
+		$this->mAbsoluteURL = "http://footballhome.org/#update_forgot_password_screen&";
 		$this->mForgotPasswordToken = bin2hex(random_bytes(32));
 		
 		$this->mUrl = sprintf('%s%s', $this->mAbsoluteURL, http_build_query([
