@@ -1352,10 +1352,11 @@ DECLARE
 	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
 
-	select id found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $3;
-	IF found_club_administrators_id > 0 THEN
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
 
-		CALL p_delete_club($2,x);
+	IF found_club_administrator_id > 0 THEN
+
+		CALL p_delete_club($3,x);
 
                	IF x > 0 THEN
                 	result_set = f_format_result_set($1,null,-100);
