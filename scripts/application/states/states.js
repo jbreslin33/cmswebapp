@@ -105,6 +105,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
                 }
+		else if (location.hash == '#delete_club_screen' && app.mStateMachine.mCurrentState != app.mDELETE_CLUB_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mDELETE_CLUB_APPLICATION);
+              	} 
 	}
 
         exit(application)
@@ -164,6 +168,11 @@ class INIT_APPLICATION extends State
 		if (application.getInsertClubScreenHtml())
 		{
 			application.getInsertClubScreenHtml().style.display = "none";
+		}
+		
+		if (application.getDeleteClubScreenHtml())
+		{
+			application.getDeleteClubScreenHtml().style.display = "none";
 		}
 		
 		if (application.getInsertPersonScreenHtml())
@@ -773,7 +782,6 @@ class INSERT_NATIVE_LOGIN_SCREEN_APPLICATION extends State
 	}
 }
 
-
 class DELETE_PERSON_APPLICATION extends State
 {
 	constructor() 
@@ -807,6 +815,45 @@ class DELETE_PERSON_APPLICATION extends State
 		if (app.mStateLogs || app.mStateExitLogs)
 		{
 			console.log("DELETE_PERSON_APPLICATION: EXIT");        
+		}
+		
+		app.getCurrentScreen().exit();
+	}
+}
+
+class DELETE_CLUB_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("DELETE_CLUB_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new DeleteClubScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("DELETE_CLUB_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("DELETE_CLUB_APPLICATION: EXIT");        
 		}
 		
 		app.getCurrentScreen().exit();

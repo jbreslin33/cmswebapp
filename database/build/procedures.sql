@@ -1341,7 +1341,57 @@ BEGIN
 	delete from persons where id = $1 returning id into x;
 END;
 $$;
---END INSERT PERSON
+--END DELETE PERSON
+
+--BEGIN DELETE CLUB
+CREATE OR REPLACE FUNCTION f_delete_club(int, int, int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+	DECLARE x int := -111;
+	found_club_administrator_id club_administrators.id%TYPE;
+BEGIN
+
+	select id found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $3;
+	IF found_club_administrators_id > 0 THEN
+
+		CALL p_delete_club($2,x);
+
+               	IF x > 0 THEN
+                	result_set = f_format_result_set($1,null,-100);
+                ELSE
+                	result_set = f_format_result_set($1,'Something went wrong while trying to delete club. Sorry.',-101);
+                END IF;
+	ELSE
+		result_set = f_format_result_set($1,'You do not have permission to delete this club. Only a club administrator can delete a club.',-101);
+	END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE p_delete_club(int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+	delete from club_emails where club_id = $1;
+	delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
+	delete from club_players using club_persons where club_persons.club_id = $1;
+	delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
+	delete from club_administrators using club_persons where club_persons.club_id = $1;
+	delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
+	delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
+	delete from team_club_persons_club_managers using club_managers, club_persons  where club_persons.club_id = $1;
+	delete from team_club_persons using club_persons where club_persons.club_id = $1;
+	delete from club_managers using club_persons where club_persons.club_id = $1;
+	delete from club_persons where club_id = $1;
+	delete from teams where club_id = $1;
+	delete from pitches where club_id = $1;
+	delete from clubs where id = $1 returning id into x;
+END;
+$$;
+--END DELETE PERSON
 
 --email_id,club_id,person_id,club_persons_id,name
 CREATE OR REPLACE PROCEDURE p_insert_team(int,text,int,INOUT x int)

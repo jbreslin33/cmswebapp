@@ -107,6 +107,7 @@
                                 <div class="btn-group">
 
                                 	<button id="insertclubnavbuttonid" formaction="#insert_club_screen">Add Club</button>
+                                        <button id="deleteclubnavbuttonid" formaction="#delete_club_screen">Delete Club</button>
 
                                 </div>
 
@@ -444,6 +445,35 @@ e
 				</div>
 
         			<!-- END DELETE PERSON HTML  -->
+
+                                <!-- DELETE CLUB HTML  -->
+
+                                <div id="delete_club_screen_html_id">
+
+                                        <div class="card">
+
+                                                <div class="container">
+
+                                                        <form>
+
+                                                                <label for="delete_club_screen_select_id">Club</label>
+                                                                <select id="delete_club_screen_select_id" class="form-control">
+                                                                </select>
+
+                                                                <div id="delete_club_screen_spinner_id">
+                                                                        <span class="sr-only">Loading...</span>
+                                                                </div>
+
+                                                                <span id='delete_club_screen_message_id'></span>
+
+                                                                <button id="deleteclubscreenbuttonid">Submit</button>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <!-- END DELETE CLUB HTML  -->
+
 
 				<!-- INSERT TEAM HTML  -->
         			<div id="insert_team_screen_html_id">
@@ -892,6 +922,9 @@ e
 	
 	<!-- delete person -->
 	<script src="scripts/screens/delete_person_screen.js"></script>
+	
+	<!-- delete club -->
+	<script src="scripts/screens/delete_club_screen.js"></script>
 	
 	<!-- insert team -->
 	<script src="scripts/screens/insert_team_screen.js"></script>

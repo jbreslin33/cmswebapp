@@ -54,6 +54,7 @@ class Application
                	this.setUpcomingScreenHtml                 ( document.getElementById("upcoming_screen_html_id")                  );
                	this.setCalendarScreenHtml                 ( document.getElementById("calendar_screen_html_id")                  );
                	this.setInsertClubScreenHtml        	   ( document.getElementById("insert_club_screen_html_id")               ); 
+               	this.setDeleteClubScreenHtml               ( document.getElementById("delete_club_screen_html_id")             );  
                	this.setInsertPersonScreenHtml             ( document.getElementById("insert_person_screen_html_id")             );  
                	this.setDeletePersonScreenHtml             ( document.getElementById("delete_person_screen_html_id")             );  
                	this.setInsertTeamScreenHtml               ( document.getElementById("insert_team_screen_html_id")               ); 
@@ -111,6 +112,7 @@ class Application
 		this.mCHOOSE_PERSON_APPLICATION        = new CHOOSE_PERSON_APPLICATION();
 		this.mLOGOUT_APPLICATION           = new LOGOUT_APPLICATION();
 		this.mINSERT_CLUB_APPLICATION        = new INSERT_CLUB_APPLICATION();
+		this.mDELETE_CLUB_APPLICATION        = new DELETE_CLUB_APPLICATION();
 		this.mINSERT_PERSON_APPLICATION        = new INSERT_PERSON_APPLICATION();
 		this.mDELETE_PERSON_APPLICATION        = new DELETE_PERSON_APPLICATION();
 		this.mINSERT_TEAM_APPLICATION        = new INSERT_TEAM_APPLICATION();
@@ -153,6 +155,7 @@ class Application
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(document.getElementById("insertforgotnavbuttonid"));
 		
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertclubnavbuttonid"));
+		document.getElementById("deleteclubnavbuttonid").onclick = this.hit.bind(document.getElementById("deleteclubnavbuttonid"));
 
 		//aside
                 this.mAsideMessageElement = null;
@@ -206,6 +209,10 @@ class Application
 		if (this.id == 'insertclubnavbuttonid')
 		{
 			location.hash = '#insert_club_screen';
+		}
+		if (this.id == 'deleteclubnavbuttonid')
+		{
+			location.hash = '#delete_club_screen';
 		}
 	}
 
@@ -464,6 +471,15 @@ class Application
         getInsertClubScreenHtml()
 	{
                return this.mInsertClubScreenHtml;
+	}
+        
+	setDeleteClubScreenHtml(h)
+	{
+                this.mDeleteClubScreenHtml = h;
+	}
+        getDeleteClubScreenHtml()
+	{
+               return this.mDeleteClubScreenHtml;
 	}
 
         setInsertPersonScreenHtml(h)
