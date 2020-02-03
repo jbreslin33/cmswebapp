@@ -10,6 +10,7 @@ class LoginScreen extends Screen
 
 		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hitLogin.bind(this));
 		document.getElementById("insertforgotnavbuttonid").addEventListener("click",this.hitForgotPassword.bind(this));
+		document.getElementById("signupnavbuttonid").addEventListener("click",this.hitSignUp.bind(this));
 
                 this.setHtml(document.getElementById("login_screen_html_id"));
                	this.setMessageElement(document.getElementById("login_screen_message_id"));
@@ -20,6 +21,15 @@ class LoginScreen extends Screen
 		document.getElementById('insert_forgot_password_nav_form_id').addEventListener('submit', function(e) {
     			e.preventDefault();	
 		});			
+		
+		document.getElementById('login_screen_sign_up_form_id').addEventListener('submit', function(e) {
+    			e.preventDefault();	
+		});			
+	}
+
+	hitSignUp()
+	{
+		location.hash = "insert_email_screen";
 	}
 
 	hitForgotPassword()

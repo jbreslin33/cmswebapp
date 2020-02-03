@@ -20,6 +20,11 @@ class InsertEmailScreen extends Screen
 		this.setForm(document.getElementById("insert_email_screen_form_id"));
 
 		this.setLoginLink(document.getElementById("insert_email_screen_login_id"));
+
+                this.getForm().addEventListener('submit', function(e) 
+		{
+                        e.preventDefault();
+                });
 	}
 
 	hit()
