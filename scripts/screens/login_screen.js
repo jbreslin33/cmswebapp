@@ -22,12 +22,26 @@ class LoginScreen extends Screen
                 <input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
 		*/
 		document.getElementById("login_screen_email_id").addEventListener("keyup",this.keyHitUp.bind(this));
+		document.getElementById("login_screen_password_id").addEventListener("keyup",this.keyHitUp.bind(this));
+		
+		//document.getElementById("login_screen_form_id").addEventListener("onsubmit",this.formSubmit.bind(this));
+		document.getElementById('login_screen_form_id').addEventListener('submit', function(e) {
+    			e.preventDefault();
+		});
 
 
 	}
+	formSubmit()
+	{
+		console.log('formSub');
+	}
+
 	keyHitUp()
 	{
-		console.log('hit key');		
+		if (event.keyCode == 13)
+		{
+			this.hit(this);
+		}
 	}
 
 	hit()
