@@ -21,10 +21,17 @@ class InsertEmailScreen extends Screen
 
 		this.setLoginLink(document.getElementById("insert_email_screen_login_id"));
 
+		document.getElementById("insert_email_screen_email_id").addEventListener("keyup",this.keyHitUp.bind(this));
+
                 this.getForm().addEventListener('submit', function(e) 
 		{
                         e.preventDefault();
                 });
+	}
+
+	keyHitUp()
+	{
+
 	}
 
 	hit()
@@ -35,17 +42,6 @@ class InsertEmailScreen extends Screen
 		this.ajax();
 		this.hideAfterHit()
 	}
-
-        enter()
-        {
-                super.enter();
-                //this.hideNavigationBar();
-        }
-        exit()
-        {
-                //this.showNavigationBar();
-                super.exit();
-        }
 
         processCodes()
         {
