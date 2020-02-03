@@ -16,19 +16,18 @@ class LoginScreen extends Screen
                 
 		this.setForm(document.getElementById("login_screen_form_id"));
 
-		//overide submit so we dont reload page
-		document.getElementById('login_screen_form_id').addEventListener('submit', function(e) 
-		{
-    			e.preventDefault();
-		});
-	}
+		//login native
+		/*
+	  	<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
+                <input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+		*/
+		document.getElementById("login_screen_email_id").addEventListener("keyup",this.keyHitUp.bind(this));
 
+
+	}
 	keyHitUp()
 	{
-		if (event.keyCode == 13)
-		{
-			this.hit(this);
-		}
+		console.log('hit key');		
 	}
 
 	hit()

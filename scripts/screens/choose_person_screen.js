@@ -19,13 +19,6 @@ class ChoosePersonScreen extends Screen
 
 		this.mPersonsExists = -1;
 
-		//overide submit so we dont reload page
-                document.getElementById('choose_person_screen_form_id').addEventListener('submit', function(e)
-                {
-                        e.preventDefault();
-                });
-
-
 	}
 
 	get()
