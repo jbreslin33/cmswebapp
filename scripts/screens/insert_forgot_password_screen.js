@@ -14,12 +14,15 @@ class InsertForgotPasswordScreen extends Screen
                 this.setMessageElement(document.getElementById("insert_forgot_password_screen_message_id"));
                 this.setForm(document.getElementById("insert_forgot_password_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_forgot_password_screen_spinner_id"));
+
+                this.getForm().addEventListener('submit', function(e) 
+		{
+                        e.preventDefault();
+                });
 	}
 
 	hit()
 	{
-		this.mHit = true;
-
       		var email  = document.getElementById("insert_forgot_password_screen_email_id").value;
 
 		//no need to send any more info
