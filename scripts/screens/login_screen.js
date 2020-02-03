@@ -8,7 +8,8 @@ class LoginScreen extends Screen
 	
     		location.hash = 'login_screen';
 
-		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hit.bind(this));
+		document.getElementById("loginscreenbuttonid").addEventListener("click",this.hitLogin.bind(this));
+		document.getElementById("insertforgotnavbuttonid").addEventListener("click",this.hitForgotPassword.bind(this));
 
                 this.setHtml(document.getElementById("login_screen_html_id"));
                	this.setMessageElement(document.getElementById("login_screen_message_id"));
@@ -16,21 +17,17 @@ class LoginScreen extends Screen
                 
 		this.setForm(document.getElementById("login_screen_form_id"));
 
-		//login native
-		/*
-	  	<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
-                <input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
-		*/
-		document.getElementById("login_screen_email_id").addEventListener("keyup",this.keyHitUp.bind(this));
-
-
+		document.getElementById('insert_forgot_password_nav_form_id').addEventListener('submit', function(e) {
+    			e.preventDefault();	
+		});			
 	}
-	keyHitUp()
+
+	hitForgotPassword()
 	{
-		console.log('hit key');		
+		location.hash = "insert_forgot_password_screen";
 	}
 
-	hit()
+	hitLogin()
 	{
                 this.mEmail    = document.getElementById("login_screen_email_id").value;
                 this.mPassword  = document.getElementById("login_screen_password_id").value;
@@ -39,6 +36,7 @@ class LoginScreen extends Screen
 
 		this.ajax();
 	}
+
 
 	enter()
 	{
