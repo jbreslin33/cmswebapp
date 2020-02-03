@@ -288,10 +288,12 @@ class Application
                 	{
                         	this.getLoggedOutHeaderHtml().style.display = "block";
                         	this.getLoggedOutHeaderHtml().style.visibility = "visible";
+				console.log('show logged out');
                 	}
                 	if (this.getLoggedInHeaderHtml())
                 	{
                         	this.getLoggedInHeaderHtml().style.display = "none";
+				console.log('hide logged in');
                 	}
 		}
         }
