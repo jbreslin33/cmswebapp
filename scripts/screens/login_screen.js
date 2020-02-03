@@ -24,16 +24,11 @@ class LoginScreen extends Screen
 		document.getElementById("login_screen_email_id").addEventListener("keyup",this.keyHitUp.bind(this));
 		document.getElementById("login_screen_password_id").addEventListener("keyup",this.keyHitUp.bind(this));
 		
-		//document.getElementById("login_screen_form_id").addEventListener("onsubmit",this.formSubmit.bind(this));
 		document.getElementById('login_screen_form_id').addEventListener('submit', function(e) {
     			e.preventDefault();
 		});
 
 
-	}
-	formSubmit()
-	{
-		console.log('formSub');
 	}
 
 	keyHitUp()
