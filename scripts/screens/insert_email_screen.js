@@ -34,36 +34,40 @@ class InsertEmailScreen extends Screen
 		this.ajax();
 		this.hideAfterHit()
 	}
-
+/*
         processCodes()
         {
-                if (this.mJson.codes)
+                super.processCodes();
+
+                if (this.mCode == '-101')
                 {
-                        var code = 0;
-                        for (var i = 0; i < this.mJson.codes.length; i++)
+                        this.hideForm();
+                }
+        }
+*/
+        processCodes()
+        {
+                super.processCodes();
+                
+		//definite success so send to upcoming
+                if (this.mCode == '-101')
+                {
+                	if (this.mApplication.mStateMachine.currentState() == this.mApplication.mUPCOMING_APPLICATION)
                         {
-                                code = this.mJson.codes[i].code;
+                                //do nothing
                         }
-                        //definite success so send to upcoming
-                        if (code == '-100')
+                        else
                         {
-                                if (this.mApplication.mStateMachine.currentState() == this.mApplication.mUPCOMING_APPLICATION)
-                                {
-                                        //do nothing
-                                }
-                                else
-                                {
-                                        this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
-                                }
+                                this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
                         }
-                        else if (code == '-101')
-                        {
-				this.hideLogin();
-                        }
-                        else if (code == '-102')
-                        {
-				this.showLogin();
-			}
+               	}
+                else if (this.mCode == '-101')
+               	{
+			this.hideLogin();
+                }
+                else if (this.mCode == '-102')
+                {
+			this.showLogin();
                 }
         }
 
