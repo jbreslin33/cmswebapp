@@ -8,8 +8,6 @@ class ChoosePersonScreen extends Screen
 
                 location.hash = 'choose_person_screen';
 
-                document.getElementById("choosepersonscreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("choose_person_screen_html_id"));
                 this.setMessageElement(document.getElementById("choose_person_screen_message_id"));
                 this.setForm(document.getElementById("choose_person_screen_form_id"));
