@@ -19,6 +19,12 @@ class LoginScreen extends Screen
                         e.preventDefault();
                         APPLICATION.getCurrentScreen().hitLogin();
                 });
+                
+		document.getElementById('login_screen_form_forgot_password_id').addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hitForgotPassword();
+                });
 	}
 	
 	hitLogin()
@@ -30,7 +36,11 @@ class LoginScreen extends Screen
 
 		this.ajax();
 	}
-
+	
+	hitForgotPassword()
+	{
+		location.hash = 'insert_forgot_password_screen';
+	}
 
 	enter()
 	{
