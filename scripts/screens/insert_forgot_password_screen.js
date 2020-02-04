@@ -8,8 +8,6 @@ class InsertForgotPasswordScreen extends Screen
 
 		location.hash = 'insert_forgot_password_screen';
 		
-		document.getElementById("insertforgotpasswordscreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("insert_forgot_password_screen_html_id"));
                 this.setMessageElement(document.getElementById("insert_forgot_password_screen_message_id"));
                 this.setForm(document.getElementById("insert_forgot_password_screen_form_id"));
@@ -18,6 +16,7 @@ class InsertForgotPasswordScreen extends Screen
                 this.getForm().addEventListener('submit', function(e) 
 		{
                         e.preventDefault();
+			APPLICATION.getCurrentScreen().hit();
                 });
 	}
 
