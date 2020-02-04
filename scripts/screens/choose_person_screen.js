@@ -19,6 +19,11 @@ class ChoosePersonScreen extends Screen
 
 		this.mPersonsExists = -1;
 
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
 	}
 
 	get()
