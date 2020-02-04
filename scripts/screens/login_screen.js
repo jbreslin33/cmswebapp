@@ -20,6 +20,12 @@ class LoginScreen extends Screen
                         APPLICATION.getCurrentScreen().hitLogin();
                 });
                 
+		document.getElementById('login_screen_form_signup_id').addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hitSignUp();
+                });
+		
 		document.getElementById('login_screen_form_forgot_password_id').addEventListener('submit', function(e)
                 {
                         e.preventDefault();
@@ -35,6 +41,11 @@ class LoginScreen extends Screen
 		this.setUrl("/php/classes/screens/native_login.php?email=" + this.mEmail + "&password=" + this.mPassword); 
 
 		this.ajax();
+	}
+
+	hitSignUp()
+	{
+		location.hash = 'insert_email_screen';
 	}
 	
 	hitForgotPassword()
