@@ -14,14 +14,18 @@ class InsertNativeLoginScreen extends Screen
 		this.mPassword1 = null;
 		this.mPassword2 = null;
 
-		document.getElementById("insertnativeloginscreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setMessageElement(document.getElementById("insert_native_login_screen_message_id"));
 		this.setHtml(document.getElementById("insert_native_login_screen_html_id"));
 		this.setSpinner(document.getElementById("insert_native_login_screen_spinner_id"));
 		this.setForm(document.getElementById("insert_native_login_screen_form_id"));
 
 		this.setLoginLink(document.getElementById("insert_native_login_screen_login_id"));
+
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
 	}
 
 	hit()
