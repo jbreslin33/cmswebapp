@@ -8,12 +8,17 @@ class InsertPersonScreen extends Screen
 
                 location.hash = 'insert_person_screen';
 
-		document.getElementById("insertpersonscreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("insert_person_screen_html_id"));
                 this.setMessageElement(document.getElementById("insert_person_screen_message_id"));
                 this.setForm(document.getElementById("insert_person_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_person_screen_spinner_id"));
+
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
+
 	}
 
 	hit()
@@ -25,7 +30,6 @@ class InsertPersonScreen extends Screen
                	var address = document.getElementById("insert_person_screen_address_id").value;
 
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_person.php?" + this.getStandardParameters() + "&first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName + "&phone=" + phone + "&address=" + address); 
-		console.log('getUrl:' + APPLICATION.getCurrentScreen().getUrl());
                 APPLICATION.getCurrentScreen().ajax();
 	}
 }
