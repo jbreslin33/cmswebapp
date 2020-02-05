@@ -1600,10 +1600,13 @@ BEGIN
 	ELSE
 		CALL p_insert_email($1,x);
 		IF x > 0 THEN 
+
 			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
+  				RAISE LOG 'IF A log message %', x;
 				result_set = f_format_result_set(x,'We sent you a link to your email to finish joining.',-101);
 			ELSE
+				RAISE LOG 'ELSE A log message %', x;
 				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
 			END IF;
 		ELSE

@@ -7,6 +7,7 @@ class InsertEmailScreen extends Screen
                 super(application);
 
 		location.hash = 'insert_email_screen';
+		console.log('here');
 
 		//sql php vars
 		this.mEmail = null;
@@ -52,6 +53,7 @@ class InsertEmailScreen extends Screen
 		//definite success so send to upcoming
                 if (this.mCode == '-101')
                 {
+			/*
                 	if (this.mApplication.mStateMachine.currentState() == this.mApplication.mUPCOMING_APPLICATION)
                         {
                                 //do nothing
@@ -60,11 +62,14 @@ class InsertEmailScreen extends Screen
                         {
                                 this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
                         }
+			*/
                	}
+		/*
                 else if (this.mCode == '-101')
                	{
 			this.hideLogin();
                 }
+		*/
                 else if (this.mCode == '-102')
                 {
 			this.showLogin();
