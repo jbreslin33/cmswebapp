@@ -42,6 +42,8 @@ button:hover
 .calendar-button
 {
 	font-size: 23px;
+	width: 33%;
+	float: left;
 }
 
 .calendar-event-button
@@ -58,6 +60,14 @@ button:hover
 }
 
 .availability-button
+{
+	float: left;
+	width: 33%;
+}
+
+/******************** PARAGRAPHS *******************/
+
+#calendar_month_p_html_id
 {
 	float: left;
 	width: 33%;
