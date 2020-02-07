@@ -1,3 +1,5 @@
+insert practice and prob insert game reloads screen
+----------------
 Use a <span class="link" ng-click="forgotPassword()"> tag. Style it with text-decoration: underline; cursor: pointer;, the color you like, etc.
 ------------
 we will call get on load but then everytime you hit forward or back button we will call get
