@@ -367,11 +367,11 @@
 								<label for="insert_person_screen_middle_name_id">Middle Name:</label>
       								<input type="text" id="insert_person_screen_middle_name_id" placeholder="Middle Name">
 								<label for="insert_person_screen_last_name_id">Last Name:</label>
-      								<input type="text" class="form-control" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
+      								<input type="text" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
 								<label for="insert_person_screen_phone_id">Phone:</label>
-      								<input type="text" class="form-control" id="insert_person_screen_phone_id" placeholder="Phone" required>
+      								<input type="text" id="insert_person_screen_phone_id" placeholder="Phone" required>
 								<label for="insert_person_screen_address_id">Address:</label>
-      								<input type="text" class="form-control" id="insert_person_screen_address_id" placeholder="Address" required>
+      								<input type="text" id="insert_person_screen_address_id" placeholder="Address" required>
 
 								<span id='insert_person_screen_message_id'></span>
 							
@@ -396,7 +396,7 @@
 							<form>
 				
                                 				<label for="delete_person_screen_select_id">Person</label>
-                                				<select id="delete_person_screen_select_id" class="form-control">
+                                				<select id="delete_person_screen_select_id">
                                 				</select>
                 			
 								<div id="delete_person_screen_spinner_id">
@@ -424,7 +424,7 @@
                                                         <form>
 
                                                                 <label for="delete_club_screen_select_id">Club</label>
-                                                                <select id="delete_club_screen_select_id" class="form-control">
+                                                                <select id="delete_club_screen_select_id">
                                                                 </select>
 
                                                                 <div id="delete_club_screen_spinner_id">
@@ -449,6 +449,9 @@
 
                                 		<div class="container">
 
+							<!--
+							<form id="insert_team_screen_form_id" action="#">
+							-->
 							<form>
 		
     			 					Add Team
@@ -459,12 +462,12 @@
 
                 						<div id="insert_team_screen_club_div_id">
                 							<label for="insert_team_screen_club_id">Club:</label>
-                        						<select id="insert_team_screen_club_id" class="form-control">
+                        						<select id="insert_team_screen_club_id">
                         						</select>
                 						</div>
 
       								<label for="insert_team_name_id">Pitch Name</label>
-      								<input type="text" class="form-control" id="insert_team_screen_name_id" placeholder="Team Name" required>
+      								<input type="text" id="insert_team_screen_name_id" placeholder="Team Name" required>
 								<span id='insert_team_screen_name_message_id'></span>
 						
 								
@@ -496,12 +499,12 @@
 
                 						<div id="insert_pitch_screen_club_div_id">
                 							<label for="insert_pitch_screen_club_id">Club:</label>
-                        						<select id="insert_pitch_screen_club_id" class="form-control">
+                        						<select id="insert_pitch_screen_club_id">
                         						</select>
                 						</div>
 
       								<label for="insert_pitch_name_id">Pitch Name</label>
-      								<input type="text" class="form-control" id="insert_pitch_screen_name_id" placeholder="Pitch Name" required>
+      								<input type="text" id="insert_pitch_screen_name_id" placeholder="Pitch Name" required>
 								<span id='insert_pitch_screen_name_message_id'></span>
 						
 								
@@ -680,7 +683,7 @@
         						<form id="insert_forgot_password_screen_form_id" action="#">
 
                                 				<label id="insert_forgot_password_screen_label_id" for="insert_forgot_password_screen_email_id">Email</label>
-                                				<input type="text" class="form-control" id="insert_forgot_password_screen_email_id" placeholder="Email" required>
+                                				<input type="text" id="insert_forgot_password_screen_email_id" placeholder="Email" required>
                                 				<span id='insert_forgot_password_screen_email_message_id'></span>
 						
 								<div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
@@ -707,11 +710,11 @@
         						<form id="insert_email_club_screen_form_id">
 
                                					<label for="insert_email_club_screen_club_id">Club:</label>
-                                       				<select id="insert_email_club_screen_club_id" class="form-control">
+								<select id="insert_email_club_screen_club_id"> 
                                       				</select>
 
                                 				<label id="insert_email_club_screen_label_id" for="insert_email_club_screen_email_id">Email</label>
-                                				<input type="text" class="form-control" id="insert_email_club_screen_email_id" placeholder="Email" required>
+                                				<input type="text" id="insert_email_club_screen_email_id" placeholder="Email" required>
 							</form>
                 				</div>
                 			</div>
@@ -776,8 +779,8 @@
 
                                					<h4><b>Login</b></h4>
 
-								<input id="login_screen_email_id" type="text" class="form-control" name="email" placeholder="Email" required>
-								<input id="login_screen_password_id" type="password" class="form-control" name="password" placeholder="Password" required>
+								<input id="login_screen_email_id" type="text" name="email" placeholder="Email" required>
+								<input id="login_screen_password_id" type="password" name="password" placeholder="Password" required>
 							
 								<button id="loginscreenbuttonid">LOGIN</button>
 							</form>
