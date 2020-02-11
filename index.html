@@ -441,42 +441,43 @@
 
                                 <!-- END DELETE CLUB HTML  -->
 
-
 				<!-- INSERT TEAM HTML  -->
-        			<div id="insert_team_screen_html_id">
 
-                                	<div class="card">
+        			<div id="insert_team_screen_html_id">
+                                	
+					<div class="card">
 
                                 		<div class="container">
 
-							<form id="insert_team_screen_form_id">
+							<form>
+		
+    			 					Add Team
 
-								<h4><b>Add Team</b></h4>
+                						<div id="insert_team_screen_spinner_id">
+                        						<span class="sr-only">Loading...</span>
+                						</div>
 
-								<div id="insert_team_screen_spinner_id" class="spinner-border text-primary" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
+                						<div id="insert_team_screen_club_div_id">
+                							<label for="insert_team_screen_club_id">Club:</label>
+                        						<select id="insert_team_screen_club_id" class="form-control">
+                        						</select>
+                						</div>
 
-								<label for="insert_team_screen_club_id">Club:</label>
-								<select id="insert_team_screen_club_id" class="form-control">
-								</select>
-
-								<label for="insert_team_name_id">Team Name</label>
-								<input type="text" class="form-control" id="insert_team_screen_name_id" placeholder="Team Name" required>
+      								<label for="insert_team_name_id">Pitch Name</label>
+      								<input type="text" class="form-control" id="insert_team_screen_name_id" placeholder="Team Name" required>
 								<span id='insert_team_screen_name_message_id'></span>
-					
+						
+								
 								<button id="insertteamscreenbuttonid">Submit</button>
-	
 								<span id='insert_team_screen_message_id'></span>
-							</form>
-
-	         				</div>
-	         			</div>
-				</div>
+    							</form>
+    						</div>
+    					</div>
+						
+    				</div>
 
 				<!-- END INSERT TEAM HTML  -->
-	
-	
+
 				<!-- INSERT PITCH HTML  -->
 
         			<div id="insert_pitch_screen_html_id">
@@ -512,7 +513,7 @@
 						
     				</div>
 
-				<!-- END INSERT TEAM HTML  -->
+				<!-- END INSERT PITCH HTML  -->
 	
 				<!-- INSERT PRACTICE HTML  -->
         			<div id="insert_practice_screen_html_id">
