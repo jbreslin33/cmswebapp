@@ -35,14 +35,14 @@ class InsertTeamScreen extends Screen
 	{
 		var name  = document.getElementById("insert_team_screen_name_id").value;
 
-		if (this.getClubId() > 0)
+		if (this.getClubId() > 0 && name.length > 0)
 		{
 			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_team.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&name=' + name);
 			APPLICATION.getCurrentScreen().ajax();
 		}
 		else
 		{
-			this.setMessage("You must select a club first","red");
+			this.setMessage("You must select a club and team name first","red");
 		}
 	}
 }
