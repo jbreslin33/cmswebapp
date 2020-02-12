@@ -8,12 +8,16 @@ class DeleteClubScreen extends Screen
 
                 location.hash = 'delete_club_screen';
 
-                document.getElementById("deleteclubscreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("delete_club_screen_html_id"));
                 this.setMessageElement(document.getElementById("delete_club_screen_message_id"));
                 this.setForm(document.getElementById("delete_club_screen_form_id"));
                 this.setSpinner(document.getElementById("delete_club_screen_spinner_id"));
+
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
 	}
 
 	get()
