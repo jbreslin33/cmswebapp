@@ -8,12 +8,17 @@ class DeletePersonScreen extends Screen
 
                 location.hash = 'delete_person_screen';
 
-                document.getElementById("deletepersonscreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("delete_person_screen_html_id"));
                 this.setMessageElement(document.getElementById("delete_person_screen_message_id"));
                 this.setForm(document.getElementById("delete_person_screen_form_id"));
                 this.setSpinner(document.getElementById("delete_person_screen_spinner_id"));
+
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
+
 	}
 
 	get()
@@ -24,8 +29,6 @@ class DeletePersonScreen extends Screen
 
 	hit()
 	{
-		this.mHit = true;
-
 		var select = document.getElementById("delete_person_screen_select_id");
                 var delete_person_id = select.options[select.selectedIndex].value;
 		
