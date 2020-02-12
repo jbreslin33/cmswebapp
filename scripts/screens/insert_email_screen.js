@@ -35,41 +35,16 @@ class InsertEmailScreen extends Screen
 		this.ajax();
 		this.hideAfterHit()
 	}
-/*
-        processCodes()
-        {
-                super.processCodes();
-
-                if (this.mCode == '-101')
-                {
-                        this.hideForm();
-                }
-        }
-*/
-        processCodes()
+        
+	processCodes()
         {
                 super.processCodes();
                 
 		//definite success so send to upcoming
                 if (this.mCode == '-101')
                 {
-			/*
-                	if (this.mApplication.mStateMachine.currentState() == this.mApplication.mUPCOMING_APPLICATION)
-                        {
-                                //do nothing
-                        }
-                        else
-                        {
-                                this.mApplication.mStateMachine.changeState(this.mApplication.mUPCOMING_APPLICATION);
-                        }
-			*/
-               	}
-		/*
-                else if (this.mCode == '-101')
-               	{
-			this.hideLogin();
-                }
-		*/
+               	
+		}
                 else if (this.mCode == '-102')
                 {
 			this.showLogin();
