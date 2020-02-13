@@ -1,3 +1,6 @@
+
+working up from bottom of menu on insert pitch
+=---
 still have reload screens to tend to but next get rid of unused procedures and files
 -----------
 insert practice and prob insert game reloads screen
