@@ -39,7 +39,7 @@ class Application
                	this.mInsertPracticeScreenHtml = null; 
                	this.mInsertGameScreenHtml = null; 
                	this.mInsertForgotPasswordScreenHtml = null; 
-               	this.mInsertEmailClubInviteScreenHtml = null; 
+               	this.mInviteToClubScreenHtml = null; 
                	this.mInsertAcceptClubInInviteScreenHtml = null; 
                	this.mUpdateForgotPasswordScreenHtml = null; 
 
@@ -62,7 +62,7 @@ class Application
                	this.setInsertPracticeScreenHtml    	   ( document.getElementById("insert_practice_screen_html_id")           ); 
                	this.setInsertGameScreenHtml               ( document.getElementById("insert_game_screen_html_id")               ); 
                	this.setInsertForgotPasswordScreenHtml     ( document.getElementById("insert_forgot_password_screen_html_id")    );
-               	this.setInsertEmailClubScreenHtml          ( document.getElementById("insert_email_club_screen_html_id")         ); 
+               	this.setInviteToClubScreenHtml             ( document.getElementById("invite_to_club_screen_html_id")         ); 
                	this.setInsertAcceptClubInInviteScreenHtml ( document.getElementById("insert_accept_club_invite_screen_html_id") );
                	this.setUpdateForgotPasswordScreenHtml     ( document.getElementById("update_forgot_password_screen_html_id")    ); 
 		
@@ -120,7 +120,7 @@ class Application
 		this.mINSERT_PRACTICE_APPLICATION        = new INSERT_PRACTICE_APPLICATION();
 		this.mINSERT_GAME_APPLICATION        = new INSERT_GAME_APPLICATION();
 		this.mINSERT_FORGOT_PASSWORD_APPLICATION        = new INSERT_FORGOT_PASSWORD_APPLICATION();
-		this.mINSERT_EMAIL_CLUB_APPLICATION        = new INSERT_EMAIL_CLUB_APPLICATION();
+		this.mINVITE_TO_CLUB_APPLICATION        = new INVITE_TO_CLUB_APPLICATION();
 		this.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION        = new INSERT_ACCEPT_CLUB_INVITE_APPLICATION();
 		this.mUPDATE_FORGOT_PASSWORD_APPLICATION        = new UPDATE_FORGOT_PASSWORD_APPLICATION();
 
@@ -147,7 +147,7 @@ class Application
 		
 		document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(document.getElementById("insertteamnavbuttonid"));
 		document.getElementById("insertpitchnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpitchnavbuttonid"));
-		document.getElementById("insertemailclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertemailclubnavbuttonid"));
+		document.getElementById("invitetoclubnavbuttonid").onclick = this.hit.bind(document.getElementById("invitetoclubnavbuttonid"));
 		
 		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpersonnavbuttonid"));
 		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(document.getElementById("deletepersonnavbuttonid"));
@@ -194,9 +194,9 @@ class Application
 		{
 			location.hash = '#insert_pitch_screen';
 		}
-		if (this.id == 'insertemailclubnavbuttonid')
+		if (this.id == 'invitetoclubnavbuttonid')
 		{
-			location.hash = '#insert_email_club_screen';
+			location.hash = '#invite_to_club_screen';
 		}
 		if (this.id == 'insertpersonnavbuttonid')
 		{
@@ -547,13 +547,13 @@ class Application
                 return this.mInsertForgotPasswordScreenHtml;
 	}
 
-        setInsertEmailClubScreenHtml(h)
+        setInviteToClubScreenHtml(h)
 	{
-                this.mInsertEmailClubScreenHtml = h;
+                this.mInviteToClubScreenHtml = h;
 	}
-        getInsertEmailClubScreenHtml()
+        getInviteToClubScreenHtml()
 	{
-                return this.mInsertEmailClubScreenHtml;
+                return this.mInviteToClubScreenHtml;
 	}
 
         setInsertAcceptClubInInviteScreenHtml(h)

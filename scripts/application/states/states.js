@@ -97,9 +97,9 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_FORGOT_PASSWORD_APPLICATION);
                 }
-		else if (location.hash == '#insert_email_club_screen' && app.mStateMachine.mCurrentState != app.mINSERT_EMAIL_CLUB_APPLICATION)
+		else if (location.hash == '#invite_to_club_screen' && app.mStateMachine.mCurrentState != app.mINVITE_TO_CLUB_APPLICATION)
                 {
-                        APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_EMAIL_CLUB_APPLICATION);
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mINVITE_TO_CLUB_APPLICATION);
                 }
 		else if (location.hash == '#insert_accept_club_invite_screen' && app.mStateMachine.mCurrentState != app.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION)
                 {
@@ -210,9 +210,9 @@ class INIT_APPLICATION extends State
 			application.getInsertForgotPasswordScreenHtml().style.display = "none";
 		}
 		
-		if (application.getInsertEmailClubScreenHtml())
+		if (application.getInviteToClubScreenHtml())
 		{
-			application.getInsertEmailClubScreenHtml().style.display = "none";
+			application.getInviteToClubScreenHtml().style.display = "none";
 		}
 		
 		if (application.getInsertAcceptClubInviteScreenHtml())
@@ -469,7 +469,7 @@ class INSERT_FORGOT_PASSWORD_APPLICATION extends State
 	}
 }
 
-class INSERT_EMAIL_CLUB_APPLICATION extends State
+class INVITE_TO_CLUB_APPLICATION extends State
 {
         constructor()
         {
@@ -480,10 +480,10 @@ class INSERT_EMAIL_CLUB_APPLICATION extends State
         {
                 if (app.mStateLogs || app.mStateEnterLogs)
                 {
-                        console.log("INSERT_EMAIL_CLUB_APPLICATION: ENTER");
+                        console.log("INVITE_TO_CLUB_APPLICATION: ENTER");
 		}
 
-		app.setCurrentScreen(new InsertEmailClubScreen(app));
+		app.setCurrentScreen(new InviteToClubScreen(app));
 		app.getCurrentScreen().enter();
         }
 
@@ -491,7 +491,7 @@ class INSERT_EMAIL_CLUB_APPLICATION extends State
         {
                 if (app.mStateLogs || app.mStateExecuteLogs)
                 {
-                        console.log("INSERT_EMAI_CLUB_APPLICATION: EXECUTE");
+                        console.log("INVITE_TO_CLUB_APPLICATION: EXECUTE");
                 }
 		app.getCurrentScreen().execute();
         }
@@ -500,7 +500,7 @@ class INSERT_EMAIL_CLUB_APPLICATION extends State
         {
                 if (app.mStateLogs || app.mStateExitLogs)
                 {
-                        console.log("INSERT_EMAIL_CLUB_APPLICATION: EXIT");
+                        console.log("INVITE_TO_CLUB_APPLICATION: EXIT");
                 }
 		app.getCurrentScreen().exit();
         }

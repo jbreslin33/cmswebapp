@@ -75,7 +75,7 @@
 
                       		<button id="insertteamnavbuttonid">Insert Team</button>
                                 <button id="insertpitchnavbuttonid">Insert Pitch</button>
-                              	<button id="insertemailclubnavbuttonid">Invite to Club</button>
+                              	<button id="invitetoclubnavbuttonid">Invite to Club</button>
 
                        	</div>
 
@@ -689,29 +689,30 @@
 
         			<!-- END INSERT FORGOT PASSWORD HTML  -->
 
-        			<!-- INSERT EMAIL CLUB SCREEN HTML  -->
+        			<!-- INVITE TO CLUB SCREEN HTML  -->
 
-        			<div id="insert_email_club_screen_html_id">
+        			<div id="invite_to_club_screen_html_id">
 					<div class="card">
 						<div class="container">
 	
-        						<form id="insert_email_club_screen_form_id">
+        						<form id="invite_to_club_screen_form_id">
 
-                               					<label for="insert_email_club_screen_club_id">Club:</label>
-								<select id="insert_email_club_screen_club_id"> 
+                               					<label for="invite_to_club_screen_club_id">Club:</label>
+								<select id="invite_to_club_screen_club_id"> 
                                       				</select>
 
-                                				<label id="insert_email_club_screen_label_id" for="insert_email_club_screen_email_id">Email</label>
-                                				<input type="text" id="insert_email_club_screen_email_id" placeholder="Email" required>
+                                				<label id="invite_to_club_screen_label_id" for="invite_to_club_screen_email_id">Email</label>
+                                				<input type="text" id="invite_to_club_screen_email_id" placeholder="Email" required>
+
 							</form>
                 				</div>
                 			</div>
 
-                			<button id="insertemailclubscreenbuttonid">Submit</button>
+                			<button id="invitetoclubscreenbuttonid">Submit</button>
 
-                                	<span id='insert_email_club_screen_email_message_id'></span>
+                                	<span id='invite_to_club_screen_email_message_id'></span>
         		
-					<div id="insert_email_club_screen_spinner_id">
+					<div id="invite_to_club_screen_spinner_id">
           					<span class="sr-only">Loading...</span>
         				</div>
 				</div>
@@ -885,6 +886,9 @@
 	
 	<!-- insert team -->
 	<script src="scripts/screens/insert_team_screen.js"></script>
+	
+	<!-- invite to club -->
+	<script src="scripts/screens/invite_to_club_screen.js"></script>
 	
 	<!-- insert pitch -->
 	<script src="scripts/screens/insert_pitch_screen.js"></script>

@@ -1617,7 +1617,7 @@ END;
 $$ LANGUAGE plpgsql;
 -------
 
-CREATE OR REPLACE FUNCTION f_insert_email_club(TEXT, TEXT, int)
+CREATE OR REPLACE FUNCTION f_invite_to_club(TEXT, TEXT, int)
 RETURNS text AS $$
 DECLARE
 	DECLARE x int := -1;
