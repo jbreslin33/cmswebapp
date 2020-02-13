@@ -1,3 +1,5 @@
+still have reload screens to tend to but next get rid of unused procedures and files
+-----------
 insert practice and prob insert game reloads screen
 ----------------
 Use a <span class="link" ng-click="forgotPassword()"> tag. Style it with text-decoration: underline; cursor: pointer;, the color you like, etc.
