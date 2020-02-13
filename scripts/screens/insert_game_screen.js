@@ -8,8 +8,6 @@ class InsertGameScreen extends Screen
 
                 location.hash = 'insert_game_screen';
 
-                document.getElementById("insertgamescreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("insert_game_screen_html_id"));
                 this.setMessageElement(document.getElementById("insert_game_screen_message_id"));
                 this.setForm(document.getElementById("insert_game_screen_form_id"));
@@ -28,6 +26,12 @@ class InsertGameScreen extends Screen
 
                 //club select
                 this.getClubSelect().onchange = this.clubSelected.bind(this);
+
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
         }
 
         clubSelected()
