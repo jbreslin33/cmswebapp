@@ -176,44 +176,6 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set_invite_club_emails(TEXT)
-RETURNS text AS $$
-DECLARE
-        json_result_invite_club_emails text;
-        result_set text;
-BEGIN
-        select into json_result_invite_club_emails j_select_invite_club_emails($1);
-        result_set = CONCAT(json_result_invite_club_emails,'}');
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
-
---NATIVE INSERT EMAIL LOGIN
-
-CREATE OR REPLACE FUNCTION f_insert_native_email_login(email_name TEXT)
-RETURNS text AS $$
-DECLARE
-	found_email_id emails.id%TYPE;
-	result_set text;
-	DECLARE x int := -1; 
-BEGIN
-
-    	SELECT id INTO found_email_id FROM emails WHERE email = email_name;
-	IF found_email_id > 0 THEN
-		result_set = '-101, Email already exists. Do you want to login instead?';
-	ELSE
-		CALL p_insert_email($1,x);
-		IF x > 0 THEN
-			result_set = f_format_result_set(x,null,-100);
-                ELSE
-			result_set = f_format_result_set(x,'Something went wrong with signup. Sorry! Please try again.',-101);
-		END IF;
-	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
 --NATIVE INSERT LOGIN
 CREATE OR REPLACE FUNCTION f_insert_native_login(token_p TEXT, password TEXT)
 RETURNS text AS $$
@@ -379,20 +341,6 @@ SELECT json_agg(t) INTO raw_json
 	ELSE
 		result_set = CONCAT('"persons": ', raw_json);
 	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
---END J_SELECT PERSONS
-
---BEGIN J_SELECTS
-CREATE OR REPLACE FUNCTION j_selects(person_id int)
-RETURNS text AS $$
-DECLARE
-result_set text;
-BEGIN
-
-result_set = '"selects": [ { "person_select_id":' || $1 || ', "club_select_id":' || 0 || ', "team_select_id":' || 0 || ' } ]';
-
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -576,30 +524,6 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
 
-CREATE OR REPLACE FUNCTION j_select_invite_club_emails(text)
-RETURNS text AS $$
-DECLARE
-raw_json text;
-result_set text;
-BEGIN
-
-SELECT json_agg(t) INTO raw_json
-        from
-        (
-                select invite_club_emails.id, invite_club_emails.email_id, invite_club_emails.club_id, invite_club_emails.club_invite_token from invite_club_emails where club_invite_token = $1
-        ) t;
-
-        IF raw_json is NULL THEN
-                result_set = CONCAT('"invite_club_emails": []', raw_json);
-        ELSE
-                result_set = CONCAT('"invite_club_emails": ', raw_json);
-        END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
---END J_SELECT INVITE_CLUB_MEMBERS
-
---insert_native_email_login
 --do we send email link for signup????? 
 CREATE OR REPLACE PROCEDURE p_insert_email(email_name TEXT, INOUT x int)
 LANGUAGE plpgsql    
@@ -621,39 +545,6 @@ BEGIN
 END;
 $$;
 
---insert_native_login_club
-CREATE OR REPLACE FUNCTION f_insert_native_login_club(TEXT,TEXT,TEXT,TEXT,TEXT,TEXT,TEXT)
-RETURNS text AS $$
-DECLARE
-	found_email_id emails.id%TYPE;
-	found_club_id clubs.id%TYPE;
-        result_set text;
-        DECLARE x int := -1;
-BEGIN
-    	SELECT email_id, club_id INTO found_email_id, found_club_id FROM invite_club_emails WHERE club_invite_token = $7;
-	IF found_club_id > 0 THEN
-		CALL p_insert_native_login_club(found_email_id,found_club_id,$1,$2,$3,$4,$5,$6,$7,x);
-                result_set = f_format_result_set(found_email_id,null,-100);
-	ELSE --for some reason email does not exist
-                result_set = f_format_result_set(found_email_id,'Something went wrong dog!',-101);
-	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE PROCEDURE p_insert_native_login_club(int, int, password TEXT, first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, club_invite_token TEXT, INOUT x int)
-LANGUAGE plpgsql    
-AS $$
-DECLARE
-	returning_email_id integer;
-	returning_native_login_id integer;
-BEGIN
-	insert into native_logins (email_id, password) values ($1, CRYPT($3, GEN_SALT('md5')));
-	insert into persons (first_name, middle_name, last_name, phones, address) values (first_name, middle_name, last_name, ARRAY[phones], address) returning id into x;
-	insert into emails_persons (email_id, person_id) values ($1,x);
-	insert into club_persons (club_id,person_id) values ($2,x);
-END;
-$$;
 
 --get_native_email
 CREATE OR REPLACE FUNCTION f_get_native_email_id(email_name TEXT)
@@ -667,22 +558,6 @@ BEGIN
 RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
-
---NATIVE LOGIN
--- this is where you realize lukes idea of multiple people
---you will return a result set of persons
---BEGIN SAMPLE JSON
-CREATE OR REPLACE FUNCTION f_select_club_administrator_clubs(person_id int)
-  RETURNS json AS $$
-   SELECT json_agg(t)
-        from
-        (
-                select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join club_administrators on club_administrators.club_person_id=club_persons.id join persons on persons.id=club_persons.person_id where persons.id = person_id
-        ) t;
-$$ LANGUAGE sql;
-
---END SAMPLE JSON
-
 
 --select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join persons on persons.id=club_persons.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1;
 
@@ -728,19 +603,6 @@ $$ LANGUAGE plpgsql;
 
 --GOOGLE
 
-CREATE OR REPLACE FUNCTION f_get_google_email_id(email_name TEXT)
-RETURNS text AS $$
-DECLARE
-        found_email_id google_logins.email_id%TYPE;
-BEGIN
-        SELECT google_logins.email_id INTO found_email_id FROM google_logins
-        join emails on emails.id=google_logins.email_id
-        WHERE email = email_name;
-RETURN found_email_id;
-END;
-$$ LANGUAGE plpgsql;
-
-
 CREATE OR REPLACE PROCEDURE p_insert_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -755,21 +617,6 @@ BEGIN
 	insert into emails_persons (email_id, person_id) values (x, returning_person_id); 
 END;
 $$;
-
-CREATE OR REPLACE PROCEDURE p_update_google_login(email_name TEXT, google_id text, id_token TEXT, first_name TEXT, last_name TEXT, INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-	returning_email_id integer;
-        returning_google_login_id integer;
-        returning_person_id integer;
-BEGIN
-	insert into emails (email) values (email_name) returning id into returning_email_id;
-        insert into google_logins (email_id, google_id, id_token) values (returning_email_id, google_id, id_token) returning id into returning_google_login_id;
-        insert into persons (first_name, last_name) values (first_name, last_name) returning id into returning_person_id;
-END;
-$$;
-
 
 CREATE OR REPLACE FUNCTION f_google_login(TEXT,TEXT,TEXT,TEXT,TEXT,TEXT)
 RETURNS text AS $$
@@ -837,31 +684,6 @@ $$ LANGUAGE plpgsql;
   	--RAISE DEBUG 'debug message %', now();
   	--RAISE WARNING 'warning message %', now();
   	--RAISE NOTICE 'notice message %', now();
-
-CREATE OR REPLACE FUNCTION f_insert_accept_club_invite(TEXT)
-RETURNS text AS $$
-DECLARE
-        found_email_id emails.id%TYPE;
-        found_club_id clubs.id%TYPE;
-	result_set text;
-	DECLARE x int := -1;
-BEGIN
-	select email_id into found_email_id from invite_club_emails where club_invite_token = $1; 
-
-	IF found_email_id > 0 THEN
-		
-		--lets grab the club_id then add all persons to club from email_id
-		SELECT club_id INTO found_club_id FROM invite_club_emails WHERE club_invite_token = $1;
-		CALL p_insert_club_persons(found_club_id,found_email_id);
-
-                result_set = f_format_result_set_jwt(found_email_id,null,-100);
-	ELSE
-                result_set = f_format_result_set_invite_club_emails($1);
-	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
 
 --INSERT CLUB MEMBERS
 CREATE OR REPLACE PROCEDURE p_insert_club_persons(club_id int,email_id int)
@@ -1668,61 +1490,5 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
---------
-
-
-
---email_id old guy, person_id, club_id, email_id of new guy,token
-CREATE OR REPLACE PROCEDURE p_insert_invite_club_email(int, int, int, int, TEXT, INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-        returning_invite_club_person_id invite_club_emails.id%TYPE;
-        found_club_administrator_id club_administrators.id%TYPE;
-BEGIN
-	insert into invite_club_emails (email_id, club_id, club_invite_token, expires) values ($4, $3, $5, NOW() + interval '1 week') returning id into returning_invite_club_person_id;	
-	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id join persons on persons.id=club_persons.person_id join clubs on clubs.id=club_persons.club_id where club_id = $3 and persons.id = $2; 
-	insert into invite_club_emails_club_administrators (invite_club_person_id, club_administrator_id) values (returning_invite_club_person_id, found_club_administrator_id);
-
-	insert into club_emails (club_id, email_id) values ($3,$4);
-
-	select email_id into x from emails_persons where person_id = $2;
-END;
-$$;
-
-
-CREATE OR REPLACE FUNCTION f_insert_invite_club_email(int, int, int, TEXT, TEXT) --email_id, person_id, club_id, email,token
-RETURNS text AS $$
-DECLARE
-	DECLARE x int := -1;
-        found_email_id emails.id%TYPE;
-        returning_email_id emails.id%TYPE;
-        found_club_email_id club_emails.id%TYPE;
-        result_set text;
-BEGIN
-        select into found_email_id f_get_email_id($4);
-
-	IF found_email_id > 0 THEN
-		select id into found_club_email_id from club_emails where club_id = $3 AND email_id = found_email_id; 
-
-		IF found_club_email_id > 0 THEN
-			result_set = f_format_result_set($1,'This email is already associated with this club',-100);
-		ELSE
-			CALL p_insert_invite_club_email($1,$2,$3,found_email_id,$5,x);
-		END IF;
-	ELSE --call without a found_email_id
-		insert into emails (email) values ($4) returning id into returning_email_id; 
-		CALL p_insert_invite_club_email($1,$2,$3,returning_email_id,$5,x);
-	END IF;
-
-	IF x > 0 THEN
-		result_set = f_format_result_set($1,null,-100);
-	ELSE
-		result_set = f_format_result_set($1,'Something went wrong.',-101);
-	END IF;
-
-        
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
+-----------
 
