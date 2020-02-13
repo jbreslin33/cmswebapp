@@ -8,8 +8,6 @@ class InsertPracticeScreen extends Screen
 
                 location.hash = 'insert_practice_screen';
 
-                document.getElementById("insertpracticescreenbuttonid").onclick = this.hit.bind(this);
-
                 this.setHtml(document.getElementById("insert_practice_screen_html_id"));
                 this.setMessageElement(document.getElementById("insert_practice_screen_message_id"));
                 this.setForm(document.getElementById("insert_practice_screen_form_id"));
@@ -35,6 +33,13 @@ class InsertPracticeScreen extends Screen
 
 		//club select
                 this.getClubSelect().onchange = this.clubSelected.bind(this);
+
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
+
 	}
 
 	clubSelected()
