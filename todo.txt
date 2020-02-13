@@ -1,5 +1,6 @@
 
-working up from bottom of menu on insert pitch
+need update game avail
+
 =---
 still have reload screens to tend to but next get rid of unused procedures and files
 -----------
