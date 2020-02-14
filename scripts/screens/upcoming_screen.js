@@ -257,6 +257,7 @@ class UpcomingScreen extends Screen
 	{
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
+		console.log('url:' + screen.getUrl());
                 screen.ajax();
 	}
 
