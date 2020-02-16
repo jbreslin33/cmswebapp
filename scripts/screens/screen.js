@@ -55,7 +55,6 @@ class Screen
                                 if (APPLICATION.getCurrentScreen().getRequest().status === 200)
                                 {
                                         APPLICATION.getCurrentScreen().mData = this.responseText;
-					console.log('mdata:' + this.responseText);
                                 }
                         }
                 };
