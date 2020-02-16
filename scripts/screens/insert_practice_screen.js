@@ -137,7 +137,15 @@ class InsertPracticeScreen extends Screen
 				var event_date = document.getElementById("insert_practice_screen_date_id").value;
 				APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_practice.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
                         
-				APPLICATION.getCurrentScreen().ajax();
+				if (this.mSent)
+				{
+					console.log('dont send we already sent it');
+				}
+				else
+				{
+					APPLICATION.getCurrentScreen().ajax();
+					this.mSent = true;
+				}
 			}
 		}
 	}

@@ -28,6 +28,7 @@ class Screen
 		this.mPitchSelect = null;
 
 		this.mHit = false;
+		this.mSentAjax = false;
 
 		this.mForm = null;
 		this.mUrl = null;
