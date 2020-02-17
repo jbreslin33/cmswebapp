@@ -48,20 +48,29 @@ class Screen
 
 	ajax()
 	{
-	        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
-                APPLICATION.getCurrentScreen().getRequest().onreadystatechange = function()
-                {
-                        if (APPLICATION.getCurrentScreen().getRequest().readyState === XMLHttpRequest.DONE)
-                        {
-                                if (APPLICATION.getCurrentScreen().getRequest().status === 200)
-                                {
-                                        APPLICATION.getCurrentScreen().mData = this.responseText;
-                                }
-                        }
-                };
-
-		APPLICATION.getCurrentScreen().checkValidity();
-
+		if (this.mSentAjax)
+		{
+			console.log('ajax request already sent do not send again.');
+		}
+		else
+		{
+			console.log('sending Ajax');
+			this.mSentAjax = true;
+	        	APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
+                	APPLICATION.getCurrentScreen().getRequest().onreadystatechange = function()
+                	{
+                       		if (APPLICATION.getCurrentScreen().getRequest().readyState === XMLHttpRequest.DONE)
+                       	 	{
+                                	if (APPLICATION.getCurrentScreen().getRequest().status === 200)
+                                	{
+						console.log('mData:' + this.responseText);
+                                        	APPLICATION.getCurrentScreen().mData = this.responseText;
+						APPLICATION.getCurrentScreen().mSentAjax = false;
+                                	}
+                        	}
+                	};
+			APPLICATION.getCurrentScreen().checkValidity();
+		}
 	}
 
 	checkValidity()
