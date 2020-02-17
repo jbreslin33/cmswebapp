@@ -68,8 +68,6 @@ class InsertGameScreen extends Screen
 	
 	hit()
 	{
-		this.mHit = true;
-
 		//both normal and recurring
 		var arrival_time = document.getElementById("insert_game_screen_arrival_time_id").value;
 		var start_time = document.getElementById("insert_game_screen_start_time_id").value;

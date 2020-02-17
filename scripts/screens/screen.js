@@ -27,7 +27,6 @@ class Screen
 		this.mTeamSelect = null;
 		this.mPitchSelect = null;
 
-		this.mHit = false;
 		this.mSentAjax = false;
 
 		this.mForm = null;
