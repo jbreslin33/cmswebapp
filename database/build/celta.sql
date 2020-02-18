@@ -716,6 +716,9 @@ DECLARE
 	returning_club_manager_id club_managers.id%TYPE;
 	returning_team_club_person_id team_club_persons.id%TYPE;
 
+	--JIM as club administrator
+	returning_administrator_id administrators.id%TYPE;
+
 BEGIN
 	--JOE
 	insert into persons (first_name, last_name, phones, address) values ('Joe', 'Hurst', ARRAY [ '215-555-1212' ], '2913 Street Road, Bensalem PA 19020') returning id into returning_person_id;
@@ -747,6 +750,11 @@ BEGIN
 	insert into club_managers (club_person_id, manager_id) values (28,returning_manager_id) returning id into returning_club_manager_id;
 	insert into team_club_persons (club_person_id, team_id) values (28,1)  returning id into returning_team_club_person_id;
 	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	
+	--add Jim Breslin as club Administrator
+	insert into administrators (person_id) values (28) returning id into returning_administrator_id;
+	insert into club_administrators (club_person_id,administrator_id) values (28,returning_administrator_id);
+	
 
 RETURN result_set;
 END;
