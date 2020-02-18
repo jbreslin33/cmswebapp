@@ -1,5 +1,9 @@
 
+
 delete club needs to handle availability
+but to do this it will be easir to have jbreslin as club admin
+
+-----------------
 need update game avail
 -------------
 also we are getting dups when you add a practice
