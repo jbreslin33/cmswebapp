@@ -1202,7 +1202,15 @@ BEGIN
 	delete from club_players using club_persons where club_persons.club_id = $1;
 	delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
 	delete from club_administrators using club_persons where club_persons.club_id = $1;
+
 	delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
+
+	delete from practices_players_availability using team_club_persons, club_persons where club_persons.club_id = $1;
+	
+	delete from practices using practice, teams  where teams.club_id = $1;
+	
+	delete from practice using teams where teams.club_id = $1;
+
 	delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
 	delete from team_club_persons_club_managers using club_managers, club_persons  where club_persons.club_id = $1;
 	delete from team_club_persons using club_persons where club_persons.club_id = $1;
