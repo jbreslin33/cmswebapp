@@ -10,7 +10,6 @@ class UpcomingAvailability extends Screen
 	
 	function getResult()
         {
-		error_log('in getResult');
 		$availability = null;
 
 		if (isset($_GET['availability']))
