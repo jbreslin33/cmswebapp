@@ -1,4 +1,5 @@
 
+thinking for this we need a profile page
 next handle adding an administrator:
 
 CLUB ADMINISTRATION
