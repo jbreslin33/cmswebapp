@@ -335,6 +335,7 @@ class UpcomingScreen extends Screen
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
+						console.log('availability_id:' + this.mEventsArray[i].availability_id);
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 
 						var button = document.createElement("BUTTON");
@@ -367,6 +368,7 @@ class UpcomingScreen extends Screen
 
 					if (this.mEventsArray[i].type == 'practice')
 					{
+						console.log('availability_id:' + this.mEventsArray[i].availability_id);
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 						
 						var button = document.createElement("BUTTON");
