@@ -1,5 +1,4 @@
 
-Handle upcoming scedule to show availablity on reload.
 next handle adding an administrator:
 
 CLUB ADMINISTRATION
@@ -12,6 +11,8 @@ add someone else in your club to just adminsistrator
  
 delete club needs to handle availability
 but to do this it will be easir to have jbreslin as club admin
+------------------
+Handle upcoming scedule to show availablity on reload.
 
 -----------------
 need update game avail
