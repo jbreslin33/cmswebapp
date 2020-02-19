@@ -259,7 +259,6 @@ class UpcomingScreen extends Screen
 	{
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
-		console.log('url:' + screen.getUrl());
                 screen.ajax();
 	}
 
@@ -383,7 +382,6 @@ class UpcomingScreen extends Screen
 
 					if (this.mEventsArray[i].type == 'practice')
 					{
-						console.log('availability_id:' + this.mEventsArray[i].availability_id);
 						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 						
 						var button = document.createElement("BUTTON");
