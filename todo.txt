@@ -1,5 +1,15 @@
 
+Handle upcoming scedule to show availablity on reload.
+next handle adding an administrator:
 
+CLUB ADMINISTRATION
+add club administrator done by ONLY club adminsitrator
+
+PROFILE
+add yourself to administrator ALSO add yourself as player, manager, coach, REMOVE yourself as those as well.
+
+add someone else in your club to just adminsistrator
+ 
 delete club needs to handle availability
 but to do this it will be easir to have jbreslin as club admin
 
