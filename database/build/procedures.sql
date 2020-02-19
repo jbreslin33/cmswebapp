@@ -445,6 +445,7 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT CLUBS
 
+--team_club_persons_club_players_id
 --BEGIN J_SELECT PRACTICES
 CREATE OR REPLACE FUNCTION j_select_practices(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
@@ -456,7 +457,7 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates,(select pitches.name from pitches where practices.pitch_id = pitches.id) as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name
+		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates,(select pitches.name from pitches where practices.pitch_id = pitches.id) as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name, (select practices_players_availability.availability_id from practices_players_availability where practices_players_availability.practice_id = practices.id) 
                 from practices
 		join practice on practice.id=practices.practice_id
                 join teams on teams.id=practice.team_id
@@ -468,7 +469,10 @@ SELECT json_agg(t) INTO raw_json
 
 		join club_players on club_players.club_person_id=club_persons.id
 
+		--join practices_players_availability on practices_players_availability.practice_id=practices.id 
+
 		join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id AND team_club_persons_club_players.club_player_id=club_players.id
+
 
                 where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
 	) t;
