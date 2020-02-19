@@ -92,6 +92,8 @@ class UpcomingScreen extends Screen
 		}
 	}
 
+	//lightUp(button
+
 	setAllHit()
 	{
 		var screen = APPLICATION.getCurrentScreen();
@@ -332,10 +334,11 @@ class UpcomingScreen extends Screen
 				{
 					var title = document.createElement('h5');
 					container.appendChild(title);
+						
+					var availability_id = this.mEventsArray[i].availability_id;
 					
 					if (this.mEventsArray[i].type == 'game')
 					{
-						console.log('availability_id:' + this.mEventsArray[i].availability_id);
 						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
 
 						var button = document.createElement("BUTTON");
@@ -345,6 +348,10 @@ class UpcomingScreen extends Screen
                                                 var id = 'button_1_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
                                                 button.setAttribute("id", id);
                                                 button.onclick = this.setOneHit.bind(button);
+						if (availability_id == 1)
+						{
+							button.style.backgroundColor = "#4CAF50";
+						}
                                                 this.mButtonArray.push(button);
 
                                                 var button = document.createElement("BUTTON");
@@ -354,6 +361,10 @@ class UpcomingScreen extends Screen
                                                 var id = 'button_1_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
                                                 button.setAttribute("id", id);
                                                 button.onclick = this.setOneHit.bind(button);
+						if (availability_id == 2)
+						{
+							button.style.backgroundColor = "yellow";
+						}
                                                 this.mButtonArray.push(button);
 
                                                 var button = document.createElement("BUTTON");
@@ -363,6 +374,10 @@ class UpcomingScreen extends Screen
                                                 var id = 'button_1_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
                                                 button.setAttribute("id", id);
                                                 button.onclick = this.setOneHit.bind(button);
+						if (availability_id == 3)
+						{
+							button.style.backgroundColor = "red";
+						}
                                                 this.mButtonArray.push(button);
 					}
 
@@ -378,6 +393,10 @@ class UpcomingScreen extends Screen
 						var id = 'button_2_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						button.setAttribute("id", id);
 			 			button.onclick = this.setOneHit.bind(button);
+						if (availability_id == 1)
+						{
+							button.style.backgroundColor = "#4CAF50";
+						}
 						this.mButtonArray.push(button);
 
 						var button = document.createElement("BUTTON");
@@ -387,6 +406,10 @@ class UpcomingScreen extends Screen
 						var id = 'button_2_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						button.setAttribute("id", id);
 			 			button.onclick = this.setOneHit.bind(button);
+						if (availability_id == 2)
+						{
+							button.style.backgroundColor = "yellow";
+						}
 						this.mButtonArray.push(button);
 						
 						var button = document.createElement("BUTTON");
@@ -396,6 +419,10 @@ class UpcomingScreen extends Screen
 						var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
   						button.setAttribute("id", id);
 			 			button.onclick = this.setOneHit.bind(button);
+						if (availability_id == 3)
+						{
+							button.style.backgroundColor = "red";
+						}
 						this.mButtonArray.push(button);
 					}
 				}
