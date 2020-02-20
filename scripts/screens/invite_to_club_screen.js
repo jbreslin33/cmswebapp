@@ -6,8 +6,6 @@ class InviteToClubScreen extends Screen
 	{
 		super(application);
 
-//invitetoclubscreenbuttonid
-
 		location.hash = 'invite_to_club_screen';
 
                 this.setHtml(document.getElementById("invite_to_club_screen_html_id"));
@@ -35,12 +33,11 @@ class InviteToClubScreen extends Screen
 
 	hit()
 	{
-		console.log('hitt is ittt');
+		this.hideAfterHit();
 		var email  = document.getElementById("invite_to_club_screen_email_id").value;
 
 		if (this.getClubId() > 0 && email.length > 0)
 		{
-			console.log('sending');
 			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/invite_to_club.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&email=' + email);
 			APPLICATION.getCurrentScreen().ajax();
 		}
@@ -49,4 +46,11 @@ class InviteToClubScreen extends Screen
 			this.setMessage("You must select a club and provide an email first","red");
 		}
 	}
+
+        hideAfterHit()
+        {
+                this.getForm().style.display = "none";
+                this.getClubSelect().style.display = "none";
+        }
+
 }
