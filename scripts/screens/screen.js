@@ -53,7 +53,6 @@ class Screen
 		}
 		else
 		{
-			console.log('sending Ajax');
 			this.mSentAjax = true;
 	        	APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
                 	APPLICATION.getCurrentScreen().getRequest().onreadystatechange = function()
@@ -62,7 +61,6 @@ class Screen
                        	 	{
                                 	if (APPLICATION.getCurrentScreen().getRequest().status === 200)
                                 	{
-						console.log('mData:' + this.responseText);
                                         	APPLICATION.getCurrentScreen().mData = this.responseText;
 						APPLICATION.getCurrentScreen().mSentAjax = false;
                                 	}

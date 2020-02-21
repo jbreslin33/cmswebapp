@@ -5,7 +5,6 @@ class SelectAdministratedClubs extends Screen
 {
         function __construct()
         {
-		error_log('here in cons');
                 parent::__construct();
         }
 
