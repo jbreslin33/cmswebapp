@@ -1,42 +1,29 @@
-                select practices.id
-                from practices
+        delete from club_emails where club_id = 2;
+        --delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = 2;
+        --delete from team_club_persons_club_players join team_club_persons on team_club_persons.club_person_id join club_persons on club_persons.id=team_club_persons.club_person_id where club_persons.club_id = 2;
+        --delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = 2;
 
-                join practice on 
-		practice.id=practices.practice_id
-                
-		join teams on 
-		teams.id=practice.team_id
+	--delete from team_club_persons_club_players;	
+	delete from team_club_persons_club_players ;	
+	
+        --delete from club_players using club_persons where club_persons.club_id = 1;
+        --delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = 1;
+        --delete from club_administrators using club_persons where club_persons.club_id = 1;
 
-                join team_club_persons on 
-		team_club_persons.team_id=teams.id
-		
+        --delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = 1;
 
-                join club_persons on 
-		club_persons.id=team_club_persons.club_person_id
+        --delete from practices_players_availability using team_club_persons, club_persons where club_persons.club_id = 1;
 
-                join clubs on 
-		clubs.id=club_persons.club_id
+        --delete from practices using practice, teams  where teams.club_id = 1;
 
-                join persons on 
-		persons.id=club_persons.person_id
+        --delete from practice using teams where teams.club_id = 1;
 
-                join emails_persons on 
-		emails_persons.person_id=persons.id
-
-                --join club_players on 
-		--club_players.club_person_id=club_persons.id
-
-                join club_managers on 
-		club_managers.club_person_id=club_persons.id
-
-                --join team_club_persons_club_players
-                --on team_club_persons_club_players.team_club_person_id=team_club_persons.id
-                --AND team_club_persons_club_players.club_player_id=club_players.id
-
-
-                join team_club_persons_club_managers
-                on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
-                AND team_club_persons_club_managers.club_manager_id=club_managers.id;
-		;
-
+        --delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = 1;
+        --delete from team_club_persons_club_managers using club_managers, club_persons  where club_persons.club_id = 1;
+        --delete from team_club_persons using club_persons where club_persons.club_id = 1;
+        --delete from club_managers using club_persons where club_persons.club_id = 1;
+        --delete from club_persons where club_id = 1;
+        --delete from teams where club_id = 1;
+        --delete from pitches where club_id = 1;
+        --delete from clubs where id = 1 returning id into x;
 
