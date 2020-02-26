@@ -1215,7 +1215,7 @@ BEGIN
 	delete from club_emails where club_id = $1;
 
         FOR recA IN
-		select id  from teams where club_id = $1  
+		select id from teams where club_id = $1  
         LOOP
 		FOR recB IN
 			select team_club_persons.id from team_club_persons where team_id = recA.id	
