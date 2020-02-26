@@ -1211,9 +1211,14 @@ AS $$
 DECLARE
         recA RECORD;
         recB RECORD;
+
+        recC RECORD;
+        recD RECORD;
+
 BEGIN
 	delete from club_emails where club_id = $1;
 
+	--delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from teams where club_id = $1  
         LOOP
@@ -1223,10 +1228,21 @@ BEGIN
 			delete from team_club_persons_club_players where team_club_person_id = recB.id; 	
 		END LOOP;
         END LOOP;
+        
 
-	--delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
 
 	--delete from club_players using club_persons where club_persons.club_id = $1;
+        FOR recC IN
+		select id from clubs where id = $1  
+        LOOP
+		FOR recD IN
+			select id from club_persons where club_id = recC.id	
+		LOOP
+			delete from club_players where club_person_id = recD.id; 	
+		END LOOP;
+        END LOOP;
+
+
 	--delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
 	--delete from club_administrators using club_persons where club_persons.club_id = $1;
 
