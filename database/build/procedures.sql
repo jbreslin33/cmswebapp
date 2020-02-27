@@ -1236,13 +1236,9 @@ BEGIN
 
 	--delete from club_players using club_persons where club_persons.club_id = $1;
         FOR recC IN
-		select id from clubs where id = $1  
+		select id from club_persons where club_id = $1  
         LOOP
-		FOR recD IN
-			select id from club_persons where club_id = recC.id	
-		LOOP
-			delete from club_players where club_person_id = recD.id; 	
-		END LOOP;
+			delete from club_players where club_person_id = recC.id; 	
         END LOOP;
 
 
