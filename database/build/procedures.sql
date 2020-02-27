@@ -1221,6 +1221,13 @@ DECLARE
 
 	recG RECORD;
         recH RECORD;
+
+        recI RECORD;
+        recJ RECORD;
+        recK RECORD;
+        recL RECORD;
+        recM RECORD;
+
 BEGIN
 	delete from club_emails where club_id = $1;
 
@@ -1246,7 +1253,6 @@ BEGIN
 	--delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
         FOR recD IN
 		select id from club_persons where club_id = $1  
-	
 	LOOP
 		FOR recE IN
 			select team_club_persons.id from team_club_persons where club_person_id = recD.id	
@@ -1267,6 +1273,17 @@ BEGIN
 	
 
 	--delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
+        FOR recG IN
+		select id from club_persons where club_id = $1  
+	LOOP
+		FOR recH IN
+			select team_club_persons.id from team_club_persons where club_person_id = recG.id	
+		LOOP
+			delete from team_club_persons_club_players  where team_club_person_id = recH.id; 	
+		END LOOP;
+	END LOOP;
+
+
 
 	--delete from practices_players_availability using team_club_persons, club_persons where club_persons.club_id = $1;
 	
