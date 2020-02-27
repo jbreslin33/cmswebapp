@@ -1213,8 +1213,9 @@ DECLARE
         recB RECORD;
 
         recC RECORD;
+
         recD RECORD;
-        
+
 	recE RECORD;
         recF RECORD;
 
@@ -1243,15 +1244,16 @@ BEGIN
 
 
 	--delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
-        --FOR recE IN
-	--	select id from teams where club_id = $1  
-        --LOOP
-	--	FOR recF IN
-	--		select team_club_persons.id from team_club_persons where team_id = recE.id	
-	--	LOOP
-	--		delete from team_club_persons_club_administrators where team_club_person_id = recF.id; 	
-	--	END LOOP;
-        --END LOOP;
+        FOR recD IN
+		select id from club_persons where club_id = $1  
+	
+	LOOP
+		FOR recE IN
+			select team_club_persons.id from team_club_persons where club_person_id = recD.id	
+		LOOP
+			delete from team_club_persons_club_administrators where team_club_person_id = recE.id; 	
+		END LOOP;
+	END LOOP;
 
 
 	--delete from club_administrators using club_persons where club_persons.club_id = $1;
