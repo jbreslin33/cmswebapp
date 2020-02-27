@@ -1257,15 +1257,12 @@ BEGIN
 
 
 	--delete from club_administrators using club_persons where club_persons.club_id = $1;
-        --FOR recG IN
-	--	select id from teams where club_id = $1  
-        --LOOP
-	--	FOR recH IN
-	--		select id from club_persons where club_id = recG.id	
---		LOOP
-	--		delete from club_administrators where club_person_id = recH.id; 	
-	--	END LOOP;
-        --END LOOP;
+        FOR recF IN
+		select id from club_persons where club_id = $1  
+        LOOP
+			delete from club_administrators where club_person_id = recF.id; 	
+        END LOOP;
+
 	
 	
 
