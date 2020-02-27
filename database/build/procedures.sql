@@ -1218,6 +1218,8 @@ DECLARE
 	recE RECORD;
         recF RECORD;
 
+	recG RECORD;
+        recH RECORD;
 BEGIN
 	delete from club_emails where club_id = $1;
 
@@ -1231,8 +1233,6 @@ BEGIN
 			delete from team_club_persons_club_players where team_club_person_id = recB.id; 	
 		END LOOP;
         END LOOP;
-        
-
 
 	--delete from club_players using club_persons where club_persons.club_id = $1;
         FOR recC IN
@@ -1247,19 +1247,29 @@ BEGIN
 
 
 	--delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
-        FOR recE IN
-		select id from teams where club_id = $1  
-        LOOP
-		FOR recF IN
-			select team_club_persons.id from team_club_persons where team_id = recE.id	
-		LOOP
-			delete from team_club_persons_club_administrators where team_club_person_id = recF.id; 	
-		END LOOP;
-        END LOOP;
-	
-	
-	
+        --FOR recE IN
+	--	select id from teams where club_id = $1  
+        --LOOP
+	--	FOR recF IN
+	--		select team_club_persons.id from team_club_persons where team_id = recE.id	
+	--	LOOP
+	--		delete from team_club_persons_club_administrators where team_club_person_id = recF.id; 	
+	--	END LOOP;
+        --END LOOP;
+
+
 	--delete from club_administrators using club_persons where club_persons.club_id = $1;
+        --FOR recG IN
+	--	select id from teams where club_id = $1  
+        --LOOP
+	--	FOR recH IN
+	--		select id from club_persons where club_id = recG.id	
+--		LOOP
+	--		delete from club_administrators where club_person_id = recH.id; 	
+	--	END LOOP;
+        --END LOOP;
+	
+	
 
 	--delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
 
