@@ -1336,6 +1336,13 @@ BEGIN
 
 
 	--delete from club_managers using club_persons where club_persons.club_id = $1;
+        FOR recA IN
+		select id from club_persons where club_id = $1  
+	LOOP
+		delete from club_managers where club_person_id = recA.id;
+	END LOOP;
+
+
 	--delete from club_persons where club_id = $1;
 	--delete from teams where club_id = $1;
 	--delete from pitches where club_id = $1;
