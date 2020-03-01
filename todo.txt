@@ -1,4 +1,6 @@
 
+Add board members 
+
 thinking for this we need a profile page
 next handle adding an administrator:
 
@@ -9,7 +11,8 @@ PROFILE
 add yourself to administrator ALSO add yourself as player, manager, coach, REMOVE yourself as those as well.
 
 add someone else in your club to just adminsistrator
- 
+
+--------------------- 
 delete club needs to handle availability
 but to do this it will be easir to have jbreslin as club admin
 ------------------
