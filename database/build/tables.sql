@@ -965,4 +965,26 @@ CREATE TABLE order_items
         PRIMARY KEY (id)
 );
 
+-- BOARD MEMBERS
+CREATE TABLE club_board_seats
+(
+	id SERIAL,
+	description text, 
+	club_id integer,
+	created_at timestamp not null default now(),
+	FOREIGN KEY (club_id) REFERENCES clubs(id),
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE club_board_seats_club_persons
+(
+	id SERIAL,
+	club_board_seat_id integer,
+	club_person_id integer,
+	FOREIGN KEY (club_board_seat_id) REFERENCES club_board_seats(id),
+	FOREIGN KEY (club_person_id) REFERENCES club_persons(id),
+	unique (club_board_seat_id, club_person_id),
+        PRIMARY KEY (id)
+);
+
 
