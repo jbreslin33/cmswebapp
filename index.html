@@ -97,6 +97,15 @@
                                 <button id="deleteclubnavbuttonid">Delete Club</button>
 
                         </div>
+			
+			Profile
+
+                        <div class="btn-group">
+
+                      		<button id="profilenavbuttonid">Edit Profile</button>
+
+                       	</div>
+
 		</div>
 		
 		<div class="row">
@@ -291,33 +300,7 @@
 
 				<!-- END INSERT NATAIVE LOGIN HTML  -->
 	
-				<!-- BEGIN UPCOMING HTML -->
-        
-				<div id="upcoming_screen_html_id">
 
-  						<button id="upcoming_available_id" class="availability-button">
-							Available
-  						</button>
-
-  						<button id="upcoming_maybe_available_id" class="availability-button">
-							Maybe Available
-  						</button>
-
-  						<button id="upcoming_not_available_id" class="availability-button">
-							Not Available
-  						</button>
-
-	    				<span id='upcoming_screen_message_id'></span>
-
-					<div id="upcoming_screen_spinner_id">
-                        			<span class="sr-only">Loading...</span>
-                			</div>
-
-				</div>	
-
-
-				<!-- END UPCOMING HTML -->	
-	
 
 				<!-- INSERT CLUB HTML  -->
 				<div id="insert_club_screen_html_id">
@@ -832,6 +815,42 @@
                				</div>
 
         			</div>
+				
+				<!-- BEGIN PROFILE HTML -->
+        
+				<div id="profile_screen_html_id">
+
+  						<button id="profile_player_id" class="availability-button">
+							Player
+  						</button>
+  						
+  						<button id="profile_parent_id" class="availability-button">
+							Parent
+  						</button>
+
+  						<button id="profile_coach_id" class="availability-button">
+							Coach
+  						</button>
+
+  						<button id="profile_manager_id" class="availability-button">
+							Manager
+  						</button>
+  						
+  						<button id="profile_administrator_id" class="availability-button">
+							Administrator
+  						</button>
+
+	    				<span id='profile_screen_message_id'></span>
+
+					<div id="profile_screen_spinner_id">
+                        			<span class="sr-only">Loading...</span>
+                			</div>
+
+				</div>	
+
+
+				<!-- END PROFILE HTML -->	
+	
 			</div> 
 
 			<!--END MIDDLE 6 COLUMNS -->
@@ -928,6 +947,11 @@
 
 	<!-- login -->
 	<script src="scripts/screens/login_screen.js"></script>
+	
+	<!-- PROFILE MENU -->
+	<!-- profile screen-->
+	<script src="scripts/screens/profile_screen.js"></script>
+
 
 	<!-- calendar -->
 	<script src="scripts/calendar/calendar.js"></script>

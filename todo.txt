@@ -1,6 +1,32 @@
+profile page:
+add yourself as player, manager, coach, REMOVE yourself as those as well.
 
+//this is currently 'done enough' via invite to club by a club_administrator. but later we need to have a request join club.
+contention:
+email can
+request themselves to club_email
+
+//this is currently done when you first join, also done when you add a person.
+contention:  
+club_email can
+add themselves to club_person
+
+//this is currenlty not done and should be first on a personal profile page.
+obvious: 
+person can
+add themselves as player, manager, coach, administrator
+
+contention: 
+club_administrator can      //sift through club_persons and make different roles
+add club_player, club_manager, club_coach
+
+contention: 
+team_club_persons_club_managers can
+team_club_persons_club_players, team_club_persons_club_coaches 
+
+--------
 Add board members 
-
+------------
 thinking for this we need a profile page
 next handle adding an administrator:
 
@@ -8,7 +34,8 @@ CLUB ADMINISTRATION
 add club administrator done by ONLY club adminsitrator
 
 PROFILE
-add yourself to administrator ALSO add yourself as player, manager, coach, REMOVE yourself as those as well.
+add yourself to administrator 
+ALSO add yourself as player, manager, coach, REMOVE yourself as those as well.
 
 add someone else in your club to just adminsistrator
 

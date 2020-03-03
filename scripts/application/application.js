@@ -42,6 +42,7 @@ class Application
                	this.mInviteToClubScreenHtml = null; 
                	this.mInsertAcceptClubInInviteScreenHtml = null; 
                	this.mUpdateForgotPasswordScreenHtml = null; 
+               	this.mProfileScreenHtml = null; 
 
 		//set html 
                	this.setLoggedOutHeaderHtml                ( document.getElementById("logged_out_header_html_id")                ); 
@@ -65,6 +66,7 @@ class Application
                	this.setInviteToClubScreenHtml             ( document.getElementById("invite_to_club_screen_html_id")         ); 
                	this.setInsertAcceptClubInInviteScreenHtml ( document.getElementById("insert_accept_club_invite_screen_html_id") );
                	this.setUpdateForgotPasswordScreenHtml     ( document.getElementById("update_forgot_password_screen_html_id")    ); 
+               	this.setProfileScreenHtml                  ( document.getElementById("profile_screen_html_id")                  );
 		
 		
 		//user variables
@@ -123,6 +125,7 @@ class Application
 		this.mINVITE_TO_CLUB_APPLICATION        = new INVITE_TO_CLUB_APPLICATION();
 		this.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION        = new INSERT_ACCEPT_CLUB_INVITE_APPLICATION();
 		this.mUPDATE_FORGOT_PASSWORD_APPLICATION        = new UPDATE_FORGOT_PASSWORD_APPLICATION();
+		this.mPROFILE_APPLICATION            = new PROFILE_APPLICATION();
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
@@ -137,25 +140,35 @@ class Application
 		this.setPersonSelect(document.getElementById("person_select_id"));
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
+		//calender
 		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(document.getElementById("upcomingnavbuttonid"));
 		document.getElementById("calendarnavbuttonid").onclick = this.hit.bind(document.getElementById("calendarnavbuttonid"));
 
+		//login
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(document.getElementById("logoutnavbuttonid"));
-		
+	
+		//manager
 		document.getElementById("insertpracticenavbuttonid").onclick = this.hit.bind(document.getElementById("insertpracticenavbuttonid"));
 		document.getElementById("insertgamenavbuttonid").onclick = this.hit.bind(document.getElementById("insertgamenavbuttonid"));
-		
+	
+		//administrator
 		document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(document.getElementById("insertteamnavbuttonid"));
 		document.getElementById("insertpitchnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpitchnavbuttonid"));
 		document.getElementById("invitetoclubnavbuttonid").onclick = this.hit.bind(document.getElementById("invitetoclubnavbuttonid"));
-		
+	
+		//persons
 		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpersonnavbuttonid"));
 		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(document.getElementById("deletepersonnavbuttonid"));
-		
+	
+		//join
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(document.getElementById("insertforgotnavbuttonid"));
-		
+	
+		//admin
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertclubnavbuttonid"));
 		document.getElementById("deleteclubnavbuttonid").onclick = this.hit.bind(document.getElementById("deleteclubnavbuttonid"));
+	
+		//profile
+		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(document.getElementById("upcomingnavbuttonid"));
 
 		//aside
                 this.mAsideMessageElement = null;
@@ -213,6 +226,10 @@ class Application
 		if (this.id == 'deleteclubnavbuttonid')
 		{
 			location.hash = '#delete_club_screen';
+		}
+		if (this.id == 'profilenavbuttonid')
+		{
+			location.hash = '#profile_screen';
 		}
 	}
 

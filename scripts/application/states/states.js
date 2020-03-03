@@ -109,6 +109,12 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mDELETE_CLUB_APPLICATION);
               	} 
+	
+		//profile
+		else if (location.hash == '#profile_screen' && app.mStateMachine.mCurrentState != app.mPROFILE_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mPROFILE_APPLICATION);
+                }
 	}
 
         exit(application)
@@ -225,6 +231,11 @@ class INIT_APPLICATION extends State
 			application.getUpdateForgotPasswordScreenHtml().style.display = "none";
 		}
 
+		//profile	
+		if (application.getProfileScreenHtml())
+		{
+			application.getProfileScreenHtml().style.display = "none";
+		}
 	}
         
 	execute(application)
