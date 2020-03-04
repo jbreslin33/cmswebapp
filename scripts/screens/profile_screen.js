@@ -66,9 +66,11 @@ class ProfileScreen extends Screen
 		//checkboxes at top for multiple availabilities
 		this.mButtonArray = new Array();
 
-		document.getElementById("upcoming_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_available_id"));
-		document.getElementById("upcoming_not_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_not_available_id"));
-		document.getElementById("upcoming_maybe_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_maybe_available_id"));
+		document.getElementById("profile_player_id").onclick = this.setAllHit.bind(document.getElementById("profile_player_id"));
+		document.getElementById("profile_parent_id").onclick = this.setAllHit.bind(document.getElementById("profile_parent_id"));
+		document.getElementById("profile_coach_id").onclick = this.setAllHit.bind(document.getElementById("profile_coach_id"));
+		document.getElementById("profile_manager_id").onclick = this.setAllHit.bind(document.getElementById("profile_manager_id"));
+		document.getElementById("profile_administrator_id").onclick = this.setAllHit.bind(document.getElementById("profile_administrator_id"));
         }
 
         get()

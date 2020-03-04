@@ -168,7 +168,7 @@ class Application
 		document.getElementById("deleteclubnavbuttonid").onclick = this.hit.bind(document.getElementById("deleteclubnavbuttonid"));
 	
 		//profile
-		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(document.getElementById("upcomingnavbuttonid"));
+		document.getElementById("profilenavbuttonid").onclick = this.hit.bind(document.getElementById("profilenavbuttonid"));
 
 		//aside
                 this.mAsideMessageElement = null;
@@ -598,6 +598,14 @@ class Application
         {
                 return this.mPersonSelect;
         }
-
-
+       
+	//profile screen
+	setProfileScreenHtml(h)
+	{
+                this.mProfileScreenHtml = h; 
+	}
+        getProfileScreenHtml()
+	{
+                return this.mProfileScreenHtml; 
+	}
 }

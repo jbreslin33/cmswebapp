@@ -1026,3 +1026,43 @@ class INSERT_GAME_APPLICATION extends State
 		app.getCurrentScreen().exit();
 	}
 }
+
+//PROFILE
+class PROFILE_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("PROFILE_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new ProfileScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("PROFILE_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("PROFILE_APPLICATION: EXIT");        
+		}
+		
+		app.getCurrentScreen().exit();
+	}
+}
