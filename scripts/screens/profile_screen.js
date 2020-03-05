@@ -76,8 +76,8 @@ class ProfileScreen extends Screen
         get()
         {
 		super.get();
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
-                APPLICATION.getCurrentScreen().ajax();
+		//APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
+                //APPLICATION.getCurrentScreen().ajax();
         }
 
 	exit()
