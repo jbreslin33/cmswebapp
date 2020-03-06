@@ -90,6 +90,8 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
 --email_id,message,code,club_id,person_id
 CREATE OR REPLACE FUNCTION f_format_result_set_pitches_and_teams(int,TEXT,int,int,int)
 RETURNS text AS $$
@@ -1624,4 +1626,45 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 -----------
+
+--BEGIN PROFILE
+CREATE OR REPLACE FUNCTION f_select_profile(email_id int, person_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+	result_set = f_format_result_set_profile(email_id, null,-100, $2);
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_format_result_set_profile(int,TEXT,int,int)
+RETURNS text AS $$
+DECLARE
+        json_result_codes text;
+        json_result_messages text;
+        json_result_persons text;
+
+        --json_result_teams text;
+        --json_result_clubs text;
+        --json_result_practices text;
+        --json_result_games text;
+        result_set text;
+BEGIN
+        select into json_result_messages j_select_messages($2);
+        select into json_result_codes j_select_codes($3);
+
+        --select into json_result_persons j_select_persons($1);
+        --select into json_result_clubs j_select_clubs($1);
+        --select into json_result_teams j_select_teams($1);
+
+        --select into json_result_practices j_select_practices($1,$4,$5);
+        --select into json_result_games j_select_games($1,$4,$5);
+
+        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
