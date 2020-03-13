@@ -66,11 +66,23 @@ class ProfileScreen extends Screen
 		//checkboxes at top for multiple availabilities
 		this.mButtonArray = new Array();
 
-		document.getElementById("profile_player_id").onclick = this.setAllHit.bind(document.getElementById("profile_player_id"));
-		document.getElementById("profile_parent_id").onclick = this.setAllHit.bind(document.getElementById("profile_parent_id"));
-		document.getElementById("profile_coach_id").onclick = this.setAllHit.bind(document.getElementById("profile_coach_id"));
-		document.getElementById("profile_manager_id").onclick = this.setAllHit.bind(document.getElementById("profile_manager_id"));
-		document.getElementById("profile_administrator_id").onclick = this.setAllHit.bind(document.getElementById("profile_administrator_id"));
+		this.mPlayerButton = document.getElementById("profile_player_id");
+		this.mParentButton = document.getElementById("profile_parent_id");
+		this.mCoachButton = document.getElementById("profile_coach_id");
+		this.mManagerButton = document.getElementById("profile_manager_id");
+		this.mAdministratorButton = document.getElementById("profile_administrator_id");
+		
+		this.mPlayerButton.onclick = this.hit.bind(this.mPlayerButton);
+		this.mParentButton.onclick = this.hit.bind(this.mParentButton);
+		this.mCoachButton.onclick = this.hit.bind(this.mCoachButton);
+		this.mManagerButton.onclick = this.hit.bind(this.mManagerButton);
+		this.mAdministratorButton.onclick = this.hit.bind(this.mAdministratorButton);
+		
+		this.mPlayerButton.style.backgroundColor = "red";
+		this.mParentButton.style.backgroundColor = "red";
+		this.mCoachButton.style.backgroundColor = "red";
+		this.mManagerButton.style.backgroundColor = "red";
+		this.mAdministratorButton.style.backgroundColor = "red";
         }
 
         get()
@@ -96,113 +108,25 @@ class ProfileScreen extends Screen
 
 	//lightUp(button
 
-	setAllHit()
-	{
-		var screen = APPLICATION.getCurrentScreen();
-		screen.resetLists();
-		
-		if (this.id == "upcoming_available_id")
-		{
-			//set this one
-			this.style.backgroundColor = "#4CAF50"; 
-
-			//set others back to blue
-			document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
-		
-			for (var i = 0; i < screen.mButtonArray.length; i++)
-			{
-				var id = screen.mButtonArray[i].id.split('_');;
-				if (id[2] == 1)
-				{
-					//give active color and add to array
-					screen.mButtonArray[i].style.backgroundColor = "#4CAF50";
-					screen.mAvailabilityArray.push(id[1]);
-					screen.mAvailabilityArray.push(id[2]);
-					screen.mAvailabilityArray.push(id[3]);
-					screen.mAvailabilityArray.push(id[4]);
-				}
-				if (id[2] == 2 || id[2] == 3)
-				{
-					screen.mButtonArray[i].style.backgroundColor = "#33b5e5"; 
-				}
-			}
-		}
-
-                if (this.id == "upcoming_maybe_available_id")
-                {
-                        //set this one
-                        this.style.backgroundColor = "yellow";
-
-                        //set others back to blue
-                        document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-                        document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-
-                        for (var i = 0; i < screen.mButtonArray.length; i++)
-                        {
-                                var id = screen.mButtonArray[i].id.split('_');
-                                if (id[2] == 2)
-                                {
-					//give active color and add to array
-                                        screen.mButtonArray[i].style.backgroundColor = "yellow";
-                                	screen.mAvailabilityArray.push(id[1]);
-                                	screen.mAvailabilityArray.push(id[2]);
-                                	screen.mAvailabilityArray.push(id[3]);
-                                	screen.mAvailabilityArray.push(id[4]);
-                                }
-                                if (id[2] == 1 || id[2] == 3)
-                                {
-                                        screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
-                                }
-                        }
-                }
-
-		if (this.id == "upcoming_not_available_id")
-                {
-                        //set this one
-                        this.style.backgroundColor = "red";
-
-                        //set others back to blue
-                        document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-                        document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
-
-                        for (var i = 0; i < screen.mButtonArray.length; i++)
-                        {
-                                var id = screen.mButtonArray[i].id.split('_');;
-                                if (id[2] == 3)
-                                {
-					//give active color and add to array
-                                        screen.mButtonArray[i].style.backgroundColor = "red";
-                                	screen.mAvailabilityArray.push(id[1]);
-                                	screen.mAvailabilityArray.push(id[2]);
-                                	screen.mAvailabilityArray.push(id[3]);
-                                	screen.mAvailabilityArray.push(id[4]);
-                                }
-                                if (id[2] == 1 || id[2] == 2)
-                                {
-                                        screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
-                                }
-                        }
-                }
-
-		screen.mAvailabilityList = screen.mAvailabilityArray.join();
-		screen.updateAvailability()
-	}
-
 	resetLists()
 	{
 		this.mAvailabilityList = null;
 		this.mAvailabilityArray.length = 0;
 	}
 
-	setOneHit()
+	hit()
 	{
 		var screen = APPLICATION.getCurrentScreen();
 		screen.resetLists();
 
 		var a = this.id.split('_');
+		var profileType = a[1]; 
 		var id = 0;
 		var availabilityTxt = null;
+
+		//document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
+		//this.style.backgroundColor = "green";
+
 		if (a.length > 1)
 		{
 			//game
