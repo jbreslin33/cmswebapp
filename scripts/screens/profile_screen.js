@@ -125,60 +125,18 @@ class ProfileScreen extends Screen
 		var availabilityTxt = null;
 
 		//document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
-		//this.style.backgroundColor = "green";
-
-		if (a.length > 1)
+		if (this.style.backgroundColor == "green")
 		{
-			//game
-			if (a[1] == 1)
-			{
-				if (a[2] == 1)
-				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-				}
-				if (a[2] == 2)
-				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "yellow"; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-				}
-				if (a[2] == 3)
-				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "red"; 		
-				}
-			}
-
-			//practice
-			if (a[1] == 2)
-			{
-				if (a[2] == 1)
-				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-				}
-				if (a[2] == 2)
-				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "yellow"; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-				}
-				if (a[2] == 3)
-				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "red"; 		
-				}
-			}
-
-			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
+			this.style.backgroundColor = "red";
 		}
+		else
+		{
+			this.style.backgroundColor = "green";
+		}
+
+		//screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
 		//send to server
-		screen.updateAvailability();
+		//screen.updateAvailability();
 	}
 
 	updateAvailability()
