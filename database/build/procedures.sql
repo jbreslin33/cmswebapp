@@ -1016,6 +1016,31 @@ END;
 $$;
 --END INSERT PRACTICE
 
+--BEGIN UPDATE PROFILE
+CREATE OR REPLACE PROCEDURE p_update_profile(text,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        ids INT[];
+        found_person_id integer;
+	found_player_id players.id%TYPE;
+BEGIN
+
+        ids = string_to_array($1,',');
+	select id into found_player_id from players where person_id = ids[1]; 
+	IF found_player_id > 0  THEN
+
+	ELSE
+
+	END IF;
+
+	insert into players (person_id) values (ids[1]) ON CONFLICT (person_id) DO select id from players where person_id = ids[1];
+
+END;
+$$;
+--END UPDATE PROFILE
+
+
 
 CREATE OR REPLACE PROCEDURE p_update_availability(text,INOUT x int)
 LANGUAGE plpgsql
@@ -1074,6 +1099,31 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_update_profile(int,text)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+        IF $2 is NULL THEN
+        ELSE
+
+                CALL p_update_profile($2,x);
+
+                IF x > 0 THEN
+                        result_set = f_format_result_set($1,null,-100);
+                ELSE
+                        result_set = f_format_result_set($1,'Something went wrong with setting availability. Please try again.',-101);
+                END IF;
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 --BEGIN SELECT PROFILES
 CREATE OR REPLACE FUNCTION f_profile(email_id_p int, person_id_p int)

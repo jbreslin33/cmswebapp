@@ -15,6 +15,8 @@ class ProfileScreen extends Screen
 
 		this.mProfilesArray = new Array();
 
+		this.mProfileUpdate = null;
+
 		this.mPlayerButton = document.getElementById("profile_player_id");
 		this.mParentButton = document.getElementById("profile_parent_id");
 		this.mCoachButton = document.getElementById("profile_coach_id");
@@ -63,24 +65,24 @@ class ProfileScreen extends Screen
 		
 		var a = this.id.split('_');
 		var profileType = a[1]; 
-		var id = 0;
-		var availabilityTxt = null;
 
 		if (this.style.backgroundColor == "green")
 		{
 			this.style.backgroundColor = "red";
+			this.mProfileUpdate = profileType + '_' + '0'; 
 		}
 		else
 		{
 			this.style.backgroundColor = "green";
+			this.mProfileUpdate = profileType + '_' + '1'; 
 		}
-		//screen.updateAvailability();
+		screen.updateProfile();
 	}
 
-	updateAvailability()
+	updateProfile()
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
+		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profile_update=' + this.mProfileUpdate);
                 screen.ajax();
 	}
 
