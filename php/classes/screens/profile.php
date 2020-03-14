@@ -18,6 +18,6 @@ class Profile extends Screen
         }
 }
 
-$insertTeam = new InsertTeam();	
+$profile = new Profile();	
 
 ?>

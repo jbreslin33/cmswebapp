@@ -362,7 +362,7 @@ CREATE TABLE persons
     	last_name text not null,
 	phones text [],
 	address text,
-	coordinates text,
+	dob date,
 	created_at timestamp not null default now(),
 	PRIMARY KEY (id)
 );
@@ -604,21 +604,22 @@ CREATE TABLE club_emails
 --so emails_players/....
 
 --PERSONS
-CREATE TABLE dobs
-(
-	id SERIAL,
-	dob date not null,
-	PRIMARY KEY (id)
-);
 
 CREATE TABLE players 
 (
 	id SERIAL,
-	dob_id int not null,
 	person_id integer not null unique,
 	created_at timestamp not null default now(),
         FOREIGN KEY(person_id) REFERENCES persons(id),
-        FOREIGN KEY(dob_id) REFERENCES dobs(id),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE parents 
+(
+	id SERIAL,
+	person_id integer not null unique,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
 	PRIMARY KEY (id)
 );
 
