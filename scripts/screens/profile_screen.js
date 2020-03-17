@@ -66,18 +66,74 @@ class ProfileScreen extends Screen
 		var a = this.id.split('_');
 		var profileType = a[1]; 
 
-		if (this.style.backgroundColor == "green")
+		if (a[1] == 'player')
 		{
-			console.log('green');
-			this.style.backgroundColor = "red";
-			this.mProfileUpdate = profileType + '_' + '0'; 
+			if (this.style.backgroundColor == "green")
+			{
+				this.style.backgroundColor = "red";
+				this.mProfileUpdate = '1_1'; 
+			}
+			else
+			{
+				this.style.backgroundColor = "green";
+				this.mProfileUpdate = '1_0'; 
+			}
 		}
-		else
+		if (a[1] == 'parent')
 		{
-			console.log('red');
-			this.style.backgroundColor = "green";
-			this.mProfileUpdate = profileType + '_' + '1'; 
-			console.log('in red:' + this.mProfileUpdate);
+			if (this.style.backgroundColor == "green")
+			{
+				this.style.backgroundColor = "red";
+				this.mProfileUpdate = profileType + '_' + '0'; 
+				this.mProfileUpdate = '2_1'; 
+			}
+			else
+			{
+				this.style.backgroundColor = "green";
+				this.mProfileUpdate = '2_0'; 
+			}
+		}
+		if (a[1] == 'coach')
+		{
+			if (this.style.backgroundColor == "green")
+			{
+				this.style.backgroundColor = "red";
+				this.mProfileUpdate = profileType + '_' + '0'; 
+				this.mProfileUpdate = '3_1'; 
+			}
+			else
+			{
+				this.style.backgroundColor = "green";
+				this.mProfileUpdate = '3_0'; 
+			}
+		}
+		if (a[1] == 'manager')
+		{
+			if (this.style.backgroundColor == "green")
+			{
+				this.style.backgroundColor = "red";
+				this.mProfileUpdate = profileType + '_' + '0'; 
+				this.mProfileUpdate = '4_1'; 
+			}
+			else
+			{
+				this.style.backgroundColor = "green";
+				this.mProfileUpdate = '4_0'; 
+			}
+		}
+		if (a[1] == 'administrator')
+		{
+			if (this.style.backgroundColor == "green")
+			{
+				this.style.backgroundColor = "red";
+				this.mProfileUpdate = profileType + '_' + '0'; 
+				this.mProfileUpdate = '5_1'; 
+			}
+			else
+			{
+				this.style.backgroundColor = "green";
+				this.mProfileUpdate = '5_0'; 
+			}
 		}
 		screen.updateProfile(this.mProfileUpdate);
 	}

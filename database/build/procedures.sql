@@ -1022,17 +1022,70 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
         ids INT[];
-        found_person_id integer;
-	found_player_id players.id%TYPE;
+	found_person_id persons.id%TYPE;
 BEGIN
 
-        ids = string_to_array($1,',');
-	select id into found_player_id from players where person_id = ids[1]; 
-	IF found_player_id > 0  THEN
-		-- DO NOTHING
+        ids = string_to_array($1,'_');
+  	
+	RAISE LOG 'log message in p %', $1;
 
+
+	IF ids[0] = 1 THEN
+		select person_id into found_person_id from players where person_id = ids[1]; 
+		IF found_person_id > 0  THEN
+			-- DO NOTHING
+		ELSE
+			insert into players (person_id) values (ids[1]);
+		END IF;
 	ELSE
-		insert into players (person_id) values (ids[1]);
+		--DO NOTHING
+	END IF;
+
+
+	IF ids[0] = 2 THEN
+		select person_id into found_person_id from parents where person_id = ids[1]; 
+		IF found_person_id > 0  THEN
+			-- DO NOTHING
+		ELSE
+			insert into parents (person_id) values (ids[1]);
+		END IF;
+	ELSE
+		--DO NOTHING
+	END IF;
+
+	
+	IF ids[0] = 3 THEN
+		select person_id into found_person_id from coaches where person_id = ids[1]; 
+		IF found_person_id > 0  THEN
+			-- DO NOTHING
+		ELSE
+			insert into coaches (person_id) values (ids[1]);
+		END IF;
+	ELSE
+		--DO NOTHING
+	END IF;
+
+
+	IF ids[0] = 4 THEN
+		select person_id into found_person_id from managers where person_id = ids[1]; 
+		IF found_person_id > 0  THEN
+			-- DO NOTHING
+		ELSE
+			insert into managers (person_id) values (ids[1]);
+		END IF;
+	ELSE
+		--DO NOTHING
+	END IF;
+	
+	IF ids[0] = 5 THEN
+		select person_id into found_person_id from administrators where person_id = ids[1]; 
+		IF found_person_id > 0  THEN
+			-- DO NOTHING
+		ELSE
+			insert into administrators (person_id) values (ids[1]);
+		END IF;
+	ELSE
+		--DO NOTHING
 	END IF;
 
 END;
@@ -1106,6 +1159,8 @@ DECLARE
         DECLARE x int := -111;
         json_result text;
 BEGIN
+	RAISE LOG 'log message in f %', $2;
+
         IF $2 is NULL THEN
         ELSE
 

@@ -14,7 +14,7 @@ class UpdateProfile extends Screen
 
 		if (isset($_GET['profile_update']))
 		{
-			$availability = $_GET['profile_update'];
+			$profile_update = $_GET['profile_update'];
 			error_log($profile_update);
 		}
 
