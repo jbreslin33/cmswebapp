@@ -1205,7 +1205,7 @@ BEGIN
                 CALL p_update_profile($2,$3,$4,x);
 
                 IF x > 0 THEN
-                        result_set = f_format_result_set($1,null,-100);
+                        result_set = f_format_result_set($1,null,-101);
                 ELSE
                         result_set = f_format_result_set($1,'Something went wrong with setting availability. Please try again.',-101);
                 END IF;
