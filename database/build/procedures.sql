@@ -1017,7 +1017,8 @@ $$;
 --END INSERT PRACTICE
 
 --BEGIN UPDATE PROFILE
-CREATE OR REPLACE PROCEDURE p_update_profile(text,INOUT x int)
+--person_id,type,active
+CREATE OR REPLACE PROCEDURE p_update_profile(int,int,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1025,67 +1026,73 @@ DECLARE
 	found_person_id persons.id%TYPE;
 BEGIN
 
-        ids = string_to_array($1,'_');
-  	
-	RAISE LOG 'log message in p %', $1;
+	RAISE LOG 'log message in 1 in p %', $1;
+	RAISE LOG 'log message in 2 in p %', $2;
+	RAISE LOG 'log message in 3 in p %', $3;
 
+	IF $3 = 2 THEN
 
-	IF ids[0] = 1 THEN
-		select person_id into found_person_id from players where person_id = ids[1]; 
-		IF found_person_id > 0  THEN
-			-- DO NOTHING
+		IF $2 = 1 THEN
+			select person_id into found_person_id from players where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into players (person_id) values ($1);
+			END IF;
 		ELSE
-			insert into players (person_id) values (ids[1]);
+			--DO NOTHING
 		END IF;
-	ELSE
-		--DO NOTHING
-	END IF;
 
 
-	IF ids[0] = 2 THEN
-		select person_id into found_person_id from parents where person_id = ids[1]; 
-		IF found_person_id > 0  THEN
-			-- DO NOTHING
+		IF $2 = 2 THEN
+			select person_id into found_person_id from parents where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into parents (person_id) values ($1);
+			END IF;
 		ELSE
-			insert into parents (person_id) values (ids[1]);
+			--DO NOTHING
 		END IF;
-	ELSE
-		--DO NOTHING
-	END IF;
 
 	
-	IF ids[0] = 3 THEN
-		select person_id into found_person_id from coaches where person_id = ids[1]; 
-		IF found_person_id > 0  THEN
-			-- DO NOTHING
+		IF $2 = 3 THEN
+			RAISE LOG 'log message in 3 %', $1;
+			select person_id into found_person_id from coaches where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into coaches (person_id) values ($1);
+			END IF;
 		ELSE
-			insert into coaches (person_id) values (ids[1]);
+			--DO NOTHING
 		END IF;
-	ELSE
-		--DO NOTHING
-	END IF;
 
 
-	IF ids[0] = 4 THEN
-		select person_id into found_person_id from managers where person_id = ids[1]; 
-		IF found_person_id > 0  THEN
-			-- DO NOTHING
+		IF $2 = 4 THEN
+			select person_id into found_person_id from managers where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into managers (person_id) values ($1);
+			END IF;
 		ELSE
-			insert into managers (person_id) values (ids[1]);
+			--DO NOTHING
 		END IF;
-	ELSE
-		--DO NOTHING
-	END IF;
 	
-	IF ids[0] = 5 THEN
-		select person_id into found_person_id from administrators where person_id = ids[1]; 
-		IF found_person_id > 0  THEN
-			-- DO NOTHING
+		IF $2 = 5 THEN
+			select person_id into found_person_id from administrators where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into administrators (person_id) values ($1);
+			END IF;
 		ELSE
-			insert into administrators (person_id) values (ids[1]);
+			--DO NOTHING
 		END IF;
+
 	ELSE
-		--DO NOTHING
+
 	END IF;
 
 END;
@@ -1152,19 +1159,19 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_update_profile(int,text)
+--email_id,person_id,type,active
+CREATE OR REPLACE FUNCTION f_update_profile(int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
 BEGIN
-	RAISE LOG 'log message in f %', $2;
 
         IF $2 is NULL THEN
         ELSE
 
-                CALL p_update_profile($2,x);
+                CALL p_update_profile($2,$3,$4,x);
 
                 IF x > 0 THEN
                         result_set = f_format_result_set($1,null,-100);

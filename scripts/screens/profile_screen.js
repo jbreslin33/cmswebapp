@@ -71,12 +71,14 @@ class ProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileUpdate = '1_1'; 
+				this.mProfileType = '1'; 
+				this.mActive = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileUpdate = '1_0'; 
+				this.mProfileType = '1'; 
+				this.mActive = '2'; 
 			}
 		}
 		if (a[1] == 'parent')
@@ -84,13 +86,14 @@ class ProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileUpdate = profileType + '_' + '0'; 
-				this.mProfileUpdate = '2_1'; 
+				this.mProfileType = '2'; 
+				this.mActive = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileUpdate = '2_0'; 
+				this.mProfileType = '2'; 
+				this.mActive = '2'; 
 			}
 		}
 		if (a[1] == 'coach')
@@ -98,13 +101,14 @@ class ProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileUpdate = profileType + '_' + '0'; 
-				this.mProfileUpdate = '3_1'; 
+				this.mProfileType = '3'; 
+				this.mActive = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileUpdate = '3_0'; 
+				this.mProfileType = '3'; 
+				this.mActive = '2'; 
 			}
 		}
 		if (a[1] == 'manager')
@@ -112,13 +116,14 @@ class ProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileUpdate = profileType + '_' + '0'; 
-				this.mProfileUpdate = '4_1'; 
+				this.mProfileType = '4'; 
+				this.mActive = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileUpdate = '4_0'; 
+				this.mProfileType = '4'; 
+				this.mActive = '2'; 
 			}
 		}
 		if (a[1] == 'administrator')
@@ -126,22 +131,23 @@ class ProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileUpdate = profileType + '_' + '0'; 
-				this.mProfileUpdate = '5_1'; 
+				this.mProfileType = '5'; 
+				this.mActive = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileUpdate = '5_0'; 
+				this.mProfileType = '5'; 
+				this.mActive = '2'; 
 			}
 		}
-		screen.updateProfile(this.mProfileUpdate);
+		screen.updateProfile(APPLICATION.getCurrentScreen().getPersonId(),this.mProfileType,this.mActive);
 	}
 
-	updateProfile(profileUpdate)
+	updateProfile(personId,profileType,active)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profile_update=' + profileUpdate);
+		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profiletype=' + profileType + '&active=' + active + '&person_id=' + personId);
 		console.log('getUrl:' + screen.getUrl());
 		//console.log('mProfileUpdate:' + screen.mProfileUpdate);
 		//console.log('mJWT:' + APPLICATION.getJWT());
