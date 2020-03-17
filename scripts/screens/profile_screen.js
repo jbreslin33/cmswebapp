@@ -68,21 +68,27 @@ class ProfileScreen extends Screen
 
 		if (this.style.backgroundColor == "green")
 		{
+			console.log('green');
 			this.style.backgroundColor = "red";
 			this.mProfileUpdate = profileType + '_' + '0'; 
 		}
 		else
 		{
+			console.log('red');
 			this.style.backgroundColor = "green";
 			this.mProfileUpdate = profileType + '_' + '1'; 
+			console.log('in red:' + this.mProfileUpdate);
 		}
-		screen.updateProfile();
+		screen.updateProfile(this.mProfileUpdate);
 	}
 
-	updateProfile()
+	updateProfile(profileUpdate)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profile_update=' + this.mProfileUpdate);
+		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profile_update=' + profileUpdate);
+		console.log('getUrl:' + screen.getUrl());
+		//console.log('mProfileUpdate:' + screen.mProfileUpdate);
+		//console.log('mJWT:' + APPLICATION.getJWT());
                 screen.ajax();
 	}
 

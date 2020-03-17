@@ -1029,12 +1029,11 @@ BEGIN
         ids = string_to_array($1,',');
 	select id into found_player_id from players where person_id = ids[1]; 
 	IF found_player_id > 0  THEN
+		-- DO NOTHING
 
 	ELSE
-
+		insert into players (person_id) values (ids[1]);
 	END IF;
-
-	insert into players (person_id) values (ids[1]) ON CONFLICT (person_id) DO select id from players where person_id = ids[1];
 
 END;
 $$;
