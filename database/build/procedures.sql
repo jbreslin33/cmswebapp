@@ -1092,8 +1092,39 @@ BEGIN
 		END IF;
 
 	ELSE
+		IF $2 = 1 THEN
+			delete from players where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 2 THEN
+			delete from parents where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 3 THEN
+			delete from coaches where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 4 THEN
+			delete from managers where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 5 THEN
+			delete from administrators where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
 
 	END IF;
+	x := 1;
 
 END;
 $$;
