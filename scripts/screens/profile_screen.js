@@ -176,6 +176,42 @@ class ProfileScreen extends Screen
 					{
 						this.mPlayerButton.style.backgroundColor = "red";
 					}
+
+					if (this.mJson.profiles[i].parent_id != null)
+					{
+						this.mParentButton.style.backgroundColor = "green";
+					}
+					else
+					{
+						this.mParentButton.style.backgroundColor = "red";
+					}
+					
+					if (this.mJson.profiles[i].coach_id != null)
+					{
+						this.mCoachButton.style.backgroundColor = "green";
+					}
+					else
+					{
+						this.mCoachButton.style.backgroundColor = "red";
+					}
+					
+					if (this.mJson.profiles[i].manager_id != null)
+					{
+						this.mManagerButton.style.backgroundColor = "green";
+					}
+					else
+					{
+						this.mManagerButton.style.backgroundColor = "red";
+					}
+					
+					if (this.mJson.profiles[i].administrator_id != null)
+					{
+						this.mAdministratorButton.style.backgroundColor = "green";
+					}
+					else
+					{
+						this.mAdministratorButton.style.backgroundColor = "red";
+					}
 				}
 			}
 		}
