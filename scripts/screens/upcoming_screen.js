@@ -323,7 +323,7 @@ class UpcomingScreen extends Screen
 				var div = document.createElement('div');	
 				this.mDivArray.push(div);
 				div.setAttribute('class','card');
-				document.getElementById("upcoming_screen_html_id").appendChild(div);
+				document.getElementById("upcoming_screen_col_6_html_id").appendChild(div);
 
 				var container = document.createElement('div');
 				container.setAttribute('class','container');
