@@ -592,8 +592,10 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 	returning_person_id persons.id%TYPE;
+	returning_club_person_id club_persons.id%TYPE;
 	returning_email_id emails.id%TYPE;
 	returning_club_id clubs.id%TYPE;
+
 
 	--JIM as manager
 	returning_manager_id managers.id%TYPE;
@@ -630,14 +632,18 @@ BEGIN
 	CALL p_insert_caos(returning_club_id);
 
 	--add Jim Breslin as team manager
-	insert into managers (person_id) values (28) returning id into returning_manager_id;
-	insert into club_managers (club_person_id, manager_id) values (28,returning_manager_id) returning id into returning_club_manager_id;
-	insert into team_club_persons (club_person_id, team_id) values (28,1)  returning id into returning_team_club_person_id;
+
+	select id into returning_person_id from persons where first_name = 'Jim' AND last_name = 'Breslin';
+	select id into returning_club_person_id from club_persons where person_id = returning_person_id;
+
+	insert into managers (person_id) values (returning_person_id) returning id into returning_manager_id;
+	insert into club_managers (club_person_id, manager_id) values (returning_club_person_id,returning_manager_id) returning id into returning_club_manager_id;
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,1)  returning id into returning_team_club_person_id;
 	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
 	
 	--add Jim Breslin as club Administrator
-	insert into administrators (person_id) values (28) returning id into returning_administrator_id;
-	insert into club_administrators (club_person_id,administrator_id) values (28,returning_administrator_id);
+	insert into administrators (person_id) values (returning_person_id) returning id into returning_administrator_id;
+	insert into club_administrators (club_person_id,administrator_id) values (returning_club_person_id,returning_administrator_id);
 	
 
 RETURN result_set;

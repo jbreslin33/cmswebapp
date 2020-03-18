@@ -307,7 +307,7 @@ class UpcomingScreen extends Screen
 		//lets set message at top that there is a schedule
 		if (this.mEventsArray.length > 0)
 		{
-			this.setMessage('Upcoming schedule', 'black'); 
+			this.setMessage('', 'black'); 
 		}
 		else
 		{
