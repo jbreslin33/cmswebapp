@@ -181,10 +181,15 @@ class ClubProfileScreen extends Screen
                                 	document.getElementById("club_profile_screen_html_id").appendChild(div);
 
 
+					//col-3
+					var divcol3 = document.createElement('div');
+                                	divcol3.setAttribute('class','col-3');
+					div.appendChild(divcol3);
+
 					//create a card and container to hold record
 	                                var divcard = document.createElement('div');
                                 	divcard.setAttribute('class','card');
-					div.appendChild(divcard);
+					divcol3.appendChild(divcard);
 
                                 	var container = document.createElement('div');
                                 	container.setAttribute('class','container');
@@ -201,6 +206,22 @@ class ClubProfileScreen extends Screen
 					this.mJson.club_profiles[i].last_name + ' ' +    
 					this.mJson.club_profiles[i].first_name +  ' dob: ' +  
 					this.mJson.club_profiles[i].dob;   
+
+
+					//col-3
+					var divcol9 = document.createElement('div');
+                                	divcol9.setAttribute('class','col-9');
+					div.appendChild(divcol9);
+
+					//create a card and container to hold record
+	                                var divcard = document.createElement('div');
+                                	divcard.setAttribute('class','card');
+					divcol9.appendChild(divcard);
+
+                                	var container = document.createElement('div');
+                                	container.setAttribute('class','container');
+                                	divcard.appendChild(container);
+
 
 
 					//create a player button
