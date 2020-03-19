@@ -40,6 +40,7 @@ class Application
                	this.mInsertGameScreenHtml = null; 
                	this.mInsertForgotPasswordScreenHtml = null; 
                	this.mInviteToClubScreenHtml = null; 
+               	this.mClubProfileScreenHtml = null; 
                	this.mInsertAcceptClubInInviteScreenHtml = null; 
                	this.mUpdateForgotPasswordScreenHtml = null; 
                	this.mProfileScreenHtml = null; 
@@ -64,6 +65,7 @@ class Application
                	this.setInsertGameScreenHtml               ( document.getElementById("insert_game_screen_html_id")               ); 
                	this.setInsertForgotPasswordScreenHtml     ( document.getElementById("insert_forgot_password_screen_html_id")    );
                	this.setInviteToClubScreenHtml             ( document.getElementById("invite_to_club_screen_html_id")         ); 
+               	this.setClubProfileScreenHtml              ( document.getElementById("club_profile_screen_html_id")                  );
                	this.setInsertAcceptClubInInviteScreenHtml ( document.getElementById("insert_accept_club_invite_screen_html_id") );
                	this.setUpdateForgotPasswordScreenHtml     ( document.getElementById("update_forgot_password_screen_html_id")    ); 
                	this.setProfileScreenHtml                  ( document.getElementById("profile_screen_html_id")                  );
@@ -123,6 +125,7 @@ class Application
 		this.mINSERT_GAME_APPLICATION        = new INSERT_GAME_APPLICATION();
 		this.mINSERT_FORGOT_PASSWORD_APPLICATION        = new INSERT_FORGOT_PASSWORD_APPLICATION();
 		this.mINVITE_TO_CLUB_APPLICATION        = new INVITE_TO_CLUB_APPLICATION();
+		this.mCLUB_PROFILE_APPLICATION            = new CLUB_PROFILE_APPLICATION();
 		this.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION        = new INSERT_ACCEPT_CLUB_INVITE_APPLICATION();
 		this.mUPDATE_FORGOT_PASSWORD_APPLICATION        = new UPDATE_FORGOT_PASSWORD_APPLICATION();
 		this.mPROFILE_APPLICATION            = new PROFILE_APPLICATION();
@@ -155,6 +158,7 @@ class Application
 		document.getElementById("insertteamnavbuttonid").onclick = this.hit.bind(document.getElementById("insertteamnavbuttonid"));
 		document.getElementById("insertpitchnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpitchnavbuttonid"));
 		document.getElementById("invitetoclubnavbuttonid").onclick = this.hit.bind(document.getElementById("invitetoclubnavbuttonid"));
+		document.getElementById("clubprofilenavbuttonid").onclick = this.hit.bind(document.getElementById("clubprofilenavbuttonid"));
 	
 		//persons
 		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpersonnavbuttonid"));
@@ -210,6 +214,10 @@ class Application
 		if (this.id == 'invitetoclubnavbuttonid')
 		{
 			location.hash = '#invite_to_club_screen';
+		}
+		if (this.id == 'clubprofilenavbuttonid')
+		{
+			location.hash = '#club_profile_screen';
 		}
 		if (this.id == 'insertpersonnavbuttonid')
 		{
@@ -569,6 +577,16 @@ class Application
         getInviteToClubScreenHtml()
 	{
                 return this.mInviteToClubScreenHtml;
+	}
+	
+	//club profile screen
+	setClubProfileScreenHtml(h)
+	{
+                this.mClubProfileScreenHtml = h; 
+	}
+        getClubProfileScreenHtml()
+	{
+                return this.mClubProfileScreenHtml; 
 	}
 
         setInsertAcceptClubInInviteScreenHtml(h)

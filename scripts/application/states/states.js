@@ -101,6 +101,10 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINVITE_TO_CLUB_APPLICATION);
                 }
+		else if (location.hash == '#club_profile_screen' && app.mStateMachine.mCurrentState != app.mCLUB_PROFILE_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mCLUB_PROFILE_APPLICATION);
+                }
 		else if (location.hash == '#insert_accept_club_invite_screen' && app.mStateMachine.mCurrentState != app.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_ACCEPT_CLUB_INVITE_APPLICATION);
@@ -515,6 +519,46 @@ class INVITE_TO_CLUB_APPLICATION extends State
                 }
 		app.getCurrentScreen().exit();
         }
+}
+
+//CLUB PROFILE
+class CLUB_PROFILE_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("CLUB_PROFILE_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new ClubProfileScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("CLUB_PROFILE_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("CLUB_PROFILE_APPLICATION: EXIT");        
+		}
+		
+		app.getCurrentScreen().exit();
+	}
 }
 
 class INSERT_ACCEPT_CLUB_INVITE_APPLICATION extends State

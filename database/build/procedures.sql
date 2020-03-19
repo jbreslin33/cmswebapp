@@ -110,6 +110,25 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--email_id,message,code,club_id,person_id
+CREATE OR REPLACE FUNCTION f_format_result_set_club_profiles(int,TEXT,int,int)
+RETURNS text AS $$
+DECLARE
+        json_result_codes text;
+        json_result_messages text;
+        json_result_profiles text;
+        result_set text;
+BEGIN
+
+        select into json_result_messages j_select_messages($2);
+        select into json_result_codes j_select_codes($3);
+        select into json_result_club_profiles j_select_club_profiles($4);
+        result_set = CONCAT(json_result_profiles,',',json_result_messages,',',json_result_codes,'}');
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 --email_id,message,code,club_id,person_id
 CREATE OR REPLACE FUNCTION f_format_result_set_pitches_and_teams(int,TEXT,int,int,int)
@@ -440,6 +459,46 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PROFILES
+
+--BEGIN J_SELECT CLUB PROFILES
+CREATE OR REPLACE FUNCTION j_select_club_profiles(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+		select
+		persons.id as person_id,
+		players.id as player_id,
+		parents.id as parent_id,
+		coaches.id as coach_id,
+		managers.id as manager_id,
+		administrators.id as administrator_id
+		
+		from persons
+
+		left join players on players.person_id=persons.id
+		left join parents on parents.person_id=persons.id
+		left join coaches on coaches.person_id=persons.id
+		left join managers on managers.person_id=persons.id
+		left join administrators on administrators.person_id=persons.id
+		where persons.id = $1
+
+        ) t;
+
+	IF raw_json is NULL THEN
+		result_set = CONCAT('"profiles": []', raw_json);
+	ELSE
+		result_set = CONCAT('"profiles": ', raw_json);
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT CLUB PROFILES
 
 --BEGIN J_SELECT TEAMS MANAGED
 CREATE OR REPLACE FUNCTION j_select_teams_managed(int,int)
@@ -1224,6 +1283,17 @@ DECLARE
         result_set text;
 BEGIN
         result_set = f_format_result_set_profiles(email_id_p,null,-102,person_id_p);
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+--BEGIN SELECT CLUB PROFILES
+CREATE OR REPLACE FUNCTION f_club_profile(email_id_p int, person_id_p int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+        result_set = f_format_result_set_club_profiles(email_id_p,null,-102,person_id_p);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
