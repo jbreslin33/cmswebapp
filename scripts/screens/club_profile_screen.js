@@ -13,7 +13,9 @@ class ClubProfileScreen extends Screen
                 this.setSpinner(document.getElementById("profile_screen_spinner_id"));
                 this.setForm(document.getElementById("profile_screen_form_id"));
 
+		this.mDivArray = new Array();
 		this.mClubProfilesArray = new Array();
+		this.mPlayerButtonArray = new Array();
 
 		this.mProfileUpdate = null;
 /*
@@ -168,9 +170,64 @@ class ClubProfileScreen extends Screen
 			{
                         	for (var i = 0; i < this.mJson.club_profiles.length; i++)
 				{
-					this.mClubProfilesArray.push(this.mJson.club_profiles[i]);
 
-					console.log('club_profile:' + this.mJson.club_profiles[i]); 
+					//add db row to array
+					this.mClubProfilesArray.push(this.mJson.club_profiles[i]);
+	                               
+					//row
+					var div = document.createElement('div');
+					this.mDivArray.push(div);
+                                	div.setAttribute('class','row');
+                                	document.getElementById("club_profile_screen_html_id").appendChild(div);
+
+
+					//create a card and container to hold record
+	                                var divcard = document.createElement('div');
+                                	divcard.setAttribute('class','card');
+					div.appendChild(divcard);
+
+                                	var container = document.createElement('div');
+                                	container.setAttribute('class','container');
+                                	divcard.appendChild(container);
+
+
+					//text
+                                	var textArray = new Array();
+
+                                	var p = document.createElement('p');
+                                	p.setAttribute('class','club-profile-paragraph');
+                                	container.appendChild(p);
+					p.innerHTML = '' + this.mJson.club_profiles[i].player_id + ' ' + 
+					this.mJson.club_profiles[i].last_name + ' ' +    
+					this.mJson.club_profiles[i].first_name +  ' dob: ' +  
+					this.mJson.club_profiles[i].dob;   
+
+
+					//create a player button
+ 					var button = document.createElement("BUTTON");
+                                	button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = "Player";
+                                        container.appendChild(button);
+                                        var id = 'club_player_button_' + this.mJson.club_profiles[i].person_id;
+                                        button.setAttribute("id", id);
+                                        button.onclick = this.hit.bind(button);
+					
+					if (this.mJson.club_profiles[i].player_id != null)
+					{
+						//this.mPlayerButton.style.backgroundColor = "green";
+						button.style.backgroundColor = "green";
+					}
+					else
+					{
+						//this.mPlayerButton.style.backgroundColor = "red";
+						button.style.backgroundColor = "red";
+					}
+
+                                        this.mPlayerButtonArray.push(button);
+
+
+
+					//console.log('club_profile:' + this.mJson.club_profiles[i]); 
 /*
 					if (this.mJson.profiles[i].player_id != null)
 					{
