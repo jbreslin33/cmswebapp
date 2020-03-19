@@ -116,14 +116,14 @@ RETURNS text AS $$
 DECLARE
         json_result_codes text;
         json_result_messages text;
-        json_result_profiles text;
+        json_result_club_profiles text;
         result_set text;
 BEGIN
 
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
         select into json_result_club_profiles j_select_club_profiles($4);
-        result_set = CONCAT(json_result_profiles,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_club_profiles,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
 END;
