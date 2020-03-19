@@ -472,6 +472,9 @@ SELECT json_agg(t) INTO raw_json
         from
         (
 		select
+		persons.last_name as last_name,
+		persons.first_name as first_name,
+		persons.dob as dob,
 		persons.id as person_id,
 		players.id as player_id,
 		parents.id as parent_id,
@@ -486,14 +489,14 @@ SELECT json_agg(t) INTO raw_json
 		left join coaches on coaches.person_id=persons.id
 		left join managers on managers.person_id=persons.id
 		left join administrators on administrators.person_id=persons.id
-		where persons.id = $1
+		order by persons.last_name asc
 
         ) t;
 
 	IF raw_json is NULL THEN
-		result_set = CONCAT('"profiles": []', raw_json);
+		result_set = CONCAT('"club_profiles": []', raw_json);
 	ELSE
-		result_set = CONCAT('"profiles": ', raw_json);
+		result_set = CONCAT('"club_profiles": ', raw_json);
 	END IF;
 RETURN result_set;
 END;

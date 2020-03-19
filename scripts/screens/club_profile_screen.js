@@ -13,10 +13,10 @@ class ClubProfileScreen extends Screen
                 this.setSpinner(document.getElementById("profile_screen_spinner_id"));
                 this.setForm(document.getElementById("profile_screen_form_id"));
 
-		this.mProfilesArray = new Array();
+		this.mClubProfilesArray = new Array();
 
 		this.mProfileUpdate = null;
-
+/*
 		this.mPlayerButton = document.getElementById("profile_player_id");
 		this.mParentButton = document.getElementById("profile_parent_id");
 		this.mCoachButton = document.getElementById("profile_coach_id");
@@ -34,6 +34,7 @@ class ClubProfileScreen extends Screen
 		this.mCoachButton.style.backgroundColor = "red";
 		this.mManagerButton.style.backgroundColor = "red";
 		this.mAdministratorButton.style.backgroundColor = "red";
+		*/
         }
 
         get()
@@ -158,16 +159,19 @@ class ClubProfileScreen extends Screen
 	{
 		super.processJsonData();
 
-		this.mProfilesArray.length = 0;
+		this.mClubProfilesArray.length = 0;
 
 		//make new array containing games and practices together
 		if (this.mJson)
 		{
-                	if (this.mJson.profiles)
+                	if (this.mJson.club_profiles)
 			{
-                        	for (var i = 0; i < this.mJson.profiles.length; i++)
+                        	for (var i = 0; i < this.mJson.club_profiles.length; i++)
 				{
-					this.mProfilesArray.push(this.mJson.profiles[i]);
+					this.mClubProfilesArray.push(this.mJson.club_profiles[i]);
+
+					console.log('club_profile:' + this.mJson.club_profiles[i]); 
+/*
 					if (this.mJson.profiles[i].player_id != null)
 					{
 						this.mPlayerButton.style.backgroundColor = "green";
@@ -176,7 +180,6 @@ class ClubProfileScreen extends Screen
 					{
 						this.mPlayerButton.style.backgroundColor = "red";
 					}
-
 					if (this.mJson.profiles[i].parent_id != null)
 					{
 						this.mParentButton.style.backgroundColor = "green";
@@ -212,6 +215,7 @@ class ClubProfileScreen extends Screen
 					{
 						this.mAdministratorButton.style.backgroundColor = "red";
 					}
+					*/
 				}
 			}
 		}
