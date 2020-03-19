@@ -16,12 +16,10 @@ class UpdateProfile extends Screen
 		if (isset($_GET['profiletype']))
 		{
 			$profiletype = $_GET['profiletype'];
-			error_log($profiletype);
 		}
 		if (isset($_GET['active']))
 		{
 			$active = $_GET['active'];
-			error_log($active);
 		}
 
                 $sql = 'select f_update_profile($1,$2,$3,$4)';

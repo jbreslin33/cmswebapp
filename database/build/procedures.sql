@@ -1026,9 +1026,9 @@ DECLARE
 	found_person_id persons.id%TYPE;
 BEGIN
 
-	RAISE LOG 'log message in 1 in p %', $1;
-	RAISE LOG 'log message in 2 in p %', $2;
-	RAISE LOG 'log message in 3 in p %', $3;
+	--RAISE LOG 'log message in 1 in p %', $1;
+	--RAISE LOG 'log message in 2 in p %', $2;
+	--RAISE LOG 'log message in 3 in p %', $3;
 
 	IF $3 = 2 THEN
 
@@ -1057,7 +1057,7 @@ BEGIN
 
 	
 		IF $2 = 3 THEN
-			RAISE LOG 'log message in 3 %', $1;
+			--RAISE LOG 'log message in 3 %', $1;
 			select person_id into found_person_id from coaches where person_id = $1; 
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
@@ -1772,10 +1772,10 @@ BEGIN
 
 			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
-  				RAISE LOG 'IF A log message %', x;
+  				--RAISE LOG 'IF A log message %', x;
 				result_set = f_format_result_set(x,'We sent you a link to your email to finish joining.',-101);
 			ELSE
-				RAISE LOG 'ELSE A log message %', x;
+				--RAISE LOG 'ELSE A log message %', x;
 				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
 			END IF;
 		ELSE
