@@ -202,10 +202,20 @@ class ClubProfileScreen extends Screen
                                 	var p = document.createElement('p');
                                 	p.setAttribute('class','club-profile-paragraph');
                                 	container.appendChild(p);
-					p.innerHTML = '' + this.mJson.club_profiles[i].player_id + ' ' + 
-					this.mJson.club_profiles[i].last_name + ' ' +    
-					this.mJson.club_profiles[i].first_name +  ' dob: ' +  
-					this.mJson.club_profiles[i].dob;   
+					//p.innerHTML = '' + this.mJson.club_profiles[i].person_id + ' ' + 
+					if (this.mJson.club_profiles[i].dob)
+					{
+						p.innerHTML = '' +  
+						this.mJson.club_profiles[i].last_name + ', ' +    
+						this.mJson.club_profiles[i].first_name +  ' DOB: ' +  
+						this.mJson.club_profiles[i].dob;   
+					}
+					else
+					{
+						p.innerHTML = '' +  
+						this.mJson.club_profiles[i].last_name + ', ' +    
+						this.mJson.club_profiles[i].first_name;  
+					}
 
 
 					//col-3
