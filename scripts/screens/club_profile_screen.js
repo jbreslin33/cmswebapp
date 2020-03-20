@@ -55,6 +55,15 @@ class ClubProfileScreen extends Screen
                 this.getClubPersons();
         }
 
+	processClubs()
+        {
+                super.processClubs();
+                if (this.mJson.clubs)
+                {
+                        this.getClubPersons();
+                }
+        }
+
 
         getClubPersons()
         {
