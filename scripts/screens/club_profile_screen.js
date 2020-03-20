@@ -15,7 +15,12 @@ class ClubProfileScreen extends Screen
 
 		this.mDivArray = new Array();
 		this.mClubProfilesArray = new Array();
+
 		this.mPlayerButtonArray = new Array();
+		this.mParentButtonArray = new Array();
+		this.mCoachButtonArray = new Array();
+		this.mManagerButtonArray = new Array();
+		this.mAdministratorButtonArray = new Array();
 
 		this.mProfileUpdate = null;
 /*
@@ -245,16 +250,34 @@ class ClubProfileScreen extends Screen
 					
 					if (this.mJson.club_profiles[i].player_id != null)
 					{
-						//this.mPlayerButton.style.backgroundColor = "green";
 						button.style.backgroundColor = "green";
 					}
 					else
 					{
-						//this.mPlayerButton.style.backgroundColor = "red";
 						button.style.backgroundColor = "red";
 					}
 
                                         this.mPlayerButtonArray.push(button);
+					
+					//create a parent button
+ 					var button = document.createElement("BUTTON");
+                                	button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = "Parent";
+                                        container.appendChild(button);
+                                        var id = 'club_parent_button_' + this.mJson.club_profiles[i].person_id;
+                                        button.setAttribute("id", id);
+                                        button.onclick = this.hit.bind(button);
+					
+					if (this.mJson.club_profiles[i].parent_id != null)
+					{
+						button.style.backgroundColor = "green";
+					}
+					else
+					{
+						button.style.backgroundColor = "red";
+					}
+
+                                        this.mParentButtonArray.push(button);
 
 
 
