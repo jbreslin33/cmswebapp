@@ -13,6 +13,9 @@ class ClubProfileScreen extends Screen
                 this.setSpinner(document.getElementById("club_profile_screen_spinner_id"));
                 this.setForm(document.getElementById("club_profile_screen_form_id"));
 
+		this.setClubSelect(document.getElementById("club_profile_screen_club_id"));
+
+
 		this.mDivArray = new Array();
 		this.mClubProfilesArray = new Array();
 
@@ -24,11 +27,37 @@ class ClubProfileScreen extends Screen
 
 		this.mProfileUpdate = null;
 
+
+               	//club select
+                this.getClubSelect().onchange = this.clubSelected.bind(this);
+/*
+                this.getForm().addEventListener('submit', function(e)
+                {
+                        e.preventDefault();
+                        APPLICATION.getCurrentScreen().hit();
+                });
+		*/
+
         }
 
-        get()
+       	get()
         {
-		super.get();
+                if (APPLICATION.getJWT())
+                {
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());
+                        APPLICATION.getCurrentScreen().ajax();
+                }
+        }
+
+
+        clubSelected()
+        {
+                this.getClubPersons();
+        }
+
+
+        getClubPersons()
+        {
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_profile.php?" + this.getStandardParameters());
                 APPLICATION.getCurrentScreen().ajax();
         }

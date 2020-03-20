@@ -224,6 +224,10 @@ class INIT_APPLICATION extends State
 		{
 			application.getInviteToClubScreenHtml().style.display = "none";
 		}
+		if (application.getClubProfileScreenHtml())
+		{
+			application.getClubProfileScreenHtml().style.display = "none";
+		}
 		
 		if (application.getInsertAcceptClubInviteScreenHtml())
 		{
