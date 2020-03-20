@@ -8,10 +8,10 @@ class ClubProfileScreen extends Screen
                	
 		location.hash = 'club_profile_screen';
 
-		this.setHtml(document.getElementById("profile_screen_html_id"));
-                this.setMessageElement(document.getElementById("profile_screen_message_id"));
-                this.setSpinner(document.getElementById("profile_screen_spinner_id"));
-                this.setForm(document.getElementById("profile_screen_form_id"));
+		this.setHtml(document.getElementById("club_profile_screen_html_id"));
+                this.setMessageElement(document.getElementById("club_profile_screen_message_id"));
+                this.setSpinner(document.getElementById("club_profile_screen_spinner_id"));
+                this.setForm(document.getElementById("club_profile_screen_form_id"));
 
 		this.mDivArray = new Array();
 		this.mClubProfilesArray = new Array();
