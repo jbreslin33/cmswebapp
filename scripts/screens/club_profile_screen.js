@@ -278,6 +278,68 @@ class ClubProfileScreen extends Screen
 					}
 
                                         this.mParentButtonArray.push(button);
+					
+					//create a coach button
+ 					var button = document.createElement("BUTTON");
+                                	button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = "Coach";
+                                        container.appendChild(button);
+                                        var id = 'club_coach_button_' + this.mJson.club_profiles[i].person_id;
+                                        button.setAttribute("id", id);
+                                        button.onclick = this.hit.bind(button);
+					
+					if (this.mJson.club_profiles[i].coach_id != null)
+					{
+						button.style.backgroundColor = "green";
+					}
+					else
+					{
+						button.style.backgroundColor = "red";
+					}
+
+                                        this.mCoachButtonArray.push(button);
+					
+					//create a manager button
+ 					var button = document.createElement("BUTTON");
+                                	button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = "Manager";
+                                        container.appendChild(button);
+                                        var id = 'club_manager_button_' + this.mJson.club_profiles[i].person_id;
+                                        button.setAttribute("id", id);
+                                        button.onclick = this.hit.bind(button);
+					
+					if (this.mJson.club_profiles[i].manager_id != null)
+					{
+						button.style.backgroundColor = "green";
+					}
+					else
+					{
+						button.style.backgroundColor = "red";
+					}
+
+                                        this.mManagerButtonArray.push(button);
+
+					//create a administrator button
+ 					var button = document.createElement("BUTTON");
+                                	button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = "Administrator";
+                                        container.appendChild(button);
+                                        var id = 'club_administrator_button_' + this.mJson.club_profiles[i].person_id;
+                                        button.setAttribute("id", id);
+                                        button.onclick = this.hit.bind(button);
+					
+					if (this.mJson.club_profiles[i].administrator_id != null)
+					{
+						button.style.backgroundColor = "green";
+					}
+					else
+					{
+						button.style.backgroundColor = "red";
+					}
+
+                                        this.mAdministratorButtonArray.push(button);
+
+
 
 
 
