@@ -23,25 +23,7 @@ class ClubProfileScreen extends Screen
 		this.mAdministratorButtonArray = new Array();
 
 		this.mProfileUpdate = null;
-/*
-		this.mPlayerButton = document.getElementById("profile_player_id");
-		this.mParentButton = document.getElementById("profile_parent_id");
-		this.mCoachButton = document.getElementById("profile_coach_id");
-		this.mManagerButton = document.getElementById("profile_manager_id");
-		this.mAdministratorButton = document.getElementById("profile_administrator_id");
-		
-		this.mPlayerButton.onclick = this.hit.bind(this.mPlayerButton);
-		this.mParentButton.onclick = this.hit.bind(this.mParentButton);
-		this.mCoachButton.onclick = this.hit.bind(this.mCoachButton);
-		this.mManagerButton.onclick = this.hit.bind(this.mManagerButton);
-		this.mAdministratorButton.onclick = this.hit.bind(this.mAdministratorButton);
-		
-		this.mPlayerButton.style.backgroundColor = "red";
-		this.mParentButton.style.backgroundColor = "red";
-		this.mCoachButton.style.backgroundColor = "red";
-		this.mManagerButton.style.backgroundColor = "red";
-		this.mAdministratorButton.style.backgroundColor = "red";
-		*/
+
         }
 
         get()
@@ -59,12 +41,10 @@ class ClubProfileScreen extends Screen
 	
 	removeDivs()
 	{
-		/*
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
 		{
                         APPLICATION.getCurrentScreen().mDivArray[i].remove();
 		}
-		*/
 	}
 
 	hit()
@@ -72,21 +52,26 @@ class ClubProfileScreen extends Screen
 		var screen = APPLICATION.getCurrentScreen();
 		
 		var a = this.id.split('_');
+
 		var profileType = a[1]; 
+		var person_to_change_id = a[3];
+
+		var profileNumber = 0;
+		var active = 0;
 
 		if (a[1] == 'player')
 		{
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileType = '1'; 
-				this.mActive = '1'; 
+				profileNumber = '1'; 
+				active = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileType = '1'; 
-				this.mActive = '2'; 
+				profileNumber = '1'; 
+				active = '2'; 
 			}
 		}
 		if (a[1] == 'parent')
@@ -94,14 +79,14 @@ class ClubProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileType = '2'; 
-				this.mActive = '1'; 
+				profileNumber = '2'; 
+				active = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileType = '2'; 
-				this.mActive = '2'; 
+				profileNumber = '2'; 
+				active = '2'; 
 			}
 		}
 		if (a[1] == 'coach')
@@ -109,14 +94,14 @@ class ClubProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileType = '3'; 
-				this.mActive = '1'; 
+				profileNumber = '3'; 
+				active = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileType = '3'; 
-				this.mActive = '2'; 
+				profileNumber = '3'; 
+				active = '2'; 
 			}
 		}
 		if (a[1] == 'manager')
@@ -124,14 +109,14 @@ class ClubProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileType = '4'; 
-				this.mActive = '1'; 
+				profileNumber = '4'; 
+				active = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileType = '4'; 
-				this.mActive = '2'; 
+				profileNumber = '4'; 
+				active = '2'; 
 			}
 		}
 		if (a[1] == 'administrator')
@@ -139,23 +124,23 @@ class ClubProfileScreen extends Screen
 			if (this.style.backgroundColor == "green")
 			{
 				this.style.backgroundColor = "red";
-				this.mProfileType = '5'; 
-				this.mActive = '1'; 
+				profileNumber = '5'; 
+				active = '1'; 
 			}
 			else
 			{
 				this.style.backgroundColor = "green";
-				this.mProfileType = '5'; 
-				this.mActive = '2'; 
+				profileNumber = '5'; 
+				active = '2'; 
 			}
 		}
-		screen.updateProfile(APPLICATION.getCurrentScreen().getPersonId(),this.mProfileType,this.mActive);
+		screen.updateProfile(APPLICATION.getCurrentScreen().getPersonId(),profileNumber,active,person_to_change_id);
 	}
 
-	updateProfile(personId,profileType,active)
+	updateProfile(personId,profileNumber,active,person_to_change_id)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profiletype=' + profileType + '&active=' + active + '&person_id=' + personId);
+		screen.setUrl("/php/classes/screens/update_club_profile.php?jwt=" + APPLICATION.getJWT() + '&profiletype=' + profileNumber + '&active=' + active + '&person_id=' + personId + '&person_to_change_id=' + person_to_change_id);
 		console.log('getUrl:' + screen.getUrl());
 		//console.log('mProfileUpdate:' + screen.mProfileUpdate);
 		//console.log('mJWT:' + APPLICATION.getJWT());
@@ -338,57 +323,6 @@ class ClubProfileScreen extends Screen
 					}
 
                                         this.mAdministratorButtonArray.push(button);
-
-
-
-
-
-					//console.log('club_profile:' + this.mJson.club_profiles[i]); 
-/*
-					if (this.mJson.profiles[i].player_id != null)
-					{
-						this.mPlayerButton.style.backgroundColor = "green";
-					}
-					else
-					{
-						this.mPlayerButton.style.backgroundColor = "red";
-					}
-					if (this.mJson.profiles[i].parent_id != null)
-					{
-						this.mParentButton.style.backgroundColor = "green";
-					}
-					else
-					{
-						this.mParentButton.style.backgroundColor = "red";
-					}
-					
-					if (this.mJson.profiles[i].coach_id != null)
-					{
-						this.mCoachButton.style.backgroundColor = "green";
-					}
-					else
-					{
-						this.mCoachButton.style.backgroundColor = "red";
-					}
-					
-					if (this.mJson.profiles[i].manager_id != null)
-					{
-						this.mManagerButton.style.backgroundColor = "green";
-					}
-					else
-					{
-						this.mManagerButton.style.backgroundColor = "red";
-					}
-					
-					if (this.mJson.profiles[i].administrator_id != null)
-					{
-						this.mAdministratorButton.style.backgroundColor = "green";
-					}
-					else
-					{
-						this.mAdministratorButton.style.backgroundColor = "red";
-					}
-					*/
 				}
 			}
 		}
