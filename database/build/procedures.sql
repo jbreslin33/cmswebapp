@@ -111,7 +111,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --email_id,message,code,club_id,person_id
-CREATE OR REPLACE FUNCTION f_format_result_set_club_profiles(int,TEXT,int,int)
+CREATE OR REPLACE FUNCTION f_format_result_set_club_profiles(int,TEXT,int,int,int)
 RETURNS text AS $$
 DECLARE
         json_result_codes text;
@@ -122,7 +122,7 @@ BEGIN
 
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
-        select into json_result_club_profiles j_select_club_profiles($4);
+        select into json_result_club_profiles j_select_club_profiles($4,$5);
         result_set = CONCAT(json_result_club_profiles,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
@@ -461,7 +461,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PROFILES
 
 --BEGIN J_SELECT CLUB PROFILES
-CREATE OR REPLACE FUNCTION j_select_club_profiles(int)
+CREATE OR REPLACE FUNCTION j_select_club_profiles(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1431,12 +1431,19 @@ END;
 $$ LANGUAGE plpgsql;
 
 --BEGIN SELECT CLUB PROFILES
-CREATE OR REPLACE FUNCTION f_club_profile(email_id_p int, person_id_p int)
+CREATE OR REPLACE FUNCTION f_club_profile(email_id_p int, person_id_p int, club_id_p int)
 RETURNS text AS $$
 DECLARE
         result_set text;
+	found_club_administrator_id club_administrators.id%TYPE;
+
 BEGIN
-        result_set = f_format_result_set_club_profiles(email_id_p,null,-102,person_id_p);
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
+	IF found_club_administrator_id > 0 THEN
+        	result_set = f_format_result_set_club_profiles(email_id_p,null,-102,person_id_p, club_id_p);
+	ELSE
+               	result_set = f_format_result_set($1,'You are not a club administrator.',-101);
+	END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

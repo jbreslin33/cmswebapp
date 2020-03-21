@@ -52,10 +52,9 @@ class ClubProfileScreen extends Screen
                 }
         }
 
-
         getClubPersons()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_profile.php?" + this.getStandardParameters());
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
