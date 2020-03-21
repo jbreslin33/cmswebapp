@@ -77,7 +77,6 @@ class InsertPracticeScreen extends Screen
 		if (APPLICATION.getJWT())
 		{
                        	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
-			console.log('geturl:' + APPLICATION.getCurrentScreen().getUrl());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}

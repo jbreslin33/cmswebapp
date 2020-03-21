@@ -58,10 +58,11 @@ BEGIN
         select into json_result_codes j_select_codes($3);
 
         select into json_result_persons j_select_persons($1); --based on email_id
-        select into json_result_clubs j_select_clubs($1); --based on email_id
-        select into json_result_teams j_select_teams($1); --based on email_id
+        --select into json_result_clubs j_select_clubs($1); --based on email_id
+        --select into json_result_teams j_select_teams($1); --based on email_id
 
-        result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        --result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT($1,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
 END;
@@ -82,10 +83,10 @@ BEGIN
 	select into json_result_codes j_select_codes($3);
 
 	select into json_result_persons j_select_persons($1); --based on email_id
-        select into json_result_clubs j_select_clubs($1); --based on email_id
-	select into json_result_teams j_select_teams($1); --based on email_id
+        --select into json_result_clubs j_select_clubs($1); --based on email_id
+	--select into json_result_teams j_select_teams($1); --based on email_id
 
-        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
 END;
@@ -1441,7 +1442,9 @@ BEGIN
 	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
 	IF found_club_administrator_id > 0 THEN
         	result_set = f_format_result_set_club_profiles(email_id_p,null,-102,person_id_p, club_id_p);
+  		RAISE LOG 'log message IF %', now();
 	ELSE
+		RAISE LOG 'log message ELSE %', now();
                	result_set = f_format_result_set($1,'You are not a club administrator.',-101);
 	END IF;
 RETURN result_set;
