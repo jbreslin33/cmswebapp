@@ -26,42 +26,21 @@ BEGIN
 		SELECT id INTO found_native_login_id FROM native_logins WHERE email_id = found_email_id;		
         	IF found_native_login_id > 0 THEN
 			update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-                	result_set = f_format_result_set_jwt(found_email_id,null,-100);
+                	result_set = f_format_result_set(found_email_id,null,-100);
 		ELSE
 			CALL p_insert_native_login(found_email_id,$2,x);
 			IF x > 0 THEN
-                		result_set = f_format_result_set_jwt(found_email_id,null,-100);
+                		result_set = f_format_result_set(found_email_id,null,-100);
 			ELSE
-                		result_set = f_format_result_set_jwt(found_email_id,'Something went wrong can you submit a new request please?',-101);
+                		result_set = f_format_result_set(found_email_id,'Something went wrong can you submit a new request please?',-101);
 			END IF;
 		END IF;
         ELSE
-                result_set = f_format_result_set_jwt(found_email_id,'Something went wrong can you submit a new request please?',-101);
+                result_set = f_format_result_set(found_email_id,'Something went wrong can you submit a new request please?',-101);
         END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
---goto format_result
-
-CREATE OR REPLACE FUNCTION f_format_result_set_jwt(int,TEXT,int) --email_id, person_id, club_id, team_id, message, code
-RETURNS text AS $$
-DECLARE
-        json_result_codes text;
-        json_result_messages text;
-        json_result_persons text;
-        result_set text;
-BEGIN
-        select into json_result_codes j_select_codes($3);
-        select into json_result_messages j_select_messages($2);
-        select into json_result_persons j_select_persons($1); --based on email_id
-
-        result_set = CONCAT($1,',',json_result_persons,',',json_result_messages,',',json_result_codes);
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
 
 CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT,int) --email_id, message, code
 RETURNS text AS $$
@@ -219,7 +198,7 @@ BEGIN
 	IF found_email_id > 0 THEN
 		CALL p_insert_native_login(found_email_id,$2,x);
 		IF x > 0 THEN
-			result_set = f_format_result_set_jwt(found_email_id,null,-100);
+			result_set = f_format_result_set(found_email_id,null,-100);
                 ELSE
 			result_set = f_format_result_set(0,'Something went wrong with signup. Sorry! Please try again.',-101);
 		END IF;
@@ -691,7 +670,7 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id > 0 THEN
-			 result_set = f_format_result_set_jwt(found_email_id,null,-100);
+			 result_set = f_format_result_set(found_email_id,null,-100);
                 ELSE
 			 result_set = f_format_result_set(found_email_id,'Bad password.',-101);
                 END IF;
@@ -779,9 +758,9 @@ BEGIN
 
 
         IF found_email_id > 0 THEN
-		result_set = f_format_result_set_jwt(found_email_id,null,-100);
+		result_set = f_format_result_set(found_email_id,null,-100);
         ELSE
-		result_set = f_format_result_set_jwt(found_email_id,'Could not find email.',-101);
+		result_set = f_format_result_set(found_email_id,'Could not find email.',-101);
         END IF;
 
 	IF $6 is NULL THEN
@@ -1941,12 +1920,12 @@ BEGIN
 		IF returning_forgot_passwords_id > 0 THEN
 			--result_set = '-101, Success. We sent you an email to help you login.';
                      	--result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
-                     	result_set = f_format_result_set_jwt(found_email_id,'We sent you an email to change password.',-101);
+                     	result_set = f_format_result_set(found_email_id,'We sent you an email to change password.',-101);
 		ELSE
-                     	result_set = f_format_result_set_jwt(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101);
+                     	result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101);
 		END IF;
 	ELSE
-                result_set = f_format_result_set_jwt(found_email_id,'That email does not exist in our system. Please try a valid email address.',-101);
+                result_set = f_format_result_set(found_email_id,'That email does not exist in our system. Please try a valid email address.',-101);
 	END IF;
 RETURN result_set;
 END;
