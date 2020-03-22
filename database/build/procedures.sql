@@ -56,12 +56,8 @@ DECLARE
 BEGIN
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
-
         select into json_result_persons j_select_persons($1); --based on email_id
-        --select into json_result_clubs j_select_clubs($1); --based on email_id
-        --select into json_result_teams j_select_teams($1); --based on email_id
 
-        --result_set = CONCAT($1,',',json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
         result_set = CONCAT($1,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
 RETURN result_set;
@@ -81,10 +77,7 @@ DECLARE
 BEGIN
 	select into json_result_messages j_select_messages($2);
 	select into json_result_codes j_select_codes($3);
-
 	select into json_result_persons j_select_persons($1); --based on email_id
-        --select into json_result_clubs j_select_clubs($1); --based on email_id
-	--select into json_result_teams j_select_teams($1); --based on email_id
 
         result_set = CONCAT(json_result_persons,',',json_result_messages,',',json_result_codes,'}');
 
