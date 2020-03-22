@@ -43,7 +43,8 @@ class NativeLogin extends Screen
                         $jwt_json = '{ "jwts": [ { "jwt": "' . $jwt . '"} ] ,';
 
                         //send only a json object client
-                        $txt = $jwt_json . $data;
+			$back_bracket = '}';
+                        $txt = $jwt_json . $data . $back_bracket;
                         return $txt;
                 }
         }

@@ -78,8 +78,9 @@ class Screen
 
         public function formatResultSet($result)
 	{
-		$bracket = '{ ';
-		$txt = $bracket . $result;
+		$front_bracket = '{ ';
+		$back_bracket = '}';
+		$txt = $front_bracket . $result . $back_bracket;
 		return $txt;
 	}
 

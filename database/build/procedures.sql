@@ -56,7 +56,7 @@ BEGIN
         select into json_result_messages j_select_messages($2);
         select into json_result_persons j_select_persons($1); --based on email_id
 
-        result_set = CONCAT($1,',',json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT($1,',',json_result_persons,',',json_result_messages,',',json_result_codes);
 
 RETURN result_set;
 END;
@@ -75,7 +75,7 @@ BEGIN
 	select into json_result_messages j_select_messages($2);
 	select into json_result_persons j_select_persons($1); --based on email_id
 
-        result_set = CONCAT(json_result_persons,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_persons,',',json_result_messages,',',json_result_codes);
 
 RETURN result_set;
 END;
@@ -94,7 +94,7 @@ BEGIN
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
         select into json_result_profiles j_select_profiles($4);
-        result_set = CONCAT(json_result_profiles,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_profiles,',',json_result_messages,',',json_result_codes);
 
 RETURN result_set;
 END;
@@ -113,7 +113,7 @@ BEGIN
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
         select into json_result_club_profiles j_select_club_profiles($4,$5);
-        result_set = CONCAT(json_result_club_profiles,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_club_profiles,',',json_result_messages,',',json_result_codes);
 
 RETURN result_set;
 END;
@@ -135,7 +135,7 @@ BEGIN
         select into json_result_codes j_select_codes($3);
         select into json_result_pitches j_select_pitches($4);
         select into json_result_teams j_select_teams_managed($4,$5);
-        result_set = CONCAT(json_result_pitches,',',json_result_teams,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_pitches,',',json_result_teams,',',json_result_messages,',',json_result_codes);
 	
 RETURN result_set;
 END;
@@ -153,7 +153,7 @@ BEGIN
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
         select into json_result_administrated_clubs j_select_administrated_clubs($4);
-        result_set = CONCAT(json_result_administrated_clubs,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_administrated_clubs,',',json_result_messages,',',json_result_codes);
 	
 RETURN result_set;
 END;
@@ -171,7 +171,7 @@ BEGIN
         select into json_result_messages j_select_messages($2);
         select into json_result_codes j_select_codes($3);
         select into json_result_clubs_of_teams_managed j_select_clubs_of_teams_managed($4);
-        result_set = CONCAT(json_result_clubs_of_teams_managed,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_clubs_of_teams_managed,',',json_result_messages,',',json_result_codes);
 
 RETURN result_set;
 END;
@@ -201,7 +201,7 @@ BEGIN
 	select into json_result_practices j_select_practices($1,$4,$5);
 	select into json_result_games j_select_games($1,$4,$5);
 	
-        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -2086,7 +2086,7 @@ BEGIN
         --select into json_result_practices j_select_practices($1,$4,$5);
         --select into json_result_games j_select_games($1,$4,$5);
 
-        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes,'}');
+        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
