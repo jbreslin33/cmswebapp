@@ -85,11 +85,7 @@ class Screen
 
 	function sendToClient()
 	{
-		//$txt = "sendToClient:";
 		$result = $this->formatResultSet($this->getResult()); 	
-		//$txt .= $result;
-		//error_log($txt);
-	//	echo $this->formatResultSet($this->getResult());
 		echo $result;
 	}	
 }
