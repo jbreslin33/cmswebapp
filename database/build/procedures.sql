@@ -1246,10 +1246,6 @@ DECLARE
 	found_person_id persons.id%TYPE;
 BEGIN
 
-	--RAISE LOG 'log message in 1 in p %', $1;
-	--RAISE LOG 'log message in 2 in p %', $2;
-	--RAISE LOG 'log message in 3 in p %', $3;
-
 	IF $3 = 2 THEN
 
 		IF $2 = 1 THEN
@@ -1257,7 +1253,7 @@ BEGIN
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				insert into players (person_id) values ($1);
+				insert into players (person_id) values ($1) returning id into x;
 			END IF;
 		ELSE
 			--DO NOTHING
@@ -1269,7 +1265,7 @@ BEGIN
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				insert into parents (person_id) values ($1);
+				insert into parents (person_id) values ($1) returning id into x;
 			END IF;
 		ELSE
 			--DO NOTHING
@@ -1282,7 +1278,7 @@ BEGIN
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				insert into coaches (person_id) values ($1);
+				insert into coaches (person_id) values ($1) returning id into x;
 			END IF;
 		ELSE
 			--DO NOTHING
@@ -1294,7 +1290,7 @@ BEGIN
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				insert into managers (person_id) values ($1);
+				insert into managers (person_id) values ($1) returning id into x;
 			END IF;
 		ELSE
 			--DO NOTHING
@@ -1305,7 +1301,7 @@ BEGIN
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				insert into administrators (person_id) values ($1);
+				insert into administrators (person_id) values ($1) returning id into x;
 			END IF;
 		ELSE
 			--DO NOTHING
@@ -1313,39 +1309,42 @@ BEGIN
 
 	ELSE
 		IF $2 = 1 THEN
-			delete from players where person_id = $1; 
+			delete from players where person_id = $1 returning id into x;  
 		ELSE
 			--DO NOTHING
 		END IF;
 
 		IF $2 = 2 THEN
-			delete from parents where person_id = $1; 
+			delete from parents where person_id = $1 returning id into x; 
 		ELSE
 			--DO NOTHING
 		END IF;
 
 		IF $2 = 3 THEN
-			delete from coaches where person_id = $1; 
+			delete from coaches where person_id = $1 returning id into x; 
 		ELSE
 			--DO NOTHING
 		END IF;
 
 		IF $2 = 4 THEN
-			delete from managers where person_id = $1; 
+			delete from managers where person_id = $1 returning id into x; 
 		ELSE
 			--DO NOTHING
 		END IF;
 
 		IF $2 = 5 THEN
-			delete from administrators where person_id = $1; 
+			delete from administrators where person_id = $1 returning id into x; 
 		ELSE
 			--DO NOTHING
 		END IF;
-
+		RAISE LOG 'log message x:%', x;
 
 	END IF;
-	x := 1;
 
+EXCEPTION
+	WHEN others THEN
+        x := -100;
+	
 END;
 $$;
 --END UPDATE PROFILE
@@ -1514,9 +1513,24 @@ BEGIN
 		CALL p_update_availability($2,x);
 
                 IF x > 0 THEN
-                        result_set = f_format_result_set($1,null,-100);
+			result_set = CONCAT
+                        (
+                        	j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-100)
+                      	);
                 ELSE
-                        result_set = f_format_result_set($1,'Something went wrong with setting availability. Please try again.',-101);
+                       	result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Something went wrong with setting availability. Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
                 END IF;
 	END IF;
 
@@ -1539,9 +1553,27 @@ BEGIN
                 CALL p_update_profile($2,$3,$4,x);
 
                 IF x > 0 THEN
-                        result_set = f_format_result_set($1,null,-101);
+  			RAISE LOG 'log message IF:%', x;
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Profile Updated.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
                 ELSE
-                        result_set = f_format_result_set($1,'Something went wrong with setting availability. Please try again.',-101);
+			RAISE LOG 'log message ELSE:%', x;
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Something went wrong with updating profile. Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
                 END IF;
         END IF;
 
