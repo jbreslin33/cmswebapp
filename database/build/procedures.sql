@@ -782,7 +782,14 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set($1,null,-100);
+	result_set = CONCAT
+        (
+        	j_select_persons($1),
+       		',',
+               	j_select_messages(null),
+                ',',
+               	j_select_codes(-100)
+       	);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
