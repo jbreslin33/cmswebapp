@@ -779,9 +779,25 @@ BEGIN
 
 
         IF found_email_id > 0 THEN
-		result_set = f_format_result_set_google(found_email_id,null,-100);
+        	result_set = CONCAT
+		(
+			found_email_id,
+			',',
+			j_select_persons(found_email_id),
+			',',
+			j_select_messages(null),
+			',',
+			j_select_codes(-100)
+		);
         ELSE
-		result_set = f_format_result_set(found_email_id,'Could not find email.',-101);
+        	result_set = CONCAT
+		(
+			j_select_persons(found_email_id),
+			',',
+			j_select_messages('Could not find email.'),
+			',',
+			j_select_codes(-101)
+		);
         END IF;
 
 	IF $6 is NULL THEN
