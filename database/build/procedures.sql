@@ -1407,16 +1407,22 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
-
 --BEGIN SELECT PROFILES
 CREATE OR REPLACE FUNCTION f_profile(email_id_p int, person_id_p int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set_profiles(email_id_p,null,-102,person_id_p);
-        --result_set = CONCAT(f_format_result_set(email_id_p,null,-102),',',j_select_profiles($2));
+        result_set = CONCAT
+	(
+		j_select_persons($1),
+		',',
+		j_select_messages(null),
+		',',
+		j_select_codes(-102),
+		',',
+		j_select_profiles($2)
+	);
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
