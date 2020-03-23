@@ -1,5 +1,43 @@
---EMAIL
 
+--FORMAT RESULT SET
+CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT,int) --email_id, message, code
+RETURNS text AS $$
+DECLARE
+        json_result_codes text;
+        json_result_messages text;
+        json_result_persons text;
+	result_set text;
+BEGIN
+	select into json_result_codes j_select_codes($3);
+	select into json_result_messages j_select_messages($2);
+	select into json_result_persons j_select_persons($1); --based on email_id
+
+        result_set = CONCAT(json_result_persons,',',json_result_messages,',',json_result_codes);
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+--FORMAT RESULT SET GOOGLE
+CREATE OR REPLACE FUNCTION f_format_result_set_google(int,TEXT,int) --email_id, message, code
+RETURNS text AS $$
+DECLARE
+        json_result_codes text;
+        json_result_messages text;
+        json_result_persons text;
+	result_set text;
+BEGIN
+	select into json_result_codes j_select_codes($3);
+	select into json_result_messages j_select_messages($2);
+	select into json_result_persons j_select_persons($1); --based on email_id
+
+        result_set = CONCAT($1,',',json_result_persons,',',json_result_messages,',',json_result_codes);
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+--EMAIL
 CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
@@ -42,23 +80,6 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_format_result_set(int,TEXT,int) --email_id, message, code
-RETURNS text AS $$
-DECLARE
-        json_result_codes text;
-        json_result_messages text;
-        json_result_persons text;
-	result_set text;
-BEGIN
-	select into json_result_codes j_select_codes($3);
-	select into json_result_messages j_select_messages($2);
-	select into json_result_persons j_select_persons($1); --based on email_id
-
-        result_set = CONCAT(json_result_persons,',',json_result_messages,',',json_result_codes);
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
 
 --email_id,message,code,club_id,person_id
 CREATE OR REPLACE FUNCTION f_format_result_set_profiles(int,TEXT,int,int)
@@ -758,7 +779,7 @@ BEGIN
 
 
         IF found_email_id > 0 THEN
-		result_set = f_format_result_set(found_email_id,null,-100);
+		result_set = f_format_result_set_google(found_email_id,null,-100);
         ELSE
 		result_set = f_format_result_set(found_email_id,'Could not find email.',-101);
         END IF;
@@ -1395,6 +1416,7 @@ DECLARE
         result_set text;
 BEGIN
         result_set = f_format_result_set_profiles(email_id_p,null,-102,person_id_p);
+        --result_set = CONCAT(f_format_result_set(email_id_p,null,-102),',',j_select_profiles($2));
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
