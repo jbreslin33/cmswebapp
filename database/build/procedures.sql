@@ -1560,7 +1560,9 @@ BEGIN
                                 ',',
                                 j_select_messages('Profile Updated.'),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(-101),
+                                ',',
+				j_select_profiles($2)
                         );
 
                 ELSE
@@ -1571,7 +1573,9 @@ BEGIN
                                 ',',
                                 j_select_messages('Something went wrong with updating profile. Please try again.'),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(-101),
+                                ',',
+				j_select_profiles($2)
                         );
 
                 END IF;

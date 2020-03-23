@@ -70,13 +70,13 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				this.style.backgroundColor = "red";
+				//this.style.backgroundColor = "red";
 				this.mProfileType = '1'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				this.style.backgroundColor = "green";
+				//this.style.backgroundColor = "green";
 				this.mProfileType = '1'; 
 				this.mActive = '2'; 
 			}
@@ -85,13 +85,13 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				this.style.backgroundColor = "red";
+				//this.style.backgroundColor = "red";
 				this.mProfileType = '2'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				this.style.backgroundColor = "green";
+				//this.style.backgroundColor = "green";
 				this.mProfileType = '2'; 
 				this.mActive = '2'; 
 			}
@@ -100,13 +100,13 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				this.style.backgroundColor = "red";
+				//this.style.backgroundColor = "red";
 				this.mProfileType = '3'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				this.style.backgroundColor = "green";
+				//this.style.backgroundColor = "green";
 				this.mProfileType = '3'; 
 				this.mActive = '2'; 
 			}
@@ -115,13 +115,13 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				this.style.backgroundColor = "red";
+				//this.style.backgroundColor = "red";
 				this.mProfileType = '4'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				this.style.backgroundColor = "green";
+				//this.style.backgroundColor = "green";
 				this.mProfileType = '4'; 
 				this.mActive = '2'; 
 			}
@@ -130,13 +130,13 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				this.style.backgroundColor = "red";
+				//this.style.backgroundColor = "red";
 				this.mProfileType = '5'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				this.style.backgroundColor = "green";
+				//this.style.backgroundColor = "green";
 				this.mProfileType = '5'; 
 				this.mActive = '2'; 
 			}
@@ -148,9 +148,6 @@ class ProfileScreen extends Screen
 	{
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profiletype=' + profileType + '&active=' + active + '&person_id=' + personId);
-		console.log('getUrl:' + screen.getUrl());
-		//console.log('mProfileUpdate:' + screen.mProfileUpdate);
-		//console.log('mJWT:' + APPLICATION.getJWT());
                 screen.ajax();
 	}
 
