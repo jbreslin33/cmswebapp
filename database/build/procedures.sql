@@ -1032,12 +1032,34 @@ BEGIN
 	IF found_team_club_manager_id > 0 THEN                     --dont need 11 because it is person id
         	CALL p_insert_practice($2,$3,$4,$5,$6,$7,$8,$9,$10,$12,$13,$14,$15,$16,$17,$18,$19,$20,x);
         	IF x > 0 THEN
-                	result_set = f_format_result_set($1,null,-100);
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-100)
+                        );
+
         	ELSE
-                	result_set = f_format_result_set($1,'Something went wrong with adding practice.',-101);
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Something went wrong with adding practice.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
         	END IF;
 	ELSE
-                --result_set = f_format_result_set($1,'You must be a manager of this team to create a practice. Contact your administrator.',-101);
+                result_set = CONCAT
+                (
+                	j_select_persons($1),
+                        ',',
+                        j_select_messages('You must be a manager of this team to create a practice. Contact your administrator.'),
+                        ',',
+                        j_select_codes(-101)
+                );
 	END IF;
 
 RETURN result_set;
