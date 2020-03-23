@@ -358,11 +358,6 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                --select distinct clubs.id, clubs.name from clubs
-                --join club_persons on club_persons.club_id=clubs.id
-                --join club_administrators on club_administrators.club_person_id=club_persons.id
-                --where club_persons.person_id = $1
-
                	select distinct clubs.id, clubs.name from clubs
                 join club_persons on club_persons.club_id=clubs.id
                 join team_club_persons on team_club_persons.club_person_id=club_persons.id
@@ -427,7 +422,6 @@ SELECT json_agg(t) INTO raw_json
 	from
         (
 		select persons.id, first_name, case when middle_name IS NULL THEN '' ELSE middle_name END, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
-		--select first_name, case when middle_name IS NULL THEN '' ELSE middle_name END,  last_name from persons;
         ) t;
 	IF raw_json is NULL THEN
 		result_set = CONCAT('"persons": []', raw_json);
@@ -450,7 +444,6 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-
 		select distinct teams.id, teams.name from teams
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
@@ -459,8 +452,6 @@ SELECT json_agg(t) INTO raw_json
                 join emails_persons on emails_persons.person_id=persons.id
                 join emails on emails.id=emails_persons.email_id
                 where email_id = $1
-
-
         ) t;
 
 	IF raw_json is NULL THEN
@@ -567,15 +558,12 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-
 		select distinct teams.id, teams.name from teams
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join persons on persons.id=club_persons.person_id
 
                 where club_persons.club_id = $1 AND persons.id = $2
-
-
         ) t;
 
 	IF raw_json is NULL THEN
@@ -608,7 +596,6 @@ SELECT json_agg(t) INTO raw_json
                 join emails_persons on emails_persons.person_id=persons.id
                 join emails on emails.id=emails_persons.email_id
                 where email_id = $1
-
         ) t;
 
 	IF raw_json is NULL THEN
@@ -645,10 +632,7 @@ SELECT json_agg(t) INTO raw_json
 
 		join club_players on club_players.club_person_id=club_persons.id
 
-		--join practices_players_availability on practices_players_availability.practice_id=practices.id 
-
 		join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id AND team_club_persons_club_players.club_player_id=club_players.id
-
 
                 where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
 	) t;
@@ -664,7 +648,6 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
 --BEGIN J_SELECT GAMES
---CREATE OR REPLACE FUNCTION j_select_games(email_id int, )
 CREATE OR REPLACE FUNCTION j_select_games(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
@@ -677,7 +660,6 @@ SELECT json_agg(t) INTO raw_json
         (
                 select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates,(select pitches.name from pitches where games.pitch_id = pitches.id) as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name
                 from games
-                --join practice on practice.id=practices.practice_id
                 join teams on teams.id=games.team_id
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
