@@ -64,17 +64,53 @@ BEGIN
 		SELECT id INTO found_native_login_id FROM native_logins WHERE email_id = found_email_id;		
         	IF found_native_login_id > 0 THEN
 			update native_logins set password = CRYPT($2, GEN_SALT('md5')) where email_id = found_email_id;     
-                	result_set = f_format_result_set(found_email_id,null,-100);
+                        result_set = CONCAT
+			(
+				found_email_id,
+                               	',',
+                       		j_select_persons(found_email_id),
+                               	',',
+                                j_select_messages(null),
+                               	',',
+                               	j_select_codes(-100)
+                        );
 		ELSE
 			CALL p_insert_native_login(found_email_id,$2,x);
 			IF x > 0 THEN
-                		result_set = f_format_result_set(found_email_id,null,-100);
+				result_set = CONCAT
+        			(
+					found_email_id,
+                               		',',
+                			j_select_persons(found_email_id),
+                			',',
+                			j_select_messages(null),
+                			',',
+                			j_select_codes(-100)
+        			);
 			ELSE
-                		result_set = f_format_result_set(found_email_id,'Something went wrong can you submit a new request please?',-101);
+                                result_set = CONCAT
+                                (
+					found_email_id,
+                               		',',
+                                        j_select_persons(found_email_id),
+                                        ',',
+                                        j_select_messages('Something went wrong can you submit a new request please?'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
 			END IF;
 		END IF;
         ELSE
-                result_set = f_format_result_set(found_email_id,'Something went wrong can you submit a new request please?',-101);
+                result_set = CONCAT
+                (
+			found_email_id,
+                       	',',
+               		j_select_persons(found_email_id),
+                        ',',
+                        j_select_messages('Something went wrong can you submit a new request please?'),
+                        ',',
+                        j_select_codes(-101)
+               	);
         END IF;
 RETURN result_set;
 END;
@@ -691,12 +727,39 @@ BEGIN
         	WHERE email_id = found_email_id AND password = (CRYPT($2, password));
                 
 		IF found_native_login_id > 0 THEN
-			 result_set = f_format_result_set(found_email_id,null,-100);
+			 result_set = CONCAT
+                         (
+				found_email_id,
+                                ',',
+                         	j_select_persons(found_email_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-100)
+                        );
                 ELSE
-			 result_set = f_format_result_set(found_email_id,'Bad password.',-101);
+			 result_set = CONCAT
+                         (
+				found_email_id,
+                                ',',
+                         	j_select_persons(found_email_id),
+                                ',',
+                                j_select_messages('Bad password.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
                 END IF;
 	ELSE
-		result_set = f_format_result_set(found_email_id,'Email does not exist',-101);
+                result_set = CONCAT
+                (
+                	found_email_id,
+                        ',',
+                        j_select_persons(found_email_id),
+                        ',',
+                        j_select_messages('Email does not exist.'),
+                       	',',
+                        j_select_codes(-101)
+               	);
 	END IF;
 RETURN result_set;
 END;
@@ -1962,14 +2025,35 @@ BEGIN
 		delete from forgot_passwords where email_id = found_email_id; 
 		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
 		IF returning_forgot_passwords_id > 0 THEN
-			--result_set = '-101, Success. We sent you an email to help you login.';
-                     	--result_set = f_format_result_set(found_email_id,0,0,0,null,-100);
-                     	result_set = f_format_result_set(found_email_id,'We sent you an email to change password.',-101);
+		        result_set = CONCAT
+                	(
+                        	found_email_id,
+                        	',',
+                        	j_select_messages('We sent you an email to change password.'),
+                        	',',
+                        	j_select_codes(-101)
+                	);
+
 		ELSE
-                     	result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101);
+                        result_set = CONCAT
+                        (
+                                found_email_id,
+                                ',',
+                                j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
 		END IF;
 	ELSE
-                result_set = f_format_result_set(found_email_id,'That email does not exist in our system. Please try a valid email address.',-101);
+                result_set = CONCAT
+                (
+                	found_email_id,
+                       	',',
+                        j_select_messages('That email does not exist in our system. Please try a valid email address.'),
+                        ',',
+                        j_select_codes(-101)
+               	);
 	END IF;
 RETURN result_set;
 END;
