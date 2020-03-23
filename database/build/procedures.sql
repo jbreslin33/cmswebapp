@@ -1194,7 +1194,6 @@ BEGIN
                         );
 
         	ELSE
-                	result_set = f_format_result_set($1,'Something went wrong with adding game.',-101);
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
