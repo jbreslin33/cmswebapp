@@ -968,18 +968,46 @@ BEGIN
         WHERE name = $1;
 
         IF found_club_id > 0 THEN
-		result_set = f_format_result_set(email_id,'Club name already exists',-101);
+		result_set = CONCAT
+                (
+                	j_select_persons(email_id),
+                        ',',
+                       	j_select_messages('Club name already exists.'),
+                        ',',
+                       	j_select_codes(-101)
+               	);
        	ELSE
 		IF person_id > 0 THEN
 
 			CALL p_insert_club($1,$2,email_id,person_id,x);
 			IF x > 0 THEN
-				result_set = f_format_result_set(email_id,null,-100);
+			        result_set = CONCAT
+                		(
+                        		j_select_persons(email_id),
+                        		',',
+                        		j_select_messages(null),
+                        		',',
+                        		j_select_codes(-100)
+                		);
 			ELSE
-				result_set = f_format_result_set(email_id,'Something went wrong with adding club. Sorry!',-101);
+				result_set = CONCAT
+                                (
+                                        j_select_persons(email_id),
+                                        ',',
+                                        j_select_messages('Something went wrong with adding club. Sorry!'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
 			END IF;
 		ELSE
-			result_set = f_format_result_set(email_id,'You must add a person to this account before you add a club.',-101);
+			result_set = CONCAT
+                        (
+                        	j_select_persons(email_id),
+                                ',',
+                                j_select_messages('You must add a person to this account before you add a club.'),
+                               	',',
+                                j_select_codes(-101)
+                        );
 		END IF;
         END IF;
 RETURN result_set;
