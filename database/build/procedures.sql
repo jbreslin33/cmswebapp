@@ -1553,7 +1553,6 @@ BEGIN
                 CALL p_update_profile($2,$3,$4,x);
 
                 IF x > 0 THEN
-  			RAISE LOG 'log message IF:%', x;
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -1566,7 +1565,6 @@ BEGIN
                         );
 
                 ELSE
-			RAISE LOG 'log message ELSE:%', x;
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -1601,9 +1599,25 @@ BEGIN
                 CALL p_update_club_profile($3,$4,$5,x);
 
                 IF x > 0 THEN
-                        result_set = f_format_result_set($1,null,-101);
+                       	result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
                 ELSE
-                        result_set = f_format_result_set($1,'Something went wrong with setting availability. Please try again.',-101);
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Something went wrong with setting availability. Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
                 END IF;
         END IF;
 
@@ -1641,11 +1655,26 @@ DECLARE
 BEGIN
 	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
 	IF found_club_administrator_id > 0 THEN
-        	result_set = f_format_result_set_club_profiles(email_id_p,null,-102,person_id_p, club_id_p);
-  		RAISE LOG 'log message IF %', now();
+	        result_set = CONCAT
+        	(
+                	j_select_persons(email_id_p),
+                	',',
+                	j_select_messages(null),
+                	',',
+                	j_select_codes(-102),
+                	',',
+                	j_select_club_profiles(person_id_p, club_id_p)
+        	);
 	ELSE
-		RAISE LOG 'log message ELSE %', now();
-               	result_set = f_format_result_set($1,'You are not a club administrator.',-101);
+	        result_set = CONCAT
+        	(
+                	j_select_persons($1),
+                	',',
+                	j_select_messages('You are not a club administrator.'),
+                	',',
+                	j_select_codes(-101)
+        	);
+
 	END IF;
 RETURN result_set;
 END;
@@ -1658,7 +1687,17 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set_pitches_and_teams(email_id_p,null,-102,club_id_p, person_id_p);
+        result_set = CONCAT
+        (
+                j_select_messages(null),
+               	',',
+                j_select_codes(-102),
+               	',',
+		j_select_pitches(club_id_p),
+               	',',
+		j_select_teams_managed(club_id_p, person_id_p)
+      	);
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1669,7 +1708,24 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set_events(email_id, null,-100, first_day_of_query, last_day_of_query);
+        
+	result_set = CONCAT
+        (
+        	j_select_persons(email_id),
+                ',',
+                j_select_messages(null),
+                ',',
+                j_select_codes(-100),
+                ',',
+		j_select_clubs(email_id),
+                ',',
+		j_select_teams(email_id),
+                ',',
+		j_select_practices(email_id,$2,$3),
+                ',',
+		j_select_games(email_id,$2,$3)
+       	);
+
 
 RETURN result_set;
 END;
@@ -1681,7 +1737,15 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set(email_id,null,-102);
+        result_set = CONCAT
+        (
+                j_select_persons(email_id),
+                ',',
+                j_select_messages(null),
+                ',',
+                j_select_codes(-102)
+        );
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1692,7 +1756,14 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set(email_id,null,-100);
+        result_set = CONCAT
+        (
+                j_select_persons(email_id),
+                ',',
+                j_select_messages(null),
+                ',',
+                j_select_codes(-100)
+        );
 
 RETURN result_set;
 END;
@@ -1710,9 +1781,25 @@ BEGIN
 	CALL p_insert_person($1,$2,$3,$4,$5,$6,$7,x);
 
         IF x > 0 THEN
-		result_set = f_format_result_set(email_id,null,-100);
+	        result_set = CONCAT
+        	(
+                	j_select_persons(email_id),
+                	',',
+                	j_select_messages(null),
+                	',',
+                	j_select_codes(-100)
+        	);
+
         ELSE
-		result_set = f_format_result_set(email_id,'Person not added',-101);
+	        result_set = CONCAT
+        	(
+                	j_select_persons(email_id),
+                	',',
+                	j_select_messages('Person not added.'),
+                	',',
+                	j_select_codes(-101)
+        	);
+
         END IF;
 
 RETURN result_set;
@@ -1779,7 +1866,15 @@ BEGIN
 		IF found_team_club_player_id > 0 THEN
 			--we have a player on a team the only way to delete is if the deletor is a team manager
 	
-			result_set = f_format_result_set($1,'You do not have permission to delete Person. They are on a team. Let your team manager know.',-101);
+		        result_set = CONCAT
+        		(
+                		j_select_persons($1),
+                		',',
+                		j_select_messages('You do not have permission to delete Person. They are on a team. Let your team manager know.'),
+                		',',
+                		j_select_codes(-101)
+        		);
+
 			--this is good enough as you should delete players on another screen.
 
 		ELSE
@@ -1787,14 +1882,37 @@ BEGIN
         		CALL p_delete_person($3,x);
 
         		IF x > 0 THEN
-				result_set = f_format_result_set($1,null,-100);
+				result_set = CONCAT
+                        	(
+                                	j_select_persons($1),
+                                	',',
+                                	j_select_messages(null),
+                                	',',
+                                	j_select_codes(-100)
+                        	);
         		ELSE
-				result_set = f_format_result_set($1,'Something went wrong',-101);
+                                result_set = CONCAT
+                                (
+                                        j_select_persons($1),
+                                        ',',
+                                        j_select_messages('Something went wrong.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
         		END IF;
 
 		END IF;
 	ELSE
-		result_set = f_format_result_set($1,'Total persons less than 2 so we cannot delete.',-101);
+                result_set = CONCAT
+                (
+                	j_select_persons($1),
+                       	',',
+                        j_select_messages('Total persons less than 2 so we cannot delete.'),
+                        ',',
+                        j_select_codes(-101)
+               	);
+
 		--not enuf persons prob get rid of this
 	END IF;
 RETURN result_set;
@@ -1830,12 +1948,36 @@ BEGIN
 		CALL p_delete_club($3,x);
 
                	IF x > 0 THEN
-                	result_set = f_format_result_set($1,null,-100);
+		        result_set = CONCAT
+                	(
+                        	j_select_persons($1),
+                        	',',
+                        	j_select_messages(null),
+                        	',',
+                        	j_select_codes(-100)
+                	);
+
                 ELSE
-                	result_set = f_format_result_set($1,'Something went wrong while trying to delete club. Sorry.',-101);
+                       	result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Something went wrong while trying to delete club. Sorry.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
                 END IF;
 	ELSE
-		result_set = f_format_result_set($1,'You do not have permission to delete this club. Only a club administrator can delete a club.',-101);
+                result_set = CONCAT
+                (
+                	j_select_persons($1),
+                        ',',
+                        j_select_messages('You do not have permission to delete this club. Only a club administrator can delete a club.'),
+                        ',',
+                        j_select_codes(-101)
+            	);
+
 	END IF;
 
 RETURN result_set;
@@ -2047,7 +2189,16 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-	result_set = f_format_result_set_administrated_clubs(email_id,null,-102,$2);
+	
+       	result_set = CONCAT
+        (
+                j_select_messages(null),
+               	',',
+                j_select_codes(-102),
+               	',',
+                j_select_administrated_clubs($2)
+      	);
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -2059,7 +2210,16 @@ RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
-        result_set = f_format_result_set_clubs_of_teams_managed(email_id,null,-102,$2);
+
+	result_set = CONCAT
+        (
+                j_select_messages(null),
+                ',',
+                j_select_codes(-101),
+                ',',
+		j_select_clubs_of_teams_managed($2)
+        );
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -2078,7 +2238,16 @@ BEGIN
 	select id into found_team_id from teams where name = $4 AND club_id = $2;  	
 
         IF found_team_id > 0 THEN
-                result_set = f_format_result_set_administrated_clubs($1,'Team name already exists',-101,$3);
+
+                result_set = CONCAT
+                (
+                        j_select_messages('Team name already exists.'),
+                        ',',
+                        j_select_codes(-101)
+                        ',',
+                        j_select_administrated_clubs($3)
+           	);
+
 	ELSE
 		--are you a club admin of club $2????
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
@@ -2088,12 +2257,36 @@ BEGIN
 			CALL p_insert_team($2,$4,$3,x);
 
 			IF x > 0 THEN
-                     		result_set = f_format_result_set($1,null,-100);
+			       	result_set = CONCAT
+        			(
+                			j_select_persons($1),
+                			',',
+                			j_select_messages(null),
+                			',',
+                			j_select_codes(-100)
+        			);
+
 			ELSE
-                     		result_set = f_format_result_set($1,'Something went wrong with adding team. Sorry!',-101);
+                         	result_set = CONCAT
+                                (
+                                        j_select_persons($1),
+                                        ',',
+                                        j_select_messages('Something went wrong with adding team. Sorry!'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			END IF;
 		ELSE
-                     	result_set = f_format_result_set($1,'You are not a club administrator. So you cannot add a team to this club.',-101);
+                        result_set = CONCAT
+                        (
+                        	j_select_persons($1),
+                                ',',
+                                j_select_messages('You are not a club administrator. So you cannot add a team to this club.'),
+                                ',',
+                                j_select_codes(-101)
+                      	);
+
 		END IF;
 	END IF;
 RETURN result_set;
@@ -2114,7 +2307,16 @@ BEGIN
 	select id into found_pitch_id from pitches where name = $4 AND club_id = $2;  	
 
         IF found_pitch_id > 0 THEN
-		result_set = f_format_result_set_administrated_clubs($1,'Pitch name already exists',-101,$3);
+
+		result_set = CONCAT
+                (
+                       	j_select_messages('Pitch name already exists.'),
+                        ',',
+                        j_select_codes(-101),
+                        ',',
+			j_select_administrated_clubs($3)
+               	);
+
 	ELSE
 		--are you a club admin of club $2????
 		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
@@ -2124,12 +2326,38 @@ BEGIN
 			CALL p_insert_pitch($2,$4,$3,x);
 
 			IF x > 0 THEN
-                     		result_set = f_format_result_set($1,null,-100);
+
+	                	result_set = CONCAT
+                		(
+                        		j_select_persons($1),
+                        		',',
+                        		j_select_messages(null),
+                        		',',
+                        		j_select_codes(-100)
+                		);
+
 			ELSE
-                     		result_set = f_format_result_set($1,'Something went wrong with adding pitch. Sorry!',-101);
+                                result_set = CONCAT
+                                (
+                                        j_select_persons($1),
+                                        ',',
+                                        j_select_messages('Something went wrong with adding pitch. Sorry!'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			END IF;
 		ELSE
-                     	result_set = f_format_result_set($1,'You are not a club administrator. So you cannot add a pitch to this club.',-101);
+
+	                result_set = CONCAT
+                        (
+                        	j_select_persons($1),
+                               	',',
+                                j_select_messages('You are not a club administrator. So you cannot add a pitch to this club.'),
+                                ',',
+                               	j_select_codes(-101)
+                     	);
+
 		END IF;
 	END IF;
 RETURN result_set;
@@ -2200,14 +2428,38 @@ BEGIN
 		select id into found_native_login_id from native_logins where email_id = found_email_id;
 
 		IF found_native_login_id > 0 THEN
-			result_set = f_format_result_set(found_email_id,'That email already has a login associated with it. Would you like to login?',-102); 
+	                result_set = CONCAT
+                	(
+                        	j_select_persons(found_email_id),
+                        	',',
+                        	j_select_messages('That email already has a login associated with it. Would you like to login?'),
+                        	',',
+                        	j_select_codes(-101)
+                	);
+
 		ELSE
 			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
-				message = 'We sent you a link to your email to finish joining.';
-				result_set = f_format_result_set(found_email_id,message,-101); -- we want you to clear screen but stay on screen and display message... 
+
+	                        result_set = CONCAT
+                        	(
+                               		j_select_persons(found_email_id),
+                                	',',
+                                	j_select_messages('We sent you a link to your email to finish joining.'),
+                                	',',
+                                	j_select_codes(-101)
+                        	);
+
 			ELSE
-				result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101); -- we want you to clear screen but stay on screen and display message.. 
+                                result_set = CONCAT
+                                (
+                                        j_select_persons(found_email_id),
+                                        ',',
+                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			END IF;
 		END IF;
 	ELSE
@@ -2216,11 +2468,27 @@ BEGIN
 
 			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
-  				--RAISE LOG 'IF A log message %', x;
-				result_set = f_format_result_set(x,'We sent you a link to your email to finish joining.',-101);
+                              	
+				result_set = CONCAT
+                                (
+                                        j_select_persons(x),
+                                        ',',
+                                        j_select_messages('We sent you a link to your email to finish joining.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			ELSE
-				--RAISE LOG 'ELSE A log message %', x;
-				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
+
+                                result_set = CONCAT
+                                (
+                                        j_select_persons(0),
+                                        ',',
+                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			END IF;
 		ELSE
 		END IF;
@@ -2245,14 +2513,39 @@ BEGIN
 		select id into found_native_login_id from native_logins where email_id = found_email_id;
 
 		IF found_native_login_id > 0 THEN
-			result_set = f_format_result_set(found_email_id,'That email already has a login associated with it. But we added it to your club.',-101); 
+
+                        result_set = CONCAT
+                        (
+                        	j_select_persons(found_email_id),
+                                ',',
+                                j_select_messages('That email already has a login associated with it. But we added it to your club.'),
+                                ',',
+                                j_select_codes(-101)
+                      	);
+
 		ELSE
 			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
-				message = 'We sent an email to your invitee to finish joining.';
-				result_set = f_format_result_set(found_email_id,message,-100); --  
+			       	
+				result_set = CONCAT
+                        	(
+                                	j_select_persons(found_email_id),
+                                	',',
+                                	j_select_messages('We sent an email to your invitee to finish joining.'),
+                                	',',
+                                	j_select_codes(-100)
+                        	);
 			ELSE
 				result_set = f_format_result_set(found_email_id,'Something went wrong with process. Sorry! Please try again.',-101); -- we want you to clear screen but stay on screen and display message.. 
+                               	result_set = CONCAT
+                                (
+                                        j_select_persons(found_email_id),
+                                        ',',
+                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			END IF;
 		END IF;
 	ELSE
@@ -2260,9 +2553,27 @@ BEGIN
 		IF x > 0 THEN 
 			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
 			IF returning_insert_native_login_token_id > 0 THEN
-				result_set = f_format_result_set(x,'We a link to your invitee to finish joining.',-100);
+
+                               	result_set = CONCAT
+                                (
+                                        j_select_persons(x),
+                                        ',',
+                                        j_select_messages('We a link to your invitee to finish joining.'),
+                                        ',',
+                                        j_select_codes(-100)
+                                );
+
 			ELSE
-				result_set = f_format_result_set(0,'Something went wrong with process. Sorry! Please try again.',-101);
+
+                               	result_set = CONCAT
+                                (
+                                        j_select_persons(0),
+                                        ',',
+                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
 			END IF;
 		ELSE
 		END IF;
@@ -2282,45 +2593,5 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 -----------
-
---BEGIN PROFILE
-CREATE OR REPLACE FUNCTION f_select_profile(email_id int, person_id int)
-RETURNS text AS $$
-DECLARE
-        result_set text;
-BEGIN
-	result_set = f_format_result_set_profile(email_id, null,-100, $2);
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION f_format_result_set_profile(int,TEXT,int,int)
-RETURNS text AS $$
-DECLARE
-        json_result_codes text;
-        json_result_messages text;
-        json_result_persons text;
-
-        --json_result_teams text;
-        --json_result_clubs text;
-        --json_result_practices text;
-        --json_result_games text;
-        result_set text;
-BEGIN
-        select into json_result_messages j_select_messages($2);
-        select into json_result_codes j_select_codes($3);
-
-        --select into json_result_persons j_select_persons($1);
-        --select into json_result_clubs j_select_clubs($1);
-        --select into json_result_teams j_select_teams($1);
-
-        --select into json_result_practices j_select_practices($1,$4,$5);
-        --select into json_result_games j_select_games($1,$4,$5);
-
-        result_set = CONCAT(json_result_clubs,',',json_result_teams,',',json_result_persons,',',json_result_practices,',',json_result_games,',',json_result_messages,',',json_result_codes);
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
 
 
