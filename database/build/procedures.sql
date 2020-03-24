@@ -656,6 +656,48 @@ END;
 $$;
 --END INSERT PRACTICE
 
+--INSERT TEAM
+CREATE OR REPLACE PROCEDURE p_insert_team(int,text,int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	returning_team_id teams.id%TYPE;
+	found_club_person_id club_persons.id%TYPE;
+	found_manager_id managers.id%TYPE;
+	found_club_manager_id club_managers.id%TYPE;
+	returning_team_club_person_id team_club_persons.id%TYPE;
+	returning_club_administrator_id club_administrators.id%TYPE;
+BEGIN
+       	insert into teams (club_id,name) values ($1,$2) returning id into returning_team_id;
+	select id into found_club_person_id from club_persons where club_id = $1 AND person_id = $3;
+	insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into returning_team_club_person_id;
+
+	--insert into managers (person_id) values ($3) ON CONFLICT ON CONSTRAINT managers_person_id_key select id into returning_manager      DO NOTHING     returning id into returning_manager_id;
+	select id into found_manager_id from managers where person_id = $3;
+
+	IF found_manager_id > 0 THEN
+		--DO NOTHING
+	ELSE
+		insert into managers (person_id) values ($3) returning id into found_manager_id;
+	END IF;
+
+
+	select id into found_club_manager_id from club_managers where club_person_id = found_club_person_id;
+
+	IF found_club_manager_id > 0 THEN 
+		--DO NOTHING
+	ELSE
+		insert into club_managers (club_person_id,manager_id) values (found_club_person_id,found_manager_id) returning id into found_club_manager_id;
+	END IF;
+
+	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, found_club_manager_id) returning id into x;
+
+	select id into returning_club_administrator_id from club_administrators where club_person_id = found_club_person_id; 
+	
+	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, returning_club_administrator_id);
+END;
+$$;
 
 --INSERT CLUB
 CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_id int, person_id int, INOUT x int)
@@ -2024,48 +2066,6 @@ END;
 $$;
 --END DELETE PERSON
 
---email_id,club_id,person_id,club_persons_id,name
-CREATE OR REPLACE PROCEDURE p_insert_team(int,text,int,INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-	returning_team_id teams.id%TYPE;
-	found_club_person_id club_persons.id%TYPE;
-	found_manager_id managers.id%TYPE;
-	found_club_manager_id club_managers.id%TYPE;
-	returning_team_club_person_id team_club_persons.id%TYPE;
-	returning_club_administrator_id club_administrators.id%TYPE;
-BEGIN
-       	insert into teams (club_id,name) values ($1,$2) returning id into returning_team_id;
-	select id into found_club_person_id from club_persons where club_id = $1 AND person_id = $3;
-	insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into returning_team_club_person_id;
-
-	--insert into managers (person_id) values ($3) ON CONFLICT ON CONSTRAINT managers_person_id_key select id into returning_manager      DO NOTHING     returning id into returning_manager_id;
-	select id into found_manager_id from managers where person_id = $3;
-
-	IF found_manager_id > 0 THEN
-		--DO NOTHING
-	ELSE
-		insert into managers (person_id) values ($3) returning id into found_manager_id;
-	END IF;
-
-
-	select id into found_club_manager_id from club_managers where club_person_id = found_club_person_id;
-
-	IF found_club_manager_id > 0 THEN 
-		--DO NOTHING
-	ELSE
-		insert into club_managers (club_person_id,manager_id) values (found_club_person_id,found_manager_id) returning id into found_club_manager_id;
-	END IF;
-
-	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, found_club_manager_id) returning id into x;
-
-	select id into returning_club_administrator_id from club_administrators where club_person_id = found_club_person_id; 
-	
-	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
-	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, returning_club_administrator_id);
-END;
-$$;
 --------------------
 CREATE OR REPLACE PROCEDURE p_insert_pitch(int,text,int,INOUT x int)
 LANGUAGE plpgsql
