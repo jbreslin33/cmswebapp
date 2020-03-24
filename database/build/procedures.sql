@@ -853,6 +853,246 @@ $$;
 --END INSERT PITCH
 
 
+
+
+
+
+
+
+
+
+
+--INVITE TO CLUB
+CREATE OR REPLACE FUNCTION f_invite_to_club(TEXT, TEXT, int)
+RETURNS text AS $$
+DECLARE
+	DECLARE x int := -1;
+        found_email_id emails.id%TYPE;
+        found_native_login_id native_logins.id%TYPE;
+        returning_insert_native_login_token_id insert_native_login_tokens.id%TYPE;
+        message text;
+        result_set text;
+BEGIN
+        select into found_email_id f_get_email_id($1);
+        IF found_email_id > 0 THEN 
+		select id into found_native_login_id from native_logins where email_id = found_email_id;
+
+		IF found_native_login_id > 0 THEN
+
+                        result_set = CONCAT
+                        (
+                        	j_select_persons(found_email_id),
+                                ',',
+                                j_select_messages('That email already has a login associated with it. But we added it to your club.'),
+                                ',',
+                                j_select_codes(-101)
+                      	);
+
+		ELSE
+			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
+			IF returning_insert_native_login_token_id > 0 THEN
+			       	
+				result_set = CONCAT
+                        	(
+                                	j_select_persons(found_email_id),
+                                	',',
+                                	j_select_messages('We sent an email to your invitee to finish joining.'),
+                                	',',
+                                	j_select_codes(-100)
+                        	);
+			ELSE
+                               	result_set = CONCAT
+                                (
+                                        j_select_persons(found_email_id),
+                                        ',',
+                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
+			END IF;
+		END IF;
+	ELSE
+		CALL p_insert_email($1,x);
+		IF x > 0 THEN 
+			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
+			IF returning_insert_native_login_token_id > 0 THEN
+
+                               	result_set = CONCAT
+                                (
+                                        j_select_persons(x),
+                                        ',',
+                                        j_select_messages('We a link to your invitee to finish joining.'),
+                                        ',',
+                                        j_select_codes(-100)
+                                );
+
+			ELSE
+
+                               	result_set = CONCAT
+                                (
+                                        j_select_persons(0),
+                                        ',',
+                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                        ',',
+                                        j_select_codes(-101)
+                                );
+
+			END IF;
+		ELSE
+		END IF;
+	END IF;
+
+
+	--for the clubs
+	IF found_email_id > 0 THEN
+		insert into club_emails (club_id, email_id) values ($3,found_email_id);
+	END IF;
+	
+	IF x > 0 THEN
+		insert into club_emails (club_id, email_id) values ($3,x);
+	END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END INVITE TO CLUB
+
+
+--INSERT CLUB ADMINISTRATOR
+CREATE OR REPLACE PROCEDURE p_insert_club_administrator(club_person_id_p int, person_id_p int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        returning_administrator_id administrators.id%TYPE;
+        found_administrator_id administrators.id%TYPE;
+BEGIN
+	select id into found_administrator_id from administrators where person_id = person_id_p; 
+	IF found_administrator_id > 0 THEN
+        	insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, found_administrator_id) returning id into x;
+	ELSE
+        	insert into administrators (person_id) values (person_id_p) returning id into returning_administrator_id;
+        	insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, returning_administrator_id) returning id into x;
+	END IF;
+END;
+$$;
+--END INSERT CLUB ADMINISTRATOR
+
+
+--BEGIN UPDATE CLUB PROFILE
+CREATE OR REPLACE PROCEDURE p_update_club_profile(int,int,int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        ids INT[];
+	found_person_id persons.id%TYPE;
+BEGIN
+
+	--RAISE LOG 'log message in 1 in p %', $1;
+	--RAISE LOG 'log message in 2 in p %', $2;
+	--RAISE LOG 'log message in 3 in p %', $3;
+
+	IF $3 = 2 THEN
+
+		IF $2 = 1 THEN
+			select person_id into found_person_id from players where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into players (person_id) values ($1);
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+
+
+		IF $2 = 2 THEN
+			select person_id into found_person_id from parents where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into parents (person_id) values ($1);
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+
+	
+		IF $2 = 3 THEN
+			--RAISE LOG 'log message in 3 %', $1;
+			select person_id into found_person_id from coaches where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into coaches (person_id) values ($1);
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+
+
+		IF $2 = 4 THEN
+			select person_id into found_person_id from managers where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into managers (person_id) values ($1);
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+	
+		IF $2 = 5 THEN
+			select person_id into found_person_id from administrators where person_id = $1; 
+			IF found_person_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into administrators (person_id) values ($1);
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+
+	ELSE
+		IF $2 = 1 THEN
+			delete from players where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 2 THEN
+			delete from parents where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 3 THEN
+			delete from coaches where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 4 THEN
+			delete from managers where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+		IF $2 = 5 THEN
+			delete from administrators where person_id = $1; 
+		ELSE
+			--DO NOTHING
+		END IF;
+
+
+	END IF;
+	x := 1;
+
+END;
+$$;
+--END UPDATE CLUB PROFILE
+-------------------------------------------------------------------------------
+
 --INSERT CLUB
 CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_id int, person_id int, INOUT x int)
 LANGUAGE plpgsql
@@ -936,7 +1176,7 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
--------------------------------------------------------------------------------
+
 
 
 
@@ -1408,28 +1648,10 @@ BEGIN
 END;
 $$;
 
---INSERT CLUB MEMBERS
-CREATE OR REPLACE PROCEDURE p_insert_club_administrator(club_person_id_p int, person_id_p int, INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-        returning_administrator_id administrators.id%TYPE;
-        found_administrator_id administrators.id%TYPE;
-BEGIN
-	select id into found_administrator_id from administrators where person_id = person_id_p; 
-	IF found_administrator_id > 0 THEN
-        	insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, found_administrator_id) returning id into x;
-	ELSE
-        	insert into administrators (person_id) values (person_id_p) returning id into returning_administrator_id;
-        	insert into club_administrators (club_person_id,administrator_id) values (club_person_id_p, returning_administrator_id) returning id into x;
-	END IF;
-END;
-$$;
 
 
 
 --BEGIN UPDATE PROFILE
---person_id,type,active
 CREATE OR REPLACE PROCEDURE p_update_profile(int,int,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -1541,124 +1763,10 @@ END;
 $$;
 --END UPDATE PROFILE
 
---BEGIN UPDATE CLUB PROFILE
---person_id,type,active,person_to_change_id
-CREATE OR REPLACE PROCEDURE p_update_club_profile(int,int,int,INOUT x int)
-LANGUAGE plpgsql
-AS $$
-DECLARE
-        ids INT[];
-	found_person_id persons.id%TYPE;
-BEGIN
-
-	--RAISE LOG 'log message in 1 in p %', $1;
-	--RAISE LOG 'log message in 2 in p %', $2;
-	--RAISE LOG 'log message in 3 in p %', $3;
-
-	IF $3 = 2 THEN
-
-		IF $2 = 1 THEN
-			select person_id into found_person_id from players where person_id = $1; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into players (person_id) values ($1);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
 
 
-		IF $2 = 2 THEN
-			select person_id into found_person_id from parents where person_id = $1; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into parents (person_id) values ($1);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
 
-	
-		IF $2 = 3 THEN
-			--RAISE LOG 'log message in 3 %', $1;
-			select person_id into found_person_id from coaches where person_id = $1; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into coaches (person_id) values ($1);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-
-
-		IF $2 = 4 THEN
-			select person_id into found_person_id from managers where person_id = $1; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into managers (person_id) values ($1);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-	
-		IF $2 = 5 THEN
-			select person_id into found_person_id from administrators where person_id = $1; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into administrators (person_id) values ($1);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-
-	ELSE
-		IF $2 = 1 THEN
-			delete from players where person_id = $1; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $2 = 2 THEN
-			delete from parents where person_id = $1; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $2 = 3 THEN
-			delete from coaches where person_id = $1; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $2 = 4 THEN
-			delete from managers where person_id = $1; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $2 = 5 THEN
-			delete from administrators where person_id = $1; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-
-	END IF;
-	x := 1;
-
-END;
-$$;
 --END UPDATE PROFILE
-
-
-
-
---email_id,person_id,type,active
 CREATE OR REPLACE FUNCTION f_update_profile(int,int,int,int)
 RETURNS text AS $$
 DECLARE
@@ -2351,99 +2459,5 @@ END;
 $$ LANGUAGE plpgsql;
 -------
 
-CREATE OR REPLACE FUNCTION f_invite_to_club(TEXT, TEXT, int)
-RETURNS text AS $$
-DECLARE
-	DECLARE x int := -1;
-        found_email_id emails.id%TYPE;
-        found_native_login_id native_logins.id%TYPE;
-        returning_insert_native_login_token_id insert_native_login_tokens.id%TYPE;
-        message text;
-        result_set text;
-BEGIN
-        select into found_email_id f_get_email_id($1);
-        IF found_email_id > 0 THEN 
-		select id into found_native_login_id from native_logins where email_id = found_email_id;
-
-		IF found_native_login_id > 0 THEN
-
-                        result_set = CONCAT
-                        (
-                        	j_select_persons(found_email_id),
-                                ',',
-                                j_select_messages('That email already has a login associated with it. But we added it to your club.'),
-                                ',',
-                                j_select_codes(-101)
-                      	);
-
-		ELSE
-			insert into insert_native_login_tokens (email_id, token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
-			IF returning_insert_native_login_token_id > 0 THEN
-			       	
-				result_set = CONCAT
-                        	(
-                                	j_select_persons(found_email_id),
-                                	',',
-                                	j_select_messages('We sent an email to your invitee to finish joining.'),
-                                	',',
-                                	j_select_codes(-100)
-                        	);
-			ELSE
-                               	result_set = CONCAT
-                                (
-                                        j_select_persons(found_email_id),
-                                        ',',
-                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
-                                        ',',
-                                        j_select_codes(-101)
-                                );
-
-			END IF;
-		END IF;
-	ELSE
-		CALL p_insert_email($1,x);
-		IF x > 0 THEN 
-			insert into insert_native_login_tokens (email_id, token, expires) values (x, $2, NOW() + interval '1 hour') returning id into returning_insert_native_login_token_id;	
-			IF returning_insert_native_login_token_id > 0 THEN
-
-                               	result_set = CONCAT
-                                (
-                                        j_select_persons(x),
-                                        ',',
-                                        j_select_messages('We a link to your invitee to finish joining.'),
-                                        ',',
-                                        j_select_codes(-100)
-                                );
-
-			ELSE
-
-                               	result_set = CONCAT
-                                (
-                                        j_select_persons(0),
-                                        ',',
-                                        j_select_messages('Something went wrong with process. Sorry! Please try again.'),
-                                        ',',
-                                        j_select_codes(-101)
-                                );
-
-			END IF;
-		ELSE
-		END IF;
-	END IF;
-
-
-	--for the clubs
-	IF found_email_id > 0 THEN
-		insert into club_emails (club_id, email_id) values ($3,found_email_id);
-	END IF;
-	
-	IF x > 0 THEN
-		insert into club_emails (club_id, email_id) values ($3,x);
-	END IF;
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
------------
 
 
