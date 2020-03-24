@@ -312,7 +312,27 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-----------------
+--BEGIN CHOOSE PERSON
+CREATE OR REPLACE FUNCTION f_choose_person(int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+	result_set = CONCAT
+        (
+        	j_select_persons($1),
+       		',',
+               	j_select_messages(null),
+                ',',
+               	j_select_codes(-100)
+       	);
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END CHOOSE PERSON
+
+
+-------------------------------------------------------------------------------
 
 
 
@@ -760,24 +780,6 @@ $$ LANGUAGE plpgsql;
 --select clubs.id, clubs.name from clubs join club_persons on club_persons.club_id=clubs.id join persons on persons.id=club_persons.person_id join emails_persons on emails_persons.person_id=persons.id where emails_persons.id = 1;
 
 
---BEGIN CHOOSE PERSON
-CREATE OR REPLACE FUNCTION f_choose_person(int)
-RETURNS text AS $$
-DECLARE
-        result_set text;
-BEGIN
-	result_set = CONCAT
-        (
-        	j_select_persons($1),
-       		',',
-               	j_select_messages(null),
-                ',',
-               	j_select_codes(-100)
-       	);
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
---END CHOOSE PERSON
 
 
 
