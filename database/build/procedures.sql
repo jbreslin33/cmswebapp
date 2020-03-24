@@ -978,8 +978,48 @@ END;
 $$;
 --END INSERT CLUB ADMINISTRATOR
 
-
 --BEGIN UPDATE CLUB PROFILE
+CREATE OR REPLACE FUNCTION f_update_club_profile(int,int,int,int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+		--lets check if you are club_admin
+
+                CALL p_update_club_profile($3,$4,$5,x);
+
+                IF x > 0 THEN
+                       	result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
+                ELSE
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('Something went wrong with setting availability. Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
+                END IF;
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE PROCEDURE p_update_club_profile(int,int,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -1253,7 +1293,6 @@ BEGIN
 END;
 $$;
 --END DELETE PERSON
--------------------------------------------------------------------------------
 
 --INSERT CLUB
 CREATE OR REPLACE PROCEDURE p_insert_club(name TEXT, address TEXT, email_id int, person_id int, INOUT x int)
@@ -1339,6 +1378,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+-------------------------------------------------------------------------------
 
 
 
@@ -1923,12 +1963,7 @@ EXCEPTION
 	
 END;
 $$;
---END UPDATE PROFILE
 
-
-
-
---END UPDATE PROFILE
 CREATE OR REPLACE FUNCTION f_update_profile(int,int,int,int)
 RETURNS text AS $$
 DECLARE
@@ -1973,47 +2008,8 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
---email_id,person_id,type,active,person_to_change_id,club_id
-CREATE OR REPLACE FUNCTION f_update_club_profile(int,int,int,int,int,int)
-RETURNS text AS $$
-DECLARE
-        result_set text;
-        DECLARE x int := -111;
-        json_result text;
-BEGIN
+--END UPDATE PROFILE
 
-        IF $2 is NULL THEN
-        ELSE
-		--lets check if you are club_admin
-
-                CALL p_update_club_profile($3,$4,$5,x);
-
-                IF x > 0 THEN
-                       	result_set = CONCAT
-                        (
-                                j_select_persons($1),
-                                ',',
-                                j_select_messages(null),
-                                ',',
-                                j_select_codes(-101)
-                        );
-
-                ELSE
-                        result_set = CONCAT
-                        (
-                                j_select_persons($1),
-                                ',',
-                                j_select_messages('Something went wrong with setting availability. Please try again.'),
-                                ',',
-                                j_select_codes(-101)
-                        );
-
-                END IF;
-        END IF;
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
 
 --BEGIN SELECT PROFILES
 CREATE OR REPLACE FUNCTION f_profile(email_id_p int, person_id_p int)
