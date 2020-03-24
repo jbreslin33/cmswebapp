@@ -2409,9 +2409,8 @@ BEGIN
 
 END;
 $$;
---END DELETE PERSON
+--END DELETE CLUB
 
---------------------
 
 --BEGIN SELECT ADMINISTRATED CLUBS
 CREATE OR REPLACE FUNCTION f_select_administrated_clubs(email_id int, person_id int)
