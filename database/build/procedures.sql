@@ -147,22 +147,101 @@ BEGIN
 END;
 $$;
 
+--NATIVE INSERT LOGIN        SIGNUP
+CREATE OR REPLACE FUNCTION f_insert_native_login(token_p TEXT, password TEXT)
+RETURNS text AS $$
+DECLARE
+	found_email_id emails.id%TYPE;
+	result_set text;
+	DECLARE x int := -1; 
+BEGIN
 
+    	SELECT email_id INTO found_email_id FROM insert_native_login_tokens WHERE token = token_p;
+	IF found_email_id > 0 THEN
+		CALL p_insert_native_login(found_email_id,$2,x);
+		IF x > 0 THEN
+                        result_set = CONCAT
+                        (
+				found_email_id,
+                                ',',
+                        	j_select_persons(found_email_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-100)
+                       	);
+                ELSE
+			result_set = CONCAT
+                        (
+                                found_email_id,
+                                ',',
+                                j_select_persons(found_email_id),
+                                ',',
+                                j_select_messages('Something went wrong with signup. Sorry! Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+		END IF;
+	ELSE
+                result_set = CONCAT
+                (
+                	found_email_id,
+                        ',',
+                        j_select_persons(found_email_id),
+                        ',',
+                        j_select_messages('Something went wrong. Please resend email email.'),
+                       	',',
+                       	j_select_codes(-101)
+               	);
+	END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 
-
-----------------
-
-
-
---EMAIL
-CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
+--FORGOT PASSWORD
+CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT)
 RETURNS text AS $$
 DECLARE
         found_email_id emails.id%TYPE;
+        returning_forgot_passwords_id forgot_passwords.id%TYPE;
+        result_set text;
 BEGIN
-        SELECT id INTO found_email_id FROM emails
-        WHERE email = email_name;
-RETURN found_email_id;
+        select into found_email_id f_get_email_id($1);
+        IF found_email_id > 0 THEN 
+		delete from forgot_passwords where email_id = found_email_id; 
+		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
+		IF returning_forgot_passwords_id > 0 THEN
+		        result_set = CONCAT
+                	(
+                        	found_email_id,
+                        	',',
+                        	j_select_messages('We sent you an email to change password.'),
+                        	',',
+                        	j_select_codes(-101)
+                	);
+
+		ELSE
+                        result_set = CONCAT
+                        (
+                                found_email_id,
+                                ',',
+                                j_select_messages('Something went wrong with process. Sorry! Please try again.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+
+		END IF;
+	ELSE
+                result_set = CONCAT
+                (
+                	found_email_id,
+                       	',',
+                        j_select_messages('That email does not exist in our system. Please try a valid email address.'),
+                        ',',
+                        j_select_codes(-101)
+               	);
+	END IF;
+RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -233,56 +312,23 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
---NATIVE INSERT LOGIN
-CREATE OR REPLACE FUNCTION f_insert_native_login(token_p TEXT, password TEXT)
+----------------
+
+
+
+--EMAIL
+CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
 RETURNS text AS $$
 DECLARE
-	found_email_id emails.id%TYPE;
-	result_set text;
-	DECLARE x int := -1; 
+        found_email_id emails.id%TYPE;
 BEGIN
-
-    	SELECT email_id INTO found_email_id FROM insert_native_login_tokens WHERE token = token_p;
-	IF found_email_id > 0 THEN
-		CALL p_insert_native_login(found_email_id,$2,x);
-		IF x > 0 THEN
-                        result_set = CONCAT
-                        (
-				found_email_id,
-                                ',',
-                        	j_select_persons(found_email_id),
-                                ',',
-                                j_select_messages(null),
-                                ',',
-                                j_select_codes(-100)
-                       	);
-                ELSE
-			result_set = CONCAT
-                        (
-                                found_email_id,
-                                ',',
-                                j_select_persons(found_email_id),
-                                ',',
-                                j_select_messages('Something went wrong with signup. Sorry! Please try again.'),
-                                ',',
-                                j_select_codes(-101)
-                        );
-		END IF;
-	ELSE
-                result_set = CONCAT
-                (
-                	found_email_id,
-                        ',',
-                        j_select_persons(found_email_id),
-                        ',',
-                        j_select_messages('Something went wrong. Please resend email email.'),
-                       	',',
-                       	j_select_codes(-101)
-               	);
-	END IF;
-RETURN result_set;
+        SELECT id INTO found_email_id FROM emails
+        WHERE email = email_name;
+RETURN found_email_id;
 END;
 $$ LANGUAGE plpgsql;
+
+
 
 --BEGIN J_SELECT PITCHES
 --params:club_id
@@ -2211,51 +2257,6 @@ $$ LANGUAGE plpgsql;
 -------
 
 
-CREATE OR REPLACE FUNCTION f_insert_forgot_password(TEXT, TEXT)
-RETURNS text AS $$
-DECLARE
-        found_email_id emails.id%TYPE;
-        returning_forgot_passwords_id forgot_passwords.id%TYPE;
-        result_set text;
-BEGIN
-        select into found_email_id f_get_email_id($1);
-        IF found_email_id > 0 THEN 
-		delete from forgot_passwords where email_id = found_email_id; 
-		insert into forgot_passwords (email_id, forgot_password_token, expires) values (found_email_id, $2, NOW() + interval '1 hour') returning id into returning_forgot_passwords_id;	
-		IF returning_forgot_passwords_id > 0 THEN
-		        result_set = CONCAT
-                	(
-                        	found_email_id,
-                        	',',
-                        	j_select_messages('We sent you an email to change password.'),
-                        	',',
-                        	j_select_codes(-101)
-                	);
-
-		ELSE
-                        result_set = CONCAT
-                        (
-                                found_email_id,
-                                ',',
-                                j_select_messages('Something went wrong with process. Sorry! Please try again.'),
-                                ',',
-                                j_select_codes(-101)
-                        );
-
-		END IF;
-	ELSE
-                result_set = CONCAT
-                (
-                	found_email_id,
-                       	',',
-                        j_select_messages('That email does not exist in our system. Please try a valid email address.'),
-                        ',',
-                        j_select_codes(-101)
-               	);
-	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
 --------
 
 CREATE OR REPLACE FUNCTION f_insert_email(TEXT, TEXT)
