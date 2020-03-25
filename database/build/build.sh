@@ -17,6 +17,9 @@ sudo -u postgres psql -d footballhome -f database/build/insert_pitch.sql
 sudo -u postgres psql -d footballhome -f database/build/invite_to_club.sql
 sudo -u postgres psql -d footballhome -f database/build/edit_club_profile.sql
 
+sudo -u postgres psql -d footballhome -f database/build/insert_person.sql
+sudo -u postgres psql -d footballhome -f database/build/delete_person.sql
+
 
 sudo -u postgres psql -d footballhome -f database/build/procedures.sql
 
