@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="css/styles.css">
 
 		<title>
-			CMS
+			FOOTBALL HOME
 		</title>
 
   		<!-- TODO add manifest here -->
@@ -32,6 +32,8 @@
 	</head>
 	
 	<body>
+		
+		<!-------------------------------- SIDE BAR NAV MENU ------------------------------------------------>
 
 		<div id="side_nav_id" class="sidenav">
   			<a id="sidenavclosebuttonid" href="javascript:void(0)" class="closebtn">&times;</a>
@@ -132,104 +134,89 @@
 
 			</div>
 		</div>
-       
-
-		<!-- BEGIN RONDO -->
-		<!-- END RONDO -->
 		
+		<!------------------------------- FRONT PAGE ------------------------------------------------>
+        	
+		<!-- BEGIN LOGIN HTML  -->
 
-		
-		<!-- BEGIN CALENDAR HTML -->
-       		<div class="row" id="calendar_screen_html_id">
-
-			<!-- BEGIN ROW -->
-			<div class="row">
-
-				<!-- BEGIN COL-12 -->
-				<div class="col-12">
-
-					<form id="calendar_screen_form_id" action="#">
-
-					</form>
-
-                  			<button id="calendarbackbuttonid" class="calendar-button">&#8592;</button>
-					<p id="calendar_month_p_html_id"> </p>
-              				<button id="calendarforwardbuttonid" class="calendar-button">&#8594;</button>
-       				</div>
-				<!-- END COL-12 -->
-				
-			</div>		
-			<!-- END ROW -->
-			
-			<!-- BEGIN ROW -->
-			<div class="row">
-
-				<div id="calendar_modal_id" class="modal">
-
-  					<!-- Modal content -->
-  					<div class="modal-content">
-    						<span id="modal_close_id" class="close">&times;</span>
-    						<p id="modal_p_id"></p>
-  					</div>
-				</div>
-
-				<div id="calendar_full_screen_html_id">
-        				<div class="card">
-
-                        			<div class="container">
-				
-							<table id="calendar_table_id">
-  								<tr>
-    									<th>Sun</th>
-    									<th>Mon</th>
-    									<th>Tue</th>
-    									<th>Wed</th>
-    									<th>Thu</th>
-    									<th>Fri</th>
-    									<th>Sat</th>
-  								</tr>
-							</table>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-        	<!-- END CALENDAR HTML -->
-
-		<!-- BEGIN CHOOSE PERSON -->
-        	<div id="choose_person_screen_html_id" class="row">
-			
+       		<div id="login_screen_html_id" class="row">
 			<div class="col-3"> </div>
-  
-			<div class="col-6">
+			<div class="col-6"> 
 
-       				<div class="card">
+              			<div class="card">
+
+                        		<div class="container">
+						<form id="login_screen_form_login_id" action="#">
+
+                               				<h4><b>Login</b></h4>
+
+							<input id="login_screen_email_id" type="text" name="email" placeholder="Email" required>
+							<input id="login_screen_password_id" type="password" name="password" placeholder="Password" required>
+							
+							<button id="loginscreenbuttonid">LOGIN</button>
+						</form>
+                       			</div>
+
+               			</div>
+
+               			<div class="card">
 
                        			<div class="container">
 
-						<form id="choose_person_screen_form_id" action="#">
+						<form id="login_screen_form_google_id" action="#">
 
-                               				<h4><b>Choose Person</b></h4>
-                               				<select id="choose_person_screen_select_id" class="select"> </select>
-                               				<span id='choose_person_screen_message_id'></span>
+                               				<h4><b>Google Login</b></h4>
 
-                      					<div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
-                      						<span class="sr-only">Loading...</span>
-                       					</div>
-								
-							<button id="choosepersonscreenbuttonid"> Submit</button>
+							<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+							<a id="google_sign_out_id" class="button" href="#" onclick="signOut();">Sign out of Google</a>
 
 						</form>
 
                				</div>
-               			</div>
-			</div>
-			<div class="col-3"> </div>
-		</div>
-        	<!-- END CHOOSE PERSON HTML  -->
+       				</div>
+				
+				<div class="card">
 
+					<div class="container">
+						<form id="login_screen_form_signup_id" action="#">
+                               				<h4><b>Sign Up</b></h4>
+
+               						<button id="signupnavbuttonid">Sign Up</button>
+						</form>
+
+                       			</div>
+
+               			</div>
+                
+				<div class="card">
+
+					<div class="container">
+						<form id="login_screen_form_forgot_password_id" action="#">
+                               				<h4><b>Forgot Password?</b></h4>
+
+							<button id="insertforgotnavbuttonid"> Forgot Password?</button>
+						</form>
+
+                       			</div>
+
+               			</div>
+
+               			<div id="login_screen_spinner_id" class="spinner-border text-primary" role="status">
+       					<span class="sr-only">Loading...</span>
+       				</div>
+
+       			</div>
+
+			<div class="col-3"> 
+				<div class="aside">
+                                       <p id="aside_p_id">This is a Football Club Management System.</p>
+                               </div>
+                       	</div>
+       		</div>
+				
+		<!-- END LOGIN HTML -->
         	
+
 		<!-- INSERT EMAIL HTML  -->
         	<div id="insert_email_screen_html_id" class="row">
 
@@ -304,8 +291,114 @@
 			<div class="col-3"> </div>
 		</div>
 
-		<!-- END INSERT NATAIVE LOGIN HTML  -->
+		<!-- END INSERT NATIVE LOGIN HTML  -->
+      		
+		<!-- INSERT FORGOT PASSWORD HTML  -->
+       		<div id="insert_forgot_password_screen_html_id" class="row">
 
+			<div class="col-3"> </div>
+
+			<div class="col-6"> 
+
+				<div class="card">
+					<div class="container">
+        					<form id="insert_forgot_password_screen_form_id" action="#">
+
+                                			<label id="insert_forgot_password_screen_label_id" for="insert_forgot_password_screen_email_id">Email</label>
+                                			<input type="text" id="insert_forgot_password_screen_email_id" placeholder="Email" required>
+                                			<span id='insert_forgot_password_screen_email_message_id'></span>
+						
+							<div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
+ 								<span class="sr-only">Loading...</span>
+							</div>
+                
+							<button id="insertforgotpasswordscreenbuttonid">Submit</button>
+
+        					</form>
+					</div>
+				</div>
+			
+				<span id='insert_forgot_password_screen_message_id'></span>
+			</div>
+			<div class="col-3"> </div>
+		</div>
+
+        	<!-- END INSERT FORGOT PASSWORD HTML  -->
+		
+		<!-- UPDATE FORGOT PASSWORD HTML  -->
+
+        	<div id="update_forgot_password_screen_html_id" class="row">
+			<div class="col-3"> </div>
+			<div class="col-6">
+			
+				<div class="card">
+					<div class="container">
+
+        					<form id="update_forgot_password_screen_form_id" action="#">
+                               				<label for="update_forgot_password_screen_password1_id">Password</label>
+                               				<input type="password" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" required>
+                               				<label for="update_forgot_password_screen_password2_id">Password Again</label>
+                               				<input type="password" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" required>
+                               				<span id='update_forgot_password_screen_password_message_id'></span>
+								
+							<button id="updateforgotpasswordscreenbuttonid">Submit</button>
+                        			</form>
+                			</div>
+                		</div>
+			
+				<div id="update_forgot_password_screen_spinner_id">
+ 					<span class="sr-only">Loading...</span>
+				</div>
+                
+        		</div>
+			<div class="col-3"> </div>
+        	</div>
+
+        	<!-- END UPDATE FORGOT PASSWORD HTML  -->
+		
+		<!-------------------------------- CHOOSE PERSON ------------------------------------------------>
+		
+		<!-- BEGIN CHOOSE PERSON -->
+        	<div id="choose_person_screen_html_id" class="row">
+			
+			<div class="col-3"> </div>
+  
+			<div class="col-6">
+
+       				<div class="card">
+
+                       			<div class="container">
+
+						<form id="choose_person_screen_form_id" action="#">
+
+                               				<h4><b>Choose Person</b></h4>
+                               				<select id="choose_person_screen_select_id" class="select"> </select>
+                               				<span id='choose_person_screen_message_id'></span>
+
+                      					<div id="choose_person_screen_spinner_id" class="spinner-border text-primary" role="status">
+                      						<span class="sr-only">Loading...</span>
+                       					</div>
+								
+							<button id="choosepersonscreenbuttonid"> Submit</button>
+
+						</form>
+
+               				</div>
+               			</div>
+			</div>
+			<div class="col-3"> </div>
+		</div>
+        	<!-- END CHOOSE PERSON HTML  -->
+       
+		<!-------------------------------- GAMES ------------------------------------------------>
+
+		<!-- BEGIN RONDO -->
+
+		<!-- END RONDO -->
+		
+
+		<!------------------------------- SCHEDULES ------------------------------------------------>
+		
 		<!-- BEGIN UPCOMING HTML -->
         
 		<div id="upcoming_screen_html_id" class="row">
@@ -344,234 +437,69 @@
 
 		<!-- END UPCOMING HTML -->	
 
+		
+		<!-- BEGIN CALENDAR HTML -->
+       		<div class="row" id="calendar_screen_html_id">
 
-		<!-- INSERT CLUB HTML  -->
-		<div id="insert_club_screen_html_id" class="row">
-			<div class="col-3"> </div>
-			
-			<div class="col-6"> 
+			<!-- BEGIN ROW -->
+			<div class="row">
 
-				<div class="card-header">ADD CLUB</div>
-        
-				<div class="container">
-					<form id="insert_club_screen_form_id">
+				<!-- BEGIN COL-12 -->
+				<div class="col-12">
 
-						<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
-							<span class="sr-only">Loading...</span>
-						</div>
-								
-						<label for="insert_club_name_id">Club Name</label>
-						<input type="text" id="insert_club_screen_name_id" placeholder="Club Name" required>
-                                                        
-						<span id='insert_club_screen_message_id'></span>
-                                        
-						<label for="insert_club_screen_address_id">Address</label>
-						<input type="text" id="insert_club_screen_address_id" placeholder="Club Address" required>
-							
-						<button id="addclubscreenbuttonid">Submit</button>
-                       
+					<form id="calendar_screen_form_id" action="#">
+
 					</form>
-				</div>
-			</div>
-			<div class="col-3"> </div>
-		</div>
 
-		<!-- END INSERT CLUB HTML  -->
-	
-	
-		<!-- INSERT PERSON HTML  -->
-
-
-		<div id="insert_person_screen_html_id" class="row">
-			<div class="col-3"> </div>
+                  			<button id="calendarbackbuttonid" class="calendar-button">&#8592;</button>
+					<p id="calendar_month_p_html_id"> </p>
+              				<button id="calendarforwardbuttonid" class="calendar-button">&#8594;</button>
+       				</div>
+				<!-- END COL-12 -->
+				
+			</div>		
+			<!-- END ROW -->
 			
-			<div class="col-6"> 
+			<!-- BEGIN ROW -->
+			<div class="row">
 
-				<div class="card">
-					<div class="card-header">ADD PERSON</div>
+				<div id="calendar_modal_id" class="modal">
 
-					<div class="container">
-
-						<div id="insert_person_screen_spinner_id">
-                        				<span class="sr-only">Loading...</span>
-                				</div>
-
-						<form id="insert_person_screen_form_id">
-
-							<label for="insert_person_screen_first_name_id">First Name:</label>
-      							<input type="text" id="insert_person_screen_first_name_id" placeholder="First Name" required>
-							<label for="insert_person_screen_middle_name_id">Middle Name:</label>
-      							<input type="text" id="insert_person_screen_middle_name_id" placeholder="Middle Name">
-							<label for="insert_person_screen_last_name_id">Last Name:</label>
-      							<input type="text" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
-							<label for="insert_person_screen_phone_id">Phone:</label>
-      							<input type="text" id="insert_person_screen_phone_id" placeholder="Phone" required>
-							<label for="insert_person_screen_address_id">Address:</label>
-      							<input type="text" id="insert_person_screen_address_id" placeholder="Address" required>
-
-							<span id='insert_person_screen_message_id'></span>
-						
-							<button id="insertpersonscreenbuttonid">Submit</button>
-    						</form>
+  					<!-- Modal content -->
+  					<div class="modal-content">
+    						<span id="modal_close_id" class="close">&times;</span>
+    						<p id="modal_p_id"></p>
   					</div>
 				</div>
-			</div>
-			<div class="col-3"> </div>
-		</div>
-		<!-- END INSERT PERSON HTML  -->
- 
-		<!-- DELETE PERSON HTML  -->
-        
-		<div id="delete_person_screen_html_id" class="row">
-			<div class="col-3"> </div>
-			
-			<div class="col-6"> 
 
-				<div class="card">
-					<div class="card-header">REMOVE PERSON</div>
+				<div id="calendar_full_screen_html_id">
+        				<div class="card">
 
-					<div class="container">
-                               			<label for="delete_person_screen_select_id">Person</label>
-                               			<select id="delete_person_screen_select_id">
-                               			</select>
-                			
-						<div id="delete_person_screen_spinner_id">
-                       					<span class="sr-only">Loading...</span>
-                				</div>
+                        			<div class="container">
+				
+							<table id="calendar_table_id">
+  								<tr>
+    									<th>Sun</th>
+    									<th>Mon</th>
+    									<th>Tue</th>
+    									<th>Wed</th>
+    									<th>Thu</th>
+    									<th>Fri</th>
+    									<th>Sat</th>
+  								</tr>
+							</table>
 
-						<form id="delete_person_screen_form_id" action="#">
-
-                					<button id="deletepersonscreenbuttonid">Submit</button>
-
-        					</form>
-
-						<span id='delete_person_screen_message_id'></span>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-3"> </div>
 		</div>
-
-        	<!-- END DELETE PERSON HTML  -->
-
+        	<!-- END CALENDAR HTML -->
 
 
 
-                <!-- DELETE CLUB HTML  -->
-
-                <div id="delete_club_screen_html_id" class="row">
-			<div class="col-3"> </div>
-
-			<div class="col-6"> 
-
-                		<div class="card">
-					<div class="card-header">REMOVE CLUB</div>
-
-                                        <div class="container">
-                                        	<div id="delete_club_screen_spinner_id">
-                                                     	<span class="sr-only">Loading...</span>
-                                                </div>
-                                                        
-						<label for="delete_club_screen_select_id">Club</label>
-                                                <select id="delete_club_screen_select_id">
-                                                </select>
-
-						<form id="delete_club_screen_form_id" action="#">
-
-                                                	<button id="deleteclubscreenbuttonid">Submit</button>
-
-                                                </form>
-
-                                                <span id='delete_club_screen_message_id'></span>
-                                        </div>
-                                </div>
-                       	</div>
-
-			<div class="col-3"> </div>
-		</div>
-
-                <!-- END DELETE CLUB HTML  -->
-
-		<!-- INSERT TEAM HTML  -->
-
-        	<div id="insert_team_screen_html_id" class="row">
-
-			<div class="col-3"> </div>
-			
-			<div class="col-6">
-                                	
-				<div class="card">
-					<div class="card-header">ADD TEAM</div>
-
-                                	<div class="container">
-                				<div id="insert_team_screen_club_div_id">
-                					<label for="insert_team_screen_club_id">Club:</label>
-                        				<select id="insert_team_screen_club_id">
-                        				</select>
-                				</div>
-    			 				
-						<form id="insert_team_screen_form_id" action="#">
-
-							<input type="text" id="insert_team_screen_name_id" placeholder="Team Name">
-							<button id="insertteamscreenbuttonid">Submit</button>
-
-    						</form>
-
-						<span id='insert_team_screen_message_id'></span>
-    					</div>
-    				</div>
-    			</div>
-
-			<div class="col-3"> </div>
-    		</div>
-
-		<!-- END INSERT TEAM HTML  -->
-
-		<!-- INSERT PITCH HTML  -->
-
-       		<div id="insert_pitch_screen_html_id" class="row">
-
-			<div class="col-3"> </div>
-
-			<div class="col-6"> 
-
-				<div class="card">
-
-					<div class="card-header">ADD PITCH</div>
-
-                               		<div class="container">
-
-						<form id="insert_pitch_screen_form_id" action="#">
+		<!------------------------------- MANAGERS ------------------------------------------------>
 		
-
-                					<div id="insert_pitch_screen_spinner_id">
-                        					<span class="sr-only">Loading...</span>
-               						</div>
-
-               						<div id="insert_pitch_screen_club_div_id">
-               							<label for="insert_pitch_screen_club_id">Club:</label>
-                       						<select id="insert_pitch_screen_club_id">
-                       						</select>
-               						</div>
-
-							<label for="insert_pitch_name_id">Pitch Name</label>
-      							<input type="text" id="insert_pitch_screen_name_id" placeholder="Pitch Name">
-							<span id='insert_pitch_screen_name_message_id'></span>
-						
-			
-							<button id="insertpitchscreenbuttonid">Submit</button>
-							<span id='insert_pitch_screen_message_id'></span>
-    						</form>
-    					</div>
-    				</div>
-    			</div>
-
-			<div class="col-3"> </div>
-
-    		</div>
-
-		<!-- END INSERT PITCH HTML  -->
-	
 		<!-- INSERT PRACTICE HTML  -->
        		<div id="insert_practice_screen_html_id" class="row">
 
@@ -742,40 +670,90 @@
 
 		<!-- END INSERT GAME HTML  -->
 
+		
+		<!-------------------------------CLUB ADMINISTRATORS ------------------------------------------------>
+		
+		<!-- INSERT TEAM HTML  -->
 
-      		<!-- INSERT FORGOT PASSWORD HTML  -->
-       		<div id="insert_forgot_password_screen_html_id" class="row">
+        	<div id="insert_team_screen_html_id" class="row">
+
+			<div class="col-3"> </div>
+			
+			<div class="col-6">
+                                	
+				<div class="card">
+					<div class="card-header">ADD TEAM</div>
+
+                                	<div class="container">
+                				<div id="insert_team_screen_club_div_id">
+                					<label for="insert_team_screen_club_id">Club:</label>
+                        				<select id="insert_team_screen_club_id">
+                        				</select>
+                				</div>
+    			 				
+						<form id="insert_team_screen_form_id" action="#">
+
+							<input type="text" id="insert_team_screen_name_id" placeholder="Team Name">
+							<button id="insertteamscreenbuttonid">Submit</button>
+
+    						</form>
+
+						<span id='insert_team_screen_message_id'></span>
+    					</div>
+    				</div>
+    			</div>
+
+			<div class="col-3"> </div>
+    		</div>
+
+		<!-- END INSERT TEAM HTML  -->
+
+		<!-- INSERT PITCH HTML  -->
+
+       		<div id="insert_pitch_screen_html_id" class="row">
 
 			<div class="col-3"> </div>
 
 			<div class="col-6"> 
 
 				<div class="card">
-					<div class="container">
-        					<form id="insert_forgot_password_screen_form_id" action="#">
 
-                                			<label id="insert_forgot_password_screen_label_id" for="insert_forgot_password_screen_email_id">Email</label>
-                                			<input type="text" id="insert_forgot_password_screen_email_id" placeholder="Email" required>
-                                			<span id='insert_forgot_password_screen_email_message_id'></span>
+					<div class="card-header">ADD PITCH</div>
+
+                               		<div class="container">
+
+						<form id="insert_pitch_screen_form_id" action="#">
+		
+
+                					<div id="insert_pitch_screen_spinner_id">
+                        					<span class="sr-only">Loading...</span>
+               						</div>
+
+               						<div id="insert_pitch_screen_club_div_id">
+               							<label for="insert_pitch_screen_club_id">Club:</label>
+                       						<select id="insert_pitch_screen_club_id">
+                       						</select>
+               						</div>
+
+							<label for="insert_pitch_name_id">Pitch Name</label>
+      							<input type="text" id="insert_pitch_screen_name_id" placeholder="Pitch Name">
+							<span id='insert_pitch_screen_name_message_id'></span>
 						
-							<div id="insert_forgot_password_screen_spinner_id" class="spinner-border text-primary" role="status">
- 								<span class="sr-only">Loading...</span>
-							</div>
-                
-							<button id="insertforgotpasswordscreenbuttonid">Submit</button>
-
-        					</form>
-					</div>
-				</div>
 			
-				<span id='insert_forgot_password_screen_message_id'></span>
-			</div>
+							<button id="insertpitchscreenbuttonid">Submit</button>
+							<span id='insert_pitch_screen_message_id'></span>
+    						</form>
+    					</div>
+    				</div>
+    			</div>
+
 			<div class="col-3"> </div>
-		</div>
 
-        	<!-- END INSERT FORGOT PASSWORD HTML  -->
+    		</div>
 
-        	<!-- INVITE TO CLUB SCREEN HTML  -->
+		<!-- END INSERT PITCH HTML  -->
+        	
+		<!-- INVITE TO CLUB SCREEN HTML  -->
 
         	<div id="invite_to_club_screen_html_id" class="row">
 
@@ -830,117 +808,175 @@
         	</div>
 
         	<!-- END INSERT INVITE CLUB MEMBER HTML  -->
+	
+		
+		<!-- CLUB PROFILE HTML -->	
+		<div id="club_profile_screen_html_id">
+			<div class="row">
+				<div class="col-3"> </div>
+				<div class="col-6">
 
-
-        	<!-- UPDATE FORGOT PASSWORD HTML  -->
-
-        	<div id="update_forgot_password_screen_html_id" class="row">
-			<div class="col-3"> </div>
-			<div class="col-6">
-			
-				<div class="card">
-					<div class="container">
-
-        					<form id="update_forgot_password_screen_form_id" action="#">
-                               				<label for="update_forgot_password_screen_password1_id">Password</label>
-                               				<input type="password" id="update_forgot_password_screen_password1_id" placeholder="Enter Password" required>
-                               				<label for="update_forgot_password_screen_password2_id">Password Again</label>
-                               				<input type="password" id="update_forgot_password_screen_password2_id" placeholder="Enter Password" required>
-                               				<span id='update_forgot_password_screen_password_message_id'></span>
-								
-							<button id="updateforgotpasswordscreenbuttonid">Submit</button>
-                        			</form>
-                			</div>
+                			<label for="club_profile_screen_club_id">Club:</label>
+					<select id="club_profile_screen_club_id"> </select>
                 		</div>
+				<div class="col-3"> </div>
+                	</div>
+
+		</div>	
+		<!-- END CLUB PROFILE HTML -->	
+		
+		
+		<!-------------------------------PERSONS ------------------------------------------------>
+		
+		<!-- INSERT PERSON HTML  -->
+
+
+		<div id="insert_person_screen_html_id" class="row">
+			<div class="col-3"> </div>
 			
-				<div id="update_forgot_password_screen_spinner_id">
- 					<span class="sr-only">Loading...</span>
-				</div>
-                
-        		</div>
-			<div class="col-3"> </div>
-        	</div>
-
-        	<!-- END UPDATE FORGOT PASSWORD HTML  -->
-
-        	<!-- BEGIN LOGIN HTML  -->
-
-       		<div id="login_screen_html_id" class="row">
-			<div class="col-3"> </div>
 			<div class="col-6"> 
 
-              			<div class="card">
+				<div class="card">
+					<div class="card-header">ADD PERSON</div>
 
-                        		<div class="container">
-						<form id="login_screen_form_login_id" action="#">
+					<div class="container">
 
-                               				<h4><b>Login</b></h4>
+						<div id="insert_person_screen_spinner_id">
+                        				<span class="sr-only">Loading...</span>
+                				</div>
 
-							<input id="login_screen_email_id" type="text" name="email" placeholder="Email" required>
-							<input id="login_screen_password_id" type="password" name="password" placeholder="Password" required>
+						<form id="insert_person_screen_form_id">
+
+							<label for="insert_person_screen_first_name_id">First Name:</label>
+      							<input type="text" id="insert_person_screen_first_name_id" placeholder="First Name" required>
+							<label for="insert_person_screen_middle_name_id">Middle Name:</label>
+      							<input type="text" id="insert_person_screen_middle_name_id" placeholder="Middle Name">
+							<label for="insert_person_screen_last_name_id">Last Name:</label>
+      							<input type="text" id="insert_person_screen_last_name_id" placeholder="Last Name" required>
+							<label for="insert_person_screen_phone_id">Phone:</label>
+      							<input type="text" id="insert_person_screen_phone_id" placeholder="Phone" required>
+							<label for="insert_person_screen_address_id">Address:</label>
+      							<input type="text" id="insert_person_screen_address_id" placeholder="Address" required>
+
+							<span id='insert_person_screen_message_id'></span>
+						
+							<button id="insertpersonscreenbuttonid">Submit</button>
+    						</form>
+  					</div>
+				</div>
+			</div>
+			<div class="col-3"> </div>
+		</div>
+		<!-- END INSERT PERSON HTML  -->
+ 
+		<!-- DELETE PERSON HTML  -->
+        
+		<div id="delete_person_screen_html_id" class="row">
+			<div class="col-3"> </div>
+			
+			<div class="col-6"> 
+
+				<div class="card">
+					<div class="card-header">REMOVE PERSON</div>
+
+					<div class="container">
+                               			<label for="delete_person_screen_select_id">Person</label>
+                               			<select id="delete_person_screen_select_id">
+                               			</select>
+                			
+						<div id="delete_person_screen_spinner_id">
+                       					<span class="sr-only">Loading...</span>
+                				</div>
+
+						<form id="delete_person_screen_form_id" action="#">
+
+                					<button id="deletepersonscreenbuttonid">Submit</button>
+
+        					</form>
+
+						<span id='delete_person_screen_message_id'></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-3"> </div>
+		</div>
+
+        	<!-- END DELETE PERSON HTML  -->
+		
+		
+		<!------------------------------- ADMINISTRATION ------------------------------------------------>
+		
+		
+		<!-- INSERT CLUB HTML  -->
+		<div id="insert_club_screen_html_id" class="row">
+			<div class="col-3"> </div>
+			
+			<div class="col-6"> 
+
+				<div class="card-header">ADD CLUB</div>
+        
+				<div class="container">
+					<form id="insert_club_screen_form_id">
+
+						<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+								
+						<label for="insert_club_name_id">Club Name</label>
+						<input type="text" id="insert_club_screen_name_id" placeholder="Club Name" required>
+                                                        
+						<span id='insert_club_screen_message_id'></span>
+                                        
+						<label for="insert_club_screen_address_id">Address</label>
+						<input type="text" id="insert_club_screen_address_id" placeholder="Club Address" required>
 							
-							<button id="loginscreenbuttonid">LOGIN</button>
-						</form>
-                       			</div>
+						<button id="addclubscreenbuttonid">Submit</button>
+                       
+					</form>
+				</div>
+			</div>
+			<div class="col-3"> </div>
+		</div>
 
-               			</div>
+		<!-- END INSERT CLUB HTML  -->
+		
+		
+                <!-- DELETE CLUB HTML  -->
 
-               			<div class="card">
+                <div id="delete_club_screen_html_id" class="row">
+			<div class="col-3"> </div>
 
-                       			<div class="container">
+			<div class="col-6"> 
 
-						<form id="login_screen_form_google_id" action="#">
+                		<div class="card">
+					<div class="card-header">REMOVE CLUB</div>
 
-                               				<h4><b>Google Login</b></h4>
+                                        <div class="container">
+                                        	<div id="delete_club_screen_spinner_id">
+                                                     	<span class="sr-only">Loading...</span>
+                                                </div>
+                                                        
+						<label for="delete_club_screen_select_id">Club</label>
+                                                <select id="delete_club_screen_select_id">
+                                                </select>
 
-							<div id="google_sign_in_id" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-							<a id="google_sign_out_id" class="button" href="#" onclick="signOut();">Sign out of Google</a>
+						<form id="delete_club_screen_form_id" action="#">
 
-						</form>
+                                                	<button id="deleteclubscreenbuttonid">Submit</button>
 
-               				</div>
-       				</div>
-				
-				<div class="card">
+                                                </form>
 
-					<div class="container">
-						<form id="login_screen_form_signup_id" action="#">
-                               				<h4><b>Sign Up</b></h4>
-
-               						<button id="signupnavbuttonid">Sign Up</button>
-						</form>
-
-                       			</div>
-
-               			</div>
-                
-				<div class="card">
-
-					<div class="container">
-						<form id="login_screen_form_forgot_password_id" action="#">
-                               				<h4><b>Forgot Password?</b></h4>
-
-							<button id="insertforgotnavbuttonid"> Forgot Password?</button>
-						</form>
-
-                       			</div>
-
-               			</div>
-
-               			<div id="login_screen_spinner_id" class="spinner-border text-primary" role="status">
-       					<span class="sr-only">Loading...</span>
-       				</div>
-
-       			</div>
-
-			<div class="col-3"> 
-				<div class="aside">
-                                       <p id="aside_p_id">This is a Football Club Management System.</p>
-                               </div>
+                                                <span id='delete_club_screen_message_id'></span>
+                                        </div>
+                                </div>
                        	</div>
-       		</div>
-				
-		<!-- END LOGIN HTML -->
+
+			<div class="col-3"> </div>
+		</div>
+
+                <!-- END DELETE CLUB HTML  -->
+		
+		<!-------------------------------PROFILE ------------------------------------------------>
 
 		<!-- BEGIN PROFILE HTML -->
         
@@ -981,22 +1017,7 @@
 		</div>	
 
 		<!-- END PROFILE HTML -->	
-		
-		<div id="club_profile_screen_html_id">
-			<div class="row">
-				<div class="col-3"> </div>
-				<div class="col-6">
-
-                			<label for="club_profile_screen_club_id">Club:</label>
-					<select id="club_profile_screen_club_id"> </select>
-                		</div>
-				<div class="col-3"> </div>
-                	</div>
-
-		</div>	
-
-
-
+	
 
 
 		<!-- BEGIN FOOTER -->
