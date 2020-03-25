@@ -21,6 +21,9 @@ sudo -u postgres psql -d footballhome -f database/build/insert_person.sql
 sudo -u postgres psql -d footballhome -f database/build/delete_person.sql
 
 
+sudo -u postgres psql -d footballhome -f database/build/insert_club.sql
+
+
 sudo -u postgres psql -d footballhome -f database/build/procedures.sql
 
 sudo -u postgres psql -d footballhome -f database/build/inserts.sql
