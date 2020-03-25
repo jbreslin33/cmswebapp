@@ -82,3 +82,24 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END SIGN UP
+
+CREATE OR REPLACE PROCEDURE p_insert_email(email_name TEXT, INOUT x int)
+LANGUAGE plpgsql    
+AS $$
+DECLARE
+BEGIN
+	insert into emails (email) values (email_name) returning id into x;
+END;
+$$;
+
+--insert_native_login  INOUT x int
+CREATE OR REPLACE PROCEDURE p_insert_native_login(email_id int, password TEXT, INOUT x int)
+LANGUAGE plpgsql    
+AS $$
+DECLARE
+	returning_person_id integer;
+BEGIN
+	insert into native_logins (email_id, password) values (email_id, CRYPT($2, GEN_SALT('md5'))) returning id into x;
+END;
+$$;
+
