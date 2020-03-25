@@ -9,6 +9,12 @@ sudo -u postgres psql -d footballhome -f database/build/choose_person.sql
 
 sudo -u postgres psql -d footballhome -f database/build/calendar.sql
 
+sudo -u postgres psql -d footballhome -f database/build/insert_practice.sql
+sudo -u postgres psql -d footballhome -f database/build/insert_game.sql
+
+sudo -u postgres psql -d footballhome -f database/build/insert_team.sql
+sudo -u postgres psql -d footballhome -f database/build/insert_pitch.sql
+
 sudo -u postgres psql -d footballhome -f database/build/procedures.sql
 
 sudo -u postgres psql -d footballhome -f database/build/inserts.sql
