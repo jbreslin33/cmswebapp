@@ -5,6 +5,10 @@ sudo -u postgres psql -d footballhome -f database/build/google_login.sql
 sudo -u postgres psql -d footballhome -f database/build/sign_up.sql
 sudo -u postgres psql -d footballhome -f database/build/forgot_password.sql
 
+sudo -u postgres psql -d footballhome -f database/build/choose_person.sql
+
+sudo -u postgres psql -d footballhome -f database/build/calendar.sql
+
 sudo -u postgres psql -d footballhome -f database/build/procedures.sql
 
 sudo -u postgres psql -d footballhome -f database/build/inserts.sql
