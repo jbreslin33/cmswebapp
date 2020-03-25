@@ -40,6 +40,15 @@
 
                        	<select id="person_select_id" class="select"> </select>
 
+                        Games
+
+                        <div>
+
+                                <button id="rondonavbuttonid">Rondo</button>
+
+                        </div>
+
+
                         Schedule
 
                         <div>
@@ -123,7 +132,12 @@
 
 			</div>
 		</div>
-        
+       
+
+		<!-- BEGIN RONDO -->
+		<!-- END RONDO -->
+		
+
 		
 		<!-- BEGIN CALENDAR HTML -->
        		<div class="row" id="calendar_screen_html_id">
@@ -1000,80 +1014,59 @@
 		<!-- authentication -->
 		<script src="scripts/authentication/google.js"></script>
 
-		<!-- utilities -->
+		<!-- Utilities -->
 		<script src="scripts/utilities/utility.js"></script>
 		<script src="scripts/utilities/time.js"></script>
-	
-		<!-- screens -->
-		<script src="scripts/screens/screen.js"></script>
-
-		<!-- join -->
-		<script src="scripts/screens/insert_email_screen.js"></script>
-		<script src="scripts/screens/insert_native_login_screen.js"></script>
-	
-		<!-- choose person -->
-		<script src="scripts/screens/choose_person_screen.js"></script>
-	
-		<!-- insert club -->
-		<script src="scripts/screens/insert_club_screen.js"></script>
-	
-		<!-- insert person -->
-		<script src="scripts/screens/insert_person_screen.js"></script>
-	
-		<!-- delete person -->
-		<script src="scripts/screens/delete_person_screen.js"></script>
-	
-		<!-- delete club -->
-		<script src="scripts/screens/delete_club_screen.js"></script>
-	
-		<!-- insert team -->
-		<script src="scripts/screens/insert_team_screen.js"></script>
-	
-		<!-- invite to club -->
-		<script src="scripts/screens/invite_to_club_screen.js"></script>
-	
-		<!-- insert pitch -->
-		<script src="scripts/screens/insert_pitch_screen.js"></script>
-	
-		<!-- insert practice -->
-		<script src="scripts/screens/insert_practice_screen.js"></script>
-	
-		<!-- insert game -->
-		<script src="scripts/screens/insert_game_screen.js"></script>
-
-		<!-- insert forgot password -->
-		<script src="scripts/screens/insert_forgot_password_screen.js"></script>
-	
-		<!-- insert accept club invite   -->
-		<script src="scripts/screens/insert_accept_club_invite_screen.js"></script>
-	
-		<!-- update forgot password -->
-		<script src="scripts/screens/update_forgot_password_screen.js"></script>
-	
-		<!-- upcoming screen-->
-		<script src="scripts/screens/upcoming_screen.js"></script>
-	
-		<!-- calendar screen -->
-		<script src="scripts/screens/calendar_screen.js"></script>
-
-		<!-- login -->
-		<script src="scripts/screens/login_screen.js"></script>
-	
-		<!-- PROFILE MENU -->
-		<!-- profile screen-->
-		<script src="scripts/screens/profile_screen.js"></script>
-		<script src="scripts/screens/club_profile_screen.js"></script>
-
-		<!-- calendar -->
 		<script src="scripts/calendar/calendar.js"></script>
-
+		
 		<!-- state machine -->
   		<script src="scripts/fsm/state.js" ></script>
   		<script src="scripts/fsm/state_machine.js" ></script>
-	
-		<!-- states -->
   		<script src="scripts/application/states/states.js" ></script>
 	
+		<!-- Screens -->
+		<script src="scripts/screens/screen.js"></script>
+
+		<!-- Front Page -->
+		<script src="scripts/screens/login_screen.js"></script>
+		<script src="scripts/screens/insert_email_screen.js"></script>
+		<script src="scripts/screens/insert_native_login_screen.js"></script>
+		<script src="scripts/screens/insert_forgot_password_screen.js"></script>
+		<script src="scripts/screens/update_forgot_password_screen.js"></script>
+
+		<!-- Choose person -->
+		<script src="scripts/screens/choose_person_screen.js"></script>
+		
+		<!-- Games  -->
+		<script src="scripts/screens/rondo_screen.js"></script>
+		
+		<!-- Schedule -->
+		<script src="scripts/screens/calendar_screen.js"></script>
+		<script src="scripts/screens/upcoming_screen.js"></script>
+		
+		<!-- Managers -->
+		<script src="scripts/screens/insert_practice_screen.js"></script>
+		<script src="scripts/screens/insert_game_screen.js"></script>
+		
+		<!-- Club Administrators -->
+		<script src="scripts/screens/insert_team_screen.js"></script>
+		<script src="scripts/screens/insert_pitch_screen.js"></script>
+		<script src="scripts/screens/invite_to_club_screen.js"></script>
+		<script src="scripts/screens/insert_accept_club_invite_screen.js"></script>
+		<script src="scripts/screens/club_profile_screen.js"></script>
+		
+		<!-- Persons -->
+		<script src="scripts/screens/insert_person_screen.js"></script>
+		<script src="scripts/screens/delete_person_screen.js"></script>
+	
+
+		<!-- Administration -->
+		<script src="scripts/screens/insert_club_screen.js"></script>
+		<script src="scripts/screens/delete_club_screen.js"></script>
+
+		<!-- Profile -->
+		<script src="scripts/screens/profile_screen.js"></script>
+
 		<!-- APPLICATION -->
 		<script src="scripts/application/application.js" ></script>
 
