@@ -1,22 +1,5 @@
 
 
-
-
-
---EMAIL
-CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
-RETURNS text AS $$
-DECLARE
-        found_email_id emails.id%TYPE;
-BEGIN
-        SELECT id INTO found_email_id FROM emails
-        WHERE email = email_name;
-RETURN found_email_id;
-END;
-$$ LANGUAGE plpgsql;
-
-
-
 --BEGIN J_SELECT PITCHES
 --params:club_id
 CREATE OR REPLACE FUNCTION j_select_pitches(int)
@@ -41,6 +24,24 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PITCHES
+
+
+
+--EMAIL
+CREATE OR REPLACE FUNCTION f_get_email_id(email_name TEXT)
+RETURNS text AS $$
+DECLARE
+        found_email_id emails.id%TYPE;
+BEGIN
+        SELECT id INTO found_email_id FROM emails
+        WHERE email = email_name;
+RETURN found_email_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
 
 --BEGIN J_SELECT ADMINISTRATED_CLUBS
 --params:person_id
