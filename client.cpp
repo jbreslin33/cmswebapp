@@ -15,11 +15,6 @@
 
 class Client
 {
-	public:
-
-	char buffer[200];
-
-
 	private:
   	
 	int sock;
@@ -27,6 +22,8 @@ class Client
   	int bytes_sent;
 
 	public:
+	
+	char buffer[200];
 
 	Client()
 	{
@@ -75,8 +72,13 @@ void readData()
 {
 	while (true) 
 	{
+		//declare string
 		std::string sin;
+
+		//set any data coming in to var sin
     		std::cin >> sin;
+
+		//set global msg var to sin
     		msg = sin;
   	}
 }
@@ -88,8 +90,14 @@ void writeData()
     		//std::lock_guard<std::mutex> lock{msg_mutex};
     		if (msg.length() > 0) 
 		{
+			//send to websocketd which will then forward to client web browser
+			//this needs to be done after processing by server....
       			std::cout << msg << std::endl;
+
+			//send to server for processing
 			client->sendToServer(msg);
+
+			//clear the msg for next time
       			msg.clear();
     		}
   	}
