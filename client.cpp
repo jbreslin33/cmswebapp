@@ -33,9 +33,17 @@ class Client
 
 	}
 
-	void sendToServer()
+	//void sendToServer(std::string m)
+	void sendToServer(std::string s)
 	{
-  		strcpy(this->buffer, "hello world!");
+
+		char cstr[s.size() + 1];
+		//strcpy(cstr, s.c_str());	// or pass &s[0]
+		strcpy(this->buffer, s.c_str());	// or pass &s[0]
+
+
+  		//strcpy(this->buffer, "hello world!");
+  		//strcpy(this->buffer, m);
   
 		sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
   
@@ -67,17 +75,30 @@ class Client
 };
 
 Client* client;
+std::string msg;
 
 void readData()
 {
 	while (true) 
 	{
-    		std::string sin;
+		std::string sin;
     		std::cin >> sin;
-    		//std::lock_guard<std::mutex> lock{msg_mutex};
     		msg = sin;
   	}
-	//client->sendToServer();
+}
+
+void writeData()
+{
+	while (true) 
+	{
+    		//std::lock_guard<std::mutex> lock{msg_mutex};
+    		if (msg.length() > 0) 
+		{
+      			std::cout << msg << std::endl;
+			client->sendToServer(msg);
+      			msg.clear();
+    		}
+  	}
 }
 
 int main(void)
@@ -85,7 +106,9 @@ int main(void)
 	client = new Client();
 
 	std::thread reader (readData);     
+	std::thread writer (writeData);     
 	reader.join();
+	writer.join();
 
 	//client->sendToServer();
   	return 0;
