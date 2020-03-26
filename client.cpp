@@ -36,15 +36,9 @@ class Client
 	//void sendToServer(std::string m)
 	void sendToServer(std::string s)
 	{
-
 		char cstr[s.size() + 1];
-		//strcpy(cstr, s.c_str());	// or pass &s[0]
 		strcpy(this->buffer, s.c_str());	// or pass &s[0]
 
-
-  		//strcpy(this->buffer, "hello world!");
-  		//strcpy(this->buffer, m);
-  
 		sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
   
 		if (sock == -1) 
