@@ -8,6 +8,10 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
+#include <iostream>       // std::cout
+#include <thread>         // std::thread, std::this_thread::sleep_for
+#include <chrono>         // std::chrono::seconds
+
 
 class Client
 {
@@ -60,20 +64,21 @@ class Client
 
 	}
 
-	void readData()
-	{
-  		// do stuff...
-	}
-
-	void writeData()
-	{
-  		// do stuff...
-	}
 };
+
+void readData()
+{
+
+}
 
 int main(void)
 {
 	Client* client = new Client();
+
+	//std::thread first (readData,1);     
+	std::thread first (readData);     
+  	//std::thread second (client.writeData,1); 
+
 	client->sendToServer();
   	return 0;
 }
