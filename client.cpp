@@ -75,9 +75,10 @@ int main(void)
 {
 	Client* client = new Client();
 
-	//std::thread first (readData,1);     
-	std::thread first (readData);     
-  	//std::thread second (client.writeData,1); 
+	std::thread reader (readData);     
+	reader.join();
+
+
 
 	client->sendToServer();
   	return 0;
