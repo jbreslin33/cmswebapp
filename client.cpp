@@ -66,20 +66,20 @@ class Client
 
 };
 
+Client* client;
+
 void readData()
 {
-
+	client->sendToServer();
 }
 
 int main(void)
 {
-	Client* client = new Client();
+	client = new Client();
 
 	std::thread reader (readData);     
 	reader.join();
 
-
-
-	client->sendToServer();
+	//client->sendToServer();
   	return 0;
 }
