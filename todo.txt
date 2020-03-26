@@ -1,4 +1,7 @@
 
+
+lets send moves to server then have it track moves and send back to client and for now just print coord to console
+------
 maybe seperate profile updates for better error handling or use client to error handle better
 ---------------------
 but right now finish format replace..
