@@ -59,6 +59,16 @@ class Client
   		close(sock); 
 
 	}
+
+	void readData()
+	{
+  		// do stuff...
+	}
+
+	void writeData()
+	{
+  		// do stuff...
+	}
 };
 
 int main(void)
