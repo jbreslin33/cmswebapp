@@ -70,7 +70,14 @@ Client* client;
 
 void readData()
 {
-	client->sendToServer();
+	while (true) 
+	{
+    		std::string sin;
+    		std::cin >> sin;
+    		//std::lock_guard<std::mutex> lock{msg_mutex};
+    		msg = sin;
+  	}
+	//client->sendToServer();
 }
 
 int main(void)
