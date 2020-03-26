@@ -394,10 +394,13 @@
 
 		<!-- BEGIN RONDO -->
 
+		<div id='msgBox'>Nothing sent yet!</div>
+        	<input type="text" id="outMsg">
+        	<button type="button" onclick="send()">Send</button>
+
   		<script> 
-			//lets try websocketd
-			var ws = new WebSocket('ws://127.0.0.1:8080/');
-			//ws.send("this Hello WebSockets server!");
+            	/*	
+			var ws = new WebSocket('ws://127.0.0.1:7654/');
 
 			ws.onopen = function () 
 			{
@@ -409,7 +412,20 @@
   				console.log('Count is: ' + event.data);
 				ws.send("Hello WebSockets server!");
 			};	
+			*/
+			var ws = new WebSocket('ws://127.0.0.1:8080/');
 
+            		ws.onmessage = function(event) 
+			{
+                		document.getElementById('msgBox').innerHTML = event.data;
+                		document.getElementById('outMsg').value='';
+            		}
+
+            
+            		function send()
+            		{
+               			 ws.send(document.getElementById('outMsg').value);
+            		}
   		</script> 
 
 		<!-- END RONDO -->
