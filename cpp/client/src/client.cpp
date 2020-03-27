@@ -14,8 +14,13 @@
 
 #include "client.h"
 
-	void Client::sendToServer(std::string s)
-	{
+Client::Client()
+{
+
+}
+
+void Client::sendToServer(std::string s)
+{
 		char cstr[s.size() + 1];
 		strcpy(this->buffer, s.c_str());	// or pass &s[0]
 

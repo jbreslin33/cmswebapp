@@ -12,9 +12,9 @@
 #include <thread>         // std::thread, std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
 
-#include "client.h"
+#include "client.h"         // std::chrono::seconds
 
-Client* client;
+
 std::string msg;
 
 void readData()
@@ -32,7 +32,7 @@ void readData()
   	}
 }
 
-void writeData()
+void writeData(Client* client)
 {
 	while (true) 
 	{
@@ -54,10 +54,10 @@ void writeData()
 
 int main(void)
 {
-	client = new Client();
+	Client client;
 
 	std::thread reader (readData);     
-	std::thread writer (writeData);     
+	std::thread writer (writeData, &client);     
 	reader.join();
 	writer.join();
 

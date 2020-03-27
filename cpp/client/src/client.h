@@ -1,3 +1,6 @@
+#ifndef CLIENT_H
+#define CLIENT_H
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
@@ -25,16 +28,11 @@ class Client
 	
 	char buffer[200];
 
-	Client()
-	{
-
-	}
+	Client();
 
 	//void sendToServer(std::string m)
-	void sendToServer(std::string s)
-	{
-
-	}
+	void sendToServer(std::string s);
 
 };
 
+#endif
