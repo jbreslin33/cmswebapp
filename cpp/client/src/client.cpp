@@ -12,6 +12,7 @@
 #include <thread>         // std::thread, std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
 
+#include "client.h"
 
 class Client
 {
