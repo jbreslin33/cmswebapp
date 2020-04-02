@@ -8,6 +8,8 @@ class RondoScreen extends Screen
 
 		location.hash = 'rondo_screen';
 
+		this.mWebSocket = null;
+
           	this.setHtml(document.getElementById("rondo_screen_html_id"));
                 this.setMessageElement(document.getElementById("rondo_screen_message_id"));
           	this.setForm(document.getElementById("rondo_screen_form_id"));
@@ -18,7 +20,22 @@ class RondoScreen extends Screen
                         e.preventDefault();
                         APPLICATION.getCurrentScreen().hit();
                 });
+ 
+		document.getElementById("rondonavjoinbuttonid").onclick = this.hitJoinRondo.bind(document.getElementById("rondonavjoinbuttonid"));
+
 	}
+	                                  <div id="rondo_screen_spinner_id" class="spinner-border text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                        </div>
+
+                                        <label for="rondo_name_id">Message to other Players:</label>
+                                        <input type="text" id="rondo_screen_outgoing_message_id">
+                                        <button id="rondoscreensendbuttonid">Send Message</button>
+
+                                        <span id='rondo_screen_message_id'></span>
+
+                                        <button id="rondoscreenjoinbuttonid">Join Rondo</button>
+
 
 	hit()
 	{
@@ -27,5 +44,29 @@ class RondoScreen extends Screen
 	
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/rondo.php?" + this.getStandardParameters()); 
 		APPLICATION.getCurrentScreen().ajax();
+	}
+
+	hitJoinRondo()
+	{
+		this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
+	}
+
+        this.mWebSocket.onopen = function ()
+        {
+        	this.mWebSocket.send('2'); //2 is connect new client code
+        }
+
+        this.mWebSocket.onmessage = function(event)
+        {
+        	document.getElementById('rondo_screen_outgoing_message_id').innerHTML = event.data;
+                document.getElementById('rondo_screen_message_id').value='';
+        }
+
+        function send()
+       	{ 
+        	this.mWebSocket.send(document.getElementById('outMsg').value);
+        }
+
+
 	}
 }

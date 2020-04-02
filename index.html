@@ -401,13 +401,23 @@
                                 <!-- BEGIN COL-12 -->
                                 <div class="col-12">
 					<form id="rondo_screen_form_id" action="#">
-
-						<div id='msgBox'>Nothing sent yet!</div>
-						<input type="text" id="outMsg"> </input>
-        					<button type="button" onclick="send()">Send</button>
 					</form>
 
+                                        <div id="rondo_screen_spinner_id" class="spinner-border text-primary" role="status">
+                                        	<span class="sr-only">Loading...</span>
+                                        </div>
+                                                                
+                                        <label for="rondo_name_id">Message to other Players:</label>
+                                        <input type="text" id="rondo_screen_outgoing_message_id">
+                                        <button id="rondoscreensendbuttonid">Send Message</button>
+                                                       
+                                        <span id='rondo_screen_message_id'></span>
+                                        
+                                        <button id="rondoscreenjoinbuttonid">Join Rondo</button>
+                       
 
+
+<!--
   					<script> 
 			
 						var ws = new WebSocket('ws://127.0.0.1:8080/');
@@ -429,6 +439,7 @@
             					}
 
   					</script> 
+					-->
 
 				
 				</div>
