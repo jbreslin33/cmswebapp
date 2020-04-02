@@ -25,12 +25,14 @@ class Application
 		//html
                	this.mLoggedOutHeaderHtml = null; 
                	this.mLoggedInHeaderHtml = null; 
+
                	this.mInsertEmailScreenHtml = null; 
                	this.mInsertNativeLoginScreenHtml = null; 
                	this.mLoginScreenHtml = null; 
                	this.mChoosePersonScreenHtml = null; 
                	this.mUpcomingScreenHtml = null; 
                	this.mCalendarScreenHtml = null; 
+               	this.mRondoScreenHtml = null; 
                	this.mInsertClubScreenHtml = null; 
                	this.mInsertPersonScreenHtml = null; 
                	this.mDeletePersonScreenHtml = null; 
@@ -55,6 +57,7 @@ class Application
                	this.setChoosePersonScreenHtml             ( document.getElementById("choose_person_screen_html_id")             ); 
                	this.setUpcomingScreenHtml                 ( document.getElementById("upcoming_screen_html_id")                  );
                	this.setCalendarScreenHtml                 ( document.getElementById("calendar_screen_html_id")                  );
+               	this.setRondoScreenHtml                    ( document.getElementById("rondo_screen_html_id")                  );
                	this.setInsertClubScreenHtml        	   ( document.getElementById("insert_club_screen_html_id")               ); 
                	this.setDeleteClubScreenHtml               ( document.getElementById("delete_club_screen_html_id")             );  
                	this.setInsertPersonScreenHtml             ( document.getElementById("insert_person_screen_html_id")             );  
@@ -110,6 +113,7 @@ class Application
 		this.mINIT_APPLICATION            = new INIT_APPLICATION();
 		this.mUPCOMING_APPLICATION            = new UPCOMING_APPLICATION();
 		this.mCALENDAR_APPLICATION            = new CALENDAR_APPLICATION();
+		this.mRONDO_APPLICATION            = new RONDO_APPLICATION();
 		this.mINSERT_EMAIL_SCREEN_APPLICATION     = new INSERT_EMAIL_SCREEN_APPLICATION();
 		this.mINSERT_NATIVE_LOGIN_SCREEN_APPLICATION     = new INSERT_NATIVE_LOGIN_SCREEN_APPLICATION();
 		this.mLOGIN_APPLICATION           = new LOGIN_APPLICATION();
@@ -146,6 +150,9 @@ class Application
 		//calender
 		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(document.getElementById("upcomingnavbuttonid"));
 		document.getElementById("calendarnavbuttonid").onclick = this.hit.bind(document.getElementById("calendarnavbuttonid"));
+
+		//game
+		document.getElementById("rondonavbuttonid").onclick = this.hit.bind(document.getElementById("rondonavbuttonid"));
 
 		//login
 		document.getElementById("logoutnavbuttonid").onclick = this.hit.bind(document.getElementById("logoutnavbuttonid"));
@@ -190,6 +197,10 @@ class Application
 		if (this.id == 'calendarnavbuttonid')
 		{
 			location.hash = '#calendar_screen';
+		}
+		if (this.id == 'rondonavbuttonid')
+		{
+			location.hash = '#rondo_screen';
 		}
 		if (this.id == 'logoutnavbuttonid')
 		{
@@ -488,6 +499,15 @@ class Application
 	{
                 return this.mCalendarScreenHtml; 
 	}
+
+        setRondoScreenHtml(h)
+        {
+                this.mRondoScreenHtml = h;
+        }
+        getRondoScreenHtml()
+        {
+                return this.mRondoScreenHtml;
+        }
         
         setInsertClubScreenHtml(h)
 	{

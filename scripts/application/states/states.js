@@ -45,6 +45,11 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mCALENDAR_APPLICATION);
                 }
+		
+		else if (location.hash == '#rondo_screen' && app.mStateMachine.mCurrentState != app.mRONDO_APPLICATION)
+                {
+                        APPLICATION.mStateMachine.changeState(APPLICATION.mRONDO_APPLICATION);
+                }
 
 		else if (location.hash == '#update_forgot_password_screen' && app.mStateMachine.mCurrentState != app.mUPDATE_FORGOT_PASSWORD_APPLICATION)
                 {
@@ -722,6 +727,45 @@ class CALENDAR_APPLICATION extends State
 				app.getCurrentScreen().mCloneArray[i].remove();
 			}
 		}
+		app.getCurrentScreen().exit();
+	}
+}
+
+class RONDO_APPLICATION extends State
+{
+	constructor() 
+	{
+		super();
+	}
+
+        enter(app)
+        {
+		if (app.mStateLogs || app.mStateEnterLogs)
+		{
+			console.log("RONDO_APPLICATION: ENTER");        
+		}
+		
+		app.setCurrentScreen(new RondoScreen(app));
+		app.getCurrentScreen().enter();
+	}
+
+        execute(app)
+        {
+		if (app.mStateLogs || app.mStateExecuteLogs)
+		{
+			console.log("RONDO_APPLICATION: EXECUTE");        
+		}
+		
+		app.getCurrentScreen().execute();
+	}
+
+        exit(app)
+        {
+		if (app.mStateLogs || app.mStateExitLogs)
+		{
+			console.log("RONDO_APPLICATION: EXIT");        
+		}
+		
 		app.getCurrentScreen().exit();
 	}
 }
