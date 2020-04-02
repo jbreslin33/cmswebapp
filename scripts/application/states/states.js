@@ -179,6 +179,11 @@ class INIT_APPLICATION extends State
 		{
 			application.getCalendarScreenHtml().style.display = "none";
 		}
+
+		if (application.getRondoScreenHtml())
+		{
+			application.getRondoScreenHtml().style.display = "none";
+		}
 		
 		if (application.getInsertClubScreenHtml())
 		{

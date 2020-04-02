@@ -400,10 +400,13 @@
 
                                 <!-- BEGIN COL-12 -->
                                 <div class="col-12">
+					<form id="rondo_screen_form_id" action="#">
 
-					<div id='msgBox'>Nothing sent yet!</div>
-        				<input type="text" id="outMsg"> 
+						<div id='msgBox'>Nothing sent yet!</div>
+						<input type="text" id="outMsg"> </input>
         					<button type="button" onclick="send()">Send</button>
+					</form>
+
 
   					<script> 
 			
@@ -419,7 +422,6 @@
                 					document.getElementById('msgBox').innerHTML = event.data;
                 					document.getElementById('outMsg').value='';
             					}
-
             
           			  		function send()
             					{
@@ -427,6 +429,7 @@
             					}
 
   					</script> 
+
 				
 				</div>
 			</div>
