@@ -45,8 +45,8 @@ class RondoScreen extends Screen
 		*/
 		console.log('hit the hit');
 		//rondo_screen_outgoing_message_id
-                APPLICATION.getCurrentScreen().mWebSocket.send('1');
-                //APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').innerHTML);
+                //APPLICATION.getCurrentScreen().mWebSocket.send('1');
+                APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
 	
 	}
 }
