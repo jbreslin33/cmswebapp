@@ -35,8 +35,28 @@ class RondoScreen extends Screen
                         document.getElementById('rondo_screen_message_id').innerHTML = event.data;
                         //document.getElementById('rondo_screen_message_id').value='';
                 }
+
+		this.mPitch = new Pitch(this);
 	}
+        
+	exit()
+        {
+                this.removeDivs();
+                super.exit();
+        }
 	
+        removeDivs()
+        {
+                //remove pitch
+                this.mPitch.mCanvas.remove();
+                /*
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mDivArray[i].remove();
+                }
+                */
+        }
+
 	hit()
 	{
 		/*
@@ -49,4 +69,6 @@ class RondoScreen extends Screen
                 APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
 	
 	}
+
+
 }
