@@ -37,6 +37,7 @@ class RondoScreen extends Screen
                 }
 
 		this.mPitch = new Pitch(this);
+		this.mPlayer = new Player(this.mPitch);
 	}
         
 	exit()
@@ -49,26 +50,11 @@ class RondoScreen extends Screen
         {
                 //remove pitch
                 this.mPitch.mCanvas.remove();
-                /*
-                for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
-                {
-                        APPLICATION.getCurrentScreen().mDivArray[i].remove();
-                }
-                */
         }
 
 	hit()
 	{
-		/*
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/rondo.php?" + this.getStandardParameters()); 
-		APPLICATION.getCurrentScreen().ajax();
-		*/
 		console.log('hit the hit');
-		//rondo_screen_outgoing_message_id
-                //APPLICATION.getCurrentScreen().mWebSocket.send('1');
                 APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
-	
 	}
-
-
 }
