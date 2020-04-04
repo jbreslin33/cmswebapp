@@ -91,7 +91,7 @@ class Pitch
 
 	update()
 	{
-		console.log('delta:' + APPLICATION.mDelta);	
+		//console.log('delta:' + APPLICATION.mDelta);	
 	}
 }
 
