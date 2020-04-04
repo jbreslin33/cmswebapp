@@ -4,6 +4,13 @@ class Application
 {
 	constructor(insertNativeLoginToken,joinEmail,forgotPasswordToken,forgotPasswordEmail) 
 	{
+
+		//update
+		this.mLastTime = (new Date()).getTime();
+		this.mCurrentTime = 0;
+		this.mDelta = 0;
+
+		//states
 		this.mStateLogs = false;
 		this.mStateEnterLogs = true;
 		this.mStateExecuteLogs = false;
@@ -351,18 +358,22 @@ class Application
         }
 
 
-	update(timestamp)
+	update()
 	{
+		//run again
+	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
+		this.mCurrentTime = (new Date()).getTime();
+  		this.mDelta = (this.mCurrentTime - this.mLastTime) / 1000;
+
 		this.mStateMachine.update();
 
 		if (this.getCurrentScreen())
 		{
-			this.getCurrentScreen().update(timestamp);
+			//this will be pitch....
+			this.getCurrentScreen().update(this.mDelta);
 		}
 
-
-		//run again
-	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
+		this.mLastTime = this.mCurrentTime;
 	}
 
 	setJWT(jwt)

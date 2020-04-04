@@ -289,7 +289,7 @@ class Screen
         {
 	}
        
-	update(timestamp)
+	update()
 	{
 		if (this.mStateMachine)
 		{
