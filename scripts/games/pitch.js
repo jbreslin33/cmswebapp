@@ -20,11 +20,19 @@ class Pitch
 		this.mPlayerArray = new Array();
 
 		//add players
+		/*
 		for (var i = 0; i < 4; i++)
 		{
 			var player = new Player(this,10*i,10*i); 
 			this.mPlayerArray.push(player);
 		}
+		*/
+		this.mPlayerArray.push(new Player(this,30,30));
+		this.mPlayerArray.push(new Player(this,400,30));
+		this.mPlayerArray.push(new Player(this,30,200));
+
+		this.mPlayerArray.push(new Player(this,200,150));
+
 	}
 
 	update()
