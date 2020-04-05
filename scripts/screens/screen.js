@@ -44,6 +44,11 @@ class Screen
 
                 this.mStateMachine = null;
 
+		//game
+	        this.mCanvas = document.createElement("canvas");
+                this.mContext = this.mCanvas.getContext("2d");
+
+
 		//keystrokes
 		this.mRightPressed = false;
 		this.mLeftPressed = false;
@@ -59,6 +64,11 @@ class Screen
                         APPLICATION.getCurrentScreen().keyUpHandler(e);
                 });
 	}
+
+        clearScreen()
+        {
+                this.mContext.clearRect(0, 0, this.mCanvas.width, this.mCanvas.height);
+        }
 
 	keyDownHandler(event)
 	{
@@ -346,6 +356,27 @@ class Screen
        
 	update()
 	{
+		//keystrokes
+                APPLICATION.getCurrentScreen();
+
+                if (APPLICATION.mUpPressed == true)
+                {
+                        console.log('up');
+                }
+                if (APPLICATION.mDownPressed == true)
+                {
+                        console.log('down');
+                }
+                if (APPLICATION.mLeftPressed == true)
+                {
+                        console.log('left');
+                }
+                if (APPLICATION.mRightPressed == true)
+                {
+                        console.log('right');
+                }
+
+		//states
 		if (this.mStateMachine)
 		{
 			this.mStateMachine.update();

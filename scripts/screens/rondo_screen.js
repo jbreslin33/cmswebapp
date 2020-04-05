@@ -36,6 +36,13 @@ class RondoScreen extends Screen
                         //document.getElementById('rondo_screen_message_id').value='';
                 }
 
+		//canvas
+                this.mCanvas.width = 480;
+                this.mCanvas.height = 270;
+
+                document.getElementById("rondo_screen_html_id").appendChild(this.mCanvas);
+
+		//game objects
 		this.mPitch = new Pitch(this);
 		this.mPlayer = new Player(this.mPitch);
 	}
@@ -54,7 +61,6 @@ class RondoScreen extends Screen
 
 	hit()
 	{
-		console.log('hit the hit');
                 APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
 	}
 }

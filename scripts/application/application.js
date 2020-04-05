@@ -365,6 +365,8 @@ class Application
 		this.mCurrentTime = (new Date()).getTime();
   		this.mDelta = (this.mCurrentTime - this.mLastTime) / 1000;
 
+		
+		//states
 		this.mStateMachine.update();
 
 		if (this.getCurrentScreen())
