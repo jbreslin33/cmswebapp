@@ -356,6 +356,9 @@ class Screen
        
 	update()
 	{
+		//clear canvas context...
+		APPLICATION.getCurrentScreen().clearScreen();
+
 		//keystrokes
                 APPLICATION.getCurrentScreen();
 

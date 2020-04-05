@@ -362,8 +362,11 @@ class Application
 	{
 		//run again
 	        window.requestAnimationFrame(APPLICATION.update.bind(APPLICATION));
+
+		//get time from last update/delta
 		this.mCurrentTime = (new Date()).getTime();
   		this.mDelta = (this.mCurrentTime - this.mLastTime) / 1000;
+
 
 		
 		//states

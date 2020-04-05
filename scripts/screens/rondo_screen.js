@@ -46,6 +46,14 @@ class RondoScreen extends Screen
 		this.mPitch = new Pitch(this);
 		this.mPlayer = new Player(this.mPitch);
 	}
+
+	update()
+	{
+		super.update();
+
+		//now update pitch. pitch will update players
+		this.mPitch.update();
+	}
         
 	exit()
         {
