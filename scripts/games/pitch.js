@@ -38,9 +38,12 @@ class Pitch
 	update()
 	{
 		//APPLICATION.getCurrentScreen().mPitch.mPlayerArray();
-		for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
+		if (APPLICATION.getCurrentScreen().mPitch)
 		{
-			 APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
+			for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
+			{
+				APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
+			}
 		}
 	}
 }

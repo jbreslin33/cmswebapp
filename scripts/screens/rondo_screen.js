@@ -52,7 +52,10 @@ class RondoScreen extends Screen
 		super.update();
 
 		//now update pitch. pitch will update players
-		this.mPitch.update();
+		if (this.mPitch)
+		{
+			this.mPitch.update();
+		}
 	}
         
 	exit()
@@ -64,9 +67,12 @@ class RondoScreen extends Screen
         removeDivs()
         {
                 //remove pitch
-		if (this.mPitch.mCanvas)
+		if (this.mPitch)
 		{
-                	this.mPitch.mCanvas.remove();
+			if (this.mPitch.mCanvas)
+			{
+                		this.mPitch.mCanvas.remove();
+			}
 		}
         }
 
