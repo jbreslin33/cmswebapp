@@ -44,8 +44,8 @@ class Screen
 
                 this.mStateMachine = null;
 
-		//game
-	        this.mCanvas = document.createElement("canvas");
+		//game canvas context
+	        this.mCanvas = document.getElementById("rondo_screen_canvas_id");
                 this.mContext = this.mCanvas.getContext("2d");
 
 

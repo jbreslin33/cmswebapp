@@ -40,7 +40,7 @@ class RondoScreen extends Screen
                 this.mCanvas.width = 480;
                 this.mCanvas.height = 270;
 
-                document.getElementById("rondo_screen_html_id").appendChild(this.mCanvas);
+                //document.getElementById("rondo_screen_html_id").appendChild(this.mCanvas);
 
 		//game objects
 		this.mPitch = new Pitch(this);
@@ -60,10 +60,11 @@ class RondoScreen extends Screen
         
 	exit()
         {
-                this.removeDivs();
+                //this.removeDivs();
                 super.exit();
         }
-	
+
+/*	
         removeDivs()
         {
                 //remove pitch
@@ -75,6 +76,7 @@ class RondoScreen extends Screen
 			}
 		}
         }
+	*/
 
 	hit()
 	{
