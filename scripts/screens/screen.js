@@ -43,6 +43,61 @@ class Screen
                 this.mStateExitLogs = false;
 
                 this.mStateMachine = null;
+
+		//keystrokes
+		this.mRightPressed = false;
+		this.mLeftPressed = false;
+		this.mDownPressed = false;
+		this.mUpPressed = false;
+
+		document.addEventListener('keydown', function(e)
+                {
+                        APPLICATION.getCurrentScreen().keyDownHandler(e);
+                });
+		document.addEventListener('keyup', function(e)
+                {
+                        APPLICATION.getCurrentScreen().keyUpHandler(e);
+                });
+	}
+
+	keyDownHandler(event)
+	{
+    		if(event.keyCode == 39) 
+		{
+        		APPLICATION.mRightPressed = true;
+    		}
+		else if(event.keyCode == 37) 
+		{
+        		APPLICATION.mLeftPressed = true;
+    		}
+    		if(event.keyCode == 40) 
+		{
+    			APPLICATION.mDownPressed = true;
+    		}
+    		else if(event.keyCode == 38) 
+		{
+    			APPLICATION.mUpPressed = true;
+    		}
+	}
+	
+	keyUpHandler(event)
+	{
+                if(event.keyCode == 39) 
+                {
+                        APPLICATION.mRightPressed = false;
+                }
+                else if(event.keyCode == 37) 
+                {
+                        APPLICATION.mLeftPressed = false;
+                }
+                if(event.keyCode == 40) 
+                {
+                        APPLICATION.mDownPressed = false; 
+                }
+                else if(event.keyCode == 38) 
+                {
+                        APPLICATION.mUpPressed = false;
+                }
 	}
 
 	ajax()
