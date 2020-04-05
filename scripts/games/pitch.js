@@ -17,16 +17,11 @@ class Pitch
 		this.mFrameNumber = 0;
 		this.mInterval = setInterval(this.update,20);
 
+		this.mClient = new Client();
+
 		this.mPlayerArray = new Array();
 
-		//add players
-		/*
-		for (var i = 0; i < 4; i++)
-		{
-			var player = new Player(this,10*i,10*i); 
-			this.mPlayerArray.push(player);
-		}
-		*/
+			
 		this.mPlayerArray.push(new Player(this,30,30,'#87CEEB'));
 		this.mPlayerArray.push(new Player(this,400,30,'#87CEEB'));
 		this.mPlayerArray.push(new Player(this,30,200,'#87CEEB'));
@@ -45,6 +40,7 @@ class Pitch
 				APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
 			}
 		}
+		APPLICATION.getCurrentScreen().mPitch.mClient.update();
 	}
 }
 

@@ -32,9 +32,32 @@ class RondoScreen extends Screen
 
                 this.mWebSocket.onmessage = function(event)
                 {
+			//show data
                         document.getElementById('rondo_screen_message_id').innerHTML = event.data;
-                        //document.getElementById('rondo_screen_message_id').value='';
+
+			var d = event.data;
+			var code_string = d.substring(0,1)
+			console.log('code_string:' + code_string);
+
+			//process data
+			
+			//you connected...
+			if (code_string == '2')
+			{
+				var id_string = d.substring(1,6)
+				if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
+				{
+					APPLICATION.getCurrentScreen().mPitch.mClient.mId = id_string;
+					console.log('you connected and your id is:' + id_string);
+				}
+				else //someone else connected
+				{
+					console.log('another clientu connected and their id is:' + id_string);
+				}
+				
+			}
                 }
+		this.mId = null;
 
 		//canvas
                 this.mCanvas.width = 480;

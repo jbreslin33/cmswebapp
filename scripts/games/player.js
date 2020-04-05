@@ -9,6 +9,8 @@ class Player
 		this.x = x;
 		this.y = y;
 		this.mColor = color;
+
+		this.mId = 0;
 	}
 
 	update()
