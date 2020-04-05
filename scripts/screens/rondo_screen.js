@@ -64,7 +64,10 @@ class RondoScreen extends Screen
         removeDivs()
         {
                 //remove pitch
-                this.mPitch.mCanvas.remove();
+		if (this.mPitch.mCanvas)
+		{
+                	this.mPitch.mCanvas.remove();
+		}
         }
 
 	hit()

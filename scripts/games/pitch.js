@@ -27,9 +27,9 @@ class Pitch
 			this.mPlayerArray.push(player);
 		}
 		*/
-		this.mPlayerArray.push(new Player(this,30,30,'blue'));
-		this.mPlayerArray.push(new Player(this,400,30,'blue'));
-		this.mPlayerArray.push(new Player(this,30,200,'blue'));
+		this.mPlayerArray.push(new Player(this,30,30,'#87CEEB'));
+		this.mPlayerArray.push(new Player(this,400,30,'#87CEEB'));
+		this.mPlayerArray.push(new Player(this,30,200,'#87CEEB'));
 
 		this.mPlayerArray.push(new Player(this,200,150,'red'));
 
