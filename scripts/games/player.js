@@ -2,18 +2,19 @@
 
 class Player
 {
-        constructor(pitch,x,y)
+        constructor(pitch,x,y,color)
         {
 		this.mContext = pitch.mScreen.mContext;
 		console.log("new player");
 		this.x = x;
 		this.y = y;
+		this.mColor = color;
 	}
 
 	update()
 	{
 		this.mContext.beginPath();
-  		this.mContext.fillStyle = 'red';
+  		this.mContext.fillStyle = this.mColor;
   		this.mContext.arc(this.x, this.y, 20, 0, Math.PI * 360);
   		this.mContext.fill();
 	}

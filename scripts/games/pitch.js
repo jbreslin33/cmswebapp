@@ -27,25 +27,21 @@ class Pitch
 			this.mPlayerArray.push(player);
 		}
 		*/
-		this.mPlayerArray.push(new Player(this,30,30));
-		this.mPlayerArray.push(new Player(this,400,30));
-		this.mPlayerArray.push(new Player(this,30,200));
+		this.mPlayerArray.push(new Player(this,30,30,'blue'));
+		this.mPlayerArray.push(new Player(this,400,30,'blue'));
+		this.mPlayerArray.push(new Player(this,30,200,'blue'));
 
-		this.mPlayerArray.push(new Player(this,200,150));
+		this.mPlayerArray.push(new Player(this,200,150,'red'));
 
 	}
 
 	update()
 	{
-		
 		//APPLICATION.getCurrentScreen().mPitch.mPlayerArray();
 		for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
 		{
 			 APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
 		}
-		//update players
-		
-		//console.log('delta:' + APPLICATION.mDelta);	
 	}
 }
 
