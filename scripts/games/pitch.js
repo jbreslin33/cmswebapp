@@ -51,7 +51,7 @@ class Pitch
 		if (this.mClient)
 		{
 			//console.log('client mID:' + this.mClient.mId);
-			var message = '11' + this.mClient.mId;
+			var message = '1,1,' + this.mClient.mId + ','; 
 			if (APPLICATION.mUpPressed == true)
 			{
 				message += '1';	
@@ -88,11 +88,9 @@ class Pitch
 
   			if (APPLICATION.getCurrentScreen().mWebSocket)
 			{
-  				APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+  				//APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 			}
-			//console.log('message:' + message);
 		}
-
 
 		//update player 
 		if (APPLICATION.getCurrentScreen().mPitch)
