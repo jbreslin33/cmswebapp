@@ -40,7 +40,7 @@ class RondoScreen extends Screen
                 this.mWebSocket.onopen = function ()
                 {
 			//1 for game 1 rondo and 2 for connect thus 12
-			var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId(); 
+			var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ','; 
                         APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
                 }
 
