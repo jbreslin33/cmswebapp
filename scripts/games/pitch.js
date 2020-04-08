@@ -36,7 +36,7 @@ class Pitch
 		//get this clients player move
 		if (this.mClient)
 		{
-			console.log('client mID:' + this.mClient.mId);
+			//console.log('client mID:' + this.mClient.mId);
 			var message = '11' + this.mClient.mId;
 			if (APPLICATION.mUpPressed == true)
 			{
@@ -76,7 +76,7 @@ class Pitch
 			{
   				APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 			}
-			console.log('message:' + message);
+			//console.log('message:' + message);
 		}
 
 
