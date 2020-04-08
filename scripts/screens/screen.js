@@ -48,13 +48,6 @@ class Screen
 	        this.mCanvas = document.getElementById("rondo_screen_canvas_id");
                 this.mContext = this.mCanvas.getContext("2d");
 
-
-		//keystrokes
-		this.mRightPressed = false;
-		this.mLeftPressed = false;
-		this.mDownPressed = false;
-		this.mUpPressed = false;
-
 		document.addEventListener('keydown', function(e)
                 {
                         APPLICATION.getCurrentScreen().keyDownHandler(e);
@@ -360,7 +353,7 @@ class Screen
 		APPLICATION.getCurrentScreen().clearScreen();
 
 		//keystrokes
-                APPLICATION.getCurrentScreen();
+                //APPLICATION.getCurrentScreen();
 
                 if (APPLICATION.mUpPressed == true)
                 {

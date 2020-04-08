@@ -192,6 +192,12 @@ class Application
                 this.mAsideMessageElement = null;
            	this.setAsideMessageElement(document.getElementById("aside_p_id"));
 
+
+               	//keystrokes
+                this.mRightPressed = false;
+                this.mLeftPressed = false;
+                this.mDownPressed = false;
+                this.mUpPressed = false;
 	}
 	
 	hit()

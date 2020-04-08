@@ -33,6 +33,54 @@ class Pitch
 	update()
 	{
 		//APPLICATION.getCurrentScreen().mPitch.mPlayerArray();
+		//get this clients player move
+		if (this.mClient)
+		{
+			console.log('client mID:' + this.mClient.mId);
+			var message = '11' + this.mClient.mId;
+			if (APPLICATION.mUpPressed == true)
+			{
+				message += '1';	
+			}
+			else
+			{
+				message += '0';	
+			}
+			if (APPLICATION.mRightPressed == true)
+			{
+				message += '1';	
+			}
+			else
+			{
+				message += '0';	
+			}
+			if (APPLICATION.mDownPressed == true)
+			{
+				message += '1';	
+			}
+			else
+			{
+				message += '0';	
+			}
+			if (APPLICATION.mLeftPressed == true)
+			{
+				message += '1';	
+			}
+			else
+			{
+				message += '0';	
+			}
+
+
+  			if (APPLICATION.getCurrentScreen().mWebSocket)
+			{
+  				APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+			}
+			console.log('message:' + message);
+		}
+
+
+		//update player 
 		if (APPLICATION.getCurrentScreen().mPitch)
 		{
 			for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
