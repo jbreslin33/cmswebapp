@@ -60,6 +60,9 @@ class Pitch
 			{
 				message += '0';	
 			}
+
+			message = message + ',';
+
 			if (APPLICATION.mRightPressed == true)
 			{
 				message += '1';	
@@ -68,6 +71,9 @@ class Pitch
 			{
 				message += '0';	
 			}
+
+			message = message + ',';
+
 			if (APPLICATION.mDownPressed == true)
 			{
 				message += '1';	
@@ -76,6 +82,9 @@ class Pitch
 			{
 				message += '0';	
 			}
+
+			message = message + ',';
+
 			if (APPLICATION.mLeftPressed == true)
 			{
 				message += '1';	
@@ -85,10 +94,12 @@ class Pitch
 				message += '0';	
 			}
 
+			message = message + ',';
+
 
   			if (APPLICATION.getCurrentScreen().mWebSocket)
 			{
-  				//APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+  				APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 			}
 		}
 
