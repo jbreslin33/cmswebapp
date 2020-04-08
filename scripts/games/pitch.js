@@ -29,6 +29,20 @@ class Pitch
 		this.mPlayerArray.push(new Player(this,200,150,'red'));
 
 	}
+	processData(data)
+	{
+		var code_string = data.substring(0,1)
+		if (code_string == '2')
+		{
+			this.processJoin(data);
+		}
+	}
+	processJoin(d)
+	{
+               	var id_string = d.substring(1,6)
+		APPLICATION.getCurrentScreen().mPitch.mClient.mId = id_string;
+                console.log('you connected and your id is:' + id_string);
+	}
 
 	update()
 	{
@@ -90,5 +104,6 @@ class Pitch
 		}
 		APPLICATION.getCurrentScreen().mPitch.mClient.update();
 	}
+
 }
 

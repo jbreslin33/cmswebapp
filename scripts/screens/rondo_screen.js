@@ -20,6 +20,18 @@ class RondoScreen extends Screen
                 });
 
 		document.getElementById("rondoscreensendbuttonid").onclick = this.hit.bind(document.getElementById("rondoscreensendbuttonid"));
+		
+		this.mId = null;
+
+		//canvas
+                this.mCanvas.width = 480;
+                this.mCanvas.height = 270;
+
+                //document.getElementById("rondo_screen_html_id").appendChild(this.mCanvas);
+
+		//game objects
+		this.mPitch = new Pitch(this);
+		this.mPlayer = new Player(this.mPitch);
 
  
 		//send for new client connection
@@ -36,39 +48,9 @@ class RondoScreen extends Screen
 			//show data
                         document.getElementById('rondo_screen_message_id').innerHTML = event.data;
 
-			var d = event.data;
-			var code_string = d.substring(0,1)
-			console.log('code_string:' + code_string);
-
 			//process data
-			
-			//you connected...
-			if (code_string == '2')
-			{
-				var id_string = d.substring(1,6)
-				if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
-				{
-					APPLICATION.getCurrentScreen().mPitch.mClient.mId = id_string;
-					console.log('you connected and your id is:' + id_string);
-				}
-				else //someone else connected
-				{
-					console.log('another clientu connected and their id is:' + id_string);
-				}
-				
-			}
+			APPLICATION.getCurrentScreen().mPitch.processData(event.data);
                 }
-		this.mId = null;
-
-		//canvas
-                this.mCanvas.width = 480;
-                this.mCanvas.height = 270;
-
-                //document.getElementById("rondo_screen_html_id").appendChild(this.mCanvas);
-
-		//game objects
-		this.mPitch = new Pitch(this);
-		this.mPlayer = new Player(this.mPitch);
 	}
 
 	update()
