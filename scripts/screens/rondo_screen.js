@@ -21,8 +21,6 @@ class RondoScreen extends Screen
 
 		document.getElementById("rondoscreensendbuttonid").onclick = this.hit.bind(document.getElementById("rondoscreensendbuttonid"));
 		
-		//this.mId = null;
-
 		//canvas
                 this.mCanvas.width = 480;
                 this.mCanvas.height = 270;
@@ -30,7 +28,29 @@ class RondoScreen extends Screen
 		//game objects
 		this.mPitch = new Pitch(this);
  
-		//send for new client connection
+		//websocket
+		this.mWebSocket = null;
+	}
+
+	update()
+	{
+		super.update();
+
+		//now update pitch. pitch will update players
+		if (this.mPitch)
+		{
+			this.mPitch.update();
+		}
+	}
+
+	enter()
+	{
+		super.enter();
+		this.initializeWebSocket();
+	}
+
+	initializeWebSocket()
+	{
 		this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
 
                 this.mWebSocket.onopen = function ()
@@ -48,17 +68,6 @@ class RondoScreen extends Screen
 			//process data
 			APPLICATION.getCurrentScreen().mPitch.processData(event.data);
                 }
-	}
-
-	update()
-	{
-		super.update();
-
-		//now update pitch. pitch will update players
-		if (this.mPitch)
-		{
-			this.mPitch.update();
-		}
 	}
         
 	exit()
