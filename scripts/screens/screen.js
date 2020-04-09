@@ -48,7 +48,7 @@ class Screen
                 this.mStateMachine = null;
 
 		//game canvas context
-	        this.mCanvas = document.getElementById("rondo_screen_canvas_id");
+	        this.mCanvas = document.getElementById("canvas_id");
                 this.mContext = this.mCanvas.getContext("2d");
 
 		document.addEventListener('keydown', function(e)
@@ -192,6 +192,16 @@ class Screen
 	getFooter()
 	{
 		return this.mFooter;
+	}
+	
+	setCanvas(canvas)
+	{
+		this.mCanvas = canvas;
+	}
+
+	getCanvas()
+	{
+		return this.mCanvas;
 	}
 	
 	setSpinner(spinner)
@@ -425,6 +435,24 @@ class Screen
 		}
         }
 	
+	showCanvas()
+	{
+                if (this.getCanvas())
+                {
+                        this.getCanvas().style.display = "block";
+                        this.getCanvas().style.visibility = "visible";
+                }
+	}
+
+	hideCanvas()
+	{
+		if (this.getCanvas())
+		{
+                	this.getCanvas().style.display = "none";
+		}
+	}
+
+	
 	showFooter()
 	{
                 if (this.getFooter())
@@ -655,6 +683,7 @@ class Screen
 		this.setMessage('','red');
 		this.show();
 		this.showFooter();
+		this.hideCanvas();
 		this.get();
 	}
 

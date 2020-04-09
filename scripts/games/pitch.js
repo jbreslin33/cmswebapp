@@ -8,8 +8,8 @@ class Pitch
 		//console.log("new pitch");
 		
 		//width and height for this canvas
-		screen.mCanvas.width = 480;
-		screen.mCanvas.height = 270;
+		//screen.mCanvas.width = 315;
+		//screen.mCanvas.height = 204;
 
 		//document.body.insertBefore(this.mCanvas,document.body.childNodes[0]);
 		document.getElementById("rondo_screen_html_id").appendChild(screen.mCanvas);

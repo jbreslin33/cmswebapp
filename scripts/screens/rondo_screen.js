@@ -19,7 +19,8 @@ class RondoScreen extends Screen
                         APPLICATION.getCurrentScreen().hit();
                 });
 
-		document.getElementById("rondoscreensendbuttonid").onclick = this.hit.bind(document.getElementById("rondoscreensendbuttonid"));
+		//document.getElementById("rondoscreensendbuttonid").onclick = this.hit.bind(document.getElementById("rondoscreensendbuttonid"));
+		document.getElementById("rondoscreenfullbuttonid").onclick = this.hitFullScreen.bind(document.getElementById("rondoscreenfullbuttonid"));
 		
 		//canvas
                 this.mCanvas.width = 480;
@@ -31,13 +32,29 @@ class RondoScreen extends Screen
 		//websocket
 		this.mWebSocket = null;
 
+	}
+
+	hitFullScreen()
+	{
 		//lets go full screen
-		/*
-		this.getHtml().webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-		this.getHtml().mozRequestFullScreen();
-		this.getHtml().msRequestFullscreen();
-		this.getHtml().requestFullscreen(); // standard
-		*/
+		var canvas = APPLICATION.getCurrentScreen().getCanvas(); 
+
+		if (canvas.requestFullscreen) 
+		{
+    			canvas.requestFullscreen();
+  		} 
+		else if (canvas.mozRequestFullScreen) 
+		{ /* Firefox */
+    			canvas.mozRequestFullScreen();
+  		} 
+		else if (canvas.webkitRequestFullscreen) 
+		{ /* Chrome, Safari & Opera */
+    			canvas.webkitRequestFullscreen();
+  		} 
+		else if (canvas.msRequestFullscreen) 
+		{ /* IE/Edge */
+    			canvas.msRequestFullscreen();
+  		}
 	}
 
 	update()
@@ -55,6 +72,7 @@ class RondoScreen extends Screen
 	{
 		super.enter();
 		this.hideFooter();
+		this.showCanvas();
 		this.initializeWebSocket();
 	}
 
@@ -72,7 +90,7 @@ class RondoScreen extends Screen
                 this.mWebSocket.onmessage = function(event)
                 {
 			//show data
-                        document.getElementById('rondo_screen_message_id').innerHTML = event.data;
+                        //document.getElementById('rondo_screen_message_id').innerHTML = event.data;
 
 			//process data
 			APPLICATION.getCurrentScreen().mPitch.processData(event.data);
