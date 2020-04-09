@@ -51,11 +51,25 @@ class Pitch
 	processMoves(dataArray)
 	{
 		//APPLICATION.getCurrentScreen().mPitch.mClient.mId = dataArray[2];
-
-
-
-		
-
+		//handle number of players....
+		for (var d = 2; d < dataArray.length; d = d + 3 ) //start with first id at element 2
+		{
+							
+			for (var p = 0; p < this.mPlayerArray.length; p++) //check for a match
+			{
+				if (dataArray[d] == this.mPlayerArray[p].mId) //if true we have a player id match so change coords
+				{
+					this.mPlayerArray[p].x = dataArray[d + 1];		
+					this.mPlayerArray[p].y = dataArray[d + 2];		
+				}
+			}
+		}
+		/*
+		for (var i = 0; i < this.mPlayerArray.length; i++)
+		{
+			//console.log('mPlayerArray' + i + ' id: ' + this.mPlayerArray[i].mId);
+		}
+		*/
 	}
 
 	update()
