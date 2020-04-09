@@ -66,57 +66,58 @@ class Pitch
 
 	update()
 	{
-		//get this clients player move
-		if (APPLICATION.getCurrentScreen().mPitch.mClient)
+		//only update if we have websocket...
+  		if (APPLICATION.getCurrentScreen().mWebSocket)
 		{
-			var message = '1,1,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
-			if (APPLICATION.mUpPressed == true)
+		
+			//get this clients player move
+			if (APPLICATION.getCurrentScreen().mPitch.mClient)
 			{
-				message += '1';	
-			}
-			else
-			{
-				message += '0';	
-			}
+				var message = '1,1,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
+				if (APPLICATION.mUpPressed == true)
+				{
+					message += '1';	
+				}
+				else
+				{
+					message += '0';	
+				}
 
-			message = message + ',';
+				message = message + ',';
 
-			if (APPLICATION.mRightPressed == true)
-			{
-				message += '1';	
-			}
-			else
-			{
-				message += '0';	
-			}
+				if (APPLICATION.mRightPressed == true)
+				{
+					message += '1';	
+				}
+				else
+				{
+					message += '0';	
+				}
 
-			message = message + ',';
+				message = message + ',';
 
-			if (APPLICATION.mDownPressed == true)
-			{
-				message += '1';	
-			}
-			else
-			{
-				message += '0';	
-			}
+				if (APPLICATION.mDownPressed == true)
+				{
+					message += '1';	
+				}
+				else
+				{
+					message += '0';	
+				}
 
-			message = message + ',';
+				message = message + ',';
 
-			if (APPLICATION.mLeftPressed == true)
-			{
-				message += '1';	
-			}
-			else
-			{
-				message += '0';	
-			}
+				if (APPLICATION.mLeftPressed == true)
+				{
+					message += '1';	
+				}
+				else
+				{
+					message += '0';	
+				}
 
-			message = message + ',';
+				message = message + ',';
 
-
-  			if (APPLICATION.getCurrentScreen().mWebSocket)
-			{
   				APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 			}
 		}
