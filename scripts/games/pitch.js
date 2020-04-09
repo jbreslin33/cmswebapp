@@ -44,6 +44,7 @@ class Pitch
 	}
 	processJoin(dataArray)
 	{
+		//this is confirmation that we have connected to server as server was goodly enough to give us a client id
 		APPLICATION.getCurrentScreen().mPitch.mClient.mId = dataArray[2];
                 console.log('you connected and your id is:' + APPLICATION.getCurrentScreen().mPitch.mClient.mId);
 	}
@@ -66,71 +67,85 @@ class Pitch
 
 	update()
 	{
-		//only update if we have websocket...
-  		if (APPLICATION.getCurrentScreen().mWebSocket)
+		//if now connection meaning no mClient.mId > 0 then send connection again
+                //1 for game 1 rondo and 2 for connect thus 12
+		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
-		
-			//get this clients player move
-			if (APPLICATION.getCurrentScreen().mPitch.mClient)
-			{
-				var message = '1,1,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
-				if (APPLICATION.mUpPressed == true)
-				{
-					message += '1';	
-				}
-				else
-				{
-					message += '0';	
-				}
+			//send move again	
+                	//var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+			//lets get random person id for now...
 
-				message = message + ',';
-
-				if (APPLICATION.mRightPressed == true)
-				{
-					message += '1';	
-				}
-				else
-				{
-					message += '0';	
-				}
-
-				message = message + ',';
-
-				if (APPLICATION.mDownPressed == true)
-				{
-					message += '1';	
-				}
-				else
-				{
-					message += '0';	
-				}
-
-				message = message + ',';
-
-				if (APPLICATION.mLeftPressed == true)
-				{
-					message += '1';	
-				}
-				else
-				{
-					message += '0';	
-				}
-
-				message = message + ',';
-
-  				APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
-			}
+                	var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                        APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 		}
-
-		//update player 
-		if (APPLICATION.getCurrentScreen().mPitch)
+		else
 		{
-			for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
+			//only update if we have websocket...
+  			if (APPLICATION.getCurrentScreen().mWebSocket)
 			{
-				APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
+				//get this clients player move
+				if (APPLICATION.getCurrentScreen().mPitch.mClient)
+				{
+					var message = '1,1,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
+					if (APPLICATION.mUpPressed == true)
+					{
+						message += '1';	
+					}
+					else
+					{
+						message += '0';	
+					}
+
+					message = message + ',';
+
+					if (APPLICATION.mRightPressed == true)
+					{	
+						message += '1';	
+					}
+					else
+					{
+						message += '0';	
+					}
+
+					message = message + ',';
+
+					if (APPLICATION.mDownPressed == true)
+					{
+						message += '1';	
+					}
+					else
+					{
+						message += '0';	
+					}
+
+					message = message + ',';
+
+					if (APPLICATION.mLeftPressed == true)
+					{
+						message += '1';	
+					}
+					else
+					{
+						message += '0';	
+					}
+
+					message = message + ',';
+
+  					APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+				}
 			}
+
+			//update player 
+			if (APPLICATION.getCurrentScreen().mPitch)
+			{
+				for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
+				{
+					APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
+				}
+			}
+
+			APPLICATION.getCurrentScreen().mPitch.mClient.update();
 		}
-		APPLICATION.getCurrentScreen().mPitch.mClient.update();
 	}
 
 }
