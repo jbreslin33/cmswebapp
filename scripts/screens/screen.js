@@ -352,26 +352,6 @@ class Screen
 		//clear canvas context...
 		APPLICATION.getCurrentScreen().clearScreen();
 
-		//keystrokes
-                //APPLICATION.getCurrentScreen();
-
-                if (APPLICATION.mUpPressed == true)
-                {
-                        console.log('up');
-                }
-                if (APPLICATION.mDownPressed == true)
-                {
-                        console.log('down');
-                }
-                if (APPLICATION.mLeftPressed == true)
-                {
-                        console.log('left');
-                }
-                if (APPLICATION.mRightPressed == true)
-                {
-                        console.log('right');
-                }
-
 		//states
 		if (this.mStateMachine)
 		{

@@ -21,18 +21,15 @@ class RondoScreen extends Screen
 
 		document.getElementById("rondoscreensendbuttonid").onclick = this.hit.bind(document.getElementById("rondoscreensendbuttonid"));
 		
-		this.mId = null;
+		//this.mId = null;
 
 		//canvas
                 this.mCanvas.width = 480;
                 this.mCanvas.height = 270;
 
-                //document.getElementById("rondo_screen_html_id").appendChild(this.mCanvas);
-
 		//game objects
 		this.mPitch = new Pitch(this);
-		this.mPlayer = new Player(this.mPitch);
-
+		//this.mPlayer = new Player(this.mPitch);
  
 		//send for new client connection
 		this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
@@ -87,6 +84,6 @@ class RondoScreen extends Screen
 
 	hit()
 	{
-                APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
+                //APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
 	}
 }

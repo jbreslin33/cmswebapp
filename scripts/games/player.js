@@ -2,7 +2,7 @@
 
 class Player
 {
-        constructor(pitch,x,y,color)
+        constructor(id,pitch,x,y,color)
         {
 		this.mContext = pitch.mScreen.mContext;
 		console.log("new player");
@@ -10,7 +10,7 @@ class Player
 		this.y = y;
 		this.mColor = color;
 
-		this.mId = 0;
+		this.mId = id;
 	}
 
 	update()
