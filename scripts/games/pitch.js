@@ -50,8 +50,6 @@ class Pitch
 
 	processMoves(dataArray)
 	{
-		//APPLICATION.getCurrentScreen().mPitch.mClient.mId = dataArray[2];
-		//handle number of players....
 		for (var d = 2; d < dataArray.length; d = d + 3 ) //start with first id at element 2
 		{
 							
@@ -64,21 +62,13 @@ class Pitch
 				}
 			}
 		}
-		/*
-		for (var i = 0; i < this.mPlayerArray.length; i++)
-		{
-			//console.log('mPlayerArray' + i + ' id: ' + this.mPlayerArray[i].mId);
-		}
-		*/
 	}
 
 	update()
 	{
-		//APPLICATION.getCurrentScreen().mPitch.mPlayerArray();
 		//get this clients player move
 		if (APPLICATION.getCurrentScreen().mPitch.mClient)
 		{
-			//console.log('client mID:' + this.mClient.mId);
 			var message = '1,1,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
 			if (APPLICATION.mUpPressed == true)
 			{

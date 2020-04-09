@@ -29,7 +29,6 @@ class RondoScreen extends Screen
 
 		//game objects
 		this.mPitch = new Pitch(this);
-		//this.mPlayer = new Player(this.mPitch);
  
 		//send for new client connection
 		this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
