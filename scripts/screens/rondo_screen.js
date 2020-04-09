@@ -46,6 +46,7 @@ class RondoScreen extends Screen
 	enter()
 	{
 		super.enter();
+		this.hideFooter();
 		this.initializeWebSocket();
 	}
 
@@ -72,7 +73,6 @@ class RondoScreen extends Screen
         
 	exit()
         {
-                //this.removeDivs();
                 super.exit();
         }
 

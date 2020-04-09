@@ -9,6 +9,9 @@ class Screen
 		//html ids
 		this.mSpinner = null;
 		this.mHtml = null;
+		this.mFooter = null;
+
+	 	this.setFooter(document.getElementById("footer_id"));
 
 		this.mCode = 0;
 		this.mData = null;
@@ -179,6 +182,16 @@ class Screen
 	getRequest()
 	{
 		return this.mRequest;
+	}
+	
+	setFooter(footer)
+	{
+		this.mFooter = footer;
+	}
+
+	getFooter()
+	{
+		return this.mFooter;
 	}
 	
 	setSpinner(spinner)
@@ -410,8 +423,24 @@ class Screen
 		{
                 	this.getSpinner().style.visibility = "hidden";
 		}
-
         }
+	
+	showFooter()
+	{
+                if (this.getFooter())
+                {
+                        this.getFooter().style.display = "block";
+                        this.getFooter().style.visibility = "visible";
+                }
+	}
+
+	hideFooter()
+	{
+		if (this.getFooter())
+		{
+                	this.getFooter().style.display = "none";
+		}
+	}
 
 	showForm()
 	{
@@ -625,6 +654,7 @@ class Screen
 	{
 		this.setMessage('','red');
 		this.show();
+		this.showFooter();
 		this.get();
 	}
 
@@ -637,6 +667,7 @@ class Screen
 	exit()
 	{
                 this.hide();
+		this.hideFooter();
 		this.resetDataVariables();
 		this.mApplication.setCurrentScreen(null);
 	}
