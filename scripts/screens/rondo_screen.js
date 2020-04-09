@@ -30,6 +30,14 @@ class RondoScreen extends Screen
  
 		//websocket
 		this.mWebSocket = null;
+
+		//lets go full screen
+		/*
+		this.getHtml().webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+		this.getHtml().mozRequestFullScreen();
+		this.getHtml().msRequestFullscreen();
+		this.getHtml().requestFullscreen(); // standard
+		*/
 	}
 
 	update()
