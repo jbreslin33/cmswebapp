@@ -1,4 +1,5 @@
-
+process moves but watch out for client id !!!!
+-----------
 
 lets send moves to server then have it track moves and send back to client and for now just print coord to console
 ------
