@@ -68,13 +68,8 @@ class Pitch
 	update()
 	{
 		//if now connection meaning no mClient.mId > 0 then send connection again
-                //1 for game 1 rondo and 2 for connect thus 12
 		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
-			//send move again	
-                	//var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
-			//lets get random person id for now...
-
                 	var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
                         APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 		}
@@ -144,7 +139,7 @@ class Pitch
 				}
 			}
 
-			//update pitch
+			//print dimensions to screen
 			var screen = APPLICATION.getCurrentScreen();
 			var ctx = screen.mCanvas.getContext("2d");
 			ctx.font = "30px Arial";
