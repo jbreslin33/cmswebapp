@@ -17,7 +17,7 @@ class Player
 	{
 		this.mContext.beginPath();
   		this.mContext.fillStyle = this.mColor;
-  		this.mContext.arc(this.x, this.y, 20, 0, Math.PI * 360);
+  		this.mContext.arc(this.x, this.y, 1.3, 0, Math.PI * 360);
   		this.mContext.fill();
 	}
 }

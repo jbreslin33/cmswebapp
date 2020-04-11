@@ -144,6 +144,16 @@ class Pitch
 				}
 			}
 
+			//update pitch
+			var screen = APPLICATION.getCurrentScreen();
+			var ctx = screen.mCanvas.getContext("2d");
+			ctx.font = "30px Arial";
+			var width = screen.mCanvas.width;
+			var height = screen.mCanvas.height;
+			var txt = "w:" + width + " h:" + height; 
+			ctx.fillText("" + txt, 10, 50);
+
+			//update client
 			APPLICATION.getCurrentScreen().mPitch.mClient.update();
 		}
 	}

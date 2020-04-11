@@ -23,8 +23,10 @@ class RondoScreen extends Screen
 		document.getElementById("rondoscreenfullbuttonid").onclick = this.hitFullScreen.bind(document.getElementById("rondoscreenfullbuttonid"));
 		
 		//canvas
-                this.mCanvas.width = 480;
-                this.mCanvas.height = 270;
+                this.mCanvas.width = 315;
+                this.mCanvas.height = 204;
+
+		this.hideCanvas();
 
 		//game objects
 		this.mPitch = new Pitch(this);
@@ -32,10 +34,32 @@ class RondoScreen extends Screen
 		//websocket
 		this.mWebSocket = null;
 
+
+		//for esc full screen
+		document.addEventListener('fullscreenchange', exitHandler);
+		document.addEventListener('webkitfullscreenchange', exitHandler);
+		document.addEventListener('mozfullscreenchange', exitHandler);
+		document.addEventListener('MSFullscreenChange', exitHandler);
+
+
+		function exitHandler() 
+		{
+    			if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) 
+			{
+        			///fire your event
+				console.log("yo money");
+				APPLICATION.getCurrentScreen().hideCanvas();
+    			}
+		}
 	}
 
 	hitFullScreen()
 	{
+		var screen = APPLICATION.getCurrentScreen();
+		screen.showCanvas();
+                screen.mCanvas.width = 315;
+                screen.mCanvas.height = 204;
+
 		//lets go full screen
 		var canvas = APPLICATION.getCurrentScreen().getCanvas(); 
 
@@ -72,7 +96,7 @@ class RondoScreen extends Screen
 	{
 		super.enter();
 		this.hideFooter();
-		this.showCanvas();
+		//this.showCanvas();
 		this.initializeWebSocket();
 	}
 
