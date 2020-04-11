@@ -23,8 +23,8 @@ class RondoScreen extends Screen
 		document.getElementById("rondoscreenfullbuttonid").onclick = this.hitFullScreen.bind(document.getElementById("rondoscreenfullbuttonid"));
 		
 		//canvas
-                this.mCanvas.width = 315;
-                this.mCanvas.height = 204;
+                //this.mCanvas.width = 315;
+                //this.mCanvas.height = 204;
 
 		this.hideCanvas();
 
@@ -55,10 +55,8 @@ class RondoScreen extends Screen
 
 	hitFullScreen()
 	{
-		var screen = APPLICATION.getCurrentScreen();
-		screen.showCanvas();
-                screen.mCanvas.width = 315;
-                screen.mCanvas.height = 204;
+		var s = APPLICATION.getCurrentScreen();
+		s.showCanvas();
 
 		//lets go full screen
 		var canvas = APPLICATION.getCurrentScreen().getCanvas(); 
@@ -79,6 +77,12 @@ class RondoScreen extends Screen
 		{ /* IE/Edge */
     			canvas.msRequestFullscreen();
   		}
+               
+		//size screen to width of 
+		//screen.mCanvas.width = 315;
+                //screen.mCanvas.height = 204;
+		s.mCanvas.width = screen.width;
+		s.mCanvas.height = screen.height;
 	}
 
 	update()
