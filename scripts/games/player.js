@@ -11,6 +11,16 @@ class Player
 		this.mColor = color;
 
 		this.mId = id;
+
+		//need to scale this... 
+		/*
+		screenWidth/105 gives pixels per meter 
+			
+			
+			
+		*/
+		this.mSize = 1;
+
 	}
 
 	update()
