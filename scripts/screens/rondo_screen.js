@@ -19,7 +19,6 @@ class RondoScreen extends Screen
                         APPLICATION.getCurrentScreen().hit();
                 });
 
-		//document.getElementById("rondoscreensendbuttonid").onclick = this.hit.bind(document.getElementById("rondoscreensendbuttonid"));
 		document.getElementById("rondoscreenfullbuttonid").onclick = this.hitFullScreen.bind(document.getElementById("rondoscreenfullbuttonid"));
 	
 		//game objects
@@ -67,10 +66,8 @@ class RondoScreen extends Screen
 		{ /* IE/Edge */
     			canvas.msRequestFullscreen();
   		}
-               
-		//size screen to width of 
-		//screen.mCanvas.width = 315;
-                //screen.mCanvas.height = 204;
+              
+		//make canvas dimensions the size of physical screen for best resolution
 		s.mCanvas.width = screen.width;
 		s.mCanvas.height = screen.height;
 	}
@@ -89,8 +86,6 @@ class RondoScreen extends Screen
 	enter()
 	{
 		super.enter();
-		this.hideFooter();
-		//this.showCanvas();
 		this.initializeWebSocket();
 	}
 
@@ -100,42 +95,13 @@ class RondoScreen extends Screen
 
                 this.mWebSocket.onopen = function ()
                 {
-			//1 for game 1 rondo and 2 for connect thus 12
-			//var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ','; 
-                        //APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+			//might want to do some acknowledgement here to make try to open again if it fails?
                 }
 
                 this.mWebSocket.onmessage = function(event)
                 {
-			//show data
-                        //document.getElementById('rondo_screen_message_id').innerHTML = event.data;
-
 			//process data
 			APPLICATION.getCurrentScreen().mPitch.processData(event.data);
                 }
-	}
-        
-	exit()
-        {
-                super.exit();
-        }
-
-/*	
-        removeDivs()
-        {
-                //remove pitch
-		if (this.mPitch)
-		{
-			if (this.mPitch.mCanvas)
-			{
-                		this.mPitch.mCanvas.remove();
-			}
-		}
-        }
-	*/
-
-	hit()
-	{
-                //APPLICATION.getCurrentScreen().mWebSocket.send(document.getElementById('rondo_screen_outgoing_message_id').value);
 	}
 }
