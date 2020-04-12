@@ -54,11 +54,56 @@ class Player
 		this.drawX = (this.x * pixelsPerMeterOfFieldWidth) + originX; 
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
 
+		  // Colors
+  		var colors = ['#4CAF50', '#00BCD4', '#E91E63', '#FFC107', '#9E9E9E', '#CDDC39'];
 
+  		// List of Angles
+  		var angles = [Math.PI * 0.3, Math.PI * 0.7, Math.PI * 0.2, Math.PI * 0.4, Math.PI * 0.4];
+
+  		// Temporary variables, to store each arc angles
+  		var beginAngle = 0;
+  		var endAngle = 0;
+
+  		// Iterate through the angles
+  		for(var i = 0; i < angles.length; i = i + 1) 
+		{
+    			// Begin where we left off
+    			beginAngle = endAngle;
+    			// End Angle
+    			endAngle = endAngle + angles[i];
+
+    			this.mContext.beginPath();
+    			// Fill color
+    			this.mContext.fillStyle = colors[i % colors.length];
+
+    			// Same code as before
+    			this.mContext.moveTo(this.drawX, this.drawY);
+    			this.mContext.arc(this.drawX, this.drawY, playerWidth, beginAngle, endAngle);
+    			this.mContext.lineTo(this.drawX, this.drawY);
+    			this.mContext.stroke();
+
+    			// Fill
+    			this.mContext.fill();
+  		}
+
+/*
 		this.mContext.beginPath();
   		this.mContext.fillStyle = this.mColor;
-  		this.mContext.arc(this.drawX, this.drawY, playerWidth, 0, Math.PI * 360);
+
+		var facingRadian = 1.5;
+		var leftFoot = 1.5 - 0.25;
+		var rigthFoot = 1.5 + 0.25;
+
+  		//this.mContext.arc(this.drawX, this.drawY, playerWidth, 0, Math.PI * 360);
+  		// full this.mContext.arc(this.drawX, this.drawY, playerWidth, 0*Math.PI, 2*Math.PI);
+  		//this.mContext.arc(this.drawX, this.drawY, playerWidth, 0*Math.PI, 1.5*Math.PI);
+  	
+		//left
+		this.mContext.arc(this.drawX, this.drawY, playerWidth, leftFoot*Math.PI, rightFoot*Math.PI);
+		this.mContext.arc(this.drawX, this.drawY, playerWidth, rightFoot*Math.PI, leftFoot*Math.PI);
+		
   		this.mContext.fill();
+		*/
 	}
 }
 
