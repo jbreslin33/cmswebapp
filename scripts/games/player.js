@@ -55,10 +55,12 @@ class Player
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
 
 		  // Colors
-  		var colors = ['black', this.mColor, this.mColor, this.mColor, this.mColor, this.mColor];
+  		//var colors = [this.mColor, this.mColor, this.mColor, this.mColor, this.mColor, this.mColor];
+  		var colors = [this.mColor, this.mColor];
 
   		// List of Angles
-  		var angles = [Math.PI * 0.3, Math.PI * 0.7, Math.PI * 0.2, Math.PI * 0.4, Math.PI * 0.4];
+  		//var angles = [Math.PI * 0.3, Math.PI * 0.7, Math.PI * 0.2, Math.PI * 0.4, Math.PI * 0.4];
+  		var angles = [Math.PI * 0.5, Math.PI * 1.5];
 
   		// Temporary variables, to store each arc angles
   		var beginAngle = 0;
