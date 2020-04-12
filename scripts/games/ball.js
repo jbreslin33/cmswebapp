@@ -1,8 +1,8 @@
 'use strict';
 
-class Player
+class Ball
 {
-        constructor(id,pitch,x,y,color)
+        constructor(pitch,x,y,colorA,colorB)
         {
 		this.mPitch = pitch;
 		this.mContext = pitch.mScreen.mContext;
@@ -12,9 +12,8 @@ class Player
 		this.drawX = x;
 		this.drawY = y;
 
-		this.mColor = color;
-
-		this.mId = id;
+		this.mColorA = colorA;
+		this.mColorB = colorB;
 
 		this.mSize = 1;
 	}
@@ -46,10 +45,10 @@ class Player
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
 
 		  // Colors
-  		var colors = [this.mColor, this.mColor];
+  		var colors = [this.mColorA, this.mColorB, this.mColorA, this.mColorB];
 
   		// List of Angles
-  		var angles = [Math.PI * 0.5, Math.PI * 1.5];
+  		var angles = [Math.PI * 0.5, Math.PI * 0.5, Math.PI * 0.5, Math.PI * 0.5];
 
   		// Temporary variables, to store each arc angles
   		var beginAngle = 0;

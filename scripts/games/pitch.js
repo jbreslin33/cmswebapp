@@ -27,6 +27,8 @@ class Pitch
 		this.mPlayerArray.push(new Player(3,this,30,200,'#87CEEB'));
 
 		this.mPlayerArray.push(new Player(4,this,200,150,'red'));
+		
+		this.mBall = new Ball(this,200,150,'black', 'white');
 
 	}
 	processData(data)
@@ -63,6 +65,10 @@ class Pitch
 				}
 			}
 		}
+
+		//ball
+		this.mBall.x = dataArray[dataArray.length - 3];
+		this.mBall.y = dataArray[dataArray.length - 2];
 	}
 
 	update()
@@ -138,6 +144,9 @@ class Pitch
 					APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].update();
 				}
 			}
+
+			//update ball
+			APPLICATION.getCurrentScreen().mPitch.mBall.update();
 
 			//print dimensions to screen
 			var screen = APPLICATION.getCurrentScreen();
