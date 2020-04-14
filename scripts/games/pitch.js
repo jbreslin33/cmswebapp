@@ -34,12 +34,13 @@ class Pitch
 	processData(data)
 	{
 		var dataArray = data.split(',');
+		console.log('1:' + dataArray[1]);
 
-		if (dataArray[1] == '1')
+		if (dataArray[1] == 'm')
 		{
 			this.processMoves(dataArray);
 		}
-		if (dataArray[1] == '2')
+		if (dataArray[1] == 'j')
 		{
 			this.processJoin(dataArray);
 		}
@@ -76,7 +77,7 @@ class Pitch
 		//if now connection meaning no mClient.mId > 0 then send connection again
 		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
-                	var message = '1,2,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                	var message = '1,j,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
                         APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 		}
 		else
@@ -87,7 +88,7 @@ class Pitch
 				//get this clients player move
 				if (APPLICATION.getCurrentScreen().mPitch.mClient)
 				{
-					var message = '1,1,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
+					var message = '1,m,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
 					if (APPLICATION.mUpPressed == true)
 					{
 						message += '1';	
