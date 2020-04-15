@@ -34,7 +34,7 @@ class Pitch
 	processData(data)
 	{
 		var dataArray = data.split(',');
-		console.log('1:' + dataArray[1]);
+		//console.log('1:' + dataArray[1]);
 
 		if (dataArray[1] == 'm')
 		{
@@ -88,52 +88,62 @@ class Pitch
 				//get this clients player move
 				if (APPLICATION.getCurrentScreen().mPitch.mClient)
 				{
-					var message = '1,m,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
-					if (APPLICATION.mUpPressed == true)
+
+					if (APPLICATION.mpPressed == true)
 					{
-						message += '1';	
+                				var message = '1,p,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                        			APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+						console.log('message:' + message);
 					}
 					else
 					{
-						message += '0';	
+						var message = '1,m,' + APPLICATION.getCurrentScreen().mPitch.mClient.mId + ','; 
+						if (APPLICATION.mUpPressed == true)
+						{
+							message += '1';	
+						}
+						else
+						{
+							message += '0';	
+						}
+
+						message = message + ',';
+
+						if (APPLICATION.mRightPressed == true)
+						{		
+							message += '1';	
+						}
+						else
+						{
+							message += '0';	
+						}
+
+						message = message + ',';
+
+						if (APPLICATION.mDownPressed == true)
+						{
+							message += '1';	
+						}
+						else
+						{
+							message += '0';	
+						}
+
+						message = message + ',';
+
+						if (APPLICATION.mLeftPressed == true)
+						{
+							message += '1';	
+						}
+						else
+						{
+							message += '0';	
+						}
+
+						message = message + ',';
+
+  						APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 					}
-
-					message = message + ',';
-
-					if (APPLICATION.mRightPressed == true)
-					{	
-						message += '1';	
-					}
-					else
-					{
-						message += '0';	
-					}
-
-					message = message + ',';
-
-					if (APPLICATION.mDownPressed == true)
-					{
-						message += '1';	
-					}
-					else
-					{
-						message += '0';	
-					}
-
-					message = message + ',';
-
-					if (APPLICATION.mLeftPressed == true)
-					{
-						message += '1';	
-					}
-					else
-					{
-						message += '0';	
-					}
-
-					message = message + ',';
-
-  					APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 				}
 			}
 

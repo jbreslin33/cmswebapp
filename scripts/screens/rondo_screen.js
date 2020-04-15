@@ -102,7 +102,6 @@ class RondoScreen extends Screen
                 {
 			//process data
 			APPLICATION.getCurrentScreen().mPitch.processData(event.data);
-			console.log('event.data:' + event.data);
                 }
 	}
 }

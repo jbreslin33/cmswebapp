@@ -68,6 +68,7 @@ class Screen
 
 	keyDownHandler(event)
 	{
+		console.log('event.keyCode down:' + event.keyCode);
     		if(event.keyCode == 39) 
 		{
         		APPLICATION.mRightPressed = true;
@@ -84,10 +85,16 @@ class Screen
 		{
     			APPLICATION.mUpPressed = true;
     		}
+    		else if(event.keyCode == 80) 
+		{
+    			APPLICATION.mpPressed = true;
+			console.log('p presed');
+    		}
 	}
 	
 	keyUpHandler(event)
 	{
+		console.log('event.keyCode up:' + event.keyCode);
                 if(event.keyCode == 39) 
                 {
                         APPLICATION.mRightPressed = false;
@@ -103,6 +110,10 @@ class Screen
                 else if(event.keyCode == 38) 
                 {
                         APPLICATION.mUpPressed = false;
+                }
+                else if(event.keyCode == 80) 
+                {
+                        APPLICATION.mpPressed = false;
                 }
 	}
 
