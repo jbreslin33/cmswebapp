@@ -199,6 +199,7 @@ class Application
                 this.mDownPressed = false;
                 this.mUpPressed = false;
                 this.mpPressed = false;
+                this.mgPressed = false;
 	}
 	
 	hit()

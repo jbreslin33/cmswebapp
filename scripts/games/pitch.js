@@ -93,7 +93,11 @@ class Pitch
 					{
                 				var message = '1,p,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
                         			APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
-						console.log('message:' + message);
+					}
+					else if (APPLICATION.mgPressed == true)
+					{
+                				var message = '1,g,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                        			APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 					}
 					else
 					{
