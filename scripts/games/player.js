@@ -9,6 +9,8 @@ class Player
 		this.x = x;
 		this.y = y;
 
+		this.mLooking = 0.0;
+
 		this.drawX = x;
 		this.drawY = y;
 
@@ -49,7 +51,7 @@ class Player
   		var colors = [this.mColor, this.mColor];
 
   		// List of Angles
-  		var angles = [Math.PI * 0.5, Math.PI * 1.5];
+  		var angles = [Math.PI * this.mLooking, this.mLooking + 1];
 
   		// Temporary variables, to store each arc angles
   		var beginAngle = 0;
