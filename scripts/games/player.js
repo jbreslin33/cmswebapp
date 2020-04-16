@@ -62,12 +62,13 @@ class Player
 
   		// List of Angles
   		//var angles = [APPLICATION.mUtility.degreesToRadians(this.mRightFootAngle),APPLICATION.mUtility.degreesToRadians(this.mLeftFootAngle - 2)];
-                var angles = [Math.PI * 0.5, Math.PI * 2.0];
+                var angles = [Math.PI * 0.5, Math.PI * 1.5];
 
                 // Temporary variables, to store each arc angles
                 //var beginAngle = this.mFacingAngle;
                 var beginAngle = APPLICATION.mUtility.degreesToRadians(this.mFacingAngle);
-                var endAngle = 0;
+		//console.log('beginAngle:' + beginAngle);
+                var endAngle = beginAngle;
 
   		// Iterate through the angles
   		for(var i = 0; i < angles.length; i = i + 1) 
