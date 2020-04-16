@@ -63,7 +63,8 @@ class Pitch
 				{
 					this.mPlayerArray[p].x = dataArray[d + 1];		
 					this.mPlayerArray[p].y = dataArray[d + 2];		
-					this.mPlayerArray[p].mLooking = dataArray[d + 3];		
+					this.mPlayerArray[p].mFacingAngle = dataArray[d + 3];		
+					//this.mPlayerArray[p].mRightFootAngle = dataArray[d + 4];		
 				}
 			}
 		}

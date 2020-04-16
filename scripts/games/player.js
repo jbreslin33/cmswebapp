@@ -10,6 +10,7 @@ class Player
 		this.y = y;
 
 		this.mLooking = 0.0;
+		this.mFacingAngle = 0.0;
 
 		this.drawX = x;
 		this.drawY = y;
@@ -50,12 +51,23 @@ class Player
 		  // Colors
   		var colors = [this.mColor, this.mColor];
 
-  		// List of Angles
-  		var angles = [Math.PI * this.mLooking, this.mLooking + 1];
+		/*
+		                   // Colors
+                var colors = [this.mColorA, this.mColorB, this.mColorA, this.mColorB];
 
-  		// Temporary variables, to store each arc angles
-  		var beginAngle = 0;
-  		var endAngle = 0;
+                // List of Angles
+                var angles = [Math.PI * 0.5, Math.PI * 0.5, Math.PI * 0.5, Math.PI * 0.5];
+
+		 */
+
+  		// List of Angles
+  		//var angles = [APPLICATION.mUtility.degreesToRadians(this.mRightFootAngle),APPLICATION.mUtility.degreesToRadians(this.mLeftFootAngle - 2)];
+                var angles = [Math.PI * 0.5, Math.PI * 2.0];
+
+                // Temporary variables, to store each arc angles
+                //var beginAngle = this.mFacingAngle;
+                var beginAngle = APPLICATION.mUtility.degreesToRadians(this.mFacingAngle);
+                var endAngle = 0;
 
   		// Iterate through the angles
   		for(var i = 0; i < angles.length; i = i + 1) 
@@ -63,7 +75,7 @@ class Player
     			// Begin where we left off
     			beginAngle = endAngle;
     			// End Angle
-    			endAngle = endAngle + angles[i];
+    			endAngle = angles[i];
 
     			this.mContext.beginPath();
     			// Fill color

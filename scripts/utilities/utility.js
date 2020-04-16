@@ -35,4 +35,10 @@ class Utility
          	var dataArray = data.split(",");
                 return dataArray[0];
 	}
+
+	degreesToRadians(degrees)
+	{
+  		var pi = Math.PI;
+  		return degrees * (pi/180);
+	}
 }
