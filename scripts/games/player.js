@@ -48,25 +48,97 @@ class Player
 		this.drawX = (this.x * pixelsPerMeterOfFieldWidth) + originX; 
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
 
-	      	this.mContext.beginPath();
-      		this.mContext.arc(this.drawX, this.drawY, playerWidth, 0, 2 * Math.PI, false);
-     		//this.mContext.fillStyle = 'green';
-     		this.mContext.fillStyle = this.mColor;
-      		this.mContext.fill();
+	
+		//var this.mContext = this.mCanvas.getContext("2d");
+		var radius = this.mPitch.mScreen.mCanvas.height / 2;
 
+		//this.mPitch.mScreen.mCanvas
 
-//legs and facing
-		var startAngle = 1.1 * Math.PI;
-      		var endAngle = 1.9 * Math.PI;
-      		var counterClockwise = false;
+		this.mContext.translate(radius, radius);
+		radius = radius * 0.90;
+		this.drawClock(radius);	
+	
+	}
+	
+	drawClock(radius) 
+	{
+  		this.drawFace(radius);
+  		this.drawNumbers(radius);
+ 	 	this.drawTime(radius);
+	}
 
-      		this.mContext.beginPath();
-      		this.mContext.arc(this.drawX, this.drawY, playerWidth, startAngle, endAngle, counterClockwise);
-      		this.mContext.lineWidth = 15;
+	drawFace(radius) 
+	{
+  		var grad;
+  		this.mContext.beginPath();
+  		this.mContext.arc(0, 0, radius, 0, 2*Math.PI);
+  		this.mContext.fillStyle = 'white';
+  		this.mContext.fill();
+  		grad = this.mContext.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  		grad.addColorStop(0, '#333');
+  		grad.addColorStop(0.5, 'white');
+  		grad.addColorStop(1, '#333');
+  		this.mContext.strokeStyle = grad;
+  		this.mContext.lineWidth = radius*0.1;
+  		this.mContext.stroke();
+  		this.mContext.beginPath();
+  		this.mContext.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  		this.mContext.fillStyle = '#333';
+  		this.mContext.fill();
+	}
 
-      		// line color
-      		this.mContext.strokeStyle = 'black';
-      		this.mContext.stroke();
+	drawNumbers(radius) 
+	{
+  		var ang;
+  		var num;
+  		this.mContext.font = radius*0.15 + "px arial";
+  		this.mContext.textBaseline="middle";
+  		this.mContext.textAlign="center";
+  		for(num = 1; num < 13; num++)
+		{
+    			ang = num * Math.PI / 6;
+    			this.mContext.rotate(ang);
+    			this.mContext.translate(0, -radius*0.85);
+    			this.mContext.rotate(-ang);
+    			this.mContext.fillText(num.toString(), 0, 0);
+    			this.mContext.rotate(ang);
+    			this.mContext.translate(0, radius*0.85);
+    			this.mContext.rotate(-ang);
+  		}
+	}
+
+	drawTime(radius)
+	{
+    		var now = new Date();
+    		var hour = now.getHours();
+    		var minute = now.getMinutes();
+    		var second = now.getSeconds();
+    		
+		//hour
+    		hour=hour%12;
+    		hour=(hour*Math.PI/6)+
+    		(minute*Math.PI/(6*60))+
+    		(second*Math.PI/(360*60));
+    		this.drawHand(hour, radius*0.5, radius*0.07);
+    
+		//minute
+    		minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    		this.drawHand(minute, radius*0.8, radius*0.07);
+    
+		// second
+    		second=(second*Math.PI/30);
+    		this.drawHand(second, radius*0.9, radius*0.02);
+	}
+
+	drawHand(pos, length, width) 
+	{
+    		this.mContext.beginPath();
+    		this.mContext.lineWidth = width;
+    		this.mContext.lineCap = "round";
+    		this.mContext.moveTo(0,0);
+    		this.mContext.rotate(pos);
+    		this.mContext.lineTo(0, -length);
+    		this.mContext.stroke();
+    		this.mContext.rotate(-pos);
 	}
 }
-
