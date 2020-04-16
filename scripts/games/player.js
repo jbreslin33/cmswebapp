@@ -50,12 +50,13 @@ class Player
 
 	
 		//var this.mContext = this.mCanvas.getContext("2d");
-		var radius = this.mPitch.mScreen.mCanvas.height / 2;
+		//var radius = this.mPitch.mScreen.mCanvas.height / 2;
+		var radius = playerWidth * 4;
 
 		//this.mPitch.mScreen.mCanvas
 
-		this.mContext.translate(radius, radius);
-		radius = radius * 0.90;
+		//this.mContext.translate(radius, radius);
+		//radius = radius * 0.90;
 		this.drawClock(radius);	
 	
 	}
@@ -71,7 +72,7 @@ class Player
 	{
   		var grad;
   		this.mContext.beginPath();
-  		this.mContext.arc(0, 0, radius, 0, 2*Math.PI);
+  		this.mContext.arc(this.drawX, this.drawY, radius, 0, 2*Math.PI);
   		this.mContext.fillStyle = 'white';
   		this.mContext.fill();
   		grad = this.mContext.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
@@ -82,7 +83,7 @@ class Player
   		this.mContext.lineWidth = radius*0.1;
   		this.mContext.stroke();
   		this.mContext.beginPath();
-  		this.mContext.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  		this.mContext.arc(this.drawX, this.drawY, radius*0.1, 0, 2*Math.PI);
   		this.mContext.fillStyle = '#333';
   		this.mContext.fill();
 	}
