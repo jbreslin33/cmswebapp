@@ -53,6 +53,20 @@ class Player
      		//this.mContext.fillStyle = 'green';
      		this.mContext.fillStyle = this.mColor;
       		this.mContext.fill();
+
+
+//legs and facing
+		var startAngle = 1.1 * Math.PI;
+      		var endAngle = 1.9 * Math.PI;
+      		var counterClockwise = false;
+
+      		this.mContext.beginPath();
+      		this.mContext.arc(this.drawX, this.drawY, playerWidth, startAngle, endAngle, counterClockwise);
+      		this.mContext.lineWidth = 15;
+
+      		// line color
+      		this.mContext.strokeStyle = 'black';
+      		this.mContext.stroke();
 	}
 }
 
