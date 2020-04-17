@@ -69,12 +69,17 @@ class Player
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
         	
-		this.mContext.fillStyle = this.mColor;
        
 		//rect body
+		this.mContext.beginPath();
+		this.mContext.fillStyle = this.mColor;
+		this.mContext.fill();
 		this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize / 2);        
 
 		//left foot
+		this.mContext.beginPath();
+		this.mContext.fillStyle = "black";
+		this.mContext.fill();
 		this.mContext.fillRect(this.mSize / -3, this.mSize , this.mSize / 8, this.mSize / 2);        
 	
 		//triangle
@@ -85,7 +90,7 @@ class Player
 
 
 
-    		this.mContext.fill();
+    		//this.mContext.fill();
 
 		this.mContext.restore();
 
