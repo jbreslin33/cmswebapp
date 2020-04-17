@@ -31,7 +31,8 @@ class Player
 		var physicalHeight = this.mPitch.mScreen.mCanvas.height; 
 		var pixelsPerMeterOfFieldWidth = physicalWidth / 105;
 		var pixelsPerMeterOfFieldHeigth = physicalHeight / 68;
-		this.mSize = pixelsPerMeterOfFieldWidth * .41; 
+		//this.mSize = pixelsPerMeterOfFieldWidth * .41; 
+		this.mSize = pixelsPerMeterOfFieldWidth * 2.41; 
 
 		//translate server and real world cartesian coordinate of player to this screen
 		var originX = physicalWidth / 2; 
@@ -48,6 +49,24 @@ class Player
 
 		this.drawX = (this.x * pixelsPerMeterOfFieldWidth) + originX; 
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
+	/*	
+		var f = this.mFacingAngle;
+		var newFacingAngle;
+		if (f < 0)
+		{
+			newFacingAngle = 360 - (f * -1);	
+			this.mFacingAngle = newFacingAngle;
+		}
+		*/
+
+
+			
+		if (this.mId == 1)
+		{
+			//console.log('mAngle:' + this.mAngle);
+			//console.log('mFacingAngle:' + this.mFacingAngle);
+		}
+		this.mAngle = this.mFacingAngle * Math.PI / 180;
 
 
         	//this.mContext.rotate(this.mAngle);
@@ -55,11 +74,12 @@ class Player
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
         	this.mContext.fillStyle = this.mColor;
+        	//this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize);        
         	this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize);        
 
 		this.mContext.restore();
 
-		this.mAngle += 1 * Math.PI / 180;
+		//this.mAngle += 1 * Math.PI / 180;
 
 	}
 	/*

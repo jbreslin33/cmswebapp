@@ -171,7 +171,19 @@ class Pitch
 			ctx.font = "30px Arial";
 			var width = screen.mCanvas.width;
 			var height = screen.mCanvas.height;
-			var txt = "w:" + width + " h:" + height; 
+			var txt;
+			for (var i = 0; i <  APPLICATION.getCurrentScreen().mPitch.mPlayerArray.length; i++)
+			{
+				if (APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].mId == 1)
+				{
+					txt = "w:" + width + " h:" + height + "mFacingAngle:" + APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].mFacingAngle + " angle:" + APPLICATION.getCurrentScreen().mPitch.mPlayerArray[i].mAngle; 
+
+				}
+				else
+				{
+					txt = "w:" + width + " h:" + height; 
+				}
+			}
 			ctx.fillText("" + txt, 10, 50);
 
 			//update client
