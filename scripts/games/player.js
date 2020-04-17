@@ -49,6 +49,7 @@ class Player
 
 		this.drawX = (this.x * pixelsPerMeterOfFieldWidth) + originX; 
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
+
 		var f = this.mFacingAngle;
 		var newFacingAngle;
 		if (f < 0)
@@ -56,8 +57,6 @@ class Player
 			newFacingAngle = 360 - (f * -1);	
 			this.mFacingAngle = newFacingAngle;
 		}
-
-
 			
 		if (this.mId == 1)
 		{
@@ -66,27 +65,36 @@ class Player
 		}
 		this.mAngle = this.mFacingAngle * Math.PI / 180;
 
+		this.mContext.save();
+		this.mContext.translate(this.drawX,this.drawY);
+		this.mContext.rotate(this.mAngle);
+		
+		this.mContext.beginPath();
+   		this.mContext.moveTo(0, this.mSize);
+    		this.mContext.lineTo(this.mSize, -this.mSize);
+    		this.mContext.lineTo(-this.mSize, -this.mSize);
+    		this.mContext.fill();
+		this.mContext.restore();
+		
+		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
 
         	//this.mContext.rotate(this.mAngle);
+		/* box
 		this.mContext.save();
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
         	this.mContext.fillStyle = this.mColor;
-        	//this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize);        
         	this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize);        
-
 		this.mContext.restore();
+		*/
+/* triangle
+    		ctx.beginPath();
+   		ctx.moveTo(75, 50);
+    		ctx.lineTo(100, 75);
+    		ctx.lineTo(100, 25);
+    		ctx.fill();
+		*/
 
-		//this.mAngle += 1 * Math.PI / 180;
 
 	}
-	/*
-	       ctx = myGameArea.context;
-        ctx.save();
-        ctx.translate(this.x, this.y);        
-        ctx.rotate(this.angle);
-        ctx.fillStyle = color;
-        ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);        
-        ctx.restore();    *
-	 */ 
 }
