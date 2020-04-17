@@ -44,7 +44,6 @@ class Player
 		var westTouchLine = 52.5;
 		var northTouchLine = 34
 		var southTouchLine = -34
-
 		//so if you are at 5x then you are 5 * pixelsPerMeterOfFieldWidth
 
 		this.drawX = (this.x * pixelsPerMeterOfFieldWidth) + originX; 
@@ -54,67 +53,57 @@ class Player
 		var newFacingAngle;
 		if (f < 0)
 		{
-			newFacingAngle = 360 - (f * -1);	
+			newFacingAngle = 360 - (f * -1);
 			this.mFacingAngle = newFacingAngle;
 		}
 			
-		if (this.mId == 1)
-		{
-			//console.log('mAngle:' + this.mAngle);
-			//console.log('mFacingAngle:' + this.mFacingAngle);
-		}
 		this.mAngle = this.mFacingAngle * Math.PI / 180;
 
 		this.mContext.save();
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
-        	
-       
+		
 		//rect body
 		this.mContext.beginPath();
 		this.mContext.fillStyle = this.mColor;
 		this.mContext.fill();
-		this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize / 2);        
-
+		this.mContext.fillRect
+		(
+			this.mSize / -2, 
+			this.mSize / -2,   
+			this.mSize,     
+			this.mSize / 2
+		);        
+		
 		//left foot
 		this.mContext.beginPath();
 		this.mContext.fillStyle = "black";
 		this.mContext.fill();
-		this.mContext.fillRect(this.mSize / -3, this.mSize / -3 , this.mSize / 8, this.mSize / 2);        
-	
-		//triangle
-		//this.mContext.beginPath();
-   		//this.mContext.moveTo(0, this.mSize);
-    		//this.mContext.lineTo(this.mSize, -this.mSize);
-    		//this.mContext.lineTo(-this.mSize, -this.mSize);
-
-
-
-    		//this.mContext.fill();
+		this.mContext.fillRect
+		(
+			this.mSize / -2,      
+			this.mSize / -2,        
+			this.mSize / 8, 
+			this.mSize / 2
+		);        
+		
+		//right foot
+		this.mContext.beginPath();
+		this.mContext.fillStyle = "red";
+		this.mContext.fill();
+		this.mContext.fillRect
+		(
+			this.mSize / 2,
+			this.mSize / -2, 
+			this.mSize / 8, 
+			this.mSize / 2
+		);        
+		
+        	
+		
+       
 
 		this.mContext.restore();
-
-
-
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
-
-        	//this.mContext.rotate(this.mAngle);
-		/* box
-		this.mContext.save();
-		this.mContext.translate(this.drawX,this.drawY);
-		this.mContext.rotate(this.mAngle);
-        	this.mContext.fillStyle = this.mColor;
-        	this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize);        
-		this.mContext.restore();
-		*/
-/* triangle
-    		ctx.beginPath();
-   		ctx.moveTo(75, 50);
-    		ctx.lineTo(100, 75);
-    		ctx.lineTo(100, 25);
-    		ctx.fill();
-		*/
-
-
 	}
 }
