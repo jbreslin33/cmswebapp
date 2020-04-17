@@ -82,8 +82,7 @@ class Player
 		this.mContext.fillRect
 		(
 			this.mSize / -2,      
-			//this.mSize * -0.5,        
-			this.mSize * 0.25,        
+			this.mSize * 0.25,  //set to this.mSize / -2 to hide under body        
 			this.mSize / 8, 
 			this.mSize / 2
 		);        
@@ -95,6 +94,30 @@ class Player
 		this.mContext.fillRect
 		(
 			this.mSize / 2,
+			this.mSize * 0.25, 
+			this.mSize / 8, 
+			this.mSize / 2
+		);        
+		
+		//right shoulder
+		this.mContext.beginPath();
+		this.mContext.fillStyle = "white";
+		this.mContext.fill();
+		this.mContext.fillRect
+		(
+			this.mSize / 2,
+			this.mSize / -2, 
+			this.mSize / 8, 
+			this.mSize / 2
+		);        
+		
+		//left shoulder
+		this.mContext.beginPath();
+		this.mContext.fillStyle = "white";
+		this.mContext.fill();
+		this.mContext.fillRect
+		(
+			this.mSize / -2,
 			this.mSize / -2, 
 			this.mSize / 8, 
 			this.mSize / 2
