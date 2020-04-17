@@ -200,6 +200,8 @@ class Application
                 this.mUpPressed = false;
                 this.mpPressed = false;
                 this.mgPressed = false;
+                this.mqPressed = false;
+                this.mwPressed = false;
 	}
 	
 	hit()

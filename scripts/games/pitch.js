@@ -148,6 +148,28 @@ class Pitch
 
 						message = message + ',';
 
+                                               	if (APPLICATION.mqPressed == true)
+                                                {
+                                                        message += '1';
+                                                }
+                                                else
+                                                {
+                                                        message += '0';
+                                                }
+
+                                                message = message + ',';
+
+                                                if (APPLICATION.mwPressed == true)
+                                                {
+                                                        message += '1';
+                                                }
+                                                else
+                                                {
+                                                        message += '0';
+                                                }
+
+                                                message = message + ',';
+
   						APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
 					}
 				}

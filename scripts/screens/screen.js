@@ -96,6 +96,14 @@ class Screen
 		{
     			APPLICATION.mgPressed = true;
     		}
+    		else if(event.keyCode == 81) 
+		{
+    			APPLICATION.mqPressed = true;
+    		}
+    		else if(event.keyCode == 87) 
+		{
+    			APPLICATION.mwPressed = true;
+    		}
 	}
 	
 	keyUpHandler(event)
@@ -124,6 +132,14 @@ class Screen
                 {
                         APPLICATION.mgPressed = false;
                 }
+    		else if(event.keyCode == 81) 
+		{
+    			APPLICATION.mqPressed = false;
+    		}
+    		else if(event.keyCode == 87) 
+		{
+    			APPLICATION.mwPressed = false;
+    		}
 	}
 
 	ajax()
