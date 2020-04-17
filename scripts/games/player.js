@@ -82,7 +82,7 @@ class Player
 		this.mContext.fillRect
 		(
 			this.mSize / -2,      
-			this.mSize / -2,        
+			this.mSize * -0.5,        
 			this.mSize / 8, 
 			this.mSize / 2
 		);        
