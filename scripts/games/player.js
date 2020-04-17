@@ -49,7 +49,6 @@ class Player
 
 		this.drawX = (this.x * pixelsPerMeterOfFieldWidth) + originX; 
 		this.drawY = (this.y * pixelsPerMeterOfFieldWidth) + originY; 
-	/*	
 		var f = this.mFacingAngle;
 		var newFacingAngle;
 		if (f < 0)
@@ -57,7 +56,6 @@ class Player
 			newFacingAngle = 360 - (f * -1);	
 			this.mFacingAngle = newFacingAngle;
 		}
-		*/
 
 
 			
