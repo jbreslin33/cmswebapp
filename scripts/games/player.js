@@ -32,7 +32,7 @@ class Player
 		var pixelsPerMeterOfFieldWidth = physicalWidth / 105;
 		var pixelsPerMeterOfFieldHeigth = physicalHeight / 68;
 		//this.mSize = pixelsPerMeterOfFieldWidth * .41; 
-		this.mSize = pixelsPerMeterOfFieldWidth * 2.41; 
+		this.mSize = pixelsPerMeterOfFieldWidth * 1.0; 
 
 		//translate server and real world cartesian coordinate of player to this screen
 		var originX = physicalWidth / 2; 
@@ -68,14 +68,29 @@ class Player
 		this.mContext.save();
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
-		
-		this.mContext.beginPath();
-   		this.mContext.moveTo(0, this.mSize);
-    		this.mContext.lineTo(this.mSize, -this.mSize);
-    		this.mContext.lineTo(-this.mSize, -this.mSize);
+        	
+		this.mContext.fillStyle = this.mColor;
+       
+		//rect body
+		this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize / 2);        
+
+		//left foot
+		this.mContext.fillRect(this.mSize / -3, this.mSize , this.mSize / 8, this.mSize / 2);        
+	
+		//triangle
+		//this.mContext.beginPath();
+   		//this.mContext.moveTo(0, this.mSize);
+    		//this.mContext.lineTo(this.mSize, -this.mSize);
+    		//this.mContext.lineTo(-this.mSize, -this.mSize);
+
+
+
     		this.mContext.fill();
+
 		this.mContext.restore();
-		
+
+
+
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
 
         	//this.mContext.rotate(this.mAngle);
