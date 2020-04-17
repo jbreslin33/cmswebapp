@@ -80,7 +80,7 @@ class Player
 		this.mContext.beginPath();
 		this.mContext.fillStyle = "black";
 		this.mContext.fill();
-		this.mContext.fillRect(this.mSize / -3, this.mSize , this.mSize / 8, this.mSize / 2);        
+		this.mContext.fillRect(this.mSize / -3, this.mSize / -3 , this.mSize / 8, this.mSize / 2);        
 	
 		//triangle
 		//this.mContext.beginPath();
