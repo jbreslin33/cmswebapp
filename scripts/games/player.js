@@ -51,10 +51,24 @@ class Player
 
 
         	//this.mContext.rotate(this.mAngle);
+		this.mContext.save();
+		this.mContext.translate(this.drawX,this.drawY);
+		this.mContext.rotate(this.mAngle);
         	this.mContext.fillStyle = this.mColor;
-        	this.mContext.fillRect(this.drawX, this.drawY, this.mSize, this.mSize);        
+        	this.mContext.fillRect(this.mSize / -2, this.mSize / -2, this.mSize, this.mSize);        
 
-		//this.mAngle += 1 * Math.PI / 180;
+		this.mContext.restore();
+
+		this.mAngle += 1 * Math.PI / 180;
 
 	}
+	/*
+	       ctx = myGameArea.context;
+        ctx.save();
+        ctx.translate(this.x, this.y);        
+        ctx.rotate(this.angle);
+        ctx.fillStyle = color;
+        ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);        
+        ctx.restore();    *
+	 */ 
 }
