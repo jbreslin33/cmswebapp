@@ -22,10 +22,7 @@ class RondoScreen extends Screen
 		document.getElementById("rondoscreenfullbuttonid").onclick = this.hitFullScreen.bind(document.getElementById("rondoscreenfullbuttonid"));
 	
 		//game objects
-		this.mPitch = new Pitch(this);
- 
-		//websocket
-		this.mWebSocket = null;
+		this.mPitch = null;
 
 		//for esc full screen
 		document.addEventListener('fullscreenchange', exitHandler);
@@ -38,12 +35,16 @@ class RondoScreen extends Screen
     			if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) 
 			{
 				APPLICATION.getCurrentScreen().hideCanvas();
+
+				APPLICATION.getCurrentScreen().mPitch = null;
     			}
 		}
 	}
 
 	hitFullScreen()
 	{
+		APPLICATION.getCurrentScreen().mPitch = new Pitch(APPLICATION.getCurrentScreen());
+
 		var s = APPLICATION.getCurrentScreen();
 		s.showCanvas();
 
@@ -81,30 +82,5 @@ class RondoScreen extends Screen
 		{
 			this.mPitch.update();
 		}
-	}
-
-	enter()
-	{
-		super.enter();
-		this.initializeWebSocket();
-	}
-
-	initializeWebSocket()
-	{
-		this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
-
-                this.mWebSocket.onopen = function ()
-                {
-			//might want to do some acknowledgement here to make try to open again if it fails?
-                }
-
-                this.mWebSocket.onmessage = function(event)
-                {
-			//process data
-			if (APPLICATION.getCurrentScreen().mPitch)
-			{
-				APPLICATION.getCurrentScreen().mPitch.processData(event.data);
-			}
-                }
 	}
 }

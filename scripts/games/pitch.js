@@ -5,13 +5,8 @@ class Pitch
         constructor(screen)
         {
 		this.mScreen = screen;
-		//console.log("new pitch");
+                
 		
-		//width and height for this canvas
-		//screen.mCanvas.width = 315;
-		//screen.mCanvas.height = 204;
-
-		//document.body.insertBefore(this.mCanvas,document.body.childNodes[0]);
 		document.getElementById("rondo_screen_html_id").appendChild(screen.mCanvas);
 
 		this.mFrameNumber = 0;
@@ -29,8 +24,33 @@ class Pitch
 		this.mPlayerArray.push(new Player(4,this,200,150,'red'));
 		
 		this.mBall = new Ball(this,200,150,'black', 'white');
+		
+		//websocket
+                this.mWebSocket = null;
+		
+		this.initializeWebSocket();
 
 	}
+
+        initializeWebSocket()
+        {
+                this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
+
+                this.mWebSocket.onopen = function ()
+                {
+                        //might want to do some acknowledgement here to make try to open again if it fails?
+                }
+
+                this.mWebSocket.onmessage = function(event)
+                {
+                        //process data
+                        if (APPLICATION.getCurrentScreen().mPitch)
+                        {
+                                APPLICATION.getCurrentScreen().mPitch.processData(event.data);
+                        }
+                }
+        }
+
 	processData(data)
 	{
 		var dataArray = data.split(',');
@@ -82,13 +102,14 @@ class Pitch
 
 		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
+			console.log('trying to join with id:' + APPLICATION.getCurrentScreen().getPersonId());
                 	var message = '1,j,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
-                        APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+                        APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 		}
 		else
 		{
 			//only update if we have websocket...
-  			if (APPLICATION.getCurrentScreen().mWebSocket)
+  			if (APPLICATION.getCurrentScreen().mPitch.mWebSocket)
 			{
 				//get this clients player move
 				if (APPLICATION.getCurrentScreen().mPitch.mClient)
@@ -97,12 +118,12 @@ class Pitch
 					if (APPLICATION.mpPressed == true)
 					{
                 				var message = '1,p,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
-                        			APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+                        			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 					else if (APPLICATION.mgPressed == true)
 					{
                 				var message = '1,g,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
-                        			APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+                        			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 					else
 					{
@@ -173,7 +194,7 @@ class Pitch
 
                                                 message = message + ',';
 
-  						APPLICATION.getCurrentScreen().mWebSocket.send('' + message);
+  						APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 				}
 			}
