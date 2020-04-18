@@ -59,9 +59,30 @@ class Player
 			
 		this.mAngle = this.mFacingAngle * Math.PI / 180;
 
+
+
 		this.mContext.save();
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
+
+		this.drawStickMan();	
+
+		this.mContext.restore();
+		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
+	}
+
+	drawStickMan()
+	{
+		this.drawBody();
+		this.drawLeftFoot();
+		this.drawRightFoot();
+		this.drawLeftShoulder();
+		this.drawRightShoulder();
+	}
+
+
+	drawBody()
+	{
 		
 		//rect body
 		this.mContext.beginPath();
@@ -74,6 +95,11 @@ class Player
 			this.mSize,     
 			this.mSize / 2
 		);        
+
+	}
+
+	drawLeftFoot()
+	{
 		
 		//left foot
 		this.mContext.beginPath();
@@ -86,7 +112,11 @@ class Player
 			this.mSize / 8, 
 			this.mSize / 2
 		);        
-		
+
+	}
+	
+	drawRightFoot()
+	{
 		//right foot
 		this.mContext.beginPath();
 		this.mContext.fillStyle = "red";
@@ -98,7 +128,11 @@ class Player
 			this.mSize / 8, 
 			this.mSize / 2
 		);        
-		
+	}	
+
+	drawRightShoulder()
+	{
+
 		//right shoulder
 		this.mContext.beginPath();
 		this.mContext.fillStyle = "white";
@@ -110,7 +144,11 @@ class Player
 			this.mSize / 8, 
 			this.mSize / 2
 		);        
-		
+
+	}
+	
+	drawLeftShoulder()
+	{
 		//left shoulder
 		this.mContext.beginPath();
 		this.mContext.fillStyle = "white";
@@ -122,12 +160,6 @@ class Player
 			this.mSize / 8, 
 			this.mSize / 2
 		);        
-		
-        	
-		
-       
 
-		this.mContext.restore();
-		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
 	}
 }
