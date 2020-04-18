@@ -77,6 +77,9 @@ class Pitch
 	update()
 	{
 		//if now connection meaning no mClient.mId > 0 then send connection again
+		if (APPLICATION.getCurrentScreen().mPitch)
+		{
+
 		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
                 	var message = '1,j,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
@@ -210,6 +213,7 @@ class Pitch
 
 			//update client
 			APPLICATION.getCurrentScreen().mPitch.mClient.update();
+		}
 		}
 	}
 

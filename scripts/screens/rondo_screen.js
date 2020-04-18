@@ -101,7 +101,10 @@ class RondoScreen extends Screen
                 this.mWebSocket.onmessage = function(event)
                 {
 			//process data
-			APPLICATION.getCurrentScreen().mPitch.processData(event.data);
+			if (APPLICATION.getCurrentScreen().mPitch)
+			{
+				APPLICATION.getCurrentScreen().mPitch.processData(event.data);
+			}
                 }
 	}
 }

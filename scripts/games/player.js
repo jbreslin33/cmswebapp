@@ -75,7 +75,7 @@ class Player
 	{
       		this.mContext.beginPath();
       		this.mContext.arc(0, 0, this.mSize, 0, 2 * Math.PI, false);
-      		this.mContext.fillStyle = 'green';
+      		this.mContext.fillStyle = this.mColor;
       		this.mContext.fill();
       		this.mContext.lineWidth = 5;
       		this.mContext.strokeStyle = '#003300';
