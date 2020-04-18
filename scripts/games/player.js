@@ -65,10 +65,21 @@ class Player
 		this.mContext.translate(this.drawX,this.drawY);
 		this.mContext.rotate(this.mAngle);
 
-		this.drawStickMan();	
+		this.drawCircleMan();	
 
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
+	}
+
+	drawCircleMan()
+	{
+      		this.mContext.beginPath();
+      		this.mContext.arc(0, 0, this.mSize, 0, 2 * Math.PI, false);
+      		this.mContext.fillStyle = 'green';
+      		this.mContext.fill();
+      		this.mContext.lineWidth = 5;
+      		this.mContext.strokeStyle = '#003300';
+      		this.mContext.stroke();
 	}
 
 	drawStickMan()
