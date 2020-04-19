@@ -66,6 +66,7 @@ class Player
 		this.mContext.rotate(this.mAngle);
 
 		this.drawCircleMan();	
+		this.drawLine();
 
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
@@ -82,6 +83,7 @@ class Player
       		this.mContext.stroke();
 	}
 
+
 	drawStickMan()
 	{
 		this.drawBody();
@@ -89,6 +91,28 @@ class Player
 		this.drawRightFoot();
 		this.drawLeftShoulder();
 		this.drawRightShoulder();
+	}
+
+	drawLine()
+	{
+		/*
+		this.mContext.beginPath();
+		this.mContext.fillStyle = "red";
+		this.mContext.moveTo(0, 0);
+		this.mContext.lineTo(300, 150);
+		this.mContext.stroke();
+		*/
+		//rect body
+		this.mContext.beginPath();
+		this.mContext.fillStyle = "yellow";
+		this.mContext.fill();
+		this.mContext.fillRect
+		(
+			this.mSize / -2, 
+			this.mSize / -2,   
+			this.mSize,     
+			this.mSize / 2
+		);        
 	}
 
 
