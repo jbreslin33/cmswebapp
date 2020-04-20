@@ -15,7 +15,8 @@ class Ball
 		this.mColorA = colorA;
 		this.mColorB = colorB;
 
-		this.mSize = 1;
+		this.mDiameter = 1.0;
+		this.mSize = 0.0;
 	}
 
 	update()
@@ -25,7 +26,7 @@ class Ball
 		var physicalHeight = this.mPitch.mScreen.mCanvas.height; 
 		var pixelsPerMeterOfFieldWidth = physicalWidth / 105;
 		var pixelsPerMeterOfFieldHeigth = physicalHeight / 68;
-		var playerWidth = pixelsPerMeterOfFieldWidth * .41; 
+		this.mSize = pixelsPerMeterOfFieldWidth * this.mDiameter; 
 
 		
 		//translate server and real world cartesian coordinate of player to this screen
@@ -68,7 +69,7 @@ class Ball
 
     			// Same code as before
     			this.mContext.moveTo(this.drawX, this.drawY);
-    			this.mContext.arc(this.drawX, this.drawY, playerWidth, beginAngle, endAngle);
+    			this.mContext.arc(this.drawX, this.drawY, this.mSize / 2, beginAngle, endAngle);
     			this.mContext.lineTo(this.drawX, this.drawY);
     			this.mContext.stroke();
 

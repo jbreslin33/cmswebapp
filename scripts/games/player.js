@@ -20,6 +20,7 @@ class Player
 		this.mId = id;
 
 		this.mDiameter = 1.0;
+		this.mSize = 0.0; //at first
 
 		this.mAngle = 1;
 	}
