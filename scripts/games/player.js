@@ -19,7 +19,7 @@ class Player
 
 		this.mId = id;
 
-		this.mRadius = 2.0;
+		this.mDiameter = 1.0;
 
 		this.mAngle = 1;
 	}
@@ -32,7 +32,7 @@ class Player
 		var pixelsPerMeterOfFieldWidth = physicalWidth / 105;
 		var pixelsPerMeterOfFieldHeigth = physicalHeight / 68;
 		//this.mSize = pixelsPerMeterOfFieldWidth * .41; 
-		this.mSize = pixelsPerMeterOfFieldWidth * this.mRadius; 
+		this.mSize = pixelsPerMeterOfFieldWidth * this.mDiameter; 
 
 		//translate server and real world cartesian coordinate of player to this screen
 		var originX = physicalWidth / 2; 
@@ -66,7 +66,7 @@ class Player
 		this.mContext.rotate(this.mAngle);
 
 		this.drawCircleMan();	
-		this.drawLine();
+		//this.drawLine();
 
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
@@ -78,9 +78,9 @@ class Player
       		this.mContext.arc(0, 0, this.mSize / 2, 0, 2 * Math.PI, false);
       		this.mContext.fillStyle = this.mColor;
       		this.mContext.fill();
-      		this.mContext.lineWidth = 5;
-      		this.mContext.strokeStyle = '#003300';
-      		this.mContext.stroke();
+      		//this.mContext.lineWidth = 5;
+      		//this.mContext.strokeStyle = '#003300';
+      		//this.mContext.stroke();
 	}
 
 
@@ -95,13 +95,6 @@ class Player
 
 	drawLine()
 	{
-		/*
-		this.mContext.beginPath();
-		this.mContext.fillStyle = "red";
-		this.mContext.moveTo(0, 0);
-		this.mContext.lineTo(300, 150);
-		this.mContext.stroke();
-		*/
 		//rect body
 		this.mContext.beginPath();
 		this.mContext.fillStyle = "yellow";
