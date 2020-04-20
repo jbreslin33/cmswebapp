@@ -19,7 +19,7 @@ class Player
 
 		this.mId = id;
 
-		this.mSize = 1;
+		this.mRadius = 2.0;
 
 		this.mAngle = 1;
 	}
@@ -32,7 +32,7 @@ class Player
 		var pixelsPerMeterOfFieldWidth = physicalWidth / 105;
 		var pixelsPerMeterOfFieldHeigth = physicalHeight / 68;
 		//this.mSize = pixelsPerMeterOfFieldWidth * .41; 
-		this.mSize = pixelsPerMeterOfFieldWidth * 1.0; 
+		this.mSize = pixelsPerMeterOfFieldWidth * this.mRadius; 
 
 		//translate server and real world cartesian coordinate of player to this screen
 		var originX = physicalWidth / 2; 
@@ -75,7 +75,7 @@ class Player
 	drawCircleMan()
 	{
       		this.mContext.beginPath();
-      		this.mContext.arc(0, 0, this.mSize, 0, 2 * Math.PI, false);
+      		this.mContext.arc(0, 0, this.mSize / 2, 0, 2 * Math.PI, false);
       		this.mContext.fillStyle = this.mColor;
       		this.mContext.fill();
       		this.mContext.lineWidth = 5;
