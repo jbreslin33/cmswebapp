@@ -15,7 +15,7 @@ class Ball
 		this.mColorA = colorA;
 		this.mColorB = colorB;
 
-		this.mDiameter = 1.0;
+		this.mDiameter = 3.0;
 		this.mSize = 0.0;
 	}
 
@@ -24,8 +24,8 @@ class Ball
 		//update player size based on physical screen size	
 		var physicalWidth = this.mPitch.mScreen.mCanvas.width; 
 		var physicalHeight = this.mPitch.mScreen.mCanvas.height; 
-		var pixelsPerMeterOfFieldWidth = physicalWidth / 105;
-		var pixelsPerMeterOfFieldHeigth = physicalHeight / 68;
+		var pixelsPerMeterOfFieldWidth = physicalWidth / 800;
+		var pixelsPerMeterOfFieldHeigth = physicalHeight / 600; 
 		this.mSize = pixelsPerMeterOfFieldWidth * this.mDiameter; 
 
 		
@@ -33,8 +33,8 @@ class Ball
 		var originX = physicalWidth / 2; 
 		var originY = physicalHeight / 2; 
 
-		var fieldWidth = 105;
-		var fieldHeigt = 68; 
+		var fieldWidth = 800;
+		var fieldHeigt = 600; 
 		var eastTouchLine = -52.5;
 		var westTouchLine = 52.5;
 		var northTouchLine = 34
