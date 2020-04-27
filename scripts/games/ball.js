@@ -13,12 +13,21 @@ class Ball
 		this.mColorB = colorB;
 
 		this.mDiameter = 3.0;
-		this.mSize = 3.0;
+		this.mSize = 10.0;
 	}
 
 	update()
 	{
-		  // Colors
+                var w = this.mPitch.mScreen.mCanvas.width;
+                var l = this.mPitch.mScreen.mCanvas.height;
+
+                var mod_w = w / 800;
+                var mod_l = l / 600;
+
+                var drawX = this.x * mod_w;
+                var drawY = this.y * mod_l;
+
+		// Colors
   		var colors = [this.mColorA, this.mColorB, this.mColorA, this.mColorB];
 
   		// List of Angles
@@ -41,9 +50,9 @@ class Ball
     			this.mContext.fillStyle = colors[i % colors.length];
 
     			// Same code as before
-    			this.mContext.moveTo(this.x, this.y);
-    			this.mContext.arc(this.x, this.y, this.mSize / 2, beginAngle, endAngle);
-    			this.mContext.lineTo(this.x, this.y);
+    			this.mContext.moveTo(drawX, drawY);
+    			this.mContext.arc(drawX, drawY, this.mSize / 2, beginAngle, endAngle);
+    			this.mContext.lineTo(drawX, drawY);
     			this.mContext.stroke();
 
     			// Fill

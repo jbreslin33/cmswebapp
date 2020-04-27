@@ -6,8 +6,10 @@ class Player
         {
 		this.mPitch = pitch;
 		this.mContext = pitch.mScreen.mContext;
+
 		this.x = x;
 		this.y = y;
+
 
 		this.mLooking = 0.0;
 		this.mFacingAngle = 0.0;
@@ -18,7 +20,7 @@ class Player
 		this.mId = id;
 
 		this.mDiameter = 3.0;
-		this.mSize = 3.0; //at first
+		this.mSize = 10; //at first
 
 		this.mAngle = 1;
 	}
@@ -27,26 +29,37 @@ class Player
 	{
 
 		this.mContext.save();
+		
+		var w = this.mPitch.mScreen.mCanvas.width;
+		var l = this.mPitch.mScreen.mCanvas.height;
 
-		this.drawCircleMan();	
-		this.drawText();
+		var mod_w = w / 800;	
+		var mod_l = l / 600;	
+	
+		var drawX = this.x * mod_w;
+		var drawY = this.y * mod_l;
+
+		this.drawCircleMan(drawX,drawY);	
+		this.drawText(drawX,drawY);
 
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
 	}
 
-	drawCircleMan()
+	drawCircleMan(drawX,drawY)
 	{
+
+
       		this.mContext.beginPath();
-      		this.mContext.arc(this.x, this.y, this.mSize / 2, 0, 2 * Math.PI, false);
+      		this.mContext.arc(drawX, drawY, this.mSize / 2, 0, 2 * Math.PI, false);
       		this.mContext.fillStyle = this.mColor;
       		this.mContext.fill();
 	}
 
-	drawText()
+	drawText(drawX,drawY)
 	{
 		this.mContext.font = "30px Arial";
-		this.mContext.fillText(this.mStateName,this.x,this.y);
+		this.mContext.fillText(this.mStateName,drawX,drawY);
 	}
 
 
