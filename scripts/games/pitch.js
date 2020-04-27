@@ -91,7 +91,7 @@ class Pitch
 					this.mPlayerArray[p].y = dataArray[d + 2];		
 					this.mPlayerArray[p].mFacingAngle = dataArray[d + 3];		
 					this.mPlayerArray[p].mStateName = dataArray[d + 4];		
-					console.log('player id: ' + this.mPlayerArray[p].mId + 'mStateName: ' + this.mPlayerArray[p].mStateName);
+					//console.log('player id: ' + this.mPlayerArray[p].mId + 'mStateName: ' + this.mPlayerArray[p].mStateName);
 					//this.mPlayerArray[p].mRightFootAngle = dataArray[d + 4];		
 				}
 			}

@@ -29,6 +29,7 @@ class Player
 		this.mContext.save();
 
 		this.drawCircleMan();	
+		this.drawText();
 
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
@@ -40,6 +41,12 @@ class Player
       		this.mContext.arc(this.x, this.y, this.mSize / 2, 0, 2 * Math.PI, false);
       		this.mContext.fillStyle = this.mColor;
       		this.mContext.fill();
+	}
+
+	drawText()
+	{
+		this.mContext.font = "30px Arial";
+		this.mContext.fillText(this.mStateName,this.x,this.y);
 	}
 
 
