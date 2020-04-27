@@ -13,6 +13,7 @@ class Player
 		this.mFacingAngle = 0.0;
 
 		this.mColor = color;
+		this.mStateName = '';
 
 		this.mId = id;
 

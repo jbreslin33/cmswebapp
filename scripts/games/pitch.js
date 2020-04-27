@@ -80,7 +80,7 @@ class Pitch
 
 	processMoves(dataArray)
 	{
-		for (var d = 2; d < dataArray.length; d = d + 4 ) //start with first id at element 2
+		for (var d = 2; d < dataArray.length; d = d + 5 ) //start with first id at element 2
 		{
 							
 			for (var p = 0; p < this.mPlayerArray.length; p++) //check for a match
@@ -90,6 +90,8 @@ class Pitch
 					this.mPlayerArray[p].x = dataArray[d + 1];		
 					this.mPlayerArray[p].y = dataArray[d + 2];		
 					this.mPlayerArray[p].mFacingAngle = dataArray[d + 3];		
+					this.mPlayerArray[p].mStateName = dataArray[d + 4];		
+					console.log('player id: ' + this.mPlayerArray[p].mId + 'mStateName: ' + this.mPlayerArray[p].mStateName);
 					//this.mPlayerArray[p].mRightFootAngle = dataArray[d + 4];		
 				}
 			}
