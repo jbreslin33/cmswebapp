@@ -58,7 +58,7 @@ class Player
 
 	drawText(drawX,drawY)
 	{
-		this.mContext.font = "30px Arial";
+		this.mContext.font = "12px Arial";
 		this.mContext.fillText(this.mStateName,drawX,drawY);
 	}
 
