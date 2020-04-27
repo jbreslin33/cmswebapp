@@ -33,8 +33,8 @@ class Player
 		var w = this.mPitch.mScreen.mCanvas.width;
 		var l = this.mPitch.mScreen.mCanvas.height;
 
-		var mod_w = w / 800;	
-		var mod_l = l / 600;	
+		var mod_w = w / 700;	
+		var mod_l = l / 400;	
 	
 		var drawX = this.x * mod_w;
 		var drawY = this.y * mod_l;

@@ -18,16 +18,16 @@ class Pitch
 
 			
 		this.mPlayerArray.push(new Player(1,this,30,30,'black'));
-		this.mPlayerArray.push(new Player(2,this,400,30,'blue'));
-		this.mPlayerArray.push(new Player(3,this,30,200,'blue'));
-		this.mPlayerArray.push(new Player(4,this,30,200,'blue'));
-		this.mPlayerArray.push(new Player(5,this,30,200,'blue'));
+		this.mPlayerArray.push(new Player(2,this,400,30,'red'));
+		this.mPlayerArray.push(new Player(3,this,30,200,'red'));
+		this.mPlayerArray.push(new Player(4,this,30,200,'red'));
+		this.mPlayerArray.push(new Player(5,this,30,200,'red'));
 
 		this.mPlayerArray.push(new Player(6,this,200,150,'yellow'));
-		this.mPlayerArray.push(new Player(7,this,200,150,'red'));
-		this.mPlayerArray.push(new Player(8,this,200,150,'red'));
-		this.mPlayerArray.push(new Player(9,this,200,150,'red'));
-		this.mPlayerArray.push(new Player(10,this,200,150,'red'));
+		this.mPlayerArray.push(new Player(7,this,200,150,'blue'));
+		this.mPlayerArray.push(new Player(8,this,200,150,'blue'));
+		this.mPlayerArray.push(new Player(9,this,200,150,'blue'));
+		this.mPlayerArray.push(new Player(10,this,200,150,'blue'));
 		
 		this.mBall = new Ball(this,200,150,'black', 'white');
 		
