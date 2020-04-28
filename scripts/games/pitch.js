@@ -105,6 +105,11 @@ class Pitch
 
 	update()
 	{
+		if (!APPLICATION.getCurrentScreen().mPitch)
+		{
+			return;
+		}
+
 		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
 			console.log('trying to join with id:' + APPLICATION.getCurrentScreen().getPersonId());

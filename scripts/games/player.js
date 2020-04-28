@@ -43,23 +43,35 @@ class Player
 		var drawY = this.y * mod_l;
 
 		drawY = l - drawY; //768 - 100 draw at 668 instead of 100
+		
+		//always fix mFacingAngle coming in right away
+		if (this.mFacingAngle < 0)
+		{
+			this.mFacingAngle = this.mFacingAngle * -1;
+			this.mFacingAngle = 360 - this.mFacingAngle;
+		}
 
+		//if no last angle then set it for next rotation... but also do one possibly big rotation to get where server is
 		if (this.mLastAngle == null)
 		{
 			this.mLastAngle = this.mFacingAngle;	
+
+			//i think we need a one time rotation here to get our heads straight so to speak. a quick rotation...
+                       	var rotateAmount = this.mFacingAngle;
+			console.log('one time rotation:' + rotateAmount);
+
+                        this.mContext.translate(drawX, drawY);              //translate to center of shape
+                        this.mContext.rotate( (Math.PI / 180) * rotateAmount);  //rotate 25 degrees.
+                        this.mContext.translate(-drawX, -drawY);            //translate center back to 0,0
+		
 		}
+		//if you already set last angle to the previous mLastAngle then rotate amount of diff from now on....
 		else
 		{
-			
 			if (this.mLastAngle < 0)
 			{
 				this.mLastAngle = this.mLastAngle * -1;
 				this.mLastAngle = 360 - this.mLastAngle;
-			}
-			if (this.mFacingAngle < 0)
-			{
-				this.mFacingAngle = this.mFacingAngle * -1;
-				this.mFacingAngle = 360 - this.mFacingAngle;
 			}
 
 			var rotateAmount = this.mLastAngle - this.mFacingAngle;
@@ -77,6 +89,19 @@ class Player
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
 
+	}
+
+	rotate()
+	{
+   		this.mContext.clearRect(0, 0, canvas.width, canvas.height);
+   		this.mContext.save(); //save canvas state
+   		this.mContext.translate(canvas.width / 2, canvas.height / 2);
+   		this.mContext.rotate(rotation * Math.PI / 180);
+   		this.mContext.translate(-canvas.width / 2, -canvas.height / 2);
+   		this.mContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+   		rotation += 90;
+   		ctx.restore(); //restore canvas state
+}
 	}
 
 	drawCircleMan(drawX,drawY)
