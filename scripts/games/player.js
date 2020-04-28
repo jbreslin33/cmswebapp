@@ -46,6 +46,18 @@ class Player
 		}
 		else
 		{
+			
+			if (this.mLastAngle < 0)
+			{
+				this.mLastAngle = this.mLastAngle * -1;
+				this.mLastAngle = 360 - this.mLastAngle;
+			}
+			if (this.mFacingAngle < 0)
+			{
+				this.mFacingAngle = this.mFacingAngle * -1;
+				this.mFacingAngle = 360 - this.mFacingAngle;
+			}
+
 			var rotateAmount = this.mLastAngle - this.mFacingAngle;
 
 			this.mContext.translate(drawX, drawY);              //translate to center of shape
