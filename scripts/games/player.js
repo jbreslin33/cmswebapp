@@ -36,9 +36,13 @@ class Player
 
 		var mod_w = w / 700;	
 		var mod_l = l / 400;	
+
+		//var totalY = mod_l * 400;
 	
 		var drawX = this.x * mod_w;
 		var drawY = this.y * mod_l;
+
+		drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 
 		if (this.mLastAngle == null)
 		{

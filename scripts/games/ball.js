@@ -27,6 +27,8 @@ class Ball
                 var drawX = this.x * mod_w;
                 var drawY = this.y * mod_l;
 
+                drawY = l - drawY; //768 - 100 draw at 668 instead of 100
+
 		// Colors
   		var colors = [this.mColorA, this.mColorB, this.mColorA, this.mColorB];
 
