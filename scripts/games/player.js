@@ -91,18 +91,6 @@ class Player
 
 	}
 
-	rotate()
-	{
-   		this.mContext.clearRect(0, 0, canvas.width, canvas.height);
-   		this.mContext.save(); //save canvas state
-   		this.mContext.translate(canvas.width / 2, canvas.height / 2);
-   		this.mContext.rotate(rotation * Math.PI / 180);
-   		this.mContext.translate(-canvas.width / 2, -canvas.height / 2);
-   		this.mContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-   		rotation += 90;
-   		ctx.restore(); //restore canvas state
-}
-	}
 
 	drawCircleMan(drawX,drawY)
 	{
