@@ -22,7 +22,8 @@ class Player
 		this.mDiameter = 3.0;
 		this.mSize = 10; //at first
 
-		this.mAngle = 1;
+		this.mAngle = null;
+		this.mLastAngle = null;
 	}
 
 	update()
@@ -39,20 +40,41 @@ class Player
 		var drawX = this.x * mod_w;
 		var drawY = this.y * mod_l;
 
+		if (this.mLastAngle == null)
+		{
+			this.mLastAngle = this.mFacingAngle;	
+		}
+		else
+		{
+			var rotateAmount = this.mLastAngle - this.mFacingAngle;
+
+			this.mContext.translate(drawX, drawY);              //translate to center of shape
+			this.mContext.rotate( (Math.PI / 180) * rotateAmount);  //rotate 25 degrees.
+			this.mContext.translate(-drawX, -drawY);            //translate center back to 0,0			
+		}
+
+
+		//this.rotate(drawX,drawY);	
 		this.drawCircleMan(drawX,drawY);	
 		this.drawText(drawX,drawY);
 
 		this.mContext.restore();
 		this.mContext.setTransform(1, 0, 0, 1, 0, 0);
+
 	}
 
 	drawCircleMan(drawX,drawY)
 	{
-
-
       		this.mContext.beginPath();
       		this.mContext.arc(drawX, drawY, this.mSize / 2, 0, 2 * Math.PI, false);
-      		this.mContext.fillStyle = this.mColor;
+		if (this.mId == 4)
+		{
+      			this.mContext.fillStyle = "violet";
+		}
+		else
+		{
+      			this.mContext.fillStyle = this.mColor;
+		}
       		this.mContext.fill();
 	}
 

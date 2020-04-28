@@ -16,7 +16,8 @@ class Pitch
 
 		this.mPlayerArray = new Array();
 
-			
+
+		//do not create players....
 		this.mPlayerArray.push(new Player(1,this,30,30,'black'));
 		this.mPlayerArray.push(new Player(2,this,400,30,'red'));
 		this.mPlayerArray.push(new Player(3,this,30,200,'red'));
