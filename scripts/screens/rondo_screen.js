@@ -45,6 +45,25 @@ class RondoScreen extends Screen
 	{
 		APPLICATION.getCurrentScreen().mPitch = new Pitch(APPLICATION.getCurrentScreen());
 
+		var elem = document.getElementById("svg_div_id");
+
+  			if (elem.requestFullscreen) 
+			{
+    				elem.requestFullscreen();
+  			} else if (elem.mozRequestFullScreen) 
+			{ /* Firefox */
+    				elem.mozRequestFullScreen();
+  			} 
+			else if (elem.webkitRequestFullscreen) 
+			{ /* Chrome, Safari & Opera */
+   				elem.webkitRequestFullscreen();
+  			} 
+			else if (elem.msRequestFullscreen) 
+			{ /* IE/Edge */
+    				elem.msRequestFullscreen();
+  			}
+		/*
+
 		var s = APPLICATION.getCurrentScreen();
 		s.showCanvas();
 
@@ -56,21 +75,22 @@ class RondoScreen extends Screen
     			canvas.requestFullscreen();
   		} 
 		else if (canvas.mozRequestFullScreen) 
-		{ /* Firefox */
+		{ 
     			canvas.mozRequestFullScreen();
   		} 
 		else if (canvas.webkitRequestFullscreen) 
-		{ /* Chrome, Safari & Opera */
+		{ 
     			canvas.webkitRequestFullscreen();
   		} 
 		else if (canvas.msRequestFullscreen) 
-		{ /* IE/Edge */
+		{
     			canvas.msRequestFullscreen();
   		}
               
 		//make canvas dimensions the size of physical screen for best resolution
 		s.mCanvas.width = screen.width;
 		s.mCanvas.height = screen.height;
+		*/
 	}
 
 	update()
