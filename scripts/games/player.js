@@ -12,8 +12,6 @@ class Player
 		this.x = x;
 		this.y = y;
 
-
-		this.mLooking = 0.0;
 		this.mFacingAngle = 0.0;
 
 		this.mColor = color;
@@ -22,13 +20,14 @@ class Player
 		this.mId = id;
 
 		this.mRadius = 10.0;
-		this.mSize = 10; //at first
-
-		this.mAngle = null;
-		this.mLastAngle = null;
 
 		this.mDivArray = new Array();
 
+		this.createBody();
+	}
+
+	createBody()
+	{
 		//make player
 		this.mCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 		this.mCircle.setAttribute('cx',0);
@@ -57,8 +56,6 @@ class Player
 		this.mPitch.mSvg.appendChild(this.mText);
 
                 this.mDivArray.push(this.mText);
-
-
 	}
 
 	removeDivs()
@@ -71,33 +68,42 @@ class Player
 
 	update()
 	{
+		this.render();
+	}
+
+	render()
+	{
+		//get full screen size of client
 		var w = screen.width;
 		var l = screen.height;
 
+		//calc position based on relative full screen size
 		var mod_w = w / 700;	
 		var mod_l = l / 400;	
 
 		var drawX = this.x * mod_w;
 		var drawY = this.y * mod_l;
 
+		//recalc radius based on screen size
 		var added = parseFloat(mod_w + mod_l);
 		var average = parseFloat(added / 2);
-		
 		var drawR = this.mRadius * average;
-		//console.log('average:' + average);
-		console.log('R:' + drawR);
 
+		//flip screen as html uses upside down y axis
 		drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 		
-		//move
+		//move circle
 		this.mCircle.setAttribute('cx', drawX)
 		this.mCircle.setAttribute('cy', drawY)
+
+		//change radius
 		this.mCircle.setAttribute('r',drawR)
 
+		//move text
 		this.mText.setAttribute('x', drawX)
 		this.mText.setAttribute('y', drawY)
-		
-		this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
 
+		//rotate text
+		this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
 	}
 }
