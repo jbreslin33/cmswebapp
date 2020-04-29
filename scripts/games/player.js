@@ -33,13 +33,25 @@ class Player
 		this.mCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 		this.mCircle.setAttribute('cx',0);
 		this.mCircle.setAttribute('cy',0);
-		this.mCircle.setAttribute('r',40);
+		this.mCircle.setAttribute('r',5);
 		this.mCircle.setAttribute('stroke',"black");
 		this.mCircle.setAttribute('stroke-width',3);
 		this.mCircle.setAttribute('fill',"red");
 		this.mPitch.mSvg.appendChild(this.mCircle);
-                this.mDivArray.push(this.mSvg);
                 this.mDivArray.push(this.mCircle);
+
+		//text
+		this.mText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+		this.mText.setAttribute('x',150);
+		this.mText.setAttribute('y',150);
+		this.mText.setAttribute('fill', 'yellow');
+		this.mText.textContent = 'PlAYA FROM THE HOOOD';
+		
+		this.mPitch.mSvg.appendChild(this.mText);
+
+                this.mDivArray.push(this.mText);
+
+
 	}
 
 	removeDivs()
@@ -77,6 +89,9 @@ class Player
 		//console.log("x:" + drawX);
 		this.mCircle.setAttribute('cx', drawX)
 		this.mCircle.setAttribute('cy', drawY)
+
+		this.mText.setAttribute('x', drawX)
+		this.mText.setAttribute('y', drawY)
 
 	}
 }
