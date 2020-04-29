@@ -2,12 +2,12 @@
 
 class Pitch
 {
-        constructor(screen)
+        constructor(s)
         {
-		this.mScreen = screen;
+		this.mScreen = s;
                 
 		
-		document.getElementById("rondo_screen_html_id").appendChild(screen.mCanvas);
+		document.getElementById("rondo_screen_html_id").appendChild(s.mCanvas);
 
 		this.mFrameNumber = 0;
 		this.mInterval = setInterval(this.update,20);
@@ -16,6 +16,15 @@ class Pitch
 
 		this.mPlayerArray = new Array();
 
+                //make svg player
+                this.mSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		var w = screen.width;
+		var l = screen.height;
+		console.log("w:" + w + "l:" + l);
+
+                this.mSvg.setAttribute('width',w);
+                this.mSvg.setAttribute('height',l);
+                document.getElementById("svg_div_id").appendChild(this.mSvg);
 
 		//do not create players....
 		this.mPlayerArray.push(new Player(1,this,30,30,'black'));
@@ -31,6 +40,7 @@ class Pitch
 		this.mPlayerArray.push(new Player(10,this,200,150,'blue'));
 		
 		this.mBall = new Ball(this,200,150,'black', 'white');
+
 		
 		//websocket
                 this.mWebSocket = null;

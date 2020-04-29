@@ -5,8 +5,10 @@ class Player
         constructor(id,pitch,x,y,color)
         {
 		this.mPitch = pitch;
-		this.mContext = pitch.mScreen.mContext;
-
+		
+		this.mScreenWidth = screen.width;
+		this.mScreenHeight = screen.height;
+		
 		this.x = x;
 		this.y = y;
 
@@ -27,37 +29,17 @@ class Player
 
 		this.mDivArray = new Array();
 
-
-
-		//make svg player
-		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-svg.setAttribute('width','200');
-svg.setAttribute('height','200');
-//document.body.appendChild(svg);
-                document.getElementById("svg_div_id").appendChild(svg);
-
-var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-path.setAttribute('d','M100,0 L200,100 100,200 0,100Z');
-path.setAttribute('fill','red');
-svg.appendChild(path);
-                        this.mDivArray.push(svg);
-                        this.mDivArray.push(path);
-		/*
-	        var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-                circle.setAttributeNS(null,'cx',150);
-                circle.setAttributeNS(null,'cy',150);
-                circle.setAttributeNS(null,'r',50);
-                circle.setAttributeNS(null,'stroke','green');
-                circle.setAttributeNS(null,'stroke-width',4);
-                circle.setAttributeNS(null,'fill','yellow');
-
-                document.getElementById("svg_div_id").appendChild(circle);
-
-///		circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-
-                                //var container = document.createElement('div');
-                                //container.setAttribute('class','co	
-*/
+		//make player
+		this.mCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		this.mCircle.setAttribute('cx',0);
+		this.mCircle.setAttribute('cy',0);
+		this.mCircle.setAttribute('r',40);
+		this.mCircle.setAttribute('stroke',"black");
+		this.mCircle.setAttribute('stroke-width',3);
+		this.mCircle.setAttribute('fill',"red");
+		this.mPitch.mSvg.appendChild(this.mCircle);
+                this.mDivArray.push(this.mSvg);
+                this.mDivArray.push(this.mCircle);
 	}
 
 	removeDivs()
@@ -70,8 +52,8 @@ svg.appendChild(path);
 
 	update()
 	{
-		var w = this.mPitch.mScreen.mCanvas.width;
-		var l = this.mPitch.mScreen.mCanvas.height;
+		var w = screen.width;
+		var l = screen.height;
 
 		var mod_w = w / 700;	
 		var mod_l = l / 400;	
@@ -89,6 +71,12 @@ svg.appendChild(path);
 			this.mFacingAngle = this.mFacingAngle * -1;
 			this.mFacingAngle = 360 - this.mFacingAngle;
 		}
+
+		//move
+		//document.getElementById("rectangle").setAttribute('x', X_value)
+		//console.log("x:" + drawX);
+		this.mCircle.setAttribute('cx', drawX)
+		this.mCircle.setAttribute('cy', drawY)
 
 	}
 }
