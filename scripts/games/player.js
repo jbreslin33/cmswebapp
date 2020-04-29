@@ -84,14 +84,6 @@ class Player
 
 		drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 		
-		//always fix mFacingAngle coming in right away
-		/*
-		if (this.mFacingAngle < 0)
-		{
-			this.mFacingAngle = this.mFacingAngle * -1;
-			this.mFacingAngle = 360 - this.mFacingAngle;
-		}
-		*/
 		//move
 		this.mCircle.setAttribute('cx', drawX)
 		this.mCircle.setAttribute('cy', drawY)
@@ -99,31 +91,7 @@ class Player
 		this.mText.setAttribute('x', drawX)
 		this.mText.setAttribute('y', drawY)
 		
-		//this.mText.setAttribute('rotate', this.mFacingAngle, drawX, drawY)
-		//myElement.setAttribute('transform','translate(30,100)');
-		//this.mText.setAttribute('transform','rotate(this.mFacingAngle,drawX,drawY)');
-		//this works 
-		//this.mText.setAttribute('rotate',this.mFacingAngle);
-		//this.mText.setAttribute('transform','rotate(180 300 300');
-		//works
-		//this.mText.setAttribute('transform','translate(30,100)');
-		//this.mText.setAttribute('transform','rotate(90,100)');
-	
-		//works
-		//this.mText.setAttribute('rotate',this.mFacingAngle);
-		
-		//this.mText.setAttribute('transform','rotate(this.mFacingAngle)');
-		//works but static angle
-		//this.mText.setAttribute('transform','rotate(90 ' + drawX + ' ' + drawY + ')');
-		if (this.mId == 4)
-		{
-			//console.log("a:" + this.mFacingAngle);
-			this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
-		}
-		else
-		{
-			this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
-		}
+		this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
 
 	}
 }
