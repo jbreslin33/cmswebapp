@@ -36,7 +36,7 @@ class Player
 		this.mCircle.setAttribute('r',5);
 		this.mCircle.setAttribute('stroke',"black");
 		this.mCircle.setAttribute('stroke-width',3);
-		this.mCircle.setAttribute('fill',"red");
+		this.mCircle.setAttribute('fill',this.mColor);
 		this.mPitch.mSvg.appendChild(this.mCircle);
                 this.mDivArray.push(this.mCircle);
 
@@ -85,13 +85,13 @@ class Player
 		}
 
 		//move
-		//document.getElementById("rectangle").setAttribute('x', X_value)
-		//console.log("x:" + drawX);
 		this.mCircle.setAttribute('cx', drawX)
 		this.mCircle.setAttribute('cy', drawY)
 
 		this.mText.setAttribute('x', drawX)
 		this.mText.setAttribute('y', drawY)
+		
+		this.mText.setAttribute('rotate', this.mFacingAngle)
 
 	}
 }

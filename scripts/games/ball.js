@@ -14,52 +14,51 @@ class Ball
 
 		this.mDiameter = 3.0;
 		this.mSize = 10.0;
+
+                this.mDivArray = new Array();
+
+                //make player
+                this.mCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                this.mCircle.setAttribute('cx',0);
+                this.mCircle.setAttribute('cy',0);
+                this.mCircle.setAttribute('r',5);
+                this.mCircle.setAttribute('stroke',"black");
+                this.mCircle.setAttribute('stroke-width',3);
+                this.mCircle.setAttribute('fill',"white");
+                this.mPitch.mSvg.appendChild(this.mCircle);
+                this.mDivArray.push(this.mCircle);
+
 	}
+
+        removeDivs()
+        {
+                for (var i = 0; i < this.mDivArray.length; i++)
+                {
+                        this.mDivArray[i].remove();
+                }
+        }
+
 
 	update()
 	{
-                var w = this.mPitch.mScreen.mCanvas.width;
-                var l = this.mPitch.mScreen.mCanvas.height;
+                var w = screen.width;
+                var l = screen.height;
 
                 var mod_w = w / 700;
                 var mod_l = l / 400;
+
+                //var totalY = mod_l * 400;
 
                 var drawX = this.x * mod_w;
                 var drawY = this.y * mod_l;
 
                 drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 
-		// Colors
-  		var colors = [this.mColorA, this.mColorB, this.mColorA, this.mColorB];
+	        //move
+		this.mCircle.setAttribute('cx', drawX)
+       		this.mCircle.setAttribute('cy', drawY)
 
-  		// List of Angles
-  		var angles = [Math.PI * 0.5, Math.PI * 0.5, Math.PI * 0.5, Math.PI * 0.5];
-
-  		// Temporary variables, to store each arc angles
-  		var beginAngle = 0;
-  		var endAngle = 0;
-
-  		// Iterate through the angles
-  		for(var i = 0; i < angles.length; i = i + 1) 
-		{
-    			// Begin where we left off
-    			beginAngle = endAngle;
-    			// End Angle
-    			endAngle = endAngle + angles[i];
-
-    			this.mContext.beginPath();
-    			// Fill color
-    			this.mContext.fillStyle = colors[i % colors.length];
-
-    			// Same code as before
-    			this.mContext.moveTo(drawX, drawY);
-    			this.mContext.arc(drawX, drawY, this.mSize / 2, beginAngle, endAngle);
-    			this.mContext.lineTo(drawX, drawY);
-    			this.mContext.stroke();
-
-    			// Fill
-    			this.mContext.fill();
-  		}
 	}
+
 }
 
