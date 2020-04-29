@@ -21,7 +21,7 @@ class Player
 
 		this.mId = id;
 
-		this.mDiameter = 3.0;
+		this.mRadius = 10.0;
 		this.mSize = 10; //at first
 
 		this.mAngle = null;
@@ -77,16 +77,22 @@ class Player
 		var mod_w = w / 700;	
 		var mod_l = l / 400;	
 
-		//var totalY = mod_l * 400;
-	
 		var drawX = this.x * mod_w;
 		var drawY = this.y * mod_l;
+
+		var added = parseFloat(mod_w + mod_l);
+		var average = parseFloat(added / 2);
+		
+		var drawR = this.mRadius * average;
+		//console.log('average:' + average);
+		console.log('R:' + drawR);
 
 		drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 		
 		//move
 		this.mCircle.setAttribute('cx', drawX)
 		this.mCircle.setAttribute('cy', drawY)
+		this.mCircle.setAttribute('r',drawR)
 
 		this.mText.setAttribute('x', drawX)
 		this.mText.setAttribute('y', drawY)
