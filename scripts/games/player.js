@@ -25,6 +25,8 @@ class Player
 		this.mAngle = null;
 		this.mLastAngle = null;
 
+		this.mDivArray = new Array();
+
 
 
 		//make svg player
@@ -38,6 +40,8 @@ var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 path.setAttribute('d','M100,0 L200,100 100,200 0,100Z');
 path.setAttribute('fill','red');
 svg.appendChild(path);
+                        this.mDivArray.push(svg);
+                        this.mDivArray.push(path);
 		/*
 	        var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
                 circle.setAttributeNS(null,'cx',150);
@@ -55,6 +59,14 @@ svg.appendChild(path);
                                 //container.setAttribute('class','co	
 */
 	}
+
+	removeDivs()
+        {
+                for (var i = 0; i < this.mDivArray.length; i++)
+                {
+                        this.mDivArray[i].remove();
+                }
+        }
 
 	update()
 	{

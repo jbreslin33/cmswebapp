@@ -34,8 +34,11 @@ class RondoScreen extends Screen
 		{
     			if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) 
 			{
-				APPLICATION.getCurrentScreen().hideCanvas();
-
+				//APPLICATION.getCurrentScreen().hideCanvas();
+				if (APPLICATION.getCurrentScreen().mPitch)
+				{
+					APPLICATION.getCurrentScreen().mPitch.removeDivs();
+				}
 				APPLICATION.getCurrentScreen().mPitch = null;
     			}
 		}

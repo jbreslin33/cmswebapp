@@ -39,6 +39,15 @@ class Pitch
 
 	}
 
+	removeDivs()
+	{
+		for (var p = 0; p < this.mPlayerArray.length; p++) //check for a match
+		{
+			this.mPlayerArray[p].removeDivs();
+		}
+		
+	}
+
         initializeWebSocket()
         {
                 this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
