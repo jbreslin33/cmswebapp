@@ -36,7 +36,14 @@ class Player
 		this.mCircle.setAttribute('r',5);
 		this.mCircle.setAttribute('stroke',"black");
 		this.mCircle.setAttribute('stroke-width',3);
-		this.mCircle.setAttribute('fill',this.mColor);
+		if (this.mId == 4)
+		{
+			this.mCircle.setAttribute('fill','violet');
+		}
+		else
+		{
+			this.mCircle.setAttribute('fill',this.mColor);
+		}
 		this.mPitch.mSvg.appendChild(this.mCircle);
                 this.mDivArray.push(this.mCircle);
 
@@ -45,7 +52,7 @@ class Player
 		this.mText.setAttribute('x',150);
 		this.mText.setAttribute('y',150);
 		this.mText.setAttribute('fill', 'yellow');
-		this.mText.textContent = 'PlAYA FROM THE HOOOD';
+		this.mText.textContent = 'T';
 		
 		this.mPitch.mSvg.appendChild(this.mText);
 
@@ -78,12 +85,13 @@ class Player
 		drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 		
 		//always fix mFacingAngle coming in right away
+		/*
 		if (this.mFacingAngle < 0)
 		{
 			this.mFacingAngle = this.mFacingAngle * -1;
 			this.mFacingAngle = 360 - this.mFacingAngle;
 		}
-
+		*/
 		//move
 		this.mCircle.setAttribute('cx', drawX)
 		this.mCircle.setAttribute('cy', drawY)
@@ -91,7 +99,31 @@ class Player
 		this.mText.setAttribute('x', drawX)
 		this.mText.setAttribute('y', drawY)
 		
-		this.mText.setAttribute('rotate', this.mFacingAngle)
+		//this.mText.setAttribute('rotate', this.mFacingAngle, drawX, drawY)
+		//myElement.setAttribute('transform','translate(30,100)');
+		//this.mText.setAttribute('transform','rotate(this.mFacingAngle,drawX,drawY)');
+		//this works 
+		//this.mText.setAttribute('rotate',this.mFacingAngle);
+		//this.mText.setAttribute('transform','rotate(180 300 300');
+		//works
+		//this.mText.setAttribute('transform','translate(30,100)');
+		//this.mText.setAttribute('transform','rotate(90,100)');
+	
+		//works
+		//this.mText.setAttribute('rotate',this.mFacingAngle);
+		
+		//this.mText.setAttribute('transform','rotate(this.mFacingAngle)');
+		//works but static angle
+		//this.mText.setAttribute('transform','rotate(90 ' + drawX + ' ' + drawY + ')');
+		if (this.mId == 4)
+		{
+			//console.log("a:" + this.mFacingAngle);
+			this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
+		}
+		else
+		{
+			this.mText.setAttribute('transform','rotate(' + this.mFacingAngle + ' ' + drawX + ' ' + drawY + ')');
+		}
 
 	}
 }
