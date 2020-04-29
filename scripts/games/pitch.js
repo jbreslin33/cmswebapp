@@ -15,16 +15,19 @@ class Pitch
 		this.mClient = new Client();
 
 		this.mPlayerArray = new Array();
+		this.mDivArray = new Array();
 
                 //make svg player
                 this.mSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		var w = screen.width;
 		var l = screen.height;
-		console.log("w:" + w + "l:" + l);
 
                 this.mSvg.setAttribute('width',w);
                 this.mSvg.setAttribute('height',l);
                 document.getElementById("svg_div_id").appendChild(this.mSvg);
+
+		this.mDivArray.push(this.mSvg);
+
 
 		//do not create players....
 		this.mPlayerArray.push(new Player(1,this,30,30,'black'));
@@ -51,10 +54,17 @@ class Pitch
 
 	removeDivs()
 	{
+
 		for (var p = 0; p < this.mPlayerArray.length; p++) //check for a match
 		{
 			this.mPlayerArray[p].removeDivs();
 		}
+                
+		for (var i = 0; i < this.mDivArray.length; i++)
+                {
+                        this.mDivArray[i].remove();
+                }
+
 		
 	}
 
