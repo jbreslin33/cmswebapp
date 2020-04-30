@@ -106,6 +106,22 @@ class Pitch
 		//this is confirmation that we have connected to server as server was goodly enough to give us a client id
 		APPLICATION.getCurrentScreen().mPitch.mClient.mId = dataArray[2];
                 console.log('you connected and your id is:' + APPLICATION.getCurrentScreen().mPitch.mClient.mId);
+		//should we pass player info here...this should tell you how many players to draw???
+		
+		APPLICATION.getCurrentScreen().mPitch.mNumberOfAwayPlayers = dataArray[3];
+		APPLICATION.getCurrentScreen().mPitch.mColorOfAwayPlayers = dataArray[4];
+		APPLICATION.getCurrentScreen().mPitch.mColorOfAwayPlayerKeeper = dataArray[5]; //0 if no keeper
+
+		APPLICATION.getCurrentScreen().mPitch.mNumberOfHomePlayers = dataArray[6];
+		APPLICATION.getCurrentScreen().mPitch.mColorOfHomePlayers = dataArray[7];
+		APPLICATION.getCurrentScreen().mPitch.mColorOfHomePlayerKeeper = dataArray[8]; //0 if no keeper
+
+		APPLICATION.getCurrentScreen().mPitch.mTopRightOfPitch.x = dataArray[9];
+		APPLICATION.getCurrentScreen().mPitch.mTopRightOfPitch.y = dataArray[10];
+		APPLICATION.getCurrentScreen().mPitch.mBottomRightOfPitch.x = dataArray[11];
+		APPLICATION.getCurrentScreen().mPitch.mBottomRightOfPitch.y = dataArray[12];
+
+		//send numberOfAwayPlayers,color, numberOfHomePlayers, color, topLeftFieldx, topLeftFieldy, bottomRightFieldx, bottomRightFieldy 
 	}
 
 	processMoves(dataArray)
@@ -121,8 +137,6 @@ class Pitch
 					this.mPlayerArray[p].y = dataArray[d + 2];		
 					this.mPlayerArray[p].mFacingAngle = dataArray[d + 3];		
 					this.mPlayerArray[p].mStateName = dataArray[d + 4];		
-					//console.log('player id: ' + this.mPlayerArray[p].mId + 'mStateName: ' + this.mPlayerArray[p].mStateName);
-					//this.mPlayerArray[p].mRightFootAngle = dataArray[d + 4];		
 				}
 			}
 		}
