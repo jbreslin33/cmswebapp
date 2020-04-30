@@ -5,15 +5,14 @@ class Ball
         constructor(pitch,x,y,colorA,colorB)
         {
 		this.mPitch = pitch;
-		this.mContext = pitch.mScreen.mContext;
+
 		this.x = x;
 		this.y = y;
 
-		this.mColorA = colorA;
-		this.mColorB = colorB;
+             	this.mScreenWidth = screen.width;
+                this.mScreenHeight = screen.height;
 
-		this.mDiameter = 3.0;
-		this.mSize = 10.0;
+		this.mRadius = 5.0;
 
                 this.mDivArray = new Array();
 
@@ -27,7 +26,6 @@ class Ball
                 this.mCircle.setAttribute('fill',"white");
                 this.mPitch.mSvg.appendChild(this.mCircle);
                 this.mDivArray.push(this.mCircle);
-
 	}
 
         removeDivs()
@@ -38,25 +36,39 @@ class Ball
                 }
         }
 
-
 	update()
 	{
+		this.render();
+	}
+
+	render()
+	{
+
+	        //get full screen size of client
                 var w = screen.width;
                 var l = screen.height;
 
+                //calc position based on relative full screen size
                 var mod_w = w / 700;
                 var mod_l = l / 400;
-
-                //var totalY = mod_l * 400;
 
                 var drawX = this.x * mod_w;
                 var drawY = this.y * mod_l;
 
+                //recalc radius based on screen size
+                var added = parseFloat(mod_w + mod_l);
+                var average = parseFloat(added / 2);
+                var drawR = this.mRadius * average;
+
+                //flip screen as html uses upside down y axis
                 drawY = l - drawY; //768 - 100 draw at 668 instead of 100
 
-	        //move
-		this.mCircle.setAttribute('cx', drawX)
-       		this.mCircle.setAttribute('cy', drawY)
+                //move circle
+                this.mCircle.setAttribute('cx', drawX)
+                this.mCircle.setAttribute('cy', drawY)
+
+                //change radius
+                this.mCircle.setAttribute('r',drawR)
 
 	}
 

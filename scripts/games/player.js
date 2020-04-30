@@ -19,7 +19,7 @@ class Player
 
 		this.mId = id;
 
-		this.mRadius = 10.0;
+		this.mRadius = 5.0;
 
 		this.mDivArray = new Array();
 
