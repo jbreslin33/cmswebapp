@@ -35,14 +35,7 @@ class Player
 		this.mCircle.setAttribute('r',5);
 		this.mCircle.setAttribute('stroke',"black");
 		this.mCircle.setAttribute('stroke-width',3);
-		if (this.mId == 4)
-		{
-			this.mCircle.setAttribute('fill','violet');
-		}
-		else
-		{
-			this.mCircle.setAttribute('fill',this.mColor);
-		}
+		this.mCircle.setAttribute('fill',this.mColor);
 		this.mPitch.mSvg.appendChild(this.mCircle);
                 this.mDivArray.push(this.mCircle);
 
