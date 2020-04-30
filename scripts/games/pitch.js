@@ -40,27 +40,66 @@ class Pitch
 
 		this.mDivArray.push(this.mSvg);
 
-
-		//do not create players....
-		this.mPlayerArray.push(new Player(1,this,30,30,'black'));
-		this.mPlayerArray.push(new Player(2,this,400,30,'red'));
-		this.mPlayerArray.push(new Player(3,this,30,200,'red'));
-		this.mPlayerArray.push(new Player(4,this,30,200,'red'));
-		this.mPlayerArray.push(new Player(5,this,30,200,'red'));
-
-		this.mPlayerArray.push(new Player(6,this,200,150,'yellow'));
-		this.mPlayerArray.push(new Player(7,this,200,150,'blue'));
-		this.mPlayerArray.push(new Player(8,this,200,150,'blue'));
-		this.mPlayerArray.push(new Player(9,this,200,150,'blue'));
-		this.mPlayerArray.push(new Player(10,this,200,150,'blue'));
-		
 		this.mBall = new Ball(this,200,150,'black', 'white');
 
-		
 		//websocket
                 this.mWebSocket = null;
 		
 		this.initializeWebSocket();
+
+	}
+
+	createPlayers()
+	{
+		/*
+		                 this.mNumberOfAwayPlayers = dataArray[3];
+                this.mColorOfAwayPlayers = dataArray[4];
+                this.mColorOfAwayPlayerKeeper = dataArray[5]; //0 if no keeper
+
+                this.mNumberOfHomePlayers = dataArray[6];
+                this.mColorOfHomePlayers = dataArray[7];
+                this.mColorOfHomePlayerKeeper = dataArray[8]; //0 if no keeper
+
+		*/
+
+                //do not create players....
+		for (var a = 0; a < this.mNumberOfAwayPlayers; a++)
+		{
+			console.log('create away player');
+                	this.mPlayerArray.push(new Player(1,this,30,30,'' + this.mColorOfAwayPlayers));
+		}
+
+		if (this.mColorOfAwayPlayerKeeper != "0")
+		{
+			console.log('create away keeper');
+                	this.mPlayerArray.push(new Player(1,this,30,30,'' + this.mColorOfAwayPlayerKeeper));
+		}
+		
+		for (var h = 0; h < this.mNumberOfHomePlayers; h++)
+		{
+			console.log('create home player');
+                	this.mPlayerArray.push(new Player(1,this,30,30,'' + this.mColorOfHomePlayers));
+		}
+		
+		if (this.mColorOfHomePlayerKeeper != "0")
+		{
+			console.log('create home keeper');
+                	this.mPlayerArray.push(new Player(1,this,30,30,'' + this.mColorOfHomePlayerKeeper));
+		}
+		
+/*
+                this.mPlayerArray.push(new Player(1,this,30,30,'black'));
+                this.mPlayerArray.push(new Player(2,this,400,30,'red'));
+                this.mPlayerArray.push(new Player(3,this,30,200,'red'));
+                this.mPlayerArray.push(new Player(4,this,30,200,'red'));
+                this.mPlayerArray.push(new Player(5,this,30,200,'red'));
+
+                this.mPlayerArray.push(new Player(6,this,200,150,'yellow'));
+                this.mPlayerArray.push(new Player(7,this,200,150,'blue'));
+                this.mPlayerArray.push(new Player(8,this,200,150,'blue'));
+                this.mPlayerArray.push(new Player(9,this,200,150,'blue'));
+                this.mPlayerArray.push(new Player(10,this,200,150,'blue'));
+		*/
 
 	}
 
@@ -120,24 +159,25 @@ class Pitch
                 console.log('you connected and your id is:' + APPLICATION.getCurrentScreen().mPitch.mClient.mId);
 		//should we pass player info here...this should tell you how many players to draw???
 		
-		APPLICATION.getCurrentScreen().mPitch.mNumberOfAwayPlayers = dataArray[3];
-		APPLICATION.getCurrentScreen().mPitch.mColorOfAwayPlayers = dataArray[4];
-		APPLICATION.getCurrentScreen().mPitch.mColorOfAwayPlayerKeeper = dataArray[5]; //0 if no keeper
+		this.mNumberOfAwayPlayers = dataArray[3];
+		this.mColorOfAwayPlayers = dataArray[4];
+		this.mColorOfAwayPlayerKeeper = dataArray[5]; //0 if no keeper
 
-		APPLICATION.getCurrentScreen().mPitch.mNumberOfHomePlayers = dataArray[6];
-		APPLICATION.getCurrentScreen().mPitch.mColorOfHomePlayers = dataArray[7];
-		APPLICATION.getCurrentScreen().mPitch.mColorOfHomePlayerKeeper = dataArray[8]; //0 if no keeper
+		this.mNumberOfHomePlayers = dataArray[6];
+		this.mColorOfHomePlayers = dataArray[7];
+		this.mColorOfHomePlayerKeeper = dataArray[8]; //0 if no keeper
 
-		APPLICATION.getCurrentScreen().mPitch.mTopLeftOfPitch.x = dataArray[9];
-		APPLICATION.getCurrentScreen().mPitch.mTopLeftOfPitch.y = dataArray[10];
-		APPLICATION.getCurrentScreen().mPitch.mBottomRightOfPitch.x = dataArray[11];
-		APPLICATION.getCurrentScreen().mPitch.mBottomRightOfPitch.y = dataArray[12];
+		this.mTopLeftOfPitch.x = dataArray[9];
+		this.mTopLeftOfPitch.y = dataArray[10];
+		this.mBottomRightOfPitch.x = dataArray[11];
+		this.mBottomRightOfPitch.y = dataArray[12];
 
 		for (var i = 0; i < dataArray.length; i++)
 		{
 			console.log("dataArray[" + i + "]:" + dataArray[i]);
 		}
 
+		this.createPlayers();
 		//send numberOfAwayPlayers,color, numberOfHomePlayers, color, topLeftFieldx, topLeftFieldy, bottomRightFieldx, bottomRightFieldy 
 	}
 
