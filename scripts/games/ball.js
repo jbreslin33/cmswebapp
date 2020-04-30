@@ -2,7 +2,7 @@
 
 class Ball
 {
-        constructor(pitch,x,y,radius,colorA,colorB)
+        constructor(pitch,x,y,radius,color)
         {
 		this.mPitch = pitch;
 
@@ -14,14 +14,16 @@ class Ball
 
 		this.mRadius = radius;
 
+		this.mColor = color;
+
                 this.mDivArray = new Array();
 
                 //make player
                 this.mCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                 this.mCircle.setAttribute('cx',0);
                 this.mCircle.setAttribute('cy',0);
-                this.mCircle.setAttribute('r',5);
-                this.mCircle.setAttribute('stroke',"black");
+                this.mCircle.setAttribute('r','' + this.mRadius);
+                this.mCircle.setAttribute('stroke','' + this.mColor);
                 this.mCircle.setAttribute('stroke-width',3);
                 this.mCircle.setAttribute('fill',"white");
                 this.mPitch.mSvg.appendChild(this.mCircle);

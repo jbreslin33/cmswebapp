@@ -40,7 +40,7 @@ class Pitch
 
 		this.mDivArray.push(this.mSvg);
 
-		this.mBall = new Ball(this,200,150,'black', 'white');
+		this.mBall = null;
 
 		//websocket
                 this.mWebSocket = null;
@@ -110,7 +110,7 @@ class Pitch
 		this.mBottomRightOfPitch.x = dataArray[5];
 		this.mBottomRightOfPitch.y = dataArray[6];
 
-		this.mBall.mRadius = dataArray[7];
+		//this.mBall.mRadius = dataArray[7];
 
 		for (var i = 8; i < dataArray.length; i = i + 3)
 		{
@@ -120,6 +120,8 @@ class Pitch
 				new Player(dataArray[i],this,30,30,'' + dataArray[parseInt(i+1)],'' +  dataArray[parseInt(i+2)])
 			);
 		}
+		
+		this.mBall = new Ball(this,200,150,dataArray[7],'white');
 	}
 
 	processMoves(dataArray)
