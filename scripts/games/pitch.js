@@ -5,7 +5,19 @@ class Pitch
         constructor(s)
         {
 		this.mScreen = s;
-                
+
+		//from server
+		this.mNumberOfAwayPlayers = 0;
+                this.mColorOfAwayPlayers = null; 
+                this.mColorOfAwayPlayerKeeper = null; //0 if no keeper
+
+                this.mNumberOfHomePlayers = 0;
+                this.mColorOfHomePlayers = null;
+                this.mColorOfHomePlayerKeeper = null; //0 if no keeper
+
+
+                this.mTopLeftOfPitch = new Vector2d(0,0);
+                this.mBottomRightOfPitch = new Vector2d(0,0);
 		
 		document.getElementById("rondo_screen_html_id").appendChild(s.mCanvas);
 
@@ -116,10 +128,15 @@ class Pitch
 		APPLICATION.getCurrentScreen().mPitch.mColorOfHomePlayers = dataArray[7];
 		APPLICATION.getCurrentScreen().mPitch.mColorOfHomePlayerKeeper = dataArray[8]; //0 if no keeper
 
-		APPLICATION.getCurrentScreen().mPitch.mTopRightOfPitch.x = dataArray[9];
-		APPLICATION.getCurrentScreen().mPitch.mTopRightOfPitch.y = dataArray[10];
+		APPLICATION.getCurrentScreen().mPitch.mTopLeftOfPitch.x = dataArray[9];
+		APPLICATION.getCurrentScreen().mPitch.mTopLeftOfPitch.y = dataArray[10];
 		APPLICATION.getCurrentScreen().mPitch.mBottomRightOfPitch.x = dataArray[11];
 		APPLICATION.getCurrentScreen().mPitch.mBottomRightOfPitch.y = dataArray[12];
+
+		for (var i = 0; i < dataArray.length; i++)
+		{
+			console.log("dataArray[" + i + "]:" + dataArray[i]);
+		}
 
 		//send numberOfAwayPlayers,color, numberOfHomePlayers, color, topLeftFieldx, topLeftFieldy, bottomRightFieldx, bottomRightFieldy 
 	}
