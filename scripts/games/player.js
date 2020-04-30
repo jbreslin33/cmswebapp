@@ -2,7 +2,7 @@
 
 class Player
 {
-        constructor(id,pitch,x,y,color)
+        constructor(id,pitch,x,y,radius,color)
         {
 		this.mPitch = pitch;
 		
@@ -19,7 +19,7 @@ class Player
 
 		this.mId = id;
 
-		this.mRadius = 5.0;
+		this.mRadius = radius;
 
 		this.mDivArray = new Array();
 

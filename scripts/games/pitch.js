@@ -110,9 +110,15 @@ class Pitch
 		this.mBottomRightOfPitch.x = dataArray[5];
 		this.mBottomRightOfPitch.y = dataArray[6];
 
-		for (var i = 7; i < dataArray.length; i = i + 2)
+		this.mBall.mRadius = dataArray[7];
+
+		for (var i = 8; i < dataArray.length; i = i + 3)
 		{
-                        this.mPlayerArray.push(new Player(dataArray[i],this,30,30,'' + dataArray[parseInt(i+1)]));
+			console.log('dataArray:' + i + ':' + dataArray[i] + ' ' +  dataArray[i+1] + ' ' + dataArray[i+2]);
+                        this.mPlayerArray.push
+			(
+				new Player(dataArray[i],this,30,30,'' + dataArray[parseInt(i+1)],'' +  dataArray[parseInt(i+2)])
+			);
 		}
 	}
 

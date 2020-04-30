@@ -2,7 +2,7 @@
 
 class Ball
 {
-        constructor(pitch,x,y,colorA,colorB)
+        constructor(pitch,x,y,radius,colorA,colorB)
         {
 		this.mPitch = pitch;
 
@@ -12,7 +12,7 @@ class Ball
              	this.mScreenWidth = screen.width;
                 this.mScreenHeight = screen.height;
 
-		this.mRadius = 5.0;
+		this.mRadius = radius;
 
                 this.mDivArray = new Array();
 
