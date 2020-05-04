@@ -104,6 +104,10 @@ class Screen
 		{
     			APPLICATION.mwPressed = true;
     		}
+    		else if(event.keyCode == 85) 
+		{
+    			APPLICATION.muPressed = true;
+    		}
 	}
 	
 	keyUpHandler(event)
@@ -139,6 +143,10 @@ class Screen
     		else if(event.keyCode == 87) 
 		{
     			APPLICATION.mwPressed = false;
+    		}
+    		else if(event.keyCode == 85) 
+		{
+    			APPLICATION.muPressed = false;
     		}
 	}
 

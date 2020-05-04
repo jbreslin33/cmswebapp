@@ -64,35 +64,6 @@ class RondoScreen extends Screen
 			{ /* IE/Edge */
     				elem.msRequestFullscreen();
   			}
-		/*
-
-		var s = APPLICATION.getCurrentScreen();
-		s.showCanvas();
-
-		//lets go full screen
-		var canvas = APPLICATION.getCurrentScreen().getCanvas(); 
-
-		if (canvas.requestFullscreen) 
-		{
-    			canvas.requestFullscreen();
-  		} 
-		else if (canvas.mozRequestFullScreen) 
-		{ 
-    			canvas.mozRequestFullScreen();
-  		} 
-		else if (canvas.webkitRequestFullscreen) 
-		{ 
-    			canvas.webkitRequestFullscreen();
-  		} 
-		else if (canvas.msRequestFullscreen) 
-		{
-    			canvas.msRequestFullscreen();
-  		}
-              
-		//make canvas dimensions the size of physical screen for best resolution
-		s.mCanvas.width = screen.width;
-		s.mCanvas.height = screen.height;
-		*/
 	}
 
 	update()

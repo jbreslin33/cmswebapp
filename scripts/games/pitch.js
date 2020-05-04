@@ -167,10 +167,19 @@ class Pitch
 				//get this clients player move
 				if (APPLICATION.getCurrentScreen().mPitch.mClient)
 				{
-
+					//p = pause true ,no updates for ball/players/teams
+					//u = pause false,   updates for ball/players/teams
+					
+					//s = game true,     start game
+					//o = game false,    end game and 
 					if (APPLICATION.mpPressed == true)
 					{
                 				var message = '1,p,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                        			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
+					}
+					else if (APPLICATION.muPressed == true)
+					{
+                				var message = '1,u,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
                         			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 					else if (APPLICATION.mgPressed == true)
