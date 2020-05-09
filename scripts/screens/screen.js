@@ -55,10 +55,24 @@ class Screen
                 {
                         APPLICATION.getCurrentScreen().keyDownHandler(e);
                 });
+
 		document.addEventListener('keyup', function(e)
                 {
                         APPLICATION.getCurrentScreen().keyUpHandler(e);
                 });
+
+                this.setPersonSelect(document.getElementById("person_select_id"));
+
+                //person select
+		if (this.getPersonSelect())
+		{
+                	this.getPersonSelect().onchange = this.personSelected.bind(this);
+		}	
+	}
+
+	personSelected()
+	{
+		console.log('person selected');	
 	}
 
         clearScreen()
