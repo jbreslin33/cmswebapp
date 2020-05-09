@@ -1,3 +1,5 @@
+are we at point we we need admin/manager to be able to edit profiles and move players to teams?
+--------------
 process moves but watch out for client id !!!!
 -----------
 
