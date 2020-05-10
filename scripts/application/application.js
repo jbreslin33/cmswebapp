@@ -283,7 +283,9 @@ class Application
 */	
 	hit()
 	{
+		console.log('about to call closeNav');
 		APPLICATION.closeNav();	
+		console.log('just called closeNav');
 		if (this.id == 'upcomingnavbuttonid')
 		{
 			location.hash = '#upcoming_screen';
@@ -441,6 +443,7 @@ class Application
 
         closeNav()
         {
+		console.log('closeNav');
 		location.hash = '#closed_side_screen';
 		//APPLICATION.setSideScreen(null);
         	//document.getElementById("side_nav_id").style.width = "0";
