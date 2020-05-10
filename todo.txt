@@ -1,4 +1,46 @@
+
 are we at point we we need admin/manager to be able to edit profiles and move players to teams?
+so maybe keep global administrator edit profiles...
+but..
+global profile may look like
+players
+then all the potential teams........as buttons so you can just click...
+Victor u8b u9b u10 u11 u12 u13b 
+
+same with parents....coaches managers....
+
+manager screen will only allow adding to that team...
+so 
+rc celt..
+ u16Caos drop down..
+        player drop down
+
+Baidel Victor  player 
+Breslin Luke   player
+
+rc celt..
+ u16Caos drop down..
+        parent drop down
+
+Baidel Alex    parent 
+Breslin Jim    parent
+Breslin Coleen parent
+
+rc celt..
+ u16Caos drop down..
+        coach drop down
+
+Breslin Jim    coach
+Servein Eugene coach
+Luis    rodri  coach
+
+
+then have..
+TEAMS
+in teams you can add players to teams if you are the manager only... administrator must first have added them as players....you can also add parents to team and coach in same way
+maybe you list players in club and then you 
+
+
 --------------
 process moves but watch out for client id !!!!
 -----------
