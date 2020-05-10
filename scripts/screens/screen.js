@@ -423,8 +423,6 @@ class Screen
                 }
         }
 
-
-
         get()
         {
 	}

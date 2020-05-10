@@ -15,6 +15,12 @@ class Application
 		this.mStateEnterLogs = true;
 		this.mStateExecuteLogs = false;
 		this.mStateExitLogs = false;
+		
+		//side states
+		this.mSideStateLogs = false;
+		this.mSideStateEnterLogs = true;
+		this.mSideStateExecuteLogs = false;
+		this.mSideStateExitLogs = false;
 
                 //authentication google
                 this.mEmail = null;
@@ -79,6 +85,9 @@ class Application
                	this.setInsertAcceptClubInInviteScreenHtml ( document.getElementById("insert_accept_club_invite_screen_html_id") );
                	this.setUpdateForgotPasswordScreenHtml     ( document.getElementById("update_forgot_password_screen_html_id")    ); 
                	this.setProfileScreenHtml                  ( document.getElementById("profile_screen_html_id")                  );
+               
+		///side screen
+		this.setSideScreenHtml        	           ( document.getElementById("side_screen_html_id")               ); 
 		
 		
 		//user variables
@@ -102,6 +111,7 @@ class Application
 		//SCREENs
 		//current Screen
 		this.mCurrentScreen = null;
+		this.mSideScreen = null;
 
 		//daily schedule
 		this.mDailySchedule = null;
@@ -143,6 +153,16 @@ class Application
 
 		this.mStateMachine.setGlobalState(this.mGLOBAL_APPLICATION);
 		this.mStateMachine.changeState(this.mINIT_APPLICATION);
+	
+		//side state machine
+		this.mSideStateMachine = new StateMachine(this);
+		this.mGLOBAL_SIDE_APPLICATION          = new GLOBAL_SIDE_APPLICATION();
+		this.mINIT_SIDE_APPLICATION            = new INIT_SIDE_APPLICATION();
+		this.mOPEN_SIDE_APPLICATION        = new OPEN_SIDE_APPLICATION();
+		this.mCLOSED_SIDE_APPLICATION        = new CLOSED_SIDE_APPLICATION();
+		
+		this.mSideStateMachine.setGlobalState(this.mGLOBAL_SIDE_APPLICATION);
+		this.mSideStateMachine.changeState(this.mINIT_SIDE_APPLICATION);
 
 		//sidenav
 		document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
@@ -204,7 +224,63 @@ class Application
                 this.mwPressed = false;
                 this.muPressed = false;
 	}
-	
+/*
+        ajax()
+        {
+                if (this.mSentAjax)
+                {
+                        console.log('ajax request already sent do not send again.');
+                }
+                else
+                {
+                        this.mSentAjax = true;
+                        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
+                        APPLICATION.getCurrentScreen().getRequest().onreadystatechange = function()
+                        {
+                                if (APPLICATION.getCurrentScreen().getRequest().readyState === XMLHttpRequest.DONE)
+                                {
+                                        if (APPLICATION.getCurrentScreen().getRequest().status === 200)
+                                        {
+                                                APPLICATION.getCurrentScreen().mData = this.responseText;
+                                                APPLICATION.getCurrentScreen().mSentAjax = false;
+                                        }
+                                }
+                        };
+                        APPLICATION.getCurrentScreen().checkValidity();
+                }
+        }
+        
+	get()
+        {
+                if (APPLICATION.getJWT())
+                {
+                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_roles.php?" + this.getStandardParameters());
+                        APPLICATION.getCurrentScreen().ajax();
+                }
+        }
+
+
+       	//url
+        setUrl(url)
+        {
+                this.mUrl = url;
+        }
+
+        getUrl()
+        {
+                return this.mUrl;
+        }
+
+        setRequest(request)
+        {
+                this.mRequest = request;
+        }
+
+        getRequest()
+        {
+                return this.mRequest;
+        }
+*/	
 	hit()
 	{
 		APPLICATION.closeNav();	
@@ -354,12 +430,20 @@ class Application
        
 	openNav()
         {
-        	document.getElementById("side_nav_id").style.width = "250px";
+		console.log("lets check roles here");
+		location.hash = '#side_screen';
+		//new SideScree
+			
+		//APPLICATION.setSideScreen(new SideScreen());
+        	
+		//document.getElementById("side_nav_id").style.width = "250px";
         }
 
         closeNav()
         {
-        	document.getElementById("side_nav_id").style.width = "0";
+		location.hash = '#closed_side_screen';
+		//APPLICATION.setSideScreen(null);
+        	//document.getElementById("side_nav_id").style.width = "0";
         }
 
 	//calendar modal
@@ -378,15 +462,18 @@ class Application
 		this.mCurrentTime = (new Date()).getTime();
   		this.mDelta = (this.mCurrentTime - this.mLastTime) / 1000;
 
-
-		
 		//states
 		this.mStateMachine.update();
+		this.mSideStateMachine.update();
 
 		if (this.getCurrentScreen())
 		{
 			//this will be pitch....
 			this.getCurrentScreen().update(this.mDelta);
+		}
+		if (this.getSideScreen())
+		{
+			this.getSideScreen().update(this.mDelta);
 		}
 
 		this.mLastTime = this.mCurrentTime;
@@ -409,6 +496,15 @@ class Application
 	getCurrentScreen()
 	{
 		return this.mCurrentScreen;
+	}
+	
+	setSideScreen(screen)
+	{
+		this.mSideScreen = screen;
+	}
+	getSideScreen()
+	{
+		return this.mSideScreen;
 	}
 
 	//GOOGLE
@@ -672,5 +768,15 @@ class Application
         getProfileScreenHtml()
 	{
                 return this.mProfileScreenHtml; 
+	}
+
+	//side screen
+        setSideScreenHtml(h)
+	{
+                this.mSideScreenHtml = h;
+	}
+        getSideScreenHtml()
+	{
+               return this.mSideScreenHtml;
 	}
 }

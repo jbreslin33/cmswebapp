@@ -74,6 +74,7 @@ class GLOBAL_APPLICATION extends State
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_CLUB_APPLICATION);
                 }
+
 		else if (location.hash == '#insert_person_screen' && app.mStateMachine.mCurrentState != app.mINSERT_PERSON_APPLICATION)
                 {
                         APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
@@ -134,6 +135,9 @@ class GLOBAL_APPLICATION extends State
                 }
 	}
 }
+
+
+
 
 
 class INIT_APPLICATION extends State
