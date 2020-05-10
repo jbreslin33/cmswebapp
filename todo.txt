@@ -1,3 +1,19 @@
+todo as well...
+everytime you click menu its does query to see role and custimizes menu
+so if you are not a manager dont show manager stuff
+not an admin dont show admin 
+so basically a parent would just see
+schedule
+persons
+edit profile
+logout
+
+so basically a playera would just see
+games
+schedule
+persons
+edit profile
+logout
 
 are we at point we we need admin/manager to be able to edit profiles and move players to teams?
 so maybe keep global administrator edit profiles...
