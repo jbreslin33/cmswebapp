@@ -133,9 +133,39 @@ td, th
 /***********************************************/
 /********************** PARTITIONS *****************/
 /*********************************************/
-
+#logged_in_header_html_id 
+{
+    list-style: none;
+    /*width: 90%;
+    height: 90px; */
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 
 /****************** HEADER *****************/
+
+#logged_in_header_html_id button
+{
+    display: inline-block;
+    width: 10%; 
+    height: 100%;
+}
+#logged_in_header_html_id p
+{
+    display: inline-block;
+     width: %40;
+    height: 100%;
+}
+
+#logged_in_header_html_id select
+{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+}
 
 .header 
 {
