@@ -32,7 +32,7 @@ DECLARE
 
 
 BEGIN
-	--TEAM
+	--TEAM u16 Caos
 	insert into teams (club_id,name) values (1,'u16 Caos') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 
@@ -42,6 +42,7 @@ BEGIN
 	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 
+	
 
 
 	--PLAYERS
@@ -581,6 +582,13 @@ BEGIN
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 
 	------------------------------------------------------------------------------------------------------
+	
+	--TEAM u14 Celestas  
+	insert into teams (club_id,name) values (1,'u14 Celestas') returning id into returning_team_id;
+	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
+	
+	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 END;
 $$;
 --END INSERT PERSON
@@ -644,6 +652,11 @@ BEGIN
 	--add Jim Breslin as club Administrator
 	insert into administrators (person_id) values (returning_person_id) returning id into returning_administrator_id;
 	insert into club_administrators (club_person_id,administrator_id) values (returning_club_person_id,returning_administrator_id);
+
+	--for u14 celestas
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,2)  returning id into returning_team_club_person_id;
+	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+
 	
 
 RETURN result_set;

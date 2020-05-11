@@ -1,20 +1,5 @@
-todo as well...
-everytime you click menu its does query to see role and custimizes menu
-so if you are not a manager dont show manager stuff
-not an admin dont show admin 
-so basically a parent would just see
-schedule
-persons
-edit profile
-logout
-
-so basically a playera would just see
-games
-schedule
-persons
-edit profile
-logout
-
+why is luke showing up as player for u14
+--------------
 are we at point we we need admin/manager to be able to edit profiles and move players to teams?
 so maybe keep global administrator edit profiles...
 but..
@@ -55,6 +40,25 @@ then have..
 TEAMS
 in teams you can add players to teams if you are the manager only... administrator must first have added them as players....you can also add parents to team and coach in same way
 maybe you list players in club and then you 
+--------------------------------
+todo as well...
+everytime you click menu its does query to see role and custimizes menu
+so if you are not a manager dont show manager stuff
+not an admin dont show admin 
+so basically a parent would just see
+schedule
+persons
+edit profile
+logout
+
+so basically a playera would just see
+games
+schedule
+persons
+edit profile
+logout
+
+
 
 
 --------------

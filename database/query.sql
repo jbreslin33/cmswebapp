@@ -1,15 +1,19 @@
-select * from players;
-select * from parents;
-select * from coaches;
-select * from managers;
-select * from administrators;
+select * from teams;
+select * from team_club_persons;
 
-select players.id as player_id, parents.id as parent_id, coaches.id as coach_id, managers.id as manager_id, administrators.id as administrator_id from persons full outer join players on players.person_id=persons.id full outer join parents on parents.person_id=players.person_id full outer join coaches on coaches.person_id=parents.person_id full outer join managers on managers.person_id=coaches.person_id full outer join administrators on administrators.person_id=managers.person_id;
+		select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates,(select pitches.name from pitches where practices.pitch_id = pitches.id) as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name, (select practices_players_availability.availability_id from practices_players_availability where practices_players_availability.practice_id = practices.id) as availability_id
+                from practices
+                join practice on practice.id=practices.practice_id
+                join teams on teams.id=practice.team_id
+                join team_club_persons on team_club_persons.team_id=teams.id
+                join club_persons on club_persons.id=team_club_persons.club_person_id
+                join clubs on clubs.id=club_persons.club_id
+                join persons on persons.id=club_persons.person_id
+                join emails_persons on emails_persons.person_id=persons.id
 
-select players.id as player_id, parents.id as parent_id, coaches.id as coach_id, managers.id as manager_id, administrators.id as administrator_id from persons full outer join players on players.person_id=persons.id full outer join parents on parents.person_id=players.person_id full outer join coaches on coaches.person_id=parents.person_id full outer join managers on managers.person_id=coaches.person_id full outer join administrators on administrators.person_id=managers.person_id where persons.id = 25 OR players.person_id = 25 OR parents.person_id = 25 OR coaches.person_id = 25 OR managers.person_id = 25 OR administrators.person_id = 25;
+                join club_players on club_players.club_person_id=club_persons.id
 
-select * from managers;
+                join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id AND team_club_persons_club_players.club_player_id=club_players.id
 
-
-select persons.id, first_name, case when middle_name IS NULL THEN '' ELSE middle_name END, last_name, players.id as player_id, parents.id as parent_id, coaches.id as coach_id, managers.id as manager_id, administrators.id as administrator_id from persons full outer join emails_persons on emails_persons.person_id=persons.id full outer join players on players.person_id=persons.id full outer join parents on parents.person_id=persons.id full outer join coaches on coaches.person_id=persons.id full outer join managers on managers.person_id=persons.id full outer join administrators on administrators.person_id=persons.id where emails_persons.email_id = 21;  
+                where emails_persons.email_id = 21; 
 
