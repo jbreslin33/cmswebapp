@@ -1,6 +1,6 @@
 
 --BEGIN UPDATE CLUB PROFILE
-CREATE OR REPLACE FUNCTION f_update_club_profile(int,int,int,int,int,int)
+CREATE OR REPLACE FUNCTION f_update_club_profile(int,int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -49,9 +49,9 @@ DECLARE
 	found_person_id persons.id%TYPE;
 BEGIN
 
-	--RAISE LOG 'log message in 1 in p %', $1;
-	--RAISE LOG 'log message in 2 in p %', $2;
-	--RAISE LOG 'log message in 3 in p %', $3;
+	RAISE LOG 'log message in 1 in p %', $1;
+	RAISE LOG 'log message in 2 in p %', $2;
+	RAISE LOG 'log message in 3 in p %', $3;
 
 	IF $3 = 2 THEN
 
