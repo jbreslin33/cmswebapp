@@ -475,6 +475,10 @@ BEGIN
 	--Michelle Obando
 	insert into emails (email) values ('Missyobando50@gmail.com') returning id into returning_email_id_mother;
 
+	--Louis Obando
+	insert into emails (email) values ('obando.louis@gmail.com') returning id into returning_email_id_father_a;
+
+
        	--PERSONS	
 	insert into persons (first_name, middle_name, last_name, phones, address, dob) values ('Nacho', null, 'Obando', null, null, '2004-12-27') returning id into returning_person_id_player_a;
         insert into persons (first_name, middle_name, last_name, phones, address) values ('Louis', null, 'Obando', null, null) returning id into returning_person_id_father;
@@ -488,10 +492,15 @@ BEGIN
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
+	
+	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
+        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
 
 	--CLUB_EMAILS
         insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
         insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
+        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
 	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
@@ -589,6 +598,15 @@ BEGIN
 	
 	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
+	
+	------------------------------------------------------------------------------------------------------
+	
+	--TEAM u19 Celtic  
+	insert into teams (club_id,name) values (1,'u19 Celtic') returning id into returning_team_id;
+	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
+	
+	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 END;
 $$;
 --END INSERT PERSON
@@ -639,7 +657,7 @@ BEGIN
 	--teams
 	CALL p_insert_caos(returning_club_id);
 
-	--add Jim Breslin as team manager
+	--add Jim Breslin as team manager to various teams
 
 	select id into returning_person_id from persons where first_name = 'Jim' AND last_name = 'Breslin';
 	select id into returning_club_person_id from club_persons where person_id = returning_person_id;
@@ -653,8 +671,12 @@ BEGIN
 	insert into administrators (person_id) values (returning_person_id) returning id into returning_administrator_id;
 	insert into club_administrators (club_person_id,administrator_id) values (returning_club_person_id,returning_administrator_id);
 
-	--for u14 celestas
+	--for u14 celestas for jim
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,2)  returning id into returning_team_club_person_id;
+	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	
+	--for u19 celtic for jim
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,3)  returning id into returning_team_club_person_id;
 	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
 
 	
