@@ -667,6 +667,8 @@ class Screen
                		//load up persons option
                		var select = this.mApplication.getPersonSelect();
 			select.length = 0;
+                        this.mApplication.mPersonArray.length = 0;
+
                		for (var i = 0; i < this.mJson.persons.length; i++)
                		{
                			var opt = document.createElement('option');
@@ -674,6 +676,8 @@ class Screen
                        		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
                         	opt.innerHTML = full_name;
                        		select.appendChild(opt);
+                                
+				this.mApplication.mPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
                		}
 
 	           	//lets grab old one first
@@ -681,6 +685,7 @@ class Screen
 
 		}
 	}
+
 	processPitches()
 	{
         	if (this.mJson.pitches)
