@@ -132,23 +132,3 @@ $$ LANGUAGE plpgsql;
 
 
 
---BEGIN SELECT ROLES
-CREATE OR REPLACE FUNCTION f_select_roles(email_id int, person_id int)
-RETURNS text AS $$
-DECLARE
-        result_set text;
-BEGIN
-
-        result_set = CONCAT
-        (
-                j_select_messages(null),
-                ',',
-                j_select_codes(-102),
-                ',',
-                j_select_roles($2)
-        );
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
-

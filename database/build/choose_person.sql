@@ -10,8 +10,6 @@ BEGIN
        		',',
                	j_select_messages(null),
                 ',',
-               	j_select_roles($2),
-                ',',
                	j_select_codes(-100)
        	);
 RETURN result_set;

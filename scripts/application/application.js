@@ -231,63 +231,7 @@ class Application
                 this.mwPressed = false;
                 this.muPressed = false;
 	}
-/*
-        ajax()
-        {
-                if (this.mSentAjax)
-                {
-                        console.log('ajax request already sent do not send again.');
-                }
-                else
-                {
-                        this.mSentAjax = true;
-                        APPLICATION.getCurrentScreen().setRequest(new XMLHttpRequest());
-                        APPLICATION.getCurrentScreen().getRequest().onreadystatechange = function()
-                        {
-                                if (APPLICATION.getCurrentScreen().getRequest().readyState === XMLHttpRequest.DONE)
-                                {
-                                        if (APPLICATION.getCurrentScreen().getRequest().status === 200)
-                                        {
-                                                APPLICATION.getCurrentScreen().mData = this.responseText;
-                                                APPLICATION.getCurrentScreen().mSentAjax = false;
-                                        }
-                                }
-                        };
-                        APPLICATION.getCurrentScreen().checkValidity();
-                }
-        }
-        
-	get()
-        {
-                if (APPLICATION.getJWT())
-                {
-                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_roles.php?" + this.getStandardParameters());
-                        APPLICATION.getCurrentScreen().ajax();
-                }
-        }
-
-
-       	//url
-        setUrl(url)
-        {
-                this.mUrl = url;
-        }
-
-        getUrl()
-        {
-                return this.mUrl;
-        }
-
-        setRequest(request)
-        {
-                this.mRequest = request;
-        }
-
-        getRequest()
-        {
-                return this.mRequest;
-        }
-*/	
+	
 	hit()
 	{
 		console.log('about to call closeNav');

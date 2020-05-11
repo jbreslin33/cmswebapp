@@ -48,14 +48,4 @@ class SideScreen extends Screen
         }
 
 
-	get()
-        {
-		/*
-        	if (APPLICATION.getJWT())
-                {
-                        APPLICATION.getSideScreen().setUrl("/php/classes/screens/select_roles.php?" + this.getStandardParameters());
-                        APPLICATION.getSideScreen().ajax();
-                }
-		*/
-        }
 }
