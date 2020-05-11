@@ -32,17 +32,20 @@ class ChoosePersonScreen extends Screen
 
 	hit()
 	{
+		//set value of person select
+		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+
 		//why are we sending to server????
 		//just send jwt authorization
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?jwt=" + APPLICATION.getJWT());
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?" +  this.getStandardParameters());
                 APPLICATION.getCurrentScreen().ajax();
 
 		this.mApplication.mUserSelectedPerson = true;
 
-		//set value of person select
-		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 
 		this.mApplication.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
+
+		//need to call db here as well.....
 
 	}
 	enter()

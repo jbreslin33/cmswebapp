@@ -35,6 +35,13 @@ class Application
 		//select person
 		this.mPersonSelect = null;
 
+		//roles
+		this.mIsPlayer = false;
+		this.mIsParent = false;
+		this.mIsCoach = false;
+		this.mIsManager = false;
+		this.mIsAdministrator = false;
+
 		//html
                	this.mLoggedOutHeaderHtml = null; 
                	this.mLoggedInHeaderHtml = null; 

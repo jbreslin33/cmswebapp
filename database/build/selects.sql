@@ -407,7 +407,9 @@ SELECT json_agg(t) INTO raw_json
         (
 
 		select players.id as player_id, parents.id as parent_id, coaches.id as coach_id, managers.id as manager_id, administrators.id as administrator_id from persons full outer join players on players.person_id=persons.id full outer join parents on parents.person_id=players.person_id full outer join coaches on coaches.person_id=parents.person_id full outer join managers on managers.person_id=coaches.person_id full outer join administrators on administrators.person_id=managers.person_id where persons.id = $1 OR players.person_id = $1 OR parents.person_id = $1 OR coaches.person_id = $1 OR managers.person_id = $1 OR administrators.person_id = $1
-        
+
+
+
 	) t;
 
         IF raw_json is NULL THEN

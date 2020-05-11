@@ -72,8 +72,10 @@ class Screen
 
 	personSelected()
 	{
+		console.log("called person selected");
 		//change to current state as we switched person so we need to reload screen
 		APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
+
 	}
 
         clearScreen()
@@ -589,6 +591,7 @@ class Screen
 			this.processPitches();
 			this.processMessages();
 			this.processCodes();
+			this.processRoles();
 		}
 		else
 		{
@@ -627,7 +630,30 @@ class Screen
 			}
 		}		
 	}
-	
+
+        processRoles()
+        {
+                //load up clubs option
+                if (this.mJson.roles)
+                {
+                        var select = this.getClubSelect();
+                        if (select)
+                        {
+                                select.length = 0;
+                                for (var i = 0; i < this.mJson.roles.length; i++)
+                                {
+                                        var opt = document.createElement('option');
+                                        //opt.value = this.mJson.roles[i].player_id;
+                                        //var name = this.mJson.clubs[i].name;
+                                        //opt.innerHTML = name;
+                                        //select.appendChild(opt);
+					console.log('player:' + this.mJson.roles[i].player_id);
+                                }
+                        }
+                }
+        }
+
+
 	processTeams()
 	{
 		//load up clubs option
