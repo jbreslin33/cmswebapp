@@ -16,6 +16,11 @@ class Person
 		this.mManagerId = manager_id;
 		this.mAdministratorId = administrator_id;
 
-		console.log('admin id:' + administrator_id);
+		console.log('mId:' + this.mId);
+		console.log('mPlayerId:' + this.mPlayerId);
+		console.log('mParentId:' + this.mParentId);
+		console.log('mCoachId:' + this.mCoachId);
+		console.log('mManagerId:' + this.mManagerId);
+		console.log('mAdministratorId:' + this.mAdministratorId);
         }
 }
