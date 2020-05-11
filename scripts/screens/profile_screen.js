@@ -34,6 +34,10 @@ class ProfileScreen extends Screen
 		this.mCoachButton.style.backgroundColor = "red";
 		this.mManagerButton.style.backgroundColor = "red";
 		this.mAdministratorButton.style.backgroundColor = "red";
+
+               	this.mProfileType = null;
+                this.mActive = null;
+
         }
 
         get()
@@ -142,6 +146,20 @@ class ProfileScreen extends Screen
 			}
 		}
 		screen.updateProfile(APPLICATION.getCurrentScreen().getPersonId(),this.mProfileType,this.mActive);
+
+		//now update side buttons for new profile
+		if (APPLICATION.getSideScreen())
+		{
+			var person = APPLICATION.getPerson(APPLICATION.getCurrentScreen().getPersonId());
+			person.setRole('' + a[1], this.mActive);
+
+			//need to do also what is in process persons
+			//this.mApplication.mPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
+
+			
+			//handle buttons
+			APPLICATION.getSideScreen().handleButtons();
+		}
 	}
 
 	updateProfile(personId,profileType,active)

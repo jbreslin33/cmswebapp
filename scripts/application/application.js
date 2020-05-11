@@ -719,4 +719,16 @@ class Application
 	{
                return this.mSideScreenHtml;
 	}
+
+	getPerson(id)
+	{
+		for (var i = 0; i < this.mPersonArray.length; i++)
+		{
+			if (id == this.mPersonArray[i].mId)
+			{
+				return this.mPersonArray[i];
+			}
+		}
+		return null;
+	}
 }

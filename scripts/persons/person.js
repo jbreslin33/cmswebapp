@@ -23,4 +23,64 @@ class Person
 		console.log('mManagerId:' + this.mManagerId);
 		console.log('mAdministratorId:' + this.mAdministratorId);
         }
+
+	setRole(role,value)
+	{
+		console.log('set person');
+		if (role == 'player')
+		{
+			if (value == 1)
+			{
+				this.mPlayerId = null;
+			}
+			if (value == 2)
+			{
+				this.mPlayerId = 2;
+			}
+		}
+		if (role == 'parent')
+		{
+			if (value == 1)
+			{
+				this.mParentId = null;
+			}
+			if (value == 2)
+			{
+				this.mParentId = 2;
+			}
+		}
+		if (role == 'coach')
+		{
+			if (value == 1)
+			{
+				this.mCoachId = null;
+			}
+			if (value == 2)
+			{
+				this.mCoachId = 2;
+			}
+		}
+		if (role == 'manager')
+		{
+			if (value == 1)
+			{
+				this.mManagerId = null;
+			}
+			if (value == 2)
+			{
+				this.mManagerId = 2;
+			}
+		}
+		if (role == 'administrator')
+		{
+			if (value == 1)
+			{
+				this.mAdministratorId = null;
+			}
+			if (value == 2)
+			{
+				this.mAdministratorId = 2;
+			}
+		}
+	}
 }
