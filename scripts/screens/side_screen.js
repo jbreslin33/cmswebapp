@@ -6,23 +6,9 @@ class SideScreen extends Screen
 	{
 		super(application);
 
-		//location.hash = 'side_screen';
-		//insert_team_screen
 		location.hash = 'side_screen';
 
-		console.log("SideScreen Constructor");
-
           	this.setHtml(document.getElementById("side_screen_html_id"));
-                //this.setMessageElement(document.getElementById("side_screen_message_id"));
-          	//this.setForm(document.getElementById("side_screen_form_id"));
-          	//this.setSpinner(document.getElementById("side_screen_spinner_id"));
-/*
-               	this.getForm().addEventListener('submit', function(e)
-                {
-                        e.preventDefault();
-                        APPLICATION.getCurrentScreen().hit();
-                });
-		*/
 	}
         enter()
         {

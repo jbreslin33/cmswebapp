@@ -36,11 +36,7 @@ class Application
 		this.mPersonSelect = null;
 
 		//roles
-		this.mIsPlayer = false;
-		this.mIsParent = false;
-		this.mIsCoach = false;
-		this.mIsManager = false;
-		this.mIsAdministrator = false;
+		this.mPersonArray = new Array();		
 
 		//html
                	this.mLoggedOutHeaderHtml = null; 
@@ -234,9 +230,8 @@ class Application
 	
 	hit()
 	{
-		console.log('about to call closeNav');
 		APPLICATION.closeNav();	
-		console.log('just called closeNav');
+
 		if (this.id == 'upcomingnavbuttonid')
 		{
 			location.hash = '#upcoming_screen';
@@ -383,21 +378,12 @@ class Application
        
 	openNav()
         {
-		console.log("lets check roles here");
 		location.hash = '#side_screen';
-		//new SideScree
-			
-		//APPLICATION.setSideScreen(new SideScreen());
-        	
-		//document.getElementById("side_nav_id").style.width = "250px";
         }
 
         closeNav()
         {
-		console.log('closeNav');
 		location.hash = '#closed_side_screen';
-		//APPLICATION.setSideScreen(null);
-        	//document.getElementById("side_nav_id").style.width = "0";
         }
 
 	//calendar modal
