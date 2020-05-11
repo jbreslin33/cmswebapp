@@ -77,7 +77,6 @@ class Screen
 			APPLICATION.getSideScreen().handleButtons();
 		}
 
-		console.log("called person selected");
 		//change to current state as we switched person so we need to reload screen
 		APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
 

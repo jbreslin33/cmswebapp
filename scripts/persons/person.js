@@ -15,18 +15,10 @@ class Person
 		this.mCoachId = coach_id;
 		this.mManagerId = manager_id;
 		this.mAdministratorId = administrator_id;
-
-		console.log('mId:' + this.mId);
-		console.log('mPlayerId:' + this.mPlayerId);
-		console.log('mParentId:' + this.mParentId);
-		console.log('mCoachId:' + this.mCoachId);
-		console.log('mManagerId:' + this.mManagerId);
-		console.log('mAdministratorId:' + this.mAdministratorId);
         }
 
 	setRole(role,value)
 	{
-		console.log('set person');
 		if (role == 'player')
 		{
 			if (value == 1)

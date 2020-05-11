@@ -153,11 +153,7 @@ class ProfileScreen extends Screen
 			var person = APPLICATION.getPerson(APPLICATION.getCurrentScreen().getPersonId());
 			person.setRole('' + a[1], this.mActive);
 
-			//need to do also what is in process persons
-			//this.mApplication.mPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
-
-			
-			//handle buttons
+			//handle buttons to update screen
 			APPLICATION.getSideScreen().handleButtons();
 		}
 	}
