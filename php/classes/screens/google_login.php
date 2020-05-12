@@ -78,7 +78,6 @@ class GoogleLogin extends Screen
                         //send only a json object client
 		   	$back_bracket = '}';
                         $txt = $jwt_json . $data . $back_bracket;
-			error_log($txt);
                         return $txt;
                 }
         }

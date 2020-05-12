@@ -26,6 +26,7 @@ class UpdateClubProfile extends Screen
 		{
 			$person_to_change_id = $_GET['person_to_change_id'];
 		}
+// screen.setUrl("/php/classes/screens/update_club_profile.php?jwt=" + APPLICATION.getJWT() + '&profiletype=' + profileNumber + '&active=' + active + '&person_id=' + personId + '&person_to_change_id=' + person_to_change_id);
 
                 $sql = 'select f_update_club_profile($1,$2,$3,$4,$5)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_update_club_profile", $sql);

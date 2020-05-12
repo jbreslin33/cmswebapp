@@ -15,7 +15,6 @@ class UpcomingAvailability extends Screen
 		if (isset($_GET['availability']))
 		{
 			$availability = $_GET['availability'];
-			error_log($availability);
 		}
 
                 $sql = 'select f_update_availability($1,$2)';

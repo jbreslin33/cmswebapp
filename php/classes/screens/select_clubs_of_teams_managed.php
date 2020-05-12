@@ -14,7 +14,6 @@ class SelectClubsOfTeamsManaged extends Screen
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_clubs_of_teams_managed", $sql);
                 $result = pg_execute($this->mDatabase->mConnection, "f_select_clubs_of_teams_managed", array( $this->getSenderEmailId(), $this->mPersonId ) );
                 $txt = pg_fetch_result($result, 0);
-		error_log($txt);
                 return $txt;
         }
 }
