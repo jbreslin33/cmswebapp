@@ -703,6 +703,17 @@ CREATE TABLE club_managers
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE club_parents 
+(
+	id SERIAL,
+	club_person_id integer,
+	manager_id integer,
+	created_at timestamp not null default now(),
+        FOREIGN KEY(manager_id) REFERENCES parents(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
+	PRIMARY KEY (id)
+);
+
 --so add club will auto pop you in this table then you can add other club members into this
 CREATE TABLE club_administrators 
 (

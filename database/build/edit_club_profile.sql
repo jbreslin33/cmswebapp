@@ -47,98 +47,61 @@ AS $$
 DECLARE
         ids INT[];
 	found_person_id persons.id%TYPE;
+
+	found_club_person_id club_persons.id%TYPE;
+
+	found_player_id players.id%TYPE;
+
+	found_club_player_id club_players.id%TYPE;
+	found_club_parent_id club_parents.id%TYPE;
+	found_club_coach_id club_coaches.id%TYPE;
+	found_club_manager_id club_managers.id%TYPE;
+	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
 	IF $2 = 2 THEN
-
+		--keep in mind anyone on this screen is a club_person
 		IF $1 = 1 THEN
-			select person_id into found_person_id from players where person_id = $3; 
-			IF found_person_id > 0  THEN
+			--do we need to add to players????
+			select person_id into found_player_id from players where person_id = $3; 
+			IF found_player_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				insert into players (person_id) values ($3);
+				insert into players (person_id) values ($3) returning id into found_player_id;
+			END IF;
+			
+			--do we need to add to club_players
+			select id into found_club_person_id from club_persons where person_id = $3; 
+			IF found_club_person_id > 0  THEN
+				--insert into club_players if it does not already exist...
+				select id into found_club_player_id from club_players where club_person_id = found_club_person_id; 
+				IF found_club_player_id > 0  THEN
+					--do nothing as club_player already exists
+				ELSE
+					insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
+				END IF;
+				
+			ELSE
+				--did not find club_person error...
 			END IF;
 		ELSE
 			--DO NOTHING
 		END IF;
-
-
-		IF $1 = 2 THEN
-			select person_id into found_person_id from parents where person_id = $3; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into parents (person_id) values ($3);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-
-	
-		IF $1 = 3 THEN
-			--RAISE LOG 'log message in 3 %', $1;
-			select person_id into found_person_id from coaches where person_id = $3; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into coaches (person_id) values ($3);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-
-
-		IF $1 = 4 THEN
-			select person_id into found_person_id from managers where person_id = $3; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into managers (person_id) values ($3);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-	
-		IF $1 = 5 THEN
-			select person_id into found_person_id from administrators where person_id = $3; 
-			IF found_person_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into administrators (person_id) values ($3);
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-
 	ELSE
 		IF $1 = 1 THEN
-			delete from players where person_id = $3; 
+			select id into found_club_person_id from club_persons where person_id = $3;
+			
+			IF found_club_person_id > 0  THEN
+				RAISE LOG 'person_id:%', $3;
+				RAISE LOG 'club_person_id:%', found_club_person_id;
+				delete from club_players where club_person_id = found_club_person_id;	
+			ELSE
+				--did not find club_person_id so we have an error...
+			END IF;
+
 		ELSE
-			--DO NOTHING
+			--DO NOTHING 
 		END IF;
 
-		IF $1 = 2 THEN
-			delete from parents where person_id = $3; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $1 = 3 THEN
-			delete from coaches where person_id = $3; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $1 = 4 THEN
-			delete from managers where person_id = $3; 
-		ELSE
-			--DO NOTHING
-		END IF;
-
-		IF $1 = 5 THEN
-			delete from administrators where person_id = $3; 
-		ELSE
-			--DO NOTHING
-		END IF;
 	END IF;
 	x := 1;
 END;
