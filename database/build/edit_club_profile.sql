@@ -51,6 +51,10 @@ DECLARE
 	found_club_person_id club_persons.id%TYPE;
 
 	found_player_id players.id%TYPE;
+	found_parent_id parents.id%TYPE;
+	found_coache_id coaches.id%TYPE;
+	found_manager_id managers.id%TYPE;
+	found_administrator_id administrators.id%TYPE;
 
 	found_club_player_id club_players.id%TYPE;
 	found_club_parent_id club_parents.id%TYPE;
@@ -59,7 +63,9 @@ DECLARE
 	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
 	IF $2 = 2 THEN
+
 		--keep in mind anyone on this screen is a club_person
+
 		IF $1 = 1 THEN
 			--do we need to add to players????
 			select person_id into found_player_id from players where person_id = $3; 
@@ -86,6 +92,35 @@ BEGIN
 		ELSE
 			--DO NOTHING
 		END IF;
+
+		IF $1 = 2 THEN
+			--do we need to add to players????
+			select person_id into found_parent_id from players where person_id = $3; 
+			IF found_parent_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into parents (person_id) values ($3) returning id into found_parent_id;
+			END IF;
+			
+			--do we need to add to club_parents
+			select id into found_club_person_id from club_persons where person_id = $3; 
+			IF found_club_person_id > 0  THEN
+				--insert into club_parents if it does not already exist...
+				select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id; 
+				IF found_club_parent_id > 0  THEN
+					--do nothing as club_parent already exists
+				ELSE
+					insert into club_parents(club_person_id,parent_id) values (found_club_person_id, found_parent_id);
+				END IF;
+				
+			ELSE
+				--did not find club_person error...
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+
+
 	ELSE
 		IF $1 = 1 THEN
 			select id into found_club_person_id from club_persons where person_id = $3;

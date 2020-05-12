@@ -707,9 +707,9 @@ CREATE TABLE club_parents
 (
 	id SERIAL,
 	club_person_id integer,
-	manager_id integer,
+	parent_id integer,
 	created_at timestamp not null default now(),
-        FOREIGN KEY(manager_id) REFERENCES parents(id),
+        FOREIGN KEY(parent_id) REFERENCES parents(id),
         FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
