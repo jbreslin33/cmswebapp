@@ -72,18 +72,20 @@ BEGIN
 		IF $1 = 1 THEN
 			--do we need to add to players????
 			select id into found_player_id from players where person_id = $3; 
+
 			IF found_player_id IS NULL THEN
 				insert into players (person_id) values ($3) returning id into found_player_id;
 			END IF;
 			
 			--do we need to add to club_players
 			select id into found_club_person_id from club_persons where person_id = $3; 
-			IF found_club_person_id > 0  THEN
+
+			IF found_club_person_id > 0 THEN
+				
 				--insert into club_players if it does not already exist...
 				select id into found_club_player_id from club_players where club_person_id = found_club_person_id; 
-				IF found_club_player_id > 0  THEN
-					--do nothing as club_player already exists
-				ELSE
+
+				IF found_club_player_id IS NULL THEN
 					insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
 				END IF;
 				
