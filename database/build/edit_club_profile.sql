@@ -72,9 +72,7 @@ BEGIN
 		IF $1 = 1 THEN
 			--do we need to add to players????
 			select id into found_player_id from players where person_id = $3; 
-			IF found_player_id > 0  THEN
-				-- DO NOTHING
-			ELSE
+			IF found_player_id IS NULL THEN
 				insert into players (person_id) values ($3) returning id into found_player_id;
 			END IF;
 			
