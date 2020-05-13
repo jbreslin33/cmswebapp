@@ -14,7 +14,7 @@ BEGIN
 
                 CALL p_update_club_profile($3,$4,$5,x);
 
-                IF x > 0 THEN
+                IF x = -100 THEN
                        	result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -23,8 +23,9 @@ BEGIN
                                 ',',
                                 j_select_codes(-101)
                         );
-
-                ELSE
+                END IF;
+                
+		IF x = -101 THEN
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -33,8 +34,8 @@ BEGIN
                                 ',',
                                 j_select_codes(-101)
                         );
-
                 END IF;
+
         END IF;
 
 RETURN result_set;
@@ -203,14 +204,18 @@ BEGIN
 			--DO NOTHING
 		END IF;
 
+				--RAISE LOG 'person_id:%', $3;
+				--RAISE LOG 'club_person_id:%', found_club_person_id;
 
 	ELSE
 		IF $1 = 1 THEN
 			select id into found_club_person_id from club_persons where person_id = $3;
-			
+
+			--do not delete until you check....
+				
+
+			--team_club_persons_club_players	
 			IF found_club_person_id > 0  THEN
-				--RAISE LOG 'person_id:%', $3;
-				--RAISE LOG 'club_person_id:%', found_club_person_id;
 				delete from club_players where club_person_id = found_club_person_id;	
 			ELSE
 				--did not find club_person_id so we have an error...
@@ -275,7 +280,7 @@ BEGIN
 
 
 	END IF;
-	x := 1;
+	x := -100;
 END;
 $$;
 
