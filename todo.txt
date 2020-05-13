@@ -1,4 +1,9 @@
-why is luke showing up as player for u14
+when you go to remove victor from club_players but he is still on team how do we handle this???
+just do it....prob not
+do it but give choice to back out first? --prob this one....
+let them know you must go into team and remove him first??? --easier to implement and forces you to dig into team???
+
+----fixed:why is luke showing up as player for u14
 --------------
 are we at point we we need admin/manager to be able to edit profiles and move players to teams?
 so maybe keep global administrator edit profiles...
