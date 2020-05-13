@@ -52,7 +52,7 @@ DECLARE
 
 	found_player_id players.id%TYPE;
 	found_parent_id parents.id%TYPE;
-	found_coache_id coaches.id%TYPE;
+	found_coach_id coaches.id%TYPE;
 	found_manager_id managers.id%TYPE;
 	found_administrator_id administrators.id%TYPE;
 
@@ -66,9 +66,11 @@ BEGIN
 
 		--keep in mind anyone on this screen is a club_person
 
+--when you goto add add colleen to player again is when error occurs....
+
 		IF $1 = 1 THEN
 			--do we need to add to players????
-			select person_id into found_player_id from players where person_id = $3; 
+			select id into found_player_id from players where person_id = $3; 
 			IF found_player_id > 0  THEN
 				-- DO NOTHING
 			ELSE
@@ -94,8 +96,8 @@ BEGIN
 		END IF;
 
 		IF $1 = 2 THEN
-			--do we need to add to players????
-			select person_id into found_parent_id from players where person_id = $3; 
+			--do we need to add to parents????
+			select id into found_parent_id from parents where person_id = $3; 
 			IF found_parent_id > 0  THEN
 				-- DO NOTHING
 			ELSE
@@ -119,6 +121,87 @@ BEGIN
 		ELSE
 			--DO NOTHING
 		END IF;
+		
+		IF $1 = 3 THEN
+			--do we need to add to coaches????
+			select id into found_coach_id from coaches where person_id = $3; 
+			IF found_coach_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into coaches (person_id) values ($3) returning id into found_coach_id;
+			END IF;
+			
+			--do we need to add to club_coaches
+			select id into found_club_person_id from club_persons where person_id = $3; 
+			IF found_club_person_id > 0  THEN
+				--insert into club_coaches if it does not already exist...
+				select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id; 
+				IF found_club_coach_id > 0  THEN
+					--do nothing as club_coach already exists
+				ELSE
+					insert into club_coaches(club_person_id,coach_id) values (found_club_person_id, found_coach_id);
+				END IF;
+				
+			ELSE
+				--did not find club_person error...
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+		
+		IF $1 = 4 THEN
+			--do we need to add to managers????
+			select id into found_manager_id from managers where person_id = $3; 
+			IF found_manager_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into managers (person_id) values ($3) returning id into found_manager_id;
+			END IF;
+			
+			--do we need to add to club_managers
+			select id into found_club_person_id from club_persons where person_id = $3; 
+			IF found_club_person_id > 0  THEN
+				--insert into club_managers if it does not already exist...
+				select id into found_club_manager_id from club_managers where club_person_id = found_club_person_id; 
+				IF found_club_manager_id > 0  THEN
+					--do nothing as club_manager already exists
+				ELSE
+					insert into club_managers(club_person_id,manager_id) values (found_club_person_id, found_manager_id);
+				END IF;
+				
+			ELSE
+				--did not find club_person error...
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
+		
+		IF $1 = 5 THEN
+			--do we need to add to administrators????
+			select id into found_administrator_id from administrators where person_id = $3; 
+			IF found_administrator_id > 0  THEN
+				-- DO NOTHING
+			ELSE
+				insert into administrators (person_id) values ($3) returning id into found_administrator_id;
+			END IF;
+			
+			--do we need to add to club_managers
+			select id into found_club_person_id from club_persons where person_id = $3; 
+			IF found_club_person_id > 0  THEN
+				--insert into club_administrators if it does not already exist...
+				select id into found_club_administrator_id from club_administrators where club_person_id = found_club_person_id; 
+				IF found_club_administrator_id > 0  THEN
+					--do nothing as club_administrator already exists
+				ELSE
+					insert into club_administrators(club_person_id,administrator_id) values (found_club_person_id, found_administrator_id);
+				END IF;
+				
+			ELSE
+				--did not find club_person error...
+			END IF;
+		ELSE
+			--DO NOTHING
+		END IF;
 
 
 	ELSE
@@ -126,8 +209,8 @@ BEGIN
 			select id into found_club_person_id from club_persons where person_id = $3;
 			
 			IF found_club_person_id > 0  THEN
-				RAISE LOG 'person_id:%', $3;
-				RAISE LOG 'club_person_id:%', found_club_person_id;
+				--RAISE LOG 'person_id:%', $3;
+				--RAISE LOG 'club_person_id:%', found_club_person_id;
 				delete from club_players where club_person_id = found_club_person_id;	
 			ELSE
 				--did not find club_person_id so we have an error...
@@ -136,6 +219,60 @@ BEGIN
 		ELSE
 			--DO NOTHING 
 		END IF;
+
+                
+		IF $1 = 2 THEN
+                        select id into found_club_person_id from club_persons where person_id = $3;
+
+                        IF found_club_person_id > 0  THEN
+                                delete from club_parents where club_person_id = found_club_person_id;
+                        ELSE
+                                --did not find club_person_id so we have an error...
+                        END IF;
+
+                ELSE
+                        --DO NOTHING
+                END IF;
+		
+		IF $1 = 3 THEN
+                        select id into found_club_person_id from club_persons where person_id = $3;
+
+                        IF found_club_person_id > 0  THEN
+                                delete from club_coaches where club_person_id = found_club_person_id;
+                        ELSE
+                                --did not find club_person_id so we have an error...
+                        END IF;
+
+                ELSE
+                        --DO NOTHING
+                END IF;
+		
+		IF $1 = 4 THEN
+                        select id into found_club_person_id from club_persons where person_id = $3;
+
+                        IF found_club_person_id > 0  THEN
+                                delete from club_managers where club_person_id = found_club_person_id;
+                        ELSE
+                                --did not find club_person_id so we have an error...
+                        END IF;
+
+                ELSE
+                        --DO NOTHING
+                END IF;
+
+		IF $1 = 5 THEN
+                        select id into found_club_person_id from club_persons where person_id = $3;
+
+                        IF found_club_person_id > 0  THEN
+                                delete from club_administrators where club_person_id = found_club_person_id;
+                        ELSE
+                                --did not find club_person_id so we have an error...
+                        END IF;
+
+                ELSE
+                        --DO NOTHING
+                END IF;
+
 
 	END IF;
 	x := 1;
