@@ -89,12 +89,9 @@ BEGIN
 					insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
 				END IF;
 				
-			ELSE
-				--did not find club_person error...
 			END IF;
-		ELSE
-			--DO NOTHING
 		END IF;
+
 
 		IF $1 = 2 THEN
 			--do we need to add to parents????
