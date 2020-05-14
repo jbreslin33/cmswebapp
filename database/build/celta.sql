@@ -39,7 +39,7 @@ BEGIN
 	insert into managers (person_id) values (1);
 	insert into club_managers (club_person_id,manager_id) values (1,1);
 
-	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 
 	
@@ -596,7 +596,7 @@ BEGIN
 	insert into teams (club_id,name) values (1,'u14 Celestas') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
-	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 	
 	------------------------------------------------------------------------------------------------------
@@ -605,7 +605,7 @@ BEGIN
 	insert into teams (club_id,name) values (1,'u19 Celtic') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
-	insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
+	--insert into team_club_persons_club_administrators (team_club_person_id, club_administrator_id) values (returning_team_club_person_id, 1);
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
 END;
 $$;
