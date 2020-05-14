@@ -1,3 +1,19 @@
+click on club person
+
+player | parent | coach | manager 
+u9b    | u9b    | u9b   | u9b  
+u9g    | u9g    | u9g   | u9g 
+u10b   | u10b   | u10b  | u10b  
+u10g   | u10g   | u10g  | u10g  
+u11b   | u11b   | u11b  | u11b 
+u11g   | u11g   | u11g  | u11g
+u12b   | u12b   | u12b  | u12b 
+u12g   | u12g   | u12g  | u12g 
+u13b   | u13b   | u13b  | u13b 
+u13g   | u13g   | u13g  | u13g 
+
+
+--------------------
 when you go to remove victor from club_players but he is still on team how do we handle this???
 just do it....prob not
 do it but give choice to back out first? --prob this one....
