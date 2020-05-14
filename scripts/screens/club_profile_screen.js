@@ -14,6 +14,12 @@ class ClubProfileScreen extends Screen
                 this.setForm(document.getElementById("club_profile_screen_form_id"));
 
 		this.setClubSelect(document.getElementById("club_profile_screen_club_id"));
+		
+		//modal
+                this.setModal(document.getElementById("club_profile_modal_id"));
+                this.setModalParagraph(document.getElementById("club_profile_modal_p_id"));
+                this.setModalButton(document.getElementById("club_profile_modal_button_id"));
+                this.setModalCloseButton(document.getElementById("club_profile_modal_close_button_id"));
 
 		this.mDivArray = new Array();
 		this.mClubProfilesArray = new Array();
