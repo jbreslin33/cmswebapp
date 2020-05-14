@@ -707,8 +707,10 @@ class Screen
 	{
 		if (this.mJson.messages)
 		{
+			console.log('message');
                		for (var i = 0; i < this.mJson.messages.length; i++)
 			{
+				console.log('message:' + this.mJson.messages[i].message);
 				this.setMessage(this.mJson.messages[i].message,'red');
 			}
 		}

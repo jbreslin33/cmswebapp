@@ -15,6 +15,7 @@ BEGIN
                 CALL p_update_club_profile($3,$4,$5,x);
 
                 IF x = -100 THEN
+			RAISE LOG '1st:%', x;
                        	result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -26,6 +27,8 @@ BEGIN
                 END IF;
                 
 		IF x = -101 THEN
+			RAISE LOG '2nd:%', x;
+			
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -62,7 +65,10 @@ DECLARE
 	found_club_coach_id club_coaches.id%TYPE;
 	found_club_manager_id club_managers.id%TYPE;
 	found_club_administrator_id club_administrators.id%TYPE;
+
+	found_team_club_persons_club_players_id team_club_persons_club_players.id%TYPE;
 BEGIN
+	x := -100;
 	IF $2 = 2 THEN
 
 		--keep in mind anyone on this screen is a club_person
@@ -206,16 +212,25 @@ BEGIN
 
 	ELSE
 		IF $1 = 1 THEN
-			select id into found_club_person_id from club_persons where person_id = $3;
 
-			--do not delete until you check....
-				
+			select id into found_club_person_id from club_persons where person_id = $3;
 
 			--team_club_persons_club_players	
 			IF found_club_person_id > 0  THEN
-				delete from club_players where club_person_id = found_club_person_id;	
-			ELSE
-				--did not find club_person_id so we have an error...
+			
+				select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+				IF found_club_player_id > 0 THEN
+
+				       	select id into found_team_club_persons_club_players_id from team_club_persons_club_players where club_player_id = found_club_player_id;
+					
+					IF found_team_club_persons_club_players_id IS NULL THEN
+						delete from club_players where club_person_id = found_club_person_id;	
+
+					ELSE 
+						x := -101; 
+					END IF;
+				END IF;
 			END IF;
 
 		ELSE
@@ -277,7 +292,6 @@ BEGIN
 
 
 	END IF;
-	x := -100;
 END;
 $$;
 
