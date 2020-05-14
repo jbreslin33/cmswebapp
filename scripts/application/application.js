@@ -171,9 +171,6 @@ class Application
 		document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
 		document.getElementById("sidenavclosebuttonid").onclick = this.closeNav.bind(this);
 
-		//calendar modal
-		document.getElementById("modal_close_id").onclick = this.closeModal.bind(this);
-		
 		this.setPersonSelect(document.getElementById("person_select_id"));
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
 
@@ -385,13 +382,6 @@ class Application
         {
 		location.hash = '#closed_side_screen';
         }
-
-	//calendar modal
-        closeModal()
-        {
-        	document.getElementById("calendar_modal_id").style.display = "none";
-        }
-
 
 	update()
 	{

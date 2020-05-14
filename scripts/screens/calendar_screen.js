@@ -12,6 +12,10 @@ class CalendarScreen extends Screen
                 this.setMessageElement(document.getElementById("calendar_screen_message_id"));
                 this.setSpinner(document.getElementById("calendar_screen_spinner_id"));
                 this.setForm(document.getElementById("calendar_screen_form_id"));
+		this.setModal(document.getElementById("calendar_modal_id"));
+		this.setModalParagraph(document.getElementById("calendar_modal_p_id"));
+		this.setModalButton(document.getElementById("calendar_modal_button_id"));
+		this.setModalCloseButton(document.getElementById("calendar_modal_close_button_id"));
 
 		this.mCalendarTable = null;
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
@@ -319,9 +323,10 @@ class CalendarScreen extends Screen
 
 	printModal()
 	{
+		console.log('print modal');
 		var i = this.getAttribute('eventsarrayelementid'); 
 
-		var p = document.getElementById("modal_p_id");
+		var p = APPLICATION.getCurrentScreen().getModalParagraph();
 		var textArray = new Array();
 		textArray.length = 0;
 		p.innerHTML = '';
@@ -395,6 +400,7 @@ class CalendarScreen extends Screen
 			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
 		}
 		
-		document.getElementById("calendar_modal_id").style.display = "block";
+		APPLICATION.getCurrentScreen().showModal();
+		//	document.getElementById("calendar_modal_id").style.display = "block";
 	}
 }

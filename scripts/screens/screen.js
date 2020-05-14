@@ -10,6 +10,10 @@ class Screen
 		this.mSpinner = null;
 		this.mHtml = null;
 		this.mFooter = null;
+		this.mModal = null;
+		this.mModalCloseButton = null;
+		this.mModalParagraph = null;
+		this.mModalButton = null;
 
 	 	this.setFooter(document.getElementById("footer_id"));
 
@@ -68,7 +72,16 @@ class Screen
 		{
                 	this.getPersonSelect().onchange = this.personSelected.bind(this);
 		}	
+
+                //clase modal
+                document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
+
 	}
+
+        closeModal()
+        {
+                document.getElementById("calendar_modal_id").style.display = "none";
+        }
 
 	personSelected()
 	{
@@ -279,6 +292,46 @@ class Screen
 	{
 		return this.mSpinner;
 	}
+	
+	setModal(modal)
+	{
+		this.mModal = modal;
+	}
+
+	getModal()
+	{
+		return this.mModal;
+	}
+	
+	setModalButton(button)
+	{
+		this.mModalButton = button;
+	}
+
+	getModalButton()
+	{
+		return this.mModalButton;
+	}
+	
+	setModalParagraph(button)
+	{
+		this.mModalParagraph = button;
+	}
+
+	getModalParagraph()
+	{
+		return this.mModalParagraph;
+	}
+	
+	setModalCloseButton(button)
+	{
+		this.mModalCloseButton = button;
+	}
+
+	getModalCloseButton()
+	{
+		return this.mModalCloseButton;
+	}
 
 	setHtml(html)
 	{
@@ -485,6 +538,24 @@ class Screen
                 	this.getSpinner().style.visibility = "hidden";
 		}
 	}
+
+        showModal()
+        {
+                if (this.getModal())
+                {
+                	this.getModal().style.display = "block";
+                        this.getModal().style.visibility = "visible";
+                }
+        }
+
+        hideModal()
+        {
+                if (this.getModal())
+                {
+                        this.getModal().style.visibility = "hidden";
+                }
+        }
+
 
         show()
         {
