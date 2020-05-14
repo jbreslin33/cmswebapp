@@ -1,3 +1,4 @@
+do we need team administrators????
 click on club person
 
 player | parent | coach | manager 
