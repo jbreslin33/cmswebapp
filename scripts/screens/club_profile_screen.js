@@ -14,6 +14,7 @@ class ClubProfileScreen extends Screen
                 this.setForm(document.getElementById("club_profile_screen_form_id"));
 
 		this.setClubSelect(document.getElementById("club_profile_screen_club_id"));
+		this.setClubPersonSelect(document.getElementById("club_person_select_id"));
 		
 		//modal
                 this.setModal(document.getElementById("club_profile_modal_id"));
@@ -184,6 +185,27 @@ class ClubProfileScreen extends Screen
 		//make new array containing games and practices together
 		if (this.mJson)
 		{
+			if (this.mJson.club_persons)
+			{
+				//load up club_persons option
+                        	var select = this.getClubPersonSelect();
+                        	select.length = 0;
+                        	this.mApplication.mClubPersonArray.length = 0;
+
+                        	for (var i = 0; i < this.mJson.club_persons.length; i++)
+                        	{
+                                	var opt = document.createElement('option');
+                                	opt.value = this.mJson.club_persons[i].id;
+                                	var full_name = this.mJson.club_persons[i].first_name + ' ' + this.mJson.club_persons[i].middle_name + ' ' + this.mJson.club_persons[i].last_name;
+                                	opt.innerHTML = full_name;
+                                	select.appendChild(opt);
+
+                                	//this.mApplication.mClubPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
+
+                        	}
+                        	//this.mPersonsExist = select.length;
+			}
+
                 	if (this.mJson.club_profiles)
 			{
                         	for (var i = 0; i < this.mJson.club_profiles.length; i++)

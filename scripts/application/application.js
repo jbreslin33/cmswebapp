@@ -38,6 +38,9 @@ class Application
 		//roles
 		this.mPersonArray = new Array();		
 
+		//club persons
+		this.mClubPersonArray = new Array();		
+
 		//html
                	this.mLoggedOutHeaderHtml = null; 
                	this.mLoggedInHeaderHtml = null; 

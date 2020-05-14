@@ -30,6 +30,7 @@ class Screen
 		this.mPitchId = 0;
 
 		this.mPersonSelect = null;
+		this.mClubPersonSelect = null;
 		this.mClubSelect = null;
 		this.mTeamSelect = null;
 		this.mPitchSelect = null;
@@ -73,6 +74,15 @@ class Screen
                 	this.getPersonSelect().onchange = this.personSelected.bind(this);
 		}	
 
+                this.setClubPersonSelect(document.getElementById("club_person_select_id"));
+
+                //club person select
+                if (this.getClubPersonSelect())
+                {
+                        this.getClubPersonSelect().onchange = this.clubPersonSelected.bind(this);
+                }
+
+
                 //clase modal
                 document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
 
@@ -92,9 +102,12 @@ class Screen
 
 		//change to current state as we switched person so we need to reload screen
 		APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
-
-
 	}
+
+	clubPersonSelected()
+        {
+		//override this to show club person data buttons
+        }
 
         clearScreen()
         {
@@ -387,6 +400,16 @@ class Screen
 	getPersonSelect()
 	{
 		return this.mPersonSelect;
+	}
+	
+	setClubPersonSelect(select)
+	{
+		this.mClubPersonSelect = select;
+	}
+
+	getClubPersonSelect()
+	{
+		return this.mClubPersonSelect;
 	}
 
 	setClubSelect(select)
