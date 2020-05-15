@@ -59,7 +59,7 @@ class ClubProfileScreen extends Screen
 	//override from screen
 	personSelected()
 	{
-				
+                this.getClubPersonProfile();
 	}
 
         clubSelected()
@@ -78,7 +78,13 @@ class ClubProfileScreen extends Screen
 
         getClubPersons()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
+                APPLICATION.getCurrentScreen().ajax();
+        }
+        
+	getClubPersonProfile()
+        {
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
         }
 

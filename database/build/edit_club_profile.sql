@@ -295,7 +295,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION f_club_profile(email_id_p int, person_id_p int, club_id_p int)
+CREATE OR REPLACE FUNCTION f_club_persons(email_id_p int, person_id_p int, club_id_p int)
 RETURNS text AS $$
 DECLARE
         result_set text;
