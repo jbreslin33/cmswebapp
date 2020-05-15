@@ -199,17 +199,25 @@ class ClubProfileScreen extends Screen
             				var last_name = this.mJson.club_persons[i].last_name;
             				var dob = this.mJson.club_persons[i].dob;
 					var full_name = '';
+					if (last_name)
+					{
+						full_name = full_name + '' + last_name;
+					}
 					if (first_name)
 					{
-						full_name = full_name + '' + first_name;
+						if (last_name)
+						{
+							full_name = full_name + ', ' + first_name;
+						}
+						else
+						{
+							//no last name
+							full_name = full_name + '' + first_name;
+						}
 					}
 					if (middle_name)
 					{
 						full_name = full_name + ' ' + middle_name;
-					}
-					if (last_name)
-					{
-						full_name = full_name + ' ' + last_name;
 					}
 					if (dob)
 					{
