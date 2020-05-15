@@ -1,3 +1,8 @@
+
+need to display below stuff
+also need a get for it in club profile screen then set up buttons and associated them with appropriate team person role
+-------
+
 do we need team administrators????
 click on club person
 

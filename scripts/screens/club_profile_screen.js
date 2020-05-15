@@ -56,6 +56,12 @@ class ClubProfileScreen extends Screen
                 }
         }
 
+	//override from screen
+	personSelected()
+	{
+				
+	}
+
         clubSelected()
         {
                 this.getClubPersons();
