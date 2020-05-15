@@ -30,7 +30,6 @@ class Screen
 		this.mPitchId = 0;
 
 		this.mPersonSelect = null;
-		this.mClubPersonSelect = null;
 		this.mClubSelect = null;
 		this.mTeamSelect = null;
 		this.mPitchSelect = null;
@@ -66,16 +65,13 @@ class Screen
                         APPLICATION.getCurrentScreen().keyUpHandler(e);
                 });
 
-                this.setPersonSelect(document.getElementById("person_select_id"));
+                this.setPersonSelect(null);
 
                 //person select
 		if (this.getPersonSelect())
 		{
                 	this.getPersonSelect().onchange = this.personSelected.bind(this);
 		}	
-
-                this.setClubPersonSelect(document.getElementById("club_person_select_id"));
-
 
                 //clase modal
                 document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
@@ -89,6 +85,7 @@ class Screen
 
 	personSelected()
 	{
+		console.log('selected in choose person???');
 		/*
 		if (APPLICATION.getSideScreen())
 		{
