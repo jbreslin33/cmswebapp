@@ -194,7 +194,28 @@ class ClubProfileScreen extends Screen
                         	{
                                 	var opt = document.createElement('option');
                                 	opt.value = this.mJson.club_persons[i].id;
-                                	var full_name = this.mJson.club_persons[i].first_name + ' ' + this.mJson.club_persons[i].middle_name + ' ' + this.mJson.club_persons[i].last_name;
+					var first_name = this.mJson.club_persons[i].first_name;
+					var middle_name = this.mJson.club_persons[i].middle_name;
+            				var last_name = this.mJson.club_persons[i].last_name;
+            				var dob = this.mJson.club_persons[i].dob;
+					var full_name = '';
+					if (first_name)
+					{
+						full_name = full_name + '' + first_name;
+					}
+					if (middle_name)
+					{
+						full_name = full_name + ' ' + middle_name;
+					}
+					if (last_name)
+					{
+						full_name = full_name + ' ' + last_name;
+					}
+					if (dob)
+					{
+						full_name = full_name + ' ' + dob;
+					}
+
                                 	opt.innerHTML = full_name;
                                 	select.appendChild(opt);
                         	}
