@@ -325,13 +325,13 @@ class Application
         {
 		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
                 
-		if (APPLICATION.getSideScreen())
+		if (this.getSideScreen())
                 {
-                        APPLICATION.getSideScreen().handleButtons();
+                        this.getSideScreen().handleButtons();
                 }
 
                 //change to current state as we switched person so we need to reload screen
-                APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
+                this.mStateMachine.changeState(this.mStateMachine.mCurrentState);
         }
 
 	setLoggedOutHeaderHtml(e)
