@@ -321,10 +321,18 @@ class Application
                 }
         }
 
-	personSelected()
-	{
+        personSelected()
+        {
 		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
-	}
+                
+		if (APPLICATION.getSideScreen())
+                {
+                        APPLICATION.getSideScreen().handleButtons();
+                }
+
+                //change to current state as we switched person so we need to reload screen
+                APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
+        }
 
 	setLoggedOutHeaderHtml(e)
 	{

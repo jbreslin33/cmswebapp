@@ -76,12 +76,6 @@ class Screen
 
                 this.setClubPersonSelect(document.getElementById("club_person_select_id"));
 
-                //club person select
-                if (this.getClubPersonSelect())
-                {
-                        this.getClubPersonSelect().onchange = this.clubPersonSelected.bind(this);
-                }
-
 
                 //clase modal
                 document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
@@ -95,6 +89,7 @@ class Screen
 
 	personSelected()
 	{
+		/*
 		if (APPLICATION.getSideScreen())
 		{
 			APPLICATION.getSideScreen().handleButtons();
@@ -102,12 +97,8 @@ class Screen
 
 		//change to current state as we switched person so we need to reload screen
 		APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
+		*/
 	}
-
-	clubPersonSelected()
-        {
-		//override this to show club person data buttons
-        }
 
         clearScreen()
         {
