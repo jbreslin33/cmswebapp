@@ -38,9 +38,6 @@ class Application
 		//roles
 		this.mPersonArray = new Array();		
 
-		//club persons
-		this.mClubPersonArray = new Array();		
-
 		//html
                	this.mLoggedOutHeaderHtml = null; 
                	this.mLoggedInHeaderHtml = null; 
@@ -531,11 +528,11 @@ class Application
 	{
                 this.mLoginScreenHtml = h;
 	}
+
         getLoginScreenHtml()
 	{
                 return this.mLoginScreenHtml;
 	}
-
 
         setChoosePersonScreenHtml(h)
 	{
