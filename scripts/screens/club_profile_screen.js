@@ -13,8 +13,6 @@ class ClubProfileScreen extends Screen
                 this.setSpinner(document.getElementById("club_profile_screen_spinner_id"));
                 this.setForm(document.getElementById("club_profile_screen_form_id"));
 
-		this.setClubSelect(document.getElementById("club_profile_screen_club_select_id"));
-		this.setPersonSelect(document.getElementById("club_person_screen_person_select_id"));
 		
 		//modal
                 this.setModal(document.getElementById("club_profile_modal_id"));
@@ -30,9 +28,23 @@ class ClubProfileScreen extends Screen
 		this.mCoachButtonArray = new Array();
 		this.mManagerButtonArray = new Array();
 		this.mAdministratorButtonArray = new Array();
+		
+		this.setClubSelect(document.getElementById("club_profile_screen_club_select_id"));
+		this.setPersonSelect(document.getElementById("club_person_screen_person_select_id"));
 
                	//club select
-                this.getClubSelect().onchange = this.clubSelected.bind(this);
+                if (this.getClubSelect())
+		{
+                	this.getClubSelect().onchange = this.clubSelected.bind(this);
+		}
+
+                //person select
+                if (this.getPersonSelect())
+                {
+                        this.getPersonSelect().onchange = this.personSelected.bind(this);
+                }
+
+
         }
 
        	get()
