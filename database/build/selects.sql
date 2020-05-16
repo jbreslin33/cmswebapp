@@ -219,7 +219,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PROFILES
 
 --BEGIN J_SELECT CLUB PROFILES
-CREATE OR REPLACE FUNCTION j_select_club_profiles(int,int)
+CREATE OR REPLACE FUNCTION j_select_club_person_profile(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -252,9 +252,9 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
 	IF raw_json is NULL THEN
-		result_set = CONCAT('"club_profiles": []', raw_json);
+		result_set = CONCAT('"club_person_profile": []', raw_json);
 	ELSE
-		result_set = CONCAT('"club_profiles": ', raw_json);
+		result_set = CONCAT('"club_person_profile": ', raw_json);
 	END IF;
 RETURN result_set;
 END;

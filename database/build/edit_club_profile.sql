@@ -347,7 +347,7 @@ BEGIN
                         ',',
                         j_select_codes(-102),
                         ',',
-                        j_select_club_persons(person_id_p, club_id_p)
+                        j_select_club_person_profile(person_id_p, club_id_p)
                 );
         ELSE
                 result_set = CONCAT

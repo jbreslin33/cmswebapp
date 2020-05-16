@@ -78,7 +78,8 @@ class ClubProfileScreen extends Screen
 
         getClubPersons()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
+		console.log('getClubPersons called');
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_persons.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
         }
         
@@ -210,6 +211,7 @@ class ClubProfileScreen extends Screen
 		{
 			if (this.mJson.club_persons)
 			{
+				console.log('got some');
 				//load up club_persons option
                         	var select = this.getPersonSelect();
                         	select.length = 0;
@@ -253,13 +255,13 @@ class ClubProfileScreen extends Screen
                         	}
 			}
 
-                	if (this.mJson.club_profiles)
+                	if (this.mJson.club_person_profile)
 			{
-                        	for (var i = 0; i < this.mJson.club_profiles.length; i++)
+                        	for (var i = 0; i < this.mJson.club_person_profile.length; i++)
 				{
 
 					//add db row to array
-					this.mClubProfilesArray.push(this.mJson.club_profiles[i]);
+					this.mClubProfilesArray.push(this.mJson.club_person_profile[i]);
 	                               
 					//row
 					var div = document.createElement('div');
@@ -289,18 +291,18 @@ class ClubProfileScreen extends Screen
                                 	p.setAttribute('class','club-profile-paragraph');
                                 	container.appendChild(p);
 					//p.innerHTML = '' + this.mJson.club_profiles[i].person_id + ' ' + 
-					if (this.mJson.club_profiles[i].dob)
+					if (this.mJson.club_person_profile[i].dob)
 					{
 						p.innerHTML = '' +  
-						this.mJson.club_profiles[i].last_name + ', ' +    
-						this.mJson.club_profiles[i].first_name +  ' DOB: ' +  
-						this.mJson.club_profiles[i].dob;   
+						this.mJson.club_person_profile[i].last_name + ', ' +    
+						this.mJson.club_person_profile[i].first_name +  ' DOB: ' +  
+						this.mJson.club_person_profile[i].dob;   
 					}
 					else
 					{
 						p.innerHTML = '' +  
-						this.mJson.club_profiles[i].last_name + ', ' +    
-						this.mJson.club_profiles[i].first_name;  
+						this.mJson.club_person_profile[i].last_name + ', ' +    
+						this.mJson.club_person_profile[i].first_name;  
 					}
 
 
@@ -325,11 +327,11 @@ class ClubProfileScreen extends Screen
                                 	button.setAttribute('class','club-profile-button');
                                         button.innerHTML = "Player";
                                         container.appendChild(button);
-                                        var id = 'club_player_button_' + this.mJson.club_profiles[i].person_id;
+                                        var id = 'club_player_button_' + this.mJson.club_person_profile[i].person_id;
                                         button.setAttribute("id", id);
                                         button.onclick = this.hit.bind(button);
 					
-					if (this.mJson.club_profiles[i].player_id != null)
+					if (this.mJson.club_person_profile[i].player_id != null)
 					{
 						button.style.backgroundColor = "green";
 					}
@@ -345,11 +347,11 @@ class ClubProfileScreen extends Screen
                                 	button.setAttribute('class','club-profile-button');
                                         button.innerHTML = "Parent";
                                         container.appendChild(button);
-                                        var id = 'club_parent_button_' + this.mJson.club_profiles[i].person_id;
+                                        var id = 'club_parent_button_' + this.mJson.club_person_profile[i].person_id;
                                         button.setAttribute("id", id);
                                         button.onclick = this.hit.bind(button);
 					
-					if (this.mJson.club_profiles[i].parent_id != null)
+					if (this.mJson.club_person_profile[i].parent_id != null)
 					{
 						button.style.backgroundColor = "green";
 					}
@@ -365,11 +367,11 @@ class ClubProfileScreen extends Screen
                                 	button.setAttribute('class','club-profile-button');
                                         button.innerHTML = "Coach";
                                         container.appendChild(button);
-                                        var id = 'club_coach_button_' + this.mJson.club_profiles[i].person_id;
+                                        var id = 'club_coach_button_' + this.mJson.club_person_profile[i].person_id;
                                         button.setAttribute("id", id);
                                         button.onclick = this.hit.bind(button);
 					
-					if (this.mJson.club_profiles[i].coach_id != null)
+					if (this.mJson.club_person_profile[i].coach_id != null)
 					{
 						button.style.backgroundColor = "green";
 					}
@@ -385,11 +387,11 @@ class ClubProfileScreen extends Screen
                                 	button.setAttribute('class','club-profile-button');
                                         button.innerHTML = "Manager";
                                         container.appendChild(button);
-                                        var id = 'club_manager_button_' + this.mJson.club_profiles[i].person_id;
+                                        var id = 'club_manager_button_' + this.mJson.club_person_profile[i].person_id;
                                         button.setAttribute("id", id);
                                         button.onclick = this.hit.bind(button);
 					
-					if (this.mJson.club_profiles[i].manager_id != null)
+					if (this.mJson.club_person_profile[i].manager_id != null)
 					{
 						button.style.backgroundColor = "green";
 					}
@@ -405,11 +407,11 @@ class ClubProfileScreen extends Screen
                                 	button.setAttribute('class','club-profile-button');
                                         button.innerHTML = "Administrator";
                                         container.appendChild(button);
-                                        var id = 'club_administrator_button_' + this.mJson.club_profiles[i].person_id;
+                                        var id = 'club_administrator_button_' + this.mJson.club_person_profile[i].person_id;
                                         button.setAttribute("id", id);
                                         button.onclick = this.hit.bind(button);
 					
-					if (this.mJson.club_profiles[i].administrator_id != null)
+					if (this.mJson.club_person_profile[i].administrator_id != null)
 					{
 						button.style.backgroundColor = "green";
 					}
