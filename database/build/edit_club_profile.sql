@@ -328,4 +328,41 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
---END UPDATE CLUB PROFILE
+--END F CLUB PERSON
+
+CREATE OR REPLACE FUNCTION f_club_person_profile(email_id_p int, person_id_p int, club_id_p int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        found_club_administrator_id club_administrators.id%TYPE;
+
+BEGIN
+        select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
+        IF found_club_administrator_id > 0 THEN
+                result_set = CONCAT
+                (
+                        j_select_persons(email_id_p),
+                        ',',
+                        j_select_messages(null),
+                        ',',
+                        j_select_codes(-102),
+                        ',',
+                        j_select_club_persons(person_id_p, club_id_p)
+                );
+        ELSE
+                result_set = CONCAT
+                (
+                        j_select_persons($1),
+                        ',',
+                        j_select_messages('You are not a club administrator.'),
+                        ',',
+                        j_select_codes(-101)
+                );
+
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+

@@ -82,7 +82,6 @@ BEGIN
 		END LOOP;			
 	END LOOP;	
 
-	--delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from teams where club_id = $1  
         LOOP
@@ -93,7 +92,6 @@ BEGIN
 		END LOOP;
         END LOOP;
 
-	--delete from club_players using club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
         LOOP
@@ -101,19 +99,17 @@ BEGIN
         END LOOP;
 
 
-	--delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
 	LOOP
 		FOR recB IN
 			select team_club_persons.id from team_club_persons where club_person_id = recA.id	
 		LOOP
-			delete from team_club_persons_club_administrators where team_club_person_id = recB.id; 	
+			--delete from team_club_persons_club_administrators where team_club_person_id = recB.id; 	
 		END LOOP;
 	END LOOP;
 
 
-	--delete from club_administrators using club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
         LOOP
@@ -121,7 +117,6 @@ BEGIN
         END LOOP;
 
 
-	--delete from team_club_persons_club_players using team_club_persons, club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
 	LOOP
@@ -132,7 +127,6 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	--delete from practices using practice, teams  where teams.club_id = $1;
         FOR recA IN
 		select id from teams where club_id = $1
 	LOOP
@@ -143,26 +137,23 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	--delete from practice using teams where teams.club_id = $1;
         FOR recA IN
 		select id from teams where club_id = $1
 	LOOP
 		delete from practice where team_id = recA.id;	
 	END LOOP;
 			
-	--delete from team_club_persons_club_administrators using team_club_persons, club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
 	LOOP
 		FOR recB IN
 			select team_club_persons.id from team_club_persons where club_person_id = recA.id	
 		LOOP
-			delete from team_club_persons_club_administrators where team_club_person_id = recB.id; 	
+			--delete from team_club_persons_club_administrators where team_club_person_id = recB.id; 	
 		END LOOP;
 	END LOOP;
 
 
-	--delete from team_club_persons_club_managers using club_managers, club_persons  where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
 	LOOP
@@ -173,14 +164,12 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
-	--delete from team_club_persons using club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
 	LOOP
 		delete from team_club_persons where club_person_id = recA.id;
 	END LOOP;
 
-	--delete from club_managers using club_persons where club_persons.club_id = $1;
         FOR recA IN
 		select id from club_persons where club_id = $1  
 	LOOP

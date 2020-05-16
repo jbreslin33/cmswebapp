@@ -145,12 +145,12 @@ class ProfileScreen extends Screen
 				this.mActive = '2'; 
 			}
 		}
-		screen.updateProfile(APPLICATION.getCurrentScreen().getPersonId(),this.mProfileType,this.mActive);
+		screen.updateProfile(APPLICATION.getPersonId(),this.mProfileType,this.mActive);
 
 		//now update side buttons for new profile
 		if (APPLICATION.getSideScreen())
 		{
-			var person = APPLICATION.getPerson(APPLICATION.getCurrentScreen().getPersonId());
+			var person = APPLICATION.getPerson(APPLICATION.getPersonId());
 			person.setRole('' + a[1], this.mActive);
 
 			//handle buttons to update screen

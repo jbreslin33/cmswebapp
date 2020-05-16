@@ -331,6 +331,21 @@ class Application
                 this.mStateMachine.changeState(this.mStateMachine.mCurrentState);
         }
 
+        //used to get from selects
+        getPersonId()
+        {
+                var select = this.getPersonSelect();
+                if (select.value == "")
+                {
+                        return 0;
+                }
+                else
+                {
+                        return select.value;
+                }
+        }
+
+
 	setLoggedOutHeaderHtml(e)
 	{
 		this.setLoggedOutHeaderHtml = e;

@@ -48,7 +48,7 @@ class SideScreen extends Screen
 		//loop throu array
 		for (var i = 0; i < this.mApplication.mPersonArray.length; i++)
 		{
-			if (this.mApplication.mPersonArray[i].mId == this.getPersonId())
+			if (this.mApplication.mPersonArray[i].mId == APPLICATION.getPersonId())
 			{
 				var player = this.mApplication.mPersonArray[i].mPlayerId;
 				var family = this.mApplication.mPersonArray[i].mFamilyId;

@@ -84,7 +84,7 @@ class ClubProfileScreen extends Screen
         
 	getClubPersonProfile()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + get);
                 APPLICATION.getCurrentScreen().ajax();
         }
 
@@ -189,7 +189,7 @@ class ClubProfileScreen extends Screen
 				active = '2'; 
 			}
 		}
-		screen.updateProfile(APPLICATION.getCurrentScreen().getPersonId(),profileNumber,active,person_to_change_id);
+		screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
 	}
 
 	updateProfile(personId,profileNumber,active,person_to_change_id)

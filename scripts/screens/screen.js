@@ -439,7 +439,7 @@ class Screen
 	//used to get from selects
         getPersonId()
         {
-                var select = this.mApplication.getPersonSelect();
+                var select = this.getPersonSelect();
                 if (select.value == "")
                 {
                         return 0;
@@ -452,7 +452,7 @@ class Screen
 
 	getStandardParameters()
 	{
-		return "jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId();
+		return "jwt=" + APPLICATION.getJWT() + "&person_id=" + APPLICATION.getPersonId();
 	}
 
 	getClubId()

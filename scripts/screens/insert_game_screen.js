@@ -52,7 +52,7 @@ class InsertGameScreen extends Screen
 	{
 		if (APPLICATION.getJWT())
 		{
-                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + this.getPersonId());
+                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + APPLICATION.getPersonId());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
@@ -61,7 +61,7 @@ class InsertGameScreen extends Screen
 	{
 		if (APPLICATION.getJWT())
 		{
-                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches_and_teams.php?jwt=" + APPLICATION.getJWT() + "&club_id=" + this.getClubId() + "&person_id=" + this.getPersonId());
+                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches_and_teams.php?jwt=" + APPLICATION.getJWT() + "&club_id=" + this.getClubId() + "&person_id=" + APPLICATION.getPersonId());
                        	APPLICATION.getCurrentScreen().ajax();
 		}
 	}
@@ -90,7 +90,7 @@ class InsertGameScreen extends Screen
 		{
 			//normal
 			var event_date = document.getElementById("insert_game_screen_date_id").value;
-			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + this.getPersonId());
+			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + APPLICATION.getPersonId());
                         
 			APPLICATION.getCurrentScreen().ajax();
 		}

@@ -155,8 +155,8 @@ class Pitch
 
 		if (APPLICATION.getCurrentScreen().mPitch.mClient.mId == 0)
 		{
-			console.log('trying to join with id:' + APPLICATION.getCurrentScreen().getPersonId());
-                	var message = '1,j,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+			console.log('trying to join with id:' + APPLICATION.getPersonId());
+                	var message = '1,j,' + APPLICATION.getPersonId() + ',';
                         APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 		}
 		else
@@ -174,17 +174,17 @@ class Pitch
 					//o = game false,    end game and 
 					if (APPLICATION.mpPressed == true)
 					{
-                				var message = '1,p,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                				var message = '1,p,' + APPLICATION.getPersonId() + ',';
                         			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 					else if (APPLICATION.muPressed == true)
 					{
-                				var message = '1,u,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                				var message = '1,u,' + APPLICATION.getPersonId() + ',';
                         			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 					else if (APPLICATION.mgPressed == true)
 					{
-                				var message = '1,g,' + APPLICATION.getCurrentScreen().getPersonId() + ',';
+                				var message = '1,g,' + APPLICATION.getPersonId() + ',';
                         			APPLICATION.getCurrentScreen().mPitch.mWebSocket.send('' + message);
 					}
 					else
