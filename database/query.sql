@@ -35,7 +35,7 @@
 
 		select 
 			teams.name, 
-			team_club_persons_club_players.id 
+			team_club_persons_club_players.id as player
 			
 			from 
 				team_club_persons_club_players
