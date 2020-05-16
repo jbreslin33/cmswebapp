@@ -84,7 +84,7 @@ class ClubProfileScreen extends Screen
         
 	getClubPersonProfile()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + get);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + this.getPersonId());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
