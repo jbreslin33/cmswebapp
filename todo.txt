@@ -1,4 +1,4 @@
-below plus isnert person is causing problems
+--fixed but i don't how maybe it was never broken?? or the getPersonId fixed it. below plus isnert person is causing problems
 ---
 need to display below stuff
 also need a get for it in club profile screen then set up buttons and associated them with appropriate team person role
