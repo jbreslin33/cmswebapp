@@ -330,7 +330,7 @@ END;
 $$ LANGUAGE plpgsql;
 --END F CLUB PERSON
 
-CREATE OR REPLACE FUNCTION f_club_person_profile(email_id_p int, person_id_p int, club_id_p int)
+CREATE OR REPLACE FUNCTION f_club_person_profile(email_id_p int, person_id_p int, club_id_p int, person_to_show_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -347,7 +347,8 @@ BEGIN
                         ',',
                         j_select_codes(-102),
                         ',',
-                        j_select_club_person_profile(person_id_p, club_id_p)
+                        --j_select_club_person_profile(person_id_p, club_id_p)
+                        j_select_club_teams($3)
                 );
         ELSE
                 result_set = CONCAT

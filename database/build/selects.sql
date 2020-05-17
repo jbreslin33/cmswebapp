@@ -178,6 +178,32 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
 
+--BEGIN J_SELECT TEAMS
+CREATE OR REPLACE FUNCTION j_select_club_teams(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+		select teams.id as team_id, teams.name as team_name from teams
+		where teams.club_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"club_teams": []', raw_json);
+        ELSE
+                result_set = CONCAT('"club_teams": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT TEAMS
+
+
 --BEGIN J_SELECT PROFILES
 CREATE OR REPLACE FUNCTION j_select_profiles(int)
 RETURNS text AS $$
@@ -218,86 +244,6 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PROFILES
 
---BEGIN J_SELECT CLUB PROFILES
-CREATE OR REPLACE FUNCTION j_select_club_person_profile(int,int)
-RETURNS text AS $$
-DECLARE
-raw_json text;
-result_set text;
-BEGIN
-
-SELECT json_agg(t) INTO raw_json
-        from
-        (
-                select
-                        teams.id as team_id,
-                        teams.name as team_name,
-			team_club_persons.id as team_club_person_id,
-                        team_club_persons_club_players.id as player,
-                        team_club_persons_club_parents.id as parent,
-                        team_club_persons_club_coaches.id as coach,
-                        team_club_persons_club_managers.id as manager
-
-                        from
-                                team_club_persons
-
-                full outer join
-                        team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
-
-                full outer join
-                        team_club_persons_club_parents on team_club_persons_club_parents.team_club_person_id=team_club_persons.id
-
-                full outer join
-                        team_club_persons_club_coaches on team_club_persons_club_coaches.team_club_person_id=team_club_persons.id
-
-                full outer join
-                        team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
-
-                full outer join
-                        teams on teams.id=team_club_persons.team_id
-
-                full outer join
-                        club_persons on club_persons.id=team_club_persons.club_person_id
-                full outer join
-                        persons on persons.id=club_persons.person_id
-
-                where
-                        persons.id = $1 AND teams.club_id = $2 
-
-
-
-		select
-		persons.last_name as last_name,
-		persons.first_name as first_name,
-		persons.dob as dob,
-		persons.id as person_id,
-		players.id as player_id,
-		parents.id as parent_id,
-		coaches.id as coach_id,
-		managers.id as manager_id,
-		administrators.id as administrator_id
-		
-		from persons
-
-		left join players on players.person_id=persons.id
-		left join parents on parents.person_id=persons.id
-		left join coaches on coaches.person_id=persons.id
-		left join managers on managers.person_id=persons.id
-		left join administrators on administrators.person_id=persons.id
-		order by persons.last_name asc
-
-        ) t;
-
-	IF raw_json is NULL THEN
-		result_set = CONCAT('"club_person_profile": []', raw_json);
-	ELSE
-		result_set = CONCAT('"club_person_profile": ', raw_json);
-	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
---END J_SELECT CLUB PROFILES
-
 --BEGIN J_SELECT CLUB PERSONS
 CREATE OR REPLACE FUNCTION j_select_club_persons(int,int)
 RETURNS text AS $$
@@ -313,20 +259,10 @@ SELECT json_agg(t) INTO raw_json
                 persons.last_name as last_name,
                 persons.first_name as first_name,
                 persons.dob as dob,
-                persons.id as person_id,
-                players.id as player_id,
-                parents.id as parent_id,
-                coaches.id as coach_id,
-                managers.id as manager_id,
-                administrators.id as administrator_id
+                persons.id as id
 
                 from persons
 
-                left join players on players.person_id=persons.id
-                left join parents on parents.person_id=persons.id
-                left join coaches on coaches.person_id=persons.id
-                left join managers on managers.person_id=persons.id
-                left join administrators on administrators.person_id=persons.id
                 order by persons.last_name asc
 
         ) t;

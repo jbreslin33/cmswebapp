@@ -85,7 +85,10 @@ class ClubProfileScreen extends Screen
         
 	getClubPersonProfile()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + this.getPersonId());
+		var person_selected_id =  APPLICATION.getCurrentScreen().getPersonId(); 
+		console.log('person_selected_id:' + person_selected_id);
+
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + person_selected_id);
                 APPLICATION.getCurrentScreen().ajax();
         }
 
@@ -255,6 +258,15 @@ class ClubProfileScreen extends Screen
                         	}
 			}
 
+			if (this.mJson.club_teams)
+			{
+                        	for (var i = 0; i < this.mJson.club_teams.length; i++)
+				{
+					console.log('team:' + 	this.mJson.club_teams[i].team_name);
+				}
+				
+			}
+/*
                 	if (this.mJson.club_person_profile)
 			{
                         	for (var i = 0; i < this.mJson.club_person_profile.length; i++)
@@ -423,6 +435,7 @@ class ClubProfileScreen extends Screen
                                         this.mAdministratorButtonArray.push(button);
 				}
 			}
+			*/
 		}
 	}
 }
