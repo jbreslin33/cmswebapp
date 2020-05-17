@@ -349,7 +349,13 @@ BEGIN
                         ',',
                         j_select_club_teams($3),
                         ',',
-                        j_select_club_players_id($3,$4)
+                        j_select_club_players_id($3,$4),
+                        ',',
+                        j_select_club_parents_id($3,$4),
+                        ',',
+                        j_select_club_coaches_id($3,$4),
+                        ',',
+                        j_select_club_managers_id($3,$4)
                 );
         ELSE
                 result_set = CONCAT

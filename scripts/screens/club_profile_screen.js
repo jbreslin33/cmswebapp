@@ -274,6 +274,29 @@ class ClubProfileScreen extends Screen
 				}
 				
 			}
+			if (this.mJson.club_parents_id)
+			{
+                        	for (var i = 0; i < this.mJson.club_parents_id.length; i++)
+				{
+					console.log('club_parents_id:' + 	this.mJson.club_parents_id[i].club_parents_id);
+				}
+				
+			}
+			if (this.mJson.club_coaches_id)
+			{
+                        	for (var i = 0; i < this.mJson.club_coaches_id.length; i++)
+				{
+					console.log('club_coaches_id:' + 	this.mJson.club_coaches_id[i].club_coaches_id);
+				}
+				
+			}
+			if (this.mJson.club_managers_id)
+			{
+                        	for (var i = 0; i < this.mJson.club_managers_id.length; i++)
+				{
+					console.log('club_managers_id:' + 	this.mJson.club_managers_id[i].club_managers_id);
+				}
+			}
 
 /*
                 	if (this.mJson.club_person_profile)
