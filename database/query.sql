@@ -23,6 +23,59 @@
 
 		;
 
+                select
+                        club_parents.id as club_parents_id
+
+                from
+                        club_parents
+
+                join
+                        club_persons on club_persons.id=club_parents.club_person_id
+
+                join
+                        persons on persons.id=club_persons.person_id
+
+                where
+                        persons.id = 25 AND club_persons.club_id = 1
+
+                ;
+
+
+                select
+                        club_coaches.id as club_coach_id
+
+                from
+                        club_coaches
+
+                join
+                        club_persons on club_persons.id=club_coaches.club_person_id
+
+                join
+                        persons on persons.id=club_persons.person_id
+
+                where
+                        persons.id = 25 AND club_persons.club_id = 1
+
+                ;
+
+                select
+                        club_managers.id as club_managers_id
+
+                from
+                        club_managers
+
+                join
+                        club_persons on club_persons.id=club_managers.club_person_id
+
+                join
+                        persons on persons.id=club_persons.person_id
+
+                where
+                        persons.id = 25 AND club_persons.club_id = 1
+
+                ;
+
+
 
 		select 
                         team_club_persons.team_id as team_id,
