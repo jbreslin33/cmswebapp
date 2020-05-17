@@ -204,6 +204,44 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
 
 
+--BEGIN J_SELECT TEAMS
+CREATE OR REPLACE FUNCTION j_select_club_players_id(int,int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        club_players.id as club_players_id
+
+                from
+                        club_players
+
+                join
+                        club_persons on club_persons.id=club_players.club_person_id
+
+                join
+                        persons on persons.id=club_persons.person_id
+
+                where
+                        persons.id = $2 AND club_persons.club_id = $1 
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"club_players_id": []', raw_json);
+        ELSE
+                result_set = CONCAT('"club_players_id": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT TEAMS
+
+
 --BEGIN J_SELECT PROFILES
 CREATE OR REPLACE FUNCTION j_select_profiles(int)
 RETURNS text AS $$

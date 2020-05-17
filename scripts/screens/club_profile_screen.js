@@ -266,6 +266,15 @@ class ClubProfileScreen extends Screen
 				}
 				
 			}
+			if (this.mJson.club_players_id)
+			{
+                        	for (var i = 0; i < this.mJson.club_players_id.length; i++)
+				{
+					console.log('club_players_id:' + 	this.mJson.club_players_id[i].club_players_id);
+				}
+				
+			}
+
 /*
                 	if (this.mJson.club_person_profile)
 			{

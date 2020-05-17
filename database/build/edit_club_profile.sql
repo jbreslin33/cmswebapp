@@ -347,8 +347,9 @@ BEGIN
                         ',',
                         j_select_codes(-102),
                         ',',
-                        --j_select_club_person_profile(person_id_p, club_id_p)
-                        j_select_club_teams($3)
+                        j_select_club_teams($3),
+                        ',',
+                        j_select_club_players_id($3,$4)
                 );
         ELSE
                 result_set = CONCAT
