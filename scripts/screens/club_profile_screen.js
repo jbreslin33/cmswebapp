@@ -297,6 +297,36 @@ class ClubProfileScreen extends Screen
 					console.log('club_managers_id:' + 	this.mJson.club_managers_id[i].club_managers_id);
 				}
 			}
+			
+			if (this.mJson.team_players_id)
+			{
+                        	for (var i = 0; i < this.mJson.team_players_id.length; i++)
+				{
+					console.log('team_player_id:' + 	this.mJson.team_players_id[i].team_player_id);
+				}
+			}
+			if (this.mJson.team_parents_id)
+			{
+                        	for (var i = 0; i < this.mJson.team_parents_id.length; i++)
+				{
+					console.log('team_parents_id:' + 	this.mJson.team_parents_id[i].team_parent_id);
+				}
+			}
+			if (this.mJson.team_coaches_id)
+			{
+                        	for (var i = 0; i < this.mJson.team_coaches_id.length; i++)
+				{
+					console.log('team_coach_id:' + 	this.mJson.team_coaches_id[i].team_coach_id);
+				}
+			}
+			if (this.mJson.team_managers_id)
+			{
+                        	for (var i = 0; i < this.mJson.team_managers_id.length; i++)
+				{
+					console.log('team_manager_id:' + 	this.mJson.team_managers_id[i].team_manager_id);
+				}
+			}
+
 
 /*
                 	if (this.mJson.club_person_profile)

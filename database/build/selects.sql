@@ -343,6 +343,151 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION j_select_team_players_id(int,int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                       	team_club_persons.team_id as team_id,
+                        team_club_persons_club_players.id as team_player_id 
+
+                        from
+                                team_club_persons_club_players
+                join
+                        team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
+
+                join
+                        club_persons on club_persons.id=team_club_persons.club_person_id
+
+
+                where
+                        club_persons.person_id = $2 AND club_persons.club_id = $1
+	) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"team_players_id": []', raw_json);
+        ELSE
+                result_set = CONCAT('"team_players_id": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION j_select_team_parents_id(int,int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        team_club_persons.team_id as team_id,
+                        team_club_persons_club_parents.id as team_parent_id                   
+
+                        from
+                                team_club_persons_club_parents
+                join
+                        team_club_persons on team_club_persons.id=team_club_persons_club_parents.team_club_person_id
+
+                join
+                        club_persons on club_persons.id=team_club_persons.club_person_id
+
+
+                where
+                        club_persons.person_id = $2 AND club_persons.club_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"team_parents_id": []', raw_json);
+        ELSE
+                result_set = CONCAT('"team_parents_id": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION j_select_team_coaches_id(int,int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        team_club_persons.team_id as team_id,
+                        team_club_persons_club_coaches.id as team_coach_id       
+
+                        from
+                                team_club_persons_club_coaches
+                join
+                        team_club_persons on team_club_persons.id=team_club_persons_club_coaches.team_club_person_id
+
+                join
+                        club_persons on club_persons.id=team_club_persons.club_person_id
+
+
+                where
+                        club_persons.person_id = $2 AND club_persons.club_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"team_coaches_id": []', raw_json);
+        ELSE
+                result_set = CONCAT('"team_coaches_id": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION j_select_team_managers_id(int,int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        team_club_persons.team_id as team_id,
+                        team_club_persons_club_managers.id as team_manager_id        
+
+                        from
+                                team_club_persons_club_managers
+                join
+                        team_club_persons on team_club_persons.id=team_club_persons_club_managers.team_club_person_id
+
+                join
+                        club_persons on club_persons.id=team_club_persons.club_person_id
+
+
+                where
+                        club_persons.person_id = $2 AND club_persons.club_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"team_managers_id": []', raw_json);
+        ELSE
+                result_set = CONCAT('"team_managers_id": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 
 --BEGIN J_SELECT PROFILES
