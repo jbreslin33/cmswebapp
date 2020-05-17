@@ -23,11 +23,18 @@ class ClubProfileScreen extends Screen
 		this.mDivArray = new Array();
 		this.mClubProfilesArray = new Array();
 
+		this.mClubPlayerButton = document.getElementById("club_profile_club_player_button_id");
+		this.mClubParentButton = document.getElementById("club_profile_club_parent_button_id");
+		this.mClubCoachButton = document.getElementById("club_profile_club_coach_button_id");
+		this.mClubManagerButton = document.getElementById("club_profile_club_manager_button_id");
+/*
 		this.mPlayerButtonArray = new Array();
 		this.mParentButtonArray = new Array();
 		this.mCoachButtonArray = new Array();
 		this.mManagerButtonArray = new Array();
 		this.mAdministratorButtonArray = new Array();
+		*/
+		
 		
 		this.setClubSelect(document.getElementById("club_profile_screen_club_select_id"));
 		this.setPersonSelect(document.getElementById("club_person_screen_person_select_id"));
@@ -268,11 +275,26 @@ class ClubProfileScreen extends Screen
 			}
 			if (this.mJson.club_players_id)
 			{
+
                         	for (var i = 0; i < this.mJson.club_players_id.length; i++)
 				{
 					console.log('club_players_id:' + 	this.mJson.club_players_id[i].club_players_id);
 				}
-				
+                                
+				this.mClubPlayerButton.setAttribute('class','club-profile-button');
+                                var id = 'club_player_button_' + this.mJson.club_players_id[0].club_players_id;
+                                this.mClubPlayerButton.setAttribute("id", id);
+                                this.mClubPlayerButton.onclick = this.hit.bind(this.mClubPlayerButton);
+                                
+                                if (this.mJson.club_players_id[0].club_players_id != null)
+                                {
+                                	this.mClubPlayerButton.style.backgroundColor = "green";
+                                }
+                                else
+                                {
+                                        this.mClubPlayerButton.style.backgroundColor = "red";
+                                }
+
 			}
 			if (this.mJson.club_parents_id)
 			{
