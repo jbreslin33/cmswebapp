@@ -604,6 +604,17 @@ BEGIN
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
 	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
+	
+	------------------------------------------------------------------------------------------------------
+	
+	--TEAM Ladder15  
+	insert into teams (club_id,name) values (1,'Ladder 15') returning id into returning_team_id;
+	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
+	
+	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
+
+
+
 END;
 $$;
 --END INSERT PERSON
@@ -627,6 +638,10 @@ DECLARE
 
 	--JIM as club administrator
 	returning_administrator_id administrators.id%TYPE;
+
+	--Jim as player
+	returning_player_id players.id%TYPE;
+	returning_club_player_id club_players.id%TYPE;
 
 BEGIN
 	--JOE
@@ -675,6 +690,24 @@ BEGIN
 	--for u19 celtic for jim
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,3)  returning id into returning_team_club_person_id;
 	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	
+	--for ladder 15 for jim
+	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,4)  returning id into returning_team_club_person_id;
+	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+
+        -------------------------------add Jim as Player to Ladder 15
+        --PLAYER
+        insert into players (person_id) values (returning_person_id) returning id into returning_player_id;
+
+        --CLUB_PLAYERS
+        insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id, returning_player_id, 31) returning id into returning_club_player_id;
+
+        --TEAM_CLUB_PERSONS
+        insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id, 4) returning id into returning_team_club_person_id;
+
+        --TEAM_CLUB_PLAYERS
+        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+
 
 	
 
