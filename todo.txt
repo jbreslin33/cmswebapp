@@ -1,3 +1,39 @@
+ team_id |  team_name   | team_club_person_id | club_players_id | club_parents_id | club_coaches_id | club_managers_id | player | parent | coach | manager 
+---------+--------------+---------------------+-----------------+-----------------+-----------------+------------------+--------+--------+-------+---------
+       4 | Ladder 15    |                  23 |              15 |                 |                 |                2 |     15 |        |       |        
+       4 | Ladder 15    |                  22 |              15 |                 |                 |                2 |        |        |       |       8
+       3 | u19 Celtic   |                  21 |              15 |                 |                 |                2 |        |        |       |       7
+       2 | u14 Celestas |                  20 |              15 |                 |                 |                2 |        |        |       |       6
+       1 | u16 Caos     |                  19 |              15 |                 |                 |                2 |        |        |       |       5
+
+CLUB ROLES BUTTONS AT TOP (club_player ,club_parent, club_coach, club_manager)
+basicaly loop thru and check 
+for 
+club_players_id if true green else red
+club_parents_id if true green else red
+club_coaches_id if true green else red
+club_managers_id if true green else red
+
+then
+for each team....
+make an array and fill it....
+teamArray
+
+then in each team array there will be an 
+playerArray
+parentArray
+coachArray
+managerArray
+
+thes arrays will be:
+role_id
+IMPORTANTE: after the buttons at top we are in essence just setting up a table of buttons
+essentiall the top are headers
+so its rows of teams with 4 colums
+IMPORTANTE: we might need a new query!!!! 
+
+
+------------
 --fixed but i don't how maybe it was never broken?? or the getPersonId fixed it. below plus isnert person is causing problems
 ---
 need to display below stuff

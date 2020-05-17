@@ -52,7 +52,7 @@
 			persons on persons.id=club_persons.person_id
 
 		where 
-			persons.id = 25 AND teams.club_id = 1
+			persons.id = 24 AND teams.club_id = 1
 		;
 
 		select * from team_club_persons_club_managers;
