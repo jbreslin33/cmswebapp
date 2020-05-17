@@ -1,5 +1,6 @@
 
 		select 
+			teams.id, 
 			teams.name, 
 			team_club_persons_club_players.id as player,
 			team_club_persons_club_parents.id as parent,
@@ -24,9 +25,9 @@
 		full outer join 
 			teams on teams.id=team_club_persons.team_id			
 		
-		join    
+		full outer join    
 			club_persons on club_persons.id=team_club_persons.club_person_id
-		join    
+		full outer join    
 			persons on persons.id=club_persons.person_id
 
 		where 
