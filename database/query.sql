@@ -1,3 +1,29 @@
+		select 
+			teams.id, teams.name  
+	
+		from 
+			teams 
+		where
+			teams.club_id = 1;
+		
+		select 
+                      	club_players.id as club_players_id
+
+		from 
+			club_players		
+
+		join
+			club_persons on club_persons.id=club_players.club_person_id
+
+		join 
+			persons on persons.id=club_persons.person_id
+
+		where 
+			persons.id = 24 AND club_persons.club_id = 1
+
+		;
+		
+
 
 		select 
                         teams.id as team_id,
@@ -16,39 +42,26 @@
                         team_club_persons_club_managers.id as manager
 
 			from 
-				team_club_persons 
+				teams 
 
-		full outer join 
-			team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id		
-		
-		full outer join 
-			team_club_persons_club_parents on team_club_persons_club_parents.team_club_person_id=team_club_persons.id		
-		
-		full outer join 
-			team_club_persons_club_coaches on team_club_persons_club_coaches.team_club_person_id=team_club_persons.id		
+		join team_club_persons on team_club_persons.team_id=teams.id
 
-		full outer join 
-			team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id		
-
-		full outer join 
-			teams on teams.id=team_club_persons.team_id			
-		
-		full outer join    
+		join    
 			club_persons on club_persons.id=team_club_persons.club_person_id
 		
-		full outer join    
+		join    
 			club_players on club_players.club_person_id=club_persons.id
 		
-		full outer join    
+		join    
 			club_parents on club_parents.club_person_id=club_persons.id
 		
-		full outer join    
+		join    
 			club_coaches on club_coaches.club_person_id=club_persons.id
 		
-		full outer join    
+		join    
 			club_managers on club_managers.club_person_id=club_persons.id
 
-		full outer join    
+		join    
 			persons on persons.id=club_persons.person_id
 
 		where 
