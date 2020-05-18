@@ -33,10 +33,10 @@ class ClubProfileScreen extends Screen
 		this.mClubCoachButton.setAttribute('class','club-profile-button');
 		this.mClubManagerButton.setAttribute('class','club-profile-button');
                                 
-		this.mClubPlayerButton.onclick  = this.hit.bind(this.mClubPlayerButton);
-                this.mClubParentButton.onclick  = this.hit.bind(this.mClubParentButton);
-                this.mClubCoachButton.onclick   = this.hit.bind(this.mClubCoachButton);
-                this.mClubManagerButton.onclick = this.hit.bind(this.mClubManagerButton);
+		this.mClubPlayerButton.onclick  = this.hitClubRoleButton.bind(this.mClubPlayerButton);
+                this.mClubParentButton.onclick  = this.hitClubRoleButton.bind(this.mClubParentButton);
+                this.mClubCoachButton.onclick   = this.hitClubRoleButton.bind(this.mClubCoachButton);
+                this.mClubManagerButton.onclick = this.hitClubRoleButton.bind(this.mClubManagerButton);
 /*
 		this.mPlayerButtonArray = new Array();
 		this.mParentButtonArray = new Array();
@@ -122,7 +122,7 @@ class ClubProfileScreen extends Screen
                         APPLICATION.getCurrentScreen().mDivArray[i].remove();
 		}
 	}
-	hitClubPlayerButton()
+	hitClubRoleButton()
 	{
                 var screen = APPLICATION.getCurrentScreen();
 
@@ -149,6 +149,24 @@ class ClubProfileScreen extends Screen
                                 active = '2';
                         }
                 }
+
+                if (a[1] == 'parent')
+                {
+                        if (this.style.backgroundColor == "green")
+                        {
+                                this.style.backgroundColor = "red";
+                                profileNumber = '2';
+                                active = '1';
+                        }
+                        else
+                        {
+                                this.style.backgroundColor = "green";
+                                profileNumber = '2';
+                                active = '2';
+                        }
+                }
+
+		screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
 	}
 
 	hit()
@@ -324,7 +342,7 @@ class ClubProfileScreen extends Screen
                                 	}
 					else
 					{
-                                		var id = 'club_player_button_0';
+                                		var id = 'club_player_button_' + this.getPersonId();
                                 		this.mClubPlayerButton.setAttribute("id", id);
                                        		this.mClubPlayerButton.style.backgroundColor = "red";
 					}
@@ -343,7 +361,7 @@ class ClubProfileScreen extends Screen
                                         }
                                         else
                                         {
-                                                var id = 'club_parent_button_0';
+                                                var id = 'club_parent_button_' + this.getPersonId();
                                                 this.mClubParentButton.setAttribute("id", id);
                                                 this.mClubParentButton.style.backgroundColor = "red";
                                         }
@@ -362,7 +380,7 @@ class ClubProfileScreen extends Screen
                                         }
                                         else
                                         {
-                                                var id = 'club_coach_button_0';
+                                                var id = 'club_coach_button_0' + this.getPersonId();
                                                 this.mClubCoachButton.setAttribute("id", id);
                                                 this.mClubCoachButton.style.backgroundColor = "red";
                                         }
@@ -381,7 +399,7 @@ class ClubProfileScreen extends Screen
                                         }
                                         else
                                         {
-                                                var id = 'club_manager_button_0';
+                                                var id = 'club_manager_button_0' + this.getPersonId();
                                                 this.mClubManagerButton.setAttribute("id", id);
                                                 this.mClubManagerButton.style.backgroundColor = "red";
                                         }

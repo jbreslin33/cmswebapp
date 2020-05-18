@@ -105,6 +105,7 @@ BEGIN
 			IF found_parent_id > 0  THEN
 				-- DO NOTHING
 			ELSE
+				RAISE LOG 'person_id:%', $3;
 				insert into parents (person_id) values ($3) returning id into found_parent_id;
 			END IF;
 			
@@ -180,33 +181,6 @@ BEGIN
 			--DO NOTHING
 		END IF;
 		
-		IF $1 = 5 THEN
-			--do we need to add to administrators????
-			select id into found_administrator_id from administrators where person_id = $3; 
-			IF found_administrator_id > 0  THEN
-				-- DO NOTHING
-			ELSE
-				insert into administrators (person_id) values ($3) returning id into found_administrator_id;
-			END IF;
-			
-			--do we need to add to club_managers
-			select id into found_club_person_id from club_persons where person_id = $3; 
-			IF found_club_person_id > 0  THEN
-				--insert into club_administrators if it does not already exist...
-				select id into found_club_administrator_id from club_administrators where club_person_id = found_club_person_id; 
-				IF found_club_administrator_id > 0  THEN
-					--do nothing as club_administrator already exists
-				ELSE
-					insert into club_administrators(club_person_id,administrator_id) values (found_club_person_id, found_administrator_id);
-				END IF;
-				
-			ELSE
-				--did not find club_person error...
-			END IF;
-		ELSE
-			--DO NOTHING
-		END IF;
-
 				--RAISE LOG 'person_id:%', $3;
 				--RAISE LOG 'club_person_id:%', found_club_person_id;
 
