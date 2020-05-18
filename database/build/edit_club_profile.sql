@@ -88,7 +88,53 @@ BEGIN
 
 RETURN result_set;
 END;
+
 $$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION f_delete_club_player(int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                --lets check if you are club_admin
+
+                CALL p_delete_club_player($3,x);
+
+                IF x = -100 THEN
+                        RAISE LOG '1st:%', x;
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-101)
+                        );
+                END IF;
+
+                IF x = -101 THEN
+                        RAISE LOG '2nd:%', x;
+
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from team or teams before removing them as a club wide player.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 
 CREATE OR REPLACE PROCEDURE p_insert_club_player(int,INOUT x int)
@@ -121,6 +167,42 @@ BEGIN
               	END IF;
 
        	END IF;
+END;
+$$;
+
+
+CREATE OR REPLACE PROCEDURE p_delete_club_player(int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        --found_player_id players.id%TYPE;
+        found_club_player_id club_players.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+	found_team_club_persons_club_players_id team_club_persons_club_players.id%TYPE;
+
+BEGIN
+        x := -100;
+
+        select id into found_club_person_id from club_persons where person_id = $1;
+
+        --team_club_persons_club_players
+        IF found_club_person_id > 0  THEN
+
+        	select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+                IF found_club_player_id > 0 THEN
+
+                	select id into found_team_club_persons_club_players_id from team_club_persons_club_players where club_player_id = found_club_player_id;
+
+                        IF found_team_club_persons_club_players_id IS NULL THEN
+                        	delete from club_players where club_person_id = found_club_person_id;
+
+                       	ELSE
+				x := -101;
+                        END IF;
+            	END IF;
+	END IF;
+
 END;
 $$;
 

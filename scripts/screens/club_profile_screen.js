@@ -288,7 +288,7 @@ class ClubProfileScreen extends Screen
 	deleteClubPlayer(person_to_change_id)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		//screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&person_to_change_id=' + person_to_change_id);
+		screen.setUrl("/php/classes/screens/delete_club_player.php?" + this.getStandardParameters() + '&person_to_change_id=' + person_to_change_id);
                 screen.ajax();
 	}
 
