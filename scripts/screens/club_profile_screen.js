@@ -86,10 +86,12 @@ class ClubProfileScreen extends Screen
 			        	if (this.mCurrentButton.style.backgroundColor == "green")
                         		{
                                 		this.mCurrentButton.style.backgroundColor = "red";
+						console.log('turning red');
                         		}
                         		else
                         		{
                                 		this.mCurrentButton.style.backgroundColor = "green";
+						console.log('turning green');
                         		}
 				}
 				else

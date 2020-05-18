@@ -112,7 +112,7 @@ BEGIN
                                 ',',
                                 j_select_messages(null),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(x)
                         );
                 END IF;
 
@@ -125,7 +125,7 @@ BEGIN
                                 ',',
                                 j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from team or teams before removing them as a club wide player.'),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(x)
                         );
                 END IF;
 
