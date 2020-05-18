@@ -33,7 +33,7 @@ BEGIN
                         (
                                 j_select_persons($1),
                                 ',',
-                                j_select_messages('Something went wrong with setting availability. Please try again.'),
+                                j_select_messages('This person is associated with teams you must remove them from team first.'),
                                 ',',
                                 j_select_codes(-101)
                         );
@@ -44,12 +44,93 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_insert_club_player(int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                --lets check if you are club_admin
+
+                CALL p_insert_club_player($3,x);
+
+                IF x = -100 THEN
+                        RAISE LOG '1st:%', x;
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(-101)
+                        );
+                END IF;
+
+                IF x = -101 THEN
+                        RAISE LOG '2nd:%', x;
+
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from team or teams before removing them as a club wide player.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE p_insert_club_player(int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	found_player_id players.id%TYPE;
+	found_club_player_id club_players.id%TYPE;
+	found_club_person_id club_persons.id%TYPE;
+BEGIN
+	x := -100;
+
+       	--do we need to add to players????
+        select id into found_player_id from players where person_id = $1;
+
+        IF found_player_id IS NULL THEN
+              	insert into players (person_id) values ($1) returning id into found_player_id;
+        END IF;
+
+        --do we need to add to club_players
+        select id into found_club_person_id from club_persons where person_id = $1;
+
+        IF found_club_person_id > 0 THEN
+
+          	--insert into club_players if it does not already exist...
+               	select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+      		IF found_club_player_id IS NULL THEN
+      			insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
+              	END IF;
+
+       	END IF;
+END;
+$$;
+
+
+
 --role,active?,persontochange
 CREATE OR REPLACE PROCEDURE p_update_club_profile(int,int,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-        ids INT[];
 	found_person_id persons.id%TYPE;
 
 	found_club_person_id club_persons.id%TYPE;

@@ -33,7 +33,7 @@ class ClubProfileScreen extends Screen
 		this.mClubCoachButton.setAttribute('class','club-profile-button');
 		this.mClubManagerButton.setAttribute('class','club-profile-button');
                                 
-		this.mClubPlayerButton.onclick  = this.hitClubRoleButton.bind(this.mClubPlayerButton);
+		this.mClubPlayerButton.onclick  = this.hitClubPlayerButton.bind(this.mClubPlayerButton);
                 this.mClubParentButton.onclick  = this.hitClubRoleButton.bind(this.mClubParentButton);
                 this.mClubCoachButton.onclick   = this.hitClubRoleButton.bind(this.mClubCoachButton);
                 this.mClubManagerButton.onclick = this.hitClubRoleButton.bind(this.mClubManagerButton);
@@ -122,6 +122,25 @@ class ClubProfileScreen extends Screen
                         APPLICATION.getCurrentScreen().mDivArray[i].remove();
 		}
 	}
+
+	hitClubPlayerButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+
+                var a = this.id.split('_');
+
+                var person_to_change_id = a[3];
+
+                if (this.style.backgroundColor == "green")
+		{
+			APPLICATION.getCurrentScreen().deleteClubPlayer(person_to_change_id);
+		}
+		else
+		{
+			APPLICATION.getCurrentScreen().insertClubPlayer(person_to_change_id);
+		}
+	}
+
 	hitClubRoleButton()
 	{
                 var screen = APPLICATION.getCurrentScreen();
@@ -257,6 +276,20 @@ class ClubProfileScreen extends Screen
 			}
 		}
 		screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
+	}
+
+	insertClubPlayer(person_to_change_id)
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&person_to_change_id=' + person_to_change_id);
+                screen.ajax();
+	}
+
+	deleteClubPlayer(person_to_change_id)
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		//screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&person_to_change_id=' + person_to_change_id);
+                screen.ajax();
 	}
 
 	updateProfile(personId,profileNumber,active,person_to_change_id)
