@@ -301,31 +301,66 @@ class ClubProfileScreen extends Screen
                                        		this.mClubPlayerButton.style.backgroundColor = "red";
 					}
 				}
+				
+				if (this.mJson.club_parents_id)
+                                {
+                                        if (this.mJson.club_parents_id.length > 0)
+                                        {
+                                                if (this.mJson.club_parents_id[0].club_parents_id)
+                                                {
+                                                        var id = 'club_parent_button_' + this.mJson.club_parents_id[0].club_parents_id;
+                                                        this.mClubParentButton.setAttribute("id", id);
+                                                        this.mClubParentButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_parent_button_0';
+                                                this.mClubParentButton.setAttribute("id", id);
+                                                this.mClubParentButton.style.backgroundColor = "red";
+                                        }
+                                }
+				
+				if (this.mJson.club_coaches_id)
+                                {
+                                        if (this.mJson.club_coaches_id.length > 0)
+                                        {
+                                                if (this.mJson.club_coaches_id[0].club_coaches_id)
+                                                {
+                                                        var id = 'club_coach_button_' + this.mJson.club_coaches_id[0].club_coaches_id;
+                                                        this.mClubCoachButton.setAttribute("id", id);
+                                                        this.mClubCoachButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_coach_button_0';
+                                                this.mClubCoachButton.setAttribute("id", id);
+                                                this.mClubCoachButton.style.backgroundColor = "red";
+                                        }
+                                }
+				
+				if (this.mJson.club_managers_id)
+                                {
+                                        if (this.mJson.club_managers_id.length > 0)
+                                        {
+                                                if (this.mJson.club_managers_id[0].club_managers_id)
+                                                {
+                                                        var id = 'club_manager_button_' + this.mJson.club_managers_id[0].club_managers_id;
+                                                        this.mClubManagerButton.setAttribute("id", id);
+                                                        this.mClubManagerButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_manager_button_0';
+                                                this.mClubManagerButton.setAttribute("id", id);
+                                                this.mClubManagerButton.style.backgroundColor = "red";
+                                        }
+                                }
 			
 			}
-			if (this.mJson.club_parents_id)
-			{
-                        	for (var i = 0; i < this.mJson.club_parents_id.length; i++)
-				{
-					console.log('club_parents_id:' + 	this.mJson.club_parents_id[i].club_parents_id);
-				}
-				
-			}
-			if (this.mJson.club_coaches_id)
-			{
-                        	for (var i = 0; i < this.mJson.club_coaches_id.length; i++)
-				{
-					console.log('club_coaches_id:' + 	this.mJson.club_coaches_id[i].club_coaches_id);
-				}
-				
-			}
-			if (this.mJson.club_managers_id)
-			{
-                        	for (var i = 0; i < this.mJson.club_managers_id.length; i++)
-				{
-					console.log('club_managers_id:' + 	this.mJson.club_managers_id[i].club_managers_id);
-				}
-			}
+
 			
 			if (this.mJson.team_players_id)
 			{
