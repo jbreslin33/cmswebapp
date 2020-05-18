@@ -27,6 +27,16 @@ class ClubProfileScreen extends Screen
 		this.mClubParentButton = document.getElementById("club_profile_club_parent_button_id");
 		this.mClubCoachButton = document.getElementById("club_profile_club_coach_button_id");
 		this.mClubManagerButton = document.getElementById("club_profile_club_manager_button_id");
+				
+		this.mClubPlayerButton.setAttribute('class','club-profile-button');
+		this.mClubParentButton.setAttribute('class','club-profile-button');
+		this.mClubCoachButton.setAttribute('class','club-profile-button');
+		this.mClubManagerButton.setAttribute('class','club-profile-button');
+                                
+		this.mClubPlayerButton.onclick  = this.hit.bind(this.mClubPlayerButton);
+                this.mClubParentButton.onclick  = this.hit.bind(this.mClubParentButton);
+                this.mClubCoachButton.onclick   = this.hit.bind(this.mClubCoachButton);
+                this.mClubManagerButton.onclick = this.hit.bind(this.mClubManagerButton);
 /*
 		this.mPlayerButtonArray = new Array();
 		this.mParentButtonArray = new Array();
@@ -272,29 +282,26 @@ class ClubProfileScreen extends Screen
 					console.log('team:' + 	this.mJson.club_teams[i].team_name);
 				}
 				
-			}
-			if (this.mJson.club_players_id)
-			{
-
-                        	for (var i = 0; i < this.mJson.club_players_id.length; i++)
+				
+				if (this.mJson.club_players_id)
 				{
-					console.log('club_players_id:' + 	this.mJson.club_players_id[i].club_players_id);
+                        		if (this.mJson.club_players_id.length > 0)
+					{
+                                		if (this.mJson.club_players_id[0].club_players_id)
+                                		{
+                                			var id = 'club_player_button_' + this.mJson.club_players_id[0].club_players_id;
+                                			this.mClubPlayerButton.setAttribute("id", id);
+                                			this.mClubPlayerButton.style.backgroundColor = "green";
+						}
+                                	}
+					else
+					{
+                                		var id = 'club_player_button_0';
+                                		this.mClubPlayerButton.setAttribute("id", id);
+                                       		this.mClubPlayerButton.style.backgroundColor = "red";
+					}
 				}
-                                
-				this.mClubPlayerButton.setAttribute('class','club-profile-button');
-                                var id = 'club_player_button_' + this.mJson.club_players_id[0].club_players_id;
-                                this.mClubPlayerButton.setAttribute("id", id);
-                                this.mClubPlayerButton.onclick = this.hit.bind(this.mClubPlayerButton);
-                                
-                                if (this.mJson.club_players_id[0].club_players_id != null)
-                                {
-                                	this.mClubPlayerButton.style.backgroundColor = "green";
-                                }
-                                else
-                                {
-                                        this.mClubPlayerButton.style.backgroundColor = "red";
-                                }
-
+			
 			}
 			if (this.mJson.club_parents_id)
 			{
