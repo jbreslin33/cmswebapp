@@ -122,6 +122,34 @@ class ClubProfileScreen extends Screen
                         APPLICATION.getCurrentScreen().mDivArray[i].remove();
 		}
 	}
+	hitClubPlayerButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+
+                var a = this.id.split('_');
+
+                var profileType = a[1];
+                var person_to_change_id = a[3];
+
+                var profileNumber = 0;
+                var active = 0;
+
+                if (a[1] == 'player')
+                {
+                        if (this.style.backgroundColor == "green")
+                        {
+                                this.style.backgroundColor = "red";
+                                profileNumber = '1';
+                                active = '1';
+                        }
+                        else
+                        {
+                                this.style.backgroundColor = "green";
+                                profileNumber = '1';
+                                active = '2';
+                        }
+                }
+	}
 
 	hit()
 	{
@@ -287,9 +315,9 @@ class ClubProfileScreen extends Screen
 				{
                         		if (this.mJson.club_players_id.length > 0)
 					{
-                                		if (this.mJson.club_players_id[0].club_players_id)
+                                		if (this.mJson.club_players_id[0].person_id)
                                 		{
-                                			var id = 'club_player_button_' + this.mJson.club_players_id[0].club_players_id;
+                                			var id = 'club_player_button_' + this.mJson.club_players_id[0].person_id;
                                 			this.mClubPlayerButton.setAttribute("id", id);
                                 			this.mClubPlayerButton.style.backgroundColor = "green";
 						}
@@ -306,9 +334,9 @@ class ClubProfileScreen extends Screen
                                 {
                                         if (this.mJson.club_parents_id.length > 0)
                                         {
-                                                if (this.mJson.club_parents_id[0].club_parents_id)
+                                                if (this.mJson.club_parents_id[0].person_id)
                                                 {
-                                                        var id = 'club_parent_button_' + this.mJson.club_parents_id[0].club_parents_id;
+                                                        var id = 'club_parent_button_' + this.mJson.club_parents_id[0].person_id;
                                                         this.mClubParentButton.setAttribute("id", id);
                                                         this.mClubParentButton.style.backgroundColor = "green";
                                                 }
@@ -325,9 +353,9 @@ class ClubProfileScreen extends Screen
                                 {
                                         if (this.mJson.club_coaches_id.length > 0)
                                         {
-                                                if (this.mJson.club_coaches_id[0].club_coaches_id)
+                                                if (this.mJson.club_coaches_id[0].person_id)
                                                 {
-                                                        var id = 'club_coach_button_' + this.mJson.club_coaches_id[0].club_coaches_id;
+                                                        var id = 'club_coach_button_' + this.mJson.club_coaches_id[0].person_id;
                                                         this.mClubCoachButton.setAttribute("id", id);
                                                         this.mClubCoachButton.style.backgroundColor = "green";
                                                 }
@@ -344,9 +372,9 @@ class ClubProfileScreen extends Screen
                                 {
                                         if (this.mJson.club_managers_id.length > 0)
                                         {
-                                                if (this.mJson.club_managers_id[0].club_managers_id)
+                                                if (this.mJson.club_managers_id[0].person_id)
                                                 {
-                                                        var id = 'club_manager_button_' + this.mJson.club_managers_id[0].club_managers_id;
+                                                        var id = 'club_manager_button_' + this.mJson.club_managers_id[0].person_id;
                                                         this.mClubManagerButton.setAttribute("id", id);
                                                         this.mClubManagerButton.style.backgroundColor = "green";
                                                 }

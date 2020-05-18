@@ -214,7 +214,7 @@ SELECT json_agg(t) INTO raw_json
         from
         (
                 select
-                        club_players.id as club_players_id
+                        persons.id as person_id
 
                 from
                         club_players
@@ -249,7 +249,7 @@ SELECT json_agg(t) INTO raw_json
         from
         (
                 select
-                        club_parents.id as club_parents_id
+                        persons.id as person_id
 
                 from
                         club_parents
@@ -284,7 +284,7 @@ SELECT json_agg(t) INTO raw_json
         from
         (
                 select
-                        club_coaches.id as club_coaches_id
+                        persons.id as person_id
 
                 from
                         club_coaches
@@ -319,7 +319,7 @@ SELECT json_agg(t) INTO raw_json
         from
         (
                 select
-                        club_managers.id as club_managers_id
+                        persons.id as person_id
 
                 from
                         club_managers
