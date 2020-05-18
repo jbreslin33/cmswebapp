@@ -162,7 +162,7 @@ class ClubProfileScreen extends Screen
 
 	hitClubPlayerButton()
 	{
-		this.mCurrentButton = this;
+		APPLICATION.getCurrentScreen().mCurrentButton = this;
 
                 var screen = APPLICATION.getCurrentScreen();
 
