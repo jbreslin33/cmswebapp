@@ -59,7 +59,7 @@ BEGIN
 
                 CALL p_insert_club_player($3,x);
 
-                IF x = -100 THEN
+                IF x = -101 THEN
                         RAISE LOG '1st:%', x;
                         result_set = CONCAT
                         (
@@ -67,11 +67,11 @@ BEGIN
                                 ',',
                                 j_select_messages(null),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(x)
                         );
                 END IF;
 
-                IF x = -101 THEN
+                IF x = -102 THEN
                         RAISE LOG '2nd:%', x;
 
                         result_set = CONCAT
@@ -80,7 +80,7 @@ BEGIN
                                 ',',
                                 j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from team or teams before removing them as a club wide player.'),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(x)
                         );
                 END IF;
 
@@ -145,7 +145,7 @@ DECLARE
 	found_club_player_id club_players.id%TYPE;
 	found_club_person_id club_persons.id%TYPE;
 BEGIN
-	x := -100;
+	x := -101;
 
        	--do we need to add to players????
         select id into found_player_id from players where person_id = $1;
@@ -181,7 +181,7 @@ DECLARE
 	found_team_club_persons_club_players_id team_club_persons_club_players.id%TYPE;
 
 BEGIN
-        x := -100;
+        x := -102;
 
         select id into found_club_person_id from club_persons where person_id = $1;
 
@@ -196,9 +196,10 @@ BEGIN
 
                         IF found_team_club_persons_club_players_id IS NULL THEN
                         	delete from club_players where club_person_id = found_club_person_id;
+				x := -101;
 
                        	ELSE
-				x := -101;
+				x := -102;
                         END IF;
             	END IF;
 	END IF;

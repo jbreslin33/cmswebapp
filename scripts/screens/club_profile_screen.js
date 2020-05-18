@@ -44,7 +44,8 @@ class ClubProfileScreen extends Screen
 		this.mManagerButtonArray = new Array();
 		this.mAdministratorButtonArray = new Array();
 		*/
-		
+	
+		this.mCurrentButton = null;
 		
 		this.setClubSelect(document.getElementById("club_profile_screen_club_select_id"));
 		this.setPersonSelect(document.getElementById("club_person_screen_person_select_id"));
@@ -63,6 +64,42 @@ class ClubProfileScreen extends Screen
 
 
         }
+
+	//overide
+       	processCodes()
+        {
+                if (this.mJson.codes)
+                {
+                        this.mCode = 0;
+                        for (var i = 0; i < this.mJson.codes.length; i++)
+                        {
+                                this.mCode = this.mJson.codes[i].code;
+                        }
+			console.log('code:' + this.mCode);
+
+                        if (this.mCode == '-101')
+                       	{
+				if (this.mCurrentButton)
+				{
+					console.log('button');
+					//flip color on success...		
+			        	if (this.mCurrentButton.style.backgroundColor == "green")
+                        		{
+                                		this.mCurrentButton.style.backgroundColor = "red";
+                        		}
+                        		else
+                        		{
+                                		this.mCurrentButton.style.backgroundColor = "green";
+                        		}
+				}
+				else
+				{
+					console.log('no button');
+				}
+                        }
+                }
+        }
+
 
        	get()
         {
@@ -125,6 +162,8 @@ class ClubProfileScreen extends Screen
 
 	hitClubPlayerButton()
 	{
+		this.mCurrentButton = this;
+
                 var screen = APPLICATION.getCurrentScreen();
 
                 var a = this.id.split('_');
