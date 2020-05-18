@@ -104,7 +104,7 @@ BEGIN
 
                 CALL p_delete_club_player($3,x);
 
-                IF x = -100 THEN
+                IF x = -101 THEN
                         RAISE LOG '1st:%', x;
                         result_set = CONCAT
                         (
@@ -116,7 +116,7 @@ BEGIN
                         );
                 END IF;
 
-                IF x = -101 THEN
+                IF x = -102 THEN
                         RAISE LOG '2nd:%', x;
 
                         result_set = CONCAT
