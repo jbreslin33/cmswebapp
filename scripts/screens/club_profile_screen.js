@@ -563,12 +563,15 @@ class ClubProfileScreen extends Screen
                                         //create a player button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = "Player";
+                                        button.innerHTML = '' + this.mJson.club_teams[i].team_name;
                                         div.appendChild(button);
 					//team id may be all we need
-                                        var id = 'club_player_button_' + this.mJson.club_teams[i].team_id;
-                                        button.setAttribute("id", id);
+                                        var team_id = this.mJson.club_teams[i].team_id;
+                                        button.setAttribute("team_id", id);
+                                        button.setAttribute("team_club_persons_club_player_id", null);
                                         button.onclick = this.hit.bind(button);
+
+					/*
 
                                         if (this.mJson.club_teams[i].team_id != null)
                                         {
@@ -579,13 +582,14 @@ class ClubProfileScreen extends Screen
                                                 button.style.backgroundColor = "red";
                                         }
 
+					*/
+
                                         this.mPlayerButtonArray.push(button);
 
 
 				}
 			
 
-				/*
 				if (this.mJson.team_players_id)
 				{
                         		for (var i = 0; i < this.mJson.team_players_id.length; i++)
@@ -593,6 +597,7 @@ class ClubProfileScreen extends Screen
 						console.log('team_player_id:' + 	this.mJson.team_players_id[i].team_player_id);
 					}
 				}
+				/*
 				if (this.mJson.team_parents_id)
 				{
                         		for (var i = 0; i < this.mJson.team_parents_id.length; i++)

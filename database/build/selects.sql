@@ -355,7 +355,7 @@ SELECT json_agg(t) INTO raw_json
         (
                 select
                        	team_club_persons.team_id as team_id,
-                        team_club_persons_club_players.id as team_player_id 
+                        team_club_persons_club_players.id as team_club_persons_club_player_id 
 
                         from
                                 team_club_persons_club_players
