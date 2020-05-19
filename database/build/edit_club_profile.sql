@@ -913,13 +913,13 @@ BEGIN
                         ',',
                         j_select_club_managers_id($3,$4),
                         ',',
-                        j_select_team_players_id($3,$4),
+                        j_select_team_club_persons_club_players($3,$4),
                         ',',
-                        j_select_team_parents_id($3,$4),
+                        j_select_team_club_persons_club_parents($3,$4),
                         ',',
-                        j_select_team_coaches_id($3,$4),
+                        j_select_team_club_persons_club_coaches($3,$4),
                         ',',
-                        j_select_team_managers_id($3,$4)
+                        j_select_team_club_persons_club_managers($3,$4)
                 );
         ELSE
                 result_set = CONCAT

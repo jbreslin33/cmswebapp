@@ -343,7 +343,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_team_players_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_players(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -371,15 +371,15 @@ SELECT json_agg(t) INTO raw_json
 	) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"team_players_id": []', raw_json);
+                result_set = CONCAT('"team_club_persons_club_players": []', raw_json);
         ELSE
-                result_set = CONCAT('"team_players_id": ', raw_json);
+                result_set = CONCAT('"team_club_persons_club_players": ', raw_json);
         END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_team_parents_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_parents(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -391,7 +391,7 @@ SELECT json_agg(t) INTO raw_json
         (
                 select
                         team_club_persons.team_id as team_id,
-                        team_club_persons_club_parents.id as team_parent_id                   
+                        team_club_persons_club_parents.id as j_select_team_club_persons_club_parent_id                   
 
                         from
                                 team_club_persons_club_parents
@@ -407,16 +407,16 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"team_parents_id": []', raw_json);
+                result_set = CONCAT('"team_club_persons_club_parents": []', raw_json);
         ELSE
-                result_set = CONCAT('"team_parents_id": ', raw_json);
+                result_set = CONCAT('"team_club_persons_club_parents": ', raw_json);
         END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION j_select_team_coaches_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_coaches(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -428,7 +428,7 @@ SELECT json_agg(t) INTO raw_json
         (
                 select
                         team_club_persons.team_id as team_id,
-                        team_club_persons_club_coaches.id as team_coach_id       
+                        team_club_persons_club_coaches.id as j_select_team_club_persons_club_coach_id                   
 
                         from
                                 team_club_persons_club_coaches
@@ -444,15 +444,15 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"team_coaches_id": []', raw_json);
+                result_set = CONCAT('"team_club_persons_club_coaches": []', raw_json);
         ELSE
-                result_set = CONCAT('"team_coaches_id": ', raw_json);
+                result_set = CONCAT('"team_club_persons_club_coaches": ', raw_json);
         END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_team_managers_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_managers(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -464,7 +464,7 @@ SELECT json_agg(t) INTO raw_json
         (
                 select
                         team_club_persons.team_id as team_id,
-                        team_club_persons_club_managers.id as team_manager_id        
+                        team_club_persons_club_managers.id as j_select_team_club_persons_club_manager_id                   
 
                         from
                                 team_club_persons_club_managers
@@ -480,9 +480,9 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"team_managers_id": []', raw_json);
+                result_set = CONCAT('"team_club_persons_club_managers": []', raw_json);
         ELSE
-                result_set = CONCAT('"team_managers_id": ', raw_json);
+                result_set = CONCAT('"team_club_persons_club_managers": ', raw_json);
         END IF;
 RETURN result_set;
 END;
