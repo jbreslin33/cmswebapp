@@ -40,8 +40,9 @@ class ClubProfileScreen extends Screen
 	
 		this.mCurrentButton = null;
 
+		//this.removePlayerButtons();
 		this.mPlayerButtonArray = new Array();
-		
+
 		this.setClubSelect(document.getElementById("club_profile_screen_club_select_id"));
 		this.setPersonSelect(document.getElementById("club_person_screen_person_select_id"));
 
@@ -98,6 +99,15 @@ class ClubProfileScreen extends Screen
                         APPLICATION.getCurrentScreen().ajax();
                 }
         }
+
+	removePlayerButtons()
+	{
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mPlayerButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mPlayerButtonArray[i].remove();
+                }
+ 		APPLICATION.getCurrentScreen().mPlayerButtonArray.length = 0;
+	}
 
 	//override from screen
 	personSelected()
@@ -425,6 +435,8 @@ class ClubProfileScreen extends Screen
 		{
 			if (this.mJson.club_persons)
 			{
+
+
 				console.log('got some');
 				//load up club_persons option
                         	var select = this.getPersonSelect();
@@ -548,6 +560,8 @@ class ClubProfileScreen extends Screen
                                                 this.mClubManagerButton.style.backgroundColor = "red";
                                         }
                                 }
+				
+				APPLICATION.getCurrentScreen().removePlayerButtons();
                                 
 				for (var i = 0; i < this.mJson.club_teams.length; i++)
 				{
