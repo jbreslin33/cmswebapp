@@ -608,7 +608,8 @@ class ClubProfileScreen extends Screen
 				{
                         		for (var i = 0; i < this.mJson.team_club_persons_club_players.length; i++)
 					{
-						console.log('team_club_persons_club_players:' + 	this.mJson.team_club_persons_club_players[i].team_club_persons_club_player_id);
+						console.log('team_id:' + 	this.mJson.team_club_persons_club_players[i].team_id);
+						console.log('team_club_persons_club_player_id:' + 	this.mJson.team_club_persons_club_players[i].team_club_persons_club_player_id);
 					}
 				}
 				/*
