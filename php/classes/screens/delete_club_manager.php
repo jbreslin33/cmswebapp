@@ -1,7 +1,7 @@
 <?php
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class DeleteClubPlayer extends Screen
+class DeleteClubManager extends Screen
 {
         function __construct()
         {
@@ -16,13 +16,13 @@ class DeleteClubPlayer extends Screen
 		{
 			$person_to_change_id = $_GET['person_to_change_id'];
 		}
-                $sql = 'select f_delete_club_player($1,$2,$3)';
-                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_club_player", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_delete_club_player", array( $this->getSenderEmailId(), $this->mPersonId, $person_to_change_id));
+                $sql = 'select f_delete_club_manager($1,$2,$3)';
+                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_club_manager", $sql);
+                $result = pg_execute($this->mDatabase->mConnection, "f_delete_club_manager", array( $this->getSenderEmailId(), $this->mPersonId, $person_to_change_id));
 
                 return pg_fetch_result($result, 0);
         }
 }
 
-$deleteClubPlayer = new DeleteClubPlayer();
+$deleteClubManager = new DeleteClubManager();
 ?>
