@@ -354,7 +354,7 @@ BEGIN
                         (
                                 j_select_persons($1),
                                 ',',
-                                j_select_messages('This manager is parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide manager.'),
+                                j_select_messages('This person is manager asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide manager.'),
                                 ',',
                                 j_select_codes(x)
                         );
