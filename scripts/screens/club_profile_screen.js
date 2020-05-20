@@ -273,95 +273,34 @@ class ClubProfileScreen extends Screen
 
 		screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
 	}
+	/*
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_persons_club_player_id", null);
+					*/
 
-	hit()
+	hitPlayerButton()
 	{
 		var screen = APPLICATION.getCurrentScreen();
 		
 		var a = this.id.split('_');
 
-		var profileType = a[1]; 
-		var person_to_change_id = a[3];
+		if (this.style.backgroundColor == "green")
+		{
+		}
+		else
+		{
+			screen.insertTeamPlayer(screen.getPersonId(),this.getAttribute("team_id"));
+		}
 
-		var profileNumber = 0;
-		var active = 0;
+		//screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
+	}
 
-		if (a[1] == 'player')
-		{
-			if (this.style.backgroundColor == "green")
-			{
-				this.style.backgroundColor = "red";
-				profileNumber = '1'; 
-				active = '1'; 
-			}
-			else
-			{
-				this.style.backgroundColor = "green";
-				profileNumber = '1'; 
-				active = '2'; 
-			}
-		}
-		if (a[1] == 'parent')
-		{
-			if (this.style.backgroundColor == "green")
-			{
-				this.style.backgroundColor = "red";
-				profileNumber = '2'; 
-				active = '1'; 
-			}
-			else
-			{
-				this.style.backgroundColor = "green";
-				profileNumber = '2'; 
-				active = '2'; 
-			}
-		}
-		if (a[1] == 'coach')
-		{
-			if (this.style.backgroundColor == "green")
-			{
-				this.style.backgroundColor = "red";
-				profileNumber = '3'; 
-				active = '1'; 
-			}
-			else
-			{
-				this.style.backgroundColor = "green";
-				profileNumber = '3'; 
-				active = '2'; 
-			}
-		}
-		if (a[1] == 'manager')
-		{
-			if (this.style.backgroundColor == "green")
-			{
-				this.style.backgroundColor = "red";
-				profileNumber = '4'; 
-				active = '1'; 
-			}
-			else
-			{
-				this.style.backgroundColor = "green";
-				profileNumber = '4'; 
-				active = '2'; 
-			}
-		}
-		if (a[1] == 'administrator')
-		{
-			if (this.style.backgroundColor == "green")
-			{
-				this.style.backgroundColor = "red";
-				profileNumber = '5'; 
-				active = '1'; 
-			}
-			else
-			{
-				this.style.backgroundColor = "green";
-				profileNumber = '5'; 
-				active = '2'; 
-			}
-		}
-		screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
+	insertTeamPlayer(screen_person_id, team_id)
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.setUrl("/php/classes/screens/insert_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + screen_person_id + '&team_id=' + team_id);
+                screen.ajax();
 	}
 
 	insertClubPlayer(person_to_change_id)
@@ -585,7 +524,7 @@ class ClubProfileScreen extends Screen
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_player_id", null);
-                                        button.onclick = this.hit.bind(button);
+                                        button.onclick = this.hitPlayerButton.bind(button);
                                         
 					button.style.backgroundColor = "red";
 

@@ -936,5 +936,86 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--email_id, person_id, screen_person_id, team_id
+CREATE OR REPLACE FUNCTION f_insert_team_player(int,int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
 
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_insert_team_player($3,$4,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE p_insert_team_player(int,int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_person_id                   club_persons.id%TYPE;
+        found_club_player_id                   club_players.id%TYPE;
+        found_team_club_person_id              team_club_persons.id%TYPE;
+	found_team_club_persons_club_player_id team_club_persons_club_players.id%TYPE;
+        found_player_id                   	players.id%TYPE;
+
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = $1;
+
+	IF found_club_person_id > 0 THEN
+
+		select id into found_player_id from players where person_id = $1;
+		IF found_player_id IS NULL THEN
+			insert into players (person_id) values ($1) returning id into found_player_id;
+		END IF;
+
+		select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+		IF found_club_player_id IS NULL THEN
+			insert into club_players (club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into found_club_player_id; 
+		END IF;
+
+		select id into found_team_club_person_id from team_club_persons where club_person_id = found_club_person_id;
+		IF found_team_club_person_id IS NULL THEN
+			insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
+		END IF;
+
+		select id into found_team_club_persons_club_player_id from team_club_persons_club_players where team_club_person_id = found_team_club_person_id;
+		IF found_team_club_persons_club_player_id IS NULL THEN
+			insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (found_team_club_person_id, found_club_player_id);
+		END IF;
+
+	END IF;
+END;
+$$;
 
