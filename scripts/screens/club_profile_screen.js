@@ -586,6 +586,8 @@ class ClubProfileScreen extends Screen
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_player_id", null);
                                         button.onclick = this.hit.bind(button);
+                                        
+					button.style.backgroundColor = "red";
 
 					/*
 
@@ -610,15 +612,12 @@ class ClubProfileScreen extends Screen
 				{
                         		for (var i = 0; i < this.mJson.team_club_persons_club_players.length; i++)
 					{
-						console.log('team_id:' + 	this.mJson.team_club_persons_club_players[i].team_id);
-						console.log('team_club_persons_club_player_id:' + 	this.mJson.team_club_persons_club_players[i].team_club_persons_club_player_id);
                         			for (var t = 0; t < this.mPlayerButtonArray.length; t++)
 						{
-							console.log('this.mJson.team_club_persons_club_players[i].team_id:' + this.mJson.team_club_persons_club_players[i].team_id);
-							console.log('this.mPlayerButtonArray[t].team_id:' + this.mPlayerButtonArray[t].getAttribute("team_id"));
 							if (this.mJson.team_club_persons_club_players[i].team_id == this.mPlayerButtonArray[t].getAttribute("team_id"))
 							{
 								console.log('found match at team:' + this.mPlayerButtonArray[t].getAttribute("team_name"));
+                                                		this.mPlayerButtonArray[t].style.backgroundColor = "green";
 							}
 						}
 					}
