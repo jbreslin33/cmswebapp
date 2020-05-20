@@ -1005,12 +1005,13 @@ BEGIN
 			insert into club_players (club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into found_club_player_id; 
 		END IF;
 
-		select id into found_team_club_person_id from team_club_persons where club_person_id = found_club_person_id;
+		select id into found_team_club_person_id from team_club_persons where club_person_id = found_club_person_id AND team_id = $2;
 		IF found_team_club_person_id IS NULL THEN
 			insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
 		END IF;
 
-		select id into found_team_club_persons_club_player_id from team_club_persons_club_players where team_club_person_id = found_team_club_person_id;
+		--looks like we need to check both fields team_club_person_id | club_player_id
+		select id into found_team_club_persons_club_player_id from team_club_persons_club_players where team_club_person_id = found_team_club_person_id AND club_player_id = found_club_player_id;
 		IF found_team_club_persons_club_player_id IS NULL THEN
 			insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (found_team_club_person_id, found_club_player_id);
 		END IF;
