@@ -540,6 +540,7 @@ DECLARE
 
 BEGIN
         x := -101;
+	RAISE LOG 'p_delete_club_player person_id:%', $1;
 
         select id into found_club_person_id from club_persons where person_id = $1;
 
@@ -552,10 +553,12 @@ BEGIN
                 	select id into found_team_club_persons_club_players_id from team_club_persons_club_players where club_player_id = found_club_player_id;
 
                         IF found_team_club_persons_club_players_id IS NULL THEN
+				RAISE LOG 'IF:%', found_team_club_persons_club_players_id;
                         	delete from club_players where club_person_id = found_club_person_id;
 				x := -101;
 
                        	ELSE
+				RAISE LOG 'ELSE:%', found_team_club_persons_club_players_id;
 				x := -102;
                         END IF;
             	END IF;

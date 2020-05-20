@@ -290,14 +290,14 @@ class ClubProfileScreen extends Screen
 	deleteClubPlayer()
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/delete_club_player.php?" + this.getStandardParameters() + '&person_to_change_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+		screen.setUrl("/php/classes/screens/delete_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
                 screen.ajax();
 	}
 
         insertClubParent(person_to_change_id)
         {
                 var screen = APPLICATION.getCurrentScreen();
-                screen.setUrl("/php/classes/screens/insert_club_parent.php?" + this.getStandardParameters() + '&person_to_change_id=' + person_to_change_id);
+                screen.setUrl("/php/classes/screens/insert_club_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + person_to_change_id);
                 screen.ajax();
         }
         deleteClubParent(person_to_change_id)
