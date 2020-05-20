@@ -225,8 +225,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
-CREATE OR REPLACE FUNCTION f_delete_club_player(int,int,int)
+CREATE OR REPLACE FUNCTION f_delete_club_player(int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -245,7 +244,26 @@ BEGIN
                                 ',',
                                 j_select_messages(null),
                                 ',',
-                                j_select_codes(x)
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_teams($4),
+                                ',',
+                                j_select_club_players_id($4,$3),
+                                ',',
+                                j_select_club_parents_id($4,$3),
+                                ',',
+                                j_select_club_coaches_id($4,$3),
+                                ',',
+                                j_select_club_managers_id($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_players($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_parents($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_coaches($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_managers($4,$3)
+
                         );
                 END IF;
 
@@ -521,7 +539,7 @@ DECLARE
 	found_team_club_persons_club_players_id team_club_persons_club_players.id%TYPE;
 
 BEGIN
-        x := -102;
+        x := -101;
 
         select id into found_club_person_id from club_persons where person_id = $1;
 
@@ -1016,6 +1034,66 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--email_id, person_id, screen_person_id, team_id, club_id
+CREATE OR REPLACE FUNCTION f_delete_team_player(int,int,int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_team_player($5,x);
+
+                IF x = -101 THEN
+
+                        result_set = CONCAT
+                        (
+                        	j_select_persons($1),
+                        	',',
+                        	j_select_messages(null),
+                        	',',
+                        	j_select_codes(x),
+                        	',',
+                        	j_select_club_teams($5),
+                        	',',
+                        	j_select_club_players_id($5,$3),
+                        	',',
+                        	j_select_club_parents_id($5,$3),
+                        	',',
+                        	j_select_club_coaches_id($5,$3),
+                        	',',
+                        	j_select_club_managers_id($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_players($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_parents($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_managers($5,$3)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE PROCEDURE p_insert_team_player(int,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -1056,6 +1134,19 @@ BEGIN
 		END IF;
 
 	END IF;
+END;
+$$;
+
+
+CREATE OR REPLACE PROCEDURE p_delete_team_player(int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+BEGIN
+        x := -101;
+
+	delete from team_club_persons_club_players where team_club_persons_club_players.id = $1;
 END;
 $$;
 
