@@ -936,8 +936,8 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
---email_id, person_id, screen_person_id, team_id
-CREATE OR REPLACE FUNCTION f_insert_team_player(int,int,int,int)
+--email_id, person_id, screen_person_id, team_id, club_id
+CREATE OR REPLACE FUNCTION f_insert_team_player(int,int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -950,13 +950,32 @@ BEGIN
                 CALL p_insert_team_player($3,$4,x);
 
                 IF x = -101 THEN
+
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
-                                ',',
-                                j_select_messages(null),
-                                ',',
-                                j_select_codes(x)
+                        	j_select_persons($1),
+                        	',',
+                        	j_select_messages(null),
+                        	',',
+                        	j_select_codes(x),
+                        	',',
+                        	j_select_club_teams($5),
+                        	',',
+                        	j_select_club_players_id($5,$3),
+                        	',',
+                        	j_select_club_parents_id($5,$3),
+                        	',',
+                        	j_select_club_coaches_id($5,$3),
+                        	',',
+                        	j_select_club_managers_id($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_players($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_parents($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	',',
+                        	j_select_team_club_persons_club_managers($5,$3)
                         );
                 END IF;
 

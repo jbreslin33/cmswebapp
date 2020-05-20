@@ -71,7 +71,7 @@ class ClubProfileScreen extends Screen
                         {
                                 this.mCode = this.mJson.codes[i].code;
                         }
-
+/*
                         if (this.mCode == '-101')
                        	{
 				if (this.mCurrentButton)
@@ -86,7 +86,11 @@ class ClubProfileScreen extends Screen
                                 		this.mCurrentButton.style.backgroundColor = "green";
                         		}
 				}
+
+
+				//also lets flip through rows and see if its all green...
                         }
+			*/
                 }
         }
 
@@ -300,7 +304,7 @@ class ClubProfileScreen extends Screen
 	insertTeamPlayer(screen_person_id, team_id)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/insert_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + screen_person_id + '&team_id=' + team_id);
+		screen.setUrl("/php/classes/screens/insert_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + screen_person_id + '&team_id=' + team_id + '&club_id=' + this.getClubId());
                 screen.ajax();
 	}
 
