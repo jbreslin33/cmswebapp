@@ -256,11 +256,11 @@ class ClubProfileScreen extends Screen
 
 		if (this.style.backgroundColor == "green")
 		{
-			screen.deleteTeamPlayer(screen.getPersonId(),this.getAttribute("team_id"));
+			screen.deleteTeamPlayer(this.getAttribute("team_id"), this.getAttribute("team_club_persons_club_player_id"));
 		}
 		else
 		{
-			screen.insertTeamPlayer(screen.getPersonId(),this.getAttribute("team_id"));
+			screen.insertTeamPlayer(this.getAttribute("team_id"));
 		}
 
 		//screen.updateProfile(APPLICATION.getPersonId(),profileNumber,active,person_to_change_id);
@@ -268,14 +268,16 @@ class ClubProfileScreen extends Screen
 
 	insertTeamPlayer(team_id)
 	{
+		console.log('team_id:' + team_id);
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/insert_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+		console.log('geturl:' + screen.getUrl());
                 screen.ajax();
 	}
-	deleteTeamPlayer(team_club_persons_club_player_id, team_id)
+	deleteTeamPlayer(team_id,team_club_persons_club_player_id)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/insert_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_player_id=' + team_club_persons_club_player_id);
+		screen.setUrl("/php/classes/screens/delete_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_player_id=' + team_club_persons_club_player_id);
                 screen.ajax();
 	}
 

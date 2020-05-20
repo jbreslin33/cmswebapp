@@ -8,8 +8,6 @@ class DeleteTeamPlayer extends Screen
 		parent::__construct();	
 	}
 
-	team_club_persons_club_player_id
-	
 	function getResult()
         {
 		$team_club_persons_club_player_id = 0;
@@ -21,7 +19,7 @@ class DeleteTeamPlayer extends Screen
 
                 $sql = 'select f_delete_team_player($1,$2,$3,$4,$5,$6)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_team_player", $sql);
-               	$result = pg_execute($this->mDatabase->mConnection, "f_insert_team_player", array( $this->getSenderEmailId(), $this->mPersonId, $this->mScreenPersonId, $this->mTeamId, $this->mClubId, $team_club_persons_club_player_id));
+               	$result = pg_execute($this->mDatabase->mConnection, "f_delete_team_player", array( $this->getSenderEmailId(), $this->mPersonId, $this->mScreenPersonId, $this->mTeamId, $this->mClubId, $team_club_persons_club_player_id));
 
 
                 return pg_fetch_result($result, 0);

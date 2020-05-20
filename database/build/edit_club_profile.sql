@@ -1035,7 +1035,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --email_id, person_id, screen_person_id, team_id, club_id
-CREATE OR REPLACE FUNCTION f_delete_team_player(int,int,int,int,int)
+CREATE OR REPLACE FUNCTION f_delete_team_player(int,int,int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -1045,7 +1045,7 @@ BEGIN
 
         IF $2 is NULL THEN
         ELSE
-                CALL p_delete_team_player($5,x);
+                CALL p_delete_team_player($6,x);
 
                 IF x = -101 THEN
 
