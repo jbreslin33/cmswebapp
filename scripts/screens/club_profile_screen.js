@@ -308,10 +308,10 @@ class ClubProfileScreen extends Screen
                 screen.ajax();
 	}
 
-	insertClubPlayer(person_to_change_id)
+	insertClubPlayer(screen_person_id)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&person_to_change_id=' + person_to_change_id);
+		screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + screen_person_id + '&club_id=' + this.getClubId());
                 screen.ajax();
 	}
 	deleteClubPlayer(person_to_change_id)

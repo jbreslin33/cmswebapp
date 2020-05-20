@@ -45,7 +45,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club_player(int,int,int)
+CREATE OR REPLACE FUNCTION f_insert_club_player(int,int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -64,7 +64,27 @@ BEGIN
                                 ',',
                                 j_select_messages(null),
                                 ',',
-                                j_select_codes(x)
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_teams($4),
+                                ',',
+                                j_select_club_players_id($4,$3),
+                                ',',
+                                j_select_club_parents_id($4,$3),
+                                ',',
+                                j_select_club_coaches_id($4,$3),
+                                ',',
+                                j_select_club_managers_id($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_players($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_parents($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_coaches($4,$3),
+                                ',',
+                                j_select_team_club_persons_club_managers($4,$3)
+
+
                         );
                 END IF;
 
