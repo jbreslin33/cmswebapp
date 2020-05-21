@@ -1,4 +1,5 @@
-
+dup on parent insert...
+------
 need delete for player...
 ---------
  team_id |  team_name   | team_club_person_id | club_players_id | club_parents_id | club_coaches_id | club_managers_id | player | parent | coach | manager 

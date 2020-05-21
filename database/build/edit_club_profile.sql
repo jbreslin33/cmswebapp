@@ -1642,7 +1642,7 @@ BEGIN
 
         IF found_club_person_id > 0 THEN
 
-                select id into found_parent_id from players where person_id = $1;
+                select id into found_parent_id from parents where person_id = $1;
                 IF found_parent_id IS NULL THEN
                         insert into parents (person_id) values ($1) returning id into found_parent_id;
                 END IF;
@@ -1700,7 +1700,6 @@ BEGIN
                         insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
                 END IF;
 
-                --looks like we need to check both fields team_club_person_id | club_player_id
                 select id into found_team_club_persons_club_coach_id from team_club_persons_club_coaches where team_club_person_id = found_team_club_person_id AND club_coach_id = found_club_coach_id;
                 IF found_team_club_persons_club_coach_id IS NULL THEN
                         insert into team_club_persons_club_coaches (team_club_person_id, club_coach_id) values (found_team_club_person_id, found_club_coach_id);
@@ -1744,7 +1743,6 @@ BEGIN
                         insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
                 END IF;
 
-                --looks like we need to check both fields team_club_person_id | club_player_id
                 select id into found_team_club_persons_club_manager_id from team_club_persons_club_managers where team_club_person_id = found_team_club_person_id AND club_manager_id = found_club_manager_id;
                 IF found_team_club_persons_club_manager_id IS NULL THEN
                         insert into team_club_persons_club_managers (team_club_person_id, club_manager_id) values (found_team_club_person_id, found_club_manager_id);
