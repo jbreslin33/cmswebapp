@@ -1216,6 +1216,7 @@ BEGIN
                 END IF;
 
         END IF;
+	RAISE LOG 'f_insert_team_parent result_set:%', result_set;
 
 RETURN result_set;
 END;

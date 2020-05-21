@@ -662,6 +662,7 @@ class ClubProfileScreen extends Screen
                                                 {
                                                         if (this.mJson.team_club_persons_club_parents[i].team_id == this.mParentButtonArray[t].getAttribute("team_id"))
                                                         {
+								console.log("set team_club_persons_club_parent_id attribute:" + this.mJson.team_club_persons_club_parents[i].team_club_persons_club_parent_id);
                                                                 this.mParentButtonArray[t].style.backgroundColor = "green";
                                                                 this.mParentButtonArray[t].setAttribute("team_club_persons_club_parent_id", this.mJson.team_club_persons_club_parents[i].team_club_persons_club_parent_id);
                                                         }
