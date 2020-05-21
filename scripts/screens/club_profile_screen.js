@@ -146,12 +146,6 @@ class ClubProfileScreen extends Screen
                 APPLICATION.getCurrentScreen().ajax();
         }
 
-	exit()
-	{
-		this.removeDivs();
-		super.exit();
-	}
-	
 	removeDivs()
 	{
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)

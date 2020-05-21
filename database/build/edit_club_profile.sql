@@ -475,6 +475,7 @@ BEGIN
         IF $2 is NULL THEN
         ELSE
                 CALL p_delete_club_manager($3,x);
+		RAISE LOG 'person_id:%', $3;
 
                 IF x = -101 THEN
                         result_set = CONCAT
@@ -759,7 +760,8 @@ AS $$
 DECLARE
         found_club_manager_id club_managers.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
-        found_team_club_persons_club_managers_id team_club_persons_club_managers.id%TYPE;
+        found_team_club_persons_club_manager_id team_club_persons_club_managers.id%TYPE;
+
 
 BEGIN
         x := -101;
@@ -772,7 +774,7 @@ BEGIN
 
                 IF found_club_manager_id > 0 THEN
 
-                        select id into found_team_club_persons_club_managers_id from team_club_persons_club_managers where club_manager_id = found_club_manager_id;
+                        select id into found_team_club_persons_club_manager_id from team_club_persons_club_managers where club_manager_id = found_club_manager_id;
 
                         IF found_team_club_persons_club_manager_id IS NULL THEN
                                 delete from club_managers where club_person_id = found_club_person_id;

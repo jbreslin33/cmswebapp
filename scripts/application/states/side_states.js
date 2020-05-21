@@ -120,6 +120,8 @@ class OPEN_SIDE_APPLICATION extends State
 		document.getElementById("side_screen_html_id").style.width = "0px";
 
                 app.getSideScreen().exit();
+		document.getElementById("side_screen_html_id").style.width = "0px";
+		app.setSideScreen(null);
         }
 }
 
@@ -140,7 +142,6 @@ class CLOSED_SIDE_APPLICATION extends State
 		//app.setSideScreen(new SideScreen(app));
 		//app.getSideScreen().enter();
 
-		document.getElementById("side_screen_html_id").style.width = "0px";
         }
 
         execute(app)
