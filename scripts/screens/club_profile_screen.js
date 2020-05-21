@@ -95,6 +95,13 @@ class ClubProfileScreen extends Screen
         exit()
         {
                 this.removeDivs();
+
+		//remove club role buttons
+		this.mClubPlayerButton.remove();		
+		this.mClubParentButton.remove();		
+		this.mClubCoachButton.remove();		
+		this.mClubManagerButton.remove();		
+
                 super.exit();
         }
 
