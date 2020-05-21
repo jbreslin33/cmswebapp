@@ -1094,8 +1094,8 @@ BEGIN
                         ',',
                         j_select_codes(-101)
                 );
-
         END IF;
+	RAISE LOG 'f_club_person_profile result_set:%', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1775,6 +1775,7 @@ DECLARE
 
 BEGIN
         x := -101;
+	RAISE LOG 'delete parent:%', $1;
 
         delete from team_club_persons_club_parents where team_club_persons_club_parents.id = $1;
 END;

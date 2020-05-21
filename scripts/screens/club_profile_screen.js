@@ -352,7 +352,8 @@ class ClubProfileScreen extends Screen
         deleteTeamParent(team_id,team_club_persons_club_parent_id)
         {
                 var screen = APPLICATION.getCurrentScreen();
-                screen.setUrl("/php/classes/screens/delete_team_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_player_id=' + team_club_persons_club_parent_id);
+                screen.setUrl("/php/classes/screens/delete_team_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_parent_id=' + team_club_persons_club_parent_id);
+		console.log('deleteTeamParentUrl:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -365,7 +366,7 @@ class ClubProfileScreen extends Screen
         deleteTeamCoach(team_id,team_club_persons_club_coach_id)
         {
                 var screen = APPLICATION.getCurrentScreen();
-                screen.setUrl("/php/classes/screens/delete_team_coach.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_player_id=' + team_club_persons_club_coach_id);
+                screen.setUrl("/php/classes/screens/delete_team_coach.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_coach_id=' + team_club_persons_club_coach_id);
                 screen.ajax();
         }
 
@@ -378,7 +379,7 @@ class ClubProfileScreen extends Screen
         deleteTeamManager(team_id,team_club_persons_club_manager_id)
         {
                 var screen = APPLICATION.getCurrentScreen();
-                screen.setUrl("/php/classes/screens/delete_team_manager.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_player_id=' + team_club_persons_club_manager_id);
+                screen.setUrl("/php/classes/screens/delete_team_manager.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_manager_id=' + team_club_persons_club_manager_id);
                 screen.ajax();
         }
 
