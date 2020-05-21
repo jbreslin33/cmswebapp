@@ -796,6 +796,11 @@ class Screen
 				console.log('message:' + this.mJson.messages[i].message);
 				this.setMessage(this.mJson.messages[i].message,'red');
 			}
+			if (this.mJson.messages.length == 0)
+			{
+				console.log('no message length yo');
+				this.setMessage('','white');
+			}
 		}
 	}	
 
