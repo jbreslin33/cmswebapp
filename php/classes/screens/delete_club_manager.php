@@ -10,15 +10,9 @@ class DeleteClubManager extends Screen
 	
 	function getResult()
         {
-		$person_to_change_id = null;
-
-		if (isset($_GET['person_to_change_id']))
-		{
-			$person_to_change_id = $_GET['person_to_change_id'];
-		}
-                $sql = 'select f_delete_club_manager($1,$2,$3)';
+                $sql = 'select f_delete_club_manager($1,$2,$3,$4)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_club_manager", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_delete_club_manager", array( $this->getSenderEmailId(), $this->mPersonId, $person_to_change_id));
+                $result = pg_execute($this->mDatabase->mConnection, "f_delete_club_manager", array( $this->getSenderEmailId(), $this->mPersonId, $this->mScreenPersonId, $this->mClubId));
 
                 return pg_fetch_result($result, 0);
         }

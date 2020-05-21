@@ -343,6 +343,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+
 CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_players(int,int)
 RETURNS text AS $$
 DECLARE
@@ -378,6 +379,7 @@ SELECT json_agg(t) INTO raw_json
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_parents(int,int)
 RETURNS text AS $$
