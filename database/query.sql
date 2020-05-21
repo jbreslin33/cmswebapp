@@ -1,152 +1,20 @@
-		select 
-			teams.id, teams.name  
-	
-		from 
-			teams 
-		where
-			teams.club_id = 1;
-		
-		select 
-                      	club_players.id as club_players_id
+                select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates,(select pitches.name from pitches where practices.pitch_id = pitches.id) as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name, (select practices_players_availability.availability_id from practices_players_availability where practices_players_availability.practice_id = practices.id) as availability_id
+                from practices
+                join practice on practice.id=practices.practice_id
+                join teams on teams.id=practice.team_id
 
-		from 
-			club_players		
+                join team_club_persons on team_club_persons.team_id=teams.id
 
-		join
-			club_persons on club_persons.id=club_players.club_person_id
+                join club_persons on club_persons.id=team_club_persons.club_person_id
+                join clubs on clubs.id=club_persons.club_id
+                join persons on persons.id=club_persons.person_id
+                join emails_persons on emails_persons.person_id=persons.id
 
-		join 
-			persons on persons.id=club_persons.person_id
+                --join club_players on club_players.club_person_id=club_persons.id
 
-		where 
-			persons.id = 25 AND club_persons.club_id = 1
+                --join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id AND team_club_persons_club_players.club_player_id=club_players.id
+                left outer join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id --AND team_club_persons_club_players.club_player_id=club_players.id
+                --left outer join team_club_persons_club_parents on team_club_persons_club_parents.team_club_person_id=team_club_persons.id --AND team_club_persons_club_players.club_player_id=club_players.id
 
-		;
-
-                select
-                        club_parents.id as club_parents_id
-
-                from
-                        club_parents
-
-                join
-                        club_persons on club_persons.id=club_parents.club_person_id
-
-                join
-                        persons on persons.id=club_persons.person_id
-
-                where
-                        persons.id = 25 AND club_persons.club_id = 1
-
-                ;
-
-
-                select
-                        club_coaches.id as club_coach_id
-
-                from
-                        club_coaches
-
-                join
-                        club_persons on club_persons.id=club_coaches.club_person_id
-
-                join
-                        persons on persons.id=club_persons.person_id
-
-                where
-                        persons.id = 25 AND club_persons.club_id = 1
-
-                ;
-
-                select
-                        club_managers.id as club_managers_id
-
-                from
-                        club_managers
-
-                join
-                        club_persons on club_persons.id=club_managers.club_person_id
-
-                join
-                        persons on persons.id=club_persons.person_id
-
-                where
-                        persons.id = 25 AND club_persons.club_id = 1
-
-                ;
-
-
-
-		select 
-                        team_club_persons.team_id as team_id,
-                        team_club_persons_club_players.id as player
-
-			from 
-				team_club_persons_club_players
-		join
-			team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
-
-		join    
-			club_persons on club_persons.id=team_club_persons.club_person_id
-
-
-		where 
-			club_persons.person_id = 25 AND club_persons.club_id = 1
-
-		;		
-
-                select
-                        team_club_persons.team_id as team_id,
-                        team_club_persons_club_parents.id as parent
-
-                        from
-                                team_club_persons_club_parents
-                join
-                        team_club_persons on team_club_persons.id=team_club_persons_club_parents.team_club_person_id
-
-                join
-                        club_persons on club_persons.id=team_club_persons.club_person_id
-
-
-                where
-                        club_persons.person_id = 25 AND club_persons.club_id = 1
-
-                ;
-
-                select
-                        team_club_persons.team_id as team_id,
-                        team_club_persons_club_coaches.id as coach
-
-                        from
-                                team_club_persons_club_coaches
-                join
-                        team_club_persons on team_club_persons.id=team_club_persons_club_coaches.team_club_person_id
-
-                join
-                        club_persons on club_persons.id=team_club_persons.club_person_id
-
-
-                where
-                        club_persons.person_id = 25 AND club_persons.club_id = 1
-
-                ;
-
-
-                select
-                        team_club_persons.team_id as team_id,
-                        team_club_persons_club_managers.id as manager
-
-                        from
-                                team_club_persons_club_managers
-                join
-                        team_club_persons on team_club_persons.id=team_club_persons_club_managers.team_club_person_id
-
-                join
-                        club_persons on club_persons.id=team_club_persons.club_person_id
-
-
-                where
-                        club_persons.person_id = 25 AND club_persons.club_id = 1
-
-                ;
+                where emails_persons.email_id = 21 
 
