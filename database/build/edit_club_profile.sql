@@ -699,7 +699,7 @@ BEGIN
 
         IF found_club_person_id > 0  THEN
 
-                select id into found_club_parent_id from club_players where club_person_id = found_club_person_id;
+                select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
 
                 IF found_club_parent_id > 0 THEN
 
