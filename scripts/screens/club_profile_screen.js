@@ -15,7 +15,8 @@ class ClubProfileScreen extends Screen
                 this.setSpinner(document.getElementById("club_profile_screen_spinner_id"));
                 this.setForm(document.getElementById("club_profile_screen_form_id"));
 
-		this.mRow = document.getElementById("club_profile_screen_team_row_id");
+		this.mClubRoleRow = document.getElementById("club_profile_screen_club_role_row_id");
+		this.mTeamRow = document.getElementById("club_profile_screen_team_row_id");
 		
 		//modal
                 this.setModal(document.getElementById("club_profile_modal_id"));
@@ -28,61 +29,44 @@ class ClubProfileScreen extends Screen
 		this.mClubCoachButton = null;
 		this.mClubManagerButton = null;
 
-		                                        //create a club player button
-                                        var button = document.createElement("BUTTON");
-                                        button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = 'Player';
-                                        this.mRow.appendChild(button);
-                                        button.onclick = this.hitClubPlayerButton.bind(button);
-                                        button.style.backgroundColor = "red";
-                                        this.mClubPlayerButton = button;
+		this.mDivArray = new Array();
 
-                                        //create a club parent button
-                                        var button = document.createElement("BUTTON");
-                                        button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = 'Parent';
-                                        this.mRow.appendChild(button);
-                                        button.onclick = this.hitClubParentButton.bind(button);
-                                        button.style.backgroundColor = "red";
-                                        this.mClubParentButton = button;
+		//create a club player button
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Player';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubPlayerButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubPlayerButton = button;
 
+                //create a club parent button
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Parent';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubParentButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubParentButton = button;
 
-                                        //create a club coach button
-                                        var button = document.createElement("BUTTON");
-                                        button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = 'Coach';
-                                        this.mRow.appendChild(button);
-                                        button.onclick = this.hitClubCoachButton.bind(button);
-                                        button.style.backgroundColor = "red";
-                                        this.mClubCoachButton = button;
+                //create a club coach button
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Coach';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubCoachButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubCoachButton = button;
 
+                //create a club manager button
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Manager';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubManagerButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubManagerButton = button;
 
-                                        //create a club manager button
-                                        var button = document.createElement("BUTTON");
-                                        button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = 'Manager';
-                                        this.mRow.appendChild(button);
-                                        button.onclick = this.hitClubManagerButton.bind(button);
-                                        button.style.backgroundColor = "red";
-                                        this.mClubManagerButton = button;
-
-/*
-		this.setClubPlayerButton(document.getElementById("club_profile_club_player_button_id"));
-		this.setClubParentButton(document.getElementById("club_profile_club_parent_button_id"));
-		this.setClubCoachButton(document.getElementById("club_profile_club_coach_button_id"));
-		this.setClubManagerButton(document.getElementById("club_profile_club_manager_button_id"));
-				
-		this.mClubPlayerButton.setAttribute('class','club-profile-button');
-		this.mClubParentButton.setAttribute('class','club-profile-button');
-		this.mClubCoachButton.setAttribute('class','club-profile-button');
-		this.mClubManagerButton.setAttribute('class','club-profile-button');
-                                
-		this.mClubPlayerButton.onclick  = this.hitClubPlayerButton.bind(this.mClubPlayerButton);
-                this.mClubParentButton.onclick  = this.hitClubParentButton.bind(this.mClubParentButton);
-                this.mClubCoachButton.onclick   = this.hitClubCoachButton.bind(this.mClubCoachButton);
-                this.mClubManagerButton.onclick = this.hitClubManagerButton.bind(this.mClubManagerButton);
-		*/
-	
 		this.mCurrentButton = null;
 
 		this.mPlayerButtonArray = new Array();
@@ -107,25 +91,23 @@ class ClubProfileScreen extends Screen
 
 
         }
-/*
-	setClubPlayerButton(b)
-	{
-		this.mClubPlayerButton = b;
-	}
-	setClubParentButton(b)
-	{
-		this.mClubParentButton = b;
-	}
-	setClubCoachButton(b)
-	{
-		this.mClubCoachButton = b;
-	}
-	setClubManagerButton(b)
-	{
-		this.mClubManagerButton = b;
-	}
-*/
-       	get()
+
+        exit()
+        {
+                this.removeDivs();
+                super.exit();
+        }
+
+        removeDivs()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mDivArray[i].remove();
+                }
+        }
+
+       	
+	get()
         {
                 if (APPLICATION.getJWT())
                 {
@@ -585,11 +567,17 @@ class ClubProfileScreen extends Screen
                                 
 				for (var i = 0; i < this.mJson.club_teams.length; i++)
 				{
+					//new row...
+                                        var rowDiv = document.createElement("DIV");
+                                       	rowDiv.setAttribute('class','row');
+					this.getHtml().appendChild(rowDiv);
+					this.mDivArray.push(rowDiv);
+
                                         //create a player button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
                                         button.innerHTML = '' + this.mJson.club_teams[i].team_name;
-                                        this.mRow.appendChild(button);
+                                        rowDiv.appendChild(button);
                                         var team_id = this.mJson.club_teams[i].team_id;
                                         var team_name = this.mJson.club_teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
@@ -603,7 +591,7 @@ class ClubProfileScreen extends Screen
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
                                         button.innerHTML = '' + this.mJson.club_teams[i].team_name;
-                                        this.mRow.appendChild(button);
+                                        rowDiv.appendChild(button);
                                         var team_id = this.mJson.club_teams[i].team_id;
                                         var team_name = this.mJson.club_teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
@@ -617,7 +605,7 @@ class ClubProfileScreen extends Screen
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
                                         button.innerHTML = '' + this.mJson.club_teams[i].team_name;
-                                        this.mRow.appendChild(button);
+                                        rowDiv.appendChild(button);
                                         var team_id = this.mJson.club_teams[i].team_id;
                                         var team_name = this.mJson.club_teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
@@ -631,7 +619,7 @@ class ClubProfileScreen extends Screen
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
                                         button.innerHTML = '' + this.mJson.club_teams[i].team_name;
-                                        this.mRow.appendChild(button);
+                                        rowDiv.appendChild(button);
                                         var team_id = this.mJson.club_teams[i].team_id;
                                         var team_name = this.mJson.club_teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
