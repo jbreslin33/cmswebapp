@@ -6,7 +6,6 @@ class ClubProfileScreen extends Screen
         {
                 super(application);
               
-		console.log("ClubProfileScreen()");
 
 		location.hash = 'club_profile_screen';
 
@@ -191,7 +190,6 @@ class ClubProfileScreen extends Screen
 
         getClubPersons()
         {
-		console.log('getClubPersons called');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_persons.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
         }
@@ -199,7 +197,6 @@ class ClubProfileScreen extends Screen
 	getClubPersonProfile()
         {
 		var person_selected_id =  APPLICATION.getCurrentScreen().getPersonId(); 
-		console.log('person_selected_id:' + person_selected_id);
 
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + person_selected_id);
                 APPLICATION.getCurrentScreen().ajax();
@@ -353,7 +350,6 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_parent_id=' + team_club_persons_club_parent_id);
-		console.log('deleteTeamParentUrl:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -488,6 +484,7 @@ class ClubProfileScreen extends Screen
                                 	opt.innerHTML = full_name;
                                 	select.appendChild(opt);
                         	}
+				this.getClubPersonProfile()
 			}
 
 			if (this.mJson.club_teams)
@@ -662,7 +659,6 @@ class ClubProfileScreen extends Screen
                                                 {
                                                         if (this.mJson.team_club_persons_club_parents[i].team_id == this.mParentButtonArray[t].getAttribute("team_id"))
                                                         {
-								console.log("set team_club_persons_club_parent_id attribute:" + this.mJson.team_club_persons_club_parents[i].team_club_persons_club_parent_id);
                                                                 this.mParentButtonArray[t].style.backgroundColor = "green";
                                                                 this.mParentButtonArray[t].setAttribute("team_club_persons_club_parent_id", this.mJson.team_club_persons_club_parents[i].team_club_persons_club_parent_id);
                                                         }
