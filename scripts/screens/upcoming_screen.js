@@ -275,7 +275,7 @@ class UpcomingScreen extends Screen
 			{
                         	for (var i = 0; i < this.mJson.practices.length; i++)
 				{
-					this.mJson.practices[i].names = null;
+					this.mJson.practices[i].names = '';
 					var dup = false;
 					for (var e = 0; e < this.mEventsArray.length; e++)
 					{
@@ -295,19 +295,19 @@ class UpcomingScreen extends Screen
 								//add names to original because you are a biter..
 								if (this.mJson.practices[i].players != null)
 								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Player:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Player:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
 								}
 								if (this.mJson.practices[i].parents != null)
 								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Parent:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Parent:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
 								}
 								if (this.mJson.practices[i].coaches != null)
 								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Coach:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Coach:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
 								}
 								if (this.mJson.practices[i].managers != null)
 								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Manager:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Manager:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
 								}
 							}
 						}
@@ -335,19 +335,19 @@ class UpcomingScreen extends Screen
 						//and add to names...
 		                                if (this.mJson.practices[i].players != null)
                                         	{
-                                                	this.mJson.practices[i].names = this.mJson.practices[i].names + 'Player:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+                                                	this.mJson.practices[i].names = this.mJson.practices[i].names + 'Player:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
                                         	}
                                         	if (this.mJson.practices[i].parents != null)
                                         	{
-                                               		this.mJson.practices[i].names = this.mJson.practices[i].names + 'Parent:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+                                               		this.mJson.practices[i].names = this.mJson.practices[i].names + 'Parent:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
                                         	}
                                         	if (this.mJson.practices[i].coaches != null)
                                         	{
-                                                	this.mJson.practices[i].names = this.mJson.practices[i].names + 'Coach:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+                                                	this.mJson.practices[i].names = this.mJson.practices[i].names + 'Coach:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
                                         	}
                                         	if (this.mJson.practices[i].managers != null)
                                         	{
-                                               		this.mJson.practices[i].names = this.mJson.practices[i].names + 'Manager:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name;
+                                               		this.mJson.practices[i].names = this.mJson.practices[i].names + 'Manager:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
                                         	}
 					}
 					else
