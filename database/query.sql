@@ -18,5 +18,5 @@
                 left outer join team_club_persons_club_coaches on team_club_persons_club_coaches.team_club_person_id=team_club_persons.id --AND team_club_persons_club_players.club_player_id=club_players.id
                 left outer join team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id --AND team_club_persons_club_players.club_player_id=club_players.id
 
-                where emails_persons.email_id = 21 
+                where emails_persons.email_id = 21 order by practices.event_date
 
