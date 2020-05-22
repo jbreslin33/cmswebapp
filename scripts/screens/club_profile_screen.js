@@ -630,7 +630,7 @@ class ClubProfileScreen extends Screen
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_manager_id", null);
-                                        button.onclick = this.hitParentButton.bind(button);
+                                        button.onclick = this.hitManagerButton.bind(button);
                                         button.style.backgroundColor = "red";
                                         this.mManagerButtonArray.push(button);
 

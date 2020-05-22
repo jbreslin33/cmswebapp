@@ -15,7 +15,6 @@ BEGIN
                 CALL p_update_club_profile($3,$4,$5,x);
 
                 IF x = -100 THEN
-			RAISE LOG '1st:%', x;
                        	result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -27,8 +26,6 @@ BEGIN
                 END IF;
                 
 		IF x = -101 THEN
-			RAISE LOG '2nd:%', x;
-			
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -475,8 +472,6 @@ BEGIN
         IF $2 is NULL THEN
         ELSE
                 CALL p_delete_club_manager($3,x);
-		RAISE LOG 'person_id:%', $3;
-
                 IF x = -101 THEN
                         result_set = CONCAT
                         (
@@ -851,7 +846,6 @@ BEGIN
 			IF found_parent_id > 0  THEN
 				-- DO NOTHING
 			ELSE
-				RAISE LOG 'person_id:%', $3;
 				insert into parents (person_id) values ($3) returning id into found_parent_id;
 			END IF;
 			
@@ -927,8 +921,6 @@ BEGIN
 			--DO NOTHING
 		END IF;
 		
-				--RAISE LOG 'person_id:%', $3;
-				--RAISE LOG 'club_person_id:%', found_club_person_id;
 
 	ELSE
 		IF $1 = 1 THEN
@@ -1095,7 +1087,6 @@ BEGIN
                         j_select_codes(-101)
                 );
         END IF;
-	RAISE LOG 'f_club_person_profile result_set:%', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -1216,7 +1207,6 @@ BEGIN
                 END IF;
 
         END IF;
-	RAISE LOG 'f_insert_team_parent result_set:%', result_set;
 
 RETURN result_set;
 END;
@@ -1776,7 +1766,6 @@ DECLARE
 
 BEGIN
         x := -101;
-	RAISE LOG 'delete parent:%', $1;
 
         delete from team_club_persons_club_parents where team_club_persons_club_parents.id = $1;
 END;

@@ -387,8 +387,6 @@ DECLARE
 raw_json text;
 result_set text;
 BEGIN
-RAISE LOG '$1:%', $1;
-RAISE LOG '$1:%', $1;
 
 SELECT json_agg(t) INTO raw_json
         from
