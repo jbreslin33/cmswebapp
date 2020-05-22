@@ -31,7 +31,8 @@ $$ LANGUAGE plpgsql;
   	--RAISE NOTICE 'notice message %', now();
 
 --BEGIN SELECT PITCHES
-CREATE OR REPLACE FUNCTION f_select_pitches_and_teams(email_id_p int,club_id_p int,person_id_p int)
+--email_id, person_id, club_id
+CREATE OR REPLACE FUNCTION f_select_pitches_and_teams(int,int,int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -42,9 +43,9 @@ BEGIN
                	',',
                 j_select_codes(-102),
                	',',
-		j_select_pitches(club_id_p),
+		j_select_pitches($3),
                	',',
-		j_select_teams_managed(club_id_p, person_id_p)
+		j_select_teams_managed($2,$3)
       	);
 
 RETURN result_set;

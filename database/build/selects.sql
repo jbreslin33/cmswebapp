@@ -577,12 +577,26 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-		select distinct teams.id, teams.name from teams
-                join team_club_persons on team_club_persons.team_id=teams.id
-                join club_persons on club_persons.id=team_club_persons.club_person_id
-                join persons on persons.id=club_persons.person_id
+                select
+                        teams.id, teams.name
+                from
+                        teams
+                join
+                        team_club_persons
+                        on
+                                team_club_persons.team_id = teams.id
+                join
+                        club_persons
+                        on
+                                club_persons.id = team_club_persons.club_person_id
 
-                where club_persons.club_id = $1 AND persons.id = $2
+                join
+                        team_club_persons_club_managers
+                        on
+                                team_club_persons_club_managers.team_club_person_id = team_club_persons.id
+
+                where
+                        club_persons.club_id = $2 AND club_persons.person_id = $1 
         ) t;
 
 	IF raw_json is NULL THEN
