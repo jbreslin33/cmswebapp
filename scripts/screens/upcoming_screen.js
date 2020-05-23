@@ -348,7 +348,7 @@ class UpcomingScreen extends Screen
 						this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
 						if (this.mEventoArray[e].mJsonEvent.availability_id != null)
 						{
-							this.mSmashEventoArray[s].mAvailablityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
+							this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
 						}
 					}
 					if (this.mEventoArray[e].mJsonEvent.parents  != null)
