@@ -44,11 +44,13 @@ class Evento
 		{
 			if (this.mJsonEvent.type == 'practice')
 			{
-				//this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+                       		var p = document.createElement('p');
+                       		this.mContainerDiv.appendChild(p);
+				p.innerHTML = this.mPlayerNameArray[i] + '<br>';
 
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
-                        	button.innerHTML = "Available";
+                        	button.innerHTML = "Going";
                         	this.mContainerDiv.appendChild(button);
                         	var id = 'button_2_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                         	button.setAttribute("id", id);
@@ -58,6 +60,38 @@ class Evento
                         		button.style.backgroundColor = "#4CAF50";
                         	}
                         	this.mButtonArray.push(button);
+
+
+                                var button = document.createElement("BUTTON");
+                                button.setAttribute("class","availability-button");
+                                button.innerHTML = "Maybe Going";
+                                this.mContainerDiv.appendChild(button);
+                        	var id = 'button_2_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                button.setAttribute("id", id);
+                        	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        	if (this.mAvailabilityIdArray[i] == 2)
+                                {
+                                	button.style.backgroundColor = "yellow";
+                                }
+                                this.mButtonArray.push(button);
+
+                                var button = document.createElement("BUTTON");
+                                button.setAttribute("class","availability-button");
+                                button.innerHTML = "Not Going";
+                                this.mContainerDiv.appendChild(button);
+                        	var id = 'button_2_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                button.setAttribute("id", id);
+                        	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        	if (this.mAvailabilityIdArray[i] == 3)
+                                {
+                                	button.style.backgroundColor = "red";
+                                }
+                                this.mButtonArray.push(button);
+
+                       		
+				var p = document.createElement('p');
+                       		this.mContainerDiv.appendChild(p);
+				p.innerHTML = '<br>';
 			}
 		}
 
@@ -75,6 +109,7 @@ class Evento
 			}
 
 			this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
+                       	
 
 			this.mTextArray = new Array();
                        	var p = document.createElement('p');
