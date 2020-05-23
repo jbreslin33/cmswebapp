@@ -1,3 +1,9 @@
+----
+
+got it: make an event class
+then make a personevent class
+event class goes on the card 
+then the person events are added to the card as buttons or names.
 
 also grace not being added to club_persons...
 ....should you only have buttons for players and should that button only show for that player???? this would prevent dup players for an event....

@@ -273,90 +273,10 @@ class UpcomingScreen extends Screen
 		{
                 	if (this.mJson.practices)
 			{
-                        	for (var i = 0; i < this.mJson.practices.length; i++)
+                       		for (var i = 0; i < this.mJson.practices.length; i++)
 				{
-					this.mJson.practices[i].names = '';
-					var dup = false;
-					for (var e = 0; e < this.mEventsArray.length; e++)
-					{
-						//if already in array just add role name person
-						if (this.mEventsArray[e].type == 'practice')
-						{
-							if (this.mEventsArray[e].id == this.mJson.practices[i].id)
-							{
-								//we already have this one
-								//so add name
-								dup = true;
-								console.log('players dup:' + this.mJson.practices[i].players);
-								console.log('parents dup:' + this.mJson.practices[i].parents);
-								console.log('coaches dup:' + this.mJson.practices[i].coaches);
-								console.log('managers dup:' + this.mJson.practices[i].managers);
-
-								//add names to original because you are a biter..
-								if (this.mJson.practices[i].players != null)
-								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Player:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-								}
-								if (this.mJson.practices[i].parents != null)
-								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Parent:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-								}
-								if (this.mJson.practices[i].coaches != null)
-								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Coach:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-								}
-								if (this.mJson.practices[i].managers != null)
-								{
-									this.mJson.practices[e].names = this.mJson.practices[e].names + 'Manager:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-								}
-							}
-						}
-					}
-
-					//console.log('players:' + this.mJson.practices[i].players);
-					//console.log('parents:' + this.mJson.practices[i].parents);
-					//console.log('coaches:' + this.mJson.practices[i].coaches);
-					//console.log('managers:' + this.mJson.practices[i].managers);
-
-					//add to names either way
-
-
-					if (dup == false) //you can add to array...
-					{
-						//this is the original.... so push into array
-						this.mEventsArray.push(this.mJson.practices[i]);
-						this.mJson.practices[i].type = 'practice';
-
-						console.log('players og:' + this.mJson.practices[i].players);
-						console.log('parents og:' + this.mJson.practices[i].parents);
-						console.log('coaches og:' + this.mJson.practices[i].coaches);
-						console.log('managers og:' + this.mJson.practices[i].managers);
-
-						//and add to names...
-		                                if (this.mJson.practices[i].players != null)
-                                        	{
-                                                	this.mJson.practices[i].names = this.mJson.practices[i].names + 'Player:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-                                        	}
-                                        	if (this.mJson.practices[i].parents != null)
-                                        	{
-                                               		this.mJson.practices[i].names = this.mJson.practices[i].names + 'Parent:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-                                        	}
-                                        	if (this.mJson.practices[i].coaches != null)
-                                        	{
-                                                	this.mJson.practices[i].names = this.mJson.practices[i].names + 'Coach:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-                                        	}
-                                        	if (this.mJson.practices[i].managers != null)
-                                        	{
-                                               		this.mJson.practices[i].names = this.mJson.practices[i].names + 'Manager:' + this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name + ' ';
-                                        	}
-					}
-					else
-					{
-
-					}
-
-
-					//this.mJson.practices[i].id = this.mJson.practices[i].id;
+					this.mEventsArray.push(this.mJson.practices[i]);
+					this.mJson.practices[i].type = 'practice';
 				}
 			}
 
@@ -383,6 +303,40 @@ class UpcomingScreen extends Screen
 				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 			}
 		);
+
+		//you should manipulate here after making them classes????
+		//
+		if (this.mEventsArray)
+		{
+                	for (var i = 0; i < this.mEventsArray.length; i++)
+			{
+				var e = new Event();
+				/*
+				 *
+				 *
+				this.mPracticeId = null;
+                		this.mGameId = null;
+                		this.mPlayerName = null;
+                		this.mParentName = null;
+                		this.mCoachName = null;
+                		this.mManager = null;
+				*/
+				if (this.mEventsArray[i].type == 'practice')
+				{
+					e.mPracticeId = this.mEventsArray[i].id; 
+				}
+				if (this.mEventsArray[i].type == 'game')
+				{
+					e.mGameId = this.mEventsArray[i].id; 
+				}
+				if (this.mEventsArray[i].players != null)
+				{
+					e.mPlayerNameArray.push(this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name);
+				}	
+				console.log('playerNameArray length:' + e.mPlayerNameArray.length);
+
+			}
+		}	
 
 		//lets set message at top that there is a schedule
 		if (this.mEventsArray.length > 0)
