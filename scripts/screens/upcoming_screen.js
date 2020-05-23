@@ -38,6 +38,8 @@ class UpcomingScreen extends Screen
 		this.mDivArray = new Array();
 
 		this.mEventsArray = new Array();
+		this.mEventoArray = new Array();
+
 
 		//availability
 		this.mAvailabilityArray = new Array();
@@ -86,6 +88,8 @@ class UpcomingScreen extends Screen
 	
 	removeDivs()
 	{
+		//loop thru eventos Array
+
 		for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
 		{
                         APPLICATION.getCurrentScreen().mDivArray[i].remove();
@@ -310,31 +314,8 @@ class UpcomingScreen extends Screen
 		{
                 	for (var i = 0; i < this.mEventsArray.length; i++)
 			{
-				var e = new Evento();
-				/*
-				 *
-				 *
-				this.mPracticeId = null;
-                		this.mGameId = null;
-                		this.mPlayerName = null;
-                		this.mParentName = null;
-                		this.mCoachName = null;
-                		this.mManager = null;
-				*/
-				if (this.mEventsArray[i].type == 'practice')
-				{
-					e.mPracticeId = this.mEventsArray[i].id; 
-				}
-				if (this.mEventsArray[i].type == 'game')
-				{
-					e.mGameId = this.mEventsArray[i].id; 
-				}
-				if (this.mEventsArray[i].players != null)
-				{
-					//e.mPlayerNameArray.push(this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name);
-				}	
-				//console.log('playerNameArray length:' + e.mPlayerNameArray.length);
-
+				var evento = new Evento(this.mApplication,this.mEventsArray[i]);
+				this.mEventoArray.push(evento);
 			}
 		}	
 
@@ -351,184 +332,7 @@ class UpcomingScreen extends Screen
 		//print to screen
 		if (this.mEventsArray)
                 {
-                        for (var i = 0; i < this.mEventsArray.length; i++)
-                        {
 
-				var div = document.createElement('div');	
-				this.mDivArray.push(div);
-				div.setAttribute('class','card');
-				document.getElementById("upcoming_screen_col_6_html_id").appendChild(div);
-
-				var container = document.createElement('div');
-				container.setAttribute('class','container');
-				div.appendChild(container);
-
-				if (this.mEventsArray[i].event_date)
-				{
-					var title = document.createElement('h5');
-					container.appendChild(title);
-						
-					var availability_id = this.mEventsArray[i].availability_id;
-					
-					if (this.mEventsArray[i].type == 'game')
-					{
-						title.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
-
-						var button = document.createElement("BUTTON");
-                                                button.setAttribute("class","availability-button");
-                                                button.innerHTML = "Available";
-                                                container.appendChild(button);
-                                                var id = 'button_1_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-						if (availability_id == 1)
-						{
-							button.style.backgroundColor = "#4CAF50";
-						}
-                                                this.mButtonArray.push(button);
-
-                                                var button = document.createElement("BUTTON");
-                                                button.setAttribute("class","availability-button");
-                                                button.innerHTML = "Maybe Available";
-                                                container.appendChild(button);
-                                                var id = 'button_1_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-						if (availability_id == 2)
-						{
-							button.style.backgroundColor = "yellow";
-						}
-                                                this.mButtonArray.push(button);
-
-                                                var button = document.createElement("BUTTON");
-                                                button.setAttribute("class","availability-button");
-                                                button.innerHTML = "Not Available";
-                                                container.appendChild(button);
-                                                var id = 'button_1_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-						if (availability_id == 3)
-						{
-							button.style.backgroundColor = "red";
-						}
-                                                this.mButtonArray.push(button);
-					}
-
-					if (this.mEventsArray[i].type == 'practice')
-					{
-						title.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
-						
-						var button = document.createElement("BUTTON");
-						button.setAttribute("class","availability-button");
-						button.innerHTML = "Available";
-						container.appendChild(button);
-						var id = 'button_2_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						button.setAttribute("id", id);
-			 			button.onclick = this.setOneHit.bind(button);
-						if (availability_id == 1)
-						{
-							button.style.backgroundColor = "#4CAF50";
-						}
-						this.mButtonArray.push(button);
-
-						var button = document.createElement("BUTTON");
-						button.setAttribute("class","availability-button");
-						button.innerHTML = "Maybe Available";
-						container.appendChild(button);
-						var id = 'button_2_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						button.setAttribute("id", id);
-			 			button.onclick = this.setOneHit.bind(button);
-						if (availability_id == 2)
-						{
-							button.style.backgroundColor = "yellow";
-						}
-						this.mButtonArray.push(button);
-						
-						var button = document.createElement("BUTTON");
-						button.setAttribute("class","availability-button");
-						button.innerHTML = "Not Available";
-						container.appendChild(button);
-						var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-  						button.setAttribute("id", id);
-			 			button.onclick = this.setOneHit.bind(button);
-						if (availability_id == 3)
-						{
-							button.style.backgroundColor = "red";
-						}
-						this.mButtonArray.push(button);
-					}
-				}
-				
-				
-				var textArray = new Array();
-				
-				var p = document.createElement('p');
-				container.appendChild(p);
-				
-				if (this.mEventsArray[i].first_name) 
-				{
-					//textArray.push('Player: ' + this.mEventsArray[i].first_name + ' ' + this.mEventsArray[i].last_name);
-					textArray.push('' + this.mEventsArray[i].names);
-				}
-
-				if (this.mEventsArray[i].arrival_time)
-				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time);
-					textArray.push('Arrive by: ' + humanTime);
-				}
-				
-				if (this.mEventsArray[i].start_time)
-				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].start_time);
-					textArray.push('Start time: ' + humanTime);
-				}
-				
-				if (this.mEventsArray[i].end_time)
-				{
-					var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].end_time);
-					textArray.push('End time: ' + humanTime);
-				}
-				
-				if (this.mEventsArray[i].address)
-				{
-					textArray.push('Address: ' + this.mEventsArray[i].address);
-				}
-
-				if (this.mEventsArray[i].coordinates)
-				{
-					textArray.push('Coordinates: ' + this.mEventsArray[i].coordinates);
-				}
-				
-				if (this.mEventsArray[i].pitch_name)
-				{
-					textArray.push('Pitch: ' + this.mEventsArray[i].pitch_name);
-				}
-				
-				if (this.mEventsArray[i].field_name)
-				{
-					textArray.push('Field: ' + this.mEventsArray[i].field_name);
-				}
-				
-				if (this.mEventsArray[i].club_name)
-				{
-					textArray.push('Club: ' + this.mEventsArray[i].club_name);
-				}
-				
-				if (this.mEventsArray[i].team_name)
-				{
-					textArray.push('Team: ' + this.mEventsArray[i].team_name);
-				}
-				
-				if (this.mEventsArray[i].opponent)
-				{
-					textArray.push('Opponent: ' + this.mEventsArray[i].opponent);
-				}
-
-				for (var r = 0; r < textArray.length; r++)
-				{
-					p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
-				}
-                        }
-                }
+		}
 	}
 }
