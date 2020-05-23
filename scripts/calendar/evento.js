@@ -32,6 +32,8 @@ class Evento
 		this.mCoachIdArray = new Array();
 		this.mManagerIdArray = new Array();
 
+		this.mAvailabilityIdArray = new Array();
+
 		this.mButtonArray = new Array();
 
 	}
@@ -49,12 +51,10 @@ class Evento
                         	var id = 'button_2_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                         	button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-				/*
-                        	if (availability_id == 1)
+                        	if (this.mAvailabilityIdArray[i] == 1)
                         	{
                         		button.style.backgroundColor = "#4CAF50";
                         	}
-				*/
                         	this.mButtonArray.push(button);
 			}
 		}

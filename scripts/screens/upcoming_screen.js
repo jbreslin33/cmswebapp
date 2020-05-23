@@ -346,6 +346,10 @@ class UpcomingScreen extends Screen
 					{
 						this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
 						this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+						if (this.mEventoArray[e].mJsonEvent.availability_id != null)
+						{
+							this.mSmashEventoArray[s].mAvailablityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
+						}
 					}
 					if (this.mEventoArray[e].mJsonEvent.parents  != null)
 					{
@@ -362,6 +366,7 @@ class UpcomingScreen extends Screen
 						this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
 						this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
 					}
+
 				}
 			}
 			if (dup == false)
@@ -370,6 +375,7 @@ class UpcomingScreen extends Screen
                                 {
                                        	this.mEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
                                         this.mEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+					this.mSmashEventoArray[s].mAvailablityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
                                 }
                                 if (this.mEventoArray[e].mJsonEvent.parents  != null)
                                 {
