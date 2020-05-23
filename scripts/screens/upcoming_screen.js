@@ -39,6 +39,7 @@ class UpcomingScreen extends Screen
 
 		this.mEventsArray = new Array();
 		this.mEventoArray = new Array();
+		this.mSmashEventoArray = new Array();
 
 
 		//availability
@@ -329,10 +330,48 @@ class UpcomingScreen extends Screen
 			this.setMessage('You have no events upcoming. Enjoy the time off.', 'black'); 
 		}
 
-		//print to screen
-		if (this.mEventsArray)
-                {
+		//smash eventos
+		for (var e = 0; e < this.mEventoArray.length; e++)
+		{
+			console.log('A1');
+			//add to smash array if not added already..
+			//
+			var dup = false;
+			for (var s = 0; s < this.mSmashEventoArray.length; s++)
+			{
+				console.log('A2');
+				console.log('id:' + this.mEventoArray[e].mJsonEvent.id);
+				console.log('id:' + this.mSmashEventoArray[s].mJsonEvent.id);
+				console.log('type:' + this.mEventoArray[e].mJsonEvent.type);
+				console.log('type:' + this.mSmashEventoArray[s].mJsonEvent.type);
 
+				if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'practice' && this.mSmashEventoArray[s].mJsonEvent.type == 'practice')
+				{
+					console.log('in loop');
+					dup = true;	
+					//add to 
+					if (this.mEventoArray[e].mJsonEvent.players  != null)
+					{
+						this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+						this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+					}
+				}
+			}
+			if (dup == false)
+			{
+				this.mSmashEventoArray.push(this.mEventoArray[e]);
+			}
+
+			
+			
+			//else just add team player id  as players etc
+			
+		}
+
+		console.log('length:' + this.mEventoArray.length);
+		for (var e = 0; e < this.mEventoArray.length; e++)
+		{
+			this.mEventoArray[e].printToScreen();
 		}
 	}
 }

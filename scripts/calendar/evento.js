@@ -7,17 +7,6 @@ class Evento
 		this.mApplication = application;
 		this.mJsonEvent = jsonEvent;
 
-		this.mPlayerName = null;
-		this.mParentName = null;
-		this.mCoachName = null;
-		this.mManagerName = null;
-/*
-		team_club_persons_club_players_id = null;
-		team_club_persons_club_parents_id = null;
-		team_club_persons_club_coaches_id = null;
-		team_club_persons_club_managers_id = null;
-*/
-
 		this.mDivArray = new Array();
 
                 this.mCardDiv = document.createElement('div');
@@ -32,8 +21,26 @@ class Evento
 		this.mTitle = null;
 		this.mTextArray = new Array();
 
+		//for smash
+		this.mPlayerNameArray = new Array();
+		this.mParentNameArray = new Array();
+		this.mCoachNameArray = new Array();
+		this.mManagerNameArray = new Array();
+		
+		this.mPlayerIdArray = new Array();
+		this.mParentIdArray = new Array();
+		this.mCoachIdArray = new Array();
+		this.mManagerIdArray = new Array();
+
+	}
+
+	printToScreen()
+	{
+		console.log('1');
+
 		if (this.mJsonEvent)
 		{
+			console.log('2');
 
 			if (this.mJsonEvent.event_date)
                 	{
