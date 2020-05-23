@@ -396,10 +396,9 @@ class UpcomingScreen extends Screen
 			
 		}
 
-		console.log('length:' + this.mEventoArray.length);
-		for (var e = 0; e < this.mEventoArray.length; e++)
+		for (var s = 0; s < this.mSmashEventoArray.length; s++)
 		{
-			this.mEventoArray[e].printToScreen();
+			this.mEventoArray[s].printToScreen();
 		}
 	}
 }
