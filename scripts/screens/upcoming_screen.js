@@ -333,32 +333,60 @@ class UpcomingScreen extends Screen
 		//smash eventos
 		for (var e = 0; e < this.mEventoArray.length; e++)
 		{
-			console.log('A1');
 			//add to smash array if not added already..
 			//
 			var dup = false;
 			for (var s = 0; s < this.mSmashEventoArray.length; s++)
 			{
-				console.log('A2');
-				console.log('id:' + this.mEventoArray[e].mJsonEvent.id);
-				console.log('id:' + this.mSmashEventoArray[s].mJsonEvent.id);
-				console.log('type:' + this.mEventoArray[e].mJsonEvent.type);
-				console.log('type:' + this.mSmashEventoArray[s].mJsonEvent.type);
-
 				if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'practice' && this.mSmashEventoArray[s].mJsonEvent.type == 'practice')
 				{
-					console.log('in loop');
 					dup = true;	
-					//add to 
+					
 					if (this.mEventoArray[e].mJsonEvent.players  != null)
 					{
 						this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
 						this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
 					}
+					if (this.mEventoArray[e].mJsonEvent.parents  != null)
+					{
+						this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
+						this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+					}
+					if (this.mEventoArray[e].mJsonEvent.coaches  != null)
+					{
+						this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+						this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+					}
+					if (this.mEventoArray[e].mJsonEvent.managers  != null)
+					{
+						this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+						this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+					}
 				}
 			}
 			if (dup == false)
 			{
+                        	if (this.mEventoArray[e].mJsonEvent.players  != null)
+                                {
+                                       	this.mEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                        this.mEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                }
+                                if (this.mEventoArray[e].mJsonEvent.parents  != null)
+                                {
+                                        this.mEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
+                                        this.mEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                }
+                                if (this.mEventoArray[e].mJsonEvent.coaches  != null)
+                                {
+                                        this.mEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.coaches);
+                                        this.mEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                }
+                                if (this.mEventoArray[e].mJsonEvent.managers  != null)
+                                {
+                                        this.mEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.managers);
+                                        this.mEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                }
+
 				this.mSmashEventoArray.push(this.mEventoArray[e]);
 			}
 

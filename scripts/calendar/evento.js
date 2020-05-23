@@ -36,17 +36,17 @@ class Evento
 
 	printToScreen()
 	{
-		console.log('1');
-
 		if (this.mJsonEvent)
 		{
-			console.log('2');
 
 			if (this.mJsonEvent.event_date)
                 	{
                 		this.mTitle = document.createElement('h5');
                         	this.mContainerDiv.appendChild(this.mTitle);
 			}
+			
+			console.log('make ' + this.mPlayerIdArray.length + ' buttons');
+
                         
 			this.mTextArray = new Array();
 
