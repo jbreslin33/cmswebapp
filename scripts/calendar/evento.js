@@ -32,6 +32,33 @@ class Evento
 		this.mCoachIdArray = new Array();
 		this.mManagerIdArray = new Array();
 
+		this.mButtonArray = new Array();
+
+	}
+
+	makeButtons()
+	{
+		for (var i = 0; i < this.mPlayerIdArray.length; i++)
+		{
+			if (this.mJsonEvent.type == 'practice')
+			{
+        			var button = document.createElement("BUTTON");
+                		button.setAttribute("class","availability-button");
+                        	button.innerHTML = "Available";
+                        	this.mContainerDiv.appendChild(button);
+                        	var id = 'button_2_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                        	button.setAttribute("id", id);
+                        	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+				/*
+                        	if (availability_id == 1)
+                        	{
+                        		button.style.backgroundColor = "#4CAF50";
+                        	}
+				*/
+                        	this.mButtonArray.push(button);
+			}
+		}
+
 	}
 
 	printToScreen()
@@ -46,6 +73,7 @@ class Evento
 			}
 			
 			console.log('make ' + this.mPlayerIdArray.length + ' buttons');
+			this.makeButtons();
 
                         
 			this.mTextArray = new Array();
