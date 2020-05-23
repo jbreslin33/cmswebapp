@@ -44,6 +44,8 @@ class Evento
 		{
 			if (this.mJsonEvent.type == 'practice')
 			{
+				//this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
+
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
                         	button.innerHTML = "Available";
@@ -71,21 +73,25 @@ class Evento
                 		this.mTitle = document.createElement('h5');
                         	this.mContainerDiv.appendChild(this.mTitle);
 			}
-			
-			console.log('make ' + this.mPlayerIdArray.length + ' buttons');
-			this.makeButtons();
 
-                        
+			this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
+
 			this.mTextArray = new Array();
-
                        	var p = document.createElement('p');
-                       	this.mContainerDiv.appendChild(p);
 
                         if (this.mJsonEvent.first_name)
                         {
                         	//this.mTextArray.push('Player: ' + this.mEventsArray[i].first_name + ' ' + this.mEventsArray[i].last_name);
                                 this.mTextArray.push('' + this.mJsonEvent.names);
                         }
+			
+			console.log('make ' + this.mPlayerIdArray.length + ' buttons');
+			this.makeButtons();
+
+                        
+
+                       	this.mContainerDiv.appendChild(p);
+
 
                         if (this.mJsonEvent.arrival_time)
                         {
