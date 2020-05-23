@@ -35,7 +35,6 @@ class UpcomingScreen extends Screen
 
 		this.mCalendar = new Calendar();
 
-		this.mDivArray = new Array();
 
 		this.mEventsArray = new Array();
 		this.mEventoArray = new Array();
@@ -90,10 +89,13 @@ class UpcomingScreen extends Screen
 	removeDivs()
 	{
 		//loop thru eventos Array
-
-		for (var i = 0; i < APPLICATION.getCurrentScreen().mDivArray.length; i++)
+		//
+		for (var i = 0; i < this.mSmashEventoArray.length; i++)
 		{
-                        APPLICATION.getCurrentScreen().mDivArray[i].remove();
+			for (var x = 0; x < this.mSmashEventoArray[i].mDivArray.length; x++)
+			{
+                        	this.mSmashEventoArray[i].mDivArray[x].remove();
+			}
 		}
 	}
 
