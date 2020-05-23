@@ -310,7 +310,7 @@ class UpcomingScreen extends Screen
 		{
                 	for (var i = 0; i < this.mEventsArray.length; i++)
 			{
-				var e = new Event();
+				var e = new Evento();
 				/*
 				 *
 				 *
@@ -331,9 +331,9 @@ class UpcomingScreen extends Screen
 				}
 				if (this.mEventsArray[i].players != null)
 				{
-					e.mPlayerNameArray.push(this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name);
+					//e.mPlayerNameArray.push(this.mJson.practices[i].first_name + ' ' + this.mJson.practices[i].last_name);
 				}	
-				console.log('playerNameArray length:' + e.mPlayerNameArray.length);
+				//console.log('playerNameArray length:' + e.mPlayerNameArray.length);
 
 			}
 		}	
