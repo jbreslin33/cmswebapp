@@ -363,6 +363,7 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_coach.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_persons_club_coach_id=' + team_club_persons_club_coach_id);
+		console.log('url:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -676,7 +677,7 @@ class ClubProfileScreen extends Screen
                                                         if (this.mJson.team_club_persons_club_coaches[i].team_id == this.mCoachButtonArray[t].getAttribute("team_id"))
                                                         {
                                                                 this.mCoachButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachButtonArray[t].setAttribute("team_club_persons_club_coach_id", this.mJson.team_club_persons_club_coaches[i].team_club_persons_club_coaches_id);
+                                                                this.mCoachButtonArray[t].setAttribute("team_club_persons_club_coach_id", this.mJson.team_club_persons_club_coaches[i].team_club_persons_club_coach_id);
                                                         }
                                                 }
                                         }

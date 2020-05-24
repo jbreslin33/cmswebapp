@@ -1,6 +1,7 @@
-delete a team coach not working
 propagate to games...
 delete practice
+----------
+fixed: delete a team coach not working
 
 ----------
 time off bug
