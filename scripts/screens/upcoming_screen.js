@@ -318,9 +318,6 @@ class UpcomingScreen extends Screen
 				}
 			}		
 
-			//lets set message to black  and null
-			this.setMessage('', 'black'); 
-
 			//smash eventos
 			for (var e = 0; e < this.mEventoArray.length; e++)
 			{
@@ -388,9 +385,14 @@ class UpcomingScreen extends Screen
 				this.mEventoArray[s].printToScreen();
 			}
 		}
-		else
+
+		if (this.mSmashEventoArray.length > 0) 
 		{
-			this.setMessage('You have no events upcoming. Enjoy the time off.', 'black'); 
-		}
+                	this.setMessage('', 'black');
+                }
+                else
+                {
+                	this.setMessage('You have no events upcoming. Enjoy the time off.', 'black');
+                }
 	}
 }
