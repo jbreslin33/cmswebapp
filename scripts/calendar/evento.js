@@ -90,7 +90,6 @@ class Evento
                                 this.mButtonArray.push(button);
 			}
 		}
-
 	}
 
 	printToScreen()

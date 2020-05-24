@@ -358,6 +358,7 @@ class UpcomingScreen extends Screen
 						}
 					}
 				}
+
 				if (dup == false)
 				{
                         		if (this.mEventoArray[e].mJsonEvent.players  != null)
