@@ -88,11 +88,6 @@ class Evento
                                 	button.style.backgroundColor = "red";
                                 }
                                 this.mButtonArray.push(button);
-/*
-				var p = document.createElement('p');
-                       		this.mContainerDiv.appendChild(p);
-				p.innerHTML = '<br>';
-				*/
 			}
 		}
 
