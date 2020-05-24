@@ -39,7 +39,6 @@ class Evento
 
 		for (var b = 0; b < this.mButtonArray.length; b++)
 		{
-			console.log('remove button:' + this.mButtonArray[b].getAttribute("id"));
 			this.mButtonArray[b].remove();
 		}
 	}
@@ -50,12 +49,6 @@ class Evento
 		{
 			if (this.mJsonEvent.type == 'practice')
 			{
-				/*
-                       		var p = document.createElement('p');
-                       		this.mContainerDiv.appendChild(p);
-				p.innerHTML = this.mPlayerNameArray[i] + '<br>';
-				*/
-
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
                         	button.innerHTML = '' + this.mPlayerNameArray[i];
