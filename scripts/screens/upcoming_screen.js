@@ -281,6 +281,7 @@ class UpcomingScreen extends Screen
 				{
 					this.mEventsArray.push(this.mJson.practices[i]);
 					this.mJson.practices[i].type = 'practice';
+					console.log('prac');
 				}
 			}
 
@@ -403,6 +404,7 @@ class UpcomingScreen extends Screen
 
 		for (var s = 0; s < this.mSmashEventoArray.length; s++)
 		{
+			console.log('print');
 			this.mEventoArray[s].printToScreen();
 		}
 	}

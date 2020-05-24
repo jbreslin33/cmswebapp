@@ -8,16 +8,21 @@ class Evento
 		this.mJsonEvent = jsonEvent;
 
 		this.mDivArray = new Array();
+                this.mCardDiv = null;
+                this.mContainerDiv = null;
 
-                this.mCardDiv = document.createElement('div');
-                this.mDivArray.push(this.mCardDiv);
-                this.mCardDiv.setAttribute('class','card');
-                document.getElementById("upcoming_screen_col_6_html_id").appendChild(this.mCardDiv);
+		                        //put container..
+		/*
+                        this.mCardDiv = document.createElement('div');
+                        this.mDivArray.push(this.mCardDiv);
+                        this.mCardDiv.setAttribute('class','card');
+                        document.getElementById("upcoming_screen_col_6_html_id").appendChild(this.mCardDiv);
 
-                this.mContainerDiv = document.createElement('div');
-                this.mContainerDiv.setAttribute('class','container');
-                this.mCardDiv.appendChild(this.mContainerDiv);
-                this.mDivArray.push(this.mContainerDiv);
+                        this.mContainerDiv = document.createElement('div');
+                        this.mContainerDiv.setAttribute('class','container');
+                        this.mCardDiv.appendChild(this.mContainerDiv);
+                        this.mDivArray.push(this.mContainerDiv);
+			*/
 
 		this.mTitle = null;
 		this.mTextArray = new Array();
@@ -112,6 +117,17 @@ class Evento
 	{
 		if (this.mJsonEvent)
 		{
+			//put container..
+			this.mCardDiv = document.createElement('div');
+                	this.mDivArray.push(this.mCardDiv);
+                	this.mCardDiv.setAttribute('class','card');
+                	document.getElementById("upcoming_screen_col_6_html_id").appendChild(this.mCardDiv);
+
+                	this.mContainerDiv = document.createElement('div');
+                	this.mContainerDiv.setAttribute('class','container');
+                	this.mCardDiv.appendChild(this.mContainerDiv);
+                	this.mDivArray.push(this.mContainerDiv);
+
 
 			if (this.mJsonEvent.event_date)
                 	{
