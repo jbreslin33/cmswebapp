@@ -36,6 +36,12 @@ class Evento
                 {
                        	this.mDivArray[x].remove();
                 }
+
+		for (var b = 0; b < this.mButtonArray.length; b++)
+		{
+			console.log('remove button:' + this.mButtonArray[b].getAttribute("id"));
+			this.mButtonArray[b].remove();
+		}
 	}
 
 	makeButtons()
@@ -44,13 +50,15 @@ class Evento
 		{
 			if (this.mJsonEvent.type == 'practice')
 			{
+				/*
                        		var p = document.createElement('p');
                        		this.mContainerDiv.appendChild(p);
 				p.innerHTML = this.mPlayerNameArray[i] + '<br>';
+				*/
 
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
-                        	button.innerHTML = "Going";
+                        	button.innerHTML = '' + this.mPlayerNameArray[i];
                         	this.mContainerDiv.appendChild(button);
                         	var id = 'button_2_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                         	button.setAttribute("id", id);
@@ -64,7 +72,7 @@ class Evento
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                                button.innerHTML = "Maybe Going";
+                        	button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
                         	var id = 'button_2_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
@@ -77,7 +85,7 @@ class Evento
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                                button.innerHTML = "Not Going";
+                        	button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
                         	var id = 'button_2_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);

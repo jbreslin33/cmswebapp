@@ -262,6 +262,8 @@ class UpcomingScreen extends Screen
 
         processJsonData()
 	{
+		console.log('process again');
+		//this.removeDivs();
 		super.processJsonData();
 
 		this.mEventsArray.length = 0;
@@ -288,111 +290,109 @@ class UpcomingScreen extends Screen
 			}
 		}
 
-		//sort this.mEventsArray by date and arrival time
-		this.mEventsArray.sort
-		(
-			function(a, b)
-			{
-				var d = new Date(a.event_date) - new Date(b.event_date)
-				if (d != 0)
-				{
-					return d;	
-				}
-				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
-			}
-		);
-
-		//you should manipulate here after making them classes????
-		//
-		if (this.mEventsArray)
-		{
-                	for (var i = 0; i < this.mEventsArray.length; i++)
-			{
-				var evento = new Evento(this.mApplication,this.mEventsArray[i]);
-				this.mEventoArray.push(evento);
-			}
-		}	
-
-		//lets set message at top that there is a schedule
 		if (this.mEventsArray.length > 0)
 		{
+
+			//sort this.mEventsArray by date and arrival time
+			this.mEventsArray.sort
+			(
+				function(a, b)
+				{
+					var d = new Date(a.event_date) - new Date(b.event_date)
+					if (d != 0)
+					{
+						return d;	
+					}
+					return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
+				}
+			);
+
+			//you should manipulate here after making them classes????
+			//
+			if (this.mEventsArray)
+			{
+                		for (var i = 0; i < this.mEventsArray.length; i++)
+				{
+					var evento = new Evento(this.mApplication,this.mEventsArray[i]);
+					this.mEventoArray.push(evento);
+				}
+			}		
+
+			//lets set message to black  and null
 			this.setMessage('', 'black'); 
+
+			//smash eventos
+			for (var e = 0; e < this.mEventoArray.length; e++)
+			{
+				//add to smash array if not added already..
+				var dup = false;
+				for (var s = 0; s < this.mSmashEventoArray.length; s++)
+				{
+					if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'practice' && this.mSmashEventoArray[s].mJsonEvent.type == 'practice')
+					{
+						dup = true;	
+					
+						if (this.mEventoArray[e].mJsonEvent.players  != null)
+						{
+							this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+							this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+							if (this.mEventoArray[e].mJsonEvent.availability_id != null)
+							{
+								this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
+							}
+						}
+						if (this.mEventoArray[e].mJsonEvent.parents  != null)
+						{
+							this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
+							this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+						}
+						if (this.mEventoArray[e].mJsonEvent.coaches  != null)
+						{
+							this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+							this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+						}
+						if (this.mEventoArray[e].mJsonEvent.managers  != null)
+						{
+							this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+							this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+						}
+					}
+				}
+				if (dup == false)
+				{
+                        		if (this.mEventoArray[e].mJsonEvent.players  != null)
+                                	{
+                                       		this.mEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                        	this.mEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+						this.mSmashEventoArray[s].mAvailablityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
+                                	}
+                                	if (this.mEventoArray[e].mJsonEvent.parents  != null)
+                                	{
+                                        	this.mEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
+                                        	this.mEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                	}
+                                	if (this.mEventoArray[e].mJsonEvent.coaches  != null)
+                                	{
+                                        	this.mEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.coaches);
+                                        	this.mEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                	}
+                                	if (this.mEventoArray[e].mJsonEvent.managers  != null)
+                                	{
+                                       		this.mEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.managers);
+                                        	this.mEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                	}
+					this.mSmashEventoArray.push(this.mEventoArray[e]);
+				}
+			}
+
+			for (var s = 0; s < this.mSmashEventoArray.length; s++)
+			{
+				this.mEventoArray[s].printToScreen();
+			}
 		}
 		else
 		{
 			this.setMessage('You have no events upcoming. Enjoy the time off.', 'black'); 
-		}
-
-		//smash eventos
-		for (var e = 0; e < this.mEventoArray.length; e++)
-		{
-			//add to smash array if not added already..
-			//
-			var dup = false;
-			for (var s = 0; s < this.mSmashEventoArray.length; s++)
-			{
-				if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'practice' && this.mSmashEventoArray[s].mJsonEvent.type == 'practice')
-				{
-					dup = true;	
-					
-					if (this.mEventoArray[e].mJsonEvent.players  != null)
-					{
-						this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
-						this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-						if (this.mEventoArray[e].mJsonEvent.availability_id != null)
-						{
-							this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
-						}
-					}
-					if (this.mEventoArray[e].mJsonEvent.parents  != null)
-					{
-						this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
-						this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-					}
-					if (this.mEventoArray[e].mJsonEvent.coaches  != null)
-					{
-						this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.players);
-						this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-					}
-					if (this.mEventoArray[e].mJsonEvent.managers  != null)
-					{
-						this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
-						this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-					}
-
-				}
-			}
-			if (dup == false)
-			{
-                        	if (this.mEventoArray[e].mJsonEvent.players  != null)
-                                {
-                                       	this.mEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
-                                        this.mEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-					this.mSmashEventoArray[s].mAvailablityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
-                                }
-                                if (this.mEventoArray[e].mJsonEvent.parents  != null)
-                                {
-                                        this.mEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
-                                        this.mEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-                                }
-                                if (this.mEventoArray[e].mJsonEvent.coaches  != null)
-                                {
-                                        this.mEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.coaches);
-                                        this.mEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-                                }
-                                if (this.mEventoArray[e].mJsonEvent.managers  != null)
-                                {
-                                        this.mEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.managers);
-                                        this.mEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-                                }
-
-				this.mSmashEventoArray.push(this.mEventoArray[e]);
-			}
-		}
-
-		for (var s = 0; s < this.mSmashEventoArray.length; s++)
-		{
-			this.mEventoArray[s].printToScreen();
 		}
 	}
 }
