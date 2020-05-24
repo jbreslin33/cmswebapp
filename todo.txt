@@ -1,4 +1,4 @@
-
+delete a team coach not working
 propagate to games...
 delete practice
 
