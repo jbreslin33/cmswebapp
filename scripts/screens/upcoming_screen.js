@@ -92,10 +92,7 @@ class UpcomingScreen extends Screen
 		//
 		for (var i = 0; i < this.mSmashEventoArray.length; i++)
 		{
-			for (var x = 0; x < this.mSmashEventoArray[i].mDivArray.length; x++)
-			{
-                        	this.mSmashEventoArray[i].mDivArray[x].remove();
-			}
+			this.mSmashEventoArray[i].removeDivs();
 		}
 	}
 

@@ -17,6 +17,7 @@ class Evento
                 this.mContainerDiv = document.createElement('div');
                 this.mContainerDiv.setAttribute('class','container');
                 this.mCardDiv.appendChild(this.mContainerDiv);
+                this.mDivArray.push(this.mContainerDiv);
 
 		this.mTitle = null;
 		this.mTextArray = new Array();
@@ -37,6 +38,16 @@ class Evento
 		this.mButtonArray = new Array();
 
 	}
+
+	removeDivs()
+	{
+		for (var x = 0; x < this.mDivArray.length; x++)
+                {
+                	console.log('remove:' + x);
+                       	this.mDivArray[x].remove();
+                }
+	}
+
 
 	makeButtons()
 	{
@@ -190,70 +201,3 @@ class Evento
 	}
 }
 
-class Availability 
-{
-	constructor(application)
-	{
-		this.mAvailableButton      = document.createElement("BUTTON"); 
-                this.mAvailableButton.setAttribute("class","availability-button");
-                this.mAvailableButton.innerHTML = "Available";
-                container.appendChild(button);
-                                                var id = 'button_2_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-                                                if (availability_id == 1)
-                                                {
-                                                        button.style.backgroundColor = "#4CAF50";
-                                                }
-                                                this.mButtonArray.push(button);
-
-
-
-		this.mMaybeAvailableButton = document.createElement("BUTTON");
-		this.mNotAvailableButton   = document.createElement("BUTTON");
-
-
-	}
-}
-
-/*
-                                                var button = document.createElement("BUTTON");
-                                                button.setAttribute("class","availability-button");
-                                                button.innerHTML = "Available";
-                                                container.appendChild(button);
-                                                var id = 'button_2_1_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-                                                if (availability_id == 1)
-                                                {
-                                                        button.style.backgroundColor = "#4CAF50";
-                                                }
-                                                this.mButtonArray.push(button);
-
-                                                var button = document.createElement("BUTTON");
-                                                button.setAttribute("class","availability-button");
-                                                button.innerHTML = "Maybe Available";
-                                                container.appendChild(button);
-                                                var id = 'button_2_2_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-                                                if (availability_id == 2)
-                                                {
-                                                        button.style.backgroundColor = "yellow";
-                                                }
-                                                this.mButtonArray.push(button);
-
-                                                var button = document.createElement("BUTTON");
-                                                button.setAttribute("class","availability-button");
-                                                button.innerHTML = "Not Available";
-                                                container.appendChild(button);
-                                                var id = 'button_2_3_' + this.mEventsArray[i].id + '_' + this.mEventsArray[i].team_club_persons_club_players_id;
-                                                button.setAttribute("id", id);
-                                                button.onclick = this.setOneHit.bind(button);
-                                                if (availability_id == 3)
-                                                {
-                                                        button.style.backgroundColor = "red";
-                                                }
-                                                this.mButtonArray.push(button);
- 
- */
