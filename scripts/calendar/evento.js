@@ -11,19 +11,6 @@ class Evento
                 this.mCardDiv = null;
                 this.mContainerDiv = null;
 
-		                        //put container..
-		/*
-                        this.mCardDiv = document.createElement('div');
-                        this.mDivArray.push(this.mCardDiv);
-                        this.mCardDiv.setAttribute('class','card');
-                        document.getElementById("upcoming_screen_col_6_html_id").appendChild(this.mCardDiv);
-
-                        this.mContainerDiv = document.createElement('div');
-                        this.mContainerDiv.setAttribute('class','container');
-                        this.mCardDiv.appendChild(this.mContainerDiv);
-                        this.mDivArray.push(this.mContainerDiv);
-			*/
-
 		this.mTitle = null;
 		this.mTextArray = new Array();
 
@@ -41,18 +28,15 @@ class Evento
 		this.mAvailabilityIdArray = new Array();
 
 		this.mButtonArray = new Array();
-
 	}
 
 	removeDivs()
 	{
 		for (var x = 0; x < this.mDivArray.length; x++)
                 {
-                	console.log('remove:' + x);
                        	this.mDivArray[x].remove();
                 }
 	}
-
 
 	makeButtons()
 	{
@@ -104,7 +88,6 @@ class Evento
                                 }
                                 this.mButtonArray.push(button);
 
-                       		
 				var p = document.createElement('p');
                        		this.mContainerDiv.appendChild(p);
 				p.innerHTML = '<br>';
@@ -136,24 +119,18 @@ class Evento
 			}
 
 			this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
-                       	
 
 			this.mTextArray = new Array();
                        	var p = document.createElement('p');
 
                         if (this.mJsonEvent.first_name)
                         {
-                        	//this.mTextArray.push('Player: ' + this.mEventsArray[i].first_name + ' ' + this.mEventsArray[i].last_name);
                                 this.mTextArray.push('' + this.mJsonEvent.names);
                         }
 			
-			console.log('make ' + this.mPlayerIdArray.length + ' buttons');
 			this.makeButtons();
 
-                        
-
                        	this.mContainerDiv.appendChild(p);
-
 
                         if (this.mJsonEvent.arrival_time)
                         {

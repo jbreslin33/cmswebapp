@@ -35,11 +35,9 @@ class UpcomingScreen extends Screen
 
 		this.mCalendar = new Calendar();
 
-
 		this.mEventsArray = new Array();
 		this.mEventoArray = new Array();
 		this.mSmashEventoArray = new Array();
-
 
 		//availability
 		this.mAvailabilityArray = new Array();
@@ -53,7 +51,7 @@ class UpcomingScreen extends Screen
                 var current_string = parseInt(current_date.getYear() + 1900) + '-' + parseInt(current_date.getMonth() + 1) + '-' + current_date.getDate();
                 var current_date_string = this.mCalendar.inflateDateString(current_string);
 
-		//7 days from now
+		//10 years from now
 		var future_date = new Date();
 		future_date.setDate(future_date.getDate() + 5000); //over 10 years
                 var future_month = future_date.getMonth();
@@ -75,7 +73,6 @@ class UpcomingScreen extends Screen
 
         get()
         {
-		super.get();
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
                 APPLICATION.getCurrentScreen().ajax();
         }
@@ -89,14 +86,11 @@ class UpcomingScreen extends Screen
 	removeDivs()
 	{
 		//loop thru eventos Array
-		//
 		for (var i = 0; i < this.mSmashEventoArray.length; i++)
 		{
 			this.mSmashEventoArray[i].removeDivs();
 		}
 	}
-
-	//lightUp(button
 
 	setAllHit()
 	{
@@ -281,7 +275,6 @@ class UpcomingScreen extends Screen
 				{
 					this.mEventsArray.push(this.mJson.practices[i]);
 					this.mJson.practices[i].type = 'practice';
-					console.log('prac');
 				}
 			}
 
@@ -395,16 +388,10 @@ class UpcomingScreen extends Screen
 
 				this.mSmashEventoArray.push(this.mEventoArray[e]);
 			}
-
-			
-			
-			//else just add team player id  as players etc
-			
 		}
 
 		for (var s = 0; s < this.mSmashEventoArray.length; s++)
 		{
-			console.log('print');
 			this.mEventoArray[s].printToScreen();
 		}
 	}
