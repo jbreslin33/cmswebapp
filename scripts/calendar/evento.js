@@ -47,6 +47,49 @@ class Evento
 	{
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
 		{
+                       	if (this.mJsonEvent.type == 'game')
+                        {
+                                var button = document.createElement("BUTTON");
+                                button.setAttribute("class","availability-button");
+                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                this.mContainerDiv.appendChild(button);
+                                var id = 'button_1_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                button.setAttribute("id", id);
+                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                                if (this.mAvailabilityIdArray[i] == 1)
+                                {
+                                        button.style.backgroundColor = "#4CAF50";
+                                }
+                                this.mButtonArray.push(button);
+
+
+                                var button = document.createElement("BUTTON");
+                                button.setAttribute("class","availability-button");
+                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                this.mContainerDiv.appendChild(button);
+                                var id = 'button_1_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                button.setAttribute("id", id);
+                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                                if (this.mAvailabilityIdArray[i] == 2)
+                                {
+                                        button.style.backgroundColor = "yellow";
+                                }
+                                this.mButtonArray.push(button);
+
+                                var button = document.createElement("BUTTON");
+                                button.setAttribute("class","availability-button");
+                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                this.mContainerDiv.appendChild(button);
+                                var id = 'button_1_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                button.setAttribute("id", id);
+                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                                if (this.mAvailabilityIdArray[i] == 3)
+                                {
+                                        button.style.backgroundColor = "red";
+                                }
+                                this.mButtonArray.push(button);
+                        }
+
 			if (this.mJsonEvent.type == 'practice')
 			{
         			var button = document.createElement("BUTTON");
@@ -113,8 +156,15 @@ class Evento
                 		this.mTitle = document.createElement('h5');
                         	this.mContainerDiv.appendChild(this.mTitle);
 			}
-
-			this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
+			
+			if (this.mJsonEvent.type == 'game')
+			{
+				this.mTitle.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
+			}
+			if (this.mJsonEvent.type == 'practice')
+			{
+				this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
+			}
 
 			this.mTextArray = new Array();
                        	var p = document.createElement('p');

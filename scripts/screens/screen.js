@@ -85,7 +85,6 @@ class Screen
 
 	personSelected()
 	{
-		console.log('selected in choose person???');
 		/*
 		if (APPLICATION.getSideScreen())
 		{
@@ -793,12 +792,10 @@ class Screen
 		{
                		for (var i = 0; i < this.mJson.messages.length; i++)
 			{
-				console.log('message:' + this.mJson.messages[i].message);
 				this.setMessage(this.mJson.messages[i].message,'red');
 			}
 			if (this.mJson.messages.length == 0)
 			{
-				console.log('no message length yo');
 				this.setMessage('','white');
 			}
 		}

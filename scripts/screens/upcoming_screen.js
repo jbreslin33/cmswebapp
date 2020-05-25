@@ -1,25 +1,5 @@
 'use strict';
 
-					/*
-					 *
-					 
-					  4 data points
-					  ----------------
-					  game:     1
-					  practice: 2
-
-				          --------------	
-					  available: 1
-					  maybe:     2 
-					  not:       3 
-
-					  ---------------------
-					  game or practice id:
-					 
-					  --------------------
-					  player id:	 
-					  */
-
 class UpcomingScreen extends Screen
 {
         constructor(application)
@@ -262,8 +242,6 @@ class UpcomingScreen extends Screen
 
         processJsonData()
 	{
-		console.log('process again');
-		//this.removeDivs();
 		super.processJsonData();
 
 		this.mEventsArray.length = 0;
@@ -271,14 +249,6 @@ class UpcomingScreen extends Screen
 		//make new array containing games and practices together
 		if (this.mJson)
 		{
-                	if (this.mJson.practices)
-			{
-                       		for (var i = 0; i < this.mJson.practices.length; i++)
-				{
-					this.mEventsArray.push(this.mJson.practices[i]);
-					this.mJson.practices[i].type = 'practice';
-				}
-			}
 
 			if (this.mJson.games)
 			{
@@ -286,6 +256,15 @@ class UpcomingScreen extends Screen
 				{
 					this.mEventsArray.push(this.mJson.games[i]);
 					this.mJson.games[i].type = 'game';
+				}
+			}
+                	
+			if (this.mJson.practices)
+			{
+                       		for (var i = 0; i < this.mJson.practices.length; i++)
+				{
+					this.mEventsArray.push(this.mJson.practices[i]);
+					this.mJson.practices[i].type = 'practice';
 				}
 			}
 		}
@@ -325,6 +304,7 @@ class UpcomingScreen extends Screen
 				var dup = false;
 				for (var s = 0; s < this.mSmashEventoArray.length; s++)
 				{
+					//practice
 					if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'practice' && this.mSmashEventoArray[s].mJsonEvent.type == 'practice')
 					{
 						dup = true;	
@@ -351,6 +331,35 @@ class UpcomingScreen extends Screen
 							this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
 						}
 					}
+
+					//game
+	                                if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'game' && this.mSmashEventoArray[s].mJsonEvent.type == 'game')
+                                        {
+                                                dup = true;
+
+                                                if (this.mEventoArray[e].mJsonEvent.players  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                                        this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                        this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
+                                                }
+                                                if (this.mEventoArray[e].mJsonEvent.parents  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
+                                                        this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                                if (this.mEventoArray[e].mJsonEvent.coaches  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                                        this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                                if (this.mEventoArray[e].mJsonEvent.managers  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                                        this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                        }
+
 				}
 
 				if (dup == false)
@@ -396,3 +405,22 @@ class UpcomingScreen extends Screen
                 }
 	}
 }
+					/*
+					 *
+					 
+					  4 data points
+					  ----------------
+					  game:     1
+					  practice: 2
+
+				          --------------	
+					  available: 1
+					  maybe:     2 
+					  not:       3 
+
+					  ---------------------
+					  game or practice id:
+					 
+					  --------------------
+					  player id:	 
+					  */
