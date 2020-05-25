@@ -1,15 +1,16 @@
-propagate to games...
 delete practice
 calendar needs availability
-----------
-fixed: delete a team coach not working
 
-----------
-time off bug
------
 OBANDO REQUESTS: 
 every other week recurring.
 send email reminders
+----------
+fixed:propagate to games...
+fixed: delete a team coach not working
+
+----------
+fixed:time off bug
+-----
 
 
 ----
