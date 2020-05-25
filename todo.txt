@@ -1,5 +1,6 @@
 propagate to games...
 delete practice
+calendar needs availability
 ----------
 fixed: delete a team coach not working
 
