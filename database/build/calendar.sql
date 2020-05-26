@@ -23,6 +23,8 @@ BEGIN
                 ',',
 		j_select_practices_player_availability(email_id),
                 ',',
+		j_select_games_player_availability(email_id),
+                ',',
 		j_select_games(email_id,$2,$3)
        	);
 

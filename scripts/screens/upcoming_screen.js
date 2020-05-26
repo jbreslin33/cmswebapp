@@ -19,6 +19,9 @@ class UpcomingScreen extends Screen
 		this.mEventoArray = new Array();
 		this.mSmashEventoArray = new Array();
 
+		this.mPracticesPlayerAvailabilityArray = new Array();
+		this.mGamesPlayerAvailabilityArray     = new Array();
+
 		//availability
 		this.mAvailabilityArray = new Array();
 		this.mAvailabilityList = null;
@@ -271,11 +274,22 @@ class UpcomingScreen extends Screen
 					this.mJson.practices[i].type = 'practice';
 				}
 			}
+
 			if (this.mJson.practices_player_availability)
 			{
                        		for (var i = 0; i < this.mJson.practices_player_availability.length; i++)
 				{
-					console.log('availyo');	
+					this.mPracticesPlayerAvailabilityArray.push(this.mJson.practices_player_availability[i]);
+					console.log('availyo pract');	
+				}
+			}
+
+			if (this.mJson.games_player_availability)
+			{
+                       		for (var i = 0; i < this.mJson.games_player_availability.length; i++)
+				{
+					this.mGamesPlayerAvailabilityArray.push(this.mJson.games_player_availability[i]);
+					console.log('availyo games');	
 				}
 
 			}
