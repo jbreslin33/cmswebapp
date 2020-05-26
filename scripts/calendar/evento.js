@@ -45,8 +45,10 @@ class Evento
 
 	makeButtons()
 	{
+		console.log('makeButtons()');
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
 		{
+			console.log('loop:' + i);
                        	if (this.mJsonEvent.type == 'game')
                         {
                                 var button = document.createElement("BUTTON");

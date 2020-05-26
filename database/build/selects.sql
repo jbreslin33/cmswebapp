@@ -689,6 +689,41 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
+--BEGIN J_SELECT PRACTICES_PLAYER_AVAILABILITY
+CREATE OR REPLACE FUNCTION j_select_practices_player_availability(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+              	select practices_players_availability.id, practices_players_availability.practice_id, practices_players_availability.team_club_persons_club_players_id, practices_players_availability.availability_id
+
+                from
+                        practices_players_availability
+
+                        join team_club_persons_club_players on team_club_persons_club_players.id=practices_players_availability.team_club_persons_club_players_id
+                        join team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
+                        join club_persons on club_persons.id=team_club_persons.club_person_id
+                        join emails_persons on emails_persons.person_id = club_persons.person_id
+
+                        where emails_persons.email_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"practices_player_availability": []', raw_json);
+        ELSE
+                result_set = CONCAT('"practices_player_availability": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT PRACTICES_PLAYER_AVAILABILITY
+
+
 --BEGIN J_SELECT GAMES
 CREATE OR REPLACE FUNCTION j_select_games(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$

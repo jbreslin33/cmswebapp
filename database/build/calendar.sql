@@ -21,9 +21,12 @@ BEGIN
                 ',',
 		j_select_practices(email_id,$2,$3),
                 ',',
+		j_select_practices_player_availability(email_id),
+                ',',
 		j_select_games(email_id,$2,$3)
        	);
 
+	RAISE LOG 'result_set f_select_events:%s', result_set;
 
 RETURN result_set;
 END;
