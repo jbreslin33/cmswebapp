@@ -273,7 +273,6 @@ class UpcomingScreen extends Screen
 			}
 			if (this.mJson.practices_player_availability)
 			{
-				console.log('emay avail');
                        		for (var i = 0; i < this.mJson.practices_player_availability.length; i++)
 				{
 					console.log('availyo');	
@@ -311,11 +310,9 @@ class UpcomingScreen extends Screen
 			}		
 			
 			//smash eventos
-			console.log('mEventoArray.Length:' + this.mEventoArray.length);
 			for (var e = 0; e < this.mEventoArray.length; e++)
 			{
 				//add to smash array if not added already..
-				console.log('smash length:' + this.mSmashEventoArray.length);
 				var dup = false;
 				for (var s = 0; s < this.mSmashEventoArray.length; s++)
 				{
@@ -327,9 +324,8 @@ class UpcomingScreen extends Screen
 						if (this.mEventoArray[e].mJsonEvent.players  != null)
 						{
 							this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
-							console.log('ptrue: ' + this.mEventoArray[e].mJsonEvent.players);
 							this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-							this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
+							//this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
 						}
 						if (this.mEventoArray[e].mJsonEvent.parents  != null)
 						{
@@ -354,7 +350,6 @@ class UpcomingScreen extends Screen
                         		if (this.mEventoArray[e].mJsonEvent.players != null)
                                		{
                                			this.mEventoArray[e].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
-						console.log('false: ' + this.mEventoArray[e].mJsonEvent.players);
                                         	this.mEventoArray[e].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
 						this.mEventoArray[e].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
                                 	}
