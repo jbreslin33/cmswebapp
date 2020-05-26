@@ -47,6 +47,7 @@ class Evento
 	{
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
 		{
+			var availability_id = null;
 
                        	if (this.mJsonEvent.type == 'game')
                         {
@@ -57,14 +58,10 @@ class Evento
                                 var id = 'button_1_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-
-
-                                if (this.mAvailabilityIdArray[i] == 1)
+                        	if (availability_id == 1)
                                 {
                                         button.style.backgroundColor = "#4CAF50";
                                 }
-                                
-				
 				this.mButtonArray.push(button);
 
 
@@ -75,7 +72,7 @@ class Evento
                                 var id = 'button_1_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                                if (this.mAvailabilityIdArray[i] == 2)
+                        	if (availability_id == 2)
                                 {
                                         button.style.backgroundColor = "yellow";
                                 }
@@ -88,7 +85,7 @@ class Evento
                                 var id = 'button_1_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                                if (this.mAvailabilityIdArray[i] == 3)
+                        	if (availability_id == 3)
                                 {
                                         button.style.backgroundColor = "red";
                                 }
@@ -97,10 +94,9 @@ class Evento
 
 			if (this.mJsonEvent.type == 'practice')
 			{
-				var availability_id = null;
 				for (var a = 0; a < this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray.length; a++)
 				{
-					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJsonEvent.id)
+					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJsonEvent.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
 					{
 						availability_id = this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].availability_id;	
 					}
