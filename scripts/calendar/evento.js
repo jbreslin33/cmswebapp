@@ -47,6 +47,7 @@ class Evento
 	{
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
 		{
+
                        	if (this.mJsonEvent.type == 'game')
                         {
                                 var button = document.createElement("BUTTON");
@@ -56,11 +57,15 @@ class Evento
                                 var id = 'button_1_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+
+
                                 if (this.mAvailabilityIdArray[i] == 1)
                                 {
                                         button.style.backgroundColor = "#4CAF50";
                                 }
-                                this.mButtonArray.push(button);
+                                
+				
+				this.mButtonArray.push(button);
 
 
                                 var button = document.createElement("BUTTON");
@@ -92,6 +97,15 @@ class Evento
 
 			if (this.mJsonEvent.type == 'practice')
 			{
+				var availability_id = null;
+				for (var a = 0; a < this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray.length; a++)
+				{
+					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJsonEvent.id)
+					{
+						availability_id = this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].availability_id;	
+					}
+				}
+
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
                         	button.innerHTML = '' + this.mPlayerNameArray[i];
@@ -99,7 +113,7 @@ class Evento
                         	var id = 'button_2_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                         	button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (this.mAvailabilityIdArray[i] == 1)
+                        	if (availability_id == 1)
                         	{
                         		button.style.backgroundColor = "#4CAF50";
                         	}
@@ -113,7 +127,7 @@ class Evento
                         	var id = 'button_2_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (this.mAvailabilityIdArray[i] == 2)
+				if (availability_id == 2)
                                 {
                                 	button.style.backgroundColor = "yellow";
                                 }
@@ -126,13 +140,18 @@ class Evento
                         	var id = 'button_2_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (this.mAvailabilityIdArray[i] == 3)
+				if (availability_id == 3)
                                 {
                                 	button.style.backgroundColor = "red";
                                 }
                                 this.mButtonArray.push(button);
 			}
 		}
+	}
+
+	colorButton(button)
+	{
+
 	}
 
 	printToScreen()
