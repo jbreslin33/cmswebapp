@@ -322,6 +322,10 @@ class UpcomingScreen extends Screen
 					this.mEventoArray.push(evento);
 				}
 			}		
+                	for (var i = 0; i < this.mEventoArray.length; i++)
+			{
+				console.log('date check:' + this.mEventoArray[i].mJsonEvent.event_date);
+			}
 			
 			//smash eventos
 			for (var e = 0; e < this.mEventoArray.length; e++)
@@ -384,11 +388,12 @@ class UpcomingScreen extends Screen
                                 	}
 					this.mSmashEventoArray.push(this.mEventoArray[e]);
 				}
-			}
+
+			}//end for eventoArray
 			
 			for (var s = 0; s < this.mSmashEventoArray.length; s++)
 			{
-				this.mEventoArray[s].printToScreen();
+				this.mSmashEventoArray[s].printToScreen();
 			}
 		}
 
