@@ -66,6 +66,17 @@ button:hover
 	color: black;
 }
 
+.delete-button
+{
+	/*
+        float: left;
+        width: 33%;
+	*/
+        color: black;
+  	background-color: #FF0000; /* red background */
+}
+
+
 /******************** PARAGRAPHS *******************/
 
 #calendar_month_p_html_id

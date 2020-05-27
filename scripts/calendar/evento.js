@@ -43,6 +43,11 @@ class Evento
 		}
 	}
 
+	deleteHit()
+	{
+		console.log('delete hit');
+	}
+
 	makeButtons()
 	{
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
@@ -51,6 +56,14 @@ class Evento
 
                        	if (this.mJsonEvent.type == 'game')
                         {
+                                for (var a = 0; a < this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray.length; a++)
+                                {
+                                        if (this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].game_id == this.mJsonEvent.id && this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
+                                        {
+                                                availability_id = this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].availability_id;
+                                        }
+                                }
+
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
                                 button.innerHTML = '' + this.mPlayerNameArray[i];
@@ -251,7 +264,39 @@ class Evento
                         {
                                 p.innerHTML = p.innerHTML + ' ' + this.mTextArray[r] + '<br>';
                         }
-		}
-	}
+			
+			var team_managed_id = null;
+
+                        for (var a = 0; a < this.mApplication.getCurrentScreen().mTeamsArray.length; a++)
+                        {
+                        	if (this.mApplication.getCurrentScreen().mTeamsArray[a].id == this.mJsonEvent.team_id)
+                                {
+                                	team_managed_id = this.mApplication.getCurrentScreen().mTeamsArray[a].id;
+                                }
+                        }
+
+			//do we need delete button?
+			if (team_managed_id)
+			{
+			       	var button = document.createElement("BUTTON");
+                                button.setAttribute("class","delete-button");
+                                button.innerHTML = 'DELETE ' + this.mJsonEvent.type;
+                                this.mContainerDiv.appendChild(button);
+				var id = null;
+				if (this.mJsonEvent.type == 'game')
+				{
+                                	id = 'deletebutton_1_' + this.mJsonEvent.id;
+				}
+				if (this.mJsonEvent.type == 'practice')
+				{
+                                	id = 'deletebutton_2_' + this.mJsonEvent.id;
+				}
+                                button.setAttribute("id", id);
+                                button.onclick = this.deleteHit.bind(button);
+                                this.mButtonArray.push(button);
+
+			}
+		}// end if (json event)
+	}//end print to screen
 }
 
