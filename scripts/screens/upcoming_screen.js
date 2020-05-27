@@ -21,6 +21,7 @@ class UpcomingScreen extends Screen
 
 		this.mPracticesPlayerAvailabilityArray = new Array();
 		this.mGamesPlayerAvailabilityArray     = new Array();
+		this.mTeamsArray = new Array();
 
 		//availability
 		this.mAvailabilityArray = new Array();
@@ -280,7 +281,6 @@ class UpcomingScreen extends Screen
                        		for (var i = 0; i < this.mJson.practices_player_availability.length; i++)
 				{
 					this.mPracticesPlayerAvailabilityArray.push(this.mJson.practices_player_availability[i]);
-					console.log('availyo pract');	
 				}
 			}
 
@@ -289,9 +289,15 @@ class UpcomingScreen extends Screen
                        		for (var i = 0; i < this.mJson.games_player_availability.length; i++)
 				{
 					this.mGamesPlayerAvailabilityArray.push(this.mJson.games_player_availability[i]);
-					console.log('availyo games');	
 				}
-
+			}
+			if (this.mJson.teams)
+			{
+                       		for (var i = 0; i < this.mJson.teams.length; i++)
+				{
+					this.mTeamsArray.push(this.mJson.teams[i]);
+					console.log('managed team:' + this.mJson.teams[i].id + ' ' + this.mJson.teams[i].name); 
+				}
 			}
 		}
 

@@ -1,7 +1,7 @@
 
 
 --BEGIN SELECT EVENTS
-CREATE OR REPLACE FUNCTION f_select_events(email_id int, first_day_of_query date, last_day_of_query date)
+CREATE OR REPLACE FUNCTION f_select_events(email_id int, person_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -15,17 +15,19 @@ BEGIN
                 ',',
                 j_select_codes(-100),
                 ',',
-		j_select_clubs(email_id),
+		--j_select_clubs(email_id),
+                --',',
+		--j_select_teams(email_id),
+                --',',
+		j_select_games(email_id,$3,$4),
                 ',',
-		j_select_teams(email_id),
-                ',',
-		j_select_practices(email_id,$2,$3),
-                ',',
-		j_select_practices_player_availability(email_id),
+		j_select_practices(email_id,$3,$4),
                 ',',
 		j_select_games_player_availability(email_id),
                 ',',
-		j_select_games(email_id,$2,$3)
+		j_select_practices_player_availability(email_id),
+                ',',
+		j_select_all_teams_managed(person_id)
        	);
 
 	--RAISE LOG 'result_set f_select_events:%s', result_set;

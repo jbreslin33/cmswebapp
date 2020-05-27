@@ -609,6 +609,50 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS MANAGED
 
+--BEGIN J_SELECT ALL TEAMS MANAGED
+CREATE OR REPLACE FUNCTION j_select_all_teams_managed(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        teams.id, teams.name
+                from
+                        teams
+                join
+                        team_club_persons
+                        on
+                                team_club_persons.team_id = teams.id
+                join
+                        club_persons
+                        on
+                                club_persons.id = team_club_persons.club_person_id
+
+                join
+                        team_club_persons_club_managers
+                        on
+                                team_club_persons_club_managers.team_club_person_id = team_club_persons.id
+
+                where
+                        club_persons.person_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"teams": []', raw_json);
+        ELSE
+                result_set = CONCAT('"teams": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT ALL TEAMS MANAGED
+
+
 --BEGIN J_SELECT CLUBS
 --        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
 
