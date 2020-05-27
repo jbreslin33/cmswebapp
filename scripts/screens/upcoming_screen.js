@@ -56,7 +56,7 @@ class UpcomingScreen extends Screen
 
         get()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?" + this.getStandardParameters() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
                 APPLICATION.getCurrentScreen().ajax();
         }
 
