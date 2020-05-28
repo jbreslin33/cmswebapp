@@ -43,11 +43,6 @@ class Evento
 		}
 	}
 
-	deleteHit()
-	{
-		console.log('delete hit');
-	}
-
 	makeButtons()
 	{
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
@@ -282,17 +277,16 @@ class Evento
                                 button.setAttribute("class","delete-button");
                                 button.innerHTML = 'DELETE ' + this.mJsonEvent.type;
                                 this.mContainerDiv.appendChild(button);
-				var id = null;
-				if (this.mJsonEvent.type == 'game')
-				{
-                                	id = 'deletebutton_1_' + this.mJsonEvent.id;
-				}
-				if (this.mJsonEvent.type == 'practice')
-				{
-                                	id = 'deletebutton_2_' + this.mJsonEvent.id;
-				}
+
+				var id = this.mJsonEvent.id;
                                 button.setAttribute("id", id);
-                                button.onclick = this.deleteHit.bind(button);
+				
+				var type = this.mJsonEvent.type;
+				button.setAttribute("type", type);
+
+				this.mApplication.getCurrentScreen().mWaitListEvento = this;
+
+                                button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
                                 this.mButtonArray.push(button);
 
 			}

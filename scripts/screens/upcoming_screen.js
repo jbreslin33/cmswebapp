@@ -27,6 +27,9 @@ class UpcomingScreen extends Screen
 		this.mAvailabilityArray = new Array();
 		this.mAvailabilityList = null;
 
+		//deletes
+		this.mWaitListEvento = null;
+
 		//now
                 var current_date = new Date();
                 var current_month = current_date.getMonth();
@@ -55,10 +58,26 @@ class UpcomingScreen extends Screen
 		document.getElementById("upcoming_maybe_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_maybe_available_id"));
         }
 
-        get()
+        processCodes()
         {
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?" + this.getStandardParameters() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
-                APPLICATION.getCurrentScreen().ajax();
+		super.processCodes();
+
+                if (this.mJson.codes)
+                {
+                        this.mCode = 0;
+                        for (var i = 0; i < this.mJson.codes.length; i++)
+                        {
+                                this.mCode = this.mJson.codes[i].code;
+                        }
+                        //definite success so send to upcoming
+                        if (this.mCode == '-103') //successful delete
+                        {
+                       		//remove evento... 
+				console.log("rm evento");
+				this.mWaitListEvento.removeDivs();
+				this.mWaitListEvento = null;
+			}
+                }
         }
 
 	exit()
@@ -66,7 +85,28 @@ class UpcomingScreen extends Screen
 		this.removeDivs();
 		super.exit();
 	}
-	
+
+        get()
+        {
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?" + this.getStandardParameters() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
+                APPLICATION.getCurrentScreen().ajax();
+        }
+
+	deleteHit()
+	{
+		var screen = APPLICATION.getCurrentScreen();
+		if (this.getAttribute("type") == 'game')
+		{
+			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id"));
+                	screen.ajax();
+		}
+		if (this.getAttribute("type") == 'practice')
+		{
+			screen.setUrl("/php/classes/screens/delete_practice.php?" + screen.getStandardParameters() + '&practice_id=' + this.getAttribute("id"));
+                	screen.ajax();
+		}
+	}
+
 	removeDivs()
 	{
 		//loop thru eventos Array
