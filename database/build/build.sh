@@ -36,3 +36,4 @@ sudo -u postgres psql -d footballhome -f database/build/inserts.sql
 sudo -u postgres psql -d footballhome -f database/build/celta.sql
 
 sudo -u postgres psql -d footballhome -f database/build/delete_practice.sql
+sudo -u postgres psql -d footballhome -f database/build/delete_game.sql

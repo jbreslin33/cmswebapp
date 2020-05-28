@@ -1,7 +1,7 @@
 
 
 --BEGIN DELETE CLUB
-CREATE OR REPLACE FUNCTION f_delete_practice(int, int, int)
+CREATE OR REPLACE FUNCTION f_delete_game(int, int, int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -37,7 +37,7 @@ BEGIN
 
 	IF found_team_club_persons_club_manager_id > 0 THEN
 
-		CALL p_delete_practice($3,x);
+		CALL p_delete_game($3,x);
 
                	IF x > 0 THEN
 		        result_set = CONCAT
@@ -54,7 +54,7 @@ BEGIN
                         (
                                 j_select_persons($1),
                                 ',',
-                                j_select_messages('Something went wrong while trying to delete practice. Sorry.'),
+                                j_select_messages('Something went wrong while trying to delete game. Sorry.'),
                                 ',',
                                 j_select_codes(-101)
                         );
@@ -65,7 +65,7 @@ BEGIN
                 (
                 	j_select_persons($1),
                         ',',
-                        j_select_messages('You do not have permission to delete this practice. Only a team manager can delete a practice.'),
+                        j_select_messages('You do not have permission to delete this game. Only a team manager can delete a game.'),
                         ',',
                         j_select_codes(-101)
             	);
@@ -76,15 +76,15 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_practice(int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_game(int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
 
 BEGIN
 
-	delete from practices_players_availability where practice_id = $1; 
-	delete from practices where id = $1 returning id into x;
+	delete from games_players_availability where game_id = $1; 
+	delete from games where id = $1 returning id into x;
 
 END;
 $$;
