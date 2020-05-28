@@ -1,7 +1,7 @@
 <?php 
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class DeletePractice extends Screen 
+class DeleteGame extends Screen 
 {
 	function __construct() 
 	{
@@ -10,21 +10,21 @@ class DeletePractice extends Screen
 
 	function getResult()
 	{
-		$practice_id = null;
+		$game_id = null;
 
-               	if (isset($_GET['practice_id']))
+               	if (isset($_GET['game_id']))
                 {
-                        $practice_id = $_GET['practice_id'];
+                        $game_id = $_GET['game_id'];
                 }
 
-		$sql = 'select f_delete_practice($1,$2,$3)';
-		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_practice", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_practice", array( $this->getSenderEmailId(), $this->mPersonId, $practice_id));
+		$sql = 'select f_delete_game($1,$2,$3)';
+		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_game", $sql);
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_game", array( $this->getSenderEmailId(), $this->mPersonId, $game_id));
 
                	return pg_fetch_result($result, 0);
         }
 }
 
-$deletePractice = new DeletePractice();	
+$deleteGame = new DeleteGame();	
 
 ?>
