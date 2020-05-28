@@ -284,8 +284,6 @@ class Evento
 				var type = this.mJsonEvent.type;
 				button.setAttribute("type", type);
 
-				this.mApplication.getCurrentScreen().mWaitListEvento = this;
-
                                 button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
                                 this.mButtonArray.push(button);
 

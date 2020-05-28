@@ -75,7 +75,6 @@ class UpcomingScreen extends Screen
                        		//remove evento... 
 				console.log("rm evento");
 				this.mWaitListEvento.removeDivs();
-				this.mWaitListEvento = null;
 			}
                 }
         }
@@ -95,6 +94,16 @@ class UpcomingScreen extends Screen
 	deleteHit()
 	{
 		var screen = APPLICATION.getCurrentScreen();
+
+		//lets find evento to delete..
+		for (var i = 0; i < screen.mSmashEventoArray.length; i++)
+		{
+			if (screen.mSmashEventoArray[i].mJsonEvent.id == this.getAttribute("id"))
+			{
+				screen.mWaitListEvento = screen.mSmashEventoArray[i]; 
+			}
+		}
+
 		if (this.getAttribute("type") == 'game')
 		{
 			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id"));
@@ -343,7 +352,7 @@ class UpcomingScreen extends Screen
 
 		if (this.mEventsArray.length > 0)
 		{
-
+			console.log('sorting');
 			//sort this.mEventsArray by date and arrival time
 			this.mEventsArray.sort
 			(
@@ -439,6 +448,7 @@ class UpcomingScreen extends Screen
 			
 			for (var s = 0; s < this.mSmashEventoArray.length; s++)
 			{
+				console.log('print:' + s);
 				this.mSmashEventoArray[s].printToScreen();
 			}
 		}
