@@ -389,6 +389,33 @@ class UpcomingScreen extends Screen
 				var dup = false;
 				for (var s = 0; s < this.mSmashEventoArray.length; s++)
 				{
+                                        //game
+                                        if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'game' && this.mSmashEventoArray[s].mJsonEvent.type == 'game')
+                                        {
+                                                dup = true;
+
+                                                if (this.mEventoArray[e].mJsonEvent.players  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                                        this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                                if (this.mEventoArray[e].mJsonEvent.parents  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJsonEvent.parents);
+                                                        this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                                if (this.mEventoArray[e].mJsonEvent.coaches  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                                        this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                                if (this.mEventoArray[e].mJsonEvent.managers  != null)
+                                                {
+                                                        this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
+                                                        this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
+                                                }
+                                        }
+
 					//practice
 					if (this.mEventoArray[e].mJsonEvent.id == this.mSmashEventoArray[s].mJsonEvent.id && this.mEventoArray[e].mJsonEvent.type == 'practice' && this.mSmashEventoArray[s].mJsonEvent.type == 'practice')
 					{
@@ -398,7 +425,6 @@ class UpcomingScreen extends Screen
 						{
 							this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJsonEvent.players);
 							this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJsonEvent.first_name + ' ' + this.mEventoArray[e].mJsonEvent.last_name);
-							//this.mSmashEventoArray[s].mAvailabilityIdArray.push(this.mEventoArray[e].mJsonEvent.availability_id);
 						}
 						if (this.mEventoArray[e].mJsonEvent.parents  != null)
 						{

@@ -153,11 +153,6 @@ class Evento
 		}
 	}
 
-	colorButton(button)
-	{
-
-	}
-
 	printToScreen()
 	{
 		if (this.mJsonEvent)
@@ -172,7 +167,6 @@ class Evento
                 	this.mContainerDiv.setAttribute('class','container');
                 	this.mCardDiv.appendChild(this.mContainerDiv);
                 	this.mDivArray.push(this.mContainerDiv);
-
 
 			if (this.mJsonEvent.event_date)
                 	{
@@ -264,6 +258,7 @@ class Evento
 
                         for (var a = 0; a < this.mApplication.getCurrentScreen().mTeamsArray.length; a++)
                         {
+				console.log('teams managed loop');
                         	if (this.mApplication.getCurrentScreen().mTeamsArray[a].id == this.mJsonEvent.team_id)
                                 {
                                 	team_managed_id = this.mApplication.getCurrentScreen().mTeamsArray[a].id;
@@ -273,6 +268,7 @@ class Evento
 			//do we need delete button?
 			if (team_managed_id)
 			{
+				console.log('team managed true');
 			       	var button = document.createElement("BUTTON");
                                 button.setAttribute("class","delete-button");
                                 button.innerHTML = 'DELETE ' + this.mJsonEvent.type;
