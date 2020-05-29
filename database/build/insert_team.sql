@@ -1,3 +1,30 @@
+CREATE OR REPLACE FUNCTION f_select_club_teams(int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -1;
+        found_club_administrator_id club_administrators.id%TYPE;
+        found_club_persons_id club_persons.id%TYPE;
+        found_team_id teams.id%TYPE;
+BEGIN
+
+	result_set = CONCAT
+       	(
+        
+		j_select_persons($1),
+                ',',
+                j_select_messages(''),
+                ',',
+                j_select_codes(-101),
+                ',',
+                j_select_club_teams($3)
+	);
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END INSERT TEAM
+
 
 CREATE OR REPLACE FUNCTION f_insert_team(int,int,int,text)
 RETURNS text AS $$
@@ -66,6 +93,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END INSERT TEAM
+
 
 --INSERT TEAM
 CREATE OR REPLACE PROCEDURE p_insert_team(int,text,int,INOUT x int)

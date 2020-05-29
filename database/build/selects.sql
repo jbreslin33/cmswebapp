@@ -194,9 +194,9 @@ SELECT json_agg(t) INTO raw_json
         ) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"club_teams": []', raw_json);
+                result_set = CONCAT('"teams": []', raw_json);
         ELSE
-                result_set = CONCAT('"club_teams": ', raw_json);
+                result_set = CONCAT('"teams": ', raw_json);
         END IF;
 RETURN result_set;
 END;

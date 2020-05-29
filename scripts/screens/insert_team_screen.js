@@ -15,6 +15,9 @@ class InsertTeamScreen extends Screen
 
 		this.setClubSelect(document.getElementById("insert_team_screen_club_id"));
 
+		this.mWaitListItem = null;
+		this.mItemArray = new Array();
+
 		this.getForm().addEventListener('submit', function(e)
                 {
                         e.preventDefault();
@@ -31,6 +34,55 @@ class InsertTeamScreen extends Screen
                 }
         }
 
+        processCodes()
+        {
+                super.processCodes();
+                if (this.mJson)
+                {
+
+                        if (this.mJson.codes)
+                        {
+                                this.mCode = 0;
+                                for (var i = 0; i < this.mJson.codes.length; i++)
+                                {
+                                        this.mCode = this.mJson.codes[i].code;
+                                }
+                                //definite success so send to upcoming
+                                if (this.mCode == '-103') //successful delete
+                                {
+                                        //remove evento...
+                                        console.log("rm evento");
+                                        this.mWaitListItem.removeDivs();
+                                }
+                        }
+                }
+        }
+
+        
+	processClubs()
+        {
+		console.log('process clubs....');
+                super.processClubs();
+                if (this.mJson.clubs)
+                {
+			console.log('in ifprocess clubs....');
+
+                        this.getClubTeams();
+                }
+        }
+
+        clubSelected()
+        {
+                this.getClubTeams();
+        }
+
+        getClubTeams()
+        {
+		var screen = APPLICATION.getCurrentScreen();
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_club_teams.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
 	hit()
 	{
 		var name  = document.getElementById("insert_team_screen_name_id").value;
@@ -45,4 +97,28 @@ class InsertTeamScreen extends Screen
 			this.setMessage("You must select a club and team name first","red");
 		}
 	}
+
+	processTeams()
+	{
+                //make new array containing games and practices together
+                if (this.mJson)
+                {
+			console.log('mJso');
+                        if (this.mJson.teams)
+                        {
+				console.log('jso teams length:' + this.mJson.teams.length);
+                                for (var i = 0; i < this.mJson.teams.length; i++)
+                                {
+					var item = new Item(this.mApplication,this.mJson.teams[i]);
+					this.mItemArray.push(item);
+                                }
+                        }
+		}
+
+		for (var i = 0; i < this.mItemArray.length; i++)
+		{
+			this.mItemArray[i].printToScreen();
+		}
+	}
 }
+
