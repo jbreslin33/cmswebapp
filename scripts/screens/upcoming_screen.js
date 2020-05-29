@@ -61,22 +61,25 @@ class UpcomingScreen extends Screen
         processCodes()
         {
 		super.processCodes();
+		if (this.mJson)
+		{
 
-                if (this.mJson.codes)
-                {
-                        this.mCode = 0;
-                        for (var i = 0; i < this.mJson.codes.length; i++)
-                        {
-                                this.mCode = this.mJson.codes[i].code;
-                        }
-                        //definite success so send to upcoming
-                        if (this.mCode == '-103') //successful delete
-                        {
-                       		//remove evento... 
-				console.log("rm evento");
-				this.mWaitListEvento.removeDivs();
-			}
-                }
+                	if (this.mJson.codes)
+                	{
+                        	this.mCode = 0;
+                        	for (var i = 0; i < this.mJson.codes.length; i++)
+                        	{
+                               		this.mCode = this.mJson.codes[i].code;
+                        	}
+                        	//definite success so send to upcoming
+                        	if (this.mCode == '-103') //successful delete
+                        	{
+                       			//remove evento... 
+					console.log("rm evento");
+					this.mWaitListEvento.removeDivs();
+				}
+                	}
+		}
         }
 
 	exit()
