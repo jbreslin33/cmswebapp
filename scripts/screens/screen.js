@@ -9,6 +9,7 @@ class Screen
 		//html ids
 		this.mSpinner = null;
 		this.mHtml = null;
+		this.mColSixHtml = null;
 		this.mFooter = null;
 		this.mModal = null;
 		this.mModalCloseButton = null;
@@ -342,6 +343,16 @@ class Screen
 	{
 		return this.mHtml;
 	}
+
+        setColSixHtml(html)
+        {
+                this.mColSixHtml = html;
+        }
+
+        getColSixHtml()
+        {
+                return this.mColSixHtml;
+        }
 
         setMessageElement(messageElement)
         {

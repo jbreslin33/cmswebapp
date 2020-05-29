@@ -38,7 +38,7 @@ class Item
                         this.mCardDiv = document.createElement('div');
                         this.mDivArray.push(this.mCardDiv);
                         this.mCardDiv.setAttribute('class','card');
-			this.mApplication.getCurrentScreen().getHtml().appendChild(this.mCardDiv);
+			this.mApplication.getCurrentScreen().getColSixHtml().appendChild(this.mCardDiv);
                         //document.getElementById("upcoming_screen_col_6_html_id").appendChild(this.mCardDiv);
 
                         this.mContainerDiv = document.createElement('div');

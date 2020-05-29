@@ -9,6 +9,7 @@ class InsertTeamScreen extends Screen
 		location.hash = 'insert_team_screen';
 
                 this.setHtml(document.getElementById("insert_team_screen_html_id"));
+                this.setColSixHtml(document.getElementById("insert_team_screen_col_6_html_id"));
                 this.setMessageElement(document.getElementById("insert_team_screen_message_id"));
                 this.setForm(document.getElementById("insert_team_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_team_screen_spinner_id"));
@@ -61,12 +62,9 @@ class InsertTeamScreen extends Screen
         
 	processClubs()
         {
-		console.log('process clubs....');
                 super.processClubs();
                 if (this.mJson.clubs)
                 {
-			console.log('in ifprocess clubs....');
-
                         this.getClubTeams();
                 }
         }
@@ -103,10 +101,8 @@ class InsertTeamScreen extends Screen
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
-			console.log('mJso');
                         if (this.mJson.teams)
                         {
-				console.log('jso teams length:' + this.mJson.teams.length);
                                 for (var i = 0; i < this.mJson.teams.length; i++)
                                 {
 					var item = new Item(this.mApplication,this.mJson.teams[i]);
