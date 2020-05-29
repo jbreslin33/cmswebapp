@@ -258,7 +258,6 @@ class Evento
 
                         for (var a = 0; a < this.mApplication.getCurrentScreen().mTeamsArray.length; a++)
                         {
-				console.log('teams managed loop');
                         	if (this.mApplication.getCurrentScreen().mTeamsArray[a].id == this.mJsonEvent.team_id)
                                 {
                                 	team_managed_id = this.mApplication.getCurrentScreen().mTeamsArray[a].id;
@@ -268,7 +267,6 @@ class Evento
 			//do we need delete button?
 			if (team_managed_id)
 			{
-				console.log('team managed true');
 			       	var button = document.createElement("BUTTON");
                                 button.setAttribute("class","delete-button");
                                 button.innerHTML = 'DELETE ' + this.mJsonEvent.type;
@@ -282,7 +280,6 @@ class Evento
 
                                 button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
                                 this.mButtonArray.push(button);
-
 			}
 		}// end if (json event)
 	}//end print to screen

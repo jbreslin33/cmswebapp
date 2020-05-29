@@ -45,19 +45,25 @@ class Item
                         this.mContainerDiv.setAttribute('class','container');
                         this.mCardDiv.appendChild(this.mContainerDiv);
                         this.mDivArray.push(this.mContainerDiv);
+
                         if (this.mJson.team_name)
                         {
                                 this.mTitle = document.createElement('h5');
                                 this.mContainerDiv.appendChild(this.mTitle);
                                	this.mTitle.innerHTML = '' + this.mJson.team_name;
                         }
-/*
-                        this.mTextArray = new Array();
-                        var p = document.createElement('p');
-                        this.mContainerDiv.appendChild(p);
-			*/
 
+			//delete button
+                        var button = document.createElement("BUTTON");
+                        button.setAttribute("class","delete-button");
+                        button.innerHTML = 'DELETE TEAM';
+                        this.mContainerDiv.appendChild(button);
+
+                        var id = this.mJson.team_id;
+                       	button.setAttribute("id", id);
+
+                        button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
+                       	this.mButtonArray.push(button);
 		}
 	}
-
 }
