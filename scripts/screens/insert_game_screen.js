@@ -32,6 +32,9 @@ class InsertGameScreen extends Screen
                         e.preventDefault();
                         APPLICATION.getCurrentScreen().hit();
                 });
+
+                //close nav
+                this.setCloseNav();
         }
 
         clubSelected()

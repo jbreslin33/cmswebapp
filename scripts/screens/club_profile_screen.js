@@ -88,7 +88,8 @@ class ClubProfileScreen extends Screen
                         this.getPersonSelect().onchange = this.personSelected.bind(this);
                 }
 
-
+                //close nav
+                this.setCloseNav();
         }
 
         exit()

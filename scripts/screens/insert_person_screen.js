@@ -19,6 +19,8 @@ class InsertPersonScreen extends Screen
                         APPLICATION.getCurrentScreen().hit();
                 });
 
+                //close nav
+                this.setCloseNav();
 	}
 
 	hit()

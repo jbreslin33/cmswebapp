@@ -20,6 +20,9 @@ class InsertPitchScreen extends Screen
                         e.preventDefault();
                         APPLICATION.getCurrentScreen().hit();
                 });
+
+                //close nav
+                this.setCloseNav();
 	}
       
 	get()

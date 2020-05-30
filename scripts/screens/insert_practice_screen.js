@@ -40,6 +40,8 @@ class InsertPracticeScreen extends Screen
                         APPLICATION.getCurrentScreen().hit();
                 });
 
+                //close nav
+                this.setCloseNav();
 	}
 
 	clubSelected()

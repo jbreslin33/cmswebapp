@@ -84,6 +84,11 @@ class Screen
                 document.getElementById("calendar_modal_id").style.display = "none";
         }
 
+        setCloseNav()
+        {
+                this.getHtml().onclick = APPLICATION.closeNav;
+        }
+
 	personSelected()
 	{
 		/*

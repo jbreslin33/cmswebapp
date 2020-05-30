@@ -223,8 +223,9 @@ class Application
                 this.mqPressed = false;
                 this.mwPressed = false;
                 this.muPressed = false;
+
 	}
-	
+
 	hit()
 	{
 		APPLICATION.closeNav();	

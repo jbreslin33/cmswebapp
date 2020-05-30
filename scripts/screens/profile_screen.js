@@ -38,6 +38,8 @@ class ProfileScreen extends Screen
                	this.mProfileType = null;
                 this.mActive = null;
 
+                //close nav
+                this.setCloseNav();
         }
 
         get()

@@ -45,13 +45,9 @@ class CalendarScreen extends Screen
 		//navigation buttons
                	document.getElementById("calendarbackbuttonid").onclick = this.back.bind(this);
                	document.getElementById("calendarforwardbuttonid").onclick = this.forward.bind(this);
-/*
-                this.getForm().addEventListener('submit', function(e)
-                {
-                        e.preventDefault();
-                        APPLICATION.getCurrentScreen().hit();
-                });
-		*/
+
+                //close nav
+                this.setCloseNav();
 	}
 
 	back()

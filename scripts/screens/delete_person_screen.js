@@ -19,6 +19,8 @@ class DeletePersonScreen extends Screen
                         APPLICATION.getCurrentScreen().hit();
                 });
 
+                //close nav
+                this.setCloseNav();
 	}
 
 	get()
