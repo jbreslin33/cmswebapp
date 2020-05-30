@@ -38,6 +38,14 @@ class InsertTeamScreen extends Screen
                 }
         }
 
+        removeDivs()
+        {
+                for (var i = 0; i < this.mItemArray.length; i++)
+                {
+                        this.mItemArray[i].removeDivs();
+                }
+        }
+
         processCodes()
         {
                 super.processCodes();
@@ -118,6 +126,7 @@ class InsertTeamScreen extends Screen
 
 	processTeams()
 	{
+		this.mItemArray.length = 0;
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
