@@ -22,6 +22,10 @@ class Screen
 		this.mData = null;
 		this.mJson = null;
 
+		//items
+		this.mWaitListItem = null;
+                this.mItemArray = new Array();
+
 		this.mNavigationBar = null;
 
 		//selects 
@@ -847,8 +851,25 @@ class Screen
 					}
 				}
 			}
+
+			//definite success so send to upcoming
+                        if (this.mCode == '-103') //successful delete
+                        {
+                        	//remove item
+                                this.mWaitListItem.removeDivs();
+                        }
 		}
 	}
+
+        removeDivs()
+        {
+                for (var i = 0; i < this.mItemArray.length; i++)
+                {
+                        this.mItemArray[i].removeDivs();
+                }
+
+                this.mItemArray.length = 0;
+        }
 	
 	enter()
 	{

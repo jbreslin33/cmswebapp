@@ -16,9 +16,6 @@ class InsertTeamScreen extends Screen
 
 		this.setClubSelect(document.getElementById("insert_team_screen_club_id"));
 
-		this.mWaitListItem = null;
-		this.mItemArray = new Array();
-
 		this.getForm().addEventListener('submit', function(e)
                 {
                         e.preventDefault();
@@ -44,41 +41,6 @@ class InsertTeamScreen extends Screen
                 }
         }
 
-        removeDivs()
-        {
-                for (var i = 0; i < this.mItemArray.length; i++)
-                {
-                        this.mItemArray[i].removeDivs();
-                }
-
-		this.mItemArray.length = 0;
-        }
-
-        processCodes()
-        {
-                super.processCodes();
-                if (this.mJson)
-                {
-
-                        if (this.mJson.codes)
-                        {
-                                this.mCode = 0;
-                                for (var i = 0; i < this.mJson.codes.length; i++)
-                                {
-                                        this.mCode = this.mJson.codes[i].code;
-                                }
-                                //definite success so send to upcoming
-                                if (this.mCode == '-103') //successful delete
-                                {
-                                        //remove evento...
-                                        console.log("rm evento");
-                                        this.mWaitListItem.removeDivs();
-                                }
-                        }
-                }
-        }
-
-        
 	processClubs()
         {
                 super.processClubs();
@@ -134,7 +96,6 @@ class InsertTeamScreen extends Screen
 		
                 screen.setUrl("/php/classes/screens/delete_team.php?" + screen.getStandardParameters() + '&team_id=' + this.getAttribute("id"));
                 screen.ajax();
-
         }
 
 	processTeams()
@@ -146,14 +107,12 @@ class InsertTeamScreen extends Screen
                         {
                                 for (var i = 0; i < this.mJson.teams.length; i++)
                                 {
-					console.log('new one:' + i);
 					var item = new Item(this.mApplication,this.mJson.teams[i]);
 					this.mItemArray.push(item);
                                 }
 
 				for (var i = 0; i < this.mItemArray.length; i++)
 				{
-					console.log('print:' + i);
 					this.mItemArray[i].printToScreen();
 				}
                         }
