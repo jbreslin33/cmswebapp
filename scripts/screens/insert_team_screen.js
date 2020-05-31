@@ -29,6 +29,12 @@ class InsertTeamScreen extends Screen
                 this.setCloseNav();
 	}
 
+        exit()
+        {
+                this.removeDivs();
+                super.exit();
+        }
+
         get()
         {
                 if (APPLICATION.getJWT())
@@ -44,6 +50,7 @@ class InsertTeamScreen extends Screen
                 {
                         this.mItemArray[i].removeDivs();
                 }
+		this.mItemArray.length = 0;
         }
 
         processCodes()
@@ -119,14 +126,19 @@ class InsertTeamScreen extends Screen
                                 screen.mWaitListItem = screen.mItemArray[i];
                         }
                 }
+		
+		this.mJson = null;
 
                 screen.setUrl("/php/classes/screens/delete_team.php?" + screen.getStandardParameters() + '&team_id=' + this.getAttribute("id"));
                 screen.ajax();
+
         }
 
 	processTeams()
 	{
-		this.mItemArray.length = 0;
+		//this.removeDivs();
+		//this.mItemArray.length = 0;
+
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
@@ -134,15 +146,17 @@ class InsertTeamScreen extends Screen
                         {
                                 for (var i = 0; i < this.mJson.teams.length; i++)
                                 {
+					console.log('new one:' + i);
 					var item = new Item(this.mApplication,this.mJson.teams[i]);
 					this.mItemArray.push(item);
                                 }
-                        }
-		}
 
-		for (var i = 0; i < this.mItemArray.length; i++)
-		{
-			this.mItemArray[i].printToScreen();
+				for (var i = 0; i < this.mItemArray.length; i++)
+				{
+					console.log('print:' + i);
+					this.mItemArray[i].printToScreen();
+				}
+                        }
 		}
 	}
 }

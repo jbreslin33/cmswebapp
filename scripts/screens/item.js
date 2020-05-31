@@ -22,11 +22,13 @@ class Item
 		console.log('removeDivs in item called');
                 for (var x = 0; x < this.mDivArray.length; x++)
                 {
+			console.log('rm div:' + x );
                         this.mDivArray[x].remove();
                 }
 
                 for (var b = 0; b < this.mButtonArray.length; b++)
                 {
+			console.log('rm button:' + b);
                         this.mButtonArray[b].remove();
                 }
         }
