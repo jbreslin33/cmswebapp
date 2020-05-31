@@ -35,7 +35,7 @@ DECLARE
 	found_club_persons_id club_persons.id%TYPE;
 	found_team_id teams.id%TYPE;
 BEGIN
-	select id into found_team_id from teams where name = $4 AND club_id = $2;  	
+	select id into found_team_id from teams where name = $4 AND club_id = $3;  	
 
         IF found_team_id > 0 THEN
 
@@ -45,16 +45,18 @@ BEGIN
                         ',',
                         j_select_codes(-101)
                         ',',
-                        j_select_administrated_clubs($3)
+                        j_select_administrated_clubs($2),
+                        ',',
+                	j_select_club_teams($3)
            	);
 
 	ELSE
 		--are you a club admin of club $2????
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $2; 
 
 		IF found_club_administrator_id > 0 THEN
 
-			CALL p_insert_team($2,$4,$3,x);
+			CALL p_insert_team($2,$3,$4,x);
 
 			IF x > 0 THEN
 			       	result_set = CONCAT
@@ -63,7 +65,9 @@ BEGIN
                 			',',
                 			j_select_messages(null),
                 			',',
-                			j_select_codes(-103)
+                			j_select_codes(-101),
+                			',',
+                			j_select_club_teams($3)
         			);
 
 			ELSE
@@ -73,7 +77,9 @@ BEGIN
                                         ',',
                                         j_select_messages('Something went wrong with adding team. Sorry!'),
                                         ',',
-                                        j_select_codes(-101)
+                                        j_select_codes(-101),
+                			',',
+                			j_select_club_teams($3)
                                 );
 
 			END IF;
@@ -84,7 +90,9 @@ BEGIN
                                 ',',
                                 j_select_messages('You are not a club administrator. So you cannot add a team to this club.'),
                                 ',',
-                                j_select_codes(-101)
+                                j_select_codes(-101),
+                		',',
+                		j_select_club_teams($3)
                       	);
 
 		END IF;
@@ -96,7 +104,7 @@ $$ LANGUAGE plpgsql;
 
 
 --INSERT TEAM
-CREATE OR REPLACE PROCEDURE p_insert_team(int,text,int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_team(int,int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -107,17 +115,17 @@ DECLARE
         returning_team_club_person_id team_club_persons.id%TYPE;
         returning_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-        insert into teams (club_id,name) values ($1,$2) returning id into returning_team_id;
-        select id into found_club_person_id from club_persons where club_id = $1 AND person_id = $3;
+        insert into teams (club_id,name) values ($2,$3) returning id into returning_team_id;
+        select id into found_club_person_id from club_persons where club_id = $2 AND person_id = $1;
         insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into returning_team_club_person_id;
 
         --insert into managers (person_id) values ($3) ON CONFLICT ON CONSTRAINT managers_person_id_key select id into returning_manager      DO NOTHING     returning id into returning_manager_id;
-        select id into found_manager_id from managers where person_id = $3;
+        select id into found_manager_id from managers where person_id = $1;
 
         IF found_manager_id > 0 THEN
                 --DO NOTHING
         ELSE
-                insert into managers (person_id) values ($3) returning id into found_manager_id;
+                insert into managers (person_id) values ($1) returning id into found_manager_id;
         END IF;
 
 

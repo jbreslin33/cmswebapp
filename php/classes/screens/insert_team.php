@@ -10,18 +10,8 @@ class InsertTeam extends Screen
 
         function getResult()
         {
-                $club_id = null;
-                $person_id = null;
                 $name = null;
 
-                if (isset($_GET['club_id']))
-                {
-                        $club_id = $_GET['club_id'];
-                }
-                if (isset($_GET['person_id']))
-                {
-                        $person_id = $_GET['person_id'];
-                }
                 if (isset($_GET['name']))
                 {
                         $name = $_GET['name'];
@@ -29,7 +19,7 @@ class InsertTeam extends Screen
 
                 $sql = 'select f_insert_team($1,$2,$3,$4)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_team", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_insert_team", array( $this->getSenderEmailId(), $club_id, $person_id, $name));
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_team", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId, $name));
 
                 return pg_fetch_result($result, 0);
         }

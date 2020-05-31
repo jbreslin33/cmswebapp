@@ -113,6 +113,9 @@ class InsertTeamScreen extends Screen
 		{
 			this.setMessage("You must select a club and team name first","red");
 		}
+
+		//rm all items we got a new json of teams coming
+                this.removeDivs();
 	}
 
         deleteHit()
@@ -128,8 +131,6 @@ class InsertTeamScreen extends Screen
                         }
                 }
 		
-		//this.mJson = null;
-
                 screen.setUrl("/php/classes/screens/delete_team.php?" + screen.getStandardParameters() + '&team_id=' + this.getAttribute("id"));
                 screen.ajax();
 
