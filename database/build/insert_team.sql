@@ -52,7 +52,7 @@ BEGIN
 
 	ELSE
 		--are you a club admin of club $2????
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $2; 
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $3 AND club_persons.person_id = $2; 
 
 		IF found_club_administrator_id > 0 THEN
 
