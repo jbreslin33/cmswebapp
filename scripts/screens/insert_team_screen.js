@@ -50,6 +50,7 @@ class InsertTeamScreen extends Screen
                 {
                         this.mItemArray[i].removeDivs();
                 }
+
 		this.mItemArray.length = 0;
         }
 
@@ -127,7 +128,7 @@ class InsertTeamScreen extends Screen
                         }
                 }
 		
-		this.mJson = null;
+		//this.mJson = null;
 
                 screen.setUrl("/php/classes/screens/delete_team.php?" + screen.getStandardParameters() + '&team_id=' + this.getAttribute("id"));
                 screen.ajax();
@@ -136,9 +137,6 @@ class InsertTeamScreen extends Screen
 
 	processTeams()
 	{
-		//this.removeDivs();
-		//this.mItemArray.length = 0;
-
                 //make new array containing games and practices together
                 if (this.mJson)
                 {

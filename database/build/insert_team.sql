@@ -63,7 +63,7 @@ BEGIN
                 			',',
                 			j_select_messages(null),
                 			',',
-                			j_select_codes(-100)
+                			j_select_codes(-103)
         			);
 
 			ELSE
