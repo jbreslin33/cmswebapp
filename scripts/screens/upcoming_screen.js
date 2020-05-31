@@ -99,6 +99,7 @@ class UpcomingScreen extends Screen
 
 	deleteHit()
 	{
+		console.log('delete hit');
 		var screen = APPLICATION.getCurrentScreen();
 
 		//lets find evento to delete..

@@ -856,7 +856,10 @@ class Screen
                         if (this.mCode == '-103') //successful delete
                         {
                         	//remove item
-                                this.mWaitListItem.removeDivs();
+				if (this.mWaitListItem)
+				{
+                                	this.mWaitListItem.removeDivs();
+				}
                         }
 		}
 	}
