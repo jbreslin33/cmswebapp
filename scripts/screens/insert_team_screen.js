@@ -88,7 +88,7 @@ class InsertTeamScreen extends Screen
                 //lets find evento to delete..
                 for (var i = 0; i < screen.mItemArray.length; i++)
                 {
-                        if (screen.mItemArray[i].mJson.team_id == this.getAttribute("id"))
+                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id"))
                         {
                                 screen.mWaitListItem = screen.mItemArray[i];
                         }
@@ -107,12 +107,16 @@ class InsertTeamScreen extends Screen
                         {
                                 for (var i = 0; i < this.mJson.teams.length; i++)
                                 {
-					var item = new Item(this.mApplication,this.mJson.teams[i]);
+					//var item = new Item(this.mApplication,this.mJson.teams[i]);
+					var textArray = new Array();	
+					console.log('new item:' + i);
+					var item = new Item(this.mApplication, this.mJson.teams[i].team_name, textArray, this.mJson.teams[i].team_id);
 					this.mItemArray.push(item);
                                 }
 
 				for (var i = 0; i < this.mItemArray.length; i++)
 				{
+					console.log('calling print:' + i);
 					this.mItemArray[i].printToScreen();
 				}
                         }
