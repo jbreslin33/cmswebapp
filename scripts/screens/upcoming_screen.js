@@ -441,7 +441,7 @@ class UpcomingScreen extends Screen
 
 					var deleteId = this.mEventsArray[i].id;
 
-					var evento = new Evento(this.mApplication,this.mEventsArray[i], titleText, textArray, deleteId);
+					var evento = new UpcomingItem(this.mApplication,this.mEventsArray[i], titleText, textArray, deleteId);
 					this.mEventoArray.push(evento);
 				}
 			}		

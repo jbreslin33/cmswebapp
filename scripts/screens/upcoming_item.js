@@ -1,6 +1,6 @@
 'use strict';
 
-class Evento extends Item 
+class UpcomingItem extends Item 
 {
         constructor(application, json, titleText, textArray, deleteId)
         {
