@@ -99,7 +99,6 @@ class UpcomingScreen extends Screen
 
 	deleteHit()
 	{
-		console.log('delete hit');
 		var screen = APPLICATION.getCurrentScreen();
 
 		//lets find evento to delete..
@@ -352,14 +351,12 @@ class UpcomingScreen extends Screen
                        		for (var i = 0; i < this.mJson.teams.length; i++)
 				{
 					this.mTeamsArray.push(this.mJson.teams[i]);
-					console.log('managed team:' + this.mJson.teams[i].id + ' ' + this.mJson.teams[i].name); 
 				}
 			}
 		}
 
 		if (this.mEventsArray.length > 0)
 		{
-			console.log('sorting');
 			//sort this.mEventsArray by date and arrival time
 			this.mEventsArray.sort
 			(
