@@ -83,6 +83,20 @@ class Screen
 
 	}
 
+        deleteHit()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+
+                //lets find evento to delete..
+                for (var i = 0; i < screen.mItemArray.length; i++)
+                {
+                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id"))
+                        {
+                                screen.mWaitListItem = screen.mItemArray[i];
+                        }
+                }
+        }
+
         closeModal()
         {
                 document.getElementById("calendar_modal_id").style.display = "none";

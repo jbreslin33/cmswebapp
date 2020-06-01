@@ -37,6 +37,7 @@ class InsertPitchScreen extends Screen
 	hit()
 	{
 		var name  = document.getElementById("insert_pitch_screen_name_id").value;
+                document.getElementById("insert_pitch_screen_name_id").value = null;
 
 		if (this.getClubId() > 0 && name.length > 0)
 		{
@@ -47,5 +48,64 @@ class InsertPitchScreen extends Screen
 		{
 			this.setMessage("You must select a club and provid a name first","red");
 		}
+                
+		//rm all items we got a new json of teams coming
+                this.removeDivs();
 	}
+
+
+        processClubs()
+        {
+                super.processClubs();
+                if (this.mJson.clubs)
+                {
+                        this.getClubTeams();
+                }
+        }
+
+        clubSelected()
+        {
+                this.getClubTeams();
+        }
+
+        getClubPitches()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_club_pitches.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        deleteHit()
+        {
+		super.deleteHit();
+                var screen = APPLICATION.getCurrentScreen();
+
+                screen.setUrl("/php/classes/screens/delete_pitch.php?" + screen.getStandardParameters() + '&pitch_id=' + this.getAttribute("id"));
+                screen.ajax();
+        }
+
+        processTeams()
+        {
+                //make new array containing games and practices together
+                if (this.mJson)
+                {
+                        if (this.mJson.teams)
+                        {
+                                for (var i = 0; i < this.mJson.teams.length; i++)
+                                {
+                                        //var item = new Item(this.mApplication,this.mJson.teams[i]);
+                                        var textArray = new Array();
+                                        var item = new Item(this.mApplication, this.mJson.teams[i], this.mJson.teams[i].team_name, textArray, this.mJson.teams[i].team_id);
+                                        this.mItemArray.push(item);
+                                }
+
+                                for (var i = 0; i < this.mItemArray.length; i++)
+                                {
+                                        this.mItemArray[i].printToScreen();
+                                }
+                        }
+                }
+        }
+
+
 }

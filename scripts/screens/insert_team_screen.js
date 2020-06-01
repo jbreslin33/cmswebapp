@@ -77,17 +77,9 @@ class InsertTeamScreen extends Screen
 
         deleteHit()
         {
+		super.deleteHit();
                 var screen = APPLICATION.getCurrentScreen();
 
-                //lets find evento to delete..
-                for (var i = 0; i < screen.mItemArray.length; i++)
-                {
-                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id"))
-                        {
-                                screen.mWaitListItem = screen.mItemArray[i];
-                        }
-                }
-		
                 screen.setUrl("/php/classes/screens/delete_team.php?" + screen.getStandardParameters() + '&team_id=' + this.getAttribute("id"));
                 screen.ajax();
         }

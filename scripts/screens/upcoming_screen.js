@@ -17,7 +17,6 @@ class UpcomingScreen extends Screen
 
 		this.mEventsArray = new Array();
 		this.mEventoArray = new Array();
-		this.mSmashEventoArray = new Array();
 
 		this.mPracticesPlayerAvailabilityArray = new Array();
 		this.mGamesPlayerAvailabilityArray     = new Array();
@@ -66,17 +65,8 @@ class UpcomingScreen extends Screen
 
 	deleteHit()
 	{
+		super.deleteHit();
 		var screen = APPLICATION.getCurrentScreen();
-
-		//lets find evento to delete..
-		for (var i = 0; i < screen.mSmashEventoArray.length; i++)
-		{
-			if (screen.mSmashEventoArray[i].mJson.id == this.getAttribute("id"))
-			{
-				console.log('delete hit setting mWaitList');
-				screen.mWaitListItem = screen.mSmashEventoArray[i]; 
-			}
-		}
 
 		if (this.getAttribute("type") == 'game')
 		{
@@ -95,9 +85,9 @@ class UpcomingScreen extends Screen
 		super.removeDivs();
 
 		//loop thru eventos Array
-		for (var i = 0; i < this.mSmashEventoArray.length; i++)
+		for (var i = 0; i < this.mItemArray.length; i++)
 		{
-			this.mSmashEventoArray[i].removeDivs();
+			this.mItemArray[i].removeDivs();
 		}
 		for (var i = 0; i < this.mEventoArray.length; i++)
 		{
@@ -418,59 +408,59 @@ class UpcomingScreen extends Screen
 			{
 				//add to smash array if not added already..
 				var dup = false;
-				for (var s = 0; s < this.mSmashEventoArray.length; s++)
+				for (var s = 0; s < this.mItemArray.length; s++)
 				{
                                         //game
-                                        if (this.mEventoArray[e].mJson.id == this.mSmashEventoArray[s].mJson.id && this.mEventoArray[e].mJson.type == 'game' && this.mSmashEventoArray[s].mJson.type == 'game')
+                                        if (this.mEventoArray[e].mJson.id == this.mItemArray[s].mJson.id && this.mEventoArray[e].mJson.type == 'game' && this.mItemArray[s].mJson.type == 'game')
                                         {
                                                 dup = true;
 
                                                 if (this.mEventoArray[e].mJson.players  != null)
                                                 {
-                                                        this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJson.players);
-                                                        this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+                                                        this.mItemArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJson.players);
+                                                        this.mItemArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
                                                 }
                                                 if (this.mEventoArray[e].mJson.parents  != null)
                                                 {
-                                                        this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJson.parents);
-                                                        this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+                                                        this.mItemArray[s].mParentIdArray.push(this.mEventoArray[e].mJson.parents);
+                                                        this.mItemArray[s].mParentNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
                                                 }
                                                 if (this.mEventoArray[e].mJson.coaches  != null)
                                                 {
-                                                        this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJson.players);
-                                                        this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+                                                        this.mItemArray[s].mCoachIdArray.push(this.mEventoArray[e].mJson.players);
+                                                        this.mItemArray[s].mCoachNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
                                                 }
                                                 if (this.mEventoArray[e].mJson.managers  != null)
                                                 {
-                                                        this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJson.players);
-                                                        this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+                                                        this.mItemArray[s].mManagerIdArray.push(this.mEventoArray[e].mJson.players);
+                                                        this.mItemArray[s].mManagerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
                                                 }
                                         }
 
 					//practice
-					if (this.mEventoArray[e].mJson.id == this.mSmashEventoArray[s].mJson.id && this.mEventoArray[e].mJson.type == 'practice' && this.mSmashEventoArray[s].mJson.type == 'practice')
+					if (this.mEventoArray[e].mJson.id == this.mItemArray[s].mJson.id && this.mEventoArray[e].mJson.type == 'practice' && this.mItemArray[s].mJson.type == 'practice')
 					{
 						dup = true;	
 					
 						if (this.mEventoArray[e].mJson.players  != null)
 						{
-							this.mSmashEventoArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJson.players);
-							this.mSmashEventoArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+							this.mItemArray[s].mPlayerIdArray.push(this.mEventoArray[e].mJson.players);
+							this.mItemArray[s].mPlayerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
 						}
 						if (this.mEventoArray[e].mJson.parents  != null)
 						{
-							this.mSmashEventoArray[s].mParentIdArray.push(this.mEventoArray[e].mJson.parents);
-							this.mSmashEventoArray[s].mParentNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+							this.mItemArray[s].mParentIdArray.push(this.mEventoArray[e].mJson.parents);
+							this.mItemArray[s].mParentNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
 						}
 						if (this.mEventoArray[e].mJson.coaches  != null)
 						{
-							this.mSmashEventoArray[s].mCoachIdArray.push(this.mEventoArray[e].mJson.players);
-							this.mSmashEventoArray[s].mCoachNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+							this.mItemArray[s].mCoachIdArray.push(this.mEventoArray[e].mJson.players);
+							this.mItemArray[s].mCoachNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
 						}
 						if (this.mEventoArray[e].mJson.managers  != null)
 						{
-							this.mSmashEventoArray[s].mManagerIdArray.push(this.mEventoArray[e].mJson.players);
-							this.mSmashEventoArray[s].mManagerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
+							this.mItemArray[s].mManagerIdArray.push(this.mEventoArray[e].mJson.players);
+							this.mItemArray[s].mManagerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
 						}
 					}
 				}
@@ -498,18 +488,18 @@ class UpcomingScreen extends Screen
                                        		this.mEventoArray[e].mManagerIdArray.push(this.mEventoArray[e].mJson.managers);
                                        		this.mEventoArray[e].mManagerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
                                 	}
-					this.mSmashEventoArray.push(this.mEventoArray[e]);
+					this.mItemArray.push(this.mEventoArray[e]);
 				}
 
 			}//end for eventoArray
 			
-			for (var s = 0; s < this.mSmashEventoArray.length; s++)
+			for (var s = 0; s < this.mItemArray.length; s++)
 			{
-				this.mSmashEventoArray[s].printToScreen();
+				this.mItemArray[s].printToScreen();
 			}
 		}
 
-		if (this.mSmashEventoArray.length > 0) 
+		if (this.mItemArray.length > 0) 
 		{
                 	this.setMessage('', 'black');
                 }
