@@ -27,9 +27,6 @@ class UpcomingScreen extends Screen
 		this.mAvailabilityArray = new Array();
 		this.mAvailabilityList = null;
 
-		//deletes
-		this.mWaitListEvento = null;
-
 		//now
                 var current_date = new Date();
                 var current_month = current_date.getMonth();
@@ -61,30 +58,6 @@ class UpcomingScreen extends Screen
 		this.setCloseNav();
         }
 
-        processCodes()
-        {
-		super.processCodes();
-		if (this.mJson)
-		{
-
-                	if (this.mJson.codes)
-                	{
-                        	this.mCode = 0;
-                        	for (var i = 0; i < this.mJson.codes.length; i++)
-                        	{
-                               		this.mCode = this.mJson.codes[i].code;
-                        	}
-                        	//definite success so send to upcoming
-                        	if (this.mCode == '-103') //successful delete
-                        	{
-                       			//remove evento... 
-					console.log("rm evento");
-					this.mWaitListEvento.removeDivs();
-				}
-                	}
-		}
-        }
-
 	exit()
 	{
 		this.removeDivs();
@@ -106,7 +79,7 @@ class UpcomingScreen extends Screen
 		{
 			if (screen.mSmashEventoArray[i].mJson.id == this.getAttribute("id"))
 			{
-				screen.mWaitListEvento = screen.mSmashEventoArray[i]; 
+				screen.mWaitList = screen.mSmashEventoArray[i]; 
 			}
 		}
 
