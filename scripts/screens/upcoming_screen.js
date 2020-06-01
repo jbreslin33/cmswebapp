@@ -73,7 +73,8 @@ class UpcomingScreen extends Screen
 		{
 			if (screen.mSmashEventoArray[i].mJson.id == this.getAttribute("id"))
 			{
-				screen.mWaitList = screen.mSmashEventoArray[i]; 
+				console.log('delete hit setting mWaitList');
+				screen.mWaitListItem = screen.mSmashEventoArray[i]; 
 			}
 		}
 
@@ -91,6 +92,8 @@ class UpcomingScreen extends Screen
 
 	removeDivs()
 	{
+		super.removeDivs();
+
 		//loop thru eventos Array
 		for (var i = 0; i < this.mSmashEventoArray.length; i++)
 		{
