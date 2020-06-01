@@ -200,6 +200,7 @@ class ClubProfileScreen extends Screen
 		var person_selected_id =  APPLICATION.getCurrentScreen().getPersonId(); 
 
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + person_selected_id);
+		console.log('getUrl():' + APPLICATION.getCurrentScreen().getUrl());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
@@ -489,8 +490,9 @@ class ClubProfileScreen extends Screen
 				this.getClubPersonProfile()
 			}
 
-			if (this.mJson.club_teams)
+			if (this.mJson.teams)
 			{
+				console.log('got teams');
 				if (this.mJson.club_players_id)
 				{
                         		if (this.mJson.club_players_id.length > 0)
@@ -572,7 +574,7 @@ class ClubProfileScreen extends Screen
 				APPLICATION.getCurrentScreen().removeCoachButtons();
 				APPLICATION.getCurrentScreen().removeManagerButtons();
                                 
-				for (var i = 0; i < this.mJson.club_teams.length; i++)
+				for (var i = 0; i < this.mJson.teams.length; i++)
 				{
 					//new row...
                                         var rowDiv = document.createElement("DIV");
@@ -583,10 +585,10 @@ class ClubProfileScreen extends Screen
                                         //create a player button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = '' + this.mJson.club_teams[i].team_name;
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name;
                                         rowDiv.appendChild(button);
-                                        var team_id = this.mJson.club_teams[i].team_id;
-                                        var team_name = this.mJson.club_teams[i].team_name;
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_player_id", null);
@@ -597,10 +599,10 @@ class ClubProfileScreen extends Screen
                                         //create a parent button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = '' + this.mJson.club_teams[i].team_name;
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name;
                                         rowDiv.appendChild(button);
-                                        var team_id = this.mJson.club_teams[i].team_id;
-                                        var team_name = this.mJson.club_teams[i].team_name;
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_parent_id", null);
@@ -611,10 +613,10 @@ class ClubProfileScreen extends Screen
                                        	//create a coach button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = '' + this.mJson.club_teams[i].team_name;
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name;
                                         rowDiv.appendChild(button);
-                                        var team_id = this.mJson.club_teams[i].team_id;
-                                        var team_name = this.mJson.club_teams[i].team_name;
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_coach_id", null);
@@ -625,10 +627,10 @@ class ClubProfileScreen extends Screen
 					//create a manager button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = '' + this.mJson.club_teams[i].team_name;
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name;
                                         rowDiv.appendChild(button);
-                                        var team_id = this.mJson.club_teams[i].team_id;
-                                        var team_name = this.mJson.club_teams[i].team_name;
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
                                         button.setAttribute("team_club_persons_club_manager_id", null);
