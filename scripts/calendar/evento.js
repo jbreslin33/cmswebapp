@@ -1,18 +1,10 @@
 'use strict';
 
-class Evento 
+class Evento extends Item 
 {
-        constructor(application,jsonEvent)
+        constructor(application, json, titleText, textArray, deleteId)
         {
-		this.mApplication = application;
-		this.mJsonEvent = jsonEvent;
-
-		this.mDivArray = new Array();
-                this.mCardDiv = null;
-                this.mContainerDiv = null;
-
-		this.mTitle = null;
-		this.mTextArray = new Array();
+        	super(application, json, titleText, textArray, deleteId);
 
 		//for smash
 		this.mPlayerNameArray = new Array();
@@ -26,21 +18,6 @@ class Evento
 		this.mManagerIdArray = new Array();
 
 		this.mAvailabilityIdArray = new Array();
-
-		this.mButtonArray = new Array();
-	}
-
-	removeDivs()
-	{
-		for (var x = 0; x < this.mDivArray.length; x++)
-                {
-                       	this.mDivArray[x].remove();
-                }
-
-		for (var b = 0; b < this.mButtonArray.length; b++)
-		{
-			this.mButtonArray[b].remove();
-		}
 	}
 
 	makeButtons()
@@ -49,11 +26,11 @@ class Evento
 		{
 			var availability_id = null;
 
-                       	if (this.mJsonEvent.type == 'game')
+                       	if (this.mJson.type == 'game')
                         {
                                 for (var a = 0; a < this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray.length; a++)
                                 {
-                                        if (this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].game_id == this.mJsonEvent.id && this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
+                                        if (this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].game_id == this.mJson.id && this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
                                         {
                                                 availability_id = this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].availability_id;
                                         }
@@ -63,7 +40,7 @@ class Evento
                                 button.setAttribute("class","availability-button");
                                 button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
-                                var id = 'button_1_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                var id = 'button_1_1_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
                         	if (availability_id == 1)
@@ -77,7 +54,7 @@ class Evento
                                 button.setAttribute("class","availability-button");
                                 button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
-                                var id = 'button_1_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                var id = 'button_1_2_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
                         	if (availability_id == 2)
@@ -90,7 +67,7 @@ class Evento
                                 button.setAttribute("class","availability-button");
                                 button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
-                                var id = 'button_1_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                                var id = 'button_1_3_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
                         	if (availability_id == 3)
@@ -100,11 +77,11 @@ class Evento
                                 this.mButtonArray.push(button);
                         }
 
-			if (this.mJsonEvent.type == 'practice')
+			if (this.mJson.type == 'practice')
 			{
 				for (var a = 0; a < this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray.length; a++)
 				{
-					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJsonEvent.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
+					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJson.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
 					{
 						availability_id = this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].availability_id;	
 					}
@@ -114,7 +91,7 @@ class Evento
                 		button.setAttribute("class","availability-button");
                         	button.innerHTML = '' + this.mPlayerNameArray[i];
                         	this.mContainerDiv.appendChild(button);
-                        	var id = 'button_2_1_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                        	var id = 'button_2_1_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
                         	button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
                         	if (availability_id == 1)
@@ -128,7 +105,7 @@ class Evento
                                 button.setAttribute("class","availability-button");
                         	button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
-                        	var id = 'button_2_2_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                        	var id = 'button_2_2_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
 				if (availability_id == 2)
@@ -141,7 +118,7 @@ class Evento
                                 button.setAttribute("class","availability-button");
                         	button.innerHTML = '' + this.mPlayerNameArray[i];
                                 this.mContainerDiv.appendChild(button);
-                        	var id = 'button_2_3_' + this.mJsonEvent.id + '_' + this.mPlayerIdArray[i];
+                        	var id = 'button_2_3_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
                                 button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
 				if (availability_id == 3)
@@ -155,7 +132,7 @@ class Evento
 
 	printToScreen()
 	{
-		if (this.mJsonEvent)
+		if (this.mJson)
 		{
 			//put container..
 			this.mCardDiv = document.createElement('div');
@@ -168,85 +145,80 @@ class Evento
                 	this.mCardDiv.appendChild(this.mContainerDiv);
                 	this.mDivArray.push(this.mContainerDiv);
 
-			if (this.mJsonEvent.event_date)
+
+			if (this.mTitleText)
                 	{
+				console.log('in titleText if');
                 		this.mTitle = document.createElement('h5');
                         	this.mContainerDiv.appendChild(this.mTitle);
 			}
 			
-			if (this.mJsonEvent.type == 'game')
-			{
-				this.mTitle.innerHTML = 'Game: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
-			}
-			if (this.mJsonEvent.type == 'practice')
-			{
-				this.mTitle.innerHTML = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mJsonEvent.event_date);
-			}
+			this.mTitle.innerHTML = this.mTitleText;
 
 			this.mTextArray = new Array();
                        	var p = document.createElement('p');
 
-                        if (this.mJsonEvent.first_name)
+                        if (this.mJson.first_name)
                         {
-                                this.mTextArray.push('' + this.mJsonEvent.names);
+                                this.mTextArray.push('' + this.mJson.names);
                         }
 			
 			this.makeButtons();
 
                        	this.mContainerDiv.appendChild(p);
 
-                        if (this.mJsonEvent.arrival_time)
+                        if (this.mJson.arrival_time)
                         {
-                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJsonEvent.arrival_time);
+                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJson.arrival_time);
                                 this.mTextArray.push('Arrive by: ' + humanTime);
                         }
 
-                        if (this.mJsonEvent.start_time)
+                        if (this.mJson.start_time)
                         {
-                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJsonEvent.start_time);
+                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJson.start_time);
                                 this.mTextArray.push('Start time: ' + humanTime);
                         }
 
 
-                        if (this.mJsonEvent.end_time)
+                        if (this.mJson.end_time)
                         {
-                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJsonEvent.end_time);
+                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJson.end_time);
                                 this.mTextArray.push('End time: ' + humanTime);
                         }
 
-                        if (this.mJsonEvent.address)
+                        if (this.mJson.address)
                         {
-                                this.mTextArray.push('Address: ' + this.mJsonEvent.address);
+                                this.mTextArray.push('Address: ' + this.mJson.address);
                         }
 
-                        if (this.mJsonEvent.coordinates)
+                        if (this.mJson.coordinates)
                        	{
-                                this.mTextArray.push('Coordinates: ' + this.mJsonEvent.coordinates);
+                                this.mTextArray.push('Coordinates: ' + this.mJson.coordinates);
                         }
 
-                        if (this.mJsonEvent.pitch_name)
+                        if (this.mJson.pitch_name)
                         {
-                                this.mTextArray.push('Pitch: ' + this.mJsonEvent.pitch_name);
+                                this.mTextArray.push('Pitch: ' + this.mJson.pitch_name);
                         }
 
-                        if (this.mJsonEvent.field_name)
+                        if (this.mJson.field_name)
                         {
-                                this.mTextArray.push('Field: ' + this.mJsonEvent.field_name);
+                                this.mTextArray.push('Field: ' + this.mJson.field_name);
                         }
 
-                       	if (this.mJsonEvent.club_name)
+                       	if (this.mJson.club_name)
                         {
-                                this.mTextArray.push('Club: ' + this.mJsonEvent.club_name);
+                                this.mTextArray.push('Club: ' + this.mJson.club_name);
                         }
 
-                        if (this.mJsonEvent.team_name)
+                        if (this.mJson.team_name)
                         {
-                                this.mTextArray.push('Team: ' + this.mJsonEvent.team_name);
+                                this.mTextArray.push('Team: ' + this.mJson.team_name);
                         }
 
-                        if (this.mJsonEvent.opponent)
+                        if (this.mJson.opponent)
                         {
-                                this.mTextArray.push('Opponent: ' + this.mJsonEvent.opponent);
+                                this.mTextArray.push('Opponent: ' + this.mJson.opponent);
                         }
 
                         for (var r = 0; r < this.mTextArray.length; r++)
@@ -258,7 +230,7 @@ class Evento
 
                         for (var a = 0; a < this.mApplication.getCurrentScreen().mTeamsArray.length; a++)
                         {
-                        	if (this.mApplication.getCurrentScreen().mTeamsArray[a].id == this.mJsonEvent.team_id)
+                        	if (this.mApplication.getCurrentScreen().mTeamsArray[a].id == this.mJson.team_id)
                                 {
                                 	team_managed_id = this.mApplication.getCurrentScreen().mTeamsArray[a].id;
                                 }
@@ -269,13 +241,13 @@ class Evento
 			{
 			       	var button = document.createElement("BUTTON");
                                 button.setAttribute("class","delete-button");
-                                button.innerHTML = 'DELETE ' + this.mJsonEvent.type;
+                                button.innerHTML = 'DELETE ' + this.mJson.type;
                                 this.mContainerDiv.appendChild(button);
 
-				var id = this.mJsonEvent.id;
+				var id = this.mJson.id;
                                 button.setAttribute("id", id);
 				
-				var type = this.mJsonEvent.type;
+				var type = this.mJson.type;
 				button.setAttribute("type", type);
 
                                 button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);

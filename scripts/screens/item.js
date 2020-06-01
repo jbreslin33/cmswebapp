@@ -2,9 +2,10 @@
 
 class Item
 {
-        constructor(application, titleText, textArray, deleteId)
+        constructor(application, json, titleText, textArray, deleteId)
         {
                 this.mApplication = application;
+		this.mJson = json;
 
                 this.mDivArray = new Array();
                 this.mCardDiv = null;
@@ -35,7 +36,6 @@ class Item
 
 	printToScreen()
         {
-		console.log('printToScreen()');
         	//put container..
                 this.mCardDiv = document.createElement('div');
                 this.mDivArray.push(this.mCardDiv);
@@ -49,7 +49,6 @@ class Item
 
                 if (this.mTitleText)
                 {
-			console.log('here!!');
                 	this.mTitle = document.createElement('h5');
                         this.mContainerDiv.appendChild(this.mTitle);
                        	this.mTitle.innerHTML = '' + this.mTitleText;
