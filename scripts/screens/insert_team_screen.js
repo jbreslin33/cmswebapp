@@ -109,14 +109,12 @@ class InsertTeamScreen extends Screen
                                 {
 					//var item = new Item(this.mApplication,this.mJson.teams[i]);
 					var textArray = new Array();	
-					console.log('new item:' + i);
-					var item = new Item(this.mApplication, this.mJson.teams[i].team_name, textArray, this.mJson.teams[i].team_id);
+					var item = new Item(this.mApplication, this.mJson.teams[i], this.mJson.teams[i].team_name, textArray, this.mJson.teams[i].team_id);
 					this.mItemArray.push(item);
                                 }
 
 				for (var i = 0; i < this.mItemArray.length; i++)
 				{
-					console.log('calling print:' + i);
 					this.mItemArray[i].printToScreen();
 				}
                         }

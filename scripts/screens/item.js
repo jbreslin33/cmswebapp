@@ -33,26 +33,36 @@ class Item
                 }
         }
 
-	printToScreen()
-        {
+	makeCard()
+	{
         	//put container..
                 this.mCardDiv = document.createElement('div');
                 this.mDivArray.push(this.mCardDiv);
                 this.mCardDiv.setAttribute('class','card');
 		this.mApplication.getCurrentScreen().getColSixHtml().appendChild(this.mCardDiv);
+	}
 
+	makeContainer()
+	{
                 this.mContainerDiv = document.createElement('div');
                 this.mContainerDiv.setAttribute('class','container');
                 this.mCardDiv.appendChild(this.mContainerDiv);
                 this.mDivArray.push(this.mContainerDiv);
+	}
 
+	makeTitle()
+	{
                 if (this.mTitleText)
                 {
+			console.log('title if GGG');
                 	this.mTitle = document.createElement('h5');
                         this.mContainerDiv.appendChild(this.mTitle);
                        	this.mTitle.innerHTML = '' + this.mTitleText;
                 }
+	}
 
+	makeDeleteButton()
+	{
 		//delete button
 		if (this.mDeleteId)
 		{
@@ -66,5 +76,13 @@ class Item
                 	button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
               		this.mButtonArray.push(button);
 		}
+	}
+
+	printToScreen()
+        {
+		this.makeCard();
+		this.makeContainer();
+		this.makeTitle();
+		this.makeDeleteButton();
 	}
 }

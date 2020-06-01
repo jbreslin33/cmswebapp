@@ -160,7 +160,6 @@ class UpcomingItem extends Item
 			this.makeButtons();
 
                        	this.mContainerDiv.appendChild(p);
-			console.log('textArray.length:' + this.mTextArray.length);
 
                         for (var r = 0; r < this.mTextArray.length; r++)
                         {
