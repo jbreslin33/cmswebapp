@@ -58,12 +58,6 @@ class UpcomingScreen extends Screen
 		this.setCloseNav();
         }
 
-	exit()
-	{
-		this.removeDivs();
-		super.exit();
-	}
-
         get()
         {
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?" + this.getStandardParameters() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);

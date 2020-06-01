@@ -26,12 +26,6 @@ class InsertTeamScreen extends Screen
                 this.setCloseNav();
 	}
 
-        exit()
-        {
-                this.removeDivs();
-                super.exit();
-        }
-
         get()
         {
                 if (APPLICATION.getJWT())

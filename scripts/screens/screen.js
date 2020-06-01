@@ -891,6 +891,7 @@ class Screen
 	
 	exit()
 	{
+		this.removeDivs();
                 this.hide();
 		this.hideFooter();
 		this.resetDataVariables();
