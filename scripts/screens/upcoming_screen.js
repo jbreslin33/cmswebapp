@@ -389,12 +389,55 @@ class UpcomingScreen extends Screen
                         		}
                         		if (this.mEventsArray[i].type == 'practice')
                         		{
-						console.log('found prac----------------');
                                 		titleText = 'Practice: ' + this.mApplication.mCalendar.convertDate(this.mEventsArray[i].event_date);
                         		}
 				
 					//array for body
 					var textArray = new Array();
+
+		                        if (this.mEventsArray[i].arrival_time)
+                        		{
+                                		var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time);
+                                		textArray.push('Arrive by: ' + humanTime);
+                        		}
+                        		if (this.mEventsArray[i].start_time)
+                        		{
+                                		var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].start_time);
+                                		textArray.push('Start time: ' + humanTime);
+                        		}
+                        		if (this.mEventsArray[i].end_time)
+                        		{
+                                		var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].end_time);
+                                		textArray.push('End time: ' + humanTime);
+                        		}
+                        		if (this.mEventsArray[i].address)
+                        		{
+                                		textArray.push('Address: ' + this.mEventsArray[i].address);
+                        		}
+                        		if (this.mEventsArray[i].coordinates)
+                        		{
+                                		textArray.push('Coordinates: ' + this.mEventsArray[i].coordinates);
+                        		}
+                        		if (this.mEventsArray[i].pitch_name)
+                        		{
+                                		textArray.push('Pitch: ' + this.mEventsArray[i].pitch_name);
+                        		}
+                        		if (this.mEventsArray[i].field_name)
+                        		{
+                                		textArray.push('Field: ' + this.mEventsArray[i].field_name);
+                        		}
+                        		if (this.mEventsArray[i].club_name)
+                        		{
+                                		textArray.push('Club: ' + this.mEventsArray[i].club_name);
+                        		}
+                        		if (this.mEventsArray[i].team_name)
+                        		{
+                                		textArray.push('Team: ' + this.mEventsArray[i].team_name);
+                        		}
+                        		if (this.mEventsArray[i].opponent)
+                        		{
+                                		textArray.push('Opponent: ' + this.mEventsArray[i].opponent);
+                        		}
 
 					var deleteId = this.mEventsArray[i].id;
 

@@ -155,71 +155,12 @@ class Evento extends Item
 			
 			this.mTitle.innerHTML = this.mTitleText;
 
-			this.mTextArray = new Array();
                        	var p = document.createElement('p');
 
-                        if (this.mJson.first_name)
-                        {
-                                this.mTextArray.push('' + this.mJson.names);
-                        }
-			
 			this.makeButtons();
 
                        	this.mContainerDiv.appendChild(p);
-
-                        if (this.mJson.arrival_time)
-                        {
-                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJson.arrival_time);
-                                this.mTextArray.push('Arrive by: ' + humanTime);
-                        }
-
-                        if (this.mJson.start_time)
-                        {
-                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJson.start_time);
-                                this.mTextArray.push('Start time: ' + humanTime);
-                        }
-
-
-                        if (this.mJson.end_time)
-                        {
-                        	var humanTime = this.mApplication.mTime.convertFromMilitaryToHuman(this.mJson.end_time);
-                                this.mTextArray.push('End time: ' + humanTime);
-                        }
-
-                        if (this.mJson.address)
-                        {
-                                this.mTextArray.push('Address: ' + this.mJson.address);
-                        }
-
-                        if (this.mJson.coordinates)
-                       	{
-                                this.mTextArray.push('Coordinates: ' + this.mJson.coordinates);
-                        }
-
-                        if (this.mJson.pitch_name)
-                        {
-                                this.mTextArray.push('Pitch: ' + this.mJson.pitch_name);
-                        }
-
-                        if (this.mJson.field_name)
-                        {
-                                this.mTextArray.push('Field: ' + this.mJson.field_name);
-                        }
-
-                       	if (this.mJson.club_name)
-                        {
-                                this.mTextArray.push('Club: ' + this.mJson.club_name);
-                        }
-
-                        if (this.mJson.team_name)
-                        {
-                                this.mTextArray.push('Team: ' + this.mJson.team_name);
-                        }
-
-                        if (this.mJson.opponent)
-                        {
-                                this.mTextArray.push('Opponent: ' + this.mJson.opponent);
-                        }
+			console.log('textArray.length:' + this.mTextArray.length);
 
                         for (var r = 0; r < this.mTextArray.length; r++)
                         {

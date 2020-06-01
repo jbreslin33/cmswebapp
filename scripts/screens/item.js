@@ -15,7 +15,6 @@ class Item
 
                 this.mTitle = null;
 		this.mTitleText = titleText;
-                this.mTextArray = new Array();
 
                 this.mButtonArray = new Array();
 		this.mDeleteId = deleteId;
