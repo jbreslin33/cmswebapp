@@ -9,6 +9,7 @@ class InsertPitchScreen extends Screen
 		location.hash = 'insert_pitch_screen';
 
                 this.setHtml(document.getElementById("insert_pitch_screen_html_id"));
+                this.setColSixHtml(document.getElementById("insert_pitch_screen_col_6_html_id"));
                 this.setMessageElement(document.getElementById("insert_pitch_screen_message_id"));
                 this.setForm(document.getElementById("insert_pitch_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_pitch_screen_spinner_id"));
@@ -59,13 +60,13 @@ class InsertPitchScreen extends Screen
                 super.processClubs();
                 if (this.mJson.clubs)
                 {
-                        this.getClubTeams();
+                        this.getClubPitches();
                 }
         }
 
         clubSelected()
         {
-                this.getClubTeams();
+                this.getClubPitches();
         }
 
         getClubPitches()
@@ -84,18 +85,17 @@ class InsertPitchScreen extends Screen
                 screen.ajax();
         }
 
-        processTeams()
+        processPitches()
         {
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
-                        if (this.mJson.teams)
+                        if (this.mJson.pitches)
                         {
-                                for (var i = 0; i < this.mJson.teams.length; i++)
+                                for (var i = 0; i < this.mJson.pitches.length; i++)
                                 {
-                                        //var item = new Item(this.mApplication,this.mJson.teams[i]);
                                         var textArray = new Array();
-                                        var item = new Item(this.mApplication, this.mJson.teams[i], this.mJson.teams[i].team_name, textArray, this.mJson.teams[i].team_id);
+                                        var item = new Item(this.mApplication, this.mJson.pitches[i], this.mJson.pitches[i].pitch_name, textArray, this.mJson.pitches[i].pitch_id);
                                         this.mItemArray.push(item);
                                 }
 
@@ -106,6 +106,4 @@ class InsertPitchScreen extends Screen
                         }
                 }
         }
-
-
 }

@@ -1,4 +1,31 @@
---INSERT PITCH
+
+CREATE OR REPLACE FUNCTION f_select_club_pitches(int,int,int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -1;
+        found_club_administrator_id club_administrators.id%TYPE;
+        found_club_persons_id club_persons.id%TYPE;
+        found_team_id pitches.id%TYPE;
+BEGIN
+
+        result_set = CONCAT
+        (
+
+                j_select_persons($1),
+                ',',
+                j_select_messages(''),
+                ',',
+                j_select_codes(-101),
+                ',',
+                j_select_club_pitches($3)
+        );
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END INSERT TEAM
+
 
 CREATE OR REPLACE FUNCTION f_insert_pitch(int,int,int,text)
 RETURNS text AS $$

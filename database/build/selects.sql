@@ -203,6 +203,32 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
 
+--BEGIN J_SELECT PITCHES
+CREATE OR REPLACE FUNCTION j_select_club_pitches(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select pitches.id as pitch_id, pitches.name as pitch_name from pitches
+                where pitches.club_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"pitches": []', raw_json);
+        ELSE
+                result_set = CONCAT('"pitches": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT PITCHES
+
+
 CREATE OR REPLACE FUNCTION j_select_club_players_id(int,int)
 RETURNS text AS $$
 DECLARE
