@@ -47,16 +47,18 @@ BEGIN
                         ',',
                         j_select_codes(-101),
                         ',',
-			j_select_administrated_clubs($3)
+			j_select_administrated_clubs($2),
+                	',',
+                	j_select_club_pitches($3)
                	);
 
 	ELSE
 		--are you a club admin of club $2????
-		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $2 AND club_persons.person_id = $3; 
+		select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.club_id = $3 AND club_persons.person_id = $2; 
 
 		IF found_club_administrator_id > 0 THEN
 
-			CALL p_insert_pitch($2,$4,$3,x);
+			CALL p_insert_pitch($3,$4,x);
 
 			IF x > 0 THEN
 
@@ -66,7 +68,9 @@ BEGIN
                         		',',
                         		j_select_messages(null),
                         		',',
-                        		j_select_codes(-100)
+                        		j_select_codes(-101),
+                			',',
+                			j_select_club_pitches($3)
                 		);
 
 			ELSE
@@ -76,7 +80,9 @@ BEGIN
                                         ',',
                                         j_select_messages('Something went wrong with adding pitch. Sorry!'),
                                         ',',
-                                        j_select_codes(-101)
+                                        j_select_codes(-101),
+                			',',
+                			j_select_club_pitches($3)
                                 );
 
 			END IF;
@@ -88,7 +94,9 @@ BEGIN
                                	',',
                                 j_select_messages('You are not a club administrator. So you cannot add a pitch to this club.'),
                                 ',',
-                               	j_select_codes(-101)
+                               	j_select_codes(-101),
+                		',',
+                		j_select_club_pitches($3)
                      	);
 
 		END IF;
@@ -97,7 +105,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_pitch(int,text,int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_pitch(int,text,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
