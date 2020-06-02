@@ -35,8 +35,8 @@ class InsertPersonScreen extends Screen
 
 	hit()
 	{
-		var name  = document.getElementById("insert_person_screen_name_id").value;
-		document.getElementById("insert_person_screen_name_id").value = null;
+		//var name  = document.getElementById("insert_person_screen_name_id").value;
+		//document.getElementById("insert_person_screen_name_id").value = null;
 
                 var firstName  = document.getElementById("insert_person_screen_first_name_id").value;
                 var middleName  = document.getElementById("insert_person_screen_middle_name_id").value;
