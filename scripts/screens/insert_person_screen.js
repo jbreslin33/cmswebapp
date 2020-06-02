@@ -84,18 +84,17 @@ class InsertPersonScreen extends Screen
                 screen.ajax();
         }
 
-	processTeams()
+	processPersons()
 	{
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
-                        if (this.mJson.teams)
+                        if (this.mJson.persons)
                         {
-                                for (var i = 0; i < this.mJson.teams.length; i++)
+                                for (var i = 0; i < this.mJson.persons.length; i++)
                                 {
-					//var item = new Item(this.mApplication,this.mJson.teams[i]);
 					var textArray = new Array();	
-					var item = new Item(this.mApplication, this.mJson.teams[i], this.mJson.teams[i].team_name, textArray, this.mJson.teams[i].team_id);
+					var item = new Item(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].person_id);
 					this.mItemArray.push(item);
                                 }
 
