@@ -35,29 +35,9 @@ class InsertPersonScreen extends Screen
                 }
         }
 
-	processClubs()
-        {
-                super.processClubs();
-                if (this.mJson.clubs)
-                {
-                        this.getClubTeams();
-                }
-        }
-
-        clubSelected()
-        {
-                this.getClubTeams();
-        }
-
-        getClubTeams()
-        {
-		var screen = APPLICATION.getCurrentScreen();
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_club_teams.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
-                screen.ajax();
-        }
-
 	hit()
 	{
+		/*
 		var name  = document.getElementById("insert_team_screen_name_id").value;
 		document.getElementById("insert_team_screen_name_id").value = null;
 
@@ -73,15 +53,18 @@ class InsertPersonScreen extends Screen
 
 		//rm all items we got a new json of teams coming
                 this.removeDivs();
+		*/
 	}
 
         deleteHit()
         {
+		/*
 		super.deleteHit();
                 var screen = APPLICATION.getCurrentScreen();
 
                 screen.setUrl("/php/classes/screens/delete_team.php?" + screen.getStandardParameters() + '&team_id=' + this.getAttribute("id"));
                 screen.ajax();
+		*/
         }
 
 	processPersons()
