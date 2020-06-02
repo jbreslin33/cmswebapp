@@ -35,23 +35,20 @@ class InsertPersonScreen extends Screen
 
 	hit()
 	{
-		/*
-		var name  = document.getElementById("insert_team_screen_name_id").value;
-		document.getElementById("insert_team_screen_name_id").value = null;
+		var name  = document.getElementById("insert_person_screen_name_id").value;
+		document.getElementById("insert_person_screen_name_id").value = null;
 
-		if (this.getClubId() > 0 && name.length > 0)
-		{
-			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_team.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&name=' + name);
-			APPLICATION.getCurrentScreen().ajax();
-		}
-		else
-		{
-			this.setMessage("You must select a club and team name first","red");
-		}
+                var firstName  = document.getElementById("insert_person_screen_first_name_id").value;
+                var middleName  = document.getElementById("insert_person_screen_middle_name_id").value;
+                var lastName  = document.getElementById("insert_person_screen_last_name_id").value;
+                var phone = document.getElementById("insert_person_screen_phone_id").value;
+                var address = document.getElementById("insert_person_screen_address_id").value;
+
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_person.php?" + this.getStandardParameters() + "&first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName + "&phone=" + phone + "&address=" + address);
+                APPLICATION.getCurrentScreen().ajax();
 
 		//rm all items we got a new json of teams coming
                 this.removeDivs();
-		*/
 	}
 
         deleteHit()
