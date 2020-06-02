@@ -19,7 +19,7 @@ class SelectAdministratedClubs extends Screen
 
         }
 }
-
+error_log("selectAdministratedClubs");
 $selectAdministratedClubs = new SelectAdministratedClubs();
 
 ?>
