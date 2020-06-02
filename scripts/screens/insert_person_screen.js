@@ -12,9 +12,7 @@ class InsertPersonScreen extends Screen
                 this.setColSixHtml(document.getElementById("insert_team_screen_col_6_html_id"));
                 this.setMessageElement(document.getElementById("insert_team_screen_message_id"));
                 this.setForm(document.getElementById("insert_team_screen_form_id"));
-                this.setSpinner(document.getElementById("insert_team_screen_spinner_id"));
-
-		//this.setClubSelect(document.getElementById("insert_team_screen_club_id"));
+                this.setSpinner(document.getElementById("insert_person_screen_spinner_id"));
 
 		this.getForm().addEventListener('submit', function(e)
                 {
