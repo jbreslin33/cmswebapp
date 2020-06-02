@@ -8,8 +8,8 @@ class InsertPersonScreen extends Screen
 
 		location.hash = 'insert_person_screen';
 
-                this.setHtml(document.getElementById("insert_team_screen_html_id"));
-                this.setColSixHtml(document.getElementById("insert_team_screen_col_6_html_id"));
+                this.setHtml(document.getElementById("insert_person_screen_html_id"));
+                this.setColSixHtml(document.getElementById("insert_person_screen_col_6_html_id"));
                 this.setMessageElement(document.getElementById("insert_person_screen_message_id"));
                 this.setForm(document.getElementById("insert_person_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_person_screen_spinner_id"));
