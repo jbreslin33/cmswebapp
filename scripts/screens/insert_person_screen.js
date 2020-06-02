@@ -30,8 +30,8 @@ class InsertPersonScreen extends Screen
         {
                 if (APPLICATION.getJWT())
                 {
-                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());
-                        APPLICATION.getCurrentScreen().ajax();
+               		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?jwt=" + APPLICATION.getJWT());
+                	APPLICATION.getCurrentScreen().ajax();
                 }
         }
 
