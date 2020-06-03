@@ -17,6 +17,8 @@ class DeletePerson extends Screen
                         $delete_person_id = $_GET['delete_person_id'];
                 }
 
+ // screen.setUrl("/php/classes/screens/delete_person.php?" + screen.getStandardParameters() + '&delete_person_id=' + this.getAttribute("id"));
+		
 		$sql = 'select f_delete_person($1,$2,$3)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_person", $sql);
 		$result = pg_execute($this->mDatabase->mConnection, "f_delete_person", array( $this->getSenderEmailId(), $this->mPersonId, $delete_person_id));
