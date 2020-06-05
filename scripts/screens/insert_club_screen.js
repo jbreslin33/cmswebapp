@@ -56,7 +56,7 @@ class InsertClubScreen extends Screen
 
 	processClubs()
 	{
-		super.processClubs();
+		//super.processClubs();
 
 		console.log('processClubs() in insert_club');
 
