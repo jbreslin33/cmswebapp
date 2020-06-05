@@ -65,11 +65,17 @@ class InsertPersonScreen extends Screen
 
 	processPersons()
 	{
+		super.processPersons();
+
+
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
                         if (this.mJson.persons)
                         {
+				//need this for remove persons because we need to send new persons...
+                		this.removeDivs();
+
                                 for (var i = 0; i < this.mJson.persons.length; i++)
                                 {
 					var textArray = new Array();	

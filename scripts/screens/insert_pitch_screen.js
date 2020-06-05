@@ -87,14 +87,11 @@ class InsertPitchScreen extends Screen
 
         processPitches()
         {
-		console.log('processPitches()');
                 //make new array containing games and practices together
                 if (this.mJson)
                 {
-			console.log('processPitches() json');
                         if (this.mJson.pitches)
                         {
-				console.log('processPitches() json pitches length:' + this.mJson.pitches.length);
                                 for (var i = 0; i < this.mJson.pitches.length; i++)
                                 {
                                         var textArray = new Array();
