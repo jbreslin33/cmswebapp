@@ -26,11 +26,8 @@ class InsertClubScreen extends Screen
 
         get()
         {
-		console.log('get() in insert club');
                 if (APPLICATION.getJWT())
                 {
-			console.log('get() in insert club jwt');
-               	//	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?jwt=" + APPLICATION.getJWT());
                 	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());
                 	APPLICATION.getCurrentScreen().ajax();
                 }
