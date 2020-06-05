@@ -17,7 +17,6 @@ class SelectPersons extends Screen
         }
 }
 
-error_log("select persons finally");
 $selectPersons = new SelectPersons();
 
 ?>

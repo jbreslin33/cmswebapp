@@ -1753,7 +1753,7 @@ DECLARE
 
 BEGIN
         x := -101;
-
+	delete from practices_players_availability where practices_players_availability.team_club_persons_club_players_id = $1;
 	delete from team_club_persons_club_players where team_club_persons_club_players.id = $1;
 END;
 $$;
