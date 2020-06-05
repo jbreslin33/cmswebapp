@@ -1,12 +1,12 @@
 ------------
 
-means you need error check if avail was set....
-xxxwhat is the purpose of table team_club_persons?  -- i think we know now it cuases dups on joins
+//means you need error check if avail was set....
+//what is the purpose of table team_club_persons?  -- i think we know now it cuases dups on joins
 instead of delete should we do deactivate?
 delete person transfer next
 then club
 then below or something else
-xxxdelete practice
+//delete practice
 calendar needs availability
 
 OBANDO REQUESTS: 
