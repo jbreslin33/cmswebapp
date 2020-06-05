@@ -2,12 +2,14 @@
 
 //means you need error check if avail was set....
 //what is the purpose of table team_club_persons?  -- i think we know now it cuases dups on joins
-instead of delete should we do deactivate?
+TODO LIST:
 delete person transfer next
 then club
 then below or something else
-//delete practice
 calendar needs availability
+
+JIM REQUESTS:
+team_club_persons_club_players_id
 
 OBANDO REQUESTS: 
 every other week recurring.
@@ -19,6 +21,7 @@ fixed: delete a team coach not working
 ----------
 fixed:time off bug
 -----
+//delete practice
 
 
 ----
