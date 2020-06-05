@@ -50,7 +50,7 @@ class InsertClubScreen extends Screen
 		super.deleteHit();
                 var screen = APPLICATION.getCurrentScreen();
 
-		screen.setUrl("/php/classes/screens/delete_club.php?" + screen.getStandardParameters() + '&delete_club_id=' + this.getAttribute("id"));
+		screen.setUrl("/php/classes/screens/delete_club.php?" + screen.getStandardParameters() + '&club_id=' + this.getAttribute("id"));
                 screen.ajax();
         }
 
