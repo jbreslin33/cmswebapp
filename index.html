@@ -954,35 +954,51 @@
 		
 		
 		<!-- INSERT CLUB HTML  -->
-		<div id="insert_club_screen_html_id" class="row">
-			<div class="col-3"> </div>
-			
-			<div class="col-6"> 
 
-				<div class="card-header">ADD CLUB</div>
-        
-				<div class="container">
-					<form id="insert_club_screen_form_id">
+                <div id="insert_club_screen_html_id" class="row">
 
-						<div id="insert_club_screen_spinner_id" class="spinner-border text-primary" role="status">
-							<span class="sr-only">Loading...</span>
-						</div>
-								
-						<label for="insert_club_name_id">Club Name</label>
-						<input type="text" id="insert_club_screen_name_id" placeholder="Club Name" required>
+                        <div class="col-3"> </div>
+
+                        <div id="insert_club_screen_col_6_html_id" class="col-6">
+
+                                <div class="card">
+
+                                        <div class="card-header">ADD CLUB</div>
+
+                                        <div class="container">
+
+                                                <form id="insert_club_screen_form_id" action="#">
+                
+
+                                                        <div id="insert_club_screen_spinner_id">
+                                                                <span class="sr-only">Loading...</span>
+                                                        </div>
+
+                                                        <div id="insert_club_screen_club_div_id">
+                                                                <label for="insert_club_screen_club_id">Club:</label>
+                                                                <select id="insert_club_screen_club_id">
+                                                                </select>
+                                                        </div>
+
+                                                        <label for="insert_club_name_id">Club Name</label>
+                                                        <input type="text" id="insert_club_screen_name_id" placeholder="Club Name">
                                                         
-						<span id='insert_club_screen_message_id'></span>
-                                        
-						<label for="insert_club_screen_address_id">Address</label>
-						<input type="text" id="insert_club_screen_address_id" placeholder="Club Address" required>
-							
-						<button id="addclubscreenbuttonid">Submit</button>
-                       
-					</form>
-				</div>
-			</div>
-			<div class="col-3"> </div>
-		</div>
+							<label for="insert_club_screen_address_id">Club Name</label>
+                                                        <input type="text" id="insert_club_screen_address_id" placeholder="Club Address">
+
+                                                        <span id='insert_club_screen_name_message_id'></span>
+                                                
+                        
+                                                        <button id="insertclubscreenbuttonid">Submit</button>
+                                                        <span id='insert_club_screen_message_id'></span>
+                                                </form>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="col-3"> </div>
+                </div>
+
 
 		<!-- END INSERT CLUB HTML  -->
 		
