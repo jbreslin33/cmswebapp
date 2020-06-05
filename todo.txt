@@ -1,7 +1,8 @@
 ------------
-date or delete on table &quot;team_club_persons_club_players&quot; violates foreign key constraint &quot;practices_players_availabilit_team_club_persons_club_playe_fkey&quot; on table &quot;practices_players_availability&quot;\nDETAIL:  Key (id)=(16) is still referenced from table &quot;practices_players_availability&quot;.\nCONTEXT:  SQL statement &quot;delete from team_club_persons_club_players where team_club_persons_club_players.id = $1&quot;\nPL/pgSQL function p_delete_team_player(integer,integer) line 7 at SQL statement\nSQL statement &quot;CALL p_delete_team_player($6,x)&quot;\nPL/pgSQL function f_delete_team_player(integer,integer,integer,integer,integer,integer) line 10 at CALL in /home/jbreslin/sandbox/footballhome/php/classes/screens/delete_team_player.php on line 22, referer: http://footballhome.org/
+
 means you need error check if avail was set....
 xxxwhat is the purpose of table team_club_persons?  -- i think we know now it cuases dups on joins
+instead of delete should we do deactivate?
 delete person transfer next
 then club
 then below or something else
