@@ -65,6 +65,7 @@ class InsertClubScreen extends Screen
                 {
                         if (this.mJson.clubs)
                         {
+				console.log('mJson.clubs true');
 				//need this for remove clubs because we need to send new persons...
                 		//this.removeDivs();
 

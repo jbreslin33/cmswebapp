@@ -92,6 +92,7 @@ class Screen
                 {
                         if (screen.mItemArray[i].mDeleteId == this.getAttribute("id"))
                         {
+				console.log("delete:" + this.getAttribute("id"));
                                 screen.mWaitListItem = screen.mItemArray[i];
                         }
                 }
