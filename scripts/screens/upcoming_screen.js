@@ -54,6 +54,16 @@ class UpcomingScreen extends Screen
 		this.setCloseNav();
         }
 
+	enter()
+	{
+		super.enter();
+		
+               	//set others back to blue
+                document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
+                document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
+                document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+	}
+
         get()
         {
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/upcoming.php?" + this.getStandardParameters() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
