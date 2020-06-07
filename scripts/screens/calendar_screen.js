@@ -52,7 +52,6 @@ class CalendarScreen extends Screen
 
 	back()
 	{
-		console.log('back');	
 		//delete old events
 		this.mEventsArray.length = 0;
 	
@@ -319,7 +318,6 @@ class CalendarScreen extends Screen
 
 	printModal()
 	{
-		console.log('print modal');
 		var i = this.getAttribute('eventsarrayelementid'); 
 
 		var p = APPLICATION.getCurrentScreen().getModalParagraph();
