@@ -867,7 +867,7 @@ class Screen
 				}
 			}
 
-			//definite success so send to upcoming
+			//success so delete item from screen....
                         if (this.mCode == '-103') //successful delete
                         {
                         	//remove item
