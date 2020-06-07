@@ -75,9 +75,7 @@ class Application
                	this.setCalendarScreenHtml                 ( document.getElementById("calendar_screen_html_id")                  );
                	this.setRondoScreenHtml                    ( document.getElementById("rondo_screen_html_id")                  );
                	this.setInsertClubScreenHtml        	   ( document.getElementById("insert_club_screen_html_id")               ); 
-               	this.setDeleteClubScreenHtml               ( document.getElementById("delete_club_screen_html_id")             );  
                	this.setInsertPersonScreenHtml             ( document.getElementById("insert_person_screen_html_id")             );  
-               	this.setDeletePersonScreenHtml             ( document.getElementById("delete_person_screen_html_id")             );  
                	this.setInsertTeamScreenHtml               ( document.getElementById("insert_team_screen_html_id")               ); 
                	this.setInsertPitchScreenHtml              ( document.getElementById("insert_pitch_screen_html_id")              ); 
                	this.setInsertPracticeScreenHtml    	   ( document.getElementById("insert_practice_screen_html_id")           ); 
@@ -196,14 +194,12 @@ class Application
 	
 		//persons
 		document.getElementById("insertpersonnavbuttonid").onclick = this.hit.bind(document.getElementById("insertpersonnavbuttonid"));
-		document.getElementById("deletepersonnavbuttonid").onclick = this.hit.bind(document.getElementById("deletepersonnavbuttonid"));
 	
 		//join
 		document.getElementById("insertforgotnavbuttonid").onclick = this.hit.bind(document.getElementById("insertforgotnavbuttonid"));
 	
 		//admin
 		document.getElementById("insertclubnavbuttonid").onclick = this.hit.bind(document.getElementById("insertclubnavbuttonid"));
-		document.getElementById("deleteclubnavbuttonid").onclick = this.hit.bind(document.getElementById("deleteclubnavbuttonid"));
 	
 		//profile
 		document.getElementById("profilenavbuttonid").onclick = this.hit.bind(document.getElementById("profilenavbuttonid"));
@@ -274,17 +270,9 @@ class Application
 		{
 			location.hash = '#insert_person_screen';
 		}
-		if (this.id == 'deletepersonnavbuttonid')
-		{
-			location.hash = '#delete_person_screen';
-		}
 		if (this.id == 'insertclubnavbuttonid')
 		{
 			location.hash = '#insert_club_screen';
-		}
-		if (this.id == 'deleteclubnavbuttonid')
-		{
-			location.hash = '#delete_club_screen';
 		}
 		if (this.id == 'profilenavbuttonid')
 		{
