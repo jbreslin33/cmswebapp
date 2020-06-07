@@ -43,7 +43,10 @@ BEGIN
                         ',',
                        	j_select_messages('Club name already exists.'),
                         ',',
-                       	j_select_codes(-101)
+                       	j_select_codes(-101),
+                        ',',
+	             	j_select_administrated_clubs($4)
+
                	);
        	ELSE
 		IF person_id > 0 THEN
@@ -56,7 +59,9 @@ BEGIN
                         		',',
                         		j_select_messages(null),
                         		',',
-                        		j_select_codes(-101)
+                        		j_select_codes(-101),
+                        		',',
+	             			j_select_administrated_clubs($4)
                 		);
 			ELSE
 				result_set = CONCAT
@@ -65,7 +70,9 @@ BEGIN
                                         ',',
                                         j_select_messages('Something went wrong with adding club. Sorry!'),
                                         ',',
-                                        j_select_codes(-101)
+                                        j_select_codes(-101),
+                                        ',',
+	             			j_select_administrated_clubs($4)
                                 );
 			END IF;
 		ELSE
@@ -75,7 +82,9 @@ BEGIN
                                 ',',
                                 j_select_messages('You must add a person to this account before you add a club.'),
                                	',',
-                                j_select_codes(-101)
+                                j_select_codes(-101),
+                               	',',
+	             		j_select_administrated_clubs($4)
                         );
 		END IF;
         END IF;
