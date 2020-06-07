@@ -46,9 +46,6 @@ class UpcomingScreen extends Screen
 		this.mFirstDayOfQuery = current_date_string;
 		this.mLastDayOfQuery = future_date_string;
 	
-		//checkboxes at top for multiple availabilities
-		this.mButtonArray = new Array();
-
 		document.getElementById("upcoming_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_available_id"));
 		document.getElementById("upcoming_not_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_not_available_id"));
 		document.getElementById("upcoming_maybe_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_maybe_available_id"));
@@ -94,37 +91,49 @@ class UpcomingScreen extends Screen
 	{
 		var screen = APPLICATION.getCurrentScreen();
 		screen.resetLists();
+		console.log('setAllHit()');
 		
 		if (this.id == "upcoming_available_id")
 		{
+			console.log('ye3as');
 			//set this one
 			this.style.backgroundColor = "#4CAF50"; 
 
 			//set others back to blue
 			document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
 			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+
 		
-			for (var i = 0; i < screen.mButtonArray.length; i++)
+			for (var i = 0; i < screen.mItemArray.length; i++)
 			{
-				var id = screen.mButtonArray[i].id.split('_');;
-				if (id[2] == 1)
+				var item = screen.mItemArray[i];
+				for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
 				{
-					//give active color and add to array
-					screen.mButtonArray[i].style.backgroundColor = "#4CAF50";
-					screen.mAvailabilityArray.push(id[1]);
-					screen.mAvailabilityArray.push(id[2]);
-					screen.mAvailabilityArray.push(id[3]);
-					screen.mAvailabilityArray.push(id[4]);
-				}
-				if (id[2] == 2 || id[2] == 3)
-				{
-					screen.mButtonArray[i].style.backgroundColor = "#33b5e5"; 
+					var id = item.mAvailabilityButtonArray[b].id.split('_');;
+				        
+					if (id[2] == 1)
+                                	{
+                                        	//give active color and add to array
+                                        	item.mAvailabilityButtonArray[b].style.backgroundColor = "#4CAF50";
+                                        	screen.mAvailabilityArray.push(id[1]);
+                                        	screen.mAvailabilityArray.push(id[2]);
+                                        	screen.mAvailabilityArray.push(id[3]);
+                                        	screen.mAvailabilityArray.push(id[4]);
+						console.log('turn green');
+                                	}
+
+                               		if (id[2] == 2 || id[2] == 3)
+                                	{
+                                       		item.mAvailabilityButtonArray[b].style.backgroundColor = "#33b5e5";
+						console.log('turn blue');
+                                	}
 				}
 			}
 		}
 
                 if (this.id == "upcoming_maybe_available_id")
                 {
+			console.log('maybe');
                         //set this one
                         this.style.backgroundColor = "yellow";
 
@@ -132,13 +141,13 @@ class UpcomingScreen extends Screen
                         document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
                         document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
 
-                        for (var i = 0; i < screen.mButtonArray.length; i++)
+                        for (var i = 0; i < screen.mAvailabilityButtonArray.length; i++)
                         {
-                                var id = screen.mButtonArray[i].id.split('_');
+                                var id = screen.mAvailabilityButtonArray[i].id.split('_');
                                 if (id[2] == 2)
                                 {
 					//give active color and add to array
-                                        screen.mButtonArray[i].style.backgroundColor = "yellow";
+                                        screen.mAvailabilityButtonArray[i].style.backgroundColor = "yellow";
                                 	screen.mAvailabilityArray.push(id[1]);
                                 	screen.mAvailabilityArray.push(id[2]);
                                 	screen.mAvailabilityArray.push(id[3]);
@@ -146,13 +155,14 @@ class UpcomingScreen extends Screen
                                 }
                                 if (id[2] == 1 || id[2] == 3)
                                 {
-                                        screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
+                                        screen.mAvailabilityButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
                         }
                 }
 
 		if (this.id == "upcoming_not_available_id")
                 {
+			console.log('no');
                         //set this one
                         this.style.backgroundColor = "red";
 
@@ -160,13 +170,13 @@ class UpcomingScreen extends Screen
                         document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
                         document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
 
-                        for (var i = 0; i < screen.mButtonArray.length; i++)
+                        for (var i = 0; i < screen.mAvailabilityButtonArray.length; i++)
                         {
-                                var id = screen.mButtonArray[i].id.split('_');;
+                                var id = screen.mAvailabilityButtonArray[i].id.split('_');;
                                 if (id[2] == 3)
                                 {
 					//give active color and add to array
-                                        screen.mButtonArray[i].style.backgroundColor = "red";
+                                        screen.mAvailabilityButtonArray[i].style.backgroundColor = "red";
                                 	screen.mAvailabilityArray.push(id[1]);
                                 	screen.mAvailabilityArray.push(id[2]);
                                 	screen.mAvailabilityArray.push(id[3]);
@@ -174,7 +184,7 @@ class UpcomingScreen extends Screen
                                 }
                                 if (id[2] == 1 || id[2] == 2)
                                 {
-                                        screen.mButtonArray[i].style.backgroundColor = "#33b5e5";
+                                        screen.mAvailabilityButtonArray[i].style.backgroundColor = "#33b5e5";
                                 }
                         }
                 }
@@ -255,6 +265,7 @@ class UpcomingScreen extends Screen
 	{
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
+		console.log('getUrl:' + screen.getUrl() );
                 screen.ajax();
 	}
 

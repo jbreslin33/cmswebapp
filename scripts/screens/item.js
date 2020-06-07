@@ -16,7 +16,7 @@ class Item
                 this.mTitle = null;
 		this.mTitleText = titleText;
 
-                this.mButtonArray = new Array();
+                this.mDeleteButtonArray = new Array();
 		this.mDeleteId = deleteId;
         }
 
@@ -27,9 +27,9 @@ class Item
                         this.mDivArray[x].remove();
                 }
 
-                for (var b = 0; b < this.mButtonArray.length; b++)
+                for (var b = 0; b < this.mDeleteButtonArray.length; b++)
                 {
-                        this.mButtonArray[b].remove();
+                        this.mDeleteButtonArray[b].remove();
                 }
         }
 
@@ -74,7 +74,7 @@ class Item
              		button.setAttribute("id", this.mDeleteId);
 
                 	button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
-              		this.mButtonArray.push(button);
+              		this.mDeleteButtonArray.push(button);
 		}
 	}
 

@@ -18,6 +18,9 @@ class UpcomingItem extends Item
 		this.mManagerIdArray = new Array();
 
 		this.mAvailabilityIdArray = new Array();
+
+		//availability buttons unique to schedules
+		this.mAvailabilityButtonArray = new Array();
 	}
 
 	makeButtons()
@@ -47,7 +50,7 @@ class UpcomingItem extends Item
                                 {
                                         button.style.backgroundColor = "#4CAF50";
                                 }
-				this.mButtonArray.push(button);
+				this.mAvailabilityButtonArray.push(button);
 
 
                                 var button = document.createElement("BUTTON");
@@ -61,7 +64,7 @@ class UpcomingItem extends Item
                                 {
                                         button.style.backgroundColor = "yellow";
                                 }
-                                this.mButtonArray.push(button);
+                                this.mAvailabilityButtonArray.push(button);
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
@@ -74,11 +77,12 @@ class UpcomingItem extends Item
                                 {
                                         button.style.backgroundColor = "red";
                                 }
-                                this.mButtonArray.push(button);
+                                this.mAvailabilityButtonArray.push(button);
                         }
 
 			if (this.mJson.type == 'practice')
 			{
+				console.log("pra");
 				for (var a = 0; a < this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray.length; a++)
 				{
 					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJson.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
@@ -98,7 +102,7 @@ class UpcomingItem extends Item
                         	{
                         		button.style.backgroundColor = "#4CAF50";
                         	}
-                        	this.mButtonArray.push(button);
+                        	this.mAvailabilityButtonArray.push(button);
 
 
                                 var button = document.createElement("BUTTON");
@@ -112,7 +116,7 @@ class UpcomingItem extends Item
                                 {
                                 	button.style.backgroundColor = "yellow";
                                 }
-                                this.mButtonArray.push(button);
+                                this.mAvailabilityButtonArray.push(button);
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
@@ -125,7 +129,7 @@ class UpcomingItem extends Item
                                 {
                                 	button.style.backgroundColor = "red";
                                 }
-                                this.mButtonArray.push(button);
+                                this.mAvailabilityButtonArray.push(button);
 			}
 		}
 	}
@@ -148,7 +152,6 @@ class UpcomingItem extends Item
 
 			if (this.mTitleText)
                 	{
-				console.log('in titleText if');
                 		this.mTitle = document.createElement('h5');
                         	this.mContainerDiv.appendChild(this.mTitle);
 			}
@@ -191,7 +194,7 @@ class UpcomingItem extends Item
 				button.setAttribute("type", type);
 
                                 button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
-                                this.mButtonArray.push(button);
+                                this.mDeleteButtonArray.push(button);
 			}
 		}// end if (json event)
 	}//end print to screen
