@@ -84,11 +84,6 @@ class UpcomingScreen extends Screen
 	{
 		super.removeDivs();
 
-		//loop thru eventos Array
-		for (var i = 0; i < this.mItemArray.length; i++)
-		{
-			this.mItemArray[i].removeDivs();
-		}
 		for (var i = 0; i < this.mEventoArray.length; i++)
 		{
 			this.mEventoArray[i].removeDivs();
