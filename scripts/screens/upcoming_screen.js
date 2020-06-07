@@ -57,7 +57,12 @@ class UpcomingScreen extends Screen
 	enter()
 	{
 		super.enter();
-		
+
+		this.resetSetAllButtons();
+	}
+
+	resetSetAllButtons()
+	{
                	//set others back to blue
                 document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
                 document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
