@@ -34,7 +34,7 @@ class Application
 
 		//colors
 		this.mSkyBlue = "#33b5e5";
-		this.mLightGreen = "LawnGreen";
+		this.mLawnGreen = "lime";
 		this.mYellow = "yellow";
 		this.mRed = "red";
 

@@ -85,7 +85,7 @@ class UpcomingScreen extends Screen
                                 {
 					console.log('green');
 					console.log('color:' + item.mAvailabilityButtonArray[b].style.backgroundColor);
-                                        if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mLightGreen)
+                                        if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mLawnGreen)
 					{
 						console.log('green false');
 						allGreen = false;
@@ -124,7 +124,7 @@ class UpcomingScreen extends Screen
 		{
 			if (allGreen)
 			{
-                		document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mLightGreen;
+                		document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mLawnGreen;
 			}
 			if (allYellow)
 			{
@@ -178,7 +178,7 @@ class UpcomingScreen extends Screen
 		if (this.id == "upcoming_available_id")
 		{
 			//set this one
-			this.style.backgroundColor = APPLICATION.mLightGreen; 
+			this.style.backgroundColor = APPLICATION.mLawnGreen; 
 
 			//set others back to APPLICATION.mSkyBlue
 			document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
@@ -196,7 +196,7 @@ class UpcomingScreen extends Screen
 					if (id[2] == 1)
                                 	{
                                         	//give active color and add to array
-                                        	item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mLightGreen;
+                                        	item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mLawnGreen;
                                         	screen.mAvailabilityArray.push(id[1]);
                                         	screen.mAvailabilityArray.push(id[2]);
                                         	screen.mAvailabilityArray.push(id[3]);
@@ -306,7 +306,7 @@ class UpcomingScreen extends Screen
 			{
 				if (a[2] == 1)
 				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLightGreen; 		
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLawnGreen; 		
 					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 				}
@@ -329,7 +329,7 @@ class UpcomingScreen extends Screen
 			{
 				if (a[2] == 1)
 				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLightGreen; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLawnGreen; 		
 					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 				}
