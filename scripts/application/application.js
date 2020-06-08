@@ -32,6 +32,12 @@ class Application
                 this.mImageUrl = null;
                 this.mGoogleLoginHit = false;
 
+		//colors
+		this.mSkyBlue = "#33b5e5";
+		this.mLightGreen = "#4CAF50";
+		this.mYellow = "yellow";
+		this.mRed = "red";
+
 		//select person
 		this.mPersonSelect = null;
 

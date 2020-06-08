@@ -63,10 +63,43 @@ class UpcomingScreen extends Screen
 
 	resetSetAllButtons()
 	{
-               	//set others back to blue
-                document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-                document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-                document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+               	//set others back to APPLICATION.mSkyBlue
+                document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
+                document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
+                document.getElementById("upcoming_maybe_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
+
+		var availableArray = new Array();
+		var maybeAvailableArray = new Array();
+		var notAvailableArray = new Array();
+
+		//can we do a check here to see if all are set to one thing???
+                for (var i = 0; i < screen.mItemArray.length; i++)
+                {
+                	var item = screen.mItemArray[i];
+                        for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
+                        {
+                       		var id = item.mAvailabilityButtonArray[b].id.split('_');;
+
+                                        if (id[2] == 1)
+                                        {
+                                                //give active color and add to array
+                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mLightGreen;
+                                                screen.mAvailabilityArray.push(id[1]);
+                                                screen.mAvailabilityArray.push(id[2]);
+                                                screen.mAvailabilityArray.push(id[3]);
+                                                screen.mAvailabilityArray.push(id[4]);
+                                                console.log('turn green');
+                                        }
+
+                                        if (id[2] == 2 || id[2] == 3)
+                                        {
+                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
+                                                console.log('turn APPLICATION.mSkyBlue');
+                                        }
+                                }
+                        }
+
+
 	}
 
         get()
@@ -106,16 +139,15 @@ class UpcomingScreen extends Screen
 	{
 		var screen = APPLICATION.getCurrentScreen();
 		screen.resetLists();
-		console.log('setAllHit()');
 		
 		if (this.id == "upcoming_available_id")
 		{
 			//set this one
-			this.style.backgroundColor = "#4CAF50"; 
+			this.style.backgroundColor = APPLICATION.mLightGreen; 
 
-			//set others back to blue
-			document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
-			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+			//set others back to APPLICATION.mSkyBlue
+			document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
+			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
 
 			for (var i = 0; i < screen.mItemArray.length; i++)
 			{
@@ -127,18 +159,16 @@ class UpcomingScreen extends Screen
 					if (id[2] == 1)
                                 	{
                                         	//give active color and add to array
-                                        	item.mAvailabilityButtonArray[b].style.backgroundColor = "#4CAF50";
+                                        	item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mLightGreen;
                                         	screen.mAvailabilityArray.push(id[1]);
                                         	screen.mAvailabilityArray.push(id[2]);
                                         	screen.mAvailabilityArray.push(id[3]);
                                         	screen.mAvailabilityArray.push(id[4]);
-						console.log('turn green');
                                 	}
 
                                		if (id[2] == 2 || id[2] == 3)
                                 	{
-                                       		item.mAvailabilityButtonArray[b].style.backgroundColor = "#33b5e5";
-						console.log('turn blue');
+                                       		item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
                                 	}
 				}
 			}
@@ -147,11 +177,11 @@ class UpcomingScreen extends Screen
                 if (this.id == "upcoming_maybe_available_id")
                 {
                         //set this one
-                        this.style.backgroundColor = "yellow";
+                        this.style.backgroundColor = APPLICATION.mYellow;
 
-                        //set others back to blue
-                        document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-                        document.getElementById("upcoming_not_available_id").style.backgroundColor = "#33b5e5";
+                        //set others back to APPLICATION.mSkyBlue
+                        document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
+                        document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
 
                         for (var i = 0; i < screen.mItemArray.length; i++)
                         {
@@ -163,7 +193,7 @@ class UpcomingScreen extends Screen
                                         if (id[2] == 2)
                                         {
                                                 //give active color and add to array
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = "yellow";
+                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mYellow;
                                                 screen.mAvailabilityArray.push(id[1]);
                                                 screen.mAvailabilityArray.push(id[2]);
                                                 screen.mAvailabilityArray.push(id[3]);
@@ -172,7 +202,7 @@ class UpcomingScreen extends Screen
 
                                         if (id[2] == 1 || id[2] == 3)
                                         {
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = "#33b5e5";
+                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
                                         }
                                 }
                         }
@@ -182,11 +212,11 @@ class UpcomingScreen extends Screen
                 {
 			console.log('no');
                         //set this one
-                        this.style.backgroundColor = "red";
+                        this.style.backgroundColor = APPLICATION.mRed;
 
-                        //set others back to blue
-                        document.getElementById("upcoming_available_id").style.backgroundColor = "#33b5e5";
-                        document.getElementById("upcoming_maybe_available_id").style.backgroundColor = "#33b5e5";
+                        //set others back to APPLICATION.mSkyBlue
+                        document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
+                        document.getElementById("upcoming_maybe_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
 
                         for (var i = 0; i < screen.mItemArray.length; i++)
                         {
@@ -198,7 +228,7 @@ class UpcomingScreen extends Screen
                                         if (id[2] == 3)
                                         {
                                                 //give active color and add to array
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = "red";
+                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mRed;
                                                 screen.mAvailabilityArray.push(id[1]);
                                                 screen.mAvailabilityArray.push(id[2]);
                                                 screen.mAvailabilityArray.push(id[3]);
@@ -207,7 +237,7 @@ class UpcomingScreen extends Screen
                                         
                                         if (id[2] == 1 || id[2] == 2)
                                         {       
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = "#33b5e5";
+                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
                                         }
                                 }
                         }
@@ -238,21 +268,21 @@ class UpcomingScreen extends Screen
 			{
 				if (a[2] == 1)
 				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLightGreen; 		
+					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 				}
 				if (a[2] == 2)
 				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "yellow"; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mYellow; 		
+					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 				}
 				if (a[2] == 3)
 				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = "red"; 		
+					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mRed; 		
 				}
 			}
 
@@ -261,21 +291,21 @@ class UpcomingScreen extends Screen
 			{
 				if (a[2] == 1)
 				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#4CAF50"; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = green; 		
+					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 				}
 				if (a[2] == 2)
 				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "yellow"; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mYellow; 		
+					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 				}
 				if (a[2] == 3)
 				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = "#33b5e5"; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = "red"; 		
+					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
+					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mRed; 		
 				}
 			}
 

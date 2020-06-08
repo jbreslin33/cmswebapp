@@ -6,6 +6,8 @@ class Screen
 	{
 		this.mApplication = application;
 
+		this.mCustomBlue = "#4CAF50";
+
 		//html ids
 		this.mSpinner = null;
 		this.mHtml = null;
