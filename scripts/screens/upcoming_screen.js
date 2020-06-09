@@ -575,16 +575,25 @@ class UpcomingScreen extends Screen
 				}
 
 			}//end for eventoArray
-			
+		
+		} //end if (this.mEventsArray.length > 0)
+		this.printItems();
+
+		this.setTimeOffMessage();	
+		this.resetSetAllButtons();
+	}//end processJsonData
+
+	printItems()
+	{
+		if (this.mEventsArray.length > 0)
+		{
 			for (var s = 0; s < this.mItemArray.length; s++)
 			{
 				this.mItemArray[s].printToScreen();
 			}
 		}
+	}
 
-		this.setTimeOffMessage();	
-		this.resetSetAllButtons();
-	}//end processJsonData
 
 	setTimeOffMessage()
 	{
