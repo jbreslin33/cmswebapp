@@ -398,6 +398,18 @@ class UpcomingScreen extends Screen
 			}
 		}
 
+			this.sortEventsArray();
+			this.makeItem();
+			this.smash();
+		
+		this.printItems();
+
+		this.setTimeOffMessage();	
+		this.resetSetAllButtons();
+	}//end processJsonData
+
+	sortEventsArray()
+	{
 		if (this.mEventsArray.length > 0)
 		{
 			//sort this.mEventsArray by date and arrival time
@@ -413,18 +425,8 @@ class UpcomingScreen extends Screen
 					return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
 				}
 			);
-
-
-			this.makeItem();
-				
-			this.smash();
-		
-		} //end if (this.mEventsArray.length > 0)
-		this.printItems();
-
-		this.setTimeOffMessage();	
-		this.resetSetAllButtons();
-	}//end processJsonData
+		}
+	}
 
 	makeItem()
 	{
