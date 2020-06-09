@@ -135,16 +135,29 @@ class UpcomingScreen extends Screen
 
 	deleteHit()
 	{
-		super.deleteHit();
+		//super.deleteHit();
 		var screen = APPLICATION.getCurrentScreen();
+                
+		//lets find evento to delete..
+                for (var i = 0; i < screen.mItemArray.length; i++)
+                {
+                        //found bug........
+			//this.mJson.type == 'game'
+                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id") && screen.mItemArray[i].mJson.type == this.getAttribute("type"))
+                        {
+                                screen.mWaitListItem = screen.mItemArray[i];
+                        }
+                }
 
 		if (this.getAttribute("type") == 'game')
 		{
+			console.log('delete hit game');
 			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id"));
                 	screen.ajax();
 		}
 		if (this.getAttribute("type") == 'practice')
 		{
+			console.log('delete hit practice');
 			screen.setUrl("/php/classes/screens/delete_practice.php?" + screen.getStandardParameters() + '&practice_id=' + this.getAttribute("id"));
                 	screen.ajax();
 		}
