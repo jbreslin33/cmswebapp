@@ -58,7 +58,6 @@ class UpcomingScreen extends Screen
 	resetSetAllButtons()
 	{
 		var screen = APPLICATION.getCurrentScreen();
-		console.log("resetSetAllButtons() length of mItemArray:" + screen.mItemArray.length);
 
                	//set others back to APPLICATION.mSkyBlue
                 document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
@@ -75,39 +74,30 @@ class UpcomingScreen extends Screen
 
                 for (var i = 0; i < screen.mItemArray.length; i++)
                 {
-			console.log('A');
                 	var item = screen.mItemArray[i];
                         for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
                         {
 				var id = item.mAvailabilityButtonArray[b].id.split('_');;
-				console.log('B');
                         	if (id[2] == 1)
                                 {
-					console.log('green');
-					console.log('color:' + item.mAvailabilityButtonArray[b].style.backgroundColor);
                                         if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mLawnGreen)
 					{
-						console.log('green false');
 						allGreen = false;
 					}
                                 }
 			
 				if (id[2] == 2)
                                 {
-					console.log('yellow');
                                         if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mYellow)
                                         {
-						console.log('yellow false');
                                                 allYellow = false;
                                         }
                                 }
 
                                	if (id[2] == 3)
                                 {
-					console.log('red');
                                         if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mRed)
                                         {
-						console.log('red false');
                                                 allRed = false;
                                         }
                                 }
@@ -184,8 +174,6 @@ class UpcomingScreen extends Screen
 			document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
 			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
 
-
-			console.log("setAllHit() length of mItemArray:" + screen.mItemArray.length);
 			for (var i = 0; i < screen.mItemArray.length; i++)
 			{
 				var item = screen.mItemArray[i];
@@ -213,7 +201,6 @@ class UpcomingScreen extends Screen
 
                 if (this.id == "upcoming_maybe_available_id")
                 {
-			console.log('maybe');
                         //set this one
                         this.style.backgroundColor = APPLICATION.mYellow;
 
@@ -248,7 +235,6 @@ class UpcomingScreen extends Screen
 
 		if (this.id == "upcoming_not_available_id")
                 {
-			console.log('no');
                         //set this one
                         this.style.backgroundColor = APPLICATION.mRed;
 
@@ -357,7 +343,6 @@ class UpcomingScreen extends Screen
 	{
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
-		console.log('getUrl:' + screen.getUrl() );
                 screen.ajax();
 	}
 
