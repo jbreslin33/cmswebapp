@@ -389,6 +389,7 @@ class UpcomingScreen extends Screen
 					this.mGamesPlayerAvailabilityArray.push(this.mJson.games_player_availability[i]);
 				}
 			}
+
 			if (this.mJson.teams)
 			{
                        		for (var i = 0; i < this.mJson.teams.length; i++)
@@ -398,15 +399,16 @@ class UpcomingScreen extends Screen
 			}
 		}
 
-			this.sortEventsArray();
-			this.makeItem();
-			this.smash();
+		this.sortEventsArray();
+		this.makeItem();
+		this.smash();
 		
 		this.printItems();
 
 		this.setTimeOffMessage();	
 		this.resetSetAllButtons();
-	}//end processJsonData
+
+	} //end processJsonData
 
 	sortEventsArray()
 	{
