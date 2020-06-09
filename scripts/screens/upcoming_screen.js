@@ -13,11 +13,21 @@ class UpcomingScreen extends ScheduleScreen
                 this.setSpinner(document.getElementById("upcoming_screen_spinner_id"));
                 this.setForm(document.getElementById("upcoming_screen_form_id"));
 
+                document.getElementById("upcoming_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_available_id"));
+                document.getElementById("upcoming_not_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_not_available_id"));
+                document.getElementById("upcoming_maybe_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_maybe_available_id"));
+
 		//close nav
 		this.setCloseNav();
-		
         }
-        
+
+       	processJsonData()
+       	{
+                super.processJsonData();
+ 
+		this.resetSetAllButtons();
+	}
+
 	//upcoming only
 	resetSetAllButtons()
 	{

@@ -1,6 +1,6 @@
 'use strict';
 
-class CalendarScreen extends Screen
+class CalendarScreen extends ScheduleScreen
 {
         constructor(application)
         {
@@ -20,17 +20,9 @@ class CalendarScreen extends Screen
 		this.mCalendarTable = null;
                 this.setCalendarTable(document.getElementById("calendar_table_id"));
 
-		//make a helper calendar instance
-		this.mCalendar = new Calendar();
-
 		this.deleteCalendarRows()
 
-		this.mEventsArray = new Array();
 		this.mCalendarEventButtonArray = new Array();
-
-		//for database
-		this.mFirstDayOfQuery = null;
-		this.mLastDayOfQuery = null;
 
 		//month calendar_month_p_html_id
 		var date = new Date();
@@ -209,15 +201,6 @@ class CalendarScreen extends Screen
 		}
 	}
 
-	//so we will call get on enter into state 
-	//so we should keep that and just call get again everytime you hit a button	
-
-        get()
-        {
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/calendar.php?jwt=" + APPLICATION.getJWT() + '&first_day_of_query=' + this.mFirstDayOfQuery + '&last_day_of_query=' + this.mLastDayOfQuery);
-                APPLICATION.getCurrentScreen().ajax();
-        }
-
 	setCalendarTable(t)
 	{
 		this.mCalendarTable = t;
@@ -232,50 +215,10 @@ class CalendarScreen extends Screen
 	{
 		super.processJsonData();
 
-		//make new array containing games and practices together
-		if (this.mJson)
-		{
-                	if (this.mJson.practices)
-			{
-                        	for (var i = 0; i < this.mJson.practices.length; i++)
-				{
-					this.mEventsArray.push(this.mJson.practices[i]);
-					this.mJson.practices[i].type = 'practice';
-				}
-			}
-
-			if (this.mJson.games)
-			{
-                       		for (var i = 0; i < this.mJson.games.length; i++)
-				{
-					this.mEventsArray.push(this.mJson.games[i]);
-					this.mJson.games[i].type = 'game';
-				}
-			}
-		}
-
 		this.sortEventsArray();
 		this.printEventsToScreen();
 	}
 
-	sortEventsArray()
-	{
-
-		//sort this.mEventsArray by date and arrival time
-		this.mEventsArray.sort
-		(
-			function(a, b)
-			{
-				var d = new Date(a.event_date) - new Date(b.event_date)
-				if (d != 0)
-				{
-					return d;	
-				}
-				return new Date('1970/01/01 ' + a.arrival_time) - new Date('1970/01/01 ' + b.arrival_time); 
-			}
-		);
-	}       
-	
 	printEventsToScreen()
 	{
 		//print to screen
@@ -395,6 +338,5 @@ class CalendarScreen extends Screen
 		}
 		
 		APPLICATION.getCurrentScreen().showModal();
-		//	document.getElementById("calendar_modal_id").style.display = "block";
 	}
 }

@@ -39,10 +39,6 @@ class ScheduleScreen extends Screen
 		//temp until we write date functions
 		this.mFirstDayOfQuery = current_date_string;
 		this.mLastDayOfQuery = future_date_string;
-	
-		document.getElementById("upcoming_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_available_id"));
-		document.getElementById("upcoming_not_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_not_available_id"));
-		document.getElementById("upcoming_maybe_available_id").onclick = this.setAllHit.bind(document.getElementById("upcoming_maybe_available_id"));
         }
 
         get()
@@ -225,8 +221,6 @@ class ScheduleScreen extends Screen
 		this.printItems();
 
 		this.setTimeOffMessage();	
-		console.log('calling res');
-		this.resetSetAllButtons();
 
 	} //end processJsonData
 
