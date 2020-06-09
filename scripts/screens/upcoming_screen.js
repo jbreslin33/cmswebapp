@@ -582,6 +582,12 @@ class UpcomingScreen extends Screen
 			}
 		}
 
+		this.setTimeOffMessage();	
+		this.resetSetAllButtons();
+	}//end processJsonData
+
+	setTimeOffMessage()
+	{
 		if (this.mItemArray.length > 0) 
 		{
                 	this.setMessage('', 'black');
@@ -590,8 +596,6 @@ class UpcomingScreen extends Screen
                 {
                 	this.setMessage('You have no events upcoming. Enjoy the time off.', 'black');
                 }
-		
-		this.resetSetAllButtons();
 	}
 }
 					/*
