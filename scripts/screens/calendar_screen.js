@@ -216,24 +216,26 @@ class CalendarScreen extends ScheduleScreen
 		super.processJsonData();
 
 		this.sortEventsArray();
-		this.printEventsToScreen();
+		this.printItemsToScreen();
 	}
 
-	printEventsToScreen()
+	printItemsToScreen()
 	{
+		var screen = APPLICATION.getCurrentScreen();
 		//print to screen
-		if (this.mEventsArray)
+		if (screen.mItemArray)
                 {
+			console.log('printItemsToScreen() if');
 			var td = null
 			var txt = null;
 				
-                        for (var i = 0; i < this.mEventsArray.length; i++)
+		        for (var i = 0; i < screen.mItemArray.length; i++)
                         {
 				
-				if (this.mEventsArray[i].event_date)
+				if (screen.mItemArray[i].mJson.event_date)
 				{
 					//get the table data cell that goes with this date
-					var event_date = this.mEventsArray[i].event_date;
+					var event_date = screen.mItemArray[i].mJson.event_date;
 					td = document.getElementById(event_date);
 
 					var calendarEventButton = document.createElement('button');
@@ -244,15 +246,15 @@ class CalendarScreen extends ScheduleScreen
 					calendarEventButton.onclick = this.printModal;
 					this.mCalendarEventButtonArray.push(calendarEventButton);
 					
-					if (this.mEventsArray[i].type == 'game')
+					if (screen.mItemArray[i].mJson.type == 'game')
 					{
 						txt = '<br>Game';
 					}
-					if (this.mEventsArray[i].type == 'practice')
+					if (screen.mItemArray[i].mJson.type == 'practice')
 					{
 						txt = '<br>Practice';
 					}
-					txt = txt + ' ' + this.mApplication.mTime.convertFromMilitaryToHuman(this.mEventsArray[i].arrival_time); 
+					txt = txt + ' ' + this.mApplication.mTime.convertFromMilitaryToHuman(screen.mItemArray[i].mJson.arrival_time); 
 					calendarEventButton.innerHTML = txt;
 				}
 			}
@@ -268,70 +270,29 @@ class CalendarScreen extends ScheduleScreen
 		textArray.length = 0;
 		p.innerHTML = '';
 
-		var eventsArray = APPLICATION.getCurrentScreen().mEventsArray;
+		var itemArray = APPLICATION.getCurrentScreen().mItemArray;
 
-		if (eventsArray[i].type == 'game')
+		if (itemArray[i].mJson.type == 'game')
 		{
 			textArray.push('<b>Game<b>');
 		}
-		if (eventsArray[i].type == 'practice')
+		if (itemArray[i].mJson.type == 'practice')
 		{
 			textArray.push('<b>Practice<b>');
 		}
 		
-		if (eventsArray[i].arrival_time)
+		if (itmArray[i].mJson.arrival_time)
 		{
-			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].arrival_time);
+			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(itemArray[i].mJson.arrival_time);
 			textArray.push('Arrive by: ' + humanTime);
 		}
 		
-		if (eventsArray[i].start_time)
+		if (itemArray[i].mJson.start_time)
 		{
-			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].start_time);
+			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(itemArray[i].mJson.start_time);
 			textArray.push('Start time: ' + humanTime);
 		}
 				
-		if (eventsArray[i].end_time)
-		{
-			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(eventsArray[i].end_time);
-			textArray.push('End time: ' + humanTime);
-		}
-				
-		if (eventsArray[i].address)
-		{
-			textArray.push('Address: ' + eventsArray[i].address);
-		}
-
-		if (eventsArray[i].coordinates)
-		{
-			textArray.push('Coordinates: ' + eventsArray[i].coordinates);
-		}
-				
-		if (eventsArray[i].pitch_name)
-		{
-			textArray.push('Pitch: ' + eventsArray[i].pitch_name);
-		}
-				
-		if (eventsArray[i].field_name)
-		{
-			textArray.push('Field: ' + eventsArray[i].field_name);
-		}
-				
-		if (eventsArray[i].club_name)
-		{
-			textArray.push('Club: ' + eventsArray[i].club_name);
-		}
-				
-		if (eventsArray[i].team_name)
-		{
-			textArray.push('Team: ' + eventsArray[i].team_name);
-		}
-				
-		if (eventsArray[i].opponent)
-		{
-			textArray.push('Opponent: ' + eventsArray[i].opponent);
-		}
-
 		for (var r = 0; r < textArray.length; r++)
 		{
 			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	

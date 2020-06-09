@@ -408,6 +408,7 @@ class ScheduleScreen extends Screen
                                        		this.mEventoArray[e].mManagerIdArray.push(this.mEventoArray[e].mJson.managers);
                                        		this.mEventoArray[e].mManagerNameArray.push(this.mEventoArray[e].mJson.first_name + ' ' + this.mEventoArray[e].mJson.last_name);
                                 	}
+					console.log('push');
 					this.mItemArray.push(this.mEventoArray[e]);
 				}
 			
@@ -417,7 +418,7 @@ class ScheduleScreen extends Screen
 
 	printItems()
 	{
-		if (this.mEventsArray.length > 0)
+		if (this.mItemArray.length > 0)
 		{
 			for (var s = 0; s < this.mItemArray.length; s++)
 			{
