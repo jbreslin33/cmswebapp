@@ -1,7 +1,7 @@
 <?php
 include_once(getenv("DOCUMENT_ROOT") . "/php/classes/screens/screen.php");
 
-class CalendarScreen extends Screen
+class ScheduleScreen extends Screen
 {
         function __construct()
         {
@@ -31,5 +31,7 @@ class CalendarScreen extends Screen
 	}
 }
 
-$calendarScreen = new CalendarScreen();
+$scheduleScreen = new ScheduleScreen();
 ?>
+
+

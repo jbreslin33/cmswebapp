@@ -75,7 +75,7 @@ class UpcomingItem extends Item
                                 button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
                         	if (availability_id == 3)
                                 {
-                                        button.style.backgroundColor = APPLCATION.mRed;
+                                        button.style.backgroundColor = APPLICATION.mRed;
                                 }
                                 this.mAvailabilityButtonArray.push(button);
                         }
