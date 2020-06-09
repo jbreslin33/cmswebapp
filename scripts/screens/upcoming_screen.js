@@ -483,9 +483,22 @@ class UpcomingScreen extends Screen
 
 					var evento = new UpcomingItem(this.mApplication,this.mEventsArray[i], titleText, textArray, deleteId);
 					this.mEventoArray.push(evento);
-				}
-			}		
-			
+				} //for (var i = 0; i < this.mEventsArray.length; i++)
+			} //if (this.mEventsArray)
+				
+			this.smash();
+		
+		} //end if (this.mEventsArray.length > 0)
+		this.printItems();
+
+		this.setTimeOffMessage();	
+		this.resetSetAllButtons();
+	}//end processJsonData
+
+	smash()
+	{
+		if (this.mEventsArray.length > 0)
+		{
 			//smash eventos
 			for (var e = 0; e < this.mEventoArray.length; e++)
 			{
@@ -573,15 +586,11 @@ class UpcomingScreen extends Screen
                                 	}
 					this.mItemArray.push(this.mEventoArray[e]);
 				}
+			
+			}//end for eventoArray smash
 
-			}//end for eventoArray
-		
-		} //end if (this.mEventsArray.length > 0)
-		this.printItems();
-
-		this.setTimeOffMessage();	
-		this.resetSetAllButtons();
-	}//end processJsonData
+		}
+	}
 
 	printItems()
 	{
