@@ -477,12 +477,10 @@ class Screen
                 var select = this.getPersonSelect();
                 if (select.value == "")
                 {
-			console.log('if A');
                         return 0;
                 }
                 else
                 {
-			console.log('esle A');
                         return select.value;
                 }
         }
@@ -882,7 +880,6 @@ class Screen
 
         removeDivs()
         {
-		console.log('rm');
                 for (var i = 0; i < this.mItemArray.length; i++)
                 {
                         this.mItemArray[i].removeDivs();
