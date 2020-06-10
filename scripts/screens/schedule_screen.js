@@ -212,15 +212,17 @@ class ScheduleScreen extends Screen
 					this.mTeamsArray.push(this.mJson.teams[i]);
 				}
 			}
+			
+			if (this.mEventsArray.length > 0)
+			{
+
+				this.sortEventsArray();
+				this.makeItem();
+				this.smash();
+				this.printItems();
+			}
+			this.setTimeOffMessage();	
 		}
-
-		this.sortEventsArray();
-		this.makeItem();
-		this.smash();
-		
-		this.printItems();
-
-		this.setTimeOffMessage();	
 
 	} //end processJsonData
 
