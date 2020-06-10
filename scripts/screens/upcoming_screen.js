@@ -213,6 +213,17 @@ class UpcomingScreen extends ScheduleScreen
 		screen.mAvailabilityList = screen.mAvailabilityArray.join();
 		screen.updateAvailability()
 	} //set all hit
+
+        printItems()
+        {
+                if (this.mItemArray.length > 0)
+                {
+                        for (var s = 0; s < this.mItemArray.length; s++)
+                        {
+                                this.mItemArray[s].printToScreen( document.getElementById("upcoming_screen_col_6_html_id") );
+                        }
+                }
+        }
 }
 					/*
 					 *

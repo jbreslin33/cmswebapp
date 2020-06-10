@@ -418,15 +418,10 @@ class ScheduleScreen extends Screen
 		}
 	}
 
+	//virtual
 	printItems()
 	{
-		if (this.mItemArray.length > 0)
-		{
-			for (var s = 0; s < this.mItemArray.length; s++)
-			{
-				this.mItemArray[s].printToScreen();
-			}
-		}
+	
 	}
 
 	setTimeOffMessage()

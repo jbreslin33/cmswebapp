@@ -133,7 +133,7 @@ class ScheduleItem extends Item
 		}
 	}
 
-	printToScreen()
+	printToScreen(div)
 	{
 		if (this.mJson)
 		{
@@ -141,7 +141,7 @@ class ScheduleItem extends Item
 			this.mCardDiv = document.createElement('div');
                 	this.mDivArray.push(this.mCardDiv);
                 	this.mCardDiv.setAttribute('class','card');
-                	document.getElementById("upcoming_screen_col_6_html_id").appendChild(this.mCardDiv);
+                	div.appendChild(this.mCardDiv);
 
                 	this.mContainerDiv = document.createElement('div');
                 	this.mContainerDiv.setAttribute('class','container');
