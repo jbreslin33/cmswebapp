@@ -1,6 +1,6 @@
 'use strict';
 
-class UpcomingItem extends Item 
+class ScheduleItem extends Item 
 {
         constructor(application, json, titleText, textArray, deleteId)
         {

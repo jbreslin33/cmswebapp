@@ -313,7 +313,7 @@ class ScheduleScreen extends Screen
 
 				var deleteId = this.mEventsArray[i].id;
 
-				var evento = new UpcomingItem(this.mApplication,this.mEventsArray[i], titleText, textArray, deleteId);
+				var evento = new ScheduleItem(this.mApplication,this.mEventsArray[i], titleText, textArray, deleteId);
 				this.mEventoArray.push(evento);
 
 			} //for (var i = 0; i < this.mEventsArray.length; i++)
