@@ -221,11 +221,6 @@ class CalendarScreen extends ScheduleScreen
                         {
 				this.sortEventsArray();
 				this.printItemsToScreen();
-
-                                //this.sortEventsArray();
-                                //this.makeItem();
-                                //this.smash();
-                                //this.printItems();
                         }
 		}
 	}
