@@ -215,9 +215,19 @@ class CalendarScreen extends ScheduleScreen
         processJsonData()
 	{
 		super.processJsonData();
+		if (this.mJson)
+		{
+		        if (this.mEventsArray.length > 0)
+                        {
+				this.sortEventsArray();
+				this.printItemsToScreen();
 
-		this.sortEventsArray();
-		this.printItemsToScreen();
+                                //this.sortEventsArray();
+                                //this.makeItem();
+                                //this.smash();
+                                //this.printItems();
+                        }
+		}
 	}
 
 	printItemsToScreen()
