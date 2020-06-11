@@ -241,7 +241,10 @@ class CalendarScreen extends ScheduleScreen
 
 					var calendarEventButton = document.createElement('button');
 					calendarEventButton.setAttribute('class','calendar-event-button');
-					calendarEventButton.setAttribute('eventsarrayelementid',i);
+
+					calendarEventButton.setAttribute('id',screen.mItemArray[i].mJson.id);
+					calendarEventButton.setAttribute('type',screen.mItemArray[i].mJson.type);
+
 					td.appendChild(calendarEventButton);
 
 					calendarEventButton.onclick = this.printModal;
@@ -264,52 +267,21 @@ class CalendarScreen extends ScheduleScreen
 
 	printModal()
 	{
-		var i = this.getAttribute('eventsarrayelementid'); 
+                var id = this.getAttribute('id');
+                var type = this.getAttribute('type');
 
-		var p = APPLICATION.getCurrentScreen().getModalParagraph();
-		var textArray = new Array();
-		textArray.length = 0;
-		p.innerHTML = '';
-
-		var itemArray = APPLICATION.getCurrentScreen().mItemArray;
-
-		if (itemArray[i].mJson.type == 'game')
-		{
-			textArray.push('<b>Game<b>');
-		}
-		if (itemArray[i].mJson.type == 'practice')
-		{
-			textArray.push('<b>Practice<b>');
-		}
-		
-		if (itemArray[i].mJson.arrival_time)
-		{
-			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(itemArray[i].mJson.arrival_time);
-			textArray.push('Arrive by: ' + humanTime);
-		}
-		
-		if (itemArray[i].mJson.start_time)
-		{
-			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(itemArray[i].mJson.start_time);
-			textArray.push('Start time: ' + humanTime);
-		}
-				
-		for (var r = 0; r < textArray.length; r++)
-		{
-			p.innerHTML = p.innerHTML + ' ' + textArray[r] + '<br>';	
-		}
-		
+		APPLICATION.getCurrentScreen().printItems(id,type);
 		APPLICATION.getCurrentScreen().showModal();
 	}
 
-        printItems()
+        printItems(id,type)
         {
-                if (this.mItemArray.length > 0)
+		for (var i = 0; i < this.mItemArray.length; i++)
                 {
-                        for (var s = 0; s < this.mItemArray.length; s++)
-                        {
-                                this.mItemArray[s].printToScreen( this.getModalContent() );
-                        }
+			if (this.mItemArray[i].mJson.id == id && this.mItemArray[i].mJson.type == type)
+			{
+                        	this.mItemArray[i].printToScreen( this.getModalContent() );
+			}
                 }
         }
 
