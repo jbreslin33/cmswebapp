@@ -47,31 +47,20 @@ class CalendarScreen extends ScheduleScreen
 
 		var screen = APPLICATION.getCurrentScreen();
 		screen.closeModal();
-/*
-                var screen = APPLICATION.getCurrentScreen();
-
-                //lets find evento to delete..
-                for (var i = 0; i < screen.mItemArray.length; i++)
-                {
-                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id") && screen.mItemArray[i].mJson.type == this.getAttribute("type"))
-                        {
-                                screen.mWaitListItem = screen.mItemArray[i];
-                        }
-                }
-
-                if (this.getAttribute("type") == 'game')
-                {
-                        screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id"));
-                        screen.ajax();
-                }
-                if (this.getAttribute("type") == 'practice')
-                {
-                        screen.setUrl("/php/classes/screens/delete_practice.php?" + screen.getStandardParameters() + '&practice_id=' + this.getAttribute("id"));
-                        screen.ajax();
-                }
-		*/
         }
 
+	processDelete()
+	{
+		for (var i = 0; i < this.mCalendarEventButtonArray.length; i++)
+		{
+			if (this.mCalendarEventButtonArray[i].getAttribute('id') == this.mWaitListItem.mJson.id && this.mCalendarEventButtonArray[i].getAttribute('type') == this.mWaitListItem.mJson.type) 
+			{
+				this.mCalendarEventButtonArray[i].remove();
+			}
+		}
+
+		super.processDelete();
+	}
 
 	back()
 	{
@@ -261,7 +250,6 @@ class CalendarScreen extends ScheduleScreen
 		//print to screen
 		if (screen.mItemArray)
                 {
-			console.log('printItemsToScreen() if');
 			var td = null
 			var txt = null;
 				
