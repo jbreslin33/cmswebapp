@@ -13,6 +13,7 @@ class CalendarScreen extends ScheduleScreen
                 this.setSpinner(document.getElementById("calendar_screen_spinner_id"));
                 this.setForm(document.getElementById("calendar_screen_form_id"));
 		this.setModal(document.getElementById("calendar_modal_id"));
+		this.setModalContent(document.getElementById("calendar_modal_content_id"));
 		this.setModalParagraph(document.getElementById("calendar_modal_p_id"));
 		this.setModalButton(document.getElementById("calendar_modal_button_id"));
 		this.setModalCloseButton(document.getElementById("calendar_modal_close_button_id"));
@@ -281,7 +282,7 @@ class CalendarScreen extends ScheduleScreen
 			textArray.push('<b>Practice<b>');
 		}
 		
-		if (itmArray[i].mJson.arrival_time)
+		if (itemArray[i].mJson.arrival_time)
 		{
 			var humanTime = APPLICATION.mTime.convertFromMilitaryToHuman(itemArray[i].mJson.arrival_time);
 			textArray.push('Arrive by: ' + humanTime);
@@ -300,4 +301,16 @@ class CalendarScreen extends ScheduleScreen
 		
 		APPLICATION.getCurrentScreen().showModal();
 	}
+
+        printItems()
+        {
+                if (this.mItemArray.length > 0)
+                {
+                        for (var s = 0; s < this.mItemArray.length; s++)
+                        {
+                                this.mItemArray[s].printToScreen( this.getModalContent() );
+                        }
+                }
+        }
+
 }

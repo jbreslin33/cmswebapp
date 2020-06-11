@@ -14,6 +14,7 @@ class Screen
 		this.mColSixHtml = null;
 		this.mFooter = null;
 		this.mModal = null;
+		this.mModalContent = null;
 		this.mModalCloseButton = null;
 		this.mModalParagraph = null;
 		this.mModalButton = null;
@@ -327,6 +328,16 @@ class Screen
 	getModal()
 	{
 		return this.mModal;
+	}
+	
+	setModalContent(modalContent)
+	{
+		this.mModalContent = modalContent;
+	}
+
+	getModalContent()
+	{
+		return this.mModalContent;
 	}
 	
 	setModalButton(button)
