@@ -886,12 +886,17 @@ class Screen
 			//success so delete item from screen....
                         if (this.mCode == '-103') //successful delete
                         {
-                        	//remove item
-				if (this.mWaitListItem)
-				{
-                                	this.mWaitListItem.removeDivs();
-				}
+				this.processDelete();
                         }
+		}
+	}
+
+	processDelete()
+	{
+       		//remove item
+		if (this.mWaitListItem)
+		{
+               		this.mWaitListItem.removeDivs();
 		}
 	}
 

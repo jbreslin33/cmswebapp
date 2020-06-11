@@ -14,8 +14,6 @@ class CalendarScreen extends ScheduleScreen
                 this.setForm(document.getElementById("calendar_screen_form_id"));
 		this.setModal(document.getElementById("calendar_modal_id"));
 		this.setModalContent(document.getElementById("calendar_modal_content_id"));
-		this.setModalParagraph(document.getElementById("calendar_modal_p_id"));
-		this.setModalButton(document.getElementById("calendar_modal_button_id"));
 		this.setModalCloseButton(document.getElementById("calendar_modal_close_button_id"));
 
 		this.mCalendarTable = null;
@@ -42,6 +40,38 @@ class CalendarScreen extends ScheduleScreen
                 //close nav
                 this.setCloseNav();
 	}
+
+        deleteHit()
+        {
+		super.deleteHit();
+
+		var screen = APPLICATION.getCurrentScreen();
+		screen.closeModal();
+/*
+                var screen = APPLICATION.getCurrentScreen();
+
+                //lets find evento to delete..
+                for (var i = 0; i < screen.mItemArray.length; i++)
+                {
+                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id") && screen.mItemArray[i].mJson.type == this.getAttribute("type"))
+                        {
+                                screen.mWaitListItem = screen.mItemArray[i];
+                        }
+                }
+
+                if (this.getAttribute("type") == 'game')
+                {
+                        screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id"));
+                        screen.ajax();
+                }
+                if (this.getAttribute("type") == 'practice')
+                {
+                        screen.setUrl("/php/classes/screens/delete_practice.php?" + screen.getStandardParameters() + '&practice_id=' + this.getAttribute("id"));
+                        screen.ajax();
+                }
+		*/
+        }
+
 
 	back()
 	{
@@ -289,5 +319,4 @@ class CalendarScreen extends ScheduleScreen
 			}
                 }
         }
-
 }
