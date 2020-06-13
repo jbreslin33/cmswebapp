@@ -23,6 +23,44 @@ class ScheduleItem extends Item
 		this.mAvailabilityButtonArray = new Array();
 	}
 
+	showPlayerAvailability()
+	{
+		console.log('showPlayerAvailability()');
+	}
+
+	showTeamAvailability()
+	{
+		console.log('showTeamAvailability()');
+	}
+
+	makeTabs()
+	{
+        	var tab = document.createElement("DIV");
+                tab.setAttribute("class","availability-button");
+                this.mContainerDiv.appendChild(tab);
+        	
+		var button = document.createElement("BUTTON");
+                button.innerHTML = '' + this.mTitleText;
+                button.onclick = this.showPlayerAvailability.bind(button);
+                tab.appendChild(button);
+
+/*
+        	var button = document.createElement("BUTTON");
+                                button.setAttribute("class","availability-button");
+                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                this.mContainerDiv.appendChild(button);
+                                var id = 'button_1_1_' + this.mJson.id + '_' + this.mPlayerIdArray[i];
+                                button.setAttribute("id", id);
+                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                                if (availability_id == 1)
+                                {
+                                        button.style.backgroundColor = APPLICATION.mLawnGreen;
+                                }
+                                this.mAvailabilityButtonArray.push(button);
+				*/
+
+	}
+
 	makeButtons()
 	{
 		for (var i = 0; i < this.mPlayerIdArray.length; i++)
@@ -148,6 +186,7 @@ class ScheduleItem extends Item
                 	this.mCardDiv.appendChild(this.mContainerDiv);
                 	this.mDivArray.push(this.mContainerDiv);
 
+			this.makeTabs();
 
 			if (this.mTitleText)
                 	{
