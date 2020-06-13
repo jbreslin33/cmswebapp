@@ -35,14 +35,32 @@ class ScheduleItem extends Item
 
 	makeTabs()
 	{
+
+        	var row = document.createElement("DIV");
+                row.setAttribute("class","row");
+		this.mContainerDiv.appendChild(row);
+
         	var tab = document.createElement("DIV");
-                tab.setAttribute("class","availability-button");
-                this.mContainerDiv.appendChild(tab);
+                tab.setAttribute("class","tab");
+                row.appendChild(tab);
+                
         	
 		var button = document.createElement("BUTTON");
-                button.innerHTML = '' + this.mTitleText;
+                button.setAttribute("class","tab-button");
+                button.innerHTML = this.mTitleText;
                 button.onclick = this.showPlayerAvailability.bind(button);
                 tab.appendChild(button);
+		
+		var button = document.createElement("BUTTON");
+                button.setAttribute("class","tab-button");
+                button.innerHTML = 'Team Availability';
+                button.onclick = this.showTeamAvailability.bind(button);
+                tab.appendChild(button);
+        /*	
+		var br = document.createElement("br");
+                this.mContainerDiv.appendChild(br);
+		*/
+			
 
 /*
         	var button = document.createElement("BUTTON");
@@ -186,15 +204,17 @@ class ScheduleItem extends Item
                 	this.mCardDiv.appendChild(this.mContainerDiv);
                 	this.mDivArray.push(this.mContainerDiv);
 
-			this.makeTabs();
-
+/*
 			if (this.mTitleText)
                 	{
                 		this.mTitle = document.createElement('h5');
                         	this.mContainerDiv.appendChild(this.mTitle);
 			}
+			*/
 			
-			this.mTitle.innerHTML = this.mTitleText;
+			this.makeTabs();
+			
+			//this.mTitle.innerHTML = this.mTitleText;
 
                        	var p = document.createElement('p');
 
