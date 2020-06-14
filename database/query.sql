@@ -24,9 +24,8 @@ where
 
 		;	
 
-                select distinct games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates,(select pitches.name from pitches where games.pitch_id = pitches.id) as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name,
-
-                team_club_persons_club_players.id as players, team_club_persons_club_parents.id as parents, team_club_persons_club_coaches.id as coaches, team_club_persons_club_managers.id as managers
+                select distinct games.id, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name,
+                team_club_persons_club_players.id as players
                 from games
 
                 join teams on teams.id=games.team_id
@@ -38,12 +37,11 @@ where
                 join club_players on club_players.club_person_id=club_persons.id
 
                 left outer join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_parents on team_club_persons_club_parents.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_coaches on team_club_persons_club_coaches.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
 
 		--where emails_persons.email_id = 21 
-		where games.id = 1
+		where games.id = 1 
+		AND team_club_persons_club_players.id > 0 
+
 
 		;
 	
