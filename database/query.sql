@@ -3,6 +3,8 @@ select
 	* 
 from 
 	team_club_persons_club_players	
+	join team_club_persons on team_club_persons.id = team_club_persons_club_players.team_club_person_id
+	where team_club_persons.team_id = 1
 ;
 
 select 
@@ -45,4 +47,5 @@ where
 
 
 		;
+
 	
