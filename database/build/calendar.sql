@@ -32,6 +32,38 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+
+--BEGIN SELECT EVENTS
+CREATE OR REPLACE FUNCTION f_select_team_game_availability(email_id int, person_id int, game_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+
+        result_set = CONCAT
+        (
+                j_select_persons(email_id),
+                ',',
+                j_select_messages(null),
+                ',',
+                j_select_codes(-100),
+                ',',
+                j_select_games(email_id,$3,$4),
+                ',',
+                j_select_practices(email_id,$3,$4),
+                ',',
+                j_select_games_player_availability(email_id),
+                ',',
+                j_select_practices_player_availability(email_id),
+                ',',
+                j_select_all_teams_managed(person_id)
+        );
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE PROCEDURE p_update_availability(text,INOUT x int)
 LANGUAGE plpgsql
 AS $$

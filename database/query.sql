@@ -12,6 +12,21 @@
 			where emails_persons.email_id = 21;
 
 			;
+
+	select 
+		persons.first_name, persons.last_name, games_players_availability.id 
+
+	from 
+		games_players_availability
+
+	join team_club_persons_club_players on team_club_persons_club_players.id = games_players_availability.team_club_persons_club_players_id
+	join club_players on club_players.id = team_club_persons_club_players.club_player_id
+	join club_persons on club_persons.id = club_players.club_person_id
+	join persons on persons.id = club_persons.person_id
+		
+	where
+		game_id = 1;	
+
 	
 
 
