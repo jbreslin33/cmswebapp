@@ -304,6 +304,17 @@ CREATE TABLE games
 	PRIMARY KEY (id)
 );
 
+CREATE table teams_games
+(
+        id SERIAL,
+	team_id integer,
+	game_id integer,
+	FOREIGN KEY (team_id) REFERENCES teams(id),
+	FOREIGN KEY (game_id) REFERENCES games(id),
+	PRIMARY KEY (id)
+);
+
+
 CREATE TABLE uniforms 
 (
 	id SERIAL,
