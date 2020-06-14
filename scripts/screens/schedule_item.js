@@ -26,24 +26,6 @@ class ScheduleItem extends Item
 		this.mPlayerDiv = null;
         	this.mTeamDiv = null;
 	}
-/*
-        showForm()
-        {
-                if (this.getForm())
-                {
-                        this.getForm().style.display = "block";
-                        this.getForm().style.visibility = "visible";
-                }
-        }
-
-        hideForm()
-        {
-                if (this.getForm())
-                {
-                        this.getForm().style.display = "none";
-                }
-        }
-	*/
 
 	hitPlayerDiv()
 	{
@@ -246,7 +228,6 @@ class ScheduleItem extends Item
 			//player div..
 			this.mPlayerDiv = document.createElement('div');
 			this.mContainerDiv.appendChild(this.mPlayerDiv);
-
 
                        	var p = document.createElement('p');
 
