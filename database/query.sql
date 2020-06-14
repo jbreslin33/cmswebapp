@@ -1,6 +1,6 @@
 
 select 
-	*	 
+	games.id, team_club_persons_club_players.id	 
 from 
 	team_club_persons_club_players	
 	join team_club_persons on team_club_persons.id = team_club_persons_club_players.team_club_person_id
