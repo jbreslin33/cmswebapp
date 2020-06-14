@@ -27,6 +27,20 @@ class ScheduleItem extends Item
         	this.mTeamDiv = null;
 	}
 
+	getTeamAvailability()
+	{
+		if (this.mJson.type == 'game')
+		{
+                	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/team_game_availability.php?" + this.getStandardParameters() + '&game_id=' + this.mJson.id);
+		}
+		if (this.mJson.type == 'practice')
+		{
+                	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/team_practice_availability.php?" + this.getStandardParameters() + '&practice_id=' + this.mJson.id);
+		}
+
+                APPLICATION.getCurrentScreen().ajax();
+	}
+
 	hitPlayerDiv()
 	{
 		this.showPlayerDiv();
@@ -35,6 +49,7 @@ class ScheduleItem extends Item
 
 	hitTeamDiv()
 	{
+		//get...
 		this.showTeamDiv();
 		this.hidePlayerDiv();
 	}

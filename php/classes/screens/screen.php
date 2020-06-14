@@ -15,6 +15,8 @@ class Screen
                 $this->mTeamId = 0;
                 $this->mPitchId = 0;
 		$this->mName = null;
+		$this->mGameId = null;
+		$this->mPracticeId = null;
 
 		$this->parseParameters();
 
@@ -51,6 +53,14 @@ class Screen
                 if (isset($_GET['name']))
                 {
                         $this->mName = $_GET['name'];
+                }
+                if (isset($_GET['game_id']))
+                {
+                        $this->mGameId = $_GET['game_id'];
+                }
+                if (isset($_GET['practice_id']))
+                {
+                        $this->mPracticeId = $_GET['practice_id'];
                 }
 	}
 
