@@ -37,11 +37,11 @@ where
                 join club_players on club_players.club_person_id=club_persons.id
 
                 join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
-		left outer join games_players_availability on games_players_availability.team_club_persons_club_players_id = team_club_persons_club_players.id 
+		full outer join games_players_availability on games_players_availability.team_club_persons_club_players_id = team_club_persons_club_players.id 
 
 		--where emails_persons.email_id = 21 
 		where games.id = 1 
-		AND team_club_persons_club_players.id > 0 
+		--AND team_club_persons_club_players.id > 0 
 
 
 		;
