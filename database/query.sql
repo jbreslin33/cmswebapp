@@ -25,7 +25,7 @@ where
 		;	
 
                 select distinct games.id, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name,
-                team_club_persons_club_players.id as players
+                team_club_persons_club_players.id as players, games_players_availability.availability_id
                 from games
 
                 join teams on teams.id=games.team_id
@@ -36,7 +36,8 @@ where
                 join emails_persons on emails_persons.person_id=persons.id
                 join club_players on club_players.club_person_id=club_persons.id
 
-                left outer join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
+                join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
+		left outer join games_players_availability on games_players_availability.team_club_persons_club_players_id = team_club_persons_club_players.id 
 
 		--where emails_persons.email_id = 21 
 		where games.id = 1 
