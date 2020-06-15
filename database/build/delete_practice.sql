@@ -83,6 +83,7 @@ DECLARE
 
 BEGIN
 
+	delete from teams_practices where practice_id = $1;
 	delete from practices_players_availability where practice_id = $1; 
 	delete from practices where id = $1 returning id into x;
 
