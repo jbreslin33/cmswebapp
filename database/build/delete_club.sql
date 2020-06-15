@@ -127,6 +127,21 @@ BEGIN
 		END LOOP;
 	END LOOP;
 
+	--delete teams_practices
+        FOR recA IN
+                select practice_id from teams_practices where club_id = $1
+        LOOP
+        	FOR recA IN
+                	select id from practices where id = recA.practice_id 
+		LOOP
+			--delete from practice where practice_id
+
+		END LOOP;
+
+                delete from teams_practices where team_id = recA.id;
+	END LOOP;
+
+
         FOR recA IN
 		select id from teams where club_id = $1
 	LOOP
