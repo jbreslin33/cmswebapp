@@ -842,7 +842,9 @@ SELECT json_agg(t) INTO raw_json
 		team_club_persons_club_players.id as players, team_club_persons_club_parents.id as parents, team_club_persons_club_coaches.id as coaches, team_club_persons_club_managers.id as managers
                 from games
 
-                join teams on teams.id=games.team_id
+		join teams_games on teams_games.game_id = games.id  
+		
+                join teams on teams.id = teams_games.team_id
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join clubs on clubs.id=club_persons.club_id

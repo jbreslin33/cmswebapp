@@ -58,12 +58,16 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
 
+	returning_game_id games.id%TYPE;
+
 BEGIN
 	IF $8 > 0 THEN
-		insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id into x;
+		insert into games (event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name) values ($2,$3,$4,$5,$6,$7,$8,$9) returning id into returning_game_id;
 	ELSE
-		insert into games (team_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($1,$2,$3,$4,$5,$6,$7,$9) returning id into x;
+		insert into games (event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($2,$3,$4,$5,$6,$7,$9) returning id into returning_game_id;
 	END IF;
+
+	insert into teams_games (team_id,game_id) values ($1,returning_game_id) returning id into x;
 END;
 $$;
 --END INSERT PRACTICE
