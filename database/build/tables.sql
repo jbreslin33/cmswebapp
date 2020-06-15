@@ -235,14 +235,9 @@ CREATE TABLE practice
 	friday_checked boolean,
 	saturday_checked boolean,
 
-	--info	
-	team_id integer,
-
 	--meta
 	created_at timestamp not null default now(),
 
-	--keys
-	FOREIGN KEY (team_id) REFERENCES teams(id),
 	PRIMARY KEY (id)
 );
 
@@ -250,7 +245,6 @@ CREATE TABLE practices
 (
 	--keys
         id SERIAL,
-	practice_id integer not null,
 
 	--dates
 	event_date date, --the date of this instance of practice
@@ -264,14 +258,26 @@ CREATE TABLE practices
 	address text,
         coordinates text,
 	pitch_id integer, --all you need for a session	
-	field_name text, --field 3, field A, 9v9 field etc if nothing in db
+        field_name text,
 
 	--meta
 	created_at timestamp not null default now(),
 
 	--keys
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
+	PRIMARY KEY (id)
+);
+
+create table practice_practices
+(
+	id serial,
+	practice_id integer,
+	practices_id integer,
+
+	created_at timestamp not null default now(),
+
 	FOREIGN KEY (practice_id) REFERENCES practice(id),
+	FOREIGN KEY (practices_id) REFERENCES practices(id),
 	PRIMARY KEY (id)
 );
 

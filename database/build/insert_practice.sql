@@ -71,7 +71,8 @@ thursday_num  int := -1;
 friday_num    int := -1;
 saturday_num  int := -1;
 	
-returning_practice_id practices.id%TYPE;
+returning_practice_id practice.id%TYPE;
+returning_practices_id practices.id%TYPE;
 
 BEGIN
 	IF $12 THEN
@@ -106,11 +107,12 @@ BEGIN
 	IF $10 is null THEN
 		IF $8 > 0 THEN
 			insert into practice (start_date, end_date) values ($2,$2) returning id into returning_practice_id;
-			insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (returning_practice_id, $2, $3,$4,$5,$6,$7,$9,$8);
+			insert into practices (event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values ($2, $3,$4,$5,$6,$7,$9,$8) returning id into returning_practices_id;
 		ELSE
 			insert into practice (start_date, end_date) values ($2,$2) returning id into returning_practice_id;
-			insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (returning_practice_id, $2, $3,$4,$5,$6,$7,$9);
+			insert into practices (event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values ($2, $3,$4,$5,$6,$7,$9) returning id into returning_practices_id;
 		END IF;
+		insert into practice_practices (practice_id, practices_id) values (returning_practice_id, returning_practices_id);
 	ELSE
        		IF $8 > 0 THEN
 			insert into practice (start_date, end_date) values ($10,$11) returning id into returning_practice_id;
@@ -133,10 +135,12 @@ BEGIN
 			--you need to check pitch status here now as well....
        			IF $8 > 0 THEN
 
-				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (returning_practice_id, next_date, $3,$4,$5,$6,$7,$9,$8) returning id into x;
+				insert into practices (event_date, arrival_time, start_time, end_time, address, coordinates, field_name, pitch_id) values (next_date, $3,$4,$5,$6,$7,$9,$8) returning id into returning_practices_id;
 			ELSE
-				insert into practices (practice_id, event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (returning_practice_id, next_date, $3,$4,$5,$6,$7,$9) returning id into x;
+				insert into practices (event_date, arrival_time, start_time, end_time, address, coordinates, field_name) values (next_date, $3,$4,$5,$6,$7,$9) returning id into returning_practices_id;
 			END IF;
+
+			insert into practice_practices (practice_id, practices_id) values (returning_practice_id, returning_practices_id);
 
 			--insert into practices (practice_id,event_date) values (x,next_date);
 		ELSE
