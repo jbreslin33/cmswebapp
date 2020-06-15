@@ -275,6 +275,16 @@ CREATE TABLE practices
 	PRIMARY KEY (id)
 );
 
+CREATE table teams_practices
+(
+        id SERIAL,
+	team_id integer,
+	practice_id integer,
+	FOREIGN KEY (team_id) REFERENCES teams(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE games 
 (
         id SERIAL,
