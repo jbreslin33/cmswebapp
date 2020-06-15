@@ -729,7 +729,10 @@ SELECT json_agg(t) INTO raw_json
                 from practices
 
                 join practice on practice.id=practices.practice_id
-                join teams on teams.id=practice.team_id
+
+		join teams_practices on teams_practices.practice_id = practices.id  
+                join teams on teams.id = teams_practices.team_id
+
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join clubs on clubs.id=club_persons.club_id
@@ -843,7 +846,6 @@ SELECT json_agg(t) INTO raw_json
                 from games
 
 		join teams_games on teams_games.game_id = games.id  
-		
                 join teams on teams.id = teams_games.team_id
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
