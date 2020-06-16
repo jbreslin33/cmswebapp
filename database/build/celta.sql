@@ -73,6 +73,9 @@ BEGIN
 	
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
+
 
 	-------------------------------Alex Rodriguez
 	--EMAILS
@@ -113,6 +116,7 @@ BEGIN
 	
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	-----------------------------------Arber Canole
 	--EMAILS
@@ -149,6 +153,9 @@ BEGIN
 	
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
+	
+	
 
 	--------------------------------Yancarlos Corredor
 	--EMAILS
@@ -177,6 +184,7 @@ BEGIN
 	
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	
 
 	----------------------------------Daniel McCallister
@@ -218,6 +226,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	---------------------------------------Dominic Evangelista
         
@@ -265,6 +274,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	---------------------------------Eric Girsh
 	--Leonard Girsh
@@ -296,6 +306,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	------------------------------------Fabrizio Franceschelli
 	--EMAILS
@@ -361,6 +372,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	
 	--PLAYERS Fabrizio
         insert into players (person_id) values (returning_person_id_player_b) returning id into returning_player_id;
@@ -373,6 +385,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	---------------------------------------Joshua Vidro
 	--Joshua Vidro
@@ -415,6 +428,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	-----------------------------------Luke Breslin
 
@@ -465,6 +479,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	--------------------------------------Nacho Obando
 	--EMAILS
@@ -517,6 +532,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 
 	----------------------------------Tedi Shaho
@@ -549,6 +565,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 
 	----------------------------------Victor Baidal
@@ -588,6 +605,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	------------------------------------------------------------------------------------------------------
 	
@@ -707,6 +725,7 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
+	insert into team_club_players (team_id, club_player_id) values (4, returning_club_player_id);
 
 
 	
