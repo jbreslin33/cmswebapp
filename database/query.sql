@@ -1,12 +1,22 @@
 
-select 
-	games.id, team_club_persons_club_players.id	 
+select persons.first_name, persons.last_name, games.id as games_id, teams_games.team_id as team_id
 from 
-	team_club_persons_club_players	
-	join team_club_persons on team_club_persons.id = team_club_persons_club_players.team_club_person_id
-	left outer join games_players_availability on games_players_availability.team_club_persons_club_players_id = team_club_persons_club_players.id 
-	where team_club_persons.team_id = 1
-;
+	games
+
+	join teams_games on teams_games.game_id = games.id
+	join team_club_persons on team_club_persons.team_id = teams_games.team_id
+	join club_persons on club_persons.id = team_club_persons.club_person_id
+	join persons on persons.id = club_persons.person_id
+
+
+where
+	games.id = 1
+
+	;
+
+
+
+
 
 select 
 	persons.first_name, persons.last_name, games_players_availability.availability_id, games.id
