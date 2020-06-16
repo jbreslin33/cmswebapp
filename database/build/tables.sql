@@ -257,14 +257,22 @@ CREATE TABLE practices
 	--info
 	address text,
         coordinates text,
-	pitch_id integer, --all you need for a session	
         field_name text,
 
 	--meta
 	created_at timestamp not null default now(),
 
 	--keys
+	PRIMARY KEY (id)
+);
+
+create table practices_pitches
+(
+	id serial,
+	practice_id integer,
+	pitch_id integer,
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
+	FOREIGN KEY (practice_id) REFERENCES practices(id),
 	PRIMARY KEY (id)
 );
 
@@ -306,7 +314,6 @@ CREATE TABLE games
 	--info
         address text,
         coordinates text,
-	pitch_id integer, --all you need for a session	
 	field_name text, --field 3, field A, 9v9 field etc if nothing in db
 	team_id integer,
 	opponent text,
@@ -314,9 +321,16 @@ CREATE TABLE games
 	--meta
 	created_at timestamp not null default now(),
 
-	--keys
+	PRIMARY KEY (id)
+);
+
+create table games_pitches
+(
+	id serial,
+	game_id integer,
+	pitch_id integer,
 	FOREIGN KEY (pitch_id) REFERENCES pitches(id),
-	FOREIGN KEY (team_id) REFERENCES teams(id),
+	FOREIGN KEY (game_id) REFERENCES games(id),
 	PRIMARY KEY (id)
 );
 

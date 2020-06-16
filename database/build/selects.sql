@@ -723,15 +723,20 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                 select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates,(select pitches.name from pitches where practices.pitch_id = pitches.id) as pitch_name, clubs.name as club_name, teams.id as team_id, teams.name as team_name, persons.first_name, persons.last_name, 
+                 select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, clubs.name as club_name, teams.id as team_id, teams.name as team_name, persons.first_name, persons.last_name, 
 
 		team_club_persons_club_players.id as players, team_club_persons_club_parents.id as parents, team_club_persons_club_coaches.id as coaches, team_club_persons_club_managers.id as managers
 
                 from practices
 
+
 		join practice_practices on practice_practices.practices_id = practices.id
+		
 
                 join practice on practice.id = practice_practices.practice_id
+
+		join practices_pitches on practices_pitches.practice_id = practices.id
+		join pitches on pitches.id = practices_pitches.pitch_id
 
 		join teams_practices on teams_practices.practice_id = practices.id  
                 join teams on teams.id = teams_practices.team_id
@@ -843,12 +848,14 @@ SELECT json_agg(t) INTO raw_json
         from
         (
 
-                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates,(select pitches.name from pitches where games.pitch_id = pitches.id) as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name, 
+                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name, 
 
 		team_club_persons_club_players.id as players, team_club_persons_club_parents.id as parents, team_club_persons_club_coaches.id as coaches, team_club_persons_club_managers.id as managers
                 from games
 
 		join teams_games on teams_games.game_id = games.id  
+		join games_pitches on games_pitches.game_id = games.id
+		join pitches on pitches.id = games_pitches.pitch_id
                 join teams on teams.id = teams_games.team_id
                 join team_club_persons on team_club_persons.team_id=teams.id
                 join club_persons on club_persons.id=team_club_persons.club_person_id
