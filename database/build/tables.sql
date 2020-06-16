@@ -894,7 +894,7 @@ CREATE TABLE team_club_persons_club_managers
 	PRIMARY KEY (id)
 );
 
-create table team_club_manager
+create table team_club_managers
 (
 	id SERIAL,
 	team_id integer,
