@@ -287,16 +287,24 @@ BEGIN
 
         --PLAYERS
         insert into players (person_id) values (returning_person_id_player_a) returning id into returning_player_id;
+        insert into parents (person_id) values (returning_person_id_father) returning id into returning_parent_id_father;
+        insert into parents (person_id) values (returning_person_id_mother) returning id into returning_parent_id_mother;
 
         --CLUB_PLAYERS
         insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 5) returning id into returning_club_player_id;
+        insert into club_parents (club_person_id, parent_id) values (returning_club_person_id_father, returning_parent_id_father) returning id into returning_club_parent_id_father;
+        insert into club_parents (club_person_id, parent_id) values (returning_club_person_id_mother, returning_parent_id_mother) returning id into returning_club_parent_id_mother;
 
         --TEAM_CLUB_PERSONS
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
+        insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_father, returning_team_id) returning id into returning_team_club_person_id_father;
+        insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
+	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
+	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 
 	---------------------------------Eric Girsh
 	--Leonard Girsh
@@ -319,16 +327,20 @@ BEGIN
         
         --PLAYERS
         insert into players (person_id) values (returning_person_id_player_a) returning id into returning_player_id;
+        insert into parents (person_id) values (returning_person_id_father) returning id into returning_parent_id_father;
 
         --CLUB_PLAYERS
         insert into club_players (club_person_id, player_id, uniform_number) values (returning_club_person_id_player_a, returning_player_id, 11) returning id into returning_club_player_id;
+        insert into club_parents (club_person_id, parent_id) values (returning_club_person_id_father, returning_parent_id_father) returning id into returning_club_parent_id_father;
 
         --TEAM_CLUB_PERSONS
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
+        insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_father, returning_team_id) returning id into returning_team_club_person_id_father;
 
         --TEAM_CLUB_PLAYERS
         insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
+	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 
 	------------------------------------Fabrizio Franceschelli
 	--EMAILS
