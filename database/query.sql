@@ -1,4 +1,5 @@
 
+--games searched for by anyone associated with team based on email id
 
                 select distinct club_persons.id as club_person_id, games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
 
@@ -23,6 +24,8 @@
 
                 where emails_persons.email_id = 21     
 		;
+	
+--this should filter out the rest of team players and just give family email id player but not jim who plays for ladder 15
 
 		select 
 			--team_club_players.id as team_club_player_id 
@@ -41,7 +44,7 @@
 				
 			;
 
-
+--roster for a game use for team availability
                 select
                         --team_club_players.id as team_club_player_id
                         games.id as game_id, team_club_players.id as players, persons.first_name, persons.last_name
