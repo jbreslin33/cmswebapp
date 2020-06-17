@@ -1,15 +1,4 @@
-                select distinct games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
-                --team_club_players.id as players 
-
-		,
-		( 
-			select 
-				team_club_players.id as team_club_player_id 
-		  	from 
-				team_club_players 	
-			where 
-				team_club_players.club_player_id = club_players.id
-		)
+                select distinct club_persons.id as club_person_id, games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
 
                 from games
 
@@ -33,5 +22,17 @@
                 where emails_persons.email_id = 21	
 		;
 
-		select team_club_players.id as team_club_player_id from team_club_players ;
+		select 
+			--team_club_players.id as team_club_player_id 
+			games.id as game_id, team_club_players.id as players 
+		from 
+			games
+
+			join teams_games on teams_games.game_id = games.id 
+			join team_club_players on team_club_players.team_id = teams_games.team_id
+		where 
+			games.id = 1  
+				
+			;
+
 
