@@ -38,9 +38,13 @@
 			join club_players on club_players.id = team_club_players.id
 			join club_persons on club_persons.id = club_players.club_person_id
 			join persons on persons.id = club_persons.person_id
+			join emails_persons on emails_persons.person_id = persons.id
 
 		where 
 			games.id = 1  
+			and
+			emails_persons.email_id = 21
+			
 				
 			;
 
