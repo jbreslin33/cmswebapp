@@ -22,7 +22,7 @@
 		full outer join club_players on club_players.club_person_id = club_persons.id
 		full outer join club_parents on club_parents.club_person_id = club_persons.id
 
-		--full outer join team_club_players on team_club_players.team_id=teams.id
+		full outer join team_club_players on team_club_players.team_id=teams.id
 
                 where emails_persons.email_id = 21	
 		;
