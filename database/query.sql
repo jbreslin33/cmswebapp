@@ -1,5 +1,4 @@
-                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
-
+                select distinct games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
                 --team_club_players.id as players 
                 from games
 
@@ -15,7 +14,7 @@
                 join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
 
-		--inner join team_club_players on team_club_players.team_id=teams.id
+		--full outer join team_club_players on team_club_players.team_id=teams.id
 
                 where emails_persons.email_id = 21	
 		;
