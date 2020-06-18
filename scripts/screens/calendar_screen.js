@@ -41,6 +41,13 @@ class CalendarScreen extends ScheduleScreen
                 this.setCloseNav();
 	}
 
+        closeModal()
+        {
+		super.closeModal();
+
+                document.getElementById("calendar_modal_id").style.display = "none";
+        }
+
         deleteHit()
         {
 		super.deleteHit();

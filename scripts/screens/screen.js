@@ -103,7 +103,6 @@ class Screen
         closeModal()
         {
                 var screen = APPLICATION.getCurrentScreen();
-                document.getElementById("calendar_modal_id").style.display = "none";
 
 		for (var i = 0; i < screen.mItemArray.length; i++)
 		{
