@@ -123,7 +123,7 @@ class ScheduleItem extends Item
                         {
                                 for (var a = 0; a < this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray.length; a++)
                                 {
-                                        if (this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].game_id == this.mJson.id && this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
+                                        if (this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].game_id == this.mJson.id && this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].team_club_player_id == this.mPlayerIdArray[i] )
                                         {
                                                 availability_id = this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].availability_id;
                                         }
@@ -174,7 +174,7 @@ class ScheduleItem extends Item
 			{
 				for (var a = 0; a < this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray.length; a++)
 				{
-					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJson.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_persons_club_players_id == this.mPlayerIdArray[i] )
+					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJson.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_player_id == this.mPlayerIdArray[i] )
 					{
 						availability_id = this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].availability_id;	
 					}

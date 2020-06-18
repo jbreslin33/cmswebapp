@@ -66,7 +66,6 @@ BEGIN
 
 	--not deleteing below
 
-	--delete from practices_players_availability using team_club_persons, club_persons where club_persons.club_id = $1;
 	FOR recA IN
 		select id from club_persons where club_id = $1
 		
@@ -75,9 +74,9 @@ BEGIN
 			select id from club_players where club_person_id = recA.id
 		LOOP
 			FOR recC IN
-				select id from team_club_persons_club_players where club_player_id = recB.id
+				select id from team_club_players where club_player_id = recB.id
 			LOOP
-				delete from practices_players_availability where team_club_persons_club_players_id = recC.id;		
+				delete from practices_players_availability where team_club_player_id = recC.id;		
 			END LOOP;
 		END LOOP;			
 	END LOOP;	
@@ -88,7 +87,7 @@ BEGIN
 		FOR recB IN
 			select team_club_persons.id from team_club_persons where team_id = recA.id	
 		LOOP
-			delete from team_club_persons_club_players where team_club_person_id = recB.id; 	
+			delete from team_club_players where team_club_person_id = recB.id; 	
 		END LOOP;
         END LOOP;
 
@@ -123,7 +122,7 @@ BEGIN
 		FOR recB IN
 			select team_club_persons.id from team_club_persons where club_person_id = recA.id	
 		LOOP
-			delete from team_club_persons_club_players  where team_club_person_id = recB.id; 	
+			delete from team_club_players  where team_club_person_id = recB.id; 	
 		END LOOP;
 	END LOOP;
 

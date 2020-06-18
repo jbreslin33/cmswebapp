@@ -78,8 +78,8 @@ BEGIN
 	
 	LOOP
 		IF ids[i] = 1 THEN
-			insert into games_players_availability (availability_id, game_id, team_club_persons_club_players_id) values (ids[i + 1], ids[i + 2], ids[i + 3]) 
-			ON CONFLICT (game_id, team_club_persons_club_players_id) 
+			insert into games_players_availability (availability_id, game_id, team_club_player_id) values (ids[i + 1], ids[i + 2], ids[i + 3]) 
+			ON CONFLICT (game_id, team_club_player_id) 
 			DO UPDATE SET availability_id = ids[i + 1], modified = now() returning games_players_availability.id into x;   
 
 		ELSE
@@ -87,8 +87,8 @@ BEGIN
 		END IF;
 
 		IF ids[i] = 2 THEN
-			insert into practices_players_availability (availability_id, practice_id, team_club_persons_club_players_id) values (ids[i + 1], ids[i + 2], ids[i + 3]) 
-			ON CONFLICT (practice_id, team_club_persons_club_players_id) 
+			insert into practices_players_availability (availability_id, practice_id, team_club_player_id) values (ids[i + 1], ids[i + 2], ids[i + 3]) 
+			ON CONFLICT (practice_id, team_club_player_id) 
 			DO UPDATE SET availability_id = ids[i + 1], modified = now() returning practices_players_availability.id into x;   
 		ELSE
 

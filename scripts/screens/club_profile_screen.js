@@ -640,67 +640,65 @@ class ClubProfileScreen extends Screen
 
 				}
 
-				if (this.mJson.team_club_persons_club_players)
+				if (this.mJson.team_club_players)
 				{
-                        		for (var i = 0; i < this.mJson.team_club_persons_club_players.length; i++)
+                        		for (var i = 0; i < this.mJson.team_club_players.length; i++)
 					{
                         			for (var t = 0; t < this.mPlayerButtonArray.length; t++)
 						{
-							if (this.mJson.team_club_persons_club_players[i].team_id == this.mPlayerButtonArray[t].getAttribute("team_id"))
+							if (this.mJson.team_club_players[i].team_id == this.mPlayerButtonArray[t].getAttribute("team_id"))
 							{
                                                 		this.mPlayerButtonArray[t].style.backgroundColor = "green";
-                                                		this.mPlayerButtonArray[t].setAttribute("team_club_persons_club_player_id", this.mJson.team_club_persons_club_players[i].team_club_persons_club_player_id);
+                                                		this.mPlayerButtonArray[t].setAttribute("team_club_player_id", this.mJson.team_club_players[i].team_club_player_id);
 							}
 						}
 					}
 				}
 
-                                if (this.mJson.team_club_persons_club_parents)
+                                if (this.mJson.team_club_parents)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_persons_club_parents.length; i++)
+                                        for (var i = 0; i < this.mJson.team_club_parents.length; i++)
                                         {
                                                 for (var t = 0; t < this.mParentButtonArray.length; t++)
                                                 {
                                                         if (this.mJson.team_club_persons_club_parents[i].team_id == this.mParentButtonArray[t].getAttribute("team_id"))
                                                         {
                                                                 this.mParentButtonArray[t].style.backgroundColor = "green";
-                                                                this.mParentButtonArray[t].setAttribute("team_club_persons_club_parent_id", this.mJson.team_club_persons_club_parents[i].team_club_persons_club_parent_id);
+                                                                this.mParentButtonArray[t].setAttribute("team_club_parent_id", this.mJson.team_club_parents[i].team_club_parent_id);
                                                         }
                                                 }
                                         }
                                 }
 
-
-				if (this.mJson.team_club_persons_club_coaches)
+				if (this.mJson.team_club_coaches)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_persons_club_coaches.length; i++)
+                                        for (var i = 0; i < this.mJson.team_club_coaches.length; i++)
                                         {
                                                 for (var t = 0; t < this.mCoachButtonArray.length; t++)
                                                 {
-                                                        if (this.mJson.team_club_persons_club_coaches[i].team_id == this.mCoachButtonArray[t].getAttribute("team_id"))
+                                                        if (this.mJson.team_club_coaches[i].team_id == this.mCoachButtonArray[t].getAttribute("team_id"))
                                                         {
                                                                 this.mCoachButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachButtonArray[t].setAttribute("team_club_persons_club_coach_id", this.mJson.team_club_persons_club_coaches[i].team_club_persons_club_coach_id);
+                                                                this.mCoachButtonArray[t].setAttribute("team_club_coach_id", this.mJson.team_club_coaches[i].team_club_coach_id);
                                                         }
                                                 }
                                         }
                                 }
 
-                                if (this.mJson.team_club_persons_club_managers)
+                                if (this.mJson.team_club_managers)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_persons_club_managers.length; i++)
+                                        for (var i = 0; i < this.mJson.team_club_managers.length; i++)
                                         {
                                                 for (var t = 0; t < this.mManagerButtonArray.length; t++)
                                                 {
-                                                        if (this.mJson.team_club_persons_club_managers[i].team_id == this.mManagerButtonArray[t].getAttribute("team_id"))
+                                                        if (this.mJson.team_club_managers[i].team_id == this.mManagerButtonArray[t].getAttribute("team_id"))
                                                         {
                                                                 this.mManagerButtonArray[t].style.backgroundColor = "green";
-                                                                this.mManagerButtonArray[t].setAttribute("team_club_persons_club_manager_id", this.mJson.team_club_persons_club_managers[i].team_club_persons_club_manager_id);
+                                                                this.mManagerButtonArray[t].setAttribute("team_club_manager_id", this.mJson.team_club_managers[i].team_club_manager_id);
                                                         }
                                                 }
                                         }
                                 }
-
 			}
 		}
 	}

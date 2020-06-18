@@ -370,7 +370,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION j_select_team_club_persons_club_players(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_players(int,int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -382,12 +382,12 @@ SELECT json_agg(t) INTO raw_json
         (
                 select
                        	team_club_persons.team_id as team_id,
-                        team_club_persons_club_players.id as team_club_persons_club_player_id 
+                        team_club_players.id as team_club_persons_club_player_id 
 
                         from
-                                team_club_persons_club_players
+                                team_club_players
                 join
-                        team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
+                        team_club_persons on team_club_persons.id=team_club_players.team_club_person_id
 
                 join
                         club_persons on club_persons.id=team_club_persons.club_person_id
@@ -398,9 +398,9 @@ SELECT json_agg(t) INTO raw_json
 	) t;
 
         IF raw_json is NULL THEN
-                result_set = CONCAT('"team_club_persons_club_players": []', raw_json);
+                result_set = CONCAT('"team_club_players": []', raw_json);
         ELSE
-                result_set = CONCAT('"team_club_persons_club_players": ', raw_json);
+                result_set = CONCAT('"team_club_players": ', raw_json);
         END IF;
 RETURN result_set;
 END;
@@ -711,7 +711,6 @@ END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT CLUBS
 
---team_club_persons_club_players_id
 --BEGIN J_SELECT PRACTICES
 CREATE OR REPLACE FUNCTION j_select_practices(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
@@ -723,36 +722,33 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                 select practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, clubs.name as club_name, teams.id as team_id, teams.name as team_name, persons.first_name, persons.last_name, 
 
-		team_club_persons_club_players.id as players, team_club_persons_club_parents.id as parents, team_club_persons_club_coaches.id as coaches, team_club_persons_club_managers.id as managers
+                select distinct club_persons.id as club_person_id, practices.id, practices.event_date, practices.arrival_time, practices.start_time, practices.end_time, practices.address, practices.coordinates, pitches.name as pitch_name, practices.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
 
                 from practices
-
-
-		join practice_practices on practice_practices.practices_id = practices.id
 		
-
+		join practice_practices on practice_practices.practices_id = practices.id
                 join practice on practice.id = practice_practices.practice_id
 
-		join practices_pitches on practices_pitches.practice_id = practices.id
-		join pitches on pitches.id = practices_pitches.pitch_id
-
-		join teams_practices on teams_practices.practice_id = practices.id  
+                join teams_practices on teams_practices.practice_id = practices.id
+                join practices_pitches on practices_pitches.practice_id = practices.id
+                join pitches on pitches.id = practices_pitches.pitch_id
                 join teams on teams.id = teams_practices.team_id
 
                 join team_club_persons on team_club_persons.team_id=teams.id
+
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join clubs on clubs.id=club_persons.club_id
                 join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
 
-                left outer join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_parents on team_club_persons_club_parents.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_coaches on team_club_persons_club_coaches.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
+                full outer join club_players on club_players.club_person_id = club_persons.id
+                full outer join club_parents on club_parents.club_person_id = club_persons.id
+
+                full outer join team_club_players on team_club_players.team_id=teams.id
 
                 where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
+
 	) t;
 
         IF raw_json is NULL THEN
@@ -776,14 +772,14 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select games_players_availability.id, games_players_availability.game_id, games_players_availability.team_club_persons_club_players_id, games_players_availability.availability_id
+                select games_players_availability.id, games_players_availability.game_id, games_players_availability.team_club_player_id, games_players_availability.availability_id
 
                 from
                         games_players_availability
 
-                        join team_club_persons_club_players on team_club_persons_club_players.id=games_players_availability.team_club_persons_club_players_id
-                        join team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
-                        join club_persons on club_persons.id=team_club_persons.club_person_id
+                        join team_club_players on team_club_players.id=games_players_availability.team_club_player_id
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
                         join emails_persons on emails_persons.person_id = club_persons.person_id
 
                         where emails_persons.email_id = $1
@@ -811,14 +807,14 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-              	select practices_players_availability.id, practices_players_availability.practice_id, practices_players_availability.team_club_persons_club_players_id, practices_players_availability.availability_id
+                select practices_players_availability.id, practices_players_availability.practice_id, practices_players_availability.team_club_player_id, practices_players_availability.availability_id
 
                 from
                         practices_players_availability
 
-                        join team_club_persons_club_players on team_club_persons_club_players.id=practices_players_availability.team_club_persons_club_players_id
-                        join team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
-                        join club_persons on club_persons.id=team_club_persons.club_person_id
+                        join team_club_players on team_club_players.id = practices_players_availability.team_club_player_id
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
                         join emails_persons on emails_persons.person_id = club_persons.person_id
 
                         where emails_persons.email_id = $1
@@ -848,26 +844,26 @@ SELECT json_agg(t) INTO raw_json
         from
         (
 
-                select games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, team_club_persons_club_players.id as team_club_persons_club_players_id, persons.first_name, persons.last_name, 
+                select distinct club_persons.id as club_person_id, games.id, games.event_date, games.arrival_time, games.start_time, games.end_time, games.address, games.coordinates, pitches.name as pitch_name, games.field_name, clubs.name as club_name, teams.name as team_name, teams.id as team_id, persons.first_name, persons.last_name
 
-		team_club_persons_club_players.id as players, team_club_persons_club_parents.id as parents, team_club_persons_club_coaches.id as coaches, team_club_persons_club_managers.id as managers
                 from games
 
-		join teams_games on teams_games.game_id = games.id  
-		join games_pitches on games_pitches.game_id = games.id
-		join pitches on pitches.id = games_pitches.pitch_id
+                join teams_games on teams_games.game_id = games.id
+                join games_pitches on games_pitches.game_id = games.id
+                join pitches on pitches.id = games_pitches.pitch_id
                 join teams on teams.id = teams_games.team_id
+
                 join team_club_persons on team_club_persons.team_id=teams.id
+
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join clubs on clubs.id=club_persons.club_id
                 join persons on persons.id=club_persons.person_id
                 join emails_persons on emails_persons.person_id=persons.id
-                join club_players on club_players.club_person_id=club_persons.id
 
-                left outer join team_club_persons_club_players on team_club_persons_club_players.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_parents on team_club_persons_club_parents.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_coaches on team_club_persons_club_coaches.team_club_person_id=team_club_persons.id
-                left outer join team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
+               	full outer join club_players on club_players.club_person_id = club_persons.id
+               	full outer join club_parents on club_parents.club_person_id = club_persons.id
+
+               	full outer join team_club_players on team_club_players.team_id=teams.id
 
                 where emails_persons.email_id = $1 AND games.event_date > $2 - interval '1 day' AND games.event_date < $3
         ) t;

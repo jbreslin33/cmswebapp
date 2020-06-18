@@ -81,8 +81,6 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
-	
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 
@@ -130,8 +128,6 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id_player_a, returning_club_player_id);
-
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
@@ -173,7 +169,6 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 	
@@ -205,7 +200,6 @@ BEGIN
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 	
 	--TEAM_CLUB_PLAYERS
-	insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	
 
@@ -247,7 +241,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 
 	---------------------------------------Dominic Evangelista
@@ -301,7 +294,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
@@ -338,7 +330,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_father, returning_team_id) returning id into returning_team_club_person_id_father;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 
@@ -405,7 +396,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_player_a, returning_team_id) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	
 	--PLAYERS Fabrizio
@@ -424,7 +414,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
@@ -475,7 +464,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
@@ -534,7 +522,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
@@ -595,7 +582,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
@@ -633,7 +619,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_mother, returning_team_id) returning id into returning_team_club_person_id_mother;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 
@@ -677,7 +662,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id_father, returning_team_id) returning id into returning_team_club_person_id_father;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 
@@ -798,7 +782,6 @@ BEGIN
         insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id, 4) returning id into returning_team_club_person_id;
 
         --TEAM_CLUB_PLAYERS
-        insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (returning_team_club_person_id, returning_club_player_id);
 	insert into team_club_players (team_id, club_player_id) values (4, returning_club_player_id);
 
 

@@ -73,13 +73,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
 
                         );
@@ -133,13 +133,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
 
                         );
@@ -193,13 +193,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coachess($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
 
                         );
@@ -253,13 +253,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
 
                         );
@@ -315,13 +315,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
                         );
                 END IF;
@@ -374,13 +374,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
                         );
                 END IF;
@@ -433,13 +433,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
                         );
                 END IF;
@@ -491,13 +491,13 @@ BEGIN
                                 ',',
                                 j_select_club_managers_id($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_players($4,$3),
+                                j_select_team_club_players($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_parents($4,$3),
+                                j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_coaches($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
-                                j_select_team_club_persons_club_managers($4,$3)
+                                j_select_team_club_managers($4,$3)
 
                         );
                 END IF;
@@ -651,7 +651,7 @@ AS $$
 DECLARE
         found_club_player_id club_players.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
-	found_team_club_persons_club_players_id team_club_persons_club_players.id%TYPE;
+	found_team_club_player_id team_club_players.id%TYPE;
 
 BEGIN
         x := -101;
@@ -664,9 +664,9 @@ BEGIN
 
                 IF found_club_player_id > 0 THEN
 
-                	select id into found_team_club_persons_club_players_id from team_club_persons_club_players where club_player_id = found_club_player_id;
+                	select id into found_team_club_player_id from team_club_players where club_player_id = found_club_player_id;
 
-                        IF found_team_club_persons_club_players_id IS NULL THEN
+                        IF found_team_club_player_id IS NULL THEN
                         	delete from club_players where club_person_id = found_club_person_id;
 				x := -101;
 
@@ -807,7 +807,7 @@ DECLARE
 	found_club_manager_id club_managers.id%TYPE;
 	found_club_administrator_id club_administrators.id%TYPE;
 
-	found_team_club_persons_club_players_id team_club_persons_club_players.id%TYPE;
+	found_team_club_player_id team_club_players.id%TYPE;
 BEGIN
 	x := -100;
 	IF $2 = 2 THEN
@@ -927,16 +927,15 @@ BEGIN
 
 			select id into found_club_person_id from club_persons where person_id = $3;
 
-			--team_club_persons_club_players	
 			IF found_club_person_id > 0  THEN
 			
 				select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
 
 				IF found_club_player_id > 0 THEN
 
-				       	select id into found_team_club_persons_club_players_id from team_club_persons_club_players where club_player_id = found_club_player_id;
+				       	select id into found_team_club_player_id from team_club_players where club_player_id = found_club_player_id;
 					
-					IF found_team_club_persons_club_players_id IS NULL THEN
+					IF found_team_club_player_id IS NULL THEN
 						delete from club_players where club_person_id = found_club_person_id;	
 
 					ELSE 
@@ -1069,13 +1068,13 @@ BEGIN
                         ',',
                         j_select_club_managers_id($3,$4),
                         ',',
-                        j_select_team_club_persons_club_players($3,$4),
+                        j_select_team_club_players($3,$4),
                         ',',
-                        j_select_team_club_persons_club_parents($3,$4),
+                        j_select_team_club_parents($3,$4),
                         ',',
-                        j_select_team_club_persons_club_coaches($3,$4),
+                        j_select_team_club_coaches($3,$4),
                         ',',
-                        j_select_team_club_persons_club_managers($3,$4)
+                        j_select_team_club_managers($3,$4)
                 );
         ELSE
                 result_set = CONCAT
@@ -1126,13 +1125,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1186,13 +1185,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1246,13 +1245,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1306,13 +1305,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1366,13 +1365,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1426,13 +1425,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1486,13 +1485,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1546,13 +1545,13 @@ BEGIN
                         	',',
                         	j_select_club_managers_id($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_players($5,$3),
+                        	j_select_team_club_players($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_parents($5,$3),
+                        	j_select_team_club_parents($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_coaches($5,$3),
+                        	j_select_team_club_coaches($5,$3),
                         	',',
-                        	j_select_team_club_persons_club_managers($5,$3)
+                        	j_select_team_club_managers($5,$3)
                         );
                 END IF;
 
@@ -1580,8 +1579,8 @@ DECLARE
         found_club_person_id                   club_persons.id%TYPE;
         found_club_player_id                   club_players.id%TYPE;
         found_team_club_person_id              team_club_persons.id%TYPE;
-	found_team_club_persons_club_player_id team_club_persons_club_players.id%TYPE;
-        found_player_id                   	players.id%TYPE;
+	found_team_club_player_id              team_club_players.id%TYPE;
+        found_player_id                        players.id%TYPE;
 
 
 BEGIN
@@ -1607,9 +1606,9 @@ BEGIN
 		END IF;
 
 		--looks like we need to check both fields team_club_person_id | club_player_id
-		select id into found_team_club_persons_club_player_id from team_club_persons_club_players where team_club_person_id = found_team_club_person_id AND club_player_id = found_club_player_id;
+		select id into found_team_club_player_id from team_club_players where team_club_person_id = found_team_club_person_id AND club_player_id = found_club_player_id;
 		IF found_team_club_persons_club_player_id IS NULL THEN
-			insert into team_club_persons_club_players (team_club_person_id, club_player_id) values (found_team_club_person_id, found_club_player_id);
+			insert into team_club_players (team_club_person_id, club_player_id) values (found_team_club_person_id, found_club_player_id);
 		END IF;
 
 	END IF;
@@ -1753,8 +1752,8 @@ DECLARE
 
 BEGIN
         x := -101;
-	delete from practices_players_availability where practices_players_availability.team_club_persons_club_players_id = $1;
-	delete from team_club_persons_club_players where team_club_persons_club_players.id = $1;
+	delete from practices_players_availability where practices_players_availability.team_club_player_id = $1;
+	delete from team_club_players where team_club_players.id = $1;
 END;
 $$;
 

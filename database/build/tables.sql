@@ -817,17 +817,6 @@ CREATE TABLE team_club_persons
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE team_club_persons_club_players 
-(
-	id SERIAL,
-	team_club_person_id integer not null,
-	club_player_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
-        FOREIGN KEY(club_player_id) REFERENCES club_players(id),
-	PRIMARY KEY (id)
-);
-
 create table team_club_players
 (
 	id SERIAL,

@@ -7,13 +7,13 @@ DECLARE
         result_set text;
 	total_persons int;
 	DECLARE x int := -111;
-	found_team_club_player_id team_club_persons_club_players.id%TYPE;
+	found_team_club_player_id team_club_players.id%TYPE;
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
         
-		select team_club_persons_club_players.id into found_team_club_player_id from team_club_persons_club_players
-        	join team_club_persons on team_club_persons.id=team_club_persons_club_players.team_club_person_id
+		select team_club_players.id into found_team_club_player_id from team_club_players
+        	join team_club_persons on team_club_persons.id=team_club_players.team_club_person_id
         	join club_persons on club_persons.id=team_club_persons.club_person_id
         	where club_persons.person_id = $3;
 
@@ -77,7 +77,7 @@ CREATE OR REPLACE PROCEDURE p_delete_person(int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-	found_team_club_player_id team_club_persons_club_players.id%TYPE;
+	found_team_club_player_id team_club_players.id%TYPE;
 BEGIN
 	delete from emails_persons where person_id = $1;
 	delete from club_persons where person_id = $1;
