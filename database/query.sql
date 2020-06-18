@@ -41,8 +41,8 @@
 			join emails_persons on emails_persons.person_id = persons.id
 
 		where 
-			games.id = 1  
-			and
+			--games.id = 1  
+			--and
 			emails_persons.email_id = 21
 			
 				

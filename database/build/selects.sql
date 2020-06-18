@@ -832,7 +832,6 @@ $$ LANGUAGE plpgsql;
 
 
 
---BEGIN J_SELECT GAMES
 CREATE OR REPLACE FUNCTION j_select_games(email_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
@@ -876,6 +875,75 @@ SELECT json_agg(t) INTO raw_json
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
---END J_SELECT PRACTICES
+
+CREATE OR REPLACE FUNCTION j_select_games_players(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        games.id as game_id, team_club_players.id as players, persons.first_name, persons.last_name
+                from
+                        games
+
+                        join teams_games on teams_games.game_id = games.id
+                        join team_club_players on team_club_players.team_id = teams_games.team_id
+                        join club_players on club_players.id = team_club_players.id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join persons on persons.id = club_persons.person_id
+                        join emails_persons on emails_persons.person_id = persons.id
+
+                where
+                        emails_persons.email_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"games_players": []', raw_json);
+        ELSE
+                result_set = CONCAT('"games_players": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION j_select_practices_players(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        practices.id as practice_id, team_club_players.id as players, persons.first_name, persons.last_name
+                from
+                        practices
+
+                        join teams_practices on teams_practices.practice_id = practices.id
+                        join team_club_players on team_club_players.team_id = teams_practices.team_id
+                        join club_players on club_players.id = team_club_players.id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join persons on persons.id = club_persons.person_id
+                        join emails_persons on emails_persons.person_id = persons.id
+
+                where
+                        emails_persons.email_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"practices_players": []', raw_json);
+        ELSE
+                result_set = CONCAT('"practices_players": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 
 

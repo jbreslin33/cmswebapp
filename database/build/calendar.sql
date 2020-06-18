@@ -19,6 +19,10 @@ BEGIN
                 ',',
 		j_select_practices(email_id,$3,$4),
                 ',',
+		j_select_games_players(email_id),
+                ',',
+		j_select_practices_players(email_id),
+                ',',
 		j_select_games_player_availability(email_id),
                 ',',
 		j_select_practices_player_availability(email_id),
@@ -26,7 +30,7 @@ BEGIN
 		j_select_all_teams_managed(person_id)
        	);
 
-	--RAISE LOG 'result_set f_select_events:%s', result_set;
+	RAISE LOG 'result_set f_select_events:%s', result_set;
 
 RETURN result_set;
 END;
