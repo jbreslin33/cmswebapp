@@ -133,7 +133,7 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
                                 this.mPlayerDiv.appendChild(button);
                                 var id = 'button_1_1_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
                                 button.setAttribute("id", id);
@@ -147,7 +147,7 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name; 
                                 this.mPlayerDiv.appendChild(button);
                                 var id = 'button_1_2_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
                                 button.setAttribute("id", id);
@@ -160,7 +160,7 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                                button.innerHTML = '' + this.mPlayerNameArray[i];
+                                button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
                                 this.mPlayerDiv.appendChild(button);
                                 var id = 'button_1_3_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
                                 button.setAttribute("id", id);
@@ -189,7 +189,7 @@ class ScheduleItem extends Item
 
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + this.mPlayerNameArray[i];
+                        	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
                         	this.mPlayerDiv.appendChild(button);
                         	var id = 'button_2_1_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
                         	button.setAttribute("id", id);
@@ -203,7 +203,7 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + this.mPlayerNameArray[i];
+                        	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
                                 this.mPlayerDiv.appendChild(button);
                         	var id = 'button_2_2_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
                                 button.setAttribute("id", id);
@@ -216,7 +216,7 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + this.mPlayerNameArray[i];
+                        	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
                                 this.mPlayerDiv.appendChild(button);
                         	var id = 'button_2_3_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
                                 button.setAttribute("id", id);
