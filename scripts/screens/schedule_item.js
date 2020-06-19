@@ -131,6 +131,7 @@ class ScheduleItem extends Item
                                         }
                                 }
 
+				console.log('am i calling this again');
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
                                 button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
