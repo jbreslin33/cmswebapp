@@ -121,6 +121,16 @@ class ScheduleScreen extends Screen
 					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mRed; 		
 				}
+
+				for (var i = 0; i < screen.mGamesPlayerAvailabilityArray.length; i++)
+                		{
+					console.log('i:' + i);
+                        		if (screen.mGamesPlayerAvailabilityArray[i].game_id == a[3] && screen.mGamesPlayerAvailabilityArray[i].team_club_player_id == a[4])
+					{
+						console.log('if:' + i);
+						screen.mGamesPlayerAvailabilityArray[i].availability_id = a[2];
+					}
+                		}
 			}
 
 			//practice
@@ -144,12 +154,25 @@ class ScheduleScreen extends Screen
 					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
 					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mRed; 		
 				}
+                               
+				for (var i = 0; i < screen.mPracticesPlayerAvailabilityArray.length; i++)
+                                {
+                                        if (screen.mPracticesPlayerAvailabilityArray[i].game_id == a[3] && screen.mPracticesPlayerAvailabilityArray[i].game_id == a[4])
+                                        {
+                                                screen.mPracticesPlayerAvailabilityArray[i].availability_id = a[2];
+                                        }
+                                }
+
 			}
 
 			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
 		}
 		//send to server
 		screen.updateAvailability();
+
+		//update arrays on client
+                //screen.mGamesPlayerAvailabilityArray[a].availability_id;
+
 	}
 
 	updateAvailability()
