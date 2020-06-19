@@ -83,6 +83,7 @@ DECLARE
 
 BEGIN
 
+	delete from games_pitches where game_id = $1;
 	delete from teams_games where game_id = $1;
 	delete from games_players_availability where game_id = $1; 
 	delete from games where id = $1 returning id into x;

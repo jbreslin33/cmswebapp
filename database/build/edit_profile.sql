@@ -33,7 +33,6 @@ BEGIN
                 CALL p_update_profile($2,$3,$4,x);
 
                 IF x > 0 THEN
-  			RAISE LOG 'log message IF:%', x;
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -46,7 +45,6 @@ BEGIN
                         );
 
                 ELSE
-			RAISE LOG 'log message ELSE:%', x;
                         result_set = CONCAT
                         (
                                 j_select_persons($1),
@@ -103,7 +101,6 @@ BEGIN
 
 	
 		IF $2 = 3 THEN
-			--RAISE LOG 'log message in 3 %', $1;
 			select person_id into found_person_id from coaches where person_id = $1; 
 			IF found_person_id > 0  THEN
 				-- DO NOTHING
@@ -167,7 +164,6 @@ BEGIN
 		ELSE
 			--DO NOTHING
 		END IF;
-		RAISE LOG 'log message x:%', x;
 
 	END IF;
 

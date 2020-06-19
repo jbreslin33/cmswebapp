@@ -1086,7 +1086,6 @@ BEGIN
                         j_select_codes(-101)
                 );
         END IF;
-	--RAISE LOG 'result_set:%',result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

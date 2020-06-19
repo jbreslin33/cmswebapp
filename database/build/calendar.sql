@@ -30,8 +30,6 @@ BEGIN
 		j_select_all_teams_managed(person_id)
        	);
 
-	RAISE LOG 'result_set f_select_events:%s', result_set;
-
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
