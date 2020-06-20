@@ -197,7 +197,7 @@ BEGIN
                                 ',',
                                 j_select_team_club_parents($4,$3),
                                 ',',
-                                j_select_team_club_coachess($4,$3),
+                                j_select_team_club_coaches($4,$3),
                                 ',',
                                 j_select_team_club_managers($4,$3)
 
@@ -1762,7 +1762,7 @@ DECLARE
 BEGIN
         x := -101;
 
-        delete from team_club_persons_club_parents where team_club_persons_club_parents.id = $1;
+	delete from team_club_parents where team_club_parents.id = $1;
 END;
 $$;
 
@@ -1775,7 +1775,7 @@ DECLARE
 BEGIN
         x := -101;
 
-        delete from team_club_persons_club_coaches where team_club_persons_club_coaches.id = $1;
+	delete from team_club_coaches where team_club_coaches.id = $1;
 END;
 $$;
 
@@ -1788,7 +1788,7 @@ DECLARE
 BEGIN
         x := -101;
 
-        delete from team_club_persons_club_managers where team_club_persons_club_managers.id = $1;
+	delete from team_club_managers where team_club_managers.id = $1;
 END;
 $$;
 

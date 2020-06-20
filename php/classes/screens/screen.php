@@ -17,6 +17,11 @@ class Screen
 		$this->mName = null;
 		$this->mGameId = null;
 		$this->mPracticeId = null;
+		
+		$this->team_club_player_id = 0;
+		$this->team_club_parent_id = 0;
+		$this->team_club_coach_id = 0;
+		$this->team_club_manager_id = 0;
 
 		$this->parseParameters();
 
@@ -61,6 +66,22 @@ class Screen
                 if (isset($_GET['practice_id']))
                 {
                         $this->mPracticeId = $_GET['practice_id'];
+                }
+                if (isset($_GET['team_club_player_id']))
+                {
+                        $this->team_club_player_id = $_GET['team_club_player_id'];
+                }
+                if (isset($_GET['team_club_parent_id']))
+                {
+                        $this->team_club_parent_id = $_GET['team_club_parent_id'];
+                }
+                if (isset($_GET['team_club_coach_id']))
+                {
+                        $this->team_club_coach_id = $_GET['team_club_coach_id'];
+                }
+                if (isset($_GET['team_club_manager_id']))
+                {
+                        $this->team_club_manager_id = $_GET['team_club_manager_id'];
                 }
 	}
 

@@ -352,6 +352,7 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_parent_id=' + team_club_parent_id);
+		console.log('url:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -379,6 +380,7 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_manager.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_manager_id=' + team_club_manager_id);
+		console.log('url:' + screen.getUrl());
                 screen.ajax();
         }
 
