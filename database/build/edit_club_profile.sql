@@ -1604,10 +1604,9 @@ BEGIN
 			insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
 		END IF;
 
-		--looks like we need to check both fields team_club_person_id | club_player_id
-		select id into found_team_club_player_id from team_club_players where team_club_person_id = found_team_club_person_id AND club_player_id = found_club_player_id;
-		IF found_team_club_persons_club_player_id IS NULL THEN
-			insert into team_club_players (team_club_person_id, club_player_id) values (found_team_club_person_id, found_club_player_id);
+		select id into found_team_club_player_id from team_club_players where club_player_id = found_club_player_id AND team_id = $2;
+		IF found_team_club_player_id IS NULL THEN
+			insert into team_club_players (club_player_id, team_id) values (found_club_player_id, $2);
 		END IF;
 
 	END IF;
@@ -1619,10 +1618,10 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
         found_club_person_id                   club_persons.id%TYPE;
-        found_club_parent_id                   club_parents.id%TYPE;
+        found_club_parent_id                   club_players.id%TYPE;
         found_team_club_person_id              team_club_persons.id%TYPE;
-        found_team_club_persons_club_parent_id team_club_persons_club_parents.id%TYPE;
-        found_parent_id                         parents.id%TYPE;
+        found_team_club_parent_id              team_club_parents.id%TYPE;
+        found_parent_id                        parents.id%TYPE;
 
 
 BEGIN
@@ -1647,26 +1646,24 @@ BEGIN
                         insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
                 END IF;
 
-                select id into found_team_club_persons_club_parent_id from team_club_persons_club_parents where team_club_person_id = found_team_club_person_id AND club_parent_id = found_club_parent_id;
-                IF found_team_club_persons_club_parent_id IS NULL THEN
-                        insert into team_club_persons_club_parents (team_club_person_id, club_parent_id) values (found_team_club_person_id, found_club_parent_id);
+                select id into found_team_club_parent_id from team_club_parents where club_parent_id = found_club_parent_id AND team_id = $2;
+                IF found_team_club_parent_id IS NULL THEN
+                        insert into team_club_parents (club_parent_id, team_id) values (found_club_parent_id, $2);
                 END IF;
 
         END IF;
 END;
 $$;
 
-
 CREATE OR REPLACE PROCEDURE p_insert_team_coach(int,int,INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
         found_club_person_id                   club_persons.id%TYPE;
-        found_club_coach_id                   club_coaches.id%TYPE;
+        found_club_coach_id                    club_coaches.id%TYPE;
         found_team_club_person_id              team_club_persons.id%TYPE;
-        found_team_club_persons_club_coach_id team_club_persons_club_coaches.id%TYPE;
+        found_team_club_coach_id               team_club_coaches.id%TYPE;
         found_coach_id                         coaches.id%TYPE;
-
 
 BEGIN
         x := -101;
@@ -1690,9 +1687,9 @@ BEGIN
                         insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
                 END IF;
 
-                select id into found_team_club_persons_club_coach_id from team_club_persons_club_coaches where team_club_person_id = found_team_club_person_id AND club_coach_id = found_club_coach_id;
-                IF found_team_club_persons_club_coach_id IS NULL THEN
-                        insert into team_club_persons_club_coaches (team_club_person_id, club_coach_id) values (found_team_club_person_id, found_club_coach_id);
+                select id into found_team_club_coach_id from team_club_coaches where club_coach_id = found_club_coach_id AND team_id = $2;
+                IF found_team_club_coach_id IS NULL THEN
+                        insert into team_club_coaches (club_coach_id, team_id) values (found_club_coach_id, $2);
                 END IF;
 
         END IF;
@@ -1707,9 +1704,8 @@ DECLARE
         found_club_person_id                   club_persons.id%TYPE;
         found_club_manager_id                  club_managers.id%TYPE;
         found_team_club_person_id              team_club_persons.id%TYPE;
-        found_team_club_persons_club_manager_id team_club_persons_club_managers.id%TYPE;
-        found_manager_id                         managers.id%TYPE;
-
+        found_team_club_manager_id             team_club_managers.id%TYPE;
+        found_manager_id                       managers.id%TYPE;
 
 BEGIN
         x := -101;
@@ -1733,9 +1729,9 @@ BEGIN
                         insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, $2) returning id into found_team_club_person_id;
                 END IF;
 
-                select id into found_team_club_persons_club_manager_id from team_club_persons_club_managers where team_club_person_id = found_team_club_person_id AND club_manager_id = found_club_manager_id;
-                IF found_team_club_persons_club_manager_id IS NULL THEN
-                        insert into team_club_persons_club_managers (team_club_person_id, club_manager_id) values (found_team_club_person_id, found_club_manager_id);
+                select id into found_team_club_manager_id from team_club_managers where club_manager_id = found_club_manager_id AND team_id = $2;
+                IF found_team_club_manager_id IS NULL THEN
+                        insert into team_club_managers (club_manager_id, team_id) values (found_club_manager_id, $2);
                 END IF;
 
         END IF;
