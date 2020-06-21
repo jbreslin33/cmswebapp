@@ -72,8 +72,8 @@ DECLARE
 rec RECORD;
 
 BEGIN
-	update practices set pitch_id = null where pitch_id = $1;
-	update games set pitch_id = null where pitch_id = $1;
+	delete from games_pitches where pitch_id = $1;
+	delete from practices_pitches where pitch_id = $1;
 	delete from pitches where id = $1 returning id into x;
 END;
 $$;
