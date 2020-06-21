@@ -182,7 +182,7 @@ class ScheduleItem extends Item
 			{
 				for (var a = 0; a < this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray.length; a++)
 				{
-					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJson.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_player_id == screen.mGamesPlayersArray[i].players )
+					if (this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].practice_id == this.mJson.id && this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].team_club_player_id == screen.mPracticesPlayersArray[i].players )
 					{
 						availability_id = this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].availability_id;	
 					}
@@ -190,9 +190,9 @@ class ScheduleItem extends Item
 
         			var button = document.createElement("BUTTON");
                 		button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
+                        	button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
                         	this.mPlayerDiv.appendChild(button);
-                        	var id = 'button_2_1_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
+                        	var id = 'button_2_1_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
                         	button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
                         	if (availability_id == 1)
@@ -204,9 +204,9 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
+                        	button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
                                 this.mPlayerDiv.appendChild(button);
-                        	var id = 'button_2_2_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
+                        	var id = 'button_2_2_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
                                 button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
 				if (availability_id == 2)
@@ -217,9 +217,9 @@ class ScheduleItem extends Item
 
                                 var button = document.createElement("BUTTON");
                                 button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
+                        	button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
                                 this.mPlayerDiv.appendChild(button);
-                        	var id = 'button_2_3_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
+                        	var id = 'button_2_3_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
                                 button.setAttribute("id", id);
                         	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
 				if (availability_id == 3)
