@@ -43,22 +43,8 @@ class CalendarScreen extends ScheduleScreen
 
         closeModal()
         {
-
 		super.closeModal();
-                
 		document.getElementById("calendar_modal_id").style.display = "none";
-		//this.get();
-		//fix this....
-		//this.mApplication.getCurrentScreen().mGamesPlayerAvailabilityArray[a].availability_id;
-
-/*
-		var screen = APPLICATION.getCurrentScreen();
-		screen.mGamesPlayerAvailabilityArray[a].availability_id;
-		for (var i = 0; i < screen.mGamesPlayerAvailabilityArray.length; i++)
-		{
-			if (screen.mGamesPlayerAvailabilityArray[i].
-		}
-		*/
         }
 
         deleteHit()
