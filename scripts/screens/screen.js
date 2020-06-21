@@ -860,6 +860,12 @@ class Screen
 			{
 				this.mCode = this.mJson.codes[i].code;
 			}
+
+               		for (var i = 0; i < this.mJson.messages.length; i++)
+			{
+				console.log('message:' + this.mJson.messages[i].message);
+			}
+
 			//definite success so send to upcoming
 			if (this.mCode == '-100') 
 			{
