@@ -13,8 +13,10 @@ BEGIN
 	IF total_persons > 1 THEN
         
 		select team_club_players.id into found_team_club_player_id from team_club_players
-        	join team_club_persons on team_club_persons.id=team_club_players.team_club_person_id
-        	join club_persons on club_persons.id=team_club_persons.club_person_id
+
+		join club_players on club_players.id = team_club_players.club_player_id
+        	join club_persons on club_persons.id = club_players.club_person_id
+
         	where club_persons.person_id = $3;
 
 		IF found_team_club_player_id > 0 THEN
@@ -77,11 +79,34 @@ CREATE OR REPLACE PROCEDURE p_delete_person(int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-	found_team_club_player_id team_club_players.id%TYPE;
+
+	found_club_person_id club_persons.id%type;
+
+	found_team_club_parent_id team_club_parents.id%TYPE;
+
 BEGIN
+	--team_club_parents
+	select team_club_parents.id into found_team_club_parent_id from team_club_parents
+        join club_parents on club_parents.id = team_club_parents.club_parent_id
+        join club_persons on club_persons.id = club_parents.club_person_id
+        where club_persons.person_id = $1;
+	delete from team_club_parents where id = found_team_club_parent_id;
+		
+
+	--team_club_persons
+	select id into found_club_person_id from club_persons where person_id = $1;
+	delete from team_club_persons where club_person_id = found_club_person_id;
+
+	delete from club_parents where club_person_id = found_club_person_id;
+	delete from parents where person_id = $1;
+
+
 	delete from emails_persons where person_id = $1;
+
 	delete from club_persons where person_id = $1;
+
 	delete from persons where id = $1 returning id into x;
+
 END;
 $$;
 --END DELETE PERSON
