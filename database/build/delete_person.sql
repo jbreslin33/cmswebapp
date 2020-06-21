@@ -7,34 +7,66 @@ DECLARE
         result_set text;
 	total_persons int;
 	DECLARE x int := -111;
+	DECLARE d int := 1;
 	found_team_club_player_id team_club_players.id%TYPE;
+	found_team_club_coach_id team_club_coaches.id%TYPE;
+	found_team_club_manager_id team_club_managers.id%TYPE;
 BEGIN
 	select count(*) into total_persons from emails_persons where email_id = $1;
 	IF total_persons > 1 THEN
         
 		select team_club_players.id into found_team_club_player_id from team_club_players
-
 		join club_players on club_players.id = team_club_players.club_player_id
         	join club_persons on club_persons.id = club_players.club_person_id
-
         	where club_persons.person_id = $3;
 
 		IF found_team_club_player_id > 0 THEN
-			--we have a player on a team the only way to delete is if the deletor is a team manager
-	
+			d = 0;
 		        result_set = CONCAT
         		(
                 		j_select_persons($1),
                 		',',
-                		j_select_messages('You do not have permission to delete Person. They are on a team. Let your team manager know.'),
+                		j_select_messages('You do not have permission to delete Person. They are a player on a team. Ask the team manager to remove them from team.'),
                 		',',
                 		j_select_codes(-101)
         		);
+		END IF;
 
-			--this is good enough as you should delete players on another screen.
+                select team_club_coaches.id into found_team_club_coach_id from team_club_coaches
+                join club_coaches on club_coaches.id = team_club_coaches.club_coach_id
+                join club_persons on club_persons.id = club_coaches.club_person_id
+                where club_persons.person_id = $3;
 
-		ELSE
-			--no worries this person is not a player on a team go ahead and delete
+                IF found_team_club_coach_id > 0 THEN
+                        d = 0;
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('You do not have permission to delete Person. They are a coach on a team. Ask the team manager to remove them from team.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+                END IF;
+
+                select team_club_managers.id into found_team_club_manager_id from team_club_managers
+                join club_managers on club_managers.id = team_club_managers.club_manager_id
+                join club_persons on club_persons.id = club_managers.club_person_id
+                where club_persons.person_id = $3;
+
+		IF found_team_club_manager_id > 0 THEN
+                        d = 0;
+                        result_set = CONCAT
+                        (
+                                j_select_persons($1),
+                                ',',
+                                j_select_messages('You do not have permission to delete Person. They are a manager on a team. Ask the team manager to remove them from team.'),
+                                ',',
+                                j_select_codes(-101)
+                        );
+                END IF;
+
+		IF d > 0 THEN --person is NOT a player, coach or manager but a parent or fan etc...
         		CALL p_delete_person($3,x);
 
         		IF x > 0 THEN
