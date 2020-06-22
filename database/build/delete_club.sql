@@ -67,7 +67,9 @@ BEGIN
 	--not deleteing below
 
 	FOR recA IN
-		select id from club_persons where club_id = $1
+		select id from team_club_players 
+		
+		where club_id = $1
 		
 	LOOP
 		FOR recB IN
@@ -80,6 +82,9 @@ BEGIN
 			END LOOP;
 		END LOOP;			
 	END LOOP;	
+
+
+
 
         FOR recA IN
 		select id from teams where club_id = $1  
