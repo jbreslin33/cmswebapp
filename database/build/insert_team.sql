@@ -115,7 +115,8 @@ DECLARE
         returning_team_club_person_id team_club_persons.id%TYPE;
         returning_club_administrator_id club_administrators.id%TYPE;
 BEGIN
-        insert into teams (club_id,name) values ($2,$3) returning id into returning_team_id;
+        insert into teams (name) values ($3) returning id into returning_team_id;
+	insert into clubs_teams (club_id, team_id) values ($2, returing_team_id);
         select id into found_club_person_id from club_persons where club_id = $2 AND person_id = $1;
         insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into returning_team_club_person_id;
 

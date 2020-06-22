@@ -44,7 +44,8 @@ DECLARE
 
 BEGIN
 	--TEAM u16 Caos
-	insert into teams (club_id,name) values (1,'u16 Caos') returning id into returning_team_id;
+	insert into teams (name) values ('u16 Caos') returning id into returning_team_id;
+	insert into clubs_teams (club_id,team_id) values (1,returning_team_id);
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 
 	insert into managers (person_id) values (1);
@@ -669,7 +670,8 @@ BEGIN
 	------------------------------------------------------------------------------------------------------
 	
 	--TEAM u14 Celestas  
-	insert into teams (club_id,name) values (1,'u14 Celestas') returning id into returning_team_id;
+	insert into teams (name) values ('u14 Celestas') returning id into returning_team_id;
+	insert into clubs_teams (club_id, team_id) values (1, returning_team_id);
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
 	insert into team_club_managers (club_manager_id, team_id) values (1,2);
@@ -677,7 +679,8 @@ BEGIN
 	------------------------------------------------------------------------------------------------------
 	
 	--TEAM u19 Celtic  
-	insert into teams (club_id,name) values (1,'u19 Celtic') returning id into returning_team_id;
+	insert into teams (name) values ('u19 Celtic') returning id into returning_team_id;
+	insert into clubs_teams (club_id, team_id) values (1, returning_team_id);
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
 	insert into team_club_managers (club_manager_id, team_id) values (1,3);
@@ -685,7 +688,8 @@ BEGIN
 	------------------------------------------------------------------------------------------------------
 	
 	--TEAM Ladder15  
-	insert into teams (club_id,name) values (1,'Ladder 15') returning id into returning_team_id;
+	insert into teams (name) values ('Ladder 15') returning id into returning_team_id;
+	insert into clubs_teams (club_id, team_id) values (1, returning_team_id);
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
 	insert into team_club_managers (club_manager_id, team_id) values (1,4);

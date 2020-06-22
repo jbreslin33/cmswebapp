@@ -122,9 +122,17 @@ CREATE TABLE teams
 (
         id SERIAL,
 	name text,
-        club_id integer,
+        PRIMARY KEY (id)
+);
+
+create table clubs_teams
+(
+	id SERIAL,
+	club_id integer,
+	team_id integer,
         FOREIGN KEY(club_id) REFERENCES clubs(id),
-	UNIQUE (name,club_id),
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+	UNIQUE (club_id, team_id),
         PRIMARY KEY (id)
 );
 

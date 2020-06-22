@@ -190,7 +190,8 @@ SELECT json_agg(t) INTO raw_json
         from
         (
 		select teams.id as team_id, teams.name as team_name from teams
-		where teams.club_id = $1
+			join clubs_teams on clubs_teams.team_id = teams.id
+		where clubs_teams.club_id = $1
         ) t;
 
         IF raw_json is NULL THEN

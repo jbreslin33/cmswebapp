@@ -79,6 +79,8 @@ BEGIN
 
 	delete from team_club_persons where team_id = $1;
 
+	delete from clubs_teams where team_id = $1;
+
 	delete from teams where teams.id = $1 returning id into x; 
 END;
 $$;
