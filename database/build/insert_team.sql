@@ -35,7 +35,10 @@ DECLARE
 	found_club_persons_id club_persons.id%TYPE;
 	found_team_id teams.id%TYPE;
 BEGIN
-	select id into found_team_id from teams where name = $4 AND club_id = $3;  	
+	select teams.id into found_team_id from teams 
+		join clubs_teams on clubs_teams.team_id = teams.id
+	
+	where teams.name = $4 AND clubs_teams.club_id = $3;  	
 
         IF found_team_id > 0 THEN
 
@@ -116,7 +119,7 @@ DECLARE
         returning_club_administrator_id club_administrators.id%TYPE;
 BEGIN
         insert into teams (name) values ($3) returning id into returning_team_id;
-	insert into clubs_teams (club_id, team_id) values ($2, returing_team_id);
+	insert into clubs_teams (club_id, team_id) values ($2, returning_team_id);
         select id into found_club_person_id from club_persons where club_id = $2 AND person_id = $1;
         insert into team_club_persons (team_id,club_person_id) values (returning_team_id,found_club_person_id) returning id into returning_team_club_person_id;
 
