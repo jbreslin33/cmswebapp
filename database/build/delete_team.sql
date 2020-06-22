@@ -72,16 +72,10 @@ DECLARE
 rec RECORD;
 
 BEGIN
-        FOR rec IN
-                select id from team_club_persons where team_id = $1
-
-        LOOP
-		delete from team_club_players where team_club_person_id = rec.id;
-		delete from team_club_parents where team_club_person_id = rec.id; 
-		delete from team_club_coaches where team_club_person_id = rec.id; 
-		delete from team_club_managers where team_club_person_id = rec.id; 
-		
-        END LOOP;
+	delete from team_club_players where team_id = $1; 
+	delete from team_club_parents where team_id = $1;
+	delete from team_club_coaches where team_id = $1;
+	delete from team_club_managers where team_id = $1;
 
 	delete from team_club_persons where team_id = $1;
 
