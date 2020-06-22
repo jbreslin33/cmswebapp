@@ -8,11 +8,13 @@ DECLARE
         json_result text;
 	found_team_club_manager_id team_club_managers.id%TYPE;
 BEGIN
-        select team_club_persons_club_managers.id into found_team_club_manager_id
+        select team_club_managers.id into found_team_club_manager_id
         from team_club_managers
-        join club_managers on club_managers.id = team_club_managers.club_manager_id
-        join club_persons on club_persons.id = club_managers.club_person_id
-        join teams on teams.id=team_club_persons.team_id
+
+        	join club_managers on club_managers.id = team_club_managers.club_manager_id
+        	join club_persons on club_persons.id = club_managers.club_person_id
+        	join teams on teams.id = team_club_managers.team_id
+
         where teams.id = $2 AND club_persons.person_id = $2;
 
 	IF found_team_club_manager_id > 0 THEN                     --dont need 11 because it is person id
