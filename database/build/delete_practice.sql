@@ -68,6 +68,7 @@ DECLARE
 
 BEGIN
 
+	delete from practices_pitches where practice_id = $1;
 	delete from practice_practices where practice_id = $1;
 	delete from teams_practices where practice_id = $1;
 	delete from practices_players_availability where practice_id = $1; 
