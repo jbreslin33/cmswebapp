@@ -39,6 +39,8 @@ DECLARE
 	returning_team_club_person_id_father team_club_persons.id%TYPE;
 	returning_team_club_person_id_mother team_club_persons.id%TYPE;
 
+	returning_club_manager_id club_managers.id%TYPE;
+
 
 BEGIN
 	--TEAM u16 Caos
@@ -46,11 +48,10 @@ BEGIN
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 
 	insert into managers (person_id) values (1);
-	insert into club_managers (club_person_id,manager_id) values (1,1);
+	insert into club_managers (club_person_id,manager_id) values (1,1) returning id into returning_club_manager_id;
 
-	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
+	insert into team_club_managers (club_manager_id,team_id) values (returning_club_manager_id, returning_team_id);
 
-	
 
 
 	--PLAYERS
@@ -671,7 +672,7 @@ BEGIN
 	insert into teams (club_id,name) values (1,'u14 Celestas') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
-	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
+	insert into team_club_managers (club_manager_id, team_id) values (1,2);
 	
 	------------------------------------------------------------------------------------------------------
 	
@@ -679,7 +680,7 @@ BEGIN
 	insert into teams (club_id,name) values (1,'u19 Celtic') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
-	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
+	insert into team_club_managers (club_manager_id, team_id) values (1,3);
 	
 	------------------------------------------------------------------------------------------------------
 	
@@ -687,9 +688,7 @@ BEGIN
 	insert into teams (club_id,name) values (1,'Ladder 15') returning id into returning_team_id;
 	insert into team_club_persons (team_id,club_person_id) values (1,1) returning id into returning_team_club_person_id;
 	
-	insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (1,1);
-
-
+	insert into team_club_managers (club_manager_id, team_id) values (1,4);
 
 END;
 $$;
@@ -753,7 +752,7 @@ BEGIN
 	insert into managers (person_id) values (returning_person_id) returning id into returning_manager_id;
 	insert into club_managers (club_person_id, manager_id) values (returning_club_person_id,returning_manager_id) returning id into returning_club_manager_id;
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,1)  returning id into returning_team_club_person_id;
-	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	insert into team_club_managers (club_manager_id, team_id) values (returning_club_manager_id, 1);
 	
 	--add Jim Breslin as club Administrator
 	insert into administrators (person_id) values (returning_person_id) returning id into returning_administrator_id;
@@ -761,15 +760,15 @@ BEGIN
 
 	--for u14 celestas for jim
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,2)  returning id into returning_team_club_person_id;
-	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	insert into team_club_managers (club_manager_id, team_id) values (returning_club_manager_id,2);
 	
 	--for u19 celtic for jim
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,3)  returning id into returning_team_club_person_id;
-	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	insert into team_club_managers (club_manager_id, team_id) values (returning_club_manager_id,3);
 	
 	--for ladder 15 for jim
 	insert into team_club_persons (club_person_id, team_id) values (returning_club_person_id,4)  returning id into returning_team_club_person_id;
-	insert into team_club_persons_club_managers (club_manager_id, team_club_person_id) values (returning_club_manager_id,returning_team_club_person_id);
+	insert into team_club_managers (club_manager_id, team_id) values (returning_club_manager_id,4);
 
         -------------------------------add Jim as Player to Ladder 15
         --PLAYER

@@ -686,7 +686,7 @@ AS $$
 DECLARE
         found_club_parent_id club_parents.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
-        found_team_club_persons_club_parents_id team_club_persons_club_parents.id%TYPE;
+        found_team_club_parents_id team_club_parents.id%TYPE;
 
 BEGIN
         x := -101;
@@ -699,9 +699,9 @@ BEGIN
 
                 IF found_club_parent_id > 0 THEN
 
-                        select id into found_team_club_persons_club_parents_id from team_club_persons_club_parents where club_parent_id = found_club_parent_id;
+                        select id into found_team_club_parents_id from team_club_parents where club_parent_id = found_club_parent_id;
 
-                        IF found_team_club_persons_club_parents_id IS NULL THEN
+                        IF found_team_club_parents_id IS NULL THEN
                                 delete from club_parents where club_person_id = found_club_person_id;
                                 x := -101;
 
@@ -720,7 +720,7 @@ AS $$
 DECLARE
         found_club_coach_id club_coaches.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
-        found_team_club_persons_club_coaches_id team_club_persons_club_coaches.id%TYPE;
+        found_team_club_coaches_id team_club_coaches.id%TYPE;
 
 BEGIN
         x := -101;
@@ -733,9 +733,9 @@ BEGIN
 
                 IF found_club_coach_id > 0 THEN
 
-                        select id into found_team_club_persons_club_coaches_id from team_club_persons_club_coaches where club_coach_id = found_club_coach_id;
+                        select id into found_team_club_coaches_id from team_club_coaches where club_coach_id = found_club_coach_id;
 
-                        IF found_team_club_persons_club_coaches_id IS NULL THEN
+                        IF found_team_club_coaches_id IS NULL THEN
                                 delete from club_coaches where club_person_id = found_club_person_id;
                                 x := -101;
 
@@ -755,7 +755,7 @@ AS $$
 DECLARE
         found_club_manager_id club_managers.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
-        found_team_club_persons_club_manager_id team_club_persons_club_managers.id%TYPE;
+        found_team_club_manager_id team_club_managers.id%TYPE;
 
 
 BEGIN
@@ -769,9 +769,9 @@ BEGIN
 
                 IF found_club_manager_id > 0 THEN
 
-                        select id into found_team_club_persons_club_manager_id from team_club_persons_club_managers where club_manager_id = found_club_manager_id;
+                        select id into found_team_club_manager_id from team_club_managers where club_manager_id = found_club_manager_id;
 
-                        IF found_team_club_persons_club_manager_id IS NULL THEN
+                        IF found_team_club_manager_id IS NULL THEN
                                 delete from club_managers where club_person_id = found_club_person_id;
                                 x := -101;
 

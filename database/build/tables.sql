@@ -827,17 +827,6 @@ create table team_club_players
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE team_club_persons_club_parents 
-(
-	id SERIAL,
-	team_club_person_id integer not null,
-	club_parent_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
-        FOREIGN KEY(club_parent_id) REFERENCES club_parents(id),
-	PRIMARY KEY (id)
-);
-
 create table team_club_parents
 (
 	id SERIAL,
@@ -850,17 +839,6 @@ create table team_club_parents
 
 
 
-CREATE TABLE team_club_persons_club_coaches 
-(
-	id SERIAL,
-	team_club_person_id integer not null,
-	club_coach_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
-        FOREIGN KEY(club_coach_id) REFERENCES club_coaches(id),
-	PRIMARY KEY (id)
-);
-
 create table team_club_coaches
 (
 	id SERIAL,
@@ -871,17 +849,6 @@ create table team_club_coaches
 	PRIMARY KEY (id)
 );
 
-
-CREATE TABLE team_club_persons_club_managers 
-(
-	id SERIAL,
-	team_club_person_id integer not null,
-	club_manager_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(team_club_person_id) REFERENCES team_club_persons(id),
-        FOREIGN KEY(club_manager_id) REFERENCES club_managers(id),
-	PRIMARY KEY (id)
-);
 
 create table team_club_managers
 (

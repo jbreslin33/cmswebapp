@@ -5,13 +5,16 @@ DECLARE
         result_set text;
         DECLARE x int := -111;
         json_result text;
-	found_team_club_manager_id team_club_persons_club_managers.id%TYPE;
+	found_team_club_manager_id team_club_managers.id%TYPE;
 BEGIN
-        select team_club_persons_club_managers.id into found_team_club_manager_id 
-	from team_club_persons_club_managers
-        join team_club_persons on team_club_persons.id=team_club_persons_club_managers.team_club_person_id
-        join teams on teams.id=team_club_persons.team_id
-        where teams.id = $2;
+        select team_club_managers.id into found_team_club_manager_id 
+	from team_club_managers
+
+		join club_managers on club_managers.id = team_club_managers.club_manager_id
+        	join club_persons on club_persons.id = club_managers.club_person_id
+        	join teams on teams.id = team_club_managers.team_id
+
+        where teams.id = $2 AND club_persons.person_id = $2;
 
 	IF found_team_club_manager_id > 0 THEN
         	CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);

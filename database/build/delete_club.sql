@@ -174,7 +174,7 @@ BEGIN
 		FOR recB IN
 			select team_club_persons.id from team_club_persons where club_person_id = recA.id	
 		LOOP
-			delete from team_club_persons_club_managers where team_club_person_id = recB.id; 	
+			delete from team_club_managers where team_club_person_id = recB.id; 	
 		END LOOP;
 	END LOOP;
 

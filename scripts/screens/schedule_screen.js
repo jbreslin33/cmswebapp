@@ -254,7 +254,7 @@ class ScheduleScreen extends Screen
 				this.smash();
 				this.printItems();
 			}
-			this.setTimeOffMessage();	
+			//this.setTimeOffMessage();	
 		}
 
 	} //end processJsonData
@@ -394,19 +394,6 @@ class ScheduleScreen extends Screen
 	
 	}
 
-	setTimeOffMessage()
-	{
-		if (this.mItemArray.length > 0) 
-		{
-                	this.setMessage('', 'black');
-			console.log('calling set message to black');
-                }
-                else
-                {
-                	this.setMessage('You have no events upcoming. Enjoy the time off.', 'black');
-			console.log('calling set message to time off');
-                }
-	}
 }
 					/*
 					 *

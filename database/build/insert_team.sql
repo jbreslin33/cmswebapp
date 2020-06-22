@@ -137,7 +137,7 @@ BEGIN
                 insert into club_managers (club_person_id,manager_id) values (found_club_person_id,found_manager_id) returning id into found_club_manager_id;
         END IF;
 
-        insert into team_club_persons_club_managers (team_club_person_id,club_manager_id) values (returning_team_club_person_id, found_club_manager_id) returning id into x;
+        insert into team_club_managers (team_id, club_manager_id) values (returning_team_id, found_club_manager_id) returning id into x;
 
         select id into returning_club_administrator_id from club_administrators where club_person_id = found_club_person_id;
 

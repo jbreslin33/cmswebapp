@@ -67,10 +67,10 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-               	select distinct clubs.id, clubs.name from clubs
-                join club_persons on club_persons.club_id=clubs.id
-                join team_club_persons on team_club_persons.club_person_id=club_persons.id
-                join team_club_persons_club_managers on team_club_persons_club_managers.team_club_person_id=team_club_persons.id
+               	select distinct clubs.id, clubs.name from team_club_managers
+			join club_managers on club_managers.id = team_club_managers.club_manager_id
+			join club_persons on club_persons.id = club_managers.club_person_id
+			join clubs on clubs.id = club_persons.club_id
                 where club_persons.person_id = $1 
 
         ) t;
@@ -597,23 +597,10 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select
-                        teams.id, teams.name
-                from
-                        teams
-                join
-                        team_club_persons
-                        on
-                                team_club_persons.team_id = teams.id
-                join
-                        club_persons
-                        on
-                                club_persons.id = team_club_persons.club_person_id
-
-                join
-                        team_club_persons_club_managers
-                        on
-                                team_club_persons_club_managers.team_club_person_id = team_club_persons.id
+                select teams.id, teams.name from teams
+                        join team_club_managers on team_club_managers.team_id = teams.id
+			join club_managers on club_managers.id = team_club_managers.club_manager_id
+			join club_persons on club_persons.id = club_managers.club_person_id
 
                 where
                         club_persons.club_id = $2 AND club_persons.person_id = $1 
@@ -644,22 +631,10 @@ SELECT json_agg(t) INTO raw_json
                         teams.id, teams.name
                 from
                         teams
-                join
-                        team_club_persons
-                        on
-                                team_club_persons.team_id = teams.id
-                join
-                        club_persons
-                        on
-                                club_persons.id = team_club_persons.club_person_id
-
-                join
-                        team_club_persons_club_managers
-                        on
-                                team_club_persons_club_managers.team_club_person_id = team_club_persons.id
-
-                where
-                        club_persons.person_id = $1
+                join team_club_managers on team_club_managers.team_id = teams.id
+		join club_managers on club_managers.id = team_club_managers.club_manager_id 
+		join club_persons on club_persons.id = club_managers.club_person_id
+                where club_persons.person_id = $1
         ) t;
 
         IF raw_json is NULL THEN
