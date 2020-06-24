@@ -98,6 +98,18 @@ BEGIN
                 delete from team_club_players where id = rec.id;
         END LOOP;
 
+	--team_club_parents
+        FOR rec IN
+                select team_club_parents.id from team_club_parents
+                        join club_parents on club_parents.id = team_club_parents.club_parent_id
+                        join club_persons on club_persons.id = club_parents.club_person_id
+
+                where club_persons.club_id = $1
+        LOOP
+                delete from team_club_parents where id = rec.id;
+        END LOOP;
+
+
 
 
 
