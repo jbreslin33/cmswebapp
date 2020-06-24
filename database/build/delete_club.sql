@@ -109,6 +109,27 @@ BEGIN
                 delete from team_club_parents where id = rec.id;
         END LOOP;
 
+        --team_club_coaches
+        FOR rec IN
+                select team_club_coaches.id from team_club_coaches
+                        join club_coaches on club_coaches.id = team_club_coaches.club_coach_id
+                        join club_persons on club_persons.id = club_coaches.club_person_id
+
+                where club_persons.club_id = $1
+        LOOP
+                delete from team_club_coaches where id = rec.id;
+        END LOOP;
+
+        --team_club_managers
+        FOR rec IN
+                select team_club_managers.id from team_club_managers
+                        join club_managers on club_managers.id = team_club_managers.club_manager_id
+                        join club_persons on club_persons.id = club_managers.club_person_id
+
+                where club_persons.club_id = $1
+        LOOP
+                delete from team_club_managers where id = rec.id;
+        END LOOP;
 
 
 
