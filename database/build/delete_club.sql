@@ -137,6 +137,30 @@ BEGIN
         LOOP
 		delete from club_players where club_person_id = rec.id; 	
         END LOOP;
+	
+	--club_parents
+        FOR rec IN
+		select id from club_persons where club_id = $1  
+        LOOP
+		delete from club_parents where club_person_id = rec.id; 	
+        END LOOP;
+	
+	--club_coaches
+        FOR rec IN
+		select id from club_persons where club_id = $1  
+        LOOP
+		delete from club_coaches where club_person_id = rec.id; 	
+        END LOOP;
+	
+	--club_managers
+        FOR rec IN
+		select id from club_persons where club_id = $1  
+        LOOP
+		delete from club_managers where club_person_id = rec.id; 	
+        END LOOP;
+
+
+
 
 
 
