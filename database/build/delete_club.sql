@@ -65,8 +65,18 @@ DECLARE
 BEGIN
 	delete from club_emails where club_id = $1;
 
-	--not deleteing below
+	--games_players_availability
+        FOR rec IN
+                select team_club_players.id from team_club_players
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
 
+                where club_persons.club_id = $1
+        LOOP
+                delete from games_players_availability where team_club_player_id = rec.id;
+        END LOOP;
+
+	--practices_players_availability
 	FOR rec IN
 		select team_club_players.id from team_club_players 
 			join club_players on club_players.id = team_club_players.club_player_id
@@ -76,6 +86,17 @@ BEGIN
 	LOOP
 		delete from practices_players_availability where team_club_player_id = rec.id;		
 	END LOOP;	
+
+	--team_club_players
+        FOR rec IN
+                select team_club_players.id from team_club_players
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
+
+                where club_persons.club_id = $1
+        LOOP
+                delete from team_club_players where id = rec.id;
+        END LOOP;
 
 
 
