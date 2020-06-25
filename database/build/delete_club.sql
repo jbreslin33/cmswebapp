@@ -131,6 +131,17 @@ BEGIN
                 delete from team_club_managers where id = rec.id;
         END LOOP;
 
+        --team_club_persons
+        FOR rec IN
+                select team_club_persons.id from team_club_persons
+                        join club_persons on club_persons.id = team_club_persons.club_person_id
+
+                where club_persons.club_id = $1
+        LOOP
+                delete from team_club_persons where id = rec.id;
+        END LOOP;
+
+
 	--club_players
         FOR rec IN
 		select id from club_persons where club_id = $1  
@@ -209,6 +220,8 @@ BEGIN
 
 		END LOOP;
         END LOOP;
+
+
 
 
 END;
