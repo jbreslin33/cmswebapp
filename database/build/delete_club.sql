@@ -196,9 +196,17 @@ BEGIN
         	FOR recB IN
 			select practice_id from teams_practices where team_id = recA.team_id
 		LOOP
+
+			FOR recC IN
+				select practice_id from practice_practices where practices_id = recB.practice_id 
+			LOOP
+				delete from practice_practices where practice_id = recC.practice_id;
+			END LOOP;
+
 			delete from practice_practices where practices_id = recB.practice_id; 
 			delete from teams_practices where practice_id = recB.practice_id;
 			delete from practices where id = recB.practice_id; 	
+
 		END LOOP;
         END LOOP;
 
