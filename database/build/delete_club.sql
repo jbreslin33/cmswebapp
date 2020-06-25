@@ -221,8 +221,16 @@ BEGIN
 		END LOOP;
         END LOOP;
 
+	--teams clubs_teams
+	FOR rec IN
+		select team_id from clubs_teams where club_id = $1
+	LOOP
+		delete from clubs_teams where team_id = rec.team_id;
+		delete from teams where id = rec.team_id;
+	END LOOP;
 
-
+	delete from club_persons where club_id = $1;
+	delete from clubs where id = $1 returning id into x;
 
 END;
 $$;
