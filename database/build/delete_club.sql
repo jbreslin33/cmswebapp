@@ -166,7 +166,13 @@ BEGIN
 		delete from club_administrators where club_person_id = rec.id; 	
         END LOOP;
 
-	--games
+	--pitches
+        --FOR rec IN
+--		select id from club_persons where club_id = $1  
+
+
+
+	--games and teams_games
         FOR recA IN
 		select team_id from clubs_teams where club_id = $1  
         LOOP
