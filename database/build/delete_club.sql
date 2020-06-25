@@ -166,6 +166,17 @@ BEGIN
 		delete from club_administrators where club_person_id = rec.id; 	
         END LOOP;
 
+	--games
+        FOR recA IN
+		select team_id from clubs_teams where club_id = $1  
+        LOOP
+        	FOR recB IN
+			select game_id from teams_games where team_id = recA.team_id
+		LOOP
+			delete from teams_games where game_id = recB.game_id;
+			delete from games where id = recB.game_id; 	
+		END LOOP;
+        END LOOP;
 
 
 
