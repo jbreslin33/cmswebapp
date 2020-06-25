@@ -167,10 +167,13 @@ BEGIN
         END LOOP;
 
 	--pitches
-        --FOR rec IN
---		select id from club_persons where club_id = $1  
-
-
+        FOR rec IN
+		select pitch_id from clubs_pitches where club_id = $1  
+	LOOP
+		delete from games_pitches where pitch_id = rec.pitch_id;
+		delete from clubs_pitches where pitch_id = rec.pitch_id;	
+		delete from pitches where id = rec.pitch_id; 
+	END LOOP;
 
 	--games and teams_games
         FOR recA IN
