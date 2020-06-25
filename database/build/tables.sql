@@ -65,10 +65,21 @@ CREATE TABLE pitches
 (
         id SERIAL,
         name text NOT NULL,
-        club_id integer NOT NULL,
+	address text,
+        coordinates text,
 	created_at timestamp not null default now(),
-        PRIMARY KEY (id),
-        FOREIGN KEY(club_id) REFERENCES clubs(id)
+        PRIMARY KEY (id)
+);
+
+create table clubs_pitches
+(
+	id SERIAL,
+	club_id integer,
+	pitch_id integer,
+        FOREIGN KEY(club_id) REFERENCES clubs(id),
+        FOREIGN KEY(pitch_id) REFERENCES pitches(id),
+	unique(club_id, pitch_id),
+	primary key (id)
 );
 
 --2004,2005,2006

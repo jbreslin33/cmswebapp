@@ -722,6 +722,9 @@ DECLARE
 	returning_player_id players.id%TYPE;
 	returning_club_player_id club_players.id%TYPE;
 
+	--pitches
+	returning_pitch_id pitches.id%TYPE;
+
 BEGIN
 	--JOE
 	insert into persons (first_name, last_name, phones, address) values ('Joe', 'Hurst', ARRAY [ '215-555-1212' ], '2913 Street Road, Bensalem PA 19020') returning id into returning_person_id;
@@ -742,8 +745,19 @@ BEGIN
 	insert into club_emails (club_id,email_id) values (1,1);
 
 	--pitches
-	insert into pitches (name, club_id) values ('Field 1', returning_club_id);
-	insert into pitches (name, club_id) values ('Sofive', returning_club_id);
+	insert into pitches (name, address) values ('Field 1', '2913 Street Rd, Bensalem, PA 19020') returning id into returning_pitch_id;
+	insert into clubs_pitches (club_id, pitch_id) values (1,returning_pitch_id);
+	insert into pitches (name, address) values ('Field 2', '2913 Street Rd, Bensalem, PA 19020') returning id into returning_pitch_id;
+	insert into clubs_pitches (club_id, pitch_id) values (1,returning_pitch_id);
+	insert into pitches (name, address) values ('Field 3', '2913 Street Rd, Bensalem, PA 19020') returning id into returning_pitch_id;
+	insert into clubs_pitches (club_id, pitch_id) values (1,returning_pitch_id);
+	insert into pitches (name, address) values ('Field 6', '7801 State Rd., Philadelphia, PA 19136') returning id into returning_pitch_id;
+	insert into clubs_pitches (club_id, pitch_id) values (1,returning_pitch_id);
+	insert into pitches (name, address) values ('Field 7', '7801 State Rd., Philadelphia, PA 19136') returning id into returning_pitch_id;
+	insert into clubs_pitches (club_id, pitch_id) values (1,returning_pitch_id);
+	insert into pitches (name, address) values ('Towey Recreation Center', '1832 N Howard St, Philadelphia, PA 19122') returning id into returning_pitch_id;
+	insert into clubs_pitches (club_id, pitch_id) values (1,returning_pitch_id);
+
 
 	--teams
 	CALL p_insert_caos(returning_club_id);
