@@ -171,6 +171,8 @@ BEGIN
 		select pitch_id from clubs_pitches where club_id = $1  
 	LOOP
 		delete from games_pitches where pitch_id = rec.pitch_id;
+		delete from practices_pitches where pitch_id = rec.pitch_id;
+
 		delete from clubs_pitches where pitch_id = rec.pitch_id;	
 		delete from pitches where id = rec.pitch_id; 
 	END LOOP;
@@ -187,9 +189,18 @@ BEGIN
 		END LOOP;
         END LOOP;
 
-
-
-
+	--practices and teams_practices
+        FOR recA IN
+		select team_id from clubs_teams where club_id = $1  
+        LOOP
+        	FOR recB IN
+			select practice_id from teams_practices where team_id = recA.team_id
+		LOOP
+			delete from practice_practices where practices_id = recB.practice_id; 
+			delete from teams_practices where practice_id = recB.practice_id;
+			delete from practices where id = recB.practice_id; 	
+		END LOOP;
+        END LOOP;
 
 
 END;
