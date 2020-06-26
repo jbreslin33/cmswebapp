@@ -919,3 +919,40 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+CREATE OR REPLACE FUNCTION j_select_game_roster(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        distinct games.id as game_id, team_club_players.id as players, persons.first_name, persons.last_name
+                from
+                        games
+
+                        join teams_games on teams_games.game_id = games.id
+                        join team_club_players on team_club_players.team_id = teams_games.team_id
+                        join club_players on club_players.id = team_club_players.id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join persons on persons.id = club_persons.person_id
+                        join emails_persons on emails_persons.person_id = persons.id
+
+                where
+                        games.id = $1
+
+	) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"game_roster": []', raw_json);
+        ELSE
+                result_set = CONCAT('"game_roster": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+

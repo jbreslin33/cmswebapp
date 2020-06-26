@@ -50,15 +50,7 @@ BEGIN
                 ',',
                 j_select_codes(-100),
                 ',',
-                j_select_games(email_id,$3,$4),
-                ',',
-                j_select_practices(email_id,$3,$4),
-                ',',
-                j_select_games_player_availability(email_id),
-                ',',
-                j_select_practices_player_availability(email_id),
-                ',',
-                j_select_all_teams_managed(person_id)
+                j_select_game_roster($3)
         );
 
 RETURN result_set;

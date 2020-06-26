@@ -17,6 +17,7 @@ class ScheduleScreen extends Screen
 		this.mGamesPlayersArray                = new Array();
 		this.mPracticesPlayersArray            = new Array();
 		this.mTeamsArray = new Array();
+		this.mGameRosterArray = new Array();
 
 		//availability
 		this.mAvailabilityArray = new Array();
@@ -245,7 +246,16 @@ class ScheduleScreen extends Screen
 					this.mTeamsArray.push(this.mJson.teams[i]);
 				}
 			}
-			
+
+			if (this.mJson.game_roster)
+			{
+                       		for (var i = 0; i < this.mJson.game_roster.length; i++)
+				{
+					console.log('game roster:' + i);
+					this.mGameRosterArray.push(this.mJson.game_roster[i]);
+				}
+			}
+
 			if (this.mEventsArray.length > 0)
 			{
 
