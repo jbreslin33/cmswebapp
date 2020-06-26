@@ -117,7 +117,6 @@ class ScheduleItem extends Item
 	{
 		var screen = APPLICATION.getCurrentScreen();
 
-		console.log('screen.mGamesPlayersArray.length:' + screen.mGamesPlayersArray.length);
 		for (var i = 0; i < screen.mGamesPlayersArray.length; i++)
 		{
 			var availability_id = null;
@@ -132,12 +131,9 @@ class ScheduleItem extends Item
                                         }
                                 }
 
-				//we need to check game id???
-				//if (this.mJson.id == screen.mGamesPlayersArray[i].last_name) 
 				if (this.mJson.id == screen.mGamesPlayersArray[i].game_id) 
 				{
 
-					console.log('am i calling this again');
                                 	var button = document.createElement("BUTTON");
                                 	button.setAttribute("class","availability-button");
                                 	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
@@ -194,46 +190,49 @@ class ScheduleItem extends Item
 						availability_id = this.mApplication.getCurrentScreen().mPracticesPlayerAvailabilityArray[a].availability_id;	
 					}
 				}
+				
+				if (this.mJson.id == screen.mPracticesPlayersArray[i].practice_id) 
+				{
+        				var button = document.createElement("BUTTON");
+                			button.setAttribute("class","availability-button");
+                        		button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
+                        		this.mPlayerDiv.appendChild(button);
+                        		var id = 'button_2_1_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
+                        		button.setAttribute("id", id);
+                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 1)
+                        		{
+                        			button.style.backgroundColor = APPLICATION.mLawnGreen;
+                        		}
+                        		this.mAvailabilityButtonArray.push(button);
 
-        			var button = document.createElement("BUTTON");
-                		button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
-                        	this.mPlayerDiv.appendChild(button);
-                        	var id = 'button_2_1_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
-                        	button.setAttribute("id", id);
-                        	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (availability_id == 1)
-                        	{
-                        		button.style.backgroundColor = APPLICATION.mLawnGreen;
-                        	}
-                        	this.mAvailabilityButtonArray.push(button);
 
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                        		button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
+                                	this.mPlayerDiv.appendChild(button);
+                        		var id = 'button_2_2_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
+                                	button.setAttribute("id", id);
+                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+					if (availability_id == 2)
+                                	{
+                                		button.style.backgroundColor = APPLICATION.mYellow;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
 
-                                var button = document.createElement("BUTTON");
-                                button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
-                                this.mPlayerDiv.appendChild(button);
-                        	var id = 'button_2_2_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
-                                button.setAttribute("id", id);
-                        	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-				if (availability_id == 2)
-                                {
-                                	button.style.backgroundColor = APPLICATION.mYellow;
-                                }
-                                this.mAvailabilityButtonArray.push(button);
-
-                                var button = document.createElement("BUTTON");
-                                button.setAttribute("class","availability-button");
-                        	button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
-                                this.mPlayerDiv.appendChild(button);
-                        	var id = 'button_2_3_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
-                                button.setAttribute("id", id);
-                        	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-				if (availability_id == 3)
-                                {
-                                	button.style.backgroundColor = APPLICATION.mRed;
-                                }
-                                this.mAvailabilityButtonArray.push(button);
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                        		button.innerHTML = '' + screen.mPracticesPlayersArray[i].first_name + ' ' + screen.mPracticesPlayersArray[i].last_name;
+                                	this.mPlayerDiv.appendChild(button);
+                        		var id = 'button_2_3_' + this.mJson.id + '_' + screen.mPracticesPlayersArray[i].players;
+                                	button.setAttribute("id", id);
+                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+					if (availability_id == 3)
+                                	{
+                                		button.style.backgroundColor = APPLICATION.mRed;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
+				}
 			}
 		}
 	}
