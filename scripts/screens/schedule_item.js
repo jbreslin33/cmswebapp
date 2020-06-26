@@ -117,6 +117,7 @@ class ScheduleItem extends Item
 	{
 		var screen = APPLICATION.getCurrentScreen();
 
+		console.log('screen.mGamesPlayersArray.length:' + screen.mGamesPlayersArray.length);
 		for (var i = 0; i < screen.mGamesPlayersArray.length; i++)
 		{
 			var availability_id = null;
@@ -131,46 +132,52 @@ class ScheduleItem extends Item
                                         }
                                 }
 
-				console.log('am i calling this again');
-                                var button = document.createElement("BUTTON");
-                                button.setAttribute("class","availability-button");
-                                button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
-                                this.mPlayerDiv.appendChild(button);
-                                var id = 'button_1_1_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
-                                button.setAttribute("id", id);
-                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (availability_id == 1)
-                                {
-                                        button.style.backgroundColor = APPLICATION.mLawnGreen;
-                                }
-				this.mAvailabilityButtonArray.push(button);
+				//we need to check game id???
+				//if (this.mJson.id == screen.mGamesPlayersArray[i].last_name) 
+				if (this.mJson.id == screen.mGamesPlayersArray[i].game_id) 
+				{
+
+					console.log('am i calling this again');
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                                	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
+                                	this.mPlayerDiv.appendChild(button);
+                                	var id = 'button_1_1_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
+                                	button.setAttribute("id", id);
+                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 1)
+                                	{
+                                       		button.style.backgroundColor = APPLICATION.mLawnGreen;
+                                	}
+					this.mAvailabilityButtonArray.push(button);
 
 
-                                var button = document.createElement("BUTTON");
-                                button.setAttribute("class","availability-button");
-                                button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name; 
-                                this.mPlayerDiv.appendChild(button);
-                                var id = 'button_1_2_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
-                                button.setAttribute("id", id);
-                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (availability_id == 2)
-                                {
-                                        button.style.backgroundColor = APPLICATION.mYellow;
-                                }
-                                this.mAvailabilityButtonArray.push(button);
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                                	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name; 
+                                	this.mPlayerDiv.appendChild(button);
+                                	var id = 'button_1_2_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
+                                	button.setAttribute("id", id);
+                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 2)
+                                	{
+                                       		button.style.backgroundColor = APPLICATION.mYellow;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
 
-                                var button = document.createElement("BUTTON");
-                                button.setAttribute("class","availability-button");
-                                button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
-                                this.mPlayerDiv.appendChild(button);
-                                var id = 'button_1_3_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
-                                button.setAttribute("id", id);
-                                button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        	if (availability_id == 3)
-                                {
-                                        button.style.backgroundColor = APPLICATION.mRed;
-                                }
-                                this.mAvailabilityButtonArray.push(button);
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                                	button.innerHTML = '' + screen.mGamesPlayersArray[i].first_name + ' ' + screen.mGamesPlayersArray[i].last_name;
+                                	this.mPlayerDiv.appendChild(button);
+                                	var id = 'button_1_3_' + this.mJson.id + '_' + screen.mGamesPlayersArray[i].players;
+                                	button.setAttribute("id", id);
+                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 3)
+                                	{
+                                       		button.style.backgroundColor = APPLICATION.mRed;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
+				}
                         }
 		}
 //game_id, players

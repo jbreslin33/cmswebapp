@@ -859,7 +859,7 @@ SELECT json_agg(t) INTO raw_json
         from
         (
                 select
-                        games.id as game_id, team_club_players.id as players, persons.first_name, persons.last_name
+                        distinct games.id as game_id, team_club_players.id as players, persons.first_name, persons.last_name
                 from
                         games
 
