@@ -249,10 +249,23 @@ class ScheduleScreen extends Screen
 
 			if (this.mJson.game_roster)
 			{
+				var game_id = null;
+				var item = null;
                        		for (var i = 0; i < this.mJson.game_roster.length; i++)
 				{
-					console.log('game roster:' + i);
+					game_id = this.mJson.game_roster[i].game_id;
 					this.mGameRosterArray.push(this.mJson.game_roster[i]);
+				}
+
+				//who does this belong to?
+                		for (var i = 0; i < this.mItemArray.length; i++)
+				{
+					if (this.mItemArray[i].mJson.type == 'game' && this.mItemArray[i].mJson.id == game_id)
+					{
+						//this is our item that we just got roster for
+						item = this.mItemArray[i];
+						console.log('found game item with id:' + game_id);
+					}	
 				}
 			}
 
