@@ -378,28 +378,39 @@ class ScheduleItem extends Item
 		}
 	}
 
+
+        makeCard(div)
+        {
+                //put container..
+                this.mCardDiv = document.createElement('div');
+                this.mDivArray.push(this.mCardDiv);
+                this.mCardDiv.setAttribute('class','card');
+                div.appendChild(this.mCardDiv);
+        }
+
+        makeContainer()
+        {
+                this.mContainerDiv = document.createElement('div');
+                this.mContainerDiv.setAttribute('class','container');
+                this.mCardDiv.appendChild(this.mContainerDiv);
+                this.mDivArray.push(this.mContainerDiv);
+        }
+
+
 	printToScreen(div)
 	{
 		if (this.mJson)
 		{
 			//put container..
-			this.mCardDiv = document.createElement('div');
-                	this.mDivArray.push(this.mCardDiv);
-                	this.mCardDiv.setAttribute('class','card');
-                	div.appendChild(this.mCardDiv);
 
-                	this.mContainerDiv = document.createElement('div');
-                	this.mContainerDiv.setAttribute('class','container');
-                	this.mCardDiv.appendChild(this.mContainerDiv);
-                	this.mDivArray.push(this.mContainerDiv);
+			this.makeCard(div);
+			this.makeContainer();
 
 			this.makeTabs();
 
 			//player div..
 			this.mPlayerDiv = document.createElement('div');
-			//this.mTeamDiv = document.createElement('div');
 			this.mContainerDiv.appendChild(this.mPlayerDiv);
-			//this.mContainerDiv.appendChild(this.mTeamDiv);
 
                        	var p = document.createElement('p');
 
