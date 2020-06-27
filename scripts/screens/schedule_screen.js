@@ -305,6 +305,7 @@ class ScheduleScreen extends Screen
                       
 				//recreate teamdiv
 				item.mTeamDiv = document.createElement('div');
+                        	//item.mContainerDiv.appendChild(item.mTeamDiv);
                         	item.mContainerDiv.appendChild(item.mTeamDiv);
 
 				item.makeRosterButtons();	

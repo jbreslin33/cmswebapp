@@ -285,6 +285,8 @@ td, th
 .container 
 {
 	padding: 2px 16px;
+	display: flex;
+  	flex-direction: column;
 }
 
 /***********************************************/
