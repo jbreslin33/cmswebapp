@@ -388,15 +388,6 @@ class ScheduleItem extends Item
                 div.appendChild(this.mCardDiv);
         }
 
-        makeContainer()
-        {
-                this.mContainerDiv = document.createElement('div');
-                this.mContainerDiv.setAttribute('class','container');
-                this.mCardDiv.appendChild(this.mContainerDiv);
-                this.mDivArray.push(this.mContainerDiv);
-        }
-
-
 	printToScreen(div)
 	{
 		if (this.mJson)
