@@ -32,6 +32,14 @@ class ScheduleItem extends Item
         	this.mTeamDiv = null;
 	}
 
+	removeTeamRosterDivs()
+	{
+		if (this.mTeamDiv)
+		{
+			this.mTeamDiv.remove();		
+		}
+	}
+
 	getTeamAvailability()
 	{
 		var screen = APPLICATION.getCurrentScreen();
@@ -389,9 +397,9 @@ class ScheduleItem extends Item
 
 			//player div..
 			this.mPlayerDiv = document.createElement('div');
-			this.mTeamDiv = document.createElement('div');
+			//this.mTeamDiv = document.createElement('div');
 			this.mContainerDiv.appendChild(this.mPlayerDiv);
-			this.mContainerDiv.appendChild(this.mTeamDiv);
+			//this.mContainerDiv.appendChild(this.mTeamDiv);
 
                        	var p = document.createElement('p');
 
