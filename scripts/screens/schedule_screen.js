@@ -17,7 +17,6 @@ class ScheduleScreen extends Screen
 		this.mGamesPlayersArray                = new Array();
 		this.mPracticesPlayersArray            = new Array();
 		this.mTeamsArray = new Array();
-		this.mGameRosterArray = new Array();
 
 		//availability
 		this.mAvailabilityArray = new Array();
@@ -247,14 +246,14 @@ class ScheduleScreen extends Screen
 				}
 			}
 
+			var item = null;
+			var game_id = null;
 			if (this.mJson.game_roster)
 			{
-				var game_id = null;
-				var item = null;
-                       		for (var i = 0; i < this.mJson.game_roster.length; i++)
+				//get game id
+				for (var i = 0; i < this.mJson.game_roster.length; i++)
 				{
 					game_id = this.mJson.game_roster[i].game_id;
-					this.mGameRosterArray.push(this.mJson.game_roster[i]);
 				}
 
 				//who does this belong to?
@@ -263,10 +262,46 @@ class ScheduleScreen extends Screen
 					if (this.mItemArray[i].mJson.type == 'game' && this.mItemArray[i].mJson.id == game_id)
 					{
 						//this is our item that we just got roster for
+						console.log('got item');
 						item = this.mItemArray[i];
-						console.log('found game item with id:' + game_id);
 					}	
 				}
+
+				//fill it
+				if (item)
+				{
+					//set jsons in item	
+					item.mJson.game_roster = this.mJson.game_roster;
+
+					//set array in item
+					item.mGameRosterArray.length = 0;
+					for (var i = 0; i < this.mJson.game_roster.length; i++)
+					{
+						item.mGameRosterArray.push(this.mJson.game_roster[i]);
+					}
+
+				}
+			}
+			
+			if (this.mJson.game_team_availability)
+			{
+				if (item)
+				{
+					//set json
+					item.mJson.game_team_availability = this.mJson.game_team_availability;
+
+					//add to avail array
+					item.mGameTeamAvailabilityArray.length = 0;
+                       			for (var i = 0; i < this.mJson.game_team_availability.length; i++)
+					{
+						item.mGameTeamAvailabilityArray.push(this.mJson.game_team_availability[i]);
+					}
+				}
+			}
+			
+			if (item)
+			{
+				item.makeRosterButtons();	
 			}
 
 			if (this.mEventsArray.length > 0)
@@ -277,7 +312,6 @@ class ScheduleScreen extends Screen
 				this.smash();
 				this.printItems();
 			}
-			//this.setTimeOffMessage();	
 		}
 
 	} //end processJsonData

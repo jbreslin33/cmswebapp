@@ -19,6 +19,11 @@ class ScheduleItem extends Item
 
 		this.mAvailabilityIdArray = new Array();
 
+                this.mGameRosterArray = new Array();
+                this.mPracticeRosterArray = new Array();
+                this.mGameTeamAvailabilityArray = new Array();
+                this.mPracticeTeamAvailabilityArray = new Array();
+
 		//availability buttons unique to schedules
 		this.mAvailabilityButtonArray = new Array();
 
@@ -112,6 +117,133 @@ class ScheduleItem extends Item
                 button.innerHTML = 'Team Availability';
                 button.onclick = this.hitTeamDiv.bind(this);
                 tab.appendChild(button);
+	}
+
+        //item.mJson.game_roster = this.mJson.game_roster;
+        //item.mJson.game_team_availability = this.mJson.game_team_availability;
+
+	makeRosterButtons()
+	{
+		var screen = APPLICATION.getCurrentScreen();
+
+		for (var i = 0; i < this.mGameRosterArray.length; i++)
+		{
+			var availability_id = null;
+
+                       	if (this.mJson.type == 'game')
+                        {
+                                for (var a = 0; a < this.mGameTeamAvailabilityArray.length; a++)
+                                {
+                                        if (this.mGameTeamAvailabilityArray[a].game_id == this.mJson.id && this.mGameTeamAvailabilityArray[a].team_club_player_id == this.mGameRosterArray[i].players )
+                                        {
+                                                availability_id = this.mGameTeamAvailabilityArray[a].availability_id;
+                                        }
+                                }
+
+				if (this.mJson.id == this.mGameRosterArray[i].game_id) 
+				{
+
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                                	button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name;
+                                	this.mTeamDiv.appendChild(button);
+                                	var id = 'button_1_1_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
+                                	button.setAttribute("id", id);
+                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 1)
+                                	{
+                                       		button.style.backgroundColor = APPLICATION.mLawnGreen;
+                                	}
+					this.mAvailabilityButtonArray.push(button);
+
+
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                                	button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name; 
+                                	this.mTeamDiv.appendChild(button);
+                                	var id = 'button_1_2_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
+                                	button.setAttribute("id", id);
+                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 2)
+                                	{
+                                       		button.style.backgroundColor = APPLICATION.mYellow;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
+
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                                	button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name;
+                                	this.mTeamDiv.appendChild(button);
+                                	var id = 'button_1_3_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
+                                	button.setAttribute("id", id);
+                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 3)
+                                	{
+                                       		button.style.backgroundColor = APPLICATION.mRed;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
+				}
+                        }
+		}
+		
+		for (var i = 0; i < this.mPracticeRosterArray.length; i++)
+		{
+			var availability_id = null;
+
+			if (this.mJson.type == 'practice')
+			{
+				for (var a = 0; a < this.mPracticeTeamAvailabilityArray.length; a++)
+				{
+					if (this.mPracticeTeamAvailabilityArray[a].practice_id == this.mJson.id && this.mPracticeTeamAvailabilityArray[a].team_club_player_id == this.mPracticeRosterArray[i].players )
+					{
+						availability_id = this.mPracticesPlayerAvailabilityArray[a].availability_id;	
+					}
+				}
+				
+				if (this.mJson.id == this.mPracticeRosterArray[i].practice_id) 
+				{
+        				var button = document.createElement("BUTTON");
+                			button.setAttribute("class","availability-button");
+                        		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
+                        		this.mTeamDiv.appendChild(button);
+                        		var id = 'button_2_1_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
+                        		button.setAttribute("id", id);
+                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        		if (availability_id == 1)
+                        		{
+                        			button.style.backgroundColor = APPLICATION.mLawnGreen;
+                        		}
+                        		this.mAvailabilityButtonArray.push(button);
+
+
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                        		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
+                                	this.mTeamDiv.appendChild(button);
+                        		var id = 'button_2_2_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
+                                	button.setAttribute("id", id);
+                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+					if (availability_id == 2)
+                                	{
+                                		button.style.backgroundColor = APPLICATION.mYellow;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
+
+                                	var button = document.createElement("BUTTON");
+                                	button.setAttribute("class","availability-button");
+                        		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
+                                	this.mTeamDiv.appendChild(button);
+                        		var id = 'button_2_3_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
+                                	button.setAttribute("id", id);
+                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+					if (availability_id == 3)
+                                	{
+                                		button.style.backgroundColor = APPLICATION.mRed;
+                                	}
+                                	this.mAvailabilityButtonArray.push(button);
+				}
+			}
+		}
 	}
 
 	makeButtons()
@@ -257,7 +389,9 @@ class ScheduleItem extends Item
 
 			//player div..
 			this.mPlayerDiv = document.createElement('div');
+			this.mTeamDiv = document.createElement('div');
 			this.mContainerDiv.appendChild(this.mPlayerDiv);
+			this.mContainerDiv.appendChild(this.mTeamDiv);
 
                        	var p = document.createElement('p');
 

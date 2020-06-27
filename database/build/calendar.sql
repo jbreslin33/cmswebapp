@@ -50,7 +50,9 @@ BEGIN
                 ',',
                 j_select_codes(-100),
                 ',',
-                j_select_game_roster($3)
+                j_select_game_roster($3),
+                ',',
+		j_select_game_team_availability($3)
         );
 
 RETURN result_set;

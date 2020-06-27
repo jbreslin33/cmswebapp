@@ -765,7 +765,40 @@ SELECT json_agg(t) INTO raw_json
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
---END J_SELECT GAMES_PLAYER_AVAILABILITY
+
+
+CREATE OR REPLACE FUNCTION j_select_game_team_availability(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select distinct games_players_availability.id, games_players_availability.game_id, games_players_availability.team_club_player_id, games_players_availability.availability_id
+
+                from
+                        games_players_availability
+
+                        join team_club_players on team_club_players.id=games_players_availability.team_club_player_id
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join emails_persons on emails_persons.person_id = club_persons.person_id
+
+                        where games_players_availability.game_id = $1
+	) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"game_team_availability": []', raw_json);
+        ELSE
+                result_set = CONCAT('"game_team_availability": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 
 --BEGIN J_SELECT PRACTICES_PLAYER_AVAILABILITY
