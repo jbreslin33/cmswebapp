@@ -300,19 +300,14 @@ class ScheduleScreen extends Screen
 			
 			if (item)
 			{
-				/*
+				//got data so remove make and show
 				item.removeTeamRosterDivs();
-                      
-				item.mTeamDiv = document.createElement('div');
-                        	item.mContainerDiv.appendChild(item.mTeamDiv);
-				*/
-
 				item.makeRosterButtons();	
+                        	item.showTeamDiv();
 			}
 
 			if (this.mEventsArray.length > 0)
 			{
-
 				this.sortEventsArray();
 				this.makeItem();
 				this.smash();

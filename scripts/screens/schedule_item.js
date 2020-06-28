@@ -61,9 +61,9 @@ class ScheduleItem extends Item
 	{
 		if (this.mTeamDiv.style.display == "none")
 		{
-                        this.removeTeamRosterDivs();
+                        //this.removeTeamRosterDivs();
 			this.getTeamAvailability();
-			this.showTeamDiv();
+			//this.showTeamDiv();
 		}
 		else
 		{
