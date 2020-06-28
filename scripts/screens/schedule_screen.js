@@ -262,7 +262,6 @@ class ScheduleScreen extends Screen
 					if (this.mItemArray[i].mJson.type == 'game' && this.mItemArray[i].mJson.id == game_id)
 					{
 						//this is our item that we just got roster for
-						console.log('got item');
 						item = this.mItemArray[i];
 					}	
 				}
