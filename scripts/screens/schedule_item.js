@@ -54,18 +54,22 @@ class ScheduleItem extends Item
                 screen.ajax();
 	}
 
-	hitPlayerDiv()
+	toggleTeamDiv()
 	{
-		this.showPlayerDiv();
-		this.hideTeamDiv();
-	}
-
-	hitTeamDiv()
-	{
+		if (this.mPlayerDiv.style.display == "none")
+		{
+			this.showPlayerDiv();
+			this.hideTeamDiv();
+		}
+		else
+		{
+			this.hidePlayerDiv();
+			this.showTeamDiv();
+			this.getTeamAvailability();
+		}
 		//get...
-		this.showTeamDiv();
-		this.hidePlayerDiv();
-		this.getTeamAvailability();
+		//this.showTeamDiv();
+		//this.hidePlayerDiv();
 	}
 
 	showPlayerDiv()
@@ -119,12 +123,9 @@ class ScheduleItem extends Item
 		var button = document.createElement("BUTTON");
                 button.setAttribute("class","tabs");
                 button.innerHTML = 'Toggle Team Availability';
-                button.onclick = this.hitTeamDiv.bind(this);
+                button.onclick = this.toggleTeamDiv.bind(this);
                 tab.appendChild(button);
 	}
-
-        //item.mJson.game_roster = this.mJson.game_roster;
-        //item.mJson.game_team_availability = this.mJson.game_team_availability;
 
 	makeRosterButtons()
 	{
@@ -403,7 +404,7 @@ class ScheduleItem extends Item
 
 			this.makeButtons();
 
-                       	this.mPlayerDiv.appendChild(p);
+                       	this.mContainerDiv.appendChild(p);
 
                         for (var r = 0; r < this.mTextArray.length; r++)
                         {
@@ -426,7 +427,7 @@ class ScheduleItem extends Item
 			       	var button = document.createElement("BUTTON");
                                 button.setAttribute("class","delete-button");
                                 button.innerHTML = 'DELETE ' + this.mJson.type;
-                                this.mPlayerDiv.appendChild(button);
+                                this.mContainerDiv.appendChild(button);
 
 				var id = this.mJson.id;
                                 button.setAttribute("id", id);
