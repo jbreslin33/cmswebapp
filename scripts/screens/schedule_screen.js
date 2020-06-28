@@ -300,12 +300,12 @@ class ScheduleScreen extends Screen
 			
 			if (item)
 			{
+				/*
 				item.removeTeamRosterDivs();
                       
-				//recreate teamdiv
 				item.mTeamDiv = document.createElement('div');
-                        	//item.mContainerDiv.appendChild(item.mTeamDiv);
                         	item.mContainerDiv.appendChild(item.mTeamDiv);
+				*/
 
 				item.makeRosterButtons();	
 			}

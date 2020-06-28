@@ -36,7 +36,10 @@ class ScheduleItem extends Item
 	{
 		if (this.mTeamDiv)
 		{
-			this.mTeamDiv.remove();		
+			while (this.mTeamDiv.firstChild)
+			{
+				this.mTeamDiv.firstChild.remove();
+			}
 		}
 	}
 
@@ -56,37 +59,16 @@ class ScheduleItem extends Item
 
 	toggleTeamDiv()
 	{
-		if (this.mPlayerDiv.style.display == "none")
+		if (this.mTeamDiv.style.display == "none")
 		{
-			this.showPlayerDiv();
-			this.hideTeamDiv();
+                        this.removeTeamRosterDivs();
+			this.getTeamAvailability();
+			this.showTeamDiv();
 		}
 		else
 		{
-			this.hidePlayerDiv();
-			this.showTeamDiv();
-			this.getTeamAvailability();
+			this.hideTeamDiv();
 		}
-		//get...
-		//this.showTeamDiv();
-		//this.hidePlayerDiv();
-	}
-
-	showPlayerDiv()
-	{
-                if (this.mPlayerDiv)
-                {
-                        this.mPlayerDiv.style.display = "block";
-                        this.mPlayerDiv.style.visibility = "visible";
-                }
-	}
-
-	hidePlayerDiv()
-	{
-                if (this.mPlayerDiv)
-                {
-                        this.mPlayerDiv.style.display = "none";
-                }
 	}
 
         showTeamDiv()
@@ -398,7 +380,9 @@ class ScheduleItem extends Item
 
 			//player div..
 			this.mPlayerDiv = document.createElement('div');
+			this.mTeamDiv = document.createElement('div');
 			this.mContainerDiv.appendChild(this.mPlayerDiv);
+			this.mContainerDiv.appendChild(this.mTeamDiv);
 
                        	var p = document.createElement('p');
 
