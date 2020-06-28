@@ -59,14 +59,15 @@ class ScheduleItem extends Item
 
 	toggleTeamDiv()
 	{
+		console.log('toggle');
 		if (this.mTeamDiv.style.display == "none")
 		{
-                        //this.removeTeamRosterDivs();
+			console.log('if');
 			this.getTeamAvailability();
-			//this.showTeamDiv();
 		}
 		else
 		{
+			console.log('else');
 			this.hideTeamDiv();
 		}
 	}
@@ -381,6 +382,10 @@ class ScheduleItem extends Item
 			//player div..
 			this.mPlayerDiv = document.createElement('div');
 			this.mTeamDiv = document.createElement('div');
+
+			//set to hide initially
+			this.hideTeamDiv();
+
 			this.mContainerDiv.appendChild(this.mPlayerDiv);
 			this.mContainerDiv.appendChild(this.mTeamDiv);
 
