@@ -104,25 +104,21 @@ class ScheduleItem extends Item
 
 	makeTabs()
 	{
-
         	this.mTabRow = document.createElement("DIV");
                 this.mTabRow.setAttribute("class","row");
 		this.mContainerDiv.appendChild(this.mTabRow);
 
         	var tab = document.createElement("DIV");
-                tab.setAttribute("class","tab");
                 this.mTabRow.appendChild(tab);
                 
-        	
-		var button = document.createElement("BUTTON");
-                button.setAttribute("class","tab-button");
-                button.innerHTML = this.mTitleText;
-                button.onclick = this.hitPlayerDiv.bind(this);
-                tab.appendChild(button);
+		var paragraph = document.createElement("p");
+                paragraph.setAttribute("class","tabs");
+                tab.appendChild(paragraph);
+                paragraph.innerHTML = this.mTitleText;
 		
 		var button = document.createElement("BUTTON");
-                button.setAttribute("class","tab-button");
-                button.innerHTML = 'Team Availability';
+                button.setAttribute("class","tabs");
+                button.innerHTML = 'Toggle Team Availability';
                 button.onclick = this.hitTeamDiv.bind(this);
                 tab.appendChild(button);
 	}
