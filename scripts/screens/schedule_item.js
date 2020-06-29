@@ -7,18 +7,6 @@ class ScheduleItem extends Item
         	super(application, json, titleText, textArray, deleteId);
 
 		//for smash
-		this.mPlayerNameArray = new Array();
-		this.mParentNameArray = new Array();
-		this.mCoachNameArray = new Array();
-		this.mManagerNameArray = new Array();
-		
-		this.mPlayerIdArray = new Array();
-		this.mParentIdArray = new Array();
-		this.mCoachIdArray = new Array();
-		this.mManagerIdArray = new Array();
-
-		this.mAvailabilityIdArray = new Array();
-
                 this.mGameRosterArray = new Array();
                 this.mPracticeRosterArray = new Array();
                 this.mGameTeamAvailabilityArray = new Array();
@@ -59,15 +47,12 @@ class ScheduleItem extends Item
 
 	toggleTeamDiv()
 	{
-		console.log('toggle');
 		if (this.mTeamDiv.style.display == "none")
 		{
-			console.log('if');
 			this.getTeamAvailability();
 		}
 		else
 		{
-			console.log('else');
 			this.hideTeamDiv();
 		}
 	}
@@ -116,60 +101,76 @@ class ScheduleItem extends Item
 
 		for (var i = 0; i < this.mGameRosterArray.length; i++)
 		{
-			var availability_id = null;
-
-                       	if (this.mJson.type == 'game')
-                        {
-                                for (var a = 0; a < this.mGameTeamAvailabilityArray.length; a++)
-                                {
-                                        if (this.mGameTeamAvailabilityArray[a].game_id == this.mJson.id && this.mGameTeamAvailabilityArray[a].team_club_player_id == this.mGameRosterArray[i].players )
-                                        {
-                                                availability_id = this.mGameTeamAvailabilityArray[a].availability_id;
-                                        }
-                                }
-
-				if (this.mJson.id == this.mGameRosterArray[i].game_id) 
+			//check if already there as a email player
+			console.log('length:' + screen.mGamesPlayersArray.length);
+			var dup = false;
+			for (var p = 0; p < screen.mGamesPlayersArray.length; p++)
+			{
+				console.log('reg:' + screen.mGamesPlayersArray[p].players + ' team:' + this.mGameRosterArray[i].players);
+				if (screen.mGamesPlayersArray[p].players == this.mGameRosterArray[i].players)
 				{
+					//we have a match
+					dup = true;
+				}
+			}
 
-                                	var button = document.createElement("BUTTON");
-                                	button.setAttribute("class","availability-button");
-                                	button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name;
-                                	this.mTeamDiv.appendChild(button);
-                                	var id = 'button_1_1_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
-                                	button.setAttribute("id", id);
-                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        		if (availability_id == 1)
+			if (dup == false)
+			{
+			
+				var availability_id = null;
+
+                       		if (this.mJson.type == 'game')
+                        	{
+                                	for (var a = 0; a < this.mGameTeamAvailabilityArray.length; a++)
                                 	{
-                                       		button.style.backgroundColor = APPLICATION.mLawnGreen;
+                                       		if (this.mGameTeamAvailabilityArray[a].game_id == this.mJson.id && this.mGameTeamAvailabilityArray[a].team_club_player_id == this.mGameRosterArray[i].players )
+                                        	{
+                                                	availability_id = this.mGameTeamAvailabilityArray[a].availability_id;
+                                        	}
                                 	}
-					this.mAvailabilityButtonArray.push(button);
 
+					if (this.mJson.id == this.mGameRosterArray[i].game_id) 
+					{
 
-                                	var button = document.createElement("BUTTON");
-                                	button.setAttribute("class","availability-button");
-                                	button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name; 
-                                	this.mTeamDiv.appendChild(button);
-                                	var id = 'button_1_2_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
-                                	button.setAttribute("id", id);
-                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        		if (availability_id == 2)
-                                	{
-                                       		button.style.backgroundColor = APPLICATION.mYellow;
-                                	}
-                                	this.mAvailabilityButtonArray.push(button);
+                                		var button = document.createElement("BUTTON");
+                                		button.setAttribute("class","availability-button");
+                                		button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name;
+                                		this.mTeamDiv.appendChild(button);
+                                		var id = 'button_1_1_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
+                                		button.setAttribute("id", id);
+                                		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        			if (availability_id == 1)
+                                		{
+                                       			button.style.backgroundColor = APPLICATION.mLawnGreen;
+                                		}
+						this.mAvailabilityButtonArray.push(button);
 
-                                	var button = document.createElement("BUTTON");
-                                	button.setAttribute("class","availability-button");
-                                	button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name;
-                                	this.mTeamDiv.appendChild(button);
-                                	var id = 'button_1_3_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
-                                	button.setAttribute("id", id);
-                                	button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        		if (availability_id == 3)
-                                	{
-                                       		button.style.backgroundColor = APPLICATION.mRed;
-                                	}
-                                	this.mAvailabilityButtonArray.push(button);
+                                		var button = document.createElement("BUTTON");
+                                		button.setAttribute("class","availability-button");
+                                		button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name; 
+                                		this.mTeamDiv.appendChild(button);
+                                		var id = 'button_1_2_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
+                                		button.setAttribute("id", id);
+                                		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        			if (availability_id == 2)
+                                		{
+                                       			button.style.backgroundColor = APPLICATION.mYellow;
+                                		}
+                                		this.mAvailabilityButtonArray.push(button);
+
+                                		var button = document.createElement("BUTTON");
+                                		button.setAttribute("class","availability-button");
+                                		button.innerHTML = '' + this.mGameRosterArray[i].first_name + ' ' + this.mGameRosterArray[i].last_name;
+                                		this.mTeamDiv.appendChild(button);
+                                		var id = 'button_1_3_' + this.mJson.id + '_' + this.mGameRosterArray[i].players;
+                                		button.setAttribute("id", id);
+                                		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        			if (availability_id == 3)
+                                		{
+                                       			button.style.backgroundColor = APPLICATION.mRed;
+                                		}
+                                		this.mAvailabilityButtonArray.push(button);
+					}
 				}
                         }
 		}
