@@ -100,6 +100,7 @@ class ScheduleScreen extends Screen
 		var availabilityTxt = null;
 		if (a.length > 1)
 		{
+			/*
 			//game
 			if (a[1] == 1)
 			{
@@ -161,6 +162,7 @@ class ScheduleScreen extends Screen
 					}
                 		}
 			}
+			*/
 
 			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
 		}
@@ -173,6 +175,7 @@ class ScheduleScreen extends Screen
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
                 screen.ajax();
+		//what if I return just the availability....
 	}
 
         processJsonData()
@@ -228,6 +231,7 @@ class ScheduleScreen extends Screen
 				{
 					this.mGamesPlayerAvailabilityArray.push(this.mJson.games_player_availability[i]);
 				}
+				//if you got this reset all availability colors etc...
 			}
 			
 			if (this.mJson.practices_player_availability)
@@ -236,6 +240,7 @@ class ScheduleScreen extends Screen
 				{
 					this.mPracticesPlayerAvailabilityArray.push(this.mJson.practices_player_availability[i]);
 				}
+				//if you got this reset all availability colors etc...
 			}
 
 			if (this.mJson.teams)
