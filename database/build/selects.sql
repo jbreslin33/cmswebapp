@@ -988,4 +988,58 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+--id | game_id | team_club_player_id | availability_id | notes | modified 
+
+CREATE OR REPLACE FUNCTION j_select_games_availability(int[])
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        distinct id as games_players_availability_id, game_id, team_club_player_id as players, availability_id
+                from
+			games_players_availability
+                where id = ANY($1)
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"games_availability": []', raw_json);
+        ELSE
+                result_set = CONCAT('"games_availability": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION j_select_practices_availability(int[])
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        distinct id as practices_players_availability_id, practice_id, team_club_player_id as players, availability_id
+                from    
+                        practices_players_availability
+                where id = ANY($1)
+
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"practices_availability": []', raw_json);
+        ELSE
+                result_set = CONCAT('"practices_availability": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 

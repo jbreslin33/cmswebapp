@@ -55,6 +55,8 @@ BEGIN
 		j_select_game_team_availability($3)
         );
 
+	RAISE LOG 'result: %', result_set;
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -77,7 +79,6 @@ BEGIN
 			insert into games_players_availability (availability_id, game_id, team_club_player_id) values (ids[i + 1], ids[i + 2], ids[i + 3]) 
 			ON CONFLICT (game_id, team_club_player_id) 
 			DO UPDATE SET availability_id = ids[i + 1], modified = now() returning games_players_availability.id into x;   
-
 		ELSE
 
 		END IF;
@@ -89,12 +90,9 @@ BEGIN
 		ELSE
 
 		END IF;
-		
-
 	END LOOP;
 END;
 $$;
-
 
 CREATE OR REPLACE FUNCTION f_update_availability(int,text)
 RETURNS text AS $$
@@ -102,34 +100,57 @@ DECLARE
         result_set text;
         DECLARE x int := 0;
         json_result text;
+	ids INT[];
+	game_id_array INT[];
+	practice_id_array INT[];
 BEGIN
-        IF $2 is NULL THEN
-	ELSE
+	CALL p_update_availability($2,x);
 
-		CALL p_update_availability($2,x);
+	ids = string_to_array($2,',');
 
-                IF x > 0 THEN
-			result_set = CONCAT
-                        (
-                        	j_select_persons($1),
-                                ',',
-                                j_select_messages(null),
-                                ',',
-                                j_select_codes(-100)
-                      	);
-                ELSE
-                       	result_set = CONCAT
-                        (
-                                j_select_persons($1),
-                                ',',
-                                j_select_messages('Something went wrong with setting availability. Please try again.'),
-                                ',',
-                                j_select_codes(-101)
-                        );
+	FOR i IN 1..array_upper(ids, 1) BY 4
+		
+	LOOP
 
-                END IF;
-	END IF;
+		IF ids[i] = 1 THEN
+			SELECT array_append(game_id_array, ids[i + 2]) INTO game_id_array;
+			RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
+		END IF;
+			
+		IF ids[i] = 2 THEN
+			SELECT array_append(practice_id_array, ids[i + 2]) INTO practice_id_array;
+			RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
+		END IF;
 
+	END LOOP;
+
+
+        IF x > 0 THEN
+		result_set = CONCAT
+                (
+                      	j_select_persons($1),
+                        ',',
+                        j_select_messages(null),
+                        ',',
+                       	j_select_codes(-100),
+                        ',',
+			j_select_games_availability(game_id_array),
+                        ',',
+			j_select_practices_availability(game_id_array)
+                );
+        ELSE
+              	result_set = CONCAT
+                (
+                	j_select_persons($1),
+                        ',',
+                        j_select_messages('Something went wrong with setting availability. Please try again.'),
+                        ',',
+                        j_select_codes(-101)
+                );
+        END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
