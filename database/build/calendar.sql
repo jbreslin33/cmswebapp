@@ -55,7 +55,7 @@ BEGIN
 		j_select_game_team_availability($3)
         );
 
-	RAISE LOG 'result: %', result_set;
+	--RAISE LOG 'result: %', result_set;
 
 RETURN result_set;
 END;
@@ -148,6 +148,7 @@ BEGIN
                         j_select_codes(-101)
                 );
         END IF;
+	RAISE LOG 'result: %', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
