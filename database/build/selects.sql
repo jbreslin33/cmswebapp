@@ -1004,7 +1004,7 @@ SELECT json_agg(t) INTO raw_json
                         distinct id as games_players_availability_id, game_id, team_club_player_id as players, availability_id
                 from
 			games_players_availability
-                where id = ANY($1)
+                where game_id = ANY($1)
         ) t;
 
         IF raw_json is NULL THEN
@@ -1030,7 +1030,7 @@ SELECT json_agg(t) INTO raw_json
                         distinct id as practices_players_availability_id, practice_id, team_club_player_id as players, availability_id
                 from    
                         practices_players_availability
-                where id = ANY($1)
+                where practice_id = ANY($1)
 
         ) t;
 

@@ -97,63 +97,9 @@ class ScheduleScreen extends Screen
 
 		var a = this.id.split('_');
 		var id = 0;
-		var availabilityTxt = null;
 		if (a.length > 1)
 		{
-			/*
-			//game
-			if (a[1] == 1)
-			{
-				if (a[2] == 1)
-				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLawnGreen; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-				}
-				if (a[2] == 2)
-				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mYellow; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-				}
-				if (a[2] == 3)
-				{
-					document.getElementById('button_1_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_1_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_1_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mRed; 		
-				}
-
-				for (var i = 0; i < screen.mGamesPlayerAvailabilityArray.length; i++)
-                		{
-                        		if (screen.mGamesPlayerAvailabilityArray[i].game_id == a[3] && screen.mGamesPlayerAvailabilityArray[i].team_club_player_id == a[4])
-					{
-						screen.mGamesPlayerAvailabilityArray[i].availability_id = a[2];
-					}
-                		}
-			}
-
-			//practice
-			if (a[1] == 2)
-			{
-				if (a[2] == 1)
-				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mLawnGreen; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-				}
-				if (a[2] == 2)
-				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mYellow; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-				}
-				if (a[2] == 3)
-				{
-					document.getElementById('button_2_1_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_2_2_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mSkyBlue; 		
-					document.getElementById('button_2_3_' + a[3] + '_' + a[4]).style.backgroundColor = APPLICATION.mRed; 		
-				}
-				
+			/*	
 				for (var i = 0; i < screen.mPracticesPlayerAvailabilityArray.length; i++)
                 		{
                         		if (screen.mPracticesPlayerAvailabilityArray[i].practice_id == a[3] && screen.mPracticesPlayerAvailabilityArray[i].team_club_player_id == a[4])
@@ -162,9 +108,27 @@ class ScheduleScreen extends Screen
 					}
                 		}
 			}
-			*/
+
+                                          4 data points
+                                          ----------------
+                                          game:     1
+                                          practice: 2
+
+                                          --------------
+                                          available: 1
+                                          maybe:     2
+                                          not:       3
+
+                                          ---------------------
+                                          game or practice id:
+
+                                          --------------------
+                                          player id:
+				}
+				*/
 
 			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
+			console.log('list:' + screen.mAvailabilityList);
 		}
 		//send to server
 		screen.updateAvailability();
@@ -322,7 +286,7 @@ class ScheduleScreen extends Screen
 			//"games_availability": [{"games_players_availability_id":1,"game_id":1,"players":11,"availability_id":1}],
 			if (this.mJson.games_availability)
 			{
-				console.log('games_avail');
+				console.log('games_avail length:' + this.mJson.games_availability.length);
 				for (var i = 0; i < this.mJson.games_availability.length; i++)
                                 {
 					console.log('looping');
