@@ -109,22 +109,6 @@ class ScheduleScreen extends Screen
                 		}
 			}
 
-                                          4 data points
-                                          ----------------
-                                          game:     1
-                                          practice: 2
-
-                                          --------------
-                                          available: 1
-                                          maybe:     2
-                                          not:       3
-
-                                          ---------------------
-                                          game or practice id:
-
-                                          --------------------
-                                          player id:
-				}
 				*/
 
 			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
@@ -266,6 +250,22 @@ class ScheduleScreen extends Screen
 					}
 				}
 			}
+
+                        if (this.mJson.practice_team_availability)
+                        {
+                                if (item)
+                                {
+                                        //set json
+                                        item.mJson.practice_team_availability = this.mJson.practice_team_availability;
+
+                                        //add to avail array
+                                        item.mPracticeTeamAvailabilityArray.length = 0;
+                                        for (var i = 0; i < this.mJson.practice_team_availability.length; i++)
+                                        {
+                                                item.mPracticeTeamAvailabilityArray.push(this.mJson.practice_team_availability[i]);
+                                        }
+                                }
+                        }
 			
 			if (item)
 			{
@@ -282,31 +282,25 @@ class ScheduleScreen extends Screen
 				this.smash();
 				this.printItems();
 			}
-
-			//"games_availability": [{"games_players_availability_id":1,"game_id":1,"players":11,"availability_id":1}],
+			
 			if (this.mJson.games_availability)
 			{
-				console.log('games_avail length:' + this.mJson.games_availability.length);
 				for (var i = 0; i < this.mJson.games_availability.length; i++)
                                 {
-					console.log('looping');
                                 	if (this.mJson.games_availability[i].availability_id == 1)
                                 	{
-						console.log('1');
                                         	document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mLawnGreen;
                                         	document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
                                         	document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
                                 	}
                                 	if (this.mJson.games_availability[i].availability_id == 2)
                                 	{
-						console.log('2');
                                         	document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
                                         	document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mYellow;
                                         	document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
                                 	}
                                 	if (this.mJson.games_availability[i].availability_id == 3)
                                 	{
-						console.log('3');
                                         	document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
                                         	document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
                                         	document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mRed;
@@ -322,10 +316,42 @@ class ScheduleScreen extends Screen
                                 }
                         }
 
-			if (this.mJson.games_availability)
+			if (this.mJson.practices_availability)
 			{
+				for (var i = 0; i < this.mJson.practices_availability.length; i++)
+                                {
+                                	if (this.mJson.practices_availability[i].availability_id == 1)
+                                	{
+                                        	document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mLawnGreen;
+                                        	document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
+                                        	document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
+                                	}
+                                	if (this.mJson.practices_availability[i].availability_id == 2)
+                                	{
+                                        	document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
+                                        	document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mYellow;
+                                        	document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
+                                	}
+                                	if (this.mJson.practices_availability[i].availability_id == 3)
+                                	{
+                                        	document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
+                                        	document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
+                                        	document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mRed;
+                                	}
 
-			}
+                                	for (var j = 0; j < this.mPracticesPlayerAvailabilityArray.length; j++)
+                                	{
+                                        	if (this.mPracticesPlayerAvailabilityArray[j].practice_id == this.mJson.practices_availability.practice_id && this.mPracticesPlayerAvailabilityArray[j].team_club_player_id == this.mJson.practices_availability[i].players)
+                                        	{
+                                                	this.mPracticesPlayerAvailabilityArray[i].availability_id = this.mJson.practices_availability[i].availability_id;
+                                        	}
+                                	}
+                                }
+                        }
+
+		
+		
+		
 		}
 
 	} //end processJsonData

@@ -136,7 +136,7 @@ BEGIN
                         ',',
 			j_select_games_availability(game_id_array),
                         ',',
-			j_select_practices_availability(game_id_array)
+			j_select_practices_availability(practice_id_array)
                 );
         ELSE
               	result_set = CONCAT
