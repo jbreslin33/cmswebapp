@@ -130,9 +130,9 @@ DECLARE
 	game_id_array INT[];
 	practice_id_array INT[];
 BEGIN
-	CALL p_update_availability($2,x);
+	CALL p_update_availability($2,$3,x);
 
-	ids = string_to_array($2,',');
+	ids = string_to_array($3,',');
 
 	FOR i IN 1..array_upper(ids, 1) BY 4
 		
@@ -174,10 +174,7 @@ BEGIN
                         j_select_codes(-101)
                 );
         END IF;
-	--RAISE LOG 'result: %', result_set;
+
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
-
-

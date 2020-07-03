@@ -11,3 +11,15 @@
                         where games_players_availability.game_id = 1
 			;
 
+		select team_club_managers.id 
+		
+		from team_club_managers
+		
+			join teams on teams.id = team_club_managers.team_id
+			join teams_games on teams_games.team_id = teams.id
+			join games on teams_games.team_id = teams.id
+			where games.id = 1 
+			
+		;
+			
+

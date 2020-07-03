@@ -123,7 +123,6 @@ class ScheduleScreen extends Screen
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
                 screen.ajax();
-		//what if I return just the availability....
 	}
 
         processJsonData()
