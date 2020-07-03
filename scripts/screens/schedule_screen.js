@@ -112,7 +112,6 @@ class ScheduleScreen extends Screen
 				*/
 
 			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
-			console.log('list:' + screen.mAvailabilityList);
 		}
 		//send to server
 		screen.updateAvailability();
@@ -510,7 +509,6 @@ class ScheduleScreen extends Screen
 				if (dup == false)
 				{
 					this.mItemArray.push(this.mEventoArray[e]);
-					console.log('itemArray push:' + e);
 				}
 			
 			}//end for eventoArray smash
