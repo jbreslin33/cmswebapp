@@ -185,7 +185,7 @@ class ScheduleItem extends Item
 				{
 					if (this.mPracticeTeamAvailabilityArray[a].practice_id == this.mJson.id && this.mPracticeTeamAvailabilityArray[a].team_club_player_id == this.mPracticeRosterArray[i].players )
 					{
-						availability_id = this.mPracticesPlayerAvailabilityArray[a].availability_id;	
+						availability_id = this.mPracticeTeamAvailabilityArray[a].availability_id;	
 					}
 				}
 				

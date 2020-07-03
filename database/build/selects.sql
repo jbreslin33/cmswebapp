@@ -800,6 +800,39 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+--game
+CREATE OR REPLACE FUNCTION j_select_practice_team_availability(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select distinct practices_players_availability.id, practices_players_availability.practice_id, practices_players_availability.team_club_player_id, practices_players_availability.availability_id
+
+                from
+                        practices_players_availability
+
+                        join team_club_players on team_club_players.id=practices_players_availability.team_club_player_id
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join emails_persons on emails_persons.person_id = club_persons.person_id
+
+                        where practices_players_availability.practice_id = $1
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"practice_team_availability": []', raw_json);
+        ELSE
+                result_set = CONCAT('"practice_team_availability": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 --BEGIN J_SELECT PRACTICES_PLAYER_AVAILABILITY
 CREATE OR REPLACE FUNCTION j_select_practices_player_availability(email_id int)
@@ -988,7 +1021,43 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
---id | game_id | team_club_player_id | availability_id | notes | modified 
+CREATE OR REPLACE FUNCTION j_select_practice_roster(int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        distinct practices.id as practice_id, team_club_players.id as players, persons.first_name, persons.last_name
+                from
+                        practices
+
+                        join teams_practices on teams_practices.practice_id = practices.id
+                        join team_club_players on team_club_players.team_id = teams_practices.team_id
+                        join club_players on club_players.id = team_club_players.id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join persons on persons.id = club_persons.person_id
+                        join emails_persons on emails_persons.person_id = persons.id
+
+                where
+                        practices.id = $1
+
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"practice_roster": []', raw_json);
+        ELSE
+                result_set = CONCAT('"practice_roster": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 CREATE OR REPLACE FUNCTION j_select_games_availability(int[])
 RETURNS text AS $$

@@ -234,6 +234,39 @@ class ScheduleScreen extends Screen
 
 				}
 			}
+
+                        var practice_id = null;
+                        if (this.mJson.practice_roster)
+                        {
+                                for (var i = 0; i < this.mJson.practice_roster.length; i++)
+                                {
+                                        practice_id = this.mJson.practice_roster[i].practice_id;
+                                }
+
+                                //who does this belong to?
+                                for (var i = 0; i < this.mItemArray.length; i++)
+                                {
+                                        if (this.mItemArray[i].mJson.type == 'practice' && this.mItemArray[i].mJson.id == practice_id)
+                                        {
+                                                //this is our item that we just got roster for
+                                                item = this.mItemArray[i];
+                                        }
+                                }
+
+                                //fill it
+                                if (item)
+                                {
+                                        //set jsons in item
+                                        item.mJson.practice_roster = this.mJson.practice_roster;
+
+                                        //set array in item
+                                        item.mPracticeRosterArray.length = 0;
+                                        for (var i = 0; i < this.mJson.practice_roster.length; i++)
+                                        {
+                                                item.mPracticeRosterArray.push(this.mJson.practice_roster[i]);
+                                        }
+                                }
+                        }
 			
 			if (this.mJson.game_team_availability)
 			{

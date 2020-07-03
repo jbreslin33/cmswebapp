@@ -61,6 +61,32 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_select_team_practice_availability(email_id int, person_id int, practice_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+
+        result_set = CONCAT
+        (
+                j_select_persons(email_id),
+                ',',
+                j_select_messages(null),
+                ',',
+                j_select_codes(-100),
+                ',',
+                j_select_practice_roster($3),
+                ',',
+                j_select_practice_team_availability($3)
+        );
+
+       RAISE LOG 'result: %', result_set;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 CREATE OR REPLACE PROCEDURE p_update_availability(text,INOUT x int)
 LANGUAGE plpgsql
@@ -114,12 +140,12 @@ BEGIN
 
 		IF ids[i] = 1 THEN
 			SELECT array_append(game_id_array, ids[i + 2]) INTO game_id_array;
-			RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
+			--RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
 		END IF;
 			
 		IF ids[i] = 2 THEN
 			SELECT array_append(practice_id_array, ids[i + 2]) INTO practice_id_array;
-			RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
+			--RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
 		END IF;
 
 	END LOOP;
@@ -148,7 +174,7 @@ BEGIN
                         j_select_codes(-101)
                 );
         END IF;
-	RAISE LOG 'result: %', result_set;
+	--RAISE LOG 'result: %', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
