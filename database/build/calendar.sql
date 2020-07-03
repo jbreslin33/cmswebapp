@@ -164,11 +164,7 @@ BEGIN
                 IF found_team_club_manager_id > 0 THEN
                 ELSE
 			IF found_team_club_player_id > 0 THEN
-				RAISE LOG 'IF $1: %', $1;
-				RAISE LOG 'IF idsA[i + 3]: %', idsA[i + 3];
 			ELSE
-				RAISE LOG 'ELSE $1: %', $1;
-				RAISE LOG 'ELSE idsA[i + 3]: %', idsA[i + 3];
                         	b := 0;
 			END IF;
                 END IF;
