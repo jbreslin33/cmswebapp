@@ -131,6 +131,7 @@ DECLARE
 	game_id_array INT[];
 	practice_id_array INT[];
 	found_team_club_manager_id             team_club_managers.id%TYPE;
+	found_team_club_player_id             team_club_players.id%TYPE;
 BEGIN
 
         idsA = string_to_array($3,',');
@@ -140,7 +141,6 @@ BEGIN
 	LOOP
 
                 select team_club_managers.id into found_team_club_manager_id
-
                 from team_club_managers
 
                         join teams on teams.id = team_club_managers.team_id
@@ -149,11 +149,28 @@ BEGIN
                         join club_managers on club_managers.id = team_club_managers.club_manager_id
                         join club_persons on club_persons.id = club_managers.club_person_id
                         where games.id = idsA[i + 2] AND club_persons.person_id = $2 
-			;
+		;
 
+                select team_club_players.id into found_team_club_player_id from team_club_players
+                        join club_players on club_players.id = team_club_players.club_player_id
+                        join club_persons on club_persons.id = club_players.club_person_id
+                        join persons on persons.id = club_persons.person_id
+                        join emails_persons on emails_persons.person_id = persons.id
+
+                where emails_persons.email_id = $1 AND team_club_players.id = idsA[i + 3] 
+                ;
+
+		--check if your a manager if not check if you are email related
                 IF found_team_club_manager_id > 0 THEN
-		ELSE
-                        b := 0;
+                ELSE
+			IF found_team_club_player_id > 0 THEN
+				RAISE LOG 'IF $1: %', $1;
+				RAISE LOG 'IF idsA[i + 3]: %', idsA[i + 3];
+			ELSE
+				RAISE LOG 'ELSE $1: %', $1;
+				RAISE LOG 'ELSE idsA[i + 3]: %', idsA[i + 3];
+                        	b := 0;
+			END IF;
                 END IF;
 
         END LOOP;
@@ -176,7 +193,6 @@ BEGIN
 				SELECT array_append(practice_id_array, idsA[i + 2]) INTO practice_id_array;
 			END IF;
 		END LOOP;
-
 
         	IF x > 0 THEN
 			result_set = CONCAT
@@ -206,7 +222,7 @@ BEGIN
                	(
                		j_select_persons($1),
                         ',',
-                        j_select_messages('You are not have permission to set availability for some or all of players. So we are not changing anything.'),
+                        j_select_messages('You do not have permission to set availability for some or all of players. So we are not changing anything.'),
                         ',',
                         j_select_codes(-101)
                	);
