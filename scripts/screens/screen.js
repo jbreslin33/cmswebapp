@@ -829,8 +829,8 @@ class Screen
                         {
                        		var opt = document.createElement('option');
                                 opt.value = this.mJson.pitches[i].id;
-                                var name = this.mJson.pitches[i].name;
-                                opt.innerHTML = name;
+				var txt = this.mJson.pitches[i].name + ' @ ' + this.mJson.pitches[i].address 
+                                opt.innerHTML = txt;
                                 select.appendChild(opt);
                         }
                 }
