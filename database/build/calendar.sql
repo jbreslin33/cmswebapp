@@ -150,20 +150,15 @@ BEGIN
                         join club_persons on club_persons.id = club_managers.club_person_id
                         where games.id = idsA[i + 2] AND club_persons.person_id = $2 
 			;
-		RAISE LOG 'idsA[i + 2]: %', idsA[i + 2]; 
-		RAISE LOG 'person_id: %', $2; 
 
                 IF found_team_club_manager_id > 0 THEN
-			RAISE LOG 'IF b: %', b; 
 		ELSE
                         b := 0;
-			RAISE LOG 'ELSE b: %', b; 
                 END IF;
 
         END LOOP;
 
 	IF b > 0 THEN
-		RAISE LOG 'B G 0: %', b; 
 
 		CALL p_update_availability($3,x);
 
