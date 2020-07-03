@@ -80,7 +80,7 @@ BEGIN
                 j_select_practice_team_availability($3)
         );
 
-       RAISE LOG 'result: %', result_set;
+       --RAISE LOG 'result: %', result_set;
 
 RETURN result_set;
 END;

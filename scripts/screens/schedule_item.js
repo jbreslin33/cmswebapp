@@ -102,11 +102,9 @@ class ScheduleItem extends Item
 		for (var i = 0; i < this.mGameRosterArray.length; i++)
 		{
 			//check if already there as a email player
-			console.log('length:' + screen.mGamesPlayersArray.length);
 			var dup = false;
 			for (var p = 0; p < screen.mGamesPlayersArray.length; p++)
 			{
-				console.log('reg:' + screen.mGamesPlayersArray[p].players + ' team:' + this.mGameRosterArray[i].players);
 				if (screen.mGamesPlayersArray[p].players == this.mGameRosterArray[i].players)
 				{
 					//we have a match

@@ -36,7 +36,7 @@ BEGIN
                         	',',
                         	j_select_codes(-103) --delete success to stay on screen
                 	);
-			RAISE LOG '1st ELSE %', x;
+			--RAISE LOG '1st ELSE %', x;
 
                 ELSE
                        	result_set = CONCAT
@@ -47,7 +47,7 @@ BEGIN
                                 ',',
                                 j_select_codes(-101)
                         );
-			RAISE LOG '2nd ELSE %', x;
+			--RAISE LOG '2nd ELSE %', x;
 
                 END IF;
 	ELSE
@@ -59,7 +59,7 @@ BEGIN
                         ',',
                         j_select_codes(-101)
             	);
-		RAISE LOG '3rd ELSE %', result_set;
+		--RAISE LOG '3rd ELSE %', result_set;
 
 	END IF;
 
