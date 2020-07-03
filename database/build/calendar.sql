@@ -120,60 +120,99 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION f_update_availability(int,text)
+CREATE OR REPLACE FUNCTION f_update_availability(int,int,text)
 RETURNS text AS $$
 DECLARE
         result_set text;
-        DECLARE x int := 0;
+        DECLARE x int := 1;
+        DECLARE b int := 1;
         json_result text;
-	ids INT[];
+	idsA INT[];
 	game_id_array INT[];
 	practice_id_array INT[];
+	found_team_club_manager_id             team_club_managers.id%TYPE;
 BEGIN
-	CALL p_update_availability($2,$3,x);
 
-	ids = string_to_array($3,',');
+        idsA = string_to_array($3,',');
 
-	FOR i IN 1..array_upper(ids, 1) BY 4
-		
+        FOR i IN 1..array_upper(idsA, 1) BY 4
+        
 	LOOP
 
-		IF ids[i] = 1 THEN
-			SELECT array_append(game_id_array, ids[i + 2]) INTO game_id_array;
-			--RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
-		END IF;
+                select team_club_managers.id into found_team_club_manager_id
+
+                from team_club_managers
+
+                        join teams on teams.id = team_club_managers.team_id
+                        join teams_games on teams_games.team_id = teams.id
+                        join games on teams_games.team_id = teams.id
+                        where games.id = idsA[i + 2] 
+			;
+
+                IF found_team_club_manager_id > 0 THEN
+			RAISE LOG 'IF b: %', b; 
+		ELSE
+                        b := 0;
+			RAISE LOG 'ELSE b: %', b; 
+                END IF;
+
+        END LOOP;
+
+	IF b > 0 THEN
+		RAISE LOG 'B G 0: %', b; 
+
+		CALL p_update_availability($3,x);
+
+		idsA = string_to_array($3,',');
+
+		FOR i IN 1..array_upper(idsA, 1) BY 4
+		
+		LOOP
+
+			IF idsA[i] = 1 THEN
+				SELECT array_append(game_id_array, idsA[i + 2]) INTO game_id_array;
+			END IF;
 			
-		IF ids[i] = 2 THEN
-			SELECT array_append(practice_id_array, ids[i + 2]) INTO practice_id_array;
-			--RAISE LOG 'ids[i + 2]: %', ids[i + 2]; 
-		END IF;
-
-	END LOOP;
+			IF idsA[i] = 2 THEN
+				SELECT array_append(practice_id_array, idsA[i + 2]) INTO practice_id_array;
+			END IF;
+		END LOOP;
 
 
-        IF x > 0 THEN
+        	IF x > 0 THEN
+			result_set = CONCAT
+                	(
+                      		j_select_persons($1),
+                        	',',
+                        	j_select_messages(null),
+                        	',',
+                       		j_select_codes(-100),
+                        	',',
+				j_select_games_availability(game_id_array),
+                        	',',
+				j_select_practices_availability(practice_id_array)
+                	);
+        	ELSE
+              		result_set = CONCAT
+                	(
+                		j_select_persons($1),
+                        	',',
+                        	j_select_messages('Something went wrong with setting availability. Please try again.'),
+                        	',',
+                        	j_select_codes(-101)
+               		);
+        	END IF;
+	ELSE
 		result_set = CONCAT
-                (
-                      	j_select_persons($1),
+               	(
+               		j_select_persons($1),
                         ',',
-                        j_select_messages(null),
-                        ',',
-                       	j_select_codes(-100),
-                        ',',
-			j_select_games_availability(game_id_array),
-                        ',',
-			j_select_practices_availability(practice_id_array)
-                );
-        ELSE
-              	result_set = CONCAT
-                (
-                	j_select_persons($1),
-                        ',',
-                        j_select_messages('Something went wrong with setting availability. Please try again.'),
+                        j_select_messages('You are not have permission to set availability for some or all of players. So we are not changing anything.'),
                         ',',
                         j_select_codes(-101)
-                );
-        END IF;
+               	);
+
+	END IF;
 
 RETURN result_set;
 END;
