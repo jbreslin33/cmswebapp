@@ -146,8 +146,12 @@ BEGIN
                         join teams on teams.id = team_club_managers.team_id
                         join teams_games on teams_games.team_id = teams.id
                         join games on teams_games.team_id = teams.id
-                        where games.id = idsA[i + 2] 
+                        join club_managers on club_managers.id = team_club_managers.club_manager_id
+                        join club_persons on club_persons.id = club_managers.club_person_id
+                        where games.id = idsA[i + 2] AND club_persons.person_id = $2 
 			;
+		RAISE LOG 'idsA[i + 2]: %', idsA[i + 2]; 
+		RAISE LOG 'person_id: %', $2; 
 
                 IF found_team_club_manager_id > 0 THEN
 			RAISE LOG 'IF b: %', b; 

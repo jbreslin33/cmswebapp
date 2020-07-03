@@ -121,7 +121,7 @@ class ScheduleScreen extends Screen
 	updateAvailability()
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/upcoming_availability.php?jwt=" + APPLICATION.getJWT() + '&availability=' + this.mAvailabilityList);
+		screen.setUrl("/php/classes/screens/upcoming_availability.php?" + this.getStandardParameters() + '&availability=' + this.mAvailabilityList);
                 screen.ajax();
 	}
 

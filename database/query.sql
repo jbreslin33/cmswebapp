@@ -18,8 +18,23 @@
 			join teams on teams.id = team_club_managers.team_id
 			join teams_games on teams_games.team_id = teams.id
 			join games on teams_games.team_id = teams.id
-			where games.id = 1 
+			join club_managers on club_managers.id = team_club_managers.club_manager_id
+			join club_persons on club_persons.id = club_managers.club_person_id
+			where games.id = 1 AND club_persons.person_id = 25 
 			
 		;
+
+                select team_club_managers.id into found_team_club_manager_id
+
+                from team_club_managers
+
+                        join teams on teams.id = team_club_managers.team_id
+                        join teams_games on teams_games.team_id = teams.id
+                        join games on teams_games.team_id = teams.id
+                        join club_managers on club_managers.id = team_club_managers.club_manager_id
+                        join club_persons on club_persons.id = club_managers.club_person_id
+                        where games.id = 1 AND club_persons.person_id = 25
+                        ;
+
 			
 
