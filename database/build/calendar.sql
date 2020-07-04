@@ -139,18 +139,7 @@ BEGIN
         FOR i IN 1..array_upper(idsA, 1) BY 4
         
 	LOOP
-
-                select team_club_managers.id into found_team_club_manager_id
-                from team_club_managers
-
-                        join teams on teams.id = team_club_managers.team_id
-                        join teams_games on teams_games.team_id = teams.id
-                        join games on teams_games.team_id = teams.id
-                        join club_managers on club_managers.id = team_club_managers.club_manager_id
-                        join club_persons on club_persons.id = club_managers.club_person_id
-                        where games.id = idsA[i + 2] AND club_persons.person_id = $2 
-		;
-
+		--email check
                 select team_club_players.id into found_team_club_player_id from team_club_players
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
@@ -159,15 +148,53 @@ BEGIN
 
                 where emails_persons.email_id = $1 AND team_club_players.id = idsA[i + 3] 
                 ;
+		IF idsA[i] = 1 THEN  
+			--game manager check
+                	select team_club_managers.id into found_team_club_manager_id
+                	from team_club_managers
 
-		--check if your a manager if not check if you are email related
-                IF found_team_club_manager_id > 0 THEN
-                ELSE
-			IF found_team_club_player_id > 0 THEN
-			ELSE
-                        	b := 0;
-			END IF;
-                END IF;
+                        	join teams on teams.id = team_club_managers.team_id
+                        	join teams_games on teams_games.team_id = teams.id
+                        	join games on teams_games.team_id = teams.id
+                        	join club_managers on club_managers.id = team_club_managers.club_manager_id
+                        	join club_persons on club_persons.id = club_managers.club_person_id
+                        	where games.id = idsA[i + 2] AND club_persons.person_id = $2 
+			;
+			
+			--check if your a manager if not check if you are email related
+                	IF found_team_club_manager_id > 0 THEN
+                	ELSE
+				IF found_team_club_player_id > 0 THEN
+				ELSE
+                        		b := 0;
+				END IF;
+                	END IF;
+		END IF;
+
+		IF idsA[i] = 2 THEN  
+			--practice manager check
+                	select team_club_managers.id into found_team_club_manager_id
+                	from team_club_managers
+
+                        	join teams on teams.id = team_club_managers.team_id
+                        	join teams_practices on teams_practices.team_id = teams.id
+                        	join practices on teams_practices.team_id = teams.id
+                       		join club_managers on club_managers.id = team_club_managers.club_manager_id
+                        	join club_persons on club_persons.id = club_managers.club_person_id
+                        	where practices.id = idsA[i + 2] AND club_persons.person_id = $2
+                	;
+			
+			--check if your a manager if not check if you are email related
+                	IF found_team_club_manager_id > 0 THEN
+                	ELSE
+				IF found_team_club_player_id > 0 THEN
+				ELSE
+                        		b := 0;
+				END IF;
+                	END IF;
+		END IF;
+
+
 
         END LOOP;
 
