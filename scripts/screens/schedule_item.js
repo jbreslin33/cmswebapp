@@ -172,64 +172,79 @@ class ScheduleItem extends Item
 				}
                         }
 		}
-		
+
 		for (var i = 0; i < this.mPracticeRosterArray.length; i++)
 		{
-			var availability_id = null;
-
-			if (this.mJson.type == 'practice')
+			//check if already there as a email player
+			var dup = false;
+			for (var p = 0; p < screen.mPracticesPlayersArray.length; p++)
 			{
-				for (var a = 0; a < this.mPracticeTeamAvailabilityArray.length; a++)
+				if (screen.mPracticesPlayersArray[p].players == this.mPracticeRosterArray[i].players)
 				{
-					if (this.mPracticeTeamAvailabilityArray[a].practice_id == this.mJson.id && this.mPracticeTeamAvailabilityArray[a].team_club_player_id == this.mPracticeRosterArray[i].players )
-					{
-						availability_id = this.mPracticeTeamAvailabilityArray[a].availability_id;	
-					}
-				}
-				
-				if (this.mJson.id == this.mPracticeRosterArray[i].practice_id) 
-				{
-        				var button = document.createElement("BUTTON");
-                			button.setAttribute("class","availability-button");
-                        		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
-                        		this.mTeamDiv.appendChild(button);
-                        		var id = 'button_2_1_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
-                        		button.setAttribute("id", id);
-                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-                        		if (availability_id == 1)
-                        		{
-                        			button.style.backgroundColor = APPLICATION.mLawnGreen;
-                        		}
-                        		this.mAvailabilityButtonArray.push(button);
-
-
-                                	var button = document.createElement("BUTTON");
-                                	button.setAttribute("class","availability-button");
-                        		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
-                                	this.mTeamDiv.appendChild(button);
-                        		var id = 'button_2_2_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
-                                	button.setAttribute("id", id);
-                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-					if (availability_id == 2)
-                                	{
-                                		button.style.backgroundColor = APPLICATION.mYellow;
-                                	}
-                                	this.mAvailabilityButtonArray.push(button);
-
-                                	var button = document.createElement("BUTTON");
-                                	button.setAttribute("class","availability-button");
-                        		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
-                                	this.mTeamDiv.appendChild(button);
-                        		var id = 'button_2_3_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
-                                	button.setAttribute("id", id);
-                        		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
-					if (availability_id == 3)
-                                	{
-                                		button.style.backgroundColor = APPLICATION.mRed;
-                                	}
-                                	this.mAvailabilityButtonArray.push(button);
+					//we have a match
+					dup = true;
 				}
 			}
+
+			if (dup == false)
+			{
+				var availability_id = null;
+
+                       		if (this.mJson.type == 'practice')
+                        	{
+                                	for (var a = 0; a < this.mPracticeTeamAvailabilityArray.length; a++)
+                                	{
+                                       		if (this.mPracticeTeamAvailabilityArray[a].practice_id == this.mJson.id && this.mPracticeTeamAvailabilityArray[a].team_club_player_id == this.mPracticeRosterArray[i].players )
+                                        	{
+                                                	availability_id = this.mPracticeTeamAvailabilityArray[a].availability_id;
+                                        	}
+                                	}
+
+					if (this.mJson.id == this.mPracticeRosterArray[i].practice_id) 
+					{
+
+                                		var button = document.createElement("BUTTON");
+                                		button.setAttribute("class","availability-button");
+                                		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
+                                		this.mTeamDiv.appendChild(button);
+                                		var id = 'button_2_1_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
+                                		button.setAttribute("id", id);
+                                		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        			if (availability_id == 1)
+                                		{
+                                       			button.style.backgroundColor = APPLICATION.mLawnGreen;
+                                		}
+						this.mAvailabilityButtonArray.push(button);
+
+                                		var button = document.createElement("BUTTON");
+                                		button.setAttribute("class","availability-button");
+                                		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name; 
+                                		this.mTeamDiv.appendChild(button);
+                                		var id = 'button_2_2_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
+                                		button.setAttribute("id", id);
+                                		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        			if (availability_id == 2)
+                                		{
+                                       			button.style.backgroundColor = APPLICATION.mYellow;
+                                		}
+                                		this.mAvailabilityButtonArray.push(button);
+
+                                		var button = document.createElement("BUTTON");
+                                		button.setAttribute("class","availability-button");
+                                		button.innerHTML = '' + this.mPracticeRosterArray[i].first_name + ' ' + this.mPracticeRosterArray[i].last_name;
+                                		this.mTeamDiv.appendChild(button);
+                                		var id = 'button_2_3_' + this.mJson.id + '_' + this.mPracticeRosterArray[i].players;
+                                		button.setAttribute("id", id);
+                                		button.onclick = this.mApplication.getCurrentScreen().setOneHit.bind(button);
+                        			if (availability_id == 3)
+                                		{
+                                       			button.style.backgroundColor = APPLICATION.mRed;
+                                		}
+                                		this.mAvailabilityButtonArray.push(button);
+					}
+				}
+                        }
+		
 		}
 	}
 

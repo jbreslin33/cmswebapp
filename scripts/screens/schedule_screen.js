@@ -12,8 +12,8 @@ class ScheduleScreen extends Screen
 		this.mEventsArray = new Array();
 		this.mEventoArray = new Array();
 
-		this.mPracticesPlayerAvailabilityArray = new Array();
 		this.mGamesPlayerAvailabilityArray     = new Array();
+		this.mPracticesPlayerAvailabilityArray = new Array();
 		this.mGamesPlayersArray                = new Array();
 		this.mPracticesPlayersArray            = new Array();
 		this.mTeamsArray = new Array();
@@ -156,6 +156,7 @@ class ScheduleScreen extends Screen
 			{
                        		for (var i = 0; i < this.mJson.games_players.length; i++)
 				{
+					console.log('game loop');
 					this.mGamesPlayersArray.push(this.mJson.games_players[i]);
 					this.mJson.games_players[i].type = 'game';
 				}
@@ -165,6 +166,7 @@ class ScheduleScreen extends Screen
 			{
                        		for (var i = 0; i < this.mJson.practices_players.length; i++)
 				{
+					console.log('practice loop');
 					this.mPracticesPlayersArray.push(this.mJson.practices_players[i]);
 					this.mJson.practices_players[i].type = 'practice';
 				}
