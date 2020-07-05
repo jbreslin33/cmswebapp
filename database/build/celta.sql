@@ -59,7 +59,7 @@ BEGIN
 
 	--PLAYERS
 	---------------------------Akmal Tokhirov
-
+	--FAMILIES
 	insert into families (name) values ('Tokhirov') returning id into returning_family_id;	
 
 	--EMAILS
@@ -90,6 +90,9 @@ BEGIN
 
 
 	-------------------------------Alex Rodriguez
+	--FAMILIES
+	insert into families (name) values ('Rodriquez') returning id into returning_family_id;	
+
 	--EMAILS
 	insert into emails (email) values ('alexjoaorodriguez@Gmail.com') returning id into returning_email_id_player_a;
 	insert into emails (email) values ('lizrsouza13@gmail.com') returning id into returning_email_id_mother;
@@ -101,11 +104,6 @@ BEGIN
 	
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 	
 	--CLUB_PERSONS
@@ -133,7 +131,15 @@ BEGIN
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
+
 	-----------------------------------Arber Canole
+	--FAMILIES
+	insert into families (name) values ('Canole') returning id into returning_family_id;	
+
 	--EMAILS
 	insert into emails (email) values ('arberc11@gmail.com') returning id into returning_email_id_player_a;
 	insert into emails (email) values ('canolegita@hotmail.com') returning id into returning_email_id_mother;
@@ -144,9 +150,6 @@ BEGIN
 
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	--CLUB_PERSONS
@@ -169,9 +172,15 @@ BEGIN
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
 	
 
 	--------------------------------Yancarlos Corredor
+	--FAMILIES
+	insert into families (name) values ('Corredor') returning id into returning_family_id;	
+
 	--EMAILS
 	insert into emails (email) values ('mystical943@gmail.com') returning id into returning_email_id_player_a;
 
@@ -196,8 +205,14 @@ BEGIN
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	
 
 	----------------------------------Daniel McCallister
+	--FAMILIES
+	insert into families (name) values ('McCallister') returning id into returning_family_id;	
+
         --EMAILS
         insert into emails (email) values ('Meek.McCallister@gmail.com') returning id into returning_email_id_father_a;
         insert into emails (email) values ('miss.b.7712@gmail.com') returning id into returning_email_id_mother;
@@ -208,12 +223,7 @@ BEGIN
         insert into persons (first_name, middle_name, last_name, phones, address) values ('Mrs.', null, 'McCallister', ARRAY ['(215) 450-6211'], '355 Elm Ave, Glenside, PA, 19038') returning id into returning_person_id_mother;
 
         --EMAILS_PERSONS
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
-
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
         --CLUB_PERSONS
@@ -232,8 +242,15 @@ BEGIN
 
         --TEAM_CLUB_PLAYERS
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
+	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	---------------------------------------Dominic Evangelista
+	--FAMILIES
+	insert into families (name) values ('Evangelista') returning id into returning_family_id;	
         
 	--EMAILS
         insert into emails (email) values ('dominice1@comcast.net') returning id into returning_email_id_player_a;
@@ -247,15 +264,7 @@ BEGIN
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-        
-	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
-	
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
         --CLUB_PERSONS
@@ -282,8 +291,16 @@ BEGIN
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
+	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	---------------------------------Eric Girsh
+	--FAMILIES
+	insert into families (name) values ('Girsh') returning id into returning_family_id;	
+
 	--Leonard Girsh
 	insert into emails (email) values ('lguirch@aol.com') returning id into returning_email_id_father_a;
 
@@ -292,7 +309,6 @@ BEGIN
         insert into persons (first_name, middle_name, last_name, phones, address) values ('Leonard', null, 'Girsh', ARRAY ['(215) 275-7124', '(215) 275-9133' ] , 'Southampton, PA, 18966') returning id into returning_person_id_father;
 
         --EMAILS_PERSONS
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
         
 	--CLUB_PERSONS
@@ -314,8 +330,15 @@ BEGIN
         --TEAM_CLUB_PLAYERS
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
+	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	------------------------------------Fabrizio Franceschelli
+	--FAMILIES
+	insert into families (name) values ('Franceschelli') returning id into returning_family_id;	
+
 	--EMAILS
 	--Fabrizio Franceschelli
 	insert into emails (email) values ('fabriziofrances@gmail.com') returning id into returning_email_id_player_a;
@@ -337,23 +360,8 @@ BEGIN
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_b);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_player_b);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_b, returning_person_id_mother);
-
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_b);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
-        
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_b);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	--CLUB_PERSONS
@@ -393,8 +401,17 @@ BEGIN
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
+	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_b);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	---------------------------------------Joshua Vidro
+	--FAMILIES
+	insert into families (name) values ('Vidro') returning id into returning_family_id;	
+
 	--Joshua Vidro
 	insert into emails (email) values ('josh_redninjago@yahoo.com') returning id into returning_email_id_player_a;
 
@@ -408,11 +425,6 @@ BEGIN
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-        
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	--CLUB_PERSONS
@@ -439,8 +451,15 @@ BEGIN
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
+	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	-----------------------------------Luke Breslin
+	--FAMILIES
+	insert into families (name) values ('Breslin') returning id into returning_family_id;	
 
 	--EMAILS
 	--Luke Breslin
@@ -457,15 +476,7 @@ BEGIN
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-	
-	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
-        
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	--CLUB_PERSONS
@@ -492,8 +503,16 @@ BEGIN
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
+	
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	--------------------------------------Nacho Obando
+	--FAMILIES
+	insert into families (name) values ('Obando') returning id into returning_family_id;	
+
 	--EMAILS
 	--Nacho Obando
 	insert into emails (email) values ('Maxwell.obando27@gmail.com') returning id into returning_email_id_player_a;
@@ -504,7 +523,6 @@ BEGIN
 	--Louis Obando
 	insert into emails (email) values ('obando.louis@gmail.com') returning id into returning_email_id_father_a;
 
-
        	--PERSONS	
 	insert into persons (first_name, middle_name, last_name, phones, address, dob) values ('Nacho', null, 'Obando', null, null, '2004-12-27') returning id into returning_person_id_player_a;
         insert into persons (first_name, middle_name, last_name, phones, address) values ('Louis', null, 'Obando', null, null) returning id into returning_person_id_father;
@@ -512,16 +530,8 @@ BEGIN
 
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_mother);
-	
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
-	
-	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
 
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
@@ -548,8 +558,15 @@ BEGIN
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	----------------------------------Tedi Shaho
+	--FAMILIES
+	insert into families (name) values ('Shaho') returning id into returning_family_id;	
+
 	--Joan Shaho
 	insert into emails (email) values ('stiljanshaho@gmail.com') returning id into returning_email_id_mother;
 
@@ -558,7 +575,6 @@ BEGIN
         insert into persons (first_name, middle_name, last_name, phones, address) values ('Joan', null, 'Shaho', null, null) returning id into returning_person_id_mother;
 
         --EMAILS_PERSONS
-	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
 	--CLUB_PERSONS
@@ -581,8 +597,14 @@ BEGIN
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_mother);
 
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_mother);
 
 	----------------------------------Victor Baidal
+	--FAMILIES
+	insert into families (name) values ('Baidal') returning id into returning_family_id;	
+
 	--Victor Baidal
 	insert into emails (email) values ('vebaidal@gmail.com') returning id into returning_email_id_player_a;
 
@@ -595,9 +617,6 @@ BEGIN
         
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-        insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_father);
-	
-	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
 	
 	--CLUB_PERSONS
@@ -619,6 +638,10 @@ BEGIN
         --TEAM_CLUB_PLAYERS
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
 	insert into team_club_parents (team_id, club_parent_id) values (returning_team_id, returning_club_parent_id_father);
+
+	--FAMILY_PERSONS	
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_father);
 
 	------------------------------------------------------------------------------------------------------
 	
