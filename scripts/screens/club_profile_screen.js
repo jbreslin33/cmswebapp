@@ -23,6 +23,26 @@ class ClubProfileScreen extends Screen
                 this.setModalButton(document.getElementById("club_profile_modal_button_id"));
                 this.setModalCloseButton(document.getElementById("club_profile_modal_close_button_id"));
 
+		this.mClubPlayerInterestButton = null;
+		this.mClubParentInterestButton = null;
+		this.mClubCoachInterestButton = null;
+		this.mClubManagerInterestButton = null;
+
+		this.mClubPlayerLeadButton = null;
+		this.mClubParentLeadButton = null;
+		this.mClubCoachLeadButton = null;
+		this.mClubManagerLeadButton = null;
+
+		this.mClubPlayerProspectButton = null;
+		this.mClubParentProspectButton = null;
+		this.mClubCoachProspectButton = null;
+		this.mClubManagerProspectButton = null;
+
+		this.mClubPlayerPotentialButton = null;
+		this.mClubParentPotentialButton = null;
+		this.mClubCoachPotentialButton = null;
+		this.mClubManagerCoachPotentialButton = null;
+
 		this.mClubPlayerButton = null;
 		this.mClubParentButton = null;
 		this.mClubCoachButton = null;
@@ -30,26 +50,156 @@ class ClubProfileScreen extends Screen
 
 		this.mDivArray = new Array();
 
-		//create a club player button
+		//Interest
                 var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Player Interest';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubPlayerInterestButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubPlayerInterestButton = button;
+                
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Parent Interest';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubParentInterestButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubParentInterestButton = button;
+		
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Coach Interest';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubCoachInterestButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubCoachInterestButton = button;
+
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Manager Interest';
+                this.mClubRoleRow.appendChild(button);
+                //button.onclick = this.hitClubManagerInterestButton.bind(button);
+                button.style.backgroundColor = "grey";
+                this.mClubManagerInterestButton = button;
+
+		//Lead
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Player Lead';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubPlayerLeadButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubPlayerLeadButton = button;
+                
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Parent Lead';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubParentLeadButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubParentLeadButton = button;
+
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Coach Lead';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubCoachLeadButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubCoachLeadButton = button;
+                
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Manager Lead';
+                this.mClubRoleRow.appendChild(button);
+                //button.onclick = this.hitClubManagerButton.bind(button);
+                button.style.backgroundColor = "grey";
+                this.mClubManagerLeadButton = button;
+
+		//Prospect
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Player Prospect';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubPlayerProspectButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubPlayerProspectButton = button;
+
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Parent Prospect';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubParentProspectButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubParentProspectButton = button;
+	
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Coach Prospect';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubCoachProspectButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubCoachProspectButton = button;
+                
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Manager Prospect';
+                this.mClubRoleRow.appendChild(button);
+                //button.onclick = this.hitClubManagerProspectButton.bind(button);
+                button.style.backgroundColor = "grey";
+                this.mClubManagerProspectButton = button;
+
+		//Potential
+                var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Player Potential';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubPlayerPotentialButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubPlayerPotentialButton = button;
+		
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Parent Potential';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubParentPotentialButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubParentPotentialButton = button;
+		
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Coach Potential';
+                this.mClubRoleRow.appendChild(button);
+                button.onclick = this.hitClubCoachPotentialButton.bind(button);
+                button.style.backgroundColor = "red";
+                this.mClubCoachPotentialButton = button;
+                
+		var button = document.createElement("BUTTON");
+                button.setAttribute('class','club-profile-button');
+                button.innerHTML = 'Club Manager Potential';
+                this.mClubRoleRow.appendChild(button);
+                //button.onclick = this.hitClubManagerButton.bind(button);
+                button.style.backgroundColor = "grey";
+                this.mClubManagerPotentialButton = button;
+
+		//Regular
+		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Player';
                 this.mClubRoleRow.appendChild(button);
                 button.onclick = this.hitClubPlayerButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubPlayerButton = button;
-
-                //create a club parent button
-                var button = document.createElement("BUTTON");
+		
+		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Parent';
                 this.mClubRoleRow.appendChild(button);
                 button.onclick = this.hitClubParentButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubParentButton = button;
-
-                //create a club coach button
-                var button = document.createElement("BUTTON");
+		
+		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Coach';
                 this.mClubRoleRow.appendChild(button);
@@ -57,8 +207,12 @@ class ClubProfileScreen extends Screen
                 button.style.backgroundColor = "red";
                 this.mClubCoachButton = button;
 
-                //create a club manager button
-                var button = document.createElement("BUTTON");
+
+
+		//old
+
+                
+		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Manager';
                 this.mClubRoleRow.appendChild(button);
@@ -203,6 +357,68 @@ class ClubProfileScreen extends Screen
                 APPLICATION.getCurrentScreen().ajax();
         }
 
+        hitClubPlayerInterestButton()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteClubPlayerInterest();
+                }
+                else
+                {
+                        screen.insertClubPlayerInterest();
+                }
+        }
+
+        hitClubPlayerLeadButton()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteClubPlayerLead();
+                }
+                else
+                {
+                        screen.insertClubPlayerLead();
+                }
+        }
+
+        hitClubPlayerProspectButton()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteClubPlayerProspect();
+                }
+                else
+                {
+                        screen.insertClubPlayerProspect();
+                }
+        }
+
+
+        hitClubPlayerPotentialButton()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteClubPlayerPotential();
+                }
+                else
+                {
+                        screen.insertClubPlayerPotential();
+                }
+        }
+
+
 	hitClubPlayerButton()
 	{
                 var screen = APPLICATION.getCurrentScreen();
@@ -218,6 +434,66 @@ class ClubProfileScreen extends Screen
 		}
 	}
 
+	hitClubParentInterestButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubParentInterest();
+		}
+		else
+		{
+			screen.insertClubParentInterest();
+		}
+	}
+
+	hitClubParentLeadButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubParentLead();
+		}
+		else
+		{
+			screen.insertClubParentLead();
+		}
+	}
+
+	hitClubParentProspectButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubParentProspect();
+		}
+		else
+		{
+			screen.insertClubParentProspect();
+		}
+	}
+
+	hitClubParentPotentialButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubParentPotential();
+		}
+		else
+		{
+			screen.insertClubParentPotential();
+		}
+	}
+
 	hitClubParentButton()
 	{
                 var screen = APPLICATION.getCurrentScreen();
@@ -230,6 +506,66 @@ class ClubProfileScreen extends Screen
 		else
 		{
 			screen.insertClubParent();
+		}
+	}
+
+	hitClubCoachInterestButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubCoachInterest();
+		}
+		else
+		{
+			screen.insertClubCoachInterest();
+		}
+	}
+
+	hitClubCoachLeadButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubCoachLead();
+		}
+		else
+		{
+			screen.insertClubCoachLead();
+		}
+	}
+
+	hitClubCoachProspectButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubCoachProspect();
+		}
+		else
+		{
+			screen.insertClubCoachProspect();
+		}
+	}
+
+	hitClubCoachPotentialButton()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.mCurrentButton = this;
+
+                if (this.style.backgroundColor == "green")
+		{
+			screen.deleteClubCoachPotential();
+		}
+		else
+		{
+			screen.insertClubCoachPotential();
 		}
 	}
 
@@ -384,21 +720,122 @@ class ClubProfileScreen extends Screen
                 screen.ajax();
         }
 
+	insertClubPlayerInterest()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.setUrl("/php/classes/screens/insert_club_player_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+	}
+	deleteClubPlayerInterest()
+	{
+                var screen = APPLICATION.getCurrentScreen();
+		screen.setUrl("/php/classes/screens/delete_club_player_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+	}
 
+	insertClubPlayerLead()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_player_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubPlayerLead()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_player_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
 
+	insertClubPlayerProspect()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_player_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubPlayerProspect()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_player_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+	insertClubPlayerPotential()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_player_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubPlayerPotential()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_player_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
 
 	insertClubPlayer()
-	{
+        {
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
                 screen.ajax();
-	}
-	deleteClubPlayer()
-	{
+        }
+        deleteClubPlayer()
+        {
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/delete_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.setUrl("/php/classes/screens/delete_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
                 screen.ajax();
-	}
+        }
+
+        insertClubParentInterest()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_parent_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubParentInterest()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_parent_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        insertClubParentLead()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_parent_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubParentLead()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_parent_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        insertClubParentProspect()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_parent_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubParentProspect()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_parent_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        insertClubParentPotential()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_parent_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubParentPotential()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_parent_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
 
         insertClubParent()
         {
@@ -410,6 +847,59 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_club_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+
+        insertClubCoachInterest()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_coach_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubCoachInterest()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_coach_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        insertClubCoachLead()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_coach_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubCoachLead()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_coach_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        insertClubCoachProspect()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_coach_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubCoachProspect()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_coach_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+
+        insertClubCoachPotential()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_club_coach_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteClubCoachPotential()
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_club_coach_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
                 screen.ajax();
         }
 

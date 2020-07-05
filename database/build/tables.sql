@@ -728,44 +728,47 @@ CREATE TABLE club_persons
         PRIMARY KEY (id)
 );
 
-
-create table club_player_interest 
+CREATE TABLE club_player_interest
 (
 	id SERIAL,
-	club_id integer, --celta
-	player_id integer, --gion, get person_id vi players table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	player_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_player_lead 
+CREATE TABLE club_player_lead
 (
 	id SERIAL,
-	club_id integer, --celta
-	player_id integer, --gion, get person_id vi players table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	player_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_player_prospect 
+CREATE TABLE club_player_prospect
 (
 	id SERIAL,
-	club_id integer, --celta
-	player_id integer, --gion, get person_id vi players table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	player_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_player_potential 
+CREATE TABLE club_player_potential
 (
 	id SERIAL,
-	club_id integer, --celta
-	player_id integer, --gion, get person_id vi players table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	player_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(player_id) REFERENCES players(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
@@ -782,45 +785,50 @@ CREATE TABLE club_players
 	PRIMARY KEY (id)
 );
 
-create table club_coach_interest 
+CREATE TABLE club_coaches_interest
 (
 	id SERIAL,
-	club_id integer, --celta
-	coach_id integer, --Julian, get person_id vi coaches table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	coach_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(coach_id) REFERENCES coaches(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_coach_lead 
+CREATE TABLE club_coaches_lead
 (
 	id SERIAL,
-	club_id integer, --celta
-	coach_id integer, --Julian, get person_id vi coaches table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	coach_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(coach_id) REFERENCES coaches(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_coach_prospect 
+CREATE TABLE club_coaches_prospect
 (
 	id SERIAL,
-	club_id integer, --celta
-	coach_id integer, --Julian, get person_id vi coaches table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	coach_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(coach_id) REFERENCES coaches(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_coach_potential 
+CREATE TABLE club_coaches_potential
 (
 	id SERIAL,
-	club_id integer, --celta
-	coach_id integer, --Julian, get person_id vi coaches table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	coach_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(coach_id) REFERENCES coaches(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
+
 
 CREATE TABLE club_coaches 
 (
@@ -844,43 +852,47 @@ CREATE TABLE club_managers
 	PRIMARY KEY (id)
 );
 
-create table club_parent_interest 
+CREATE TABLE club_parents_interest
 (
 	id SERIAL,
-	club_id integer, --celta
-	parent_id integer, --Jimmys parents, get person_id vi parents table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	parent_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(parent_id) REFERENCES parents(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_parent_lead 
+CREATE TABLE club_parents_lead
 (
 	id SERIAL,
-	club_id integer, --celta
-	parent_id integer, --Jimmys parents, get person_id vi parents table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	parent_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(parent_id) REFERENCES parents(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_parent_prospect 
+CREATE TABLE club_parents_prospect
 (
 	id SERIAL,
-	club_id integer, --celta
-	parent_id integer, --Jimmys parents, get person_id vi parents table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	parent_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(parent_id) REFERENCES parents(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
-create table club_parent_potential 
+CREATE TABLE club_parents_potential
 (
 	id SERIAL,
-	club_id integer, --celta
-	parent_id integer, --Jimmys parents, get person_id vi parents table person_id fk
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
+	club_person_id integer,
+	parent_id integer,
+	created_at timestamp not null default now(),
         FOREIGN KEY(parent_id) REFERENCES parents(id),
+        FOREIGN KEY(club_person_id) REFERENCES club_persons(id),
 	PRIMARY KEY (id)
 );
 
