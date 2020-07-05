@@ -156,7 +156,6 @@ class ScheduleScreen extends Screen
 			{
                        		for (var i = 0; i < this.mJson.games_players.length; i++)
 				{
-					console.log('game loop');
 					this.mGamesPlayersArray.push(this.mJson.games_players[i]);
 					this.mJson.games_players[i].type = 'game';
 				}
@@ -166,7 +165,6 @@ class ScheduleScreen extends Screen
 			{
                        		for (var i = 0; i < this.mJson.practices_players.length; i++)
 				{
-					console.log('practice loop');
 					this.mPracticesPlayersArray.push(this.mJson.practices_players[i]);
 					this.mJson.practices_players[i].type = 'practice';
 				}
@@ -322,7 +320,6 @@ class ScheduleScreen extends Screen
 			{
 				for (var i = 0; i < this.mJson.games_availability.length; i++)
                                 {
-					console.log('games_availability in db: 1_' + this.mJson.games_availability[i].availability_id + '_' +  this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
                                 	if (this.mJson.games_availability[i].availability_id == 1)
                                 	{
                                         	if (document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
@@ -389,7 +386,6 @@ class ScheduleScreen extends Screen
 			{
 				for (var i = 0; i < this.mJson.practices_availability.length; i++)
                                 {
-					console.log('practices_availability in db: 1_' + this.mJson.practices_availability[i].availability_id + '_' +  this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
                                 	if (this.mJson.practices_availability[i].availability_id == 1)
                                 	{
                                         	if (document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
