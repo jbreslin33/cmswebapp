@@ -58,6 +58,8 @@ BEGIN
 	--PLAYERS
 	---------------------------Akmal Tokhirov
 
+	insert into families (name) values ('Tokhirov');	
+
 	--EMAILS
 	insert into emails (email) values ('tokabduaziz@gmail.com') returning id into returning_email_id_player_a;
 

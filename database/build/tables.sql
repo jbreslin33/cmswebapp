@@ -445,6 +445,22 @@ create table confirm_emails
 	PRIMARY KEY (id)
 );
 
+create table families
+(
+	id serial,
+	name text,
+	PRIMARY KEY (id)
+);
+
+create table families_persons
+(
+	id serial,
+	family_id integer,
+	person_id integer,
+        FOREIGN KEY(family_id) REFERENCES families(id),
+        FOREIGN KEY(person_id) REFERENCES persons(id),
+	PRIMARY KEY (id)
+);
 
 CREATE TABLE emails_persons
 (
