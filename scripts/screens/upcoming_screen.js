@@ -49,12 +49,13 @@ class UpcomingScreen extends ScheduleScreen
                 for (var i = 0; i < screen.mItemArray.length; i++)
                 {
                 	var item = screen.mItemArray[i];
-                        for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
+
+                        for (var b = 0; b < item.mAvailabilityEmailButtonArray.length; b++)
                         {
-				var id = item.mAvailabilityButtonArray[b].id.split('_');;
+				var id = item.mAvailabilityEmailButtonArray[b].id.split('_');;
                         	if (id[2] == 1)
                                 {
-                                        if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mLawnGreen)
+                                        if (item.mAvailabilityEmailButtonArray[b].style.backgroundColor != APPLICATION.mLawnGreen)
 					{
 						allGreen = false;
 					}
@@ -62,7 +63,7 @@ class UpcomingScreen extends ScheduleScreen
 			
 				if (id[2] == 2)
                                 {
-                                        if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mYellow)
+                                        if (item.mAvailabilityEmailButtonArray[b].style.backgroundColor != APPLICATION.mYellow)
                                         {
                                                 allYellow = false;
                                         }
@@ -70,7 +71,7 @@ class UpcomingScreen extends ScheduleScreen
 
                                	if (id[2] == 3)
                                 {
-                                        if (item.mAvailabilityButtonArray[b].style.backgroundColor != APPLICATION.mRed)
+                                        if (item.mAvailabilityEmailButtonArray[b].style.backgroundColor != APPLICATION.mRed)
                                         {
                                                 allRed = false;
                                         }
@@ -113,9 +114,9 @@ class UpcomingScreen extends ScheduleScreen
 			for (var i = 0; i < screen.mItemArray.length; i++)
 			{
 				var item = screen.mItemArray[i];
-				for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
+				for (var b = 0; b < item.mAvailabilityEmailButtonArray.length; b++)
 				{
-					var id = item.mAvailabilityButtonArray[b].id.split('_');;
+					var id = item.mAvailabilityEmailButtonArray[b].id.split('_');;
 				        
 					if (id[2] == 1)
                                 	{
@@ -134,9 +135,9 @@ class UpcomingScreen extends ScheduleScreen
                         for (var i = 0; i < screen.mItemArray.length; i++)
                         {
                                 var item = screen.mItemArray[i];
-                                for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
+                                for (var b = 0; b < item.mAvailabilityEmailButtonArray.length; b++)
                                 {
-                                        var id = item.mAvailabilityButtonArray[b].id.split('_');;
+                                        var id = item.mAvailabilityEmailButtonArray[b].id.split('_');;
 
                                         if (id[2] == 2)
                                         {
@@ -155,9 +156,9 @@ class UpcomingScreen extends ScheduleScreen
                         for (var i = 0; i < screen.mItemArray.length; i++)
                         {
                                 var item = screen.mItemArray[i];
-                                for (var b = 0; b < item.mAvailabilityButtonArray.length; b++)
+                                for (var b = 0; b < item.mAvailabilityEmailButtonArray.length; b++)
                                 {
-                                        var id = item.mAvailabilityButtonArray[b].id.split('_');;
+                                        var id = item.mAvailabilityEmailButtonArray[b].id.split('_');;
 
                                         if (id[2] == 3)
                                         {

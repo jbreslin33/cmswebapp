@@ -13,7 +13,8 @@ class ScheduleItem extends Item
                 this.mPracticeTeamAvailabilityArray = new Array();
 
 		//availability buttons unique to schedules
-		this.mAvailabilityButtonArray = new Array();
+		this.mAvailabilityEmailButtonArray = new Array();
+		this.mAvailabilityRosterButtonArray = new Array();
 
 		this.mTabRow = null;
 		this.mPlayerDiv = null;
@@ -141,7 +142,7 @@ class ScheduleItem extends Item
                                 		{
                                        			button.style.backgroundColor = APPLICATION.mLawnGreen;
                                 		}
-						this.mAvailabilityButtonArray.push(button);
+						this.mAvailabilityRosterButtonArray.push(button);
 
                                 		var button = document.createElement("BUTTON");
                                 		button.setAttribute("class","availability-button");
@@ -154,7 +155,7 @@ class ScheduleItem extends Item
                                 		{
                                        			button.style.backgroundColor = APPLICATION.mYellow;
                                 		}
-                                		this.mAvailabilityButtonArray.push(button);
+                                		this.mAvailabilityRosterButtonArray.push(button);
 
                                 		var button = document.createElement("BUTTON");
                                 		button.setAttribute("class","availability-button");
@@ -167,7 +168,7 @@ class ScheduleItem extends Item
                                 		{
                                        			button.style.backgroundColor = APPLICATION.mRed;
                                 		}
-                                		this.mAvailabilityButtonArray.push(button);
+                                		this.mAvailabilityRosterButtonArray.push(button);
 					}
 				}
                         }
@@ -214,7 +215,7 @@ class ScheduleItem extends Item
                                 		{
                                        			button.style.backgroundColor = APPLICATION.mLawnGreen;
                                 		}
-						this.mAvailabilityButtonArray.push(button);
+						this.mAvailabilityRosterButtonArray.push(button);
 
                                 		var button = document.createElement("BUTTON");
                                 		button.setAttribute("class","availability-button");
@@ -227,7 +228,7 @@ class ScheduleItem extends Item
                                 		{
                                        			button.style.backgroundColor = APPLICATION.mYellow;
                                 		}
-                                		this.mAvailabilityButtonArray.push(button);
+                                		this.mAvailabilityRosterButtonArray.push(button);
 
                                 		var button = document.createElement("BUTTON");
                                 		button.setAttribute("class","availability-button");
@@ -240,7 +241,7 @@ class ScheduleItem extends Item
                                 		{
                                        			button.style.backgroundColor = APPLICATION.mRed;
                                 		}
-                                		this.mAvailabilityButtonArray.push(button);
+                                		this.mAvailabilityRosterButtonArray.push(button);
 					}
 				}
                         }
@@ -280,7 +281,7 @@ class ScheduleItem extends Item
                                 	{
                                        		button.style.backgroundColor = APPLICATION.mLawnGreen;
                                 	}
-					this.mAvailabilityButtonArray.push(button);
+					this.mAvailabilityEmailButtonArray.push(button);
 
 
                                 	var button = document.createElement("BUTTON");
@@ -294,7 +295,7 @@ class ScheduleItem extends Item
                                 	{
                                        		button.style.backgroundColor = APPLICATION.mYellow;
                                 	}
-                                	this.mAvailabilityButtonArray.push(button);
+                                	this.mAvailabilityEmailButtonArray.push(button);
 
                                 	var button = document.createElement("BUTTON");
                                 	button.setAttribute("class","availability-button");
@@ -307,7 +308,7 @@ class ScheduleItem extends Item
                                 	{
                                        		button.style.backgroundColor = APPLICATION.mRed;
                                 	}
-                                	this.mAvailabilityButtonArray.push(button);
+                                	this.mAvailabilityEmailButtonArray.push(button);
 				}
                         }
 		}
@@ -339,7 +340,7 @@ class ScheduleItem extends Item
                         		{
                         			button.style.backgroundColor = APPLICATION.mLawnGreen;
                         		}
-                        		this.mAvailabilityButtonArray.push(button);
+                        		this.mAvailabilityEmailButtonArray.push(button);
 
 
                                 	var button = document.createElement("BUTTON");
@@ -353,7 +354,7 @@ class ScheduleItem extends Item
                                 	{
                                 		button.style.backgroundColor = APPLICATION.mYellow;
                                 	}
-                                	this.mAvailabilityButtonArray.push(button);
+                                	this.mAvailabilityEmailButtonArray.push(button);
 
                                 	var button = document.createElement("BUTTON");
                                 	button.setAttribute("class","availability-button");
@@ -366,7 +367,7 @@ class ScheduleItem extends Item
                                 	{
                                 		button.style.backgroundColor = APPLICATION.mRed;
                                 	}
-                                	this.mAvailabilityButtonArray.push(button);
+                                	this.mAvailabilityEmailButtonArray.push(button);
 				}
 			}
 		}
