@@ -41,6 +41,8 @@ DECLARE
 
 	returning_club_manager_id club_managers.id%TYPE;
 
+	returning_family_id families.id%TYPE;
+
 
 BEGIN
 	--TEAM u16 Caos
@@ -58,7 +60,7 @@ BEGIN
 	--PLAYERS
 	---------------------------Akmal Tokhirov
 
-	insert into families (name) values ('Tokhirov');	
+	insert into families (name) values ('Tokhirov') returning id into returning_family_id;	
 
 	--EMAILS
 	insert into emails (email) values ('tokabduaziz@gmail.com') returning id into returning_email_id_player_a;
@@ -83,6 +85,8 @@ BEGIN
 	
 	--TEAM_CLUB_PLAYERS
 	insert into team_club_players (team_id, club_player_id) values (returning_team_id, returning_club_player_id);
+
+	insert into families_persons (family_id, person_id) values (returning_family_id, returning_person_id_player_a);
 
 
 	-------------------------------Alex Rodriguez
