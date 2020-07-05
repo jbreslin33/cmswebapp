@@ -14,7 +14,12 @@ class ClubProfileScreen extends Screen
                 this.setSpinner(document.getElementById("club_profile_screen_spinner_id"));
                 this.setForm(document.getElementById("club_profile_screen_form_id"));
 
-		this.mClubRoleRow = document.getElementById("club_profile_screen_club_role_row_id");
+		this.mClubRoleInterestRow = document.getElementById("club_profile_screen_club_role_interest_row_id");
+		this.mClubRoleLeadRow = document.getElementById("club_profile_screen_club_role_lead_row_id");
+		this.mClubRoleProspectRow = document.getElementById("club_profile_screen_club_role_prospect_row_id");
+		this.mClubRolePotentialRow = document.getElementById("club_profile_screen_club_role_potential_row_id");
+		this.mClubRoleRegularRow = document.getElementById("club_profile_screen_club_role_regular_row_id");
+
 		this.mTeamRow = document.getElementById("club_profile_screen_team_row_id");
 		
 		//modal
@@ -54,7 +59,7 @@ class ClubProfileScreen extends Screen
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Player Interest';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleInterestRow.appendChild(button);
                 button.onclick = this.hitClubPlayerInterestButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubPlayerInterestButton = button;
@@ -62,7 +67,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Parent Interest';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleInterestRow.appendChild(button);
                 button.onclick = this.hitClubParentInterestButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubParentInterestButton = button;
@@ -70,7 +75,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Coach Interest';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleInterestRow.appendChild(button);
                 button.onclick = this.hitClubCoachInterestButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubCoachInterestButton = button;
@@ -78,7 +83,7 @@ class ClubProfileScreen extends Screen
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Manager Interest';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleInterestRow.appendChild(button);
                 //button.onclick = this.hitClubManagerInterestButton.bind(button);
                 button.style.backgroundColor = "grey";
                 this.mClubManagerInterestButton = button;
@@ -87,7 +92,7 @@ class ClubProfileScreen extends Screen
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Player Lead';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleLeadRow.appendChild(button);
                 button.onclick = this.hitClubPlayerLeadButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubPlayerLeadButton = button;
@@ -95,7 +100,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Parent Lead';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleLeadRow.appendChild(button);
                 button.onclick = this.hitClubParentLeadButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubParentLeadButton = button;
@@ -103,7 +108,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Coach Lead';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleLeadRow.appendChild(button);
                 button.onclick = this.hitClubCoachLeadButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubCoachLeadButton = button;
@@ -111,7 +116,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Manager Lead';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleLeadRow.appendChild(button);
                 //button.onclick = this.hitClubManagerButton.bind(button);
                 button.style.backgroundColor = "grey";
                 this.mClubManagerLeadButton = button;
@@ -120,7 +125,7 @@ class ClubProfileScreen extends Screen
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Player Prospect';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleProspectRow.appendChild(button);
                 button.onclick = this.hitClubPlayerProspectButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubPlayerProspectButton = button;
@@ -128,7 +133,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Parent Prospect';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleProspectRow.appendChild(button);
                 button.onclick = this.hitClubParentProspectButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubParentProspectButton = button;
@@ -136,7 +141,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Coach Prospect';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleProspectRow.appendChild(button);
                 button.onclick = this.hitClubCoachProspectButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubCoachProspectButton = button;
@@ -144,7 +149,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Manager Prospect';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleProspectRow.appendChild(button);
                 //button.onclick = this.hitClubManagerProspectButton.bind(button);
                 button.style.backgroundColor = "grey";
                 this.mClubManagerProspectButton = button;
@@ -153,7 +158,7 @@ class ClubProfileScreen extends Screen
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Player Potential';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRolePotentialRow.appendChild(button);
                 button.onclick = this.hitClubPlayerPotentialButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubPlayerPotentialButton = button;
@@ -161,7 +166,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Parent Potential';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRolePotentialRow.appendChild(button);
                 button.onclick = this.hitClubParentPotentialButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubParentPotentialButton = button;
@@ -169,7 +174,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Coach Potential';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRolePotentialRow.appendChild(button);
                 button.onclick = this.hitClubCoachPotentialButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubCoachPotentialButton = button;
@@ -177,7 +182,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Manager Potential';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRolePotentialRow.appendChild(button);
                 //button.onclick = this.hitClubManagerButton.bind(button);
                 button.style.backgroundColor = "grey";
                 this.mClubManagerPotentialButton = button;
@@ -186,7 +191,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Player';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleRegularRow.appendChild(button);
                 button.onclick = this.hitClubPlayerButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubPlayerButton = button;
@@ -194,7 +199,7 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Parent';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleRegularRow.appendChild(button);
                 button.onclick = this.hitClubParentButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubParentButton = button;
@@ -202,20 +207,15 @@ class ClubProfileScreen extends Screen
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Coach';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleRegularRow.appendChild(button);
                 button.onclick = this.hitClubCoachButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubCoachButton = button;
 
-
-
-		//old
-
-                
 		var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
                 button.innerHTML = 'Club Manager';
-                this.mClubRoleRow.appendChild(button);
+                this.mClubRoleRegularRow.appendChild(button);
                 button.onclick = this.hitClubManagerButton.bind(button);
                 button.style.backgroundColor = "red";
                 this.mClubManagerButton = button;
