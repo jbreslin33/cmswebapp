@@ -80,16 +80,6 @@ BEGIN
 		END IF;
 	END IF;
 
-
-	--for the clubs
-	IF found_email_id > 0 THEN
-		insert into club_emails (club_id, email_id) values ($3,found_email_id);
-	END IF;
-	
-	IF x > 0 THEN
-		insert into club_emails (club_id, email_id) values ($3,x);
-	END IF;
-
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;

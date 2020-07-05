@@ -69,9 +69,6 @@ BEGIN
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
 
-	--CLUB_EMAILS
-      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-
 	--CLUB_PERSONS
 	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
 
@@ -107,10 +104,6 @@ BEGIN
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 	
-	--CLUB_EMAILS
-      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-
 	--CLUB_PERSONS
 	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
 	insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
@@ -152,10 +145,6 @@ BEGIN
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
-	--CLUB_EMAILS
-      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-	
 	--CLUB_PERSONS
 	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
 	insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother) returning id into returning_club_person_id_mother;
@@ -187,9 +176,6 @@ BEGIN
 	
 	--EMAILS_PERSONS
 	insert into emails_persons (email_id, person_id) values (returning_email_id_player_a, returning_person_id_player_a);
-	
-	--CLUB_EMAILS
-      	insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
 	
 	--CLUB_PERSONS
 	insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
@@ -225,10 +211,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
-
-        --CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
 
         --CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
@@ -272,11 +254,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
-        --CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-
         --CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
@@ -313,9 +290,6 @@ BEGIN
         --EMAILS_PERSONS
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-        
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
         
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
@@ -378,12 +352,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_b);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_b) returning id into returning_club_person_id_player_b;
@@ -443,10 +411,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
@@ -500,11 +464,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
@@ -560,11 +519,6 @@ BEGIN
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_mother);
 
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
-	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_father) returning id into returning_club_person_id_father;
@@ -603,9 +557,6 @@ BEGIN
 	insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_mother, returning_person_id_mother);
 
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_mother);
-	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_mother) returning id into returning_club_person_id_mother;
@@ -644,10 +595,6 @@ BEGIN
 	
 	insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_player_a);
         insert into emails_persons (email_id, person_id) values (returning_email_id_father_a, returning_person_id_father);
-	
-	--CLUB_EMAILS
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_player_a);
-        insert into club_emails (club_id, email_id) values ($1,returning_email_id_father_a);
 	
 	--CLUB_PERSONS
         insert into club_persons (club_id, person_id) values ($1, returning_person_id_player_a) returning id into returning_club_person_id_player_a;
@@ -743,8 +690,6 @@ BEGIN
 
 	insert into club_persons (club_id,person_id) values (1,1);
 	insert into club_administrators (club_person_id,administrator_id) values (1,1);
-
-	insert into club_emails (club_id,email_id) values (1,1);
 
 	--pitches
 	insert into pitches (name, address) values ('Field 1', '2913 Street Rd, Bensalem, PA 19020') returning id into returning_pitch_id;

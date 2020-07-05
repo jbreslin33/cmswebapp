@@ -63,7 +63,6 @@ DECLARE
         recD RECORD;
 
 BEGIN
-	delete from club_emails where club_id = $1;
 
 	--games_players_availability
         FOR rec IN

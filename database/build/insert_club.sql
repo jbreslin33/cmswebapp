@@ -6,11 +6,9 @@ AS $$
 DECLARE
         returning_club_person_id integer;
         returning_club_id integer;
-        returning_club_email_id integer;
         found_club_person_id integer;
 BEGIN
         insert into clubs (name,address) values (name,address) returning id into returning_club_id;
-	insert into club_emails (club_id, email_id) values (returning_club_id,$3);
 
 	--loop for other persons....
 	CALL p_insert_club_persons(returning_club_id,$3);

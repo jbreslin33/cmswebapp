@@ -644,43 +644,7 @@ create TABLE insert_native_login_tokens
 	PRIMARY KEY (id)
 );
 
-
---chance for email for luke or no email for grace or multiple emails for luke
---this table could we leave it and use it or not but it has nothing to do with logins???? so this would be a way for me to send luke updates to his email but he would not need a login..then once in a while we can ask him if he wants his own login???
---this was persons_emails...
-
-
-
---this would say Jim Breslin's family via foreign key persons_id
---person_id is the family creator
---familys are linked by people not logins
---Luke Breslin, Celta Vigo
---actually this is officially that you are part of a club this way if the master account leaves you could also still stay, as the master email propels this to an insert
---so if we delete club then it takes with it all club_persons???
-
---new idea than above, club members are associated with an email/club via clubs_emails table.... thus if you share an email you share a club
---this will allow persons less power related to club membership and relate it directly to email where it belongs instead of iterating through each time email joins a club to associate all persons with said club, now instead a person will automagically be a member of club but NOT a team member, team_player etc...that is for the club to decide. Its as if anyone with an email can join a club but it is up to the club to place them in a role such as teamplayer, teamcoach etc., team parent maybe.... 
-
-CREATE TABLE club_emails
-(
-	id SERIAL,
-	club_id integer not null,
-	email_id integer not null,
-	created_at timestamp not null default now(),
-        FOREIGN KEY(club_id) REFERENCES clubs(id),
-        FOREIGN KEY(email_id) REFERENCES emails(id),
-	unique (email_id, club_id),
-        PRIMARY KEY (id)
-);
-
-
---this only gets deleted when player leaves club if you want to
---Luke Breslin is a player at Celta Vigo
---oh crap an email should create a player....
---so emails_players/....
-
 --PERSONS
-
 CREATE TABLE players 
 (
 	id SERIAL,
