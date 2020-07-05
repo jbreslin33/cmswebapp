@@ -315,12 +315,14 @@ class ScheduleScreen extends Screen
 				this.smash();
 				this.printItems();
 			}
+		 
+			//distinct id as games_players_availability_id, game_id, team_club_player_id as players, availability_id	
 			
 			if (this.mJson.games_availability)
 			{
 				for (var i = 0; i < this.mJson.games_availability.length; i++)
                                 {
-					console.log('print:' + this.mJson.games_availability[i].availability_id + ':' +  this.mJson.games_availability[i].game_id + ':' + this.mJson.games_availability[i].players);
+					console.log('games_availability in db: 1_' + this.mJson.games_availability[i].availability_id + '_' +  this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
                                 	if (this.mJson.games_availability[i].availability_id == 1)
                                 	{
                                         	if (document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
@@ -329,7 +331,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
 
                                         	if (document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
@@ -339,7 +341,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                         	if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
@@ -347,7 +349,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                 	}
 
@@ -359,7 +361,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
 
                                         	if (document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
@@ -368,7 +370,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                         	
 						if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
@@ -377,7 +379,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                 	}
                                 	if (this.mJson.games_availability[i].availability_id == 3)
@@ -388,7 +390,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                         	if (document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
@@ -396,7 +398,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                         	if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
@@ -404,7 +406,7 @@ class ScheduleScreen extends Screen
 						}
 						else
 						{
-							console.log('element not found: 1_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
+							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                 	}
 
@@ -422,7 +424,7 @@ class ScheduleScreen extends Screen
 			{
 				for (var i = 0; i < this.mJson.practices_availability.length; i++)
                                 {
-					console.log('print:' + this.mJson.practices_availability[i].availability_id + ':' +  this.mJson.practices_availability[i].practice_id + ':' + this.mJson.practices_availability[i].players);
+					console.log('practices_availability in db: 1_' + this.mJson.practices_availability[i].availability_id + '_' +  this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
                                 	if (this.mJson.practices_availability[i].availability_id == 1)
                                 	{
                                         	if (document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
