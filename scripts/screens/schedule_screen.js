@@ -329,27 +329,16 @@ class ScheduleScreen extends Screen
 						{
                                         		document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mLawnGreen;
 						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
 
                                         		document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
-						}
-                                        	if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
+                                        	
+						if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
                                         		document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
-						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                 	}
 
@@ -359,27 +348,15 @@ class ScheduleScreen extends Screen
 						{
                                         		document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
                                         		document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mYellow;
 						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
-						}
                                         	
 						if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
                                         		document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
-						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                 	}
                                 	if (this.mJson.games_availability[i].availability_id == 3)
@@ -388,25 +365,13 @@ class ScheduleScreen extends Screen
 						{
                                         		document.getElementById('button_1_1_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
-						}
                                         	if (document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
                                         		document.getElementById('button_1_2_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
-						}
                                         	if (document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players))
 						{
                                         		document.getElementById('button_1_3_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players).style.backgroundColor = APPLICATION.mRed;
-						}
-						else
-						{
-							console.log('element not found: 1_' + this.mJson.games_availability[i].availability_id + '_' + this.mJson.games_availability[i].game_id + '_' + this.mJson.games_availability[i].players);
 						}
                                 	}
 
@@ -431,28 +396,16 @@ class ScheduleScreen extends Screen
 						{
                                         		document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mLawnGreen;
 						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
 						{
 
                                         		document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
 						{
                                         		document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
-						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
 						}
 
                                 	}
@@ -463,27 +416,15 @@ class ScheduleScreen extends Screen
 						{
                                         		document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
 						{
                                         		document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mYellow;
 						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
 						{
                                         		document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
-						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
 						}
 
                                 	}
@@ -494,27 +435,15 @@ class ScheduleScreen extends Screen
 						{
                                         		document.getElementById('button_2_1_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
 						{
                                         		document.getElementById('button_2_2_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mSkyBlue;
 						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
-						}
 
                                         	if (document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players))
 						{
                                         		document.getElementById('button_2_3_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players).style.backgroundColor = APPLICATION.mRed;
-						}
-						else
-						{
-							console.log('element not found: 2_' + this.mJson.practices_availability[i].availability_id + '_' + this.mJson.practices_availability[i].practice_id + '_' + this.mJson.practices_availability[i].players);
 						}
 
                                 	}
