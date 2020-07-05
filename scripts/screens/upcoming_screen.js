@@ -110,13 +110,6 @@ class UpcomingScreen extends ScheduleScreen
 		
 		if (this.id == "upcoming_available_id")
 		{
-			//set this one
-			this.style.backgroundColor = APPLICATION.mLawnGreen; 
-
-			//set others back to APPLICATION.mSkyBlue
-			document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
-			document.getElementById("upcoming_maybe_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
-
 			for (var i = 0; i < screen.mItemArray.length; i++)
 			{
 				var item = screen.mItemArray[i];
@@ -126,17 +119,11 @@ class UpcomingScreen extends ScheduleScreen
 				        
 					if (id[2] == 1)
                                 	{
-                                        	//give active color and add to array
-                                        	item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mLawnGreen;
+                                        	//add to array
                                         	screen.mAvailabilityArray.push(id[1]);
                                         	screen.mAvailabilityArray.push(id[2]);
                                         	screen.mAvailabilityArray.push(id[3]);
                                         	screen.mAvailabilityArray.push(id[4]);
-                                	}
-
-                               		if (id[2] == 2 || id[2] == 3)
-                                	{
-                                       		item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
                                 	}
 				}
 			}
@@ -144,13 +131,6 @@ class UpcomingScreen extends ScheduleScreen
 
                 if (this.id == "upcoming_maybe_available_id")
                 {
-                        //set this one
-                        this.style.backgroundColor = APPLICATION.mYellow;
-
-                        //set others back to APPLICATION.mSkyBlue
-                        document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
-                        document.getElementById("upcoming_not_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
-
                         for (var i = 0; i < screen.mItemArray.length; i++)
                         {
                                 var item = screen.mItemArray[i];
@@ -160,17 +140,11 @@ class UpcomingScreen extends ScheduleScreen
 
                                         if (id[2] == 2)
                                         {
-                                                //give active color and add to array
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mYellow;
+                                                //add to array
                                                 screen.mAvailabilityArray.push(id[1]);
                                                 screen.mAvailabilityArray.push(id[2]);
                                                 screen.mAvailabilityArray.push(id[3]);
                                                 screen.mAvailabilityArray.push(id[4]);
-                                        }
-
-                                        if (id[2] == 1 || id[2] == 3)
-                                        {
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
                                         }
                                 }
                         }
@@ -178,13 +152,6 @@ class UpcomingScreen extends ScheduleScreen
 
 		if (this.id == "upcoming_not_available_id")
                 {
-                        //set this one
-                        this.style.backgroundColor = APPLICATION.mRed;
-
-                        //set others back to APPLICATION.mSkyBlue
-                        document.getElementById("upcoming_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
-                        document.getElementById("upcoming_maybe_available_id").style.backgroundColor = APPLICATION.mSkyBlue;
-
                         for (var i = 0; i < screen.mItemArray.length; i++)
                         {
                                 var item = screen.mItemArray[i];
@@ -194,17 +161,11 @@ class UpcomingScreen extends ScheduleScreen
 
                                         if (id[2] == 3)
                                         {
-                                                //give active color and add to array
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mRed;
+                                                //add to array
                                                 screen.mAvailabilityArray.push(id[1]);
                                                 screen.mAvailabilityArray.push(id[2]);
                                                 screen.mAvailabilityArray.push(id[3]);
                                                 screen.mAvailabilityArray.push(id[4]);
-                                        }
-                                        
-                                        if (id[2] == 1 || id[2] == 2)
-                                        {       
-                                                item.mAvailabilityButtonArray[b].style.backgroundColor = APPLICATION.mSkyBlue;
                                         }
                                 }
                         }
