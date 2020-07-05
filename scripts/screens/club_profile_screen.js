@@ -33,7 +33,7 @@ class ClubProfileScreen extends Screen
 		//create a club player button
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
-                button.innerHTML = 'Player';
+                button.innerHTML = 'Club Player';
                 this.mClubRoleRow.appendChild(button);
                 button.onclick = this.hitClubPlayerButton.bind(button);
                 button.style.backgroundColor = "red";
@@ -42,7 +42,7 @@ class ClubProfileScreen extends Screen
                 //create a club parent button
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
-                button.innerHTML = 'Parent';
+                button.innerHTML = 'Club Parent';
                 this.mClubRoleRow.appendChild(button);
                 button.onclick = this.hitClubParentButton.bind(button);
                 button.style.backgroundColor = "red";
@@ -51,7 +51,7 @@ class ClubProfileScreen extends Screen
                 //create a club coach button
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
-                button.innerHTML = 'Coach';
+                button.innerHTML = 'Club Coach';
                 this.mClubRoleRow.appendChild(button);
                 button.onclick = this.hitClubCoachButton.bind(button);
                 button.style.backgroundColor = "red";
@@ -60,7 +60,7 @@ class ClubProfileScreen extends Screen
                 //create a club manager button
                 var button = document.createElement("BUTTON");
                 button.setAttribute('class','club-profile-button');
-                button.innerHTML = 'Manager';
+                button.innerHTML = 'Club Manager';
                 this.mClubRoleRow.appendChild(button);
                 button.onclick = this.hitClubManagerButton.bind(button);
                 button.style.backgroundColor = "red";
