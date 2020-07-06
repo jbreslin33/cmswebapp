@@ -32,7 +32,7 @@ $$ LANGUAGE plpgsql;
 
 --BEGIN SELECT PITCHES
 --email_id, person_id, club_id
-CREATE OR REPLACE FUNCTION f_select_pitches_and_teams(int,int,int)
+CREATE OR REPLACE FUNCTION f_select_pitches_and_teams(person_id int, club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -43,9 +43,9 @@ BEGIN
                	',',
                 j_select_codes(-102),
                	',',
-		j_select_pitches($3),
+		j_select_pitches(club_id),
                	',',
-		j_select_teams_managed($2,$3)
+		j_select_teams_managed(person_id, club_id)
       	);
 
 RETURN result_set;
@@ -133,7 +133,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --BEGIN SELECT CLUBS OF TEAMS MANAGED
-CREATE OR REPLACE FUNCTION f_select_clubs_of_teams_managed(email_id int, person_id int)
+CREATE OR REPLACE FUNCTION f_select_clubs_of_teams_managed(person_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -145,7 +145,7 @@ BEGIN
                 ',',
                 j_select_codes(-101),
                 ',',
-		j_select_clubs_of_teams_managed($2)
+		j_select_clubs_of_teams_managed(person_id)
         );
 
 RETURN result_set;

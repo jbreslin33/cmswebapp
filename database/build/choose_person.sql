@@ -14,7 +14,6 @@ BEGIN
                 ',',
                	j_select_codes(-100)
        	);
-	RAISE LOG 'result: %', result_set;
 
 RETURN result_set;
 END;

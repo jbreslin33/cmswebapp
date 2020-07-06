@@ -55,8 +55,9 @@ class InsertGameScreen extends Screen
 	{
 		if (APPLICATION.getJWT())
 		{
-                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?jwt=" + APPLICATION.getJWT() + "&person_id=" + APPLICATION.getPersonId());
-                       	APPLICATION.getCurrentScreen().ajax();
+			var screen = APPLICATION.getCurrentScreen();
+                       	screen.setUrl("/php/classes/screens/select_clubs_of_teams_managed.php?" + screen.getStandardParameters());
+                       	screen.ajax();
 		}
 	}
 	
@@ -64,8 +65,9 @@ class InsertGameScreen extends Screen
 	{
 		if (APPLICATION.getJWT())
 		{
-                       	APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_pitches_and_teams.php?jwt=" + APPLICATION.getJWT() + "&club_id=" + this.getClubId() + "&person_id=" + APPLICATION.getPersonId());
-                       	APPLICATION.getCurrentScreen().ajax();
+			var screen = APPLICATION.getCurrentScreen();
+                       	screen.setUrl("/php/classes/screens/select_pitches_and_teams.php?" + screen.getStandardParameters() + "&club_id=" + this.getClubId());
+                       	screen.ajax();
 		}
 	}
 	
@@ -88,14 +90,16 @@ class InsertGameScreen extends Screen
 		{
 			this.setMessage("You must select a team to enter a game. You don't have any teams that you are a manager on.",'red');
 		}
+			
 
 		if (this.getClubId() > 0 && this.getTeamId() > 0)
 		{
-			//normal
+			var screen = APPLICATION.getCurrentScreen();
+			
 			var event_date = document.getElementById("insert_game_screen_date_id").value;
-			APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_game.php?jwt=" + APPLICATION.getJWT() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name + '&person_id=' + APPLICATION.getPersonId());
+			screen.setUrl("/php/classes/screens/insert_game.php?" + screen.getStandardParameters() + '&team_id=' + this.getTeamId() + '&event_date=' + event_date + '&arrival_time=' + arrival_time + '&start_time=' + start_time + '&end_time=' + end_time + '&address=' + address + '&coordinates=' + coordinates + '&pitch_id=' + this.getPitchId() + '&field_name=' + field_name);
                         
-			APPLICATION.getCurrentScreen().ajax();
+			screen.ajax();
 		}
 	}
 
