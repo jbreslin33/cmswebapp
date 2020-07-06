@@ -1,7 +1,7 @@
 
 
 --BEGIN SELECT EVENTS
-CREATE OR REPLACE FUNCTION f_select_events(email_id int, person_id int, first_day_of_query date, last_day_of_query date)
+CREATE OR REPLACE FUNCTION f_select_events(email_id int, family_id int, person_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -9,15 +9,15 @@ BEGIN
         
 	result_set = CONCAT
         (
-        	j_select_persons(email_id),
+        	j_select_persons(family_id),
                 ',',
                 j_select_messages(null),
                 ',',
                 j_select_codes(-100),
                 ',',
-		j_select_games(email_id,$3,$4),
+		j_select_games(email_id,first_day_of_query,last_day_of_query),
                 ',',
-		j_select_practices(email_id,$3,$4),
+		j_select_practices(email_id,first_day_of_query,last_day_of_query),
                 ',',
 		j_select_games_players(email_id),
                 ',',

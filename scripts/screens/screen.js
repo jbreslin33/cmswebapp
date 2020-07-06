@@ -857,6 +857,7 @@ class Screen
 
                		for (var i = 0; i < this.mJson.persons.length; i++)
                		{
+				console.log('Screen::processPersons() first_name:' +  this.mJson.persons[i].first_name);
                			var opt = document.createElement('option');
                			opt.value = this.mJson.persons[i].id;
                        		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;

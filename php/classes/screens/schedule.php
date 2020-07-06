@@ -23,9 +23,9 @@ class ScheduleScreen extends Screen
                         $last_day_of_query = $_GET['last_day_of_query'];
                 }
 
-                $sql = 'select f_select_events($1,$2,$3,$4)';
+                $sql = 'select f_select_events($1,$2,$3,$4,$5)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_events", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $this->mPersonId, $first_day_of_query, $last_day_of_query));
+		$result = pg_execute($this->mDatabase->mConnection, "f_select_events", array( $this->getSenderEmailId(), $this->mFamilyId, $this->mPersonId, $first_day_of_query, $last_day_of_query));
 	
 		return pg_fetch_result($result, 0);
 	}
