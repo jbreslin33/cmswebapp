@@ -87,12 +87,12 @@ class Screen
                 this.setPersonSelect(null);
 
                 //person select
+		/*
 		if (this.getPersonSelect())
 		{
                 	this.getPersonSelect().onchange = this.personSelected.bind(this);
 		}	
-
-
+		*/
 
                 //clase modal
                 document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
@@ -130,6 +130,7 @@ class Screen
 
 	personSelected()
 	{
+
 		/*
 		if (APPLICATION.getSideScreen())
 		{
@@ -849,6 +850,7 @@ class Screen
 			console.log('Screen::processPersons() persons json exists');
            		//lets grab old one first
                         var v = this.mApplication.getPersonSelect().value;
+			console.log('old value:' + v);
 
                		//load up persons option
                		var select = this.mApplication.getPersonSelect();

@@ -19,6 +19,12 @@ class ChoosePersonScreen extends Screen
 		this.mPersonsExists = -1;
 		this.mFamiliesExists = -1;
 
+                //person select
+                if (this.getPersonSelect())
+                {
+                        this.getPersonSelect().onchange = this.personSelected.bind(this);
+                }
+
                 this.getForm().addEventListener('submit', function(e)
                 {
                         e.preventDefault();
@@ -39,6 +45,23 @@ class ChoosePersonScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?" + this.getStandardParameters()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
+        personSelected()
+        {
+		console.log('ChoosePersonScreen::personSelected() value:' + this.getPersonSelect().value );
+          
+		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+
+                /*
+                if (APPLICATION.getSideScreen())
+                {
+                        APPLICATION.getSideScreen().handleButtons();
+                }
+
+                //change to current state as we switched person so we need to reload screen
+                APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
+                */
+        }
+
 
 	hit()
 	{
@@ -109,31 +132,46 @@ class ChoosePersonScreen extends Screen
 //you need to set person after processing persons to set whoever was chosen on choose screeen
 	processPersons()
         {
-		//parent will handle application persons select
-
                 if (this.mJson.persons)
                 {
-			super.processPersons();
 
-			console.log('ChoosePersonScreen::processPersons() persons json exits');
                         //load up persons option
-			var select = this.getPersonSelect();
-			select.length = 0;
+			var selectScreen      = this.getPersonSelect();
+			var selectApplication = this.mApplication.getPersonSelect();
+
+                        //lets grab old one first
+                        var v = this.mApplication.getPersonSelect().value;
+                        console.log('ChoosePersonScreen::processPersons old value:' + v);
+
+			selectScreen.length      = 0;
+			selectApplication.length = 0;
+			
 			this.mApplication.mPersonArray.length = 0;			
+
                         for (var i = 0; i < this.mJson.persons.length; i++)
                         {
-                        	var opt = document.createElement('option');
-                               	opt.value = this.mJson.persons[i].id;
+                        	var screenOpt      = document.createElement('option');
+                        	var applicationOpt = document.createElement('option');
+
+                               	screenOpt.value      = this.mJson.persons[i].id;
+                               	applicationOpt.value = this.mJson.persons[i].id;
+
                                	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                               	opt.innerHTML = full_name;
-                               	select.appendChild(opt);
 
+                               	screenOpt.innerHTML      = full_name;
+                               	applicationOpt.innerHTML = full_name;
 
+                               	selectScreen.appendChild(screenOpt);
+                               	selectApplication.appendChild(applicationOpt);
+
+				//for application
 				this.mApplication.mPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
 
 			}
-			this.mPersonsExist = select.length;
-			
+			this.mPersonsExist = selectScreen.length;
+		
+			//set value on screen with old one and THEN alos set app with value on this one
+			this.getPersonSelect().value = v;
 			this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 		
 			if (this.mPersonsExist == 0)
