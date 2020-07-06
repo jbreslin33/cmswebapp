@@ -34,38 +34,22 @@ class ChoosePersonScreen extends Screen
 
 	get()
 	{
-		console.log('ChoosePersonScreen::get()');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_families.php?jwt=" + APPLICATION.getJWT()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
 	getPersons()
 	{
-		console.log('ChoosePersonScreen::getPersons()');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?" + this.getStandardParameters()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
         personSelected()
         {
-		console.log('ChoosePersonScreen::personSelected() value:' + this.getPersonSelect().value );
-          
 		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
-
-                /*
-                if (APPLICATION.getSideScreen())
-                {
-                        APPLICATION.getSideScreen().handleButtons();
-                }
-
-                //change to current state as we switched person so we need to reload screen
-                APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
-                */
         }
-
 
 	hit()
 	{
-		console.log('ChoosePersonScreen::hit()');
 		//set value of person select
 		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 
@@ -109,7 +93,6 @@ class ChoosePersonScreen extends Screen
 
                 if (this.mJson.families)
                 {
-			console.log('ChoosePersonScreen::processFamilies() families json exists');
                         //load up persons option
                         var select = this.getFamilySelect();
                         select.length = 0;
@@ -141,7 +124,6 @@ class ChoosePersonScreen extends Screen
 
                         //lets grab old one first
                         var v = this.mApplication.getPersonSelect().value;
-                        console.log('ChoosePersonScreen::processPersons old value:' + v);
 
 			selectScreen.length      = 0;
 			selectApplication.length = 0;

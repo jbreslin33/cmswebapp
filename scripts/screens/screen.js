@@ -819,7 +819,6 @@ class Screen
 
                 if (this.mJson.families)
                 {
-			console.log('Screen::processFamilies() families json exists');
                         //lets grab old one first
                         var v = this.mApplication.getFamilySelect().value;
 
@@ -847,10 +846,8 @@ class Screen
 	{
 		if (this.mJson.persons)
 		{
-			console.log('Screen::processPersons() persons json exists');
            		//lets grab old one first
                         var v = this.mApplication.getPersonSelect().value;
-			console.log('old value:' + v);
 
                		//load up persons option
                		var select = this.mApplication.getPersonSelect();
@@ -859,7 +856,6 @@ class Screen
 
                		for (var i = 0; i < this.mJson.persons.length; i++)
                		{
-				console.log('Screen::processPersons() first_name:' +  this.mJson.persons[i].first_name);
                			var opt = document.createElement('option');
                			opt.value = this.mJson.persons[i].id;
                        		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
@@ -919,7 +915,7 @@ class Screen
 
                		for (var i = 0; i < this.mJson.messages.length; i++)
 			{
-				console.log('message:' + this.mJson.messages[i].message);
+				//console.log('message:' + this.mJson.messages[i].message);
 			}
 
 			//definite success so send to upcoming
