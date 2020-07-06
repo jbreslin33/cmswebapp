@@ -815,8 +815,10 @@ class Screen
 
         processFamilies()
         {
+
                 if (this.mJson.families)
                 {
+			console.log('Screen::processFamilies() families json exists');
                         //lets grab old one first
                         var v = this.mApplication.getFamilySelect().value;
 
@@ -844,6 +846,7 @@ class Screen
 	{
 		if (this.mJson.persons)
 		{
+			console.log('Screen::processPersons() persons json exists');
            		//lets grab old one first
                         var v = this.mApplication.getPersonSelect().value;
 

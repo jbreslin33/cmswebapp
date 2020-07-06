@@ -28,18 +28,21 @@ class ChoosePersonScreen extends Screen
 
 	get()
 	{
+		console.log('ChoosePersonScreen::get()');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_families.php?jwt=" + APPLICATION.getJWT()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
 	getPersons()
 	{
+		console.log('ChoosePersonScreen::getPersons()');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?" + this.getStandardParameters()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
 
 	hit()
 	{
+		console.log('ChoosePersonScreen::hit()');
 		//set value of person select
 		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 
@@ -80,9 +83,10 @@ class ChoosePersonScreen extends Screen
 
         processFamilies()
         {
-		//super.processFamilies();
+
                 if (this.mJson.families)
                 {
+			console.log('ChoosePersonScreen::processFamilies() families json exists');
                         //load up persons option
                         var select = this.getFamilySelect();
                         select.length = 0;
@@ -105,9 +109,9 @@ class ChoosePersonScreen extends Screen
 //you need to set person after processing persons to set whoever was chosen on choose screeen
 	processPersons()
         {
-		//super.processPersons();
                 if (this.mJson.persons)
                 {
+			console.log('ChoosePersonScreen::processPersons() persons json exits');
                         //load up persons option
 			var select = this.getPersonSelect();
 			select.length = 0;

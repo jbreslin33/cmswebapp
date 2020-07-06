@@ -62,8 +62,6 @@ BEGIN
         (
                 j_select_families(email_id),
                 ',',
-                --j_select_persons(email_id),
-                --',',
                 j_select_messages(null),
                 ',',
                 j_select_codes(-102)
