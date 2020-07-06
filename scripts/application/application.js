@@ -339,7 +339,7 @@ class Application
 
         personSelected()
         {
-		this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
+		//this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
                 
 		if (this.getSideScreen())
                 {

@@ -51,7 +51,7 @@ class ChoosePersonScreen extends Screen
 		this.mApplication.mUserSelectedPerson = true;
 
 
-		this.mApplication.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
+		//this.mApplication.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
 
 		//need to call db here as well.....
 
@@ -132,6 +132,8 @@ class ChoosePersonScreen extends Screen
 
 			}
 			this.mPersonsExist = select.length;
+			
+			this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 		
 			if (this.mPersonsExist == 0)
 			{
