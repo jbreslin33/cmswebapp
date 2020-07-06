@@ -109,8 +109,12 @@ class ChoosePersonScreen extends Screen
 //you need to set person after processing persons to set whoever was chosen on choose screeen
 	processPersons()
         {
+		//parent will handle application persons select
+
                 if (this.mJson.persons)
                 {
+			super.processPersons();
+
 			console.log('ChoosePersonScreen::processPersons() persons json exits');
                         //load up persons option
 			var select = this.getPersonSelect();
