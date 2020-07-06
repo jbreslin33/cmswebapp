@@ -32,11 +32,13 @@ class Screen
 		this.mNavigationBar = null;
 
 		//selects 
+		this.mFamilyId = 0;
 		this.mPersonId = 0;
 		this.mClubId = 0;
 		this.mTeamId = 0;
 		this.mPitchId = 0;
 
+		this.mFamilySelect = null;
 		this.mPersonSelect = null;
 		this.mClubSelect = null;
 		this.mTeamSelect = null;
@@ -73,6 +75,15 @@ class Screen
                         APPLICATION.getCurrentScreen().keyUpHandler(e);
                 });
 
+                this.setFamilySelect(null);
+
+                //famliy select
+                if (this.getFamilySelect())
+                {
+                        this.getFamliySelect().onchange = this.famliySelected.bind(this);
+                }
+
+
                 this.setPersonSelect(null);
 
                 //person select
@@ -80,6 +91,8 @@ class Screen
 		{
                 	this.getPersonSelect().onchange = this.personSelected.bind(this);
 		}	
+
+
 
                 //clase modal
                 document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
@@ -431,6 +444,16 @@ class Screen
 		return this.mNavigationBar;
 	}
 	
+	setFamilySelect(select)
+	{
+		this.mFamilySelect = select;
+	}
+
+	getFamilySelect()
+	{
+		return this.mFamilySelect;
+	}
+	
 	setPersonSelect(select)
 	{
 		this.mPersonSelect = select;
@@ -503,7 +526,7 @@ class Screen
 
 	getStandardParameters()
 	{
-		return "jwt=" + APPLICATION.getJWT() + "&person_id=" + APPLICATION.getPersonId();
+		return "jwt=" + APPLICATION.getJWT() + "&family_id=" + APPLICATION.getFamilyId() + "&person_id=" + APPLICATION.getPersonId();
 	}
 
 	getClubId()
@@ -725,6 +748,7 @@ class Screen
 			this.processJwts();
 			this.processClubs();
 			this.processTeams();
+			this.processFamilies();
 			this.processPersons();
 			this.processPitches();
 			this.processMessages();
@@ -789,6 +813,33 @@ class Screen
 		}		
 	}
 
+        processFamilies()
+        {
+                if (this.mJson.families)
+                {
+                        //lets grab old one first
+                        var v = this.mApplication.getFamilySelect().value;
+
+                        //load up families option
+                        var select = this.mApplication.getFamilySelect();
+                        select.length = 0;
+                        //this.mApplication.mFamilyArray.length = 0;
+
+                        for (var i = 0; i < this.mJson.families.length; i++)
+                        {
+                                var opt = document.createElement('option');
+                                opt.value = this.mJson.families[i].id;
+                                var name = this.mJson.families[i].name + ' Family';
+                                opt.innerHTML = name;
+                                select.appendChild(opt);
+                        }
+
+                        //lets grab old one first
+                        this.mApplication.getFamilySelect().value = v;
+                }
+        }
+
+
 	processPersons()
 	{
 		if (this.mJson.persons)
@@ -814,7 +865,6 @@ class Screen
 
 	           	//lets grab old one first
                         this.mApplication.getPersonSelect().value = v;
-
 		}
 	}
 

@@ -121,8 +121,39 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT CODES
 
 
+--BEGIN J_SELECT FAMILIES
+CREATE OR REPLACE FUNCTION j_select_families(email_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select distinct families.id, families.name
+
+                from families
+                        join families_persons on families_persons.family_id = families.id
+                        join emails_persons on emails_persons.person_id = families_persons.person_id
+
+                where emails_persons.email_id = $1
+
+        ) t;
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"families": []', raw_json);
+        ELSE
+                result_set = CONCAT('"families": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+--END J_SELECT FAMILIES
+
+
 --BEGIN J_SELECT PERSONS
-CREATE OR REPLACE FUNCTION j_select_persons(email_id int)
+CREATE OR REPLACE FUNCTION j_select_persons(family_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -132,11 +163,15 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
 	from
         (
-		--select persons.id, first_name, case when middle_name IS NULL THEN '' ELSE middle_name END, last_name from persons join emails_persons on emails_persons.person_id=persons.id where emails_persons.email_id = $1 
-
-
-		select persons.id as id, first_name, case when middle_name IS NULL THEN '' ELSE middle_name END, last_name, players.id as player_id, parents.id as parent_id, coaches.id as coach_id, managers.id as manager_id, administrators.id as administrator_id from persons full outer join emails_persons on emails_persons.person_id=persons.id full outer join players on players.person_id=persons.id full outer join parents on parents.person_id=persons.id full outer join coaches on coaches.person_id=persons.id full outer join managers on managers.person_id=persons.id full outer join administrators on administrators.person_id=persons.id where emails_persons.email_id = $1 
-
+		select persons.id as id, first_name, case when middle_name IS NULL THEN '' ELSE middle_name END, last_name, players.id as player_id, parents.id as parent_id, coaches.id as coach_id, managers.id as manager_id, administrators.id as administrator_id from persons 
+			full outer join emails_persons on emails_persons.person_id=persons.id 
+			full outer join families_persons on families_persons.person_id = emails_persons.person_id 
+			full outer join players on players.person_id=persons.id 
+			full outer join parents on parents.person_id=persons.id 
+			full outer join coaches on coaches.person_id=persons.id 
+			full outer join managers on managers.person_id=persons.id 
+			full outer join administrators on administrators.person_id=persons.id 
+		where families_persons.family_id = $1 
 
         ) t;
 	IF raw_json is NULL THEN
@@ -148,6 +183,8 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 --END J_SELECT PERSONS
+
+
 
 --BEGIN J_SELECT TEAMS
 CREATE OR REPLACE FUNCTION j_select_teams(int)

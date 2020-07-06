@@ -52,16 +52,37 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
---BEGIN SELECT PERSON
-CREATE OR REPLACE FUNCTION f_select_person(email_id int)
+--BEGIN SELECT FAMILY
+CREATE OR REPLACE FUNCTION f_select_family(email_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
 BEGIN
         result_set = CONCAT
         (
-                j_select_persons(email_id),
+                j_select_families(email_id),
+                ',',
+                --j_select_persons(email_id),
+                --',',
+                j_select_messages(null),
+                ',',
+                j_select_codes(-102)
+        );
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--BEGIN SELECT PERSON
+CREATE OR REPLACE FUNCTION f_select_person(email_id int, family_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+BEGIN
+        result_set = CONCAT
+        (
+                j_select_persons($2),
                 ',',
                 j_select_messages(null),
                 ',',
@@ -71,6 +92,8 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
 
 --BEGIN SELECTED PERSON
 CREATE OR REPLACE FUNCTION f_selected_person(email_id int, person_id int)

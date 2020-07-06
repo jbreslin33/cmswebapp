@@ -9,6 +9,7 @@ class Screen
 	{
 		$this->mDatabase = new Database("localhost","footballhome","postgres","mibesfat");
 
+               	$this->mFamilyId = 0;
                	$this->mPersonId = 0;
                	$this->mScreenPersonId = 0;
                 $this->mClubId = 0;
@@ -35,6 +36,10 @@ class Screen
 
 	function parseParameters()
 	{
+                if (isset($_GET['family_id']))
+                {
+                        $this->mFamilyId = $_GET['family_id'];
+                }
                 if (isset($_GET['person_id']))
                 {
                         $this->mPersonId = $_GET['person_id'];

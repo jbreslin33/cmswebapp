@@ -48,7 +48,9 @@ BEGIN
 		(
 			found_email_id,
 			',',
-			j_select_persons(found_email_id),
+			j_select_families(found_email_id),
+			--',',
+			--j_select_persons(found_email_id),
 			',',
 			j_select_messages(null),
 			',',
@@ -57,8 +59,10 @@ BEGIN
         ELSE
         	result_set = CONCAT
 		(
-			j_select_persons(found_email_id),
+			j_select_families(found_email_id),
 			',',
+			--j_select_persons(found_email_id),
+			--',',
 			j_select_messages('Could not find email.'),
 			',',
 			j_select_codes(-101)
