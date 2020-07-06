@@ -80,16 +80,14 @@ class ChoosePersonScreen extends Screen
 
         processFamilies()
         {
-		console.log('fam');
+		//super.processFamilies();
                 if (this.mJson.families)
                 {
-			console.log('fam if');
                         //load up persons option
                         var select = this.getFamilySelect();
                         select.length = 0;
                         for (var i = 0; i < this.mJson.families.length; i++)
                         {
-				console.log('fam for');
                                 var opt = document.createElement('option');
                                 opt.value = this.mJson.families[i].id;
                                 var name = this.mJson.families[i].name + ' Family';
@@ -102,25 +100,20 @@ class ChoosePersonScreen extends Screen
 
 			this.getPersons();
                 }
-
-
         }
 
 //you need to set person after processing persons to set whoever was chosen on choose screeen
 	processPersons()
         {
-		console.log('per');
+		//super.processPersons();
                 if (this.mJson.persons)
                 {
-			console.log('per if');
-
                         //load up persons option
 			var select = this.getPersonSelect();
 			select.length = 0;
 			this.mApplication.mPersonArray.length = 0;			
                         for (var i = 0; i < this.mJson.persons.length; i++)
                         {
-				console.log('per for');
                         	var opt = document.createElement('option');
                                	opt.value = this.mJson.persons[i].id;
                                	var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
