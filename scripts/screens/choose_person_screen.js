@@ -171,8 +171,18 @@ class ChoosePersonScreen extends Screen
 			this.mPersonsExist = selectScreen.length;
 		
 			//set value on screen with old one and THEN alos set app with value on this one
-			this.getPersonSelect().value = v;
-			this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+		
+			if (v)
+			{
+				//then we have old value so set this one to old and app to old
+				this.getPersonSelect().value = v;
+				this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+			}
+			else
+			{
+				//no old value so just use what is local to set to app
+				this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+			}
 		
 			if (this.mPersonsExist == 0)
 			{
