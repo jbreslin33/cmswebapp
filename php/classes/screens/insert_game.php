@@ -10,21 +10,14 @@ class InsertGame extends Screen
 
 	function getResult()
 	{
-		$team_id = null;
 		$event_date = null;
 		$arrival_time = null;
 		$start_time = null;
 		$end_time = null;
 		$address = null;
 		$coordinates = null;
-		$pitch_id = null;
 		$field_name = null;
-		$person_id = null;
 	
-		if (isset($_GET['team_id']))
-		{
-			$team_id = $_GET['team_id'];
-		}
 		if (isset($_GET['event_date']))
 		{
 			$event_date = $_GET['event_date'];
@@ -49,19 +42,10 @@ class InsertGame extends Screen
 		{
 			$coordinates = $_GET['coordinates'];
 		}
-		if (isset($_GET['pitch_id']))
-		{
-			$pitch_id = $_GET['pitch_id'];
-		}
 		if (isset($_GET['field_name']))
 		{
 			$field_name = $_GET['field_name'];
 		}
-
-                if (isset($_GET['person_id']))
-                {
-                        $person_id = $_GET['person_id'];
-                }
 
 		if ($event_date)
 		{
@@ -70,7 +54,7 @@ class InsertGame extends Screen
 				//prep db
 				$sql = 'select f_insert_game($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)';
 				$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_game", $sql);
-				$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->getSenderEmailId(), $team_id, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $pitch_id, $field_name, $person_id));
+				$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->mFamilyId, $this->mPersonId, $this->mTeamId, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $this->mPitchId, $field_name));
 			
 				return pg_fetch_result($result, 0);
 			}

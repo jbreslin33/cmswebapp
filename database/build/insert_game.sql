@@ -1,5 +1,6 @@
 --BEGIN INSERT GAME
-CREATE OR REPLACE FUNCTION f_insert_game(int,int,date,time,time,time,text,text,int,text,int)
+
+CREATE OR REPLACE FUNCTION f_insert_game(family_id int, p_person_id int, p_team_id int, event_date date, arrival_time time, start_time time, end_time time, address text, coordinates text, pitch_id int,field_name text)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -14,14 +15,14 @@ BEGIN
         	join club_persons on club_persons.id = club_managers.club_person_id
         	join teams on teams.id = team_club_managers.team_id
 
-        where teams.id = $2 AND club_persons.person_id = $2;
+        where teams.id = p_team_id AND club_persons.person_id = p_person_id;
 
 	IF found_team_club_manager_id > 0 THEN
-        	CALL p_insert_game($2,$3,$4,$5,$6,$7,$8,$9,$10,x);
+        	CALL p_insert_game(p_team_id, event_date, arrival_time, start_time, end_time, address, coordinates, pitch_id, field_name, x);
         	IF x > 0 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
@@ -31,7 +32,7 @@ BEGIN
         	ELSE
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(family_id),
                                 ',',
                                 j_select_messages('Something went wrong with adding game.'),
                                 ',',
@@ -42,7 +43,7 @@ BEGIN
 	ELSE
 		result_set = CONCAT
                 (
-                	j_select_persons($1),
+                	j_select_persons(family_id),
                        	',',
                         j_select_messages('You must be a manager of this team to create a game. Contact your administrator.'),
                         ',',
