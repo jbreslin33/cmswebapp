@@ -42,7 +42,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club_player(int,int,int,int)
+CREATE OR REPLACE FUNCTION f_insert_club_player(family_id int, person_id int, club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -57,29 +57,29 @@ BEGIN
                 IF x = -101 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams($4),
+                                j_select_club_teams(club_id),
                                 ',',
-                                j_select_club_players_id($4,$3),
+                                j_select_club_players_id(person_id, club_id),
                                 ',',
-                                j_select_club_parents_id($4,$3),
+                                j_select_club_parents_id(person_id, club_id),
                                 ',',
-                                j_select_club_coaches_id($4,$3),
+                                j_select_club_coaches_id(person_id, club_id),
                                 ',',
-                                j_select_club_managers_id($4,$3),
+                                j_select_club_managers_id(person_id, club_id),
                                 ',',
-                                j_select_team_club_players($4,$3),
+                                j_select_team_club_players(person_id, club_id),
                                 ',',
-                                j_select_team_club_parents($4,$3),
+                                j_select_team_club_parents(person_id, club_id),
                                 ',',
-                                j_select_team_club_coaches($4,$3),
+                                j_select_team_club_coaches(person_id, club_id),
                                 ',',
-                                j_select_team_club_managers($4,$3)
+                                j_select_team_club_managers(person_id, club_id)
 
 
                         );
@@ -1006,7 +1006,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION f_club_persons(email_id_p int, person_id_p int, club_id_p int)
+CREATE OR REPLACE FUNCTION f_club_persons(p_family_id int, p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -1017,18 +1017,18 @@ BEGIN
 	IF found_club_administrator_id > 0 THEN
 	        result_set = CONCAT
         	(
-                	j_select_persons(email_id_p),
+                	j_select_persons(p_family_id),
                 	',',
                 	j_select_messages(null),
                 	',',
                 	j_select_codes(-102),
                 	',',
-                	j_select_club_persons(person_id_p, club_id_p)
+                	j_select_club_persons(p_person_id, p_club_id)
         	);
 	ELSE
 	        result_set = CONCAT
         	(
-                	j_select_persons($1),
+                	j_select_persons(p_family_id),
                 	',',
                 	j_select_messages('You are not a club administrator.'),
                 	',',

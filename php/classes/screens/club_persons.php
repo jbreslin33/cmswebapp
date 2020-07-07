@@ -12,7 +12,7 @@ class ClubPerson extends Screen
         {
                 $sql = 'select f_club_persons($1,$2,$3)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_club_persons", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_club_persons", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId));
+                $result = pg_execute($this->mDatabase->mConnection, "f_club_persons", array( $this->mFamilyId, $this->mPersonId, $this->mClubId));
 
                 return pg_fetch_result($result, 0);
         }

@@ -2,7 +2,7 @@
 
 
 --BEGIN J_SELECT PITCHES
-CREATE OR REPLACE FUNCTION j_select_pitches(int)
+CREATE OR REPLACE FUNCTION j_select_pitches(p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -14,7 +14,7 @@ SELECT json_agg(t) INTO raw_json
         (
                 select pitches.id, pitches.name, pitches.address from pitches 
 			join clubs_pitches on clubs_pitches.pitch_id = pitches.id
-		where clubs_pitches.club_id = $1
+		where clubs_pitches.club_id = p_club_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -31,7 +31,7 @@ $$ LANGUAGE plpgsql;
 
 --BEGIN J_SELECT ADMINISTRATED_CLUBS
 --params:person_id
-CREATE OR REPLACE FUNCTION j_select_administrated_clubs(int)
+CREATE OR REPLACE FUNCTION j_select_administrated_clubs(p_person_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -44,7 +44,7 @@ SELECT json_agg(t) INTO raw_json
                 select distinct clubs.id, clubs.name from clubs
                 join club_persons on club_persons.club_id=clubs.id
                 join club_administrators on club_administrators.club_person_id=club_persons.id
-                where club_persons.person_id = $1
+                where club_persons.person_id = p_person_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -59,7 +59,7 @@ $$ LANGUAGE plpgsql;
 
 --BEGIN J_SELECT CLUBS OF TEAMS MANAGED
 --params:person_id
-CREATE OR REPLACE FUNCTION j_select_clubs_of_teams_managed(int)
+CREATE OR REPLACE FUNCTION j_select_clubs_of_teams_managed(p_person_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -73,7 +73,7 @@ SELECT json_agg(t) INTO raw_json
 			join club_managers on club_managers.id = team_club_managers.club_manager_id
 			join club_persons on club_persons.id = club_managers.club_person_id
 			join clubs on clubs.id = club_persons.club_id
-                where club_persons.person_id = $1 
+                where club_persons.person_id = p_person_id 
 
         ) t;
 
@@ -187,7 +187,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN J_SELECT TEAMS
-CREATE OR REPLACE FUNCTION j_select_teams(int)
+CREATE OR REPLACE FUNCTION j_select_teams(p_family_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -202,9 +202,8 @@ SELECT json_agg(t) INTO raw_json
                 join club_persons on club_persons.id=team_club_persons.club_person_id
 
                 join persons on persons.id=club_persons.person_id
-                join emails_persons on emails_persons.person_id=persons.id
-                join emails on emails.id=emails_persons.email_id
-                where email_id = $1
+                join families_persons on families_persons.person_id=persons.id
+                where families_persons.family_id = p_family_id 
         ) t;
 
 	IF raw_json is NULL THEN
@@ -218,7 +217,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
 
 --BEGIN J_SELECT TEAMS
-CREATE OR REPLACE FUNCTION j_select_club_teams(int)
+CREATE OR REPLACE FUNCTION j_select_club_teams(p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -230,7 +229,7 @@ SELECT json_agg(t) INTO raw_json
         (
 		select teams.id as team_id, teams.name as team_name from teams
 			join clubs_teams on clubs_teams.team_id = teams.id
-		where clubs_teams.club_id = $1
+		where clubs_teams.club_id = p_club_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -244,7 +243,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS
 
 --BEGIN J_SELECT PITCHES
-CREATE OR REPLACE FUNCTION j_select_club_pitches(int)
+CREATE OR REPLACE FUNCTION j_select_club_pitches(p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -255,7 +254,7 @@ SELECT json_agg(t) INTO raw_json
         from
         (
                 select pitches.id as pitch_id, pitches.name as pitch_name from pitches
-                where pitches.club_id = $1
+                where pitches.club_id = p_club_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -269,7 +268,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PITCHES
 
 
-CREATE OR REPLACE FUNCTION j_select_club_players_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_club_players_id(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -292,7 +291,7 @@ SELECT json_agg(t) INTO raw_json
                         persons on persons.id=club_persons.person_id
 
                 where
-                        persons.id = $2 AND club_persons.club_id = $1 
+                        persons.id = p_person_id AND club_persons.club_id = p_club_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -304,7 +303,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_club_parents_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_club_parents_id(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -327,7 +326,7 @@ SELECT json_agg(t) INTO raw_json
                         persons on persons.id=club_persons.person_id
 
                 where
-                        persons.id = $2 AND club_persons.club_id = $1
+                        persons.id = p_person_id AND club_persons.club_id = p_club_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -339,7 +338,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_club_coaches_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_club_coaches_id(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -362,7 +361,7 @@ SELECT json_agg(t) INTO raw_json
                         persons on persons.id=club_persons.person_id
 
                 where
-                        persons.id = $2 AND club_persons.club_id = $1
+                        persons.id = p_person_id AND club_persons.club_id = p_club_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -374,7 +373,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_club_managers_id(int,int)
+CREATE OR REPLACE FUNCTION j_select_club_managers_id(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -397,7 +396,7 @@ SELECT json_agg(t) INTO raw_json
                         persons on persons.id=club_persons.person_id
 
                 where
-                        persons.id = $2 AND club_persons.club_id = $1
+                        persons.id = p_person_id AND club_persons.club_id = p_club_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -410,7 +409,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION j_select_team_club_players(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_players(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -433,7 +432,7 @@ SELECT json_agg(t) INTO raw_json
                         club_persons on club_persons.id = club_players.club_person_id
 
                 where
-                        club_persons.person_id = $2 AND club_persons.club_id = $1
+                        club_persons.person_id = p_person_id AND club_persons.club_id = p_club_id 
 	) t;
 
         IF raw_json is NULL THEN
@@ -445,7 +444,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_team_club_parents(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_parents(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -468,7 +467,7 @@ SELECT json_agg(t) INTO raw_json
                         club_persons on club_persons.id = club_parents.club_person_id
 
                 where
-                        club_persons.person_id = $2 AND club_persons.club_id = $1
+                        club_persons.person_id = p_person_id AND club_persons.club_id = p_club_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -480,7 +479,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_team_club_coaches(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_coaches(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -503,7 +502,7 @@ SELECT json_agg(t) INTO raw_json
                         club_persons on club_persons.id = club_coaches.club_person_id
 
                 where
-                        club_persons.person_id = $2 AND club_persons.club_id = $1
+                        club_persons.person_id = p_person_id AND club_persons.club_id = p_club_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -516,7 +515,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION j_select_team_club_managers(int,int)
+CREATE OR REPLACE FUNCTION j_select_team_club_managers(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -539,7 +538,7 @@ SELECT json_agg(t) INTO raw_json
                         club_persons on club_persons.id = club_managers.club_person_id
 
                 where
-                        club_persons.person_id = $2 AND club_persons.club_id = $1
+                        club_persons.person_id = p_person_id AND club_persons.club_id = p_club_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -553,7 +552,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN J_SELECT PROFILES
-CREATE OR REPLACE FUNCTION j_select_profiles(int)
+CREATE OR REPLACE FUNCTION j_select_profiles(p_person_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -578,7 +577,7 @@ SELECT json_agg(t) INTO raw_json
 		left join coaches on coaches.person_id=persons.id
 		left join managers on managers.person_id=persons.id
 		left join administrators on administrators.person_id=persons.id
-		where persons.id = $1
+		where persons.id = p_person_id
 
         ) t;
 
@@ -627,7 +626,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN J_SELECT TEAMS MANAGED
-CREATE OR REPLACE FUNCTION j_select_teams_managed(int,int)
+CREATE OR REPLACE FUNCTION j_select_teams_managed(p_person_id int,p_club_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -643,7 +642,7 @@ SELECT json_agg(t) INTO raw_json
 			join club_persons on club_persons.id = club_managers.club_person_id
 
                 where
-                        club_persons.club_id = $2 AND club_persons.person_id = $1 
+                        club_persons.club_id = p_club_id AND club_persons.person_id = p_person_id 
         ) t;
 
 	IF raw_json is NULL THEN
@@ -657,7 +656,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT TEAMS MANAGED
 
 --BEGIN J_SELECT ALL TEAMS MANAGED
-CREATE OR REPLACE FUNCTION j_select_all_teams_managed(int)
+CREATE OR REPLACE FUNCTION j_select_all_teams_managed(p_person_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -674,7 +673,7 @@ SELECT json_agg(t) INTO raw_json
                 join team_club_managers on team_club_managers.team_id = teams.id
 		join club_managers on club_managers.id = team_club_managers.club_manager_id 
 		join club_persons on club_persons.id = club_managers.club_person_id
-                where club_persons.person_id = $1
+                where club_persons.person_id = p_person_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -691,37 +690,9 @@ $$ LANGUAGE plpgsql;
 --BEGIN J_SELECT CLUBS
 --        result_set = CONCAT($1,',','{',json_result_clubs,',',json_result_teams,',',json_result_persons,'}');
 
---takes email_id
-CREATE OR REPLACE FUNCTION j_select_clubs(int)
-RETURNS text AS $$
-DECLARE
-raw_json text;
-result_set text;
-BEGIN
-
-SELECT json_agg(t) INTO raw_json
-        from
-        (
-		select distinct clubs.id, clubs.name from clubs
-                join club_persons on club_persons.club_id=clubs.id
-                join persons on persons.id=club_persons.person_id
-                join emails_persons on emails_persons.person_id=persons.id
-                join emails on emails.id=emails_persons.email_id
-                where email_id = $1
-        ) t;
-
-	IF raw_json is NULL THEN
-		result_set = CONCAT('"clubs": []', raw_json);
-	ELSE
-		result_set = CONCAT('"clubs": ', raw_json);
-	END IF;
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
---END J_SELECT CLUBS
 
 --BEGIN J_SELECT PRACTICES
-CREATE OR REPLACE FUNCTION j_select_practices(email_id int, first_day_of_query date, last_day_of_query date)
+CREATE OR REPLACE FUNCTION j_select_practices(p_family_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -749,14 +720,14 @@ SELECT json_agg(t) INTO raw_json
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join clubs on clubs.id=club_persons.club_id
                 join persons on persons.id=club_persons.person_id
-                join emails_persons on emails_persons.person_id=persons.id
+                join families_persons on families_persons.person_id=persons.id
 
                 full outer join club_players on club_players.club_person_id = club_persons.id
                 full outer join club_parents on club_parents.club_person_id = club_persons.id
 
                 full outer join team_club_players on team_club_players.team_id=teams.id
 
-                where emails_persons.email_id = $1 AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
+                where families_persons.family_id = p_family_id AND practices.event_date > $2 - interval '1 day' AND practices.event_date < $3
 
 	) t;
 
@@ -771,7 +742,7 @@ $$ LANGUAGE plpgsql;
 --END J_SELECT PRACTICES
 
 --BEGIN J_SELECT GAMES_PLAYER_AVAILABILITY
-CREATE OR REPLACE FUNCTION j_select_games_player_availability(email_id int)
+CREATE OR REPLACE FUNCTION j_select_games_player_availability(p_family_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -789,9 +760,9 @@ SELECT json_agg(t) INTO raw_json
                         join team_club_players on team_club_players.id=games_players_availability.team_club_player_id
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
-                        join emails_persons on emails_persons.person_id = club_persons.person_id
+                        join families_persons on families_persons.person_id = club_persons.person_id
 
-                        where emails_persons.email_id = $1
+                        where families_persons.family_id = p_family_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -804,7 +775,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION j_select_game_team_availability(int)
+CREATE OR REPLACE FUNCTION j_select_game_team_availability(p_game_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -822,9 +793,9 @@ SELECT json_agg(t) INTO raw_json
                         join team_club_players on team_club_players.id=games_players_availability.team_club_player_id
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
-                        join emails_persons on emails_persons.person_id = club_persons.person_id
+                        join families_persons on families_persons.person_id = club_persons.person_id
 
-                        where games_players_availability.game_id = $1
+                        where games_players_availability.game_id = p_game_id
 	) t;
 
         IF raw_json is NULL THEN
@@ -838,7 +809,7 @@ $$ LANGUAGE plpgsql;
 
 
 --game
-CREATE OR REPLACE FUNCTION j_select_practice_team_availability(int)
+CREATE OR REPLACE FUNCTION j_select_practice_team_availability(p_practice_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -858,7 +829,7 @@ SELECT json_agg(t) INTO raw_json
                         join club_persons on club_persons.id = club_players.club_person_id
                         join emails_persons on emails_persons.person_id = club_persons.person_id
 
-                        where practices_players_availability.practice_id = $1
+                        where practices_players_availability.practice_id = p_practice_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -872,7 +843,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN J_SELECT PRACTICES_PLAYER_AVAILABILITY
-CREATE OR REPLACE FUNCTION j_select_practices_player_availability(email_id int)
+CREATE OR REPLACE FUNCTION j_select_practices_player_availability(p_family_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -890,9 +861,9 @@ SELECT json_agg(t) INTO raw_json
                         join team_club_players on team_club_players.id = practices_players_availability.team_club_player_id
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
-                        join emails_persons on emails_persons.person_id = club_persons.person_id
+                        join families_persons on families_persons.person_id = club_persons.person_id
 
-                        where emails_persons.email_id = $1
+                        where families_persons.family_id = p_family_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -907,7 +878,7 @@ $$ LANGUAGE plpgsql;
 
 
 
-CREATE OR REPLACE FUNCTION j_select_games(email_id int, first_day_of_query date, last_day_of_query date)
+CREATE OR REPLACE FUNCTION j_select_games(p_family_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -932,14 +903,14 @@ SELECT json_agg(t) INTO raw_json
                 join club_persons on club_persons.id=team_club_persons.club_person_id
                 join clubs on clubs.id=club_persons.club_id
                 join persons on persons.id=club_persons.person_id
-                join emails_persons on emails_persons.person_id=persons.id
+                join families_persons on families_persons.person_id=persons.id
 
                	full outer join club_players on club_players.club_person_id = club_persons.id
                	full outer join club_parents on club_parents.club_person_id = club_persons.id
 
                	full outer join team_club_players on team_club_players.team_id=teams.id
 
-                where emails_persons.email_id = $1 AND games.event_date > $2 - interval '1 day' AND games.event_date < $3
+                where families_persons.family_id = p_family_id AND games.event_date > $2 - interval '1 day' AND games.event_date < $3
         ) t;
 
         IF raw_json is NULL THEN
@@ -951,7 +922,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_games_players(email_id int)
+CREATE OR REPLACE FUNCTION j_select_games_players(p_family_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -971,10 +942,10 @@ SELECT json_agg(t) INTO raw_json
                         join club_players on club_players.id = team_club_players.id
                         join club_persons on club_persons.id = club_players.club_person_id
                         join persons on persons.id = club_persons.person_id
-                        join emails_persons on emails_persons.person_id = persons.id
+                        join families_persons on families_persons.person_id = persons.id
 
                 where
-                        emails_persons.email_id = $1
+                        families_persons.family_id = p_family_id
         ) t;
 
         IF raw_json is NULL THEN
@@ -986,7 +957,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_practices_players(email_id int)
+CREATE OR REPLACE FUNCTION j_select_practices_players(p_family_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1006,10 +977,10 @@ SELECT json_agg(t) INTO raw_json
                         join club_players on club_players.id = team_club_players.id
                         join club_persons on club_persons.id = club_players.club_person_id
                         join persons on persons.id = club_persons.person_id
-                        join emails_persons on emails_persons.person_id = persons.id
+                        join families_persons on families_persons.person_id = persons.id
 
                 where
-                        emails_persons.email_id = $1
+                        families_persons.family_id = p_family_id 
         ) t;
 
         IF raw_json is NULL THEN
@@ -1022,7 +993,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION j_select_game_roster(int)
+CREATE OR REPLACE FUNCTION j_select_game_roster(p_game_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1045,7 +1016,7 @@ SELECT json_agg(t) INTO raw_json
                         join emails_persons on emails_persons.person_id = persons.id
 
                 where
-                        games.id = $1
+                        games.id = p_game_id
 
 	) t;
 
@@ -1058,7 +1029,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION j_select_practice_roster(int)
+CREATE OR REPLACE FUNCTION j_select_practice_roster(p_practice_id int)
 RETURNS text AS $$
 DECLARE
 raw_json text;
@@ -1081,7 +1052,7 @@ SELECT json_agg(t) INTO raw_json
                         join emails_persons on emails_persons.person_id = persons.id
 
                 where
-                        practices.id = $1
+                        practices.id = p_practice_id
 
         ) t;
 

@@ -15,13 +15,13 @@ BEGIN
                 ',',
                 j_select_codes(-100),
                 ',',
-		j_select_games(email_id,first_day_of_query,last_day_of_query),
+		j_select_games(family_id,first_day_of_query,last_day_of_query),
                 ',',
-		j_select_practices(email_id,first_day_of_query,last_day_of_query),
+		j_select_practices(family_id,first_day_of_query,last_day_of_query),
                 ',',
-		j_select_games_players(email_id),
+		j_select_games_players(family_id),
                 ',',
-		j_select_practices_players(email_id),
+		j_select_practices_players(family_id),
                 ',',
 		j_select_games_player_availability(email_id),
                 ',',
@@ -36,7 +36,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN SELECT EVENTS
-CREATE OR REPLACE FUNCTION f_select_team_game_availability(email_id int, person_id int, game_id int)
+CREATE OR REPLACE FUNCTION f_select_team_game_availability(family_id int, game_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -44,15 +44,15 @@ BEGIN
 
         result_set = CONCAT
         (
-                j_select_persons(email_id),
+                j_select_persons(family_id),
                 ',',
                 j_select_messages(null),
                 ',',
                 j_select_codes(-100),
                 ',',
-                j_select_game_roster($3),
+                j_select_game_roster(game_id),
                 ',',
-		j_select_game_team_availability($3)
+		j_select_game_team_availability(game_id)
         );
 
 	--RAISE LOG 'result: %', result_set;
@@ -61,7 +61,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_select_team_practice_availability(email_id int, person_id int, practice_id int)
+CREATE OR REPLACE FUNCTION f_select_team_practice_availability(family_id int, practice_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -69,15 +69,15 @@ BEGIN
 
         result_set = CONCAT
         (
-                j_select_persons(email_id),
+                j_select_persons(family_id),
                 ',',
                 j_select_messages(null),
                 ',',
                 j_select_codes(-100),
                 ',',
-                j_select_practice_roster($3),
+                j_select_practice_roster(practice_id),
                 ',',
-                j_select_practice_team_availability($3)
+                j_select_practice_team_availability(practice_id)
         );
 
        --RAISE LOG 'result: %', result_set;
