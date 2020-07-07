@@ -64,7 +64,8 @@ class ScheduleScreen extends Screen
 
 		if (this.getAttribute("type") == 'game')
 		{
-			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id"));
+			console.log('team:' + screen.mWaitListItem.mJson.team_id);
+			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id") + '&team_id=' + screen.mWaitListItem.mJson.team_id );
                 	screen.ajax();
 		}
 		if (this.getAttribute("type") == 'practice')

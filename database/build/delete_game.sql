@@ -1,7 +1,7 @@
 
 
 --BEGIN DELETE CLUB
-CREATE OR REPLACE FUNCTION f_delete_game(int, int, int)
+CREATE OR REPLACE FUNCTION f_delete_game(p_family_id int, p_person_id int, p_team_id int, p_game_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -20,17 +20,17 @@ BEGIN
 		join club_persons on club_persons.id = club_managers.club_person_id 
 		join teams on teams.id = team_club_managers.team_id
 
-        where club_persons.person_id = $2 AND teams.id = $3;
+        where club_persons.person_id = p_person_id AND teams.id = p_team_id;
 
 
 	IF found_team_club_manager_id > 0 THEN
 
-		CALL p_delete_game($3,x);
+		CALL p_delete_game(p_game_id,x);
 
                	IF x > 0 THEN
 		        result_set = CONCAT
                 	(
-                        	j_select_persons($1),
+                        	j_select_persons(p_family_id),
                         	',',
                         	j_select_messages(null),
                         	',',
@@ -41,7 +41,7 @@ BEGIN
                 ELSE
                        	result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages('Something went wrong while trying to delete game. Sorry.'),
                                 ',',
@@ -53,7 +53,7 @@ BEGIN
 	ELSE
                 result_set = CONCAT
                 (
-                	j_select_persons($1),
+                	j_select_persons(p_family_id),
                         ',',
                         j_select_messages('You do not have permission to delete this game. Only a team manager can delete a game.'),
                         ',',
@@ -67,17 +67,17 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_game(int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_game(p_game_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
 
 BEGIN
 
-	delete from games_pitches where game_id = $1;
-	delete from teams_games where game_id = $1;
-	delete from games_players_availability where game_id = $1; 
-	delete from games where id = $1 returning id into x;
+	delete from games_pitches where game_id = p_game_id;
+	delete from teams_games where game_id = p_game_id;
+	delete from games_players_availability where game_id = p_game_id; 
+	delete from games where id = p_game_id returning id into x;
 
 END;
 $$;
