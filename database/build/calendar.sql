@@ -120,7 +120,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION f_update_availability(int,int,text)
+CREATE OR REPLACE FUNCTION f_update_availability(p_family_id int, p_person_id int, text)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -144,9 +144,9 @@ BEGIN
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
                         join persons on persons.id = club_persons.person_id
-                        join emails_persons on emails_persons.person_id = persons.id
+                        join families_persons on families_persons.person_id = persons.id
 
-                where emails_persons.email_id = $1 AND team_club_players.id = idsA[i + 3] 
+                where families_persons.family_id = p_family_id AND team_club_players.id = idsA[i + 3] 
                 ;
 		IF idsA[i] = 1 THEN  
 			--game manager check
@@ -158,7 +158,7 @@ BEGIN
                         	join games on teams_games.team_id = teams.id
                         	join club_managers on club_managers.id = team_club_managers.club_manager_id
                         	join club_persons on club_persons.id = club_managers.club_person_id
-                        	where games.id = idsA[i + 2] AND club_persons.person_id = $2 
+                        	where games.id = idsA[i + 2] AND club_persons.person_id = p_person_id 
 			;
 			
 			--check if your a manager if not check if you are email related
@@ -181,7 +181,7 @@ BEGIN
                         	join practices on teams_practices.team_id = teams.id
                        		join club_managers on club_managers.id = team_club_managers.club_manager_id
                         	join club_persons on club_persons.id = club_managers.club_person_id
-                        	where practices.id = idsA[i + 2] AND club_persons.person_id = $2
+                        	where practices.id = idsA[i + 2] AND club_persons.person_id = p_person_id
                 	;
 			
 			--check if your a manager if not check if you are email related
@@ -220,7 +220,7 @@ BEGIN
         	IF x > 0 THEN
 			result_set = CONCAT
                 	(
-                      		j_select_persons($1),
+                      		j_select_persons(p_family_id),
                         	',',
                         	j_select_messages(null),
                         	',',
@@ -233,7 +233,7 @@ BEGIN
         	ELSE
               		result_set = CONCAT
                 	(
-                		j_select_persons($1),
+                		j_select_persons(p_family_id),
                         	',',
                         	j_select_messages('Something went wrong with setting availability. Please try again.'),
                         	',',
@@ -243,7 +243,7 @@ BEGIN
 	ELSE
 		result_set = CONCAT
                	(
-               		j_select_persons($1),
+               		j_select_persons(p_family_id),
                         ',',
                         j_select_messages('You do not have permission to set availability for some or all of players. So we are not changing anything.'),
                         ',',

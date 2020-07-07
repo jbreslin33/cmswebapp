@@ -19,7 +19,7 @@ class UpcomingAvailability extends Screen
 
                 $sql = 'select f_update_availability($1,$2,$3)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_update_availability", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_update_availability", array( $this->getSenderEmailId(), $this->mPersonId ,$availability));
+                $result = pg_execute($this->mDatabase->mConnection, "f_update_availability", array( $this->mFamilyId, $this->mPersonId ,$availability));
 
                 return pg_fetch_result($result, 0);
         }
