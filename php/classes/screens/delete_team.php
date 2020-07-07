@@ -10,16 +10,9 @@ class DeleteTeam extends Screen
 
 	function getResult()
 	{
-		$team_id = null;
-
-               	if (isset($_GET['team_id']))
-                {
-                        $team_id = $_GET['team_id'];
-                }
-
 		$sql = 'select f_delete_team($1,$2,$3)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_team", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_team", array( $this->getSenderEmailId(), $this->mPersonId, $team_id));
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_team", array( $this->mFamilyId, $this->mPersonId, $this->mTeamId));
 
                	return pg_fetch_result($result, 0);
         }

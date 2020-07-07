@@ -1,7 +1,7 @@
 
 
 --BEGIN DELETE TEAM
-CREATE OR REPLACE FUNCTION f_delete_team(int, int, int)
+CREATE OR REPLACE FUNCTION f_delete_team(p_family_id int, p_person_id int, p_team_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -20,17 +20,17 @@ BEGIN
 	on 
 		club_persons.id=club_administrators.club_person_id 
 	where 
-		club_persons.person_id = $2;
+		club_persons.person_id = p_person_id;
 
 	if found_club_administrator_id > 0 THEN
 
-		CALL p_delete_team($3,x);
+		CALL p_delete_team(p_team_id, x);
 
                	IF x > 0 THEN
 
 		        result_set = CONCAT
                 	(
-                        	j_select_persons($1),
+                        	j_select_persons(p_family_id),
                         	',',
                         	j_select_messages(null),
                         	',',
@@ -40,7 +40,7 @@ BEGIN
                 ELSE
                        	result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages('Something went wrong while trying to delete team. Sorry.'),
                                 ',',
@@ -51,7 +51,7 @@ BEGIN
 	ELSE
                 result_set = CONCAT
                 (
-                	j_select_persons($1),
+                	j_select_persons(p_family_id),
                         ',',
                         j_select_messages('You do not have permission to delete this team. Only a club administrator can delete a team.'),
                         ',',
@@ -64,7 +64,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_team(int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_delete_team(p_team_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -72,16 +72,16 @@ DECLARE
 rec RECORD;
 
 BEGIN
-	delete from team_club_players where team_id = $1; 
-	delete from team_club_parents where team_id = $1;
-	delete from team_club_coaches where team_id = $1;
-	delete from team_club_managers where team_id = $1;
+	delete from team_club_players where team_id = p_team_id; 
+	delete from team_club_parents where team_id = p_team_id;
+	delete from team_club_coaches where team_id = p_team_id;
+	delete from team_club_managers where team_id = p_team_id;
 
-	delete from team_club_persons where team_id = $1;
+	delete from team_club_persons where team_id = p_team_id;
 
-	delete from clubs_teams where team_id = $1;
+	delete from clubs_teams where team_id = p_team_id;
 
-	delete from teams where teams.id = $1 returning id into x; 
+	delete from teams where teams.id = p_team_id returning id into x; 
 END;
 $$;
 --END DELETE TEAM
