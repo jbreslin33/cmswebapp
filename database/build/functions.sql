@@ -113,7 +113,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --BEGIN SELECT ADMINISTRATED CLUBS
-CREATE OR REPLACE FUNCTION f_select_administrated_clubs(email_id int, person_id int)
+CREATE OR REPLACE FUNCTION f_select_administrated_clubs(p_person_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -125,7 +125,7 @@ BEGIN
                	',',
                 j_select_codes(-102),
                	',',
-                j_select_administrated_clubs($2)
+                j_select_administrated_clubs(p_person_id)
       	);
 
 RETURN result_set;

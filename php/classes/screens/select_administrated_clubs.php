@@ -10,9 +10,9 @@ class SelectAdministratedClubs extends Screen
 
         function getResult()
         {
-	   	$sql = 'select f_select_administrated_clubs($1,$2)';
+	   	$sql = 'select f_select_administrated_clubs($1)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_administrated_clubs", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_administrated_clubs", array( $this->getSenderEmailId(), $this->mPersonId ) );
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_administrated_clubs", array( $this->mPersonId ) );
 
                 $txt = pg_fetch_result($result, 0);
                 return $txt;
