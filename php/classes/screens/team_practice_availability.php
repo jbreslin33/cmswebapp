@@ -12,7 +12,7 @@ class TeamPracticeAvailabilityScreen extends Screen
 	{
                 $sql = 'select f_select_team_practice_availability($1,$2)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_team_practice_availability", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_select_team_practice_availability", array( $this->mPersonId, $this->mPracticeId));
+		$result = pg_execute($this->mDatabase->mConnection, "f_select_team_practice_availability", array( $this->mFamilyId, $this->mPracticeId));
 
 		return pg_fetch_result($result, 0);
 
