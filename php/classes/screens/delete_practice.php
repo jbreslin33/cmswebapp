@@ -10,16 +10,9 @@ class DeletePractice extends Screen
 
 	function getResult()
 	{
-		$practice_id = null;
-
-               	if (isset($_GET['practice_id']))
-                {
-                        $practice_id = $_GET['practice_id'];
-                }
-
-		$sql = 'select f_delete_practice($1,$2,$3)';
+		$sql = 'select f_delete_practice($1,$2,$3,$4)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_practice", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_practice", array( $this->getSenderEmailId(), $this->mPersonId, $practice_id));
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_practice", array( $this->mFamilyId, $this->mPersonId, $this->mTeamId, $this->mPracticeId));
 
                	return pg_fetch_result($result, 0);
         }

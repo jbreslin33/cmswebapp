@@ -10,13 +10,6 @@ class DeleteGame extends Screen
 
 	function getResult()
 	{
-		$game_id = null;
-
-               	if (isset($_GET['game_id']))
-                {
-                        $game_id = $_GET['game_id'];
-                }
-
 		$sql = 'select f_delete_game($1,$2,$3,$4)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_game", $sql);
 		$result = pg_execute($this->mDatabase->mConnection, "f_delete_game", array( $this->mFamilyId, $this->mPersonId, $this->mTeamId, $this->mGameId));

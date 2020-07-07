@@ -64,13 +64,14 @@ class ScheduleScreen extends Screen
 
 		if (this.getAttribute("type") == 'game')
 		{
-			console.log('team:' + screen.mWaitListItem.mJson.team_id);
-			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id") + '&team_id=' + screen.mWaitListItem.mJson.team_id );
+			screen.setUrl("/php/classes/screens/delete_game.php?" + screen.getStandardParameters() + '&game_id=' + this.getAttribute("id") + '&team_id=' + screen.mWaitListItem.mJson.team_id);
+			console.log('url:' + screen.getUrl());
                 	screen.ajax();
 		}
 		if (this.getAttribute("type") == 'practice')
 		{
-			screen.setUrl("/php/classes/screens/delete_practice.php?" + screen.getStandardParameters() + '&practice_id=' + this.getAttribute("id"));
+			screen.setUrl("/php/classes/screens/delete_practice.php?" + screen.getStandardParameters() + '&practice_id=' + this.getAttribute("id") + '&team_id=' + screen.mWaitListItem.mJson.team_id);
+			console.log('url:' + screen.getUrl());
                 	screen.ajax();
 		}
 	}
@@ -100,18 +101,6 @@ class ScheduleScreen extends Screen
 		var id = 0;
 		if (a.length > 1)
 		{
-			/*	
-				for (var i = 0; i < screen.mPracticesPlayerAvailabilityArray.length; i++)
-                		{
-                        		if (screen.mPracticesPlayerAvailabilityArray[i].practice_id == a[3] && screen.mPracticesPlayerAvailabilityArray[i].team_club_player_id == a[4])
-					{
-						screen.mPracticesPlayerAvailabilityArray[i].availability_id = a[2];
-					}
-                		}
-			}
-
-				*/
-
 			screen.mAvailabilityList = a[1] + ',' + a[2] + ',' + a[3] + ',' + a[4];
 		}
 		//send to server
