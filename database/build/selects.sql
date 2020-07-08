@@ -253,8 +253,10 @@ BEGIN
 SELECT json_agg(t) INTO raw_json
         from
         (
-                select pitches.id as pitch_id, pitches.name as pitch_name from pitches
-                where pitches.club_id = p_club_id
+                select pitches.id as pitch_id, pitches.name as pitch_name 
+		from pitches
+			join clubs_pitches on clubs_pitches.pitch_id = pitches.id
+                where clubs_pitches.club_id = p_club_id
         ) t;
 
         IF raw_json is NULL THEN

@@ -10,9 +10,9 @@ class SelectClubPitches extends Screen
 
         function getResult()
         {
-                $sql = 'select f_select_club_pitches($1,$2,$3)';
+                $sql = 'select f_select_club_pitches($1,$2)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_select_club_pitches", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_select_club_pitches", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId));
+                $result = pg_execute($this->mDatabase->mConnection, "f_select_club_pitches", array( $this->mFamilyId, $this->mClubId));
 
                 return pg_fetch_result($result, 0);
         }
