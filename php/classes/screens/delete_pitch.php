@@ -12,7 +12,7 @@ class DeletePitch extends Screen
 	{
 		$sql = 'select f_delete_pitch($1,$2,$3)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_pitch", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_pitch", array( $this->getSenderEmailId(), $this->mPersonId, $this->mPitchId));
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_pitch", array( $this->mFamilyId, $this->mPersonId, $this->mPitchId));
 
                	return pg_fetch_result($result, 0);
         }
