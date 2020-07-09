@@ -12,7 +12,7 @@ class InsertClub extends Screen
 	{
 		$sql = 'select f_insert_club($1,$2,$3,$4)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_club", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_insert_club", array( $_GET['name'] ,$_GET['address'], $this->getSenderEmailId(), $_GET['person_id']));
+		$result = pg_execute($this->mDatabase->mConnection, "f_insert_club", array( $this->mFamilyId, $this->mPersonId, $this->mName, $this->mAddress));
 
                 return pg_fetch_result($result, 0);
 	}
