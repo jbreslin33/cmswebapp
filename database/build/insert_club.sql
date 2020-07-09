@@ -76,7 +76,7 @@ BEGIN
 		ELSE
 			result_set = CONCAT
                         (
-                        	j_select_persons(email_id),
+                        	j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages('You must add a person to this account before you add a club.'),
                                	',',

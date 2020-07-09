@@ -1,7 +1,7 @@
 
 
 --BEGIN DELETE CLUB
-CREATE OR REPLACE FUNCTION f_delete_club(int, int, int)
+CREATE OR REPLACE FUNCTION f_delete_club(p_family_id int, p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -9,16 +9,16 @@ DECLARE
 	found_club_administrator_id club_administrators.id%TYPE;
 BEGIN
 
-	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
+	select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = p_person_id;
 
 	IF found_club_administrator_id > 0 THEN
 
-		CALL p_delete_club($3,x);
+		CALL p_delete_club(p_club_id,x);
 
                	IF x > 0 THEN
 		        result_set = CONCAT
                 	(
-                        	j_select_persons($1),
+                        	j_select_persons(p_family_id),
                         	',',
                         	j_select_messages(null),
                         	',',
@@ -28,7 +28,7 @@ BEGIN
                 ELSE
                        	result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages('Something went wrong while trying to delete club. Sorry.'),
                                 ',',
@@ -39,7 +39,7 @@ BEGIN
 	ELSE
                 result_set = CONCAT
                 (
-                	j_select_persons($1),
+                	j_select_persons(p_family_id),
                         ',',
                         j_select_messages('You do not have permission to delete this club. Only a club administrator can delete a club.'),
                         ',',
@@ -52,7 +52,8 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_delete_club(int, INOUT x int)
+
+CREATE OR REPLACE PROCEDURE p_delete_club(p_club_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -60,7 +61,6 @@ DECLARE
         recA RECORD;
         recB RECORD;
         recC RECORD;
-        recD RECORD;
 
 BEGIN
 
@@ -70,7 +70,7 @@ BEGIN
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
 
-                where club_persons.club_id = $1
+                where club_persons.club_id = p_club_id
         LOOP
                 delete from games_players_availability where team_club_player_id = rec.id;
         END LOOP;
@@ -81,7 +81,7 @@ BEGIN
 			join club_players on club_players.id = team_club_players.club_player_id
 			join club_persons on club_persons.id = club_players.club_person_id	
 			
-		where club_persons.club_id = $1
+		where club_persons.club_id = p_club_id
 	LOOP
 		delete from practices_players_availability where team_club_player_id = rec.id;		
 	END LOOP;	
@@ -92,7 +92,7 @@ BEGIN
                         join club_players on club_players.id = team_club_players.club_player_id
                         join club_persons on club_persons.id = club_players.club_person_id
 
-                where club_persons.club_id = $1
+                where club_persons.club_id = p_club_id
         LOOP
                 delete from team_club_players where id = rec.id;
         END LOOP;
@@ -103,7 +103,7 @@ BEGIN
                         join club_parents on club_parents.id = team_club_parents.club_parent_id
                         join club_persons on club_persons.id = club_parents.club_person_id
 
-                where club_persons.club_id = $1
+                where club_persons.club_id = p_club_id
         LOOP
                 delete from team_club_parents where id = rec.id;
         END LOOP;
@@ -114,7 +114,7 @@ BEGIN
                         join club_coaches on club_coaches.id = team_club_coaches.club_coach_id
                         join club_persons on club_persons.id = club_coaches.club_person_id
 
-                where club_persons.club_id = $1
+                where club_persons.club_id = p_club_id
         LOOP
                 delete from team_club_coaches where id = rec.id;
         END LOOP;
@@ -125,7 +125,7 @@ BEGIN
                         join club_managers on club_managers.id = team_club_managers.club_manager_id
                         join club_persons on club_persons.id = club_managers.club_person_id
 
-                where club_persons.club_id = $1
+                where club_persons.club_id = p_club_id
         LOOP
                 delete from team_club_managers where id = rec.id;
         END LOOP;
@@ -135,7 +135,7 @@ BEGIN
                 select team_club_persons.id from team_club_persons
                         join club_persons on club_persons.id = team_club_persons.club_person_id
 
-                where club_persons.club_id = $1
+                where club_persons.club_id = p_club_id
         LOOP
                 delete from team_club_persons where id = rec.id;
         END LOOP;
@@ -143,42 +143,42 @@ BEGIN
 
 	--club_players
         FOR rec IN
-		select id from club_persons where club_id = $1  
+		select id from club_persons where club_id = p_club_id  
         LOOP
 		delete from club_players where club_person_id = rec.id; 	
         END LOOP;
 	
 	--club_parents
         FOR rec IN
-		select id from club_persons where club_id = $1  
+		select id from club_persons where club_id = p_club_id  
         LOOP
 		delete from club_parents where club_person_id = rec.id; 	
         END LOOP;
 	
 	--club_coaches
         FOR rec IN
-		select id from club_persons where club_id = $1  
+		select id from club_persons where club_id = p_club_id  
         LOOP
 		delete from club_coaches where club_person_id = rec.id; 	
         END LOOP;
 	
 	--club_managers
         FOR rec IN
-		select id from club_persons where club_id = $1  
+		select id from club_persons where club_id = p_club_id  
         LOOP
 		delete from club_managers where club_person_id = rec.id; 	
         END LOOP;
 	
 	--club_administrators
         FOR rec IN
-		select id from club_persons where club_id = $1  
+		select id from club_persons where club_id = p_club_id  
         LOOP
 		delete from club_administrators where club_person_id = rec.id; 	
         END LOOP;
 
 	--pitches
         FOR rec IN
-		select pitch_id from clubs_pitches where club_id = $1  
+		select pitch_id from clubs_pitches where club_id = p_club_id  
 	LOOP
 		delete from games_pitches where pitch_id = rec.pitch_id;
 		delete from practices_pitches where pitch_id = rec.pitch_id;
@@ -189,7 +189,7 @@ BEGIN
 
 	--games and teams_games
         FOR recA IN
-		select team_id from clubs_teams where club_id = $1  
+		select team_id from clubs_teams where club_id = p_club_id  
         LOOP
         	FOR recB IN
 			select game_id from teams_games where team_id = recA.team_id
@@ -201,7 +201,7 @@ BEGIN
 
 	--practices and teams_practices
         FOR recA IN
-		select team_id from clubs_teams where club_id = $1  
+		select team_id from clubs_teams where club_id = p_club_id  
         LOOP
         	FOR recB IN
 			select practice_id from teams_practices where team_id = recA.team_id
@@ -222,14 +222,14 @@ BEGIN
 
 	--teams clubs_teams
 	FOR rec IN
-		select team_id from clubs_teams where club_id = $1
+		select team_id from clubs_teams where club_id = p_club_id
 	LOOP
 		delete from clubs_teams where team_id = rec.team_id;
 		delete from teams where id = rec.team_id;
 	END LOOP;
 
-	delete from club_persons where club_id = $1;
-	delete from clubs where id = $1 returning id into x;
+	delete from club_persons where club_id = p_club_id;
+	delete from clubs where id = p_club_id returning id into x;
 
 END;
 $$;
