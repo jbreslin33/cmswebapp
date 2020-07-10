@@ -270,6 +270,7 @@ class ClubProfileScreen extends Screen
        	
 	get()
         {
+		console.log('ClubProfileScreen::get()');
                 if (APPLICATION.getJWT())
                 {
                         APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());
@@ -345,15 +346,17 @@ class ClubProfileScreen extends Screen
 
         getClubPersons()
         {
+		console.log('ClubProfileScreen::getClubPersons()');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_persons.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
         }
         
 	getClubPersonProfile()
         {
+		console.log('ClubProfileScreen::getClubPersonProfile()');
 		var person_selected_id =  APPLICATION.getCurrentScreen().getPersonId(); 
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&person_selected_id=' + person_selected_id);
+		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&screen_person_id=' + person_selected_id);
                 APPLICATION.getCurrentScreen().ajax();
         }
 

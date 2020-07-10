@@ -1041,51 +1041,54 @@ END;
 $$ LANGUAGE plpgsql;
 --END F CLUB PERSON
 
-CREATE OR REPLACE FUNCTION f_club_person_profile(email_id_p int, person_id_p int, club_id_p int, person_to_show_id int)
+CREATE OR REPLACE FUNCTION f_club_person_profile(p_family_id int, p_person_id int, p_club_id int, p_screen_person_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
         found_club_administrator_id club_administrators.id%TYPE;
 
 BEGIN
-        select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = $2;
+	RAISE LOG 'f_club_person_profile p_screen_person_id: %', p_screen_person_id;
+        select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = p_person_id;
         IF found_club_administrator_id > 0 THEN
                 result_set = CONCAT
                 (
-                        j_select_persons(email_id_p),
+                        j_select_persons(p_family_id),
                         ',',
                         j_select_messages(null),
                         ',',
                         j_select_codes(-102),
                         ',',
-                        j_select_club_teams($3),
+                        j_select_club_teams(p_club_id),
                         ',',
-                        j_select_club_players_id($3,$4),
+                        j_select_club_players_id(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_club_parents_id($3,$4),
+                        j_select_club_parents_id(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_club_coaches_id($3,$4),
+                        j_select_club_coaches_id(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_club_managers_id($3,$4),
+                        j_select_club_managers_id(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_team_club_players($3,$4),
+                        j_select_team_club_players(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_team_club_parents($3,$4),
+                        j_select_team_club_parents(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_team_club_coaches($3,$4),
+                        j_select_team_club_coaches(p_screen_person_id, p_club_id),
                         ',',
-                        j_select_team_club_managers($3,$4)
+                        j_select_team_club_managers(p_screen_person_id, p_club_id)
                 );
         ELSE
                 result_set = CONCAT
                 (
-                        j_select_persons($1),
+                        j_select_persons(p_family_id),
                         ',',
                         j_select_messages('You are not a club administrator.'),
                         ',',
                         j_select_codes(-101)
                 );
         END IF;
+	
+	RAISE LOG 'f_club_person_profile result: %', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
