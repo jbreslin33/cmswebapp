@@ -38,8 +38,6 @@ BEGIN
                                 j_select_team_club_coaches(p_screen_person_id, p_club_id),
                                 ',',
                                 j_select_team_club_managers(p_screen_person_id, p_club_id)
-
-
                         );
                 END IF;
 
@@ -48,7 +46,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -60,7 +58,9 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club_parent(int,int,int,int)
+
+
+CREATE OR REPLACE FUNCTION f_insert_club_parent(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -68,47 +68,45 @@ DECLARE
         json_result text;
 BEGIN
 
-        IF $2 is NULL THEN
+        IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_parent($3,x);
+                CALL p_insert_club_parent(p_screen_person_id, x);
 
                 IF x = -101 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams($4),
+                                j_select_club_teams(p_club_id),
                                 ',',
-                                j_select_club_players_id($4,$3),
+                                j_select_club_players_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_parents_id($4,$3),
+                                j_select_club_parents_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_coaches_id($4,$3),
+                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_managers_id($4,$3),
+                                j_select_club_managers_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_players($4,$3),
+                                j_select_team_club_players(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_parents($4,$3),
+                                j_select_team_club_parents(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_coaches($4,$3),
+                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_managers($4,$3)
-
-
+                                j_select_team_club_managers(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
                 IF x = -102 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
+                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -120,7 +118,8 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club_coach(int,int,int,int)
+
+CREATE OR REPLACE FUNCTION f_insert_club_coach(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -128,47 +127,45 @@ DECLARE
         json_result text;
 BEGIN
 
-        IF $2 is NULL THEN
+        IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_coach($3,x);
+                CALL p_insert_club_coach(p_screen_person_id, x);
 
                 IF x = -101 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams($4),
+                                j_select_club_teams(p_club_id),
                                 ',',
-                                j_select_club_players_id($4,$3),
+                                j_select_club_players_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_parents_id($4,$3),
+                                j_select_club_parents_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_coaches_id($4,$3),
+                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_managers_id($4,$3),
+                                j_select_club_managers_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_players($4,$3),
+                                j_select_team_club_players(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_parents($4,$3),
+                                j_select_team_club_parents(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_coaches($4,$3),
+                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_managers($4,$3)
-
-
+                                j_select_team_club_managers(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
                 IF x = -102 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide coach.'),
+                                j_select_messages('This person is a coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide coach.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -180,7 +177,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club_manager(int,int,int,int)
+CREATE OR REPLACE FUNCTION f_insert_club_manager(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -188,47 +185,45 @@ DECLARE
         json_result text;
 BEGIN
 
-        IF $2 is NULL THEN
+        IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_manager($3,x);
+                CALL p_insert_club_manager(p_screen_person_id, x);
 
                 IF x = -101 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams($4),
+                                j_select_club_teams(p_club_id),
                                 ',',
-                                j_select_club_players_id($4,$3),
+                                j_select_club_players_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_parents_id($4,$3),
+                                j_select_club_parents_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_coaches_id($4,$3),
+                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_managers_id($4,$3),
+                                j_select_club_managers_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_players($4,$3),
+                                j_select_team_club_players(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_parents($4,$3),
+                                j_select_team_club_parents(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_coaches($4,$3),
+                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_managers($4,$3)
-
-
+                                j_select_team_club_managers(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
                 IF x = -102 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is manager asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide manager.'),
+                                j_select_messages('This person is a manager asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide manager.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -239,8 +234,6 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
-
-
 
 CREATE OR REPLACE FUNCTION f_delete_club_player(int,int,int,int)
 RETURNS text AS $$
