@@ -12,7 +12,7 @@ class DeleteClub extends Screen
 	{
 		$sql = 'select f_delete_club($1,$2,$3)';
 		$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_delete_club", $sql);
-		$result = pg_execute($this->mDatabase->mConnection, "f_delete_club", array( $this->getSenderEmailId(), $this->mPersonId, $this->mClubId));
+		$result = pg_execute($this->mDatabase->mConnection, "f_delete_club", array( $this->mFamilyId, $this->mPersonId, $this->mClubId));
 
                	return pg_fetch_result($result, 0);
         }

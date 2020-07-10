@@ -13,7 +13,7 @@ BEGIN
 
 	IF found_club_administrator_id > 0 THEN
 
-		CALL p_delete_club(p_club_id,x);
+		CALL p_delete_club(p_club_id, x);
 
                	IF x > 0 THEN
 		        result_set = CONCAT
