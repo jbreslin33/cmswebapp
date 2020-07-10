@@ -42,7 +42,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_insert_club_player(family_id int, person_id int, club_id int)
+CREATE OR REPLACE FUNCTION f_insert_club_player(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -50,36 +50,36 @@ DECLARE
         json_result text;
 BEGIN
 
-        IF $2 is NULL THEN
+        IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_player($3,x);
+                CALL p_insert_club_player(p_screen_person_id, x);
 
                 IF x = -101 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons(family_id),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(club_id),
+                                j_select_club_teams(p_club_id),
                                 ',',
-                                j_select_club_players_id(person_id, club_id),
+                                j_select_club_players_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_parents_id(person_id, club_id),
+                                j_select_club_parents_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_coaches_id(person_id, club_id),
+                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_managers_id(person_id, club_id),
+                                j_select_club_managers_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_players(person_id, club_id),
+                                j_select_team_club_players(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_parents(person_id, club_id),
+                                j_select_team_club_parents(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_coaches(person_id, club_id),
+                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_team_club_managers(person_id, club_id)
+                                j_select_team_club_managers(p_screen_person_id, p_club_id)
 
 
                         );
@@ -88,7 +88,7 @@ BEGIN
                 IF x = -102 THEN
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
+                                j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages('This person is player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
                                 ',',
@@ -521,7 +521,7 @@ $$ LANGUAGE plpgsql;
 
 
 
-CREATE OR REPLACE PROCEDURE p_insert_club_player(int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_player(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -532,14 +532,14 @@ BEGIN
 	x := -101;
 
        	--do we need to add to players????
-        select id into found_player_id from players where person_id = $1;
+        select id into found_player_id from players where person_id = p_person_id;
 
         IF found_player_id IS NULL THEN
-              	insert into players (person_id) values ($1) returning id into found_player_id;
+              	insert into players (person_id) values (p_person_id) returning id into found_player_id;
         END IF;
 
         --do we need to add to club_players
-        select id into found_club_person_id from club_persons where person_id = $1;
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
 
         IF found_club_person_id > 0 THEN
 
@@ -1048,7 +1048,7 @@ DECLARE
         found_club_administrator_id club_administrators.id%TYPE;
 
 BEGIN
-	RAISE LOG 'f_club_person_profile p_screen_person_id: %', p_screen_person_id;
+	--RAISE LOG 'f_club_person_profile p_screen_person_id: %', p_screen_person_id;
         select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = p_person_id;
         IF found_club_administrator_id > 0 THEN
                 result_set = CONCAT
@@ -1088,7 +1088,7 @@ BEGIN
                 );
         END IF;
 	
-	RAISE LOG 'f_club_person_profile result: %', result_set;
+	--RAISE LOG 'f_club_person_profile result: %', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
