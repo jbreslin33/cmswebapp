@@ -1,46 +1,4 @@
 
---BEGIN UPDATE CLUB PROFILE
-CREATE OR REPLACE FUNCTION f_update_club_profile(int,int,int,int,int)
-RETURNS text AS $$
-DECLARE
-        result_set text;
-        DECLARE x int := -111;
-        json_result text;
-BEGIN
-
-        IF $2 is NULL THEN
-        ELSE
-		--lets check if you are club_admin
-
-                CALL p_update_club_profile($3,$4,$5,x);
-
-                IF x = -100 THEN
-                       	result_set = CONCAT
-                        (
-                                j_select_persons($1),
-                                ',',
-                                j_select_messages(null),
-                                ',',
-                                j_select_codes(-101)
-                        );
-                END IF;
-                
-		IF x = -101 THEN
-                        result_set = CONCAT
-                        (
-                                j_select_persons($1),
-                                ',',
-                                j_select_messages('This person is associated with teams you must remove them from team first.'),
-                                ',',
-                                j_select_codes(-101)
-                        );
-                END IF;
-
-        END IF;
-
-RETURN result_set;
-END;
-$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION f_insert_club_player(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
