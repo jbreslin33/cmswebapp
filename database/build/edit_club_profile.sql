@@ -107,7 +107,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                j_select_messages('This person is already a player at the club. You must remove them as a club player before adding them as a interested club player.'),
                                 ',',
                                 j_select_codes(x)
                         );
