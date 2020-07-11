@@ -270,7 +270,6 @@ class ClubProfileScreen extends Screen
        	
 	get()
         {
-		console.log('ClubProfileScreen::get()');
                 if (APPLICATION.getJWT())
                 {
                         APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_administrated_clubs.php?" + this.getStandardParameters());
@@ -346,14 +345,12 @@ class ClubProfileScreen extends Screen
 
         getClubPersons()
         {
-		console.log('ClubProfileScreen::getClubPersons()');
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_persons.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId());
                 APPLICATION.getCurrentScreen().ajax();
         }
         
 	getClubPersonProfile()
         {
-		console.log('ClubProfileScreen::getClubPersonProfile()');
 		var person_selected_id =  APPLICATION.getCurrentScreen().getPersonId(); 
 
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&screen_person_id=' + person_selected_id);
@@ -424,7 +421,6 @@ class ClubProfileScreen extends Screen
 
 	hitClubPlayerButton()
 	{
-		console.log('ClubProfileScreen::hitClubPlayerButton()');
                 var screen = APPLICATION.getCurrentScreen();
 		screen.mCurrentButton = this;
 
@@ -605,6 +601,7 @@ class ClubProfileScreen extends Screen
 
 	hitPlayerButton()
 	{
+		console.log('ClubProfileScreen::insertPlayerButton()');
 		APPLICATION.getCurrentScreen().mCurrentButton = this;
 		var screen = APPLICATION.getCurrentScreen();
 
@@ -676,7 +673,6 @@ class ClubProfileScreen extends Screen
 	{
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/delete_team_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_player_id=' + team_club_player_id);
-		console.log('url:' + screen.getUrl());
                 screen.ajax();
 	}
 
@@ -692,7 +688,6 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_parent.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_parent_id=' + team_club_parent_id);
-		console.log('url:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -706,7 +701,6 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_coach.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_coach_id=' + team_club_coach_id);
-		console.log('url:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -720,7 +714,6 @@ class ClubProfileScreen extends Screen
         {
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/delete_team_manager.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_manager_id=' + team_club_manager_id);
-		console.log('url:' + screen.getUrl());
                 screen.ajax();
         }
 
@@ -778,7 +771,6 @@ class ClubProfileScreen extends Screen
 
 	insertClubPlayer()
         {
-		console.log('ClubProfileScreen::insertClubPlayer()');
                 var screen = APPLICATION.getCurrentScreen();
                 screen.setUrl("/php/classes/screens/insert_club_player.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
                 screen.ajax();
