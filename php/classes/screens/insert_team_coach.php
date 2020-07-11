@@ -12,7 +12,7 @@ class InsertTeamCoach extends Screen
         {
                 $sql = 'select f_insert_team_coach($1,$2,$3,$4,$5)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_team_coach", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_insert_team_coach", array( $this->getSenderEmailId(), $this->mPersonId, $this->mScreenPersonId, $this->mTeamId, $this->mClubId));
+                $result = pg_execute($this->mDatabase->mConnection, "f_insert_team_coach", array( $this->mFamilyId, $this->mPersonId, $this->mScreenPersonId, $this->mTeamId, $this->mClubId));
 
                 return pg_fetch_result($result, 0);
         }
