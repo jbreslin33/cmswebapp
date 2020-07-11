@@ -999,6 +999,27 @@ class ClubProfileScreen extends Screen
                                        		this.mClubPlayerButton.style.backgroundColor = "red";
 					}
 				}
+
+
+                                if (this.mJson.club_players_interest_id)
+                                {
+                                        if (this.mJson.club_players_interest_id.length > 0)
+                                        {
+                                                if (this.mJson.club_players_interest_id[0].person_id)
+                                                {
+                                                        var id = 'club_players_interest_button_' + this.mJson.club_players_interest_id[0].person_id;
+                                                        this.mClubPlayerInterestButton.setAttribute("id", id);
+                                                        this.mClubPlayerInterestButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_players_interest_button_' + this.getPersonId();
+                                                this.mClubPlayerInterestButton.setAttribute("id", id);
+                                                this.mClubPlayerInterestButton.style.backgroundColor = "red";
+                                        }
+                                }
+
 				
 				if (this.mJson.club_parents_id)
                                 {

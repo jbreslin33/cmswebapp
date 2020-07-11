@@ -708,7 +708,7 @@ CREATE TABLE club_persons
         PRIMARY KEY (id)
 );
 
-CREATE TABLE club_player_interest
+CREATE TABLE club_players_interest
 (
 	id SERIAL,
 	club_person_id integer,
@@ -719,7 +719,7 @@ CREATE TABLE club_player_interest
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE club_player_lead
+CREATE TABLE club_players_lead
 (
 	id SERIAL,
 	club_person_id integer,
@@ -730,7 +730,7 @@ CREATE TABLE club_player_lead
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE club_player_prospect
+CREATE TABLE club_players_prospect
 (
 	id SERIAL,
 	club_person_id integer,
@@ -741,7 +741,7 @@ CREATE TABLE club_player_prospect
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE club_player_potential
+CREATE TABLE club_players_potential
 (
 	id SERIAL,
 	club_person_id integer,

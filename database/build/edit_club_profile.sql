@@ -69,7 +69,7 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_player_interest(p_screen_person_id, x);
+                CALL p_insert_club_players_interest(p_screen_person_id, x);
 
                 IF x = -101 THEN
                         result_set = CONCAT
@@ -83,6 +83,8 @@ BEGIN
                                 j_select_club_teams(p_club_id),
                                 ',',
                                 j_select_club_players_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_interest_id(p_screen_person_id, p_club_id),
                                 ',',
                                 j_select_club_parents_id(p_screen_person_id, p_club_id),
                                 ',',
@@ -564,12 +566,12 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE p_insert_club_player_interest(p_person_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_players_interest(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
         found_player_id players.id%TYPE;
-        found_club_player_interest_id club_player_interest.id%TYPE;
+        found_club_players_interest_id club_players_interest.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
 BEGIN
         x := -101;
@@ -587,10 +589,10 @@ BEGIN
         IF found_club_person_id > 0 THEN
 
                 --insert into club_players if it does not already exist...
-                select id into found_club_player_interest_id from club_player_interest where club_person_id = found_club_person_id;
+                select id into found_club_players_interest_id from club_players_interest where club_person_id = found_club_person_id;
 
-                IF found_club_player_interest_id IS NULL THEN
-                        insert into club_player_interest(club_person_id,player_id) values (found_club_person_id, found_player_id);
+                IF found_club_players_interest_id IS NULL THEN
+                        insert into club_players_interest(club_person_id,player_id) values (found_club_person_id, found_player_id);
                 END IF;
 
         END IF;
