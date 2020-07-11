@@ -1,5 +1,4 @@
 
-
 CREATE OR REPLACE FUNCTION f_insert_club_player(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
@@ -57,6 +56,68 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
+CREATE OR REPLACE FUNCTION f_insert_club_player_interest(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF p_screen_person_id is NULL THEN
+        ELSE
+                CALL p_insert_club_player_interest(p_screen_person_id, x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_teams(p_club_id),
+                                ',',
+                                j_select_club_players_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_managers_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_team_club_players(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_team_club_parents(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 
 
@@ -502,6 +563,40 @@ BEGIN
        	END IF;
 END;
 $$;
+
+CREATE OR REPLACE PROCEDURE p_insert_club_player_interest(p_person_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_player_id players.id%TYPE;
+        found_club_player_interest_id club_player_interest.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+BEGIN
+        x := -101;
+
+        --do we need to add to players????
+        select id into found_player_id from players where person_id = p_person_id;
+
+        IF found_player_id IS NULL THEN
+                insert into players (person_id) values (p_person_id) returning id into found_player_id;
+        END IF;
+
+        --do we need to add to club_players
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0 THEN
+
+                --insert into club_players if it does not already exist...
+                select id into found_club_player_interest_id from club_player_interest where club_person_id = found_club_person_id;
+
+                IF found_club_player_interest_id IS NULL THEN
+                        insert into club_player_interest(club_person_id,player_id) values (found_club_person_id, found_player_id);
+                END IF;
+
+        END IF;
+END;
+$$;
+
 
 CREATE OR REPLACE PROCEDURE p_insert_club_parent(p_person_id int,INOUT x int)
 LANGUAGE plpgsql

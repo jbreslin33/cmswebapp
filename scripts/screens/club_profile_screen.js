@@ -359,6 +359,7 @@ class ClubProfileScreen extends Screen
 
         hitClubPlayerInterestButton()
         {
+		console.log('ClubProfileScreen::hitClubPlayerInterestButton()');
                 var screen = APPLICATION.getCurrentScreen();
                 screen.mCurrentButton = this;
 
@@ -601,7 +602,6 @@ class ClubProfileScreen extends Screen
 
 	hitPlayerButton()
 	{
-		console.log('ClubProfileScreen::insertPlayerButton()');
 		APPLICATION.getCurrentScreen().mCurrentButton = this;
 		var screen = APPLICATION.getCurrentScreen();
 
