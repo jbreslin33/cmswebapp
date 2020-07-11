@@ -71,14 +71,14 @@ BEGIN
         ELSE
                 CALL p_insert_club_players_interest(p_screen_person_id, x);
 
-                IF x = -101 THEN
+                IF x > 0 THEN
                         result_set = CONCAT
                         (
                                 j_select_persons(p_family_id),
                                 ',',
                                 j_select_messages(null),
                                 ',',
-                                j_select_codes(x),
+                                j_select_codes(-101),
                                 ',',
                                 j_select_club_teams(p_club_id),
                                 ',',
@@ -572,9 +572,9 @@ AS $$
 DECLARE
         found_player_id players.id%TYPE;
         found_club_players_interest_id club_players_interest.id%TYPE;
+        found_club_player_id club_players.id%TYPE;
         found_club_person_id club_persons.id%TYPE;
 BEGIN
-        x := -101;
 
         --do we need to add to players????
         select id into found_player_id from players where person_id = p_person_id;
@@ -588,13 +588,18 @@ BEGIN
 
         IF found_club_person_id > 0 THEN
 
-                --insert into club_players if it does not already exist...
-                select id into found_club_players_interest_id from club_players_interest where club_person_id = found_club_person_id;
+		--check if exists on club_players if so you cannot be club_players_interest...
+                select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
 
-                IF found_club_players_interest_id IS NULL THEN
-                        insert into club_players_interest(club_person_id,player_id) values (found_club_person_id, found_player_id);
-                END IF;
+		IF found_club_player_id > 0 THEN
+			x := -102; 
+		ELSE
+                	select id into found_club_players_interest_id from club_players_interest where club_person_id = found_club_person_id;
 
+                	IF found_club_players_interest_id IS NULL THEN
+                        	insert into club_players_interest(club_person_id,player_id) values (found_club_person_id, found_player_id) returning id into x;
+                	END IF;
+		END IF;
         END IF;
 END;
 $$;
