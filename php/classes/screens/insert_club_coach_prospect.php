@@ -5,7 +5,7 @@ class InsertClubCoachProspect extends Screen
 {
         function __construct()
         {
-		coach::__construct();	
+		parent::__construct();	
 	}
 	
 	function getResult()

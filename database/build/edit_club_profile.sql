@@ -409,7 +409,7 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_potentialt_id(p_screen_person_id, p_club_id)
+                                j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -453,23 +453,9 @@ BEGIN
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(p_club_id),
-                                ',',
-                                j_select_club_players_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_parents_id(p_screen_person_id, p_club_id),
-                                ',',
                                 j_select_club_coaches_id(p_screen_person_id, p_club_id),
                                 ',',
-                                j_select_club_managers_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_players(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_parents(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                                j_select_team_club_coaches(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -501,7 +487,7 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_parents_interest(p_screen_person_id, x);
+                CALL p_insert_club_coaches_interest(p_screen_person_id, x);
 
                 IF x > 0 THEN
                         result_set = CONCAT
@@ -512,7 +498,7 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -521,7 +507,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is already a parent at the club. You must remove them as a club player before adding them as a interested club parent.'),
+                                j_select_messages('This person is already a coach at the club. You must remove them as a club player before adding them as a interested club coach.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -543,7 +529,7 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_parents_lead(p_screen_person_id, x);
+                CALL p_insert_club_coaches_lead(p_screen_person_id, x);
 
                 IF x > 0 THEN
                         result_set = CONCAT
@@ -554,7 +540,7 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -563,7 +549,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is already a parent at the club. You must remove them as a club player before adding them as a club parent lead.'),
+                                j_select_messages('This person is already a coach at the club. You must remove them as a club player before adding them as a club coach lead.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -586,7 +572,7 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_parents_prospect(p_screen_person_id, x);
+                CALL p_insert_club_coaches_prospect(p_screen_person_id, x);
 
                 IF x > 0 THEN
                         result_set = CONCAT
@@ -597,7 +583,7 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -606,7 +592,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is already a parent at the club. You must remove them as a club player before adding them as a club parent prospect.'),
+                                j_select_messages('This person is already a coach at the club. You must remove them as a club player before adding them as a club coach prospect.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -629,7 +615,7 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_parents_potential(p_screen_person_id, x);
+                CALL p_insert_club_coaches_potential(p_screen_person_id, x);
 
                 IF x > 0 THEN
                         result_set = CONCAT
@@ -640,7 +626,7 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -649,7 +635,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is already a parent at the club. You must remove them as a club player before adding them as a potential club parent.'),
+                                j_select_messages('This person is already a coach at the club. You must remove them as a club player before adding them as a potential club coach.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -1087,7 +1073,7 @@ BEGIN
                 IF found_club_player_id > 0 THEN
                         x := -102;
                 ELSE
-                        select id into found_club_players_prospect_id from club_players_lead where club_person_id = found_club_person_id;
+                        select id into found_club_players_prospect_id from club_players_prospect where club_person_id = found_club_person_id;
 
                         IF found_club_players_prospect_id IS NULL THEN
                                 insert into club_players_prospect(club_person_id,player_id) values (found_club_person_id, found_player_id) returning id into x;
@@ -1122,7 +1108,7 @@ BEGIN
                 IF found_club_player_id > 0 THEN
                         x := -102;
                 ELSE
-                        select id into found_club_players_potential_id from club_players_lead where club_person_id = found_club_person_id;
+                        select id into found_club_players_potential_id from club_players_potential where club_person_id = found_club_person_id;
 
                         IF found_club_players_potential_id IS NULL THEN
                                 insert into club_players_potential(club_person_id,player_id) values (found_club_person_id, found_player_id) returning id into x;

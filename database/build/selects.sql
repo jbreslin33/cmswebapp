@@ -782,7 +782,7 @@ SELECT json_agg(t) INTO raw_json
                         persons.id as person_id
 
                 from
-                        club_coaches_prospect
+                        club_coaches_potential
 
                 join
                         club_persons on club_persons.id=club_coaches_potential.club_person_id
