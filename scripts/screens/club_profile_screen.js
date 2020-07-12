@@ -1020,6 +1020,64 @@ class ClubProfileScreen extends Screen
                                         }
                                 }
 
+                                if (this.mJson.club_players_lead_id)
+                                {
+                                        if (this.mJson.club_players_lead_id.length > 0)
+                                        {
+                                                if (this.mJson.club_players_lead_id[0].person_id)
+                                                {
+                                                        var id = 'club_players_lead_button_' + this.mJson.club_players_lead_id[0].person_id;
+                                                        this.mClubPlayerLeadButton.setAttribute("id", id);
+                                                        this.mClubPlayerLeadButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_players_lead_button_' + this.getPersonId();
+                                                this.mClubPlayerLeadButton.setAttribute("id", id);
+                                                this.mClubPlayerLeadButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+                                if (this.mJson.club_players_prospect_id)
+                                {
+                                        if (this.mJson.club_players_prospect_id.length > 0)
+                                        {
+                                                if (this.mJson.club_players_prospect_id[0].person_id)
+                                                {
+                                                        var id = 'club_players_prospect_button_' + this.mJson.club_players_prospect_id[0].person_id;
+                                                        this.mClubPlayerProspectButton.setAttribute("id", id);
+                                                        this.mClubPlayerProspectButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_players_prospect_button_' + this.getPersonId();
+                                                this.mClubPlayerProspectButton.setAttribute("id", id);
+                                                this.mClubPlayerProspectButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+
+                                if (this.mJson.club_players_potential_id)
+                                {
+                                        if (this.mJson.club_players_potential_id.length > 0)
+                                        {
+                                                if (this.mJson.club_players_potential_id[0].person_id)
+                                                {
+                                                        var id = 'club_players_potential_button_' + this.mJson.club_players_potential_id[0].person_id;
+                                                        this.mClubPlayerPotentialButton.setAttribute("id", id);
+                                                        this.mClubPlayerPotentialButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_players_potential_button_' + this.getPersonId();
+                                                this.mClubPlayerPotentialButton.setAttribute("id", id);
+                                                this.mClubPlayerPotentialButton.style.backgroundColor = "red";
+                                        }
+                                }
+
 				
 				if (this.mJson.club_parents_id)
                                 {
@@ -1039,6 +1097,84 @@ class ClubProfileScreen extends Screen
                                                 this.mClubParentButton.style.backgroundColor = "red";
                                         }
                                 }
+
+
+                                if (this.mJson.club_parents_interest_id)
+                                {
+                                        if (this.mJson.club_parents_interest_id.length > 0)
+                                        {
+                                                if (this.mJson.club_parents_interest_id[0].person_id)
+                                                {
+                                                        var id = 'club_parents_interest_button_' + this.mJson.club_parents_interest_id[0].person_id;
+                                                        this.mClubParentInterestButton.setAttribute("id", id);
+                                                        this.mClubParentInterestButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_parents_interest_button_' + this.getPersonId();
+                                                this.mClubParentInterestButton.setAttribute("id", id);
+                                                this.mClubParentInterestButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+                                if (this.mJson.club_parents_lead_id)
+                                {
+                                        if (this.mJson.club_parents_lead_id.length > 0)
+                                        {
+                                                if (this.mJson.club_parents_lead_id[0].person_id)
+                                                {
+                                                        var id = 'club_parents_lead_button_' + this.mJson.club_parents_lead_id[0].person_id;
+                                                        this.mClubParentLeadButton.setAttribute("id", id);
+                                                        this.mClubParentLeadButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_parents_lead_button_' + this.getPersonId();
+                                                this.mClubParentLeadButton.setAttribute("id", id);
+                                                this.mClubParentLeadButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+                                if (this.mJson.club_parents_prospect_id)
+                                {
+                                        if (this.mJson.club_parents_prospect_id.length > 0)
+                                        {
+                                                if (this.mJson.club_parents_prospect_id[0].person_id)
+                                                {
+                                                        var id = 'club_parents_prospect_button_' + this.mJson.club_parents_prospect_id[0].person_id;
+                                                        this.mClubParentProspectButton.setAttribute("id", id);
+                                                        this.mClubParentProspectButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_parents_prospect_button_' + this.getPersonId();
+                                                this.mClubParentProspectButton.setAttribute("id", id);
+                                                this.mClubParentProspectButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+                                if (this.mJson.club_parents_potential_id)
+                                {
+                                        if (this.mJson.club_parents_potential_id.length > 0)
+                                        {
+                                                if (this.mJson.club_parents_potential_id[0].person_id)
+                                                {
+                                                        var id = 'club_parents_potential_button_' + this.mJson.club_parents_potential_id[0].person_id;
+                                                        this.mClubParentPotentialButton.setAttribute("id", id);
+                                                        this.mClubParentPotentialButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_parents_potential_button_' + this.getPersonId();
+                                                this.mClubParentPotentialButton.setAttribute("id", id);
+                                                this.mClubParentPotentialButton.style.backgroundColor = "red";
+                                        }
+                                }
+
 				
 				if (this.mJson.club_coaches_id)
                                 {
@@ -1058,6 +1194,84 @@ class ClubProfileScreen extends Screen
                                                 this.mClubCoachButton.style.backgroundColor = "red";
                                         }
                                 }
+
+                                if (this.mJson.club_coaches_interest_id)
+                                {
+                                        if (this.mJson.club_coaches_interest_id.length > 0)
+                                        {
+                                                if (this.mJson.club_coaches_interest_id[0].person_id)
+                                                {
+                                                        var id = 'club_coaches_interest_button_' + this.mJson.club_coaches_interest_id[0].person_id;
+                                                        this.mClubCoachInterestButton.setAttribute("id", id);
+                                                        this.mClubCoachInterestButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_coaches_interest_button_' + this.getPersonId();
+                                                this.mClubCoachInterestButton.setAttribute("id", id);
+                                                this.mClubCoachInterestButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+                                if (this.mJson.club_coaches_lead_id)
+                                {
+                                        if (this.mJson.club_coaches_lead_id.length > 0)
+                                        {
+                                                if (this.mJson.club_coaches_lead_id[0].person_id)
+                                                {
+                                                        var id = 'club_coaches_lead_button_' + this.mJson.club_coaches_lead_id[0].person_id;
+                                                        this.mClubCoachLeadButton.setAttribute("id", id);
+                                                        this.mClubCoachLeadButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_coaches_lead_button_' + this.getPersonId();
+                                                this.mClubCoachLeadButton.setAttribute("id", id);
+                                                this.mClubCoachLeadButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+                                if (this.mJson.club_coaches_prospect_id)
+                                {
+                                        if (this.mJson.club_coaches_prospect_id.length > 0)
+                                        {
+                                                if (this.mJson.club_coaches_prospect_id[0].person_id)
+                                                {
+                                                        var id = 'club_coaches_prospect_button_' + this.mJson.club_coaches_prospect_id[0].person_id;
+                                                        this.mClubCoachProspectButton.setAttribute("id", id);
+                                                        this.mClubCoachProspectButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_coaches_prospect_button_' + this.getPersonId();
+                                                this.mClubCoachProspectButton.setAttribute("id", id);
+                                                this.mClubCoachProspectButton.style.backgroundColor = "red";
+                                        }
+                                }
+
+
+                                if (this.mJson.club_coaches_potential_id)
+                                {
+                                        if (this.mJson.club_coaches_potential_id.length > 0)
+                                        {
+                                                if (this.mJson.club_coaches_potential_id[0].person_id)
+                                                {
+                                                        var id = 'club_coaches_potential_button_' + this.mJson.club_coaches_potential_id[0].person_id;
+                                                        this.mClubCoachPotentialButton.setAttribute("id", id);
+                                                        this.mClubCoachPotentialButton.style.backgroundColor = "green";
+                                                }
+                                        }
+                                        else
+                                        {
+                                                var id = 'club_coaches_potential_button_' + this.getPersonId();
+                                                this.mClubCoachPotentialButton.setAttribute("id", id);
+                                                this.mClubCoachPotentialButton.style.backgroundColor = "red";
+                                        }
+                                }
+
 				
 				if (this.mJson.club_managers_id)
                                 {
@@ -1077,6 +1291,9 @@ class ClubProfileScreen extends Screen
                                                 this.mClubManagerButton.style.backgroundColor = "red";
                                         }
                                 }
+
+
+
 				//APPLICATION.getCurrentScreen().removeClubButtons();	
 				APPLICATION.getCurrentScreen().removePlayerButtons();
 				APPLICATION.getCurrentScreen().removeParentButtons();
