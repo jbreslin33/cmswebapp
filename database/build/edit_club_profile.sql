@@ -348,7 +348,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
+                                j_select_messages('This person is a non-member. You must remove them from the non-member list before adding them aa a club parent.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -563,7 +563,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide coach.'),
+                                j_select_messages('This person is a non-member. You must remove them from the non-member list before adding them aa a club coach.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -778,7 +778,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a manager asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide manager.'),
+                                j_select_messages('This person is a non-member. You must remove them from the non-member list before adding them aa a club manager.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -1630,9 +1630,7 @@ BEGIN
 END;
 $$;
 
-
-
-CREATE OR REPLACE PROCEDURE p_insert_club_parent(p_person_id int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_parent(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1642,24 +1640,31 @@ DECLARE
 BEGIN
         x := -101;
 
-        select id into found_parent_id from parents where person_id = p_person_id;
+        CALL p_check_for_non_member_status(p_person_id, x); --check for non member status
 
-        IF found_parent_id IS NULL THEN
-                insert into parents (person_id) values (p_person_id) returning id into found_parent_id;
-        END IF;
+        IF x = -102 THEN --we have non member so do not do insert into club_parents
 
-        select id into found_club_person_id from club_persons where person_id = p_person_id;
+        ELSE --we are free to insert into club_parents
+                select id into found_parent_id from parents where person_id = p_person_id;
 
-        IF found_club_person_id > 0 THEN
+                IF found_parent_id IS NULL THEN --if no parent than insert one
+                        insert into parents (person_id) values (p_person_id) returning id into found_parent_id;
+                END IF;
 
-                select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
+                select id into found_club_person_id from club_persons where person_id = p_person_id;
 
-                IF found_club_parent_id IS NULL THEN
-                        insert into club_parents(club_person_id,parent_id) values (found_club_person_id, found_parent_id);
+                IF found_club_person_id > 0 THEN --if we have a club person than we can insert into club_parents
+
+                        select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
+
+                        IF found_club_parent_id IS NULL THEN
+                                insert into club_parents(club_person_id, parent_id) values (found_club_person_id, found_parent_id);
+                        END IF;
                 END IF;
         END IF;
 END;
 $$;
+
 
 CREATE OR REPLACE PROCEDURE p_insert_club_parents_interest(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
@@ -1801,8 +1806,7 @@ BEGIN
 END;
 $$;
 
-
-CREATE OR REPLACE PROCEDURE p_insert_club_coach(p_person_id int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_coach(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1812,25 +1816,31 @@ DECLARE
 BEGIN
         x := -101;
 
-        select id into found_coach_id from coaches where person_id = p_person_id;
+        CALL p_check_for_non_member_status(p_person_id, x); --check for non member status
 
-        IF found_coach_id IS NULL THEN
-                insert into coaches (person_id) values (p_person_id) returning id into found_coach_id;
-        END IF;
+        IF x = -102 THEN --we have non member so do not do insert into club_coaches
 
-        select id into found_club_person_id from club_persons where person_id = p_person_id;
+        ELSE --we are free to insert into club_coaches
+                select id into found_coach_id from coaches where person_id = p_person_id;
 
-        IF found_club_person_id > 0 THEN
-
-                select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id;
-
-                IF found_club_coach_id IS NULL THEN
-                        insert into club_coaches(club_person_id,coach_id) values (found_club_person_id, found_coach_id);
+                IF found_coach_id IS NULL THEN --if no coach than insert one
+                        insert into coaches (person_id) values (p_person_id) returning id into found_coach_id;
                 END IF;
 
+                select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+                IF found_club_person_id > 0 THEN --if we have a club person than we can insert into club_coaches
+
+                        select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id;
+
+                        IF found_club_coach_id IS NULL THEN
+                                insert into club_coaches(club_person_id, coach_id) values (found_club_person_id, found_coach_id);
+                        END IF;
+                END IF;
         END IF;
 END;
 $$;
+
 
 
 CREATE OR REPLACE PROCEDURE p_insert_club_coaches_interest(p_person_id int, INOUT x int)
@@ -1974,10 +1984,7 @@ END;
 $$;
 
 
-
-
-
-CREATE OR REPLACE PROCEDURE p_insert_club_manager(p_person_id int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_club_manager(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1987,20 +1994,26 @@ DECLARE
 BEGIN
         x := -101;
 
-        select id into found_manager_id from managers where person_id = p_person_id;
+        CALL p_check_for_non_member_status(p_person_id, x); --check for non member status
 
-        IF found_manager_id IS NULL THEN
-                insert into managers (person_id) values (p_person_id) returning id into found_manager_id;
-        END IF;
+        IF x = -102 THEN --we have non member so do not do insert into club_managers
 
-        select id into found_club_person_id from club_persons where person_id = p_person_id;
+        ELSE --we are free to insert into club_managers
+                select id into found_manager_id from managers where person_id = p_person_id;
 
-        IF found_club_person_id > 0 THEN
+                IF found_manager_id IS NULL THEN --if no manager than insert one
+                        insert into managers (person_id) values (p_person_id) returning id into found_manager_id;
+                END IF;
 
-                select id into found_club_manager_id from club_managers where club_person_id = found_club_person_id;
+                select id into found_club_person_id from club_persons where person_id = p_person_id;
 
-                IF found_club_manager_id IS NULL THEN
-                        insert into club_managers(club_person_id,manager_id) values (found_club_person_id, found_manager_id);
+                IF found_club_person_id > 0 THEN --if we have a club person than we can insert into club_managers
+
+                        select id into found_club_manager_id from club_managers where club_person_id = found_club_person_id;
+
+                        IF found_club_manager_id IS NULL THEN
+                                insert into club_managers(club_person_id, manager_id) values (found_club_person_id, found_manager_id);
+                        END IF;
                 END IF;
         END IF;
 END;
