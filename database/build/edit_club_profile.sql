@@ -670,23 +670,7 @@ BEGIN
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(p_club_id),
-                                ',',
-                                j_select_club_players_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_parents_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_managers_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_players(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_parents(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                                j_select_club_managers_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -727,8 +711,6 @@ BEGIN
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(x),
-                                ',',
-                                j_select_club_teams(p_club_id),
                                 ',',
                                 j_select_club_players_id(p_screen_person_id, p_club_id)
                         );
@@ -772,8 +754,6 @@ BEGIN
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(p_club_id),
-                                ',',
                                 j_select_club_players_interest_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
@@ -788,9 +768,127 @@ BEGIN
                                 j_select_codes(x)
                         );
                 END IF;
-
         END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_delete_club_player_lead(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_player_lead(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_players_lead_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club player lead.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_delete_club_player_prospect(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_player_prospect(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club player prospect.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_delete_club_player_potenial(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_player_potential(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_players_potential_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a potential club player.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
@@ -819,23 +917,7 @@ BEGIN
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(p_club_id),
-                                ',',
-                                j_select_club_players_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_parents_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_managers_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_players(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_parents(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                                j_select_club_parents_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -855,6 +937,168 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_delete_club_parent_interest(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_parent_interest(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a interested club parent.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_delete_club_parent_lead(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_parent_lead(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club parent lead.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_delete_club_parent_prospect(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_parent_prospect(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club parent prospect.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_delete_club_parent_potential(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_parent_potential(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a potential club parent.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
 
 
 CREATE OR REPLACE FUNCTION f_delete_club_coach(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
@@ -878,23 +1122,7 @@ BEGIN
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(p_club_id),
-                                ',',
-                                j_select_club_players_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_parents_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_managers_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_players(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_parents(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -914,6 +1142,172 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION f_delete_club_coach_interest(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_coach_interest(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a interested club coach.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_delete_club_coach_lead(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_coach_lead(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club coach lead.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_delete_club_coach_prospect(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_coach_prospect(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club coach prospect.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_delete_club_coach_potential(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_coach_potential(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_coaches_potential_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a coach asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a potential club coach.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 
 CREATE OR REPLACE FUNCTION f_delete_club_manager(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
@@ -936,23 +1330,7 @@ BEGIN
                                 ',',
                                 j_select_codes(x),
                                 ',',
-                                j_select_club_teams(p_club_id),
-                                ',',
-                                j_select_club_players_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_parents_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_managers_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_players(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_parents(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                                j_select_club_managers_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -1588,7 +1966,92 @@ BEGIN
 END;
 $$;
 
-			--RAISE LOG 'p_delete_club_players_interest found_club_player_id: %', found_club_person_id;
+CREATE OR REPLACE PROCEDURE p_delete_club_player_lead(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_player_id club_players.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_player_id team_club_players.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+                IF found_club_player_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_players_lead where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_player_prospect(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_player_id club_players.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_player_id team_club_players.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+                IF found_club_player_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_players_prospect where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_player_potential(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_player_id club_players.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_player_id team_club_players.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+                IF found_club_player_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_players_potential where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+
+
 
 CREATE OR REPLACE PROCEDURE p_delete_club_parent(p_person_id int,INOUT x int)
 LANGUAGE plpgsql
@@ -1622,6 +2085,120 @@ BEGIN
         END IF;
 END;
 $$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_parent_interest(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_parent_id club_parents.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_parent_id team_club_parents.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
+
+                IF found_club_parent_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_parents_interest where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_parent_lead(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_parent_id club_parents.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_parent_id team_club_parents.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
+
+                IF found_club_parent_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_parents_lead where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_parent_prospect(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_parent_id club_parents.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_parent_id team_club_parents.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
+
+                IF found_club_parent_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_parents_prospect where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+
+CREATE OR REPLACE PROCEDURE p_delete_club_parent_potential(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_parent_id club_parents.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_parent_id team_club_parents.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_parent_id from club_parents where club_person_id = found_club_person_id;
+
+                IF found_club_parent_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_parents_potental where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
 
 
 CREATE OR REPLACE PROCEDURE p_delete_club_coach(p_person_id int,INOUT x int)
@@ -1657,6 +2234,118 @@ BEGIN
 END;
 $$;
 
+
+CREATE OR REPLACE PROCEDURE p_delete_club_coach_interest(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_coach_id club_coaches.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_coach_id team_club_coaches.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id;
+
+                IF found_club_coach_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_coaches_interest where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_coach_lead(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_coach_id club_coaches.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_coach_id team_club_coaches.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id;
+
+                IF found_club_coach_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_coaches_lead where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_coach_prospect(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_coach_id club_coaches.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_coach_id team_club_coaches.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id;
+
+                IF found_club_coach_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_coaches_prospect where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE p_delete_club_coach_potential(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_coach_id club_coaches.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_coach_id team_club_coaches.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_coach_id from club_coaches where club_person_id = found_club_person_id;
+
+                IF found_club_coach_id > 0 THEN
+                        x := -102;
+
+                ELSE
+                        delete from club_coaches_potential where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
 
 
 CREATE OR REPLACE PROCEDURE p_delete_club_manager(p_person_id int,INOUT x int)
