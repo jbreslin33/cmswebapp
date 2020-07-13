@@ -853,7 +853,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION f_delete_club_player_potenial(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+CREATE OR REPLACE FUNCTION f_delete_club_player_potential(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -2192,7 +2192,7 @@ BEGIN
                         x := -102;
 
                 ELSE
-                        delete from club_parents_potental where club_person_id = found_club_person_id;
+                        delete from club_parents_potential where club_person_id = found_club_person_id;
                         x := -101;
                 END IF;
         END IF;
