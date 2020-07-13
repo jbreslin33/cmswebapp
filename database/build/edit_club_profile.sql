@@ -1,4 +1,103 @@
 
+CREATE OR REPLACE PROCEDURE p_check_for_non_member_status(p_person_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+found_club_person_id club_persons.id%TYPE;
+
+found_club_player_interest_id club_players_interest.id%TYPE;
+found_club_player_lead_id club_players_lead.id%TYPE;
+found_club_player_prospect_id club_players_prospect.id%TYPE;
+found_club_player_potential_id club_players_potential.id%TYPE;
+
+found_club_parent_interest_id club_parents_interest.id%TYPE;
+found_club_parent_lead_id club_parents_lead.id%TYPE;
+found_club_parent_prospect_id club_parents_prospect.id%TYPE;
+found_club_parent_potential_id club_parents_potential.id%TYPE;
+
+found_club_coach_interest_id club_coaches_interest.id%TYPE;
+found_club_coach_lead_id club_coaches_lead.id%TYPE;
+found_club_coach_prospect_id club_coaches_prospect.id%TYPE;
+found_club_coach_potential_id club_coaches_potential.id%TYPE;
+
+BEGIN
+        x := -101;
+        
+	select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+	IF found_club_person_id > 0 THEN
+
+		--player
+       		select id into found_club_player_interest_id from club_players_interest where club_person_id = found_club_person_id;
+		IF found_club_player_interest_id > 0 THEN
+			x := -102;
+		END IF;
+       		
+		select id into found_club_player_lead_id from club_players_lead where club_person_id = found_club_person_id;
+		IF found_club_player_lead_id > 0 THEN
+			x := -102;
+		END IF;
+		
+		select id into found_club_player_prospect_id from club_players_prospect where club_person_id = found_club_person_id;
+		IF found_club_player_prospect_id > 0 THEN
+			x := -102;
+		END IF;
+		
+		select id into found_club_player_potential_id from club_players_potential where club_person_id = found_club_person_id;
+		IF found_club_player_potential_id > 0 THEN
+			x := -102;
+		END IF;
+
+		--parent
+                select id into found_club_parent_interest_id from club_parents_interest where club_person_id = found_club_person_id;
+                IF found_club_parent_interest_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                select id into found_club_parent_lead_id from club_parents_lead where club_person_id = found_club_person_id;
+                IF found_club_parent_lead_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                select id into found_club_parent_prospect_id from club_parents_prospect where club_person_id = found_club_person_id;
+                IF found_club_parent_prospect_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                select id into found_club_parent_potential_id from club_parents_potential where club_person_id = found_club_person_id;
+                IF found_club_parent_potential_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                --coach
+                select id into found_club_coach_interest_id from club_coaches_interest where club_person_id = found_club_person_id;
+                IF found_club_coach_interest_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                select id into found_club_coach_lead_id from club_coaches_lead where club_person_id = found_club_person_id;
+                IF found_club_coach_lead_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                select id into found_club_coach_prospect_id from club_coaches_prospect where club_person_id = found_club_person_id;
+                IF found_club_coach_prospect_id > 0 THEN
+                        x := -102;
+                END IF;
+
+                select id into found_club_coach_potential_id from club_coaches_potential where club_person_id = found_club_person_id;
+                IF found_club_coach_potential_id > 0 THEN
+                        x := -102;
+                END IF;
+
+	ELSE
+		--this guy aint even a club person....
+
+	END IF;
+END;
+$$;
+
 CREATE OR REPLACE FUNCTION f_insert_club_player(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
@@ -31,7 +130,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                j_select_messages('This person is a non-member. You must remove them from the non-member list before adding them aa a club player.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -1362,26 +1461,29 @@ DECLARE
 BEGIN
 	x := -101;
 
-       	--do we need to add to players????
-        select id into found_player_id from players where person_id = p_person_id;
+	CALL p_check_for_non_member_status(p_person_id, x); --check for non member status
 
-        IF found_player_id IS NULL THEN
-              	insert into players (person_id) values (p_person_id) returning id into found_player_id;
-        END IF;
+	IF x = -102 THEN --we have non member so do not do insert into club_players
 
-        --do we need to add to club_players
-        select id into found_club_person_id from club_persons where person_id = p_person_id;
+	ELSE --we are free to insert into club_players
+        	select id into found_player_id from players where person_id = p_person_id;
 
-        IF found_club_person_id > 0 THEN
+        	IF found_player_id IS NULL THEN --if no player than insert one
+              		insert into players (person_id) values (p_person_id) returning id into found_player_id;
+        	END IF;
 
-          	--insert into club_players if it does not already exist...
-               	select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+        	select id into found_club_person_id from club_persons where person_id = p_person_id;
 
-      		IF found_club_player_id IS NULL THEN
-      			insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
-              	END IF;
+        	IF found_club_person_id > 0 THEN --if we have a club person than we can insert into club_players
 
-       	END IF;
+               		select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+      			IF found_club_player_id IS NULL THEN
+      				insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
+              		END IF;
+       		END IF;
+	
+	END IF;
 END;
 $$;
 
