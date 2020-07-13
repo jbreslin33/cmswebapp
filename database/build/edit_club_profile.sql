@@ -168,7 +168,7 @@ BEGIN
 
         END IF;
 
-	RAISE LOG 'f_insert_club_player_prospect result: %', result_set;
+	--RAISE LOG 'f_insert_club_player_prospect result: %', result_set;
 
 RETURN result_set;
 END;
@@ -730,21 +730,7 @@ BEGIN
                                 ',',
                                 j_select_club_teams(p_club_id),
                                 ',',
-                                j_select_club_players_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_parents_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_coaches_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_managers_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_players(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_parents(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_team_club_managers(p_screen_person_id, p_club_id)
+                                j_select_club_players_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
