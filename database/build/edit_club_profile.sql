@@ -751,6 +751,52 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION f_delete_club_player_interest(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF $2 is NULL THEN
+        ELSE
+                CALL p_delete_club_player_interest(p_screen_person_id,x);
+
+                IF x = -101 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages(null),
+                                ',',
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_teams(p_club_id),
+                                ',',
+                                j_select_club_players_interest_id(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a interested club player.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 
 CREATE OR REPLACE FUNCTION f_delete_club_parent(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
@@ -983,7 +1029,7 @@ BEGIN
 
         IF found_club_person_id > 0 THEN
 
-		--check if exists on club_players if so you cannot be club_players_interest...
+
                 select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
 
 		IF found_club_player_id > 0 THEN
@@ -1514,7 +1560,35 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE PROCEDURE p_delete_club_player_interest(p_person_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_player_id club_players.id%TYPE;
+        found_club_person_id club_persons.id%TYPE;
+        found_team_club_player_id team_club_players.id%TYPE;
 
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0  THEN
+
+                select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
+
+                IF found_club_player_id > 0 THEN
+                	x := -102;
+
+		ELSE
+                        delete from club_players_interest where club_person_id = found_club_person_id;
+                        x := -101;
+                END IF;
+        END IF;
+END;
+$$;
+
+			--RAISE LOG 'p_delete_club_players_interest found_club_player_id: %', found_club_person_id;
 
 CREATE OR REPLACE PROCEDURE p_delete_club_parent(p_person_id int,INOUT x int)
 LANGUAGE plpgsql
