@@ -214,7 +214,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_players_interest_id(p_screen_person_id, p_club_id)
+                                j_select_club_players_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -223,7 +229,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is already a member at the club. You must remove from them all roles of the club before adding them as a interested club player.'),
+                                j_select_messages('This person is already a member at the club. You must remove from them all roles of the club before adding them as a club player lead.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -1570,6 +1576,9 @@ BEGIN
 
                 	IF found_club_players_interest_id IS NULL THEN
                         	insert into club_players_interest(club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into x;
+				delete from club_players_lead where club_person_id = found_club_person_id;
+				delete from club_players_prospect where club_person_id = found_club_person_id;
+				delete from club_players_potential where club_person_id = found_club_person_id;
                 	END IF;
 		END IF;
         END IF;
@@ -1608,7 +1617,11 @@ BEGIN
                         select id into found_club_players_lead_id from club_players_lead where club_person_id = found_club_person_id;
 
                         IF found_club_players_lead_id IS NULL THEN
+                                delete from club_players_interest where club_person_id = found_club_person_id;
                                 insert into club_players_lead(club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into x;
+                                delete from club_players_prospect where club_person_id = found_club_person_id;
+                                delete from club_players_potential where club_person_id = found_club_person_id;
+
                         END IF;
                 END IF;
         END IF;
@@ -1647,7 +1660,10 @@ BEGIN
                         select id into found_club_players_prospect_id from club_players_prospect where club_person_id = found_club_person_id;
 
                         IF found_club_players_prospect_id IS NULL THEN
+                                delete from club_players_interest where club_person_id = found_club_person_id;
+                                delete from club_players_lead where club_person_id = found_club_person_id;
                                 insert into club_players_prospect(club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into x;
+                                delete from club_players_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -1686,6 +1702,9 @@ BEGIN
                         select id into found_club_players_potential_id from club_players_potential where club_person_id = found_club_person_id;
 
                         IF found_club_players_potential_id IS NULL THEN
+                                delete from club_players_interest where club_person_id = found_club_person_id;
+                                delete from club_players_lead where club_person_id = found_club_person_id;
+                                delete from club_players_prospect where club_person_id = found_club_person_id;
                                 insert into club_players_potential(club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into x;
                         END IF;
                 END IF;
