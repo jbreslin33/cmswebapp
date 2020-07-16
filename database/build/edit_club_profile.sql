@@ -263,7 +263,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_players_lead_id(p_screen_person_id, p_club_id)
+                                j_select_club_players_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -306,7 +312,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id)
+                                j_select_club_players_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -350,6 +362,12 @@ BEGIN
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(-101),
+                                ',',
+                                j_select_club_players_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id),
                                 ',',
                                 j_select_club_players_potential_id(p_screen_person_id, p_club_id)
                         );
@@ -437,7 +455,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id)
+                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -479,7 +503,14 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id)
+                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
+
                         );
                 END IF;
 
@@ -521,7 +552,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id)
+                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -563,6 +600,12 @@ BEGIN
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(-101),
+                                ',',
+                                j_select_club_parents_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_parents_prospect_id(p_screen_person_id, p_club_id),
                                 ',',
                                 j_select_club_parents_potential_id(p_screen_person_id, p_club_id)
                         );
@@ -653,7 +696,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -695,7 +744,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -738,7 +793,13 @@ BEGIN
                                 ',',
                                 j_select_codes(-101),
                                 ',',
-                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id)
+                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_potential_id(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -780,6 +841,12 @@ BEGIN
                                 j_select_messages(null),
                                 ',',
                                 j_select_codes(-101),
+                                ',',
+                                j_select_club_coaches_interest_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_lead_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_club_coaches_prospect_id(p_screen_person_id, p_club_id),
                                 ',',
                                 j_select_club_coaches_potential_id(p_screen_person_id, p_club_id)
                         );
@@ -1782,6 +1849,9 @@ BEGIN
 
                         IF found_club_parents_interest_id IS NULL THEN
                                 insert into club_parents_interest(club_person_id, parent_id) values (found_club_person_id, found_parent_id) returning id into x;
+                                delete from club_parents_lead where club_person_id = found_club_person_id;
+                                delete from club_parents_prospect where club_person_id = found_club_person_id;
+                                delete from club_parents_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -1818,7 +1888,10 @@ BEGIN
                         select id into found_club_parents_lead_id from club_parents_lead where club_person_id = found_club_person_id;
 
                         IF found_club_parents_lead_id IS NULL THEN
+                                delete from club_parents_interest where club_person_id = found_club_person_id;
                                 insert into club_parents_lead(club_person_id, parent_id) values (found_club_person_id, found_parent_id) returning id into x;
+                                delete from club_parents_prospect where club_person_id = found_club_person_id;
+                                delete from club_parents_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -1855,7 +1928,10 @@ BEGIN
                         select id into found_club_parents_prospect_id from club_parents_prospect where club_person_id = found_club_person_id;
 
                         IF found_club_parents_prospect_id IS NULL THEN
+                                delete from club_parents_interest where club_person_id = found_club_person_id;
+                                delete from club_parents_lead where club_person_id = found_club_person_id;
                                 insert into club_parents_prospect(club_person_id, parent_id) values (found_club_person_id, found_parent_id) returning id into x;
+                                delete from club_parents_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -1892,6 +1968,9 @@ BEGIN
                         select id into found_club_parents_potential_id from club_parents_potential where club_person_id = found_club_person_id;
 
                         IF found_club_parents_potential_id IS NULL THEN
+                                delete from club_parents_interest where club_person_id = found_club_person_id;
+                                delete from club_parents_lead where club_person_id = found_club_person_id;
+                                delete from club_parents_prospect where club_person_id = found_club_person_id;
                                 insert into club_parents_potential(club_person_id, parent_id) values (found_club_person_id, found_parent_id) returning id into x;
                         END IF;
                 END IF;
@@ -1969,6 +2048,9 @@ BEGIN
 
                         IF found_club_coaches_interest_id IS NULL THEN
                                 insert into club_coaches_interest(club_person_id, coach_id) values (found_club_person_id, found_coach_id) returning id into x;
+                                delete from club_coaches_lead where club_person_id = found_club_person_id;
+                                delete from club_coaches_prospect where club_person_id = found_club_person_id;
+                                delete from club_coaches_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -2006,7 +2088,10 @@ BEGIN
                         select id into found_club_coaches_lead_id from club_coaches_lead where club_person_id = found_club_person_id;
 
                         IF found_club_coaches_lead_id IS NULL THEN
+                                delete from club_coaches_interest where club_person_id = found_club_person_id;
                                 insert into club_coaches_lead(club_person_id, coach_id) values (found_club_person_id, found_coach_id) returning id into x;
+                                delete from club_coaches_prospect where club_person_id = found_club_person_id;
+                                delete from club_coaches_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -2043,7 +2128,10 @@ BEGIN
                         select id into found_club_coaches_prospect_id from club_coaches_prospect where club_person_id = found_club_person_id;
 
                         IF found_club_coaches_prospect_id IS NULL THEN
+                                delete from club_coaches_interest where club_person_id = found_club_person_id;
+                                delete from club_coaches_lead where club_person_id = found_club_person_id;
                                 insert into club_coaches_prospect(club_person_id, coach_id) values (found_club_person_id, found_coach_id) returning id into x;
+                                delete from club_coaches_potential where club_person_id = found_club_person_id;
                         END IF;
                 END IF;
         END IF;
@@ -2080,6 +2168,9 @@ BEGIN
                         select id into found_club_coaches_potential_id from club_coaches_potential where club_person_id = found_club_person_id;
 
                         IF found_club_coaches_potential_id IS NULL THEN
+                                delete from club_coaches_interest where club_person_id = found_club_person_id;
+                                delete from club_coaches_lead where club_person_id = found_club_person_id;
+                                delete from club_coaches_prospect where club_person_id = found_club_person_id;
                                 insert into club_coaches_potential(club_person_id, coach_id) values (found_club_person_id, found_coach_id) returning id into x;
                         END IF;
                 END IF;
