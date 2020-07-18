@@ -959,6 +959,47 @@ create table team_club_players
 	PRIMARY KEY (id)
 );
 
+create table team_club_players_interest
+(
+        id SERIAL,
+        team_id integer,
+        club_players_interest_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_players_interest_id) REFERENCES club_players_interest(id),
+        PRIMARY KEY (id)
+);
+
+create table team_club_players_lead
+(
+        id SERIAL,
+        team_id integer,
+        club_players_lead_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_players_lead_id) REFERENCES club_players_lead(id),
+        PRIMARY KEY (id)
+);
+
+create table team_club_players_prospect
+(
+        id SERIAL,
+        team_id integer,
+        club_players_prospect_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_players_prospect_id) REFERENCES club_players_prospect(id),
+        PRIMARY KEY (id)
+);
+
+create table team_club_players_potential
+(
+        id SERIAL,
+        team_id integer,
+        club_players_potential_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_players_potential_id) REFERENCES club_players_potential(id),
+        PRIMARY KEY (id)
+);
+
+
 create table team_club_parents
 (
 	id SERIAL,
@@ -970,6 +1011,48 @@ create table team_club_parents
 );
 
 
+create table team_club_parents_interest
+(
+        id SERIAL,
+        team_id integer,
+        club_parents_interest_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_parents_interest_id) REFERENCES club_parents_interest(id),
+        PRIMARY KEY (id)
+);
+
+
+create table team_club_parents_lead
+(
+        id SERIAL,
+        team_id integer,
+        club_parents_lead_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_parents_lead_id) REFERENCES club_parents_lead(id),
+        PRIMARY KEY (id)
+);
+
+
+create table team_club_parents_prospect
+(
+        id SERIAL,
+        team_id integer,
+        club_parents_prospect_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_parents_prospect_id) REFERENCES club_parents_prospect(id),
+        PRIMARY KEY (id)
+);
+
+
+create table team_club_parents_potential
+(
+        id SERIAL,
+        team_id integer,
+        club_parents_potential_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_parents_potential_id) REFERENCES club_parents_potential(id),
+        PRIMARY KEY (id)
+);
 
 create table team_club_coaches
 (
@@ -981,6 +1064,45 @@ create table team_club_coaches
 	PRIMARY KEY (id)
 );
 
+create table team_club_coaches_interest
+(
+        id SERIAL,
+        team_id integer,
+        club_coaches_interest_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_coaches_interest_id) REFERENCES club_coaches_interest(id),
+        PRIMARY KEY (id)
+);
+
+create table team_club_coaches_lead
+(
+        id SERIAL,
+        team_id integer,
+        club_coaches_lead_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_coaches_lead_id) REFERENCES club_coaches_lead(id),
+        PRIMARY KEY (id)
+);
+
+create table team_club_coaches_prospect
+(
+        id SERIAL,
+        team_id integer,
+        club_coaches_prospect_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_coaches_prospect_id) REFERENCES club_coaches_prospect(id),
+        PRIMARY KEY (id)
+);
+
+create table team_club_coaches_potential
+(
+        id SERIAL,
+        team_id integer,
+        club_coaches_potential_id integer,
+        FOREIGN KEY(team_id) REFERENCES teams(id),
+        FOREIGN KEY(club_coaches_potential_id) REFERENCES club_coaches_potential(id),
+        PRIMARY KEY (id)
+);
 
 create table team_club_managers
 (
