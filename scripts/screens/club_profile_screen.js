@@ -223,8 +223,23 @@ class ClubProfileScreen extends Screen
 		this.mCurrentButton = null;
 
 		this.mPlayerButtonArray = new Array();
+		this.mPlayerInterestButtonArray = new Array();
+		this.mPlayerLeadButtonArray = new Array();
+		this.mPlayerProspectButtonArray = new Array();
+		this.mPlayerPotentialButtonArray = new Array();
+
 		this.mParentButtonArray = new Array();
+		this.mParentLeadButtonArray = new Array();
+		this.mParentInterestButtonArray = new Array();
+		this.mParentProspectButtonArray = new Array();
+		this.mParentPotentialButtonArray = new Array();
+
 		this.mCoachButtonArray = new Array();
+		this.mCoachInterestButtonArray = new Array();
+		this.mCoachLeadButtonArray = new Array();
+		this.mCoachProspectButtonArray = new Array();
+		this.mCoachPotentialButtonArray = new Array();
+
 		this.mManagerButtonArray = new Array();
 
 		this.setClubSelect(document.getElementById("club_profile_screen_club_select_id"));
@@ -294,6 +309,42 @@ class ClubProfileScreen extends Screen
  		APPLICATION.getCurrentScreen().mPlayerButtonArray.length = 0;
 	}
 
+        removePlayerInterestButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mPlayerInterestButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mPlayerInterestButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mPlayerInterestButtonArray.length = 0;
+        }
+
+        removePlayerLeadButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mPlayerLeadButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mPlayerLeadButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mPlayerLeadButtonArray.length = 0;
+        }
+
+
+        removePlayerProspectButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mPlayerProspectButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mPlayerProspectButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mPlayerProspectButtonArray.length = 0;
+        }
+
+        removePlayerPotentialButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mPlayerPotentialButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mPlayerPotentialButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mPlayerPotentialButtonArray.length = 0;
+        }
 
         removeParentButtons()
         {
@@ -304,6 +355,42 @@ class ClubProfileScreen extends Screen
                 APPLICATION.getCurrentScreen().mParentButtonArray.length = 0;
         }
 
+        removeParentInterestButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mParentInterestButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mParentInterestButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mParentInterestButtonArray.length = 0;
+        }
+        
+	removeParentLeadButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mParentLeadButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mParentLeadButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mParentLeadButtonArray.length = 0;
+        }
+
+        removeParentProspectButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mParentProspectButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mParentProspectButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mParentProspectButtonArray.length = 0;
+        }
+        
+	removeParentPotentialButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mParentPotentialButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mParentPotentialButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mParentPotentialButtonArray.length = 0;
+        }
+
         removeCoachButtons()
         {
                 for (var i = 0; i < APPLICATION.getCurrentScreen().mCoachButtonArray.length; i++)
@@ -312,6 +399,43 @@ class ClubProfileScreen extends Screen
                 }
                 APPLICATION.getCurrentScreen().mCoachButtonArray.length = 0;
         }
+
+        removeCoachInterestButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mCoachInterestButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mCoachInterestButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mCoachInterestButtonArray.length = 0;
+        }
+
+        removeCoachLeadButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mCoachLeadButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mCoachLeadButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mCoachLeadButtonArray.length = 0;
+        }
+
+        removeCoachProspectButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mCoachProspectButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mCoachProspectButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mCoachProspectButtonArray.length = 0;
+        }
+
+        removeCoachPotentialButtons()
+        {
+                for (var i = 0; i < APPLICATION.getCurrentScreen().mCoachPotentialButtonArray.length; i++)
+                {
+                        APPLICATION.getCurrentScreen().mCoachPotentialButtonArray[i].remove();
+                }
+                APPLICATION.getCurrentScreen().mCoachPotentialButtonArray.length = 0;
+        }
+
 
         removeManagerButtons()
         {
@@ -622,7 +746,7 @@ class ClubProfileScreen extends Screen
 
                 if (this.style.backgroundColor == "green")
                 {
-                        screen.deleteTeamPlayerInterest(this.getAttribute("team_id"), this.getAttribute("team_club_player_id"));
+                        screen.deleteTeamPlayerInterest(this.getAttribute("team_id"), this.getAttribute("team_club_player_interest_id"));
                 }
                 else
                 {
@@ -630,6 +754,50 @@ class ClubProfileScreen extends Screen
                 }
         }
 
+        hitPlayerLeadButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamPlayerLead(this.getAttribute("team_id"), this.getAttribute("team_club_player_lead_id"));
+                }
+                else
+                {
+                        screen.insertTeamPlayerLead(this.getAttribute("team_id"));
+                }
+        }
+        
+	hitPlayerProspectButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamPlayerProspect(this.getAttribute("team_id"), this.getAttribute("team_club_player_prospect_id"));
+                }
+                else
+                {
+                        screen.insertTeamPlayerProspect(this.getAttribute("team_id"));
+                }
+        }
+
+        hitPlayerPotentialButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamPlayerPotential(this.getAttribute("team_id"), this.getAttribute("team_club_player_potential_id"));
+                }
+                else
+                {
+                        screen.insertTeamPlayerPotential(this.getAttribute("team_id"));
+                }
+        }
 
 
 	hitParentButton()
@@ -647,6 +815,72 @@ class ClubProfileScreen extends Screen
                 }
         }
 
+
+        hitParentInterestButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamParentInterest(this.getAttribute("team_id"), this.getAttribute("team_club_parent_interest_id"));
+                }
+                else
+                {
+                        screen.insertTeamParentInterest(this.getAttribute("team_id"));
+                }
+        }
+
+        hitParentLeadButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamParentLead(this.getAttribute("team_id"), this.getAttribute("team_club_parent_lead_id"));
+                }
+                else
+                {
+                        screen.insertTeamParentLead(this.getAttribute("team_id"));
+                }
+        }
+
+
+	hitParentProspectButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamParentProspect(this.getAttribute("team_id"), this.getAttribute("team_club_parent_prospect_id"));
+                }
+                else
+                {
+                        screen.insertTeamParentProspect(this.getAttribute("team_id"));
+                }
+        }
+
+
+
+	hitParentPotentialButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamPotentialInterest(this.getAttribute("team_id"), this.getAttribute("team_club_parent_potential_id"));
+                }
+                else
+                {
+                        screen.insertTeamParentInterest(this.getAttribute("team_id"));
+                }
+        }
+
+
+
         hitCoachButton()
         {
                 APPLICATION.getCurrentScreen().mCurrentButton = this;
@@ -661,6 +895,102 @@ class ClubProfileScreen extends Screen
                         screen.insertTeamCoach(this.getAttribute("team_id"));
                 }
         }
+
+        hitCoachInterestButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamCoachInterest(this.getAttribute("team_id"), this.getAttribute("team_club_coach_interest_id"));
+                }
+                else
+                {
+                        screen.insertTeamCoachInterest(this.getAttribute("team_id"));
+                }
+        }
+
+
+        hitCoachLeadButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamCoachLead(this.getAttribute("team_id"), this.getAttribute("team_club_coach_lead_id"));
+                }
+                else
+                {
+                        screen.insertTeamCoachLead(this.getAttribute("team_id"));
+                }
+        }
+
+
+        hitCoachProspectButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamCoachProspect(this.getAttribute("team_id"), this.getAttribute("team_club_coach_prospect_id"));
+                }
+                else
+                {
+                        screen.insertTeamCoachProspect(this.getAttribute("team_id"));
+                }
+        }
+
+
+        hitCoachLeadButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamCoachLead(this.getAttribute("team_id"), this.getAttribute("team_club_coach_lead_id"));
+                }
+                else
+                {
+                        screen.insertTeamCoachLead(this.getAttribute("team_id"));
+                }
+        }
+
+
+        hitCoachProspectButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamCoachProspect(this.getAttribute("team_id"), this.getAttribute("team_club_coach_prospect_id"));
+                }
+                else
+                {
+                        screen.insertTeamCoachProspect(this.getAttribute("team_id"));
+                }
+        }
+
+
+	hitCoachPotentialButton()
+        {
+                APPLICATION.getCurrentScreen().mCurrentButton = this;
+                var screen = APPLICATION.getCurrentScreen();
+
+                if (this.style.backgroundColor == "green")
+                {
+                        screen.deleteTeamCoachPotential(this.getAttribute("team_id"), this.getAttribute("team_club_coach_potential_id"));
+                }
+                else
+                {
+                        screen.insertTeamCoachPotential(this.getAttribute("team_id"));
+                }
+        }
+
 
 	hitManagerButton()
         {
@@ -698,13 +1028,52 @@ class ClubProfileScreen extends Screen
                 screen.setUrl("/php/classes/screens/insert_team_player_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
                 screen.ajax();
         }
-        deleteTeamPlayerInterest(team_id,team_club_player_id)
+        deleteTeamPlayerInterest(team_id, team_club_player_interest_id)
         {
                 var screen = APPLICATION.getCurrentScreen();
-                screen.setUrl("/php/classes/screens/delete_team_player_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_player_id=' + team_club_player_id);
+                screen.setUrl("/php/classes/screens/delete_team_player_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_player_interest_id=' + team_club_player_interest_id);
                 screen.ajax();
         }
 
+        insertTeamPlayerLead(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_player_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamPlayerLead(team_id, team_club_player_lead_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_player_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_player_lead_id=' + team_club_player_lead_id);
+                screen.ajax();
+        }
+
+        insertTeamPlayerProspect(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_player_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamPlayerProspect(team_id, team_club_player_prospect_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_player_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_player_prospect_id=' + team_club_player_prospect_id);
+                screen.ajax();
+        }
+
+
+        insertTeamPlayerPotential(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_player_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamPlayerPotential(team_id, team_club_player_potential_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_player_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_player_potential_id=' + team_club_player_potential_id);
+                screen.ajax();
+        }
 
 
         insertTeamParent(team_id)
@@ -720,6 +1089,61 @@ class ClubProfileScreen extends Screen
                 screen.ajax();
         }
 
+
+        insertTeamParentInterest(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_parent_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamParentInterest(team_id, team_club_parent_interest_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_parent_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_parent_interest_id=' + team_club_parent_interest_id);
+                screen.ajax();
+        }
+
+        insertTeamParentLead(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_parent_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamParentLead(team_id, team_club_parent_lead_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_parent_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_parent_lead_id=' + team_club_parent_lead_id);
+                screen.ajax();
+        }
+
+        insertTeamParentProspect(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_parent_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamParentProspect(team_id, team_club_parent_prospect_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_parent_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_parent_prospect_id=' + team_club_parent_prospect_id);
+                screen.ajax();
+        }
+
+        insertTeamParentPotential(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_parent_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamParentPotential(team_id, team_club_parent_potential_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_parent_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_parent_potential_id=' + team_club_parent_potential_id);
+                screen.ajax();
+        }
+
+
+
         insertTeamCoach(team_id)
         {
                 var screen = APPLICATION.getCurrentScreen();
@@ -732,6 +1156,61 @@ class ClubProfileScreen extends Screen
                 screen.setUrl("/php/classes/screens/delete_team_coach.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_coach_id=' + team_club_coach_id);
                 screen.ajax();
         }
+
+        insertTeamCoachInterest(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_coach_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamCoachInterest(team_id,team_club_coach_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_coach_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_coach_interest_id=' + team_club_coach_interest_id);
+                screen.ajax();
+        }
+
+        insertTeamCoachLead(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_coach_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamCoachLead(team_id,team_club_coach_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_coach_lead.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_coach_lead_id=' + team_club_coach_lead_id);
+                screen.ajax();
+        }
+
+        insertTeamCoachProspect(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_coach_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamCoachProspectLead(team_id, team_club_coach_prospect_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_coach_prospect.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_coach_lead_prospect_id=' + team_club_coach_prospect_id);
+                screen.ajax();
+        }
+
+        insertTeamCoachPotential(team_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/insert_team_coach_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId());
+                screen.ajax();
+        }
+        deleteTeamCoachProspectPotential(team_id, team_club_coach_potential_id)
+        {
+                var screen = APPLICATION.getCurrentScreen();
+                screen.setUrl("/php/classes/screens/delete_team_coach_potential.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&team_id=' + team_id + '&club_id=' + this.getClubId() + '&team_club_coach_lead_potential_id=' + team_club_coach_potential_id);
+                screen.ajax();
+        }
+
+
+
 
         insertTeamManager(team_id)
         {
@@ -1326,28 +1805,63 @@ class ClubProfileScreen extends Screen
 			if (this.mJson.teams)
 			{
 
-				//APPLICATION.getCurrentScreen().removeClubButtons();	
 				APPLICATION.getCurrentScreen().removePlayerButtons();
+				APPLICATION.getCurrentScreen().removePlayerLeadButtons();
+				APPLICATION.getCurrentScreen().removePlayerInterestButtons();
+				APPLICATION.getCurrentScreen().removePlayerProspectButtons();
+				APPLICATION.getCurrentScreen().removePlayerPotentialButtons();
+
 				APPLICATION.getCurrentScreen().removeParentButtons();
+				APPLICATION.getCurrentScreen().removeParentInterestButtons();
+				APPLICATION.getCurrentScreen().removeParentLeadButtons();
+				APPLICATION.getCurrentScreen().removeParentProspectButtons();
+				APPLICATION.getCurrentScreen().removeParentPotentialButtons();
+
 				APPLICATION.getCurrentScreen().removeCoachButtons();
+				APPLICATION.getCurrentScreen().removeCoachInterestButtons();
+				APPLICATION.getCurrentScreen().removeCoachLeadButtons();
+				APPLICATION.getCurrentScreen().removeCoachProspectButtons();
+				APPLICATION.getCurrentScreen().removeCoachPotentialButtons();
+
 				APPLICATION.getCurrentScreen().removeManagerButtons();
                                 
 				for (var i = 0; i < this.mJson.teams.length; i++)
 				{
-					//new row normal...
+					//new row Interest...
                                         var rowDivInterest = document.createElement("DIV");
                                        	rowDivInterest.setAttribute('class','row');
 					this.getHtml().appendChild(rowDivInterest);
 					this.mDivArray.push(rowDivInterest);
 					this.mClubRoleInterestRow.after(rowDivInterest);
 
+					//new row Lead...
+                                        var rowDivLead = document.createElement("DIV");
+                                        rowDivLead.setAttribute('class','row');
+                                        this.getHtml().appendChild(rowDivLead);
+                                        this.mDivArray.push(rowDivLead);
+                                        this.mClubRoleLeadRow.after(rowDivLead);
+
+
+					//new row Prospect..
+                                        var rowDivProspect = document.createElement("DIV");
+                                        rowDivProspect.setAttribute('class','row');
+                                        this.getHtml().appendChild(rowDivProspect);
+                                        this.mDivArray.push(rowDivProspect);
+                                        this.mClubRoleProspectRow.after(rowDivProspect);
+
+
+					//new row Potential...
+                                        var rowDivPotential = document.createElement("DIV");
+                                        rowDivPotential.setAttribute('class','row');
+                                        this.getHtml().appendChild(rowDivPotential);
+                                        this.mDivArray.push(rowDivPotential);
+                                        this.mClubRolePotentialRow.after(rowDivPotential);
+
 					//new row normal...
                                         var rowDivNormal = document.createElement("DIV");
                                        	rowDivNormal.setAttribute('class','row');
 					this.getHtml().appendChild(rowDivNormal);
 					this.mDivArray.push(rowDivNormal);
-
-
 
 
                                         //create a normal player button
@@ -1364,27 +1878,63 @@ class ClubProfileScreen extends Screen
 					button.style.backgroundColor = "red";
                                         this.mPlayerButtonArray.push(button);
 
-
-
                                         //create a player interest button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
-                                        button.innerHTML = '' + this.mJson.teams[i].team_name;
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Player Interest';
                                         rowDivInterest.appendChild(button);
                                         var team_id = this.mJson.teams[i].team_id;
                                         var team_name = this.mJson.teams[i].team_name;
                                         button.setAttribute("team_id", team_id);
                                         button.setAttribute("team_name", team_name);
-                                        button.setAttribute("team_club_player_id", null);
+                                        button.setAttribute("team_club_player_interest_id", null);
                                         button.onclick = this.hitPlayerInterestButton.bind(button);
                                         button.style.backgroundColor = "red";
-                                        this.mPlayerButtonArray.push(button);
+                                        this.mPlayerInterestButtonArray.push(button);
+
+                                        //create a player lead button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Player Lead';
+                                        rowDivLead.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_player_lead_id", null);
+                                        button.onclick = this.hitPlayerLeadButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mPlayerLeadButtonArray.push(button);
+
+                                        //create a player prospect button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Player Prospect';
+                                        rowDivProspect.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_player_prospect_id", null);
+                                        button.onclick = this.hitPlayerProspectButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mPlayerProspectButtonArray.push(button);
 
 
+                                        //create a player potential button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Player Potential';
+                                        rowDivPotential.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_player_potential_id", null);
+                                        button.onclick = this.hitPlayerPotentialButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mPlayerPotentialButtonArray.push(button);
 
-
-
-					//mClubRoleInterestRow
 
                                         //create a parent button
                                         var button = document.createElement("BUTTON");
@@ -1400,6 +1950,69 @@ class ClubProfileScreen extends Screen
                                         button.style.backgroundColor = "red";
                                         this.mParentButtonArray.push(button);
 
+
+                                        //create a parent interest button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Parent Interest';
+                                        rowDivInterest.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_parent_interest_id", null);
+                                        button.onclick = this.hitParentInterestButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mParentInterestButtonArray.push(button);
+
+
+                                        //create a parent lead button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Parent Lead';
+                                        rowDivLead.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_parent_lead_id", null);
+                                        button.onclick = this.hitParentLeadButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mParentLeadButtonArray.push(button);
+
+
+                                        //create a parent prospect button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Parent Prospect';
+                                        rowDivProspect.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_parent_prospect_id", null);
+                                        button.onclick = this.hitParentProspectButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mParentProspectButtonArray.push(button);
+
+
+                                        //create a parent potentia button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Parent Potential';
+                                        rowDivPotential.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_parent_potential_id", null);
+                                        button.onclick = this.hitParentPotentialButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mParentPotentialButtonArray.push(button);
+
+
+
+
                                        	//create a coach button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
@@ -1414,6 +2027,66 @@ class ClubProfileScreen extends Screen
                                         button.style.backgroundColor = "red";
                                         this.mCoachButtonArray.push(button);
 
+
+                                        //create a coach interest button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Coach Interest';
+                                        rowDivInterest.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_coach_interest_id", null);
+                                        button.onclick = this.hitCoachInterestButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mCoachInterestButtonArray.push(button);
+
+
+                                        //create a coach lead button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Coach Lead';
+                                        rowDivLead.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_coach_lead_id", null);
+                                        button.onclick = this.hitCoachLeadButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mCoachLeadButtonArray.push(button);
+
+                                        //create a coach prospect button
+                                        var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Coach Prospect';
+                                        rowDivProspect.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_coach_prospect_id", null);
+                                        button.onclick = this.hitCoachProspectButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mCoachProspectButtonArray.push(button);
+
+				        //create a coach potential button
+                                     	var button = document.createElement("BUTTON");
+                                        button.setAttribute('class','club-profile-button');
+                                        button.innerHTML = '' + this.mJson.teams[i].team_name + ' Coach Potential';
+                                        rowDivPotential.appendChild(button);
+                                        var team_id = this.mJson.teams[i].team_id;
+                                        var team_name = this.mJson.teams[i].team_name;
+                                        button.setAttribute("team_id", team_id);
+                                        button.setAttribute("team_name", team_name);
+                                        button.setAttribute("team_club_coach_potential_id", null);
+                                        button.onclick = this.hitCoachPotentialButton.bind(button);
+                                        button.style.backgroundColor = "red";
+                                        this.mCoachPotentialButtonArray.push(button);
+
+
+
 					//create a manager button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
@@ -1427,6 +2100,7 @@ class ClubProfileScreen extends Screen
                                         button.onclick = this.hitManagerButton.bind(button);
                                         button.style.backgroundColor = "red";
                                         this.mManagerButtonArray.push(button);
+
 
 				}
 
@@ -1445,6 +2119,67 @@ class ClubProfileScreen extends Screen
 					}
 				}
 
+			        if (this.mJson.team_club_players_interest)
+                              	{
+                                        for (var i = 0; i < this.mJson.team_club_players_interest.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mPlayerInterestButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_players_interest[i].team_id == this.mPlayerInterestButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mPlayerInterestButtonArray[t].style.backgroundColor = "green";
+                                                                this.mPlayerInterestButtonArray[t].setAttribute("team_club_player_interest_id", this.mJson.team_club_players_interest[i].team_club_player_interest_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+                                if (this.mJson.team_club_players_lead)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_players_lead.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mPlayerLeadButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_players_lead[i].team_id == this.mPlayerLeadButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mPlayerLeadButtonArray[t].style.backgroundColor = "green";
+                                                                this.mPlayerLeadButtonArray[t].setAttribute("team_club_player_lead_id", this.mJson.team_club_players_lead[i].team_club_player_lead_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+                                if (this.mJson.team_club_players_prospect)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_players_prospect.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mPlayerProspectButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_players_prospect[i].team_id == this.mPlayerProspectButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mPlayerProspectButtonArray[t].style.backgroundColor = "green";
+                                                                this.mPlayerProspectButtonArray[t].setAttribute("team_club_player_prospect_id", this.mJson.team_club_players_prospect[i].team_club_player_prospect_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+                                if (this.mJson.team_club_players_potential)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_players_potential.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mPlayerPotentialButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_players_potential[i].team_id == this.mPlayerPotentialButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mPlayerPotentialButtonArray[t].style.backgroundColor = "green";
+                                                                this.mPlayerPotentialButtonArray[t].setAttribute("team_club_player_potential_id", this.mJson.team_club_players_potential[i].team_club_player_potential_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+
                                 if (this.mJson.team_club_parents)
                                 {
                                         for (var i = 0; i < this.mJson.team_club_parents.length; i++)
@@ -1460,6 +2195,69 @@ class ClubProfileScreen extends Screen
                                         }
                                 }
 
+                                if (this.mJson.team_club_parents_interest)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_parents_interest.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mParentInterestButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_parents_interest[i].team_id == this.mParentInterestButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mParentInterestButtonArray[t].style.backgroundColor = "green";
+                                                                this.mParentInterestButtonArray[t].setAttribute("team_club_parent_interest_id", this.mJson.team_club_parents_interest[i].team_club_parent_interest_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+                                if (this.mJson.team_club_parents_lead)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_parents_lead.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mParentLeadButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_parents_lead[i].team_id == this.mParentLeadButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mParentLeadButtonArray[t].style.backgroundColor = "green";
+                                                                this.mParentLeadButtonArray[t].setAttribute("team_club_parent_lead_id", this.mJson.team_club_parents_lead[i].team_club_parent_lead_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+
+                                if (this.mJson.team_club_parents_prospect)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_parents_prospect.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mParentProspectButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_parents_prospect[i].team_id == this.mParentProspectButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mParentProspectButtonArray[t].style.backgroundColor = "green";
+                                                                this.mParentProspectButtonArray[t].setAttribute("team_club_parent_prospect_id", this.mJson.team_club_parents_prospect[i].team_club_parent_prospect_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+
+                                if (this.mJson.team_club_parents_potential)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_parents_potential.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mParentPotentialButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_parents_potential[i].team_id == this.mParentPotentialButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mParentPotentialButtonArray[t].style.backgroundColor = "green";
+                                                                this.mParentPotentialButtonArray[t].setAttribute("team_club_parent_potential_id", this.mJson.team_club_parents_potential[i].team_club_parent_potential_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+
 				if (this.mJson.team_club_coaches)
                                 {
                                         for (var i = 0; i < this.mJson.team_club_coaches.length; i++)
@@ -1470,6 +2268,68 @@ class ClubProfileScreen extends Screen
                                                         {
                                                                 this.mCoachButtonArray[t].style.backgroundColor = "green";
                                                                 this.mCoachButtonArray[t].setAttribute("team_club_coach_id", this.mJson.team_club_coaches[i].team_club_coach_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+                                if (this.mJson.team_club_coaches_interest)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_coaches_interest.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mCoachInterestButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_coaches_interest[i].team_id == this.mCoachInterestButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mCoachInterestButtonArray[t].style.backgroundColor = "green";
+                                                                this.mCoachInterestButtonArray[t].setAttribute("team_club_coach_interest_id", this.mJson.team_club_coaches_interest[i].team_club_coach_interest_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+                                if (this.mJson.team_club_coaches_lead)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_coaches_lead.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mCoachLeadButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_coaches_lead[i].team_id == this.mCoachLeadButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mCoachLeadButtonArray[t].style.backgroundColor = "green";
+                                                                this.mCoachLeadButtonArray[t].setAttribute("team_club_coach_lead_id", this.mJson.team_club_coaches_lead[i].team_club_coach_lead_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+
+			        if (this.mJson.team_club_coaches_prospect)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_coaches_prospect.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mCoachProspectButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_coaches_prospect[i].team_id == this.mCoachProspectButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mCoachProspectButtonArray[t].style.backgroundColor = "green";
+                                                                this.mCoachProspectButtonArray[t].setAttribute("team_club_coach_prospect_id", this.mJson.team_club_coaches_prospect[i].team_club_coach_prospect_id);
+                                                        }
+                                                }
+                                        }
+                                }
+
+
+			       	if (this.mJson.team_club_coaches_potential)
+                                {
+                                        for (var i = 0; i < this.mJson.team_club_coaches_potential.length; i++)
+                                        {
+                                                for (var t = 0; t < this.mCoachPotentialButtonArray.length; t++)
+                                                {
+                                                        if (this.mJson.team_club_coaches_potential[i].team_id == this.mCoachPotentialButtonArray[t].getAttribute("team_id"))
+                                                        {
+                                                                this.mCoachPotentialButtonArray[t].style.backgroundColor = "green";
+                                                                this.mCoachPotentialButtonArray[t].setAttribute("team_club_coach_potential_id", this.mJson.team_club_coaches_potential[i].team_club_coach_potential_id);
                                                         }
                                                 }
                                         }
