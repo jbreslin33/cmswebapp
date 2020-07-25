@@ -1488,321 +1488,314 @@ class ClubProfileScreen extends Screen
                                 	select.appendChild(opt);
                         	}
 				this.getClubPersonProfile()
+			} //this.mJson.club_persons
+
+			if (this.mJson.club_players_id)
+			{
+                       		if (this.mJson.club_players_id.length > 0)
+				{
+                               		if (this.mJson.club_players_id[0].person_id)
+                               		{
+                               			var id = 'club_player_button_' + this.mJson.club_players_id[0].person_id;
+                               			this.mClubPlayerButton.setAttribute("id", id);
+                               			this.mClubPlayerButton.style.backgroundColor = "green";
+					}
+                               	}
+				else
+				{
+                               		var id = 'club_player_button_' + this.getPersonId();
+                               		this.mClubPlayerButton.setAttribute("id", id);
+                              		this.mClubPlayerButton.style.backgroundColor = "red";
+				}
 			}
 
-				if (this.mJson.club_players_id)
-				{
-                        		if (this.mJson.club_players_id.length > 0)
-					{
-                                		if (this.mJson.club_players_id[0].person_id)
-                                		{
-                                			var id = 'club_player_button_' + this.mJson.club_players_id[0].person_id;
-                                			this.mClubPlayerButton.setAttribute("id", id);
-                                			this.mClubPlayerButton.style.backgroundColor = "green";
-						}
-                                	}
-					else
-					{
-                                		var id = 'club_player_button_' + this.getPersonId();
-                                		this.mClubPlayerButton.setAttribute("id", id);
-                                       		this.mClubPlayerButton.style.backgroundColor = "red";
-					}
-				}
-
-
-                                if (this.mJson.club_players_interest_id)
+                        if (this.mJson.club_players_interest_id)
+                        {
+                        	if (this.mJson.club_players_interest_id.length > 0)
                                 {
-                                        if (this.mJson.club_players_interest_id.length > 0)
+                                	if (this.mJson.club_players_interest_id[0].person_id)
                                         {
-                                                if (this.mJson.club_players_interest_id[0].person_id)
-                                                {
-                                                        var id = 'club_players_interest_button_' + this.mJson.club_players_interest_id[0].person_id;
-                                                        this.mClubPlayerInterestButton.setAttribute("id", id);
-                                                        this.mClubPlayerInterestButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_players_interest_button_' + this.getPersonId();
+                                        	var id = 'club_players_interest_button_' + this.mJson.club_players_interest_id[0].person_id;
                                                 this.mClubPlayerInterestButton.setAttribute("id", id);
-                                                this.mClubPlayerInterestButton.style.backgroundColor = "red";
+                                               	this.mClubPlayerInterestButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_players_lead_id)
+                               	}
+                                else
                                 {
-                                        if (this.mJson.club_players_lead_id.length > 0)
+                                	var id = 'club_players_interest_button_' + this.getPersonId();
+                                        this.mClubPlayerInterestButton.setAttribute("id", id);
+                                        this.mClubPlayerInterestButton.style.backgroundColor = "red";
+                                }
+                       	}
+
+                       	if (this.mJson.club_players_lead_id)
+                        {
+                        	if (this.mJson.club_players_lead_id.length > 0)
+                                {
+                                	if (this.mJson.club_players_lead_id[0].person_id)
                                         {
-                                                if (this.mJson.club_players_lead_id[0].person_id)
-                                                {
-                                                        var id = 'club_players_lead_button_' + this.mJson.club_players_lead_id[0].person_id;
-                                                        this.mClubPlayerLeadButton.setAttribute("id", id);
-                                                        this.mClubPlayerLeadButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_players_lead_button_' + this.getPersonId();
+                                        	var id = 'club_players_lead_button_' + this.mJson.club_players_lead_id[0].person_id;
                                                 this.mClubPlayerLeadButton.setAttribute("id", id);
-                                                this.mClubPlayerLeadButton.style.backgroundColor = "red";
+                                                this.mClubPlayerLeadButton.style.backgroundColor = "green";
                                         }
                                 }
-
-                                if (this.mJson.club_players_prospect_id)
+                                else
                                 {
-					console.log('got players prospect');
-                                        if (this.mJson.club_players_prospect_id.length > 0)
+                                        var id = 'club_players_lead_button_' + this.getPersonId();
+                                        this.mClubPlayerLeadButton.setAttribute("id", id);
+                                      	this.mClubPlayerLeadButton.style.backgroundColor = "red";
+                                }
+                      	}
+
+                       	if (this.mJson.club_players_prospect_id)
+                        {
+				console.log('got players prospect');
+                                if (this.mJson.club_players_prospect_id.length > 0)
+                                {
+					console.log('got players prospect:' + this.mJson.club_players_prospect_id[0].person_id);
+                                        if (this.mJson.club_players_prospect_id[0].person_id)
                                         {
-						console.log('got players prospect:' + this.mJson.club_players_prospect_id[0].person_id);
-                                                if (this.mJson.club_players_prospect_id[0].person_id)
-                                                {
-                                                        var id = 'club_players_prospect_button_' + this.mJson.club_players_prospect_id[0].person_id;
-                                                        this.mClubPlayerProspectButton.setAttribute("id", id);
-                                                        this.mClubPlayerProspectButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_players_prospect_button_' + this.getPersonId();
+                                        	var id = 'club_players_prospect_button_' + this.mJson.club_players_prospect_id[0].person_id;
                                                 this.mClubPlayerProspectButton.setAttribute("id", id);
-                                                this.mClubPlayerProspectButton.style.backgroundColor = "red";
+                                                this.mClubPlayerProspectButton.style.backgroundColor = "green";
                                         }
                                 }
-
-
-                                if (this.mJson.club_players_potential_id)
+                                else
                                 {
-                                        if (this.mJson.club_players_potential_id.length > 0)
+                                	var id = 'club_players_prospect_button_' + this.getPersonId();
+                                        this.mClubPlayerProspectButton.setAttribute("id", id);
+                                        this.mClubPlayerProspectButton.style.backgroundColor = "red";
+                                }
+                     	}
+
+                        if (this.mJson.club_players_potential_id)
+                        {
+                        	if (this.mJson.club_players_potential_id.length > 0)
+                                {
+                                	if (this.mJson.club_players_potential_id[0].person_id)
                                         {
-                                                if (this.mJson.club_players_potential_id[0].person_id)
-                                                {
-                                                        var id = 'club_players_potential_button_' + this.mJson.club_players_potential_id[0].person_id;
-                                                        this.mClubPlayerPotentialButton.setAttribute("id", id);
-                                                        this.mClubPlayerPotentialButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_players_potential_button_' + this.getPersonId();
+                                        	var id = 'club_players_potential_button_' + this.mJson.club_players_potential_id[0].person_id;
                                                 this.mClubPlayerPotentialButton.setAttribute("id", id);
-                                                this.mClubPlayerPotentialButton.style.backgroundColor = "red";
+                                                this.mClubPlayerPotentialButton.style.backgroundColor = "green";
                                         }
-                                }
-
-				
-				if (this.mJson.club_parents_id)
+                               	}
+                               	else
                                 {
-                                        if (this.mJson.club_parents_id.length > 0)
+                                	var id = 'club_players_potential_button_' + this.getPersonId();
+                                        this.mClubPlayerPotentialButton.setAttribute("id", id);
+                                        this.mClubPlayerPotentialButton.style.backgroundColor = "red";
+                                }
+                       	}
+				
+			if (this.mJson.club_parents_id)
+                        {
+                        	if (this.mJson.club_parents_id.length > 0)
+				{ 
+                                	if (this.mJson.club_parents_id[0].person_id)
                                         {
-                                                if (this.mJson.club_parents_id[0].person_id)
-                                                {
-                                                        var id = 'club_parent_button_' + this.mJson.club_parents_id[0].person_id;
-                                                        this.mClubParentButton.setAttribute("id", id);
-                                                        this.mClubParentButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_parent_button_' + this.getPersonId();
+                                        	var id = 'club_parent_button_' + this.mJson.club_parents_id[0].person_id;
                                                 this.mClubParentButton.setAttribute("id", id);
-                                                this.mClubParentButton.style.backgroundColor = "red";
+                                                this.mClubParentButton.style.backgroundColor = "green";
                                         }
                                 }
-
-
-                                if (this.mJson.club_parents_interest_id)
+                                else
                                 {
-                                        if (this.mJson.club_parents_interest_id.length > 0)
+                                        var id = 'club_parent_button_' + this.getPersonId();
+                                       	this.mClubParentButton.setAttribute("id", id);
+                                        this.mClubParentButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_parents_interest_id)
+                        {
+                        	if (this.mJson.club_parents_interest_id.length > 0)
+                                {
+                                	if (this.mJson.club_parents_interest_id[0].person_id)
                                         {
-                                                if (this.mJson.club_parents_interest_id[0].person_id)
-                                                {
-                                                        var id = 'club_parents_interest_button_' + this.mJson.club_parents_interest_id[0].person_id;
-                                                        this.mClubParentInterestButton.setAttribute("id", id);
-                                                        this.mClubParentInterestButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_parents_interest_button_' + this.getPersonId();
+                                                var id = 'club_parents_interest_button_' + this.mJson.club_parents_interest_id[0].person_id;
                                                 this.mClubParentInterestButton.setAttribute("id", id);
-                                                this.mClubParentInterestButton.style.backgroundColor = "red";
+                                                this.mClubParentInterestButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_parents_lead_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_parents_lead_id.length > 0)
+                                        var id = 'club_parents_interest_button_' + this.getPersonId();
+                                       	this.mClubParentInterestButton.setAttribute("id", id);
+                                       	this.mClubParentInterestButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_parents_lead_id)
+                        {
+                        	if (this.mJson.club_parents_lead_id.length > 0)
+                                {
+                                	if (this.mJson.club_parents_lead_id[0].person_id)
                                         {
-                                                if (this.mJson.club_parents_lead_id[0].person_id)
-                                                {
-                                                        var id = 'club_parents_lead_button_' + this.mJson.club_parents_lead_id[0].person_id;
-                                                        this.mClubParentLeadButton.setAttribute("id", id);
-                                                        this.mClubParentLeadButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_parents_lead_button_' + this.getPersonId();
+                                        	var id = 'club_parents_lead_button_' + this.mJson.club_parents_lead_id[0].person_id;
                                                 this.mClubParentLeadButton.setAttribute("id", id);
-                                                this.mClubParentLeadButton.style.backgroundColor = "red";
+                                                this.mClubParentLeadButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_parents_prospect_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_parents_prospect_id.length > 0)
+                                        var id = 'club_parents_lead_button_' + this.getPersonId();
+                                        this.mClubParentLeadButton.setAttribute("id", id);
+                                       	this.mClubParentLeadButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_parents_prospect_id)
+                        {
+                        	if (this.mJson.club_parents_prospect_id.length > 0)
+                                {
+                                	if (this.mJson.club_parents_prospect_id[0].person_id)
                                         {
-                                                if (this.mJson.club_parents_prospect_id[0].person_id)
-                                                {
-                                                        var id = 'club_parents_prospect_button_' + this.mJson.club_parents_prospect_id[0].person_id;
-                                                        this.mClubParentProspectButton.setAttribute("id", id);
-                                                        this.mClubParentProspectButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_parents_prospect_button_' + this.getPersonId();
+                                        	var id = 'club_parents_prospect_button_' + this.mJson.club_parents_prospect_id[0].person_id;
                                                 this.mClubParentProspectButton.setAttribute("id", id);
-                                                this.mClubParentProspectButton.style.backgroundColor = "red";
+                                                this.mClubParentProspectButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_parents_potential_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_parents_potential_id.length > 0)
+                                        var id = 'club_parents_prospect_button_' + this.getPersonId();
+                                        this.mClubParentProspectButton.setAttribute("id", id);
+                                        this.mClubParentProspectButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_parents_potential_id)
+                        {
+                        	if (this.mJson.club_parents_potential_id.length > 0)
+                                {
+                                	if (this.mJson.club_parents_potential_id[0].person_id)
                                         {
-                                                if (this.mJson.club_parents_potential_id[0].person_id)
-                                                {
-                                                        var id = 'club_parents_potential_button_' + this.mJson.club_parents_potential_id[0].person_id;
-                                                        this.mClubParentPotentialButton.setAttribute("id", id);
-                                                        this.mClubParentPotentialButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_parents_potential_button_' + this.getPersonId();
+                                               	var id = 'club_parents_potential_button_' + this.mJson.club_parents_potential_id[0].person_id;
                                                 this.mClubParentPotentialButton.setAttribute("id", id);
-                                                this.mClubParentPotentialButton.style.backgroundColor = "red";
+                                                this.mClubParentPotentialButton.style.backgroundColor = "green";
                                         }
-                                }
-
-				
-				if (this.mJson.club_coaches_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_coaches_id.length > 0)
+                                        var id = 'club_parents_potential_button_' + this.getPersonId();
+                                        this.mClubParentPotentialButton.setAttribute("id", id);
+                                        this.mClubParentPotentialButton.style.backgroundColor = "red";
+                                }
+			}
+
+			if (this.mJson.club_coaches_id)
+                        {
+                        	if (this.mJson.club_coaches_id.length > 0)
+                                {
+                                	if (this.mJson.club_coaches_id[0].person_id)
                                         {
-                                                if (this.mJson.club_coaches_id[0].person_id)
-                                                {
-                                                        var id = 'club_coach_button_' + this.mJson.club_coaches_id[0].person_id;
-                                                        this.mClubCoachButton.setAttribute("id", id);
-                                                        this.mClubCoachButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_coach_button_0' + this.getPersonId();
+                                        	var id = 'club_coach_button_' + this.mJson.club_coaches_id[0].person_id;
                                                 this.mClubCoachButton.setAttribute("id", id);
-                                                this.mClubCoachButton.style.backgroundColor = "red";
+                                                this.mClubCoachButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_coaches_interest_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_coaches_interest_id.length > 0)
+                                        var id = 'club_coach_button_0' + this.getPersonId();
+                                        this.mClubCoachButton.setAttribute("id", id);
+                                        this.mClubCoachButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_coaches_interest_id)
+                        {
+                        	if (this.mJson.club_coaches_interest_id.length > 0)
+                                {
+                                	if (this.mJson.club_coaches_interest_id[0].person_id)
                                         {
-                                                if (this.mJson.club_coaches_interest_id[0].person_id)
-                                                {
-                                                        var id = 'club_coaches_interest_button_' + this.mJson.club_coaches_interest_id[0].person_id;
-                                                        this.mClubCoachInterestButton.setAttribute("id", id);
-                                                        this.mClubCoachInterestButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_coaches_interest_button_' + this.getPersonId();
+                                        	var id = 'club_coaches_interest_button_' + this.mJson.club_coaches_interest_id[0].person_id;
                                                 this.mClubCoachInterestButton.setAttribute("id", id);
-                                                this.mClubCoachInterestButton.style.backgroundColor = "red";
+                                                this.mClubCoachInterestButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_coaches_lead_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_coaches_lead_id.length > 0)
+                                        var id = 'club_coaches_interest_button_' + this.getPersonId();
+                                        this.mClubCoachInterestButton.setAttribute("id", id);
+                                        this.mClubCoachInterestButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_coaches_lead_id)
+                        {
+                        	if (this.mJson.club_coaches_lead_id.length > 0)
+                                {
+                                	if (this.mJson.club_coaches_lead_id[0].person_id)
                                         {
-                                                if (this.mJson.club_coaches_lead_id[0].person_id)
-                                                {
-                                                        var id = 'club_coaches_lead_button_' + this.mJson.club_coaches_lead_id[0].person_id;
-                                                        this.mClubCoachLeadButton.setAttribute("id", id);
-                                                        this.mClubCoachLeadButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_coaches_lead_button_' + this.getPersonId();
+                                        	var id = 'club_coaches_lead_button_' + this.mJson.club_coaches_lead_id[0].person_id;
                                                 this.mClubCoachLeadButton.setAttribute("id", id);
-                                                this.mClubCoachLeadButton.style.backgroundColor = "red";
+                                                this.mClubCoachLeadButton.style.backgroundColor = "green";
                                         }
-                                }
-
-                                if (this.mJson.club_coaches_prospect_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_coaches_prospect_id.length > 0)
+                                	var id = 'club_coaches_lead_button_' + this.getPersonId();
+                                        this.mClubCoachLeadButton.setAttribute("id", id);
+                                        this.mClubCoachLeadButton.style.backgroundColor = "red";
+                                }
+			}
+
+                        if (this.mJson.club_coaches_prospect_id)
+                       	{ 
+                        	if (this.mJson.club_coaches_prospect_id.length > 0)
+                                {
+                                	if (this.mJson.club_coaches_prospect_id[0].person_id)
                                         {
-                                                if (this.mJson.club_coaches_prospect_id[0].person_id)
-                                                {
-                                                        var id = 'club_coaches_prospect_button_' + this.mJson.club_coaches_prospect_id[0].person_id;
-                                                        this.mClubCoachProspectButton.setAttribute("id", id);
-                                                        this.mClubCoachProspectButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_coaches_prospect_button_' + this.getPersonId();
+                                        	var id = 'club_coaches_prospect_button_' + this.mJson.club_coaches_prospect_id[0].person_id;
                                                 this.mClubCoachProspectButton.setAttribute("id", id);
-                                                this.mClubCoachProspectButton.style.backgroundColor = "red";
+                                                this.mClubCoachProspectButton.style.backgroundColor = "green";
                                         }
-                                }
-
-
-                                if (this.mJson.club_coaches_potential_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_coaches_potential_id.length > 0)
+                                	var id = 'club_coaches_prospect_button_' + this.getPersonId();
+                                        this.mClubCoachProspectButton.setAttribute("id", id);
+                                        this.mClubCoachProspectButton.style.backgroundColor = "red";
+                                }
+			}
+
+
+                        if (this.mJson.club_coaches_potential_id)
+                        {
+                        	if (this.mJson.club_coaches_potential_id.length > 0)
+                                {
+                                	if (this.mJson.club_coaches_potential_id[0].person_id)
                                         {
-                                                if (this.mJson.club_coaches_potential_id[0].person_id)
-                                                {
-                                                        var id = 'club_coaches_potential_button_' + this.mJson.club_coaches_potential_id[0].person_id;
-                                                        this.mClubCoachPotentialButton.setAttribute("id", id);
-                                                        this.mClubCoachPotentialButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_coaches_potential_button_' + this.getPersonId();
+                                        	var id = 'club_coaches_potential_button_' + this.mJson.club_coaches_potential_id[0].person_id;
                                                 this.mClubCoachPotentialButton.setAttribute("id", id);
-                                                this.mClubCoachPotentialButton.style.backgroundColor = "red";
+                                                this.mClubCoachPotentialButton.style.backgroundColor = "green";
                                         }
-                                }
-
-				
-				if (this.mJson.club_managers_id)
+				}
+                                else
                                 {
-                                        if (this.mJson.club_managers_id.length > 0)
-                                        {
-                                                if (this.mJson.club_managers_id[0].person_id)
-                                                {
-                                                        var id = 'club_manager_button_' + this.mJson.club_managers_id[0].person_id;
-                                                        this.mClubManagerButton.setAttribute("id", id);
-                                                        this.mClubManagerButton.style.backgroundColor = "green";
-                                                }
-                                        }
-                                        else
-                                        {
-                                                var id = 'club_manager_button_0' + this.getPersonId();
-                                                this.mClubManagerButton.setAttribute("id", id);
-                                                this.mClubManagerButton.style.backgroundColor = "red";
-                                        }
+                                	var id = 'club_coaches_potential_button_' + this.getPersonId();
+                                        this.mClubCoachPotentialButton.setAttribute("id", id);
+                                        this.mClubCoachPotentialButton.style.backgroundColor = "red";
                                 }
+			}
 
+			if (this.mJson.club_managers_id)
+                        {
+                        	if (this.mJson.club_managers_id.length > 0)
+                                {
+                                	if (this.mJson.club_managers_id[0].person_id)
+                                        {
+                                        	var id = 'club_manager_button_' + this.mJson.club_managers_id[0].person_id;
+                                                this.mClubManagerButton.setAttribute("id", id);
+                                                this.mClubManagerButton.style.backgroundColor = "green";
+                                        }
+				}
+                                else
+                               	{ 
+                                	var id = 'club_manager_button_0' + this.getPersonId();
+                                        this.mClubManagerButton.setAttribute("id", id);
+                                        this.mClubManagerButton.style.backgroundColor = "red";
+                                }
+			}
 
 			if (this.mJson.teams)
 			{
@@ -2012,9 +2005,6 @@ class ClubProfileScreen extends Screen
                                         button.style.backgroundColor = "red";
                                         this.mParentPotentialButtonArray.push(button);
 
-
-
-
                                        	//create a coach button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
@@ -2087,8 +2077,6 @@ class ClubProfileScreen extends Screen
                                         button.style.backgroundColor = "red";
                                         this.mCoachPotentialButtonArray.push(button);
 
-
-
 					//create a manager button
                                         var button = document.createElement("BUTTON");
                                         button.setAttribute('class','club-profile-button');
@@ -2102,252 +2090,246 @@ class ClubProfileScreen extends Screen
                                         button.onclick = this.hitManagerButton.bind(button);
                                         button.style.backgroundColor = "red";
                                         this.mManagerButtonArray.push(button);
-
-
 				}
+			}
 
-				if (this.mJson.team_club_players)
+			if (this.mJson.team_club_players)
+			{
+				console.log('team_club_players json');
+                       		for (var i = 0; i < this.mJson.team_club_players.length; i++)
 				{
-                        		for (var i = 0; i < this.mJson.team_club_players.length; i++)
+                       			for (var t = 0; t < this.mPlayerButtonArray.length; t++)
 					{
-                        			for (var t = 0; t < this.mPlayerButtonArray.length; t++)
+						if (this.mJson.team_club_players[i].team_id == this.mPlayerButtonArray[t].getAttribute("team_id"))
 						{
-							if (this.mJson.team_club_players[i].team_id == this.mPlayerButtonArray[t].getAttribute("team_id"))
-							{
-                                                		this.mPlayerButtonArray[t].style.backgroundColor = "green";
-                                                		this.mPlayerButtonArray[t].setAttribute("team_club_player_id", this.mJson.team_club_players[i].team_club_player_id);
-							}
+                                               		this.mPlayerButtonArray[t].style.backgroundColor = "green";
+                                               		this.mPlayerButtonArray[t].setAttribute("team_club_player_id", this.mJson.team_club_players[i].team_club_player_id);
 						}
 					}
 				}
+			}
 
-			        if (this.mJson.team_club_players_interest)
-                              	{
-                                        for (var i = 0; i < this.mJson.team_club_players_interest.length; i++)
+			if (this.mJson.team_club_players_interest)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_players_interest.length; i++)
+                                {
+                                	for (var t = 0; t < this.mPlayerInterestButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mPlayerInterestButtonArray.length; t++)
+                                        	if (this.mJson.team_club_players_interest[i].team_id == this.mPlayerInterestButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_players_interest[i].team_id == this.mPlayerInterestButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mPlayerInterestButtonArray[t].style.backgroundColor = "green";
-                                                                this.mPlayerInterestButtonArray[t].setAttribute("team_club_player_interest_id", this.mJson.team_club_players_interest[i].team_club_player_interest_id);
-                                                        }
+                                                	this.mPlayerInterestButtonArray[t].style.backgroundColor = "green";
+                                                        this.mPlayerInterestButtonArray[t].setAttribute("team_club_player_interest_id", this.mJson.team_club_players_interest[i].team_club_player_interest_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_players_lead)
+                        if (this.mJson.team_club_players_lead)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_players_lead.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_players_lead.length; i++)
+                                	for (var t = 0; t < this.mPlayerLeadButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mPlayerLeadButtonArray.length; t++)
+                                        	if (this.mJson.team_club_players_lead[i].team_id == this.mPlayerLeadButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_players_lead[i].team_id == this.mPlayerLeadButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mPlayerLeadButtonArray[t].style.backgroundColor = "green";
-                                                                this.mPlayerLeadButtonArray[t].setAttribute("team_club_player_lead_id", this.mJson.team_club_players_lead[i].team_club_player_lead_id);
-                                                        }
+                                                        this.mPlayerLeadButtonArray[t].style.backgroundColor = "green";
+                                                       	this.mPlayerLeadButtonArray[t].setAttribute("team_club_player_lead_id", this.mJson.team_club_players_lead[i].team_club_player_lead_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_players_prospect)
+                        if (this.mJson.team_club_players_prospect)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_players_prospect.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_players_prospect.length; i++)
+                                	for (var t = 0; t < this.mPlayerProspectButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mPlayerProspectButtonArray.length; t++)
+                                        	if (this.mJson.team_club_players_prospect[i].team_id == this.mPlayerProspectButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_players_prospect[i].team_id == this.mPlayerProspectButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mPlayerProspectButtonArray[t].style.backgroundColor = "green";
-                                                                this.mPlayerProspectButtonArray[t].setAttribute("team_club_player_prospect_id", this.mJson.team_club_players_prospect[i].team_club_player_prospect_id);
-                                                        }
+                                                	this.mPlayerProspectButtonArray[t].style.backgroundColor = "green";
+                                                        this.mPlayerProspectButtonArray[t].setAttribute("team_club_player_prospect_id", this.mJson.team_club_players_prospect[i].team_club_player_prospect_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_players_potential)
+                        if (this.mJson.team_club_players_potential)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_players_potential.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_players_potential.length; i++)
+                                	for (var t = 0; t < this.mPlayerPotentialButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mPlayerPotentialButtonArray.length; t++)
+                                        	if (this.mJson.team_club_players_potential[i].team_id == this.mPlayerPotentialButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_players_potential[i].team_id == this.mPlayerPotentialButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mPlayerPotentialButtonArray[t].style.backgroundColor = "green";
-                                                                this.mPlayerPotentialButtonArray[t].setAttribute("team_club_player_potential_id", this.mJson.team_club_players_potential[i].team_club_player_potential_id);
-                                                        }
+                                                	this.mPlayerPotentialButtonArray[t].style.backgroundColor = "green";
+                                                        this.mPlayerPotentialButtonArray[t].setAttribute("team_club_player_potential_id", this.mJson.team_club_players_potential[i].team_club_player_potential_id);
                                                 }
                                         }
                                 }
+			}
 
 
-                                if (this.mJson.team_club_parents)
+                        if (this.mJson.team_club_parents)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_parents.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_parents.length; i++)
+                                	for (var t = 0; t < this.mParentButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mParentButtonArray.length; t++)
+                                        	if (this.mJson.team_club_parents[i].team_id == this.mParentButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_parents[i].team_id == this.mParentButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mParentButtonArray[t].style.backgroundColor = "green";
-                                                                this.mParentButtonArray[t].setAttribute("team_club_parent_id", this.mJson.team_club_parents[i].team_club_parent_id);
-                                                        }
+                                                	this.mParentButtonArray[t].style.backgroundColor = "green";
+                                                        this.mParentButtonArray[t].setAttribute("team_club_parent_id", this.mJson.team_club_parents[i].team_club_parent_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_parents_interest)
+                        if (this.mJson.team_club_parents_interest)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_parents_interest.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_parents_interest.length; i++)
+                                	for (var t = 0; t < this.mParentInterestButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mParentInterestButtonArray.length; t++)
+                                        	if (this.mJson.team_club_parents_interest[i].team_id == this.mParentInterestButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_parents_interest[i].team_id == this.mParentInterestButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mParentInterestButtonArray[t].style.backgroundColor = "green";
-                                                                this.mParentInterestButtonArray[t].setAttribute("team_club_parent_interest_id", this.mJson.team_club_parents_interest[i].team_club_parent_interest_id);
-                                                        }
+                                                	this.mParentInterestButtonArray[t].style.backgroundColor = "green";
+                                                        this.mParentInterestButtonArray[t].setAttribute("team_club_parent_interest_id", this.mJson.team_club_parents_interest[i].team_club_parent_interest_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_parents_lead)
+                        if (this.mJson.team_club_parents_lead)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_parents_lead.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_parents_lead.length; i++)
+                                	for (var t = 0; t < this.mParentLeadButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mParentLeadButtonArray.length; t++)
+                                        	if (this.mJson.team_club_parents_lead[i].team_id == this.mParentLeadButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_parents_lead[i].team_id == this.mParentLeadButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mParentLeadButtonArray[t].style.backgroundColor = "green";
-                                                                this.mParentLeadButtonArray[t].setAttribute("team_club_parent_lead_id", this.mJson.team_club_parents_lead[i].team_club_parent_lead_id);
-                                                        }
+                                                        this.mParentLeadButtonArray[t].style.backgroundColor = "green";
+                                                       	this.mParentLeadButtonArray[t].setAttribute("team_club_parent_lead_id", this.mJson.team_club_parents_lead[i].team_club_parent_lead_id);
                                                 }
                                         }
                                 }
+			}
 
-
-                                if (this.mJson.team_club_parents_prospect)
+                        if (this.mJson.team_club_parents_prospect)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_parents_prospect.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_parents_prospect.length; i++)
+                                	for (var t = 0; t < this.mParentProspectButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mParentProspectButtonArray.length; t++)
+                                        	if (this.mJson.team_club_parents_prospect[i].team_id == this.mParentProspectButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_parents_prospect[i].team_id == this.mParentProspectButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mParentProspectButtonArray[t].style.backgroundColor = "green";
-                                                                this.mParentProspectButtonArray[t].setAttribute("team_club_parent_prospect_id", this.mJson.team_club_parents_prospect[i].team_club_parent_prospect_id);
-                                                        }
+                                                	this.mParentProspectButtonArray[t].style.backgroundColor = "green";
+                                                        this.mParentProspectButtonArray[t].setAttribute("team_club_parent_prospect_id", this.mJson.team_club_parents_prospect[i].team_club_parent_prospect_id);
                                                 }
                                         }
                                 }
+			}
 
-
-                                if (this.mJson.team_club_parents_potential)
+                        if (this.mJson.team_club_parents_potential)
+                       	{
+                        	for (var i = 0; i < this.mJson.team_club_parents_potential.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_parents_potential.length; i++)
+                                	for (var t = 0; t < this.mParentPotentialButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mParentPotentialButtonArray.length; t++)
+                                        	if (this.mJson.team_club_parents_potential[i].team_id == this.mParentPotentialButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_parents_potential[i].team_id == this.mParentPotentialButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mParentPotentialButtonArray[t].style.backgroundColor = "green";
-                                                                this.mParentPotentialButtonArray[t].setAttribute("team_club_parent_potential_id", this.mJson.team_club_parents_potential[i].team_club_parent_potential_id);
-                                                        }
+                                                	this.mParentPotentialButtonArray[t].style.backgroundColor = "green";
+                                                        this.mParentPotentialButtonArray[t].setAttribute("team_club_parent_potential_id", this.mJson.team_club_parents_potential[i].team_club_parent_potential_id);
                                                 }
                                         }
                                 }
+			}
 
-
-				if (this.mJson.team_club_coaches)
+			if (this.mJson.team_club_coaches)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_coaches.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_coaches.length; i++)
+                                	for (var t = 0; t < this.mCoachButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mCoachButtonArray.length; t++)
+                                        	if (this.mJson.team_club_coaches[i].team_id == this.mCoachButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_coaches[i].team_id == this.mCoachButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mCoachButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachButtonArray[t].setAttribute("team_club_coach_id", this.mJson.team_club_coaches[i].team_club_coach_id);
-                                                        }
+                                                	this.mCoachButtonArray[t].style.backgroundColor = "green";
+                                                        this.mCoachButtonArray[t].setAttribute("team_club_coach_id", this.mJson.team_club_coaches[i].team_club_coach_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_coaches_interest)
+                        if (this.mJson.team_club_coaches_interest)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_coaches_interest.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_coaches_interest.length; i++)
+                                	for (var t = 0; t < this.mCoachInterestButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mCoachInterestButtonArray.length; t++)
+                                        	if (this.mJson.team_club_coaches_interest[i].team_id == this.mCoachInterestButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_coaches_interest[i].team_id == this.mCoachInterestButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mCoachInterestButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachInterestButtonArray[t].setAttribute("team_club_coach_interest_id", this.mJson.team_club_coaches_interest[i].team_club_coach_interest_id);
-                                                        }
+                                                	this.mCoachInterestButtonArray[t].style.backgroundColor = "green";
+                                                        this.mCoachInterestButtonArray[t].setAttribute("team_club_coach_interest_id", this.mJson.team_club_coaches_interest[i].team_club_coach_interest_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_coaches_lead)
+                        if (this.mJson.team_club_coaches_lead)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_coaches_lead.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_coaches_lead.length; i++)
+                                	for (var t = 0; t < this.mCoachLeadButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mCoachLeadButtonArray.length; t++)
+                                        	if (this.mJson.team_club_coaches_lead[i].team_id == this.mCoachLeadButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_coaches_lead[i].team_id == this.mCoachLeadButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mCoachLeadButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachLeadButtonArray[t].setAttribute("team_club_coach_lead_id", this.mJson.team_club_coaches_lead[i].team_club_coach_lead_id);
-                                                        }
+                                                	this.mCoachLeadButtonArray[t].style.backgroundColor = "green";
+                                                        this.mCoachLeadButtonArray[t].setAttribute("team_club_coach_lead_id", this.mJson.team_club_coaches_lead[i].team_club_coach_lead_id);
                                                 }
                                         }
                                 }
+			}
 
-
-			        if (this.mJson.team_club_coaches_prospect)
+			if (this.mJson.team_club_coaches_prospect)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_coaches_prospect.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_coaches_prospect.length; i++)
+                                	for (var t = 0; t < this.mCoachProspectButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mCoachProspectButtonArray.length; t++)
+                                        	if (this.mJson.team_club_coaches_prospect[i].team_id == this.mCoachProspectButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_coaches_prospect[i].team_id == this.mCoachProspectButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mCoachProspectButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachProspectButtonArray[t].setAttribute("team_club_coach_prospect_id", this.mJson.team_club_coaches_prospect[i].team_club_coach_prospect_id);
-                                                        }
+                                                	this.mCoachProspectButtonArray[t].style.backgroundColor = "green";
+                                                        this.mCoachProspectButtonArray[t].setAttribute("team_club_coach_prospect_id", this.mJson.team_club_coaches_prospect[i].team_club_coach_prospect_id);
                                                 }
                                         }
                                 }
+			}
 
-
-			       	if (this.mJson.team_club_coaches_potential)
+			if (this.mJson.team_club_coaches_potential)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_coaches_potential.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_coaches_potential.length; i++)
-                                        {
-                                                for (var t = 0; t < this.mCoachPotentialButtonArray.length; t++)
+                                	for (var t = 0; t < this.mCoachPotentialButtonArray.length; t++)
+                                       	{ 
+                                        	if (this.mJson.team_club_coaches_potential[i].team_id == this.mCoachPotentialButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_coaches_potential[i].team_id == this.mCoachPotentialButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mCoachPotentialButtonArray[t].style.backgroundColor = "green";
-                                                                this.mCoachPotentialButtonArray[t].setAttribute("team_club_coach_potential_id", this.mJson.team_club_coaches_potential[i].team_club_coach_potential_id);
-                                                        }
+                                                	this.mCoachPotentialButtonArray[t].style.backgroundColor = "green";
+                                                        this.mCoachPotentialButtonArray[t].setAttribute("team_club_coach_potential_id", this.mJson.team_club_coaches_potential[i].team_club_coach_potential_id);
                                                 }
                                         }
                                 }
+			}
 
-                                if (this.mJson.team_club_managers)
+                        if (this.mJson.team_club_managers)
+                        {
+                        	for (var i = 0; i < this.mJson.team_club_managers.length; i++)
                                 {
-                                        for (var i = 0; i < this.mJson.team_club_managers.length; i++)
+                                	for (var t = 0; t < this.mManagerButtonArray.length; t++)
                                         {
-                                                for (var t = 0; t < this.mManagerButtonArray.length; t++)
+                                        	if (this.mJson.team_club_managers[i].team_id == this.mManagerButtonArray[t].getAttribute("team_id"))
                                                 {
-                                                        if (this.mJson.team_club_managers[i].team_id == this.mManagerButtonArray[t].getAttribute("team_id"))
-                                                        {
-                                                                this.mManagerButtonArray[t].style.backgroundColor = "green";
-                                                                this.mManagerButtonArray[t].setAttribute("team_club_manager_id", this.mJson.team_club_managers[i].team_club_manager_id);
-                                                        }
+                                               		this.mManagerButtonArray[t].style.backgroundColor = "green";
+                                                      	this.mManagerButtonArray[t].setAttribute("team_club_manager_id", this.mJson.team_club_managers[i].team_club_manager_id);
                                                 }
                                         }
                                 }

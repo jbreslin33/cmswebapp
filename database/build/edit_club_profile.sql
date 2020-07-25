@@ -1726,9 +1726,7 @@ BEGIN
 	x := -101;
 
 	CALL p_check_for_member_status(p_person_id, x); --check for non member status
-	RAISE LOG 'p_insert_club_players_interest member x: %', x;
 	CALL p_check_for_player_non_member_status_excluding(p_person_id, x, 1);
-	RAISE LOG 'p_insert_club_players_interest exclude x: %', x;
 
 
 	IF x = -102 THEN --we have non member so do not do insert into club_players
@@ -2919,47 +2917,41 @@ DECLARE
         json_result text;
 BEGIN
 
-        IF p_screen_person_id is NULL THEN
-        ELSE
 
-		CALL p_check_for_non_member_status(p_screen_person_id, x);
+        IF p_screen_person_id > 0 THEN
 
-		IF x > 0 THEN
+		CALL p_check_for_player_non_member_status(p_screen_person_id, x);
+		
+		IF x = -101 THEN
 
+			CALL p_insert_team_player(p_screen_person_id, p_team_id, x);
 
-
-                CALL p_insert_team_player(p_screen_person_id, p_team_id, x);
-
-                IF x > 0 THEN
-
-                        result_set = CONCAT
-                        (
-                        	j_select_persons(p_family_id),
-                        	',',
-                        	j_select_messages(null),
-                        	',',
-                        	j_select_codes(x),
-                        	',',
-                        	j_select_club_players_id(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_team_club_players(p_screen_person_id, p_club_id)
-                        );
-                END IF;
-
-                IF x = -102 THEN
                         result_set = CONCAT
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                j_select_messages(null),
                                 ',',
-                                j_select_codes(x)
+                                j_select_codes(x),
+                                ',',
+                                j_select_club_players_id(p_screen_person_id, p_club_id),
+                                ',',
+                                j_select_team_club_players(p_screen_person_id, p_club_id)
                         );
+			RAISE LOG 'p_insert_team_player result_set: %', result_set;
+		ELSE 
+			IF x = -102 THEN
+	
+                     		result_set = CONCAT
+                        	(
+                                	j_select_persons(p_family_id),
+                                	',',
+                                	j_select_messages('This person is entered as a non-member. You must remove them from all non-member roles before adding them as a team player.'),
+                                	',',
+                                	j_select_codes(x)
+                        	);
+			END IF;
                 END IF;
-		
-		ELSE
-		
-		END IF;
 
         END IF;
 
@@ -3430,7 +3422,7 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE p_insert_team_player(p_person_id int, p_team_id int,INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_team_player(p_person_id int, p_team_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
