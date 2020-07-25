@@ -741,6 +741,7 @@ class ClubProfileScreen extends Screen
 
         hitPlayerInterestButton()
         {
+		console.log('ClubPersonScreen::hitPlayerInterestButton()');
                 APPLICATION.getCurrentScreen().mCurrentButton = this;
                 var screen = APPLICATION.getCurrentScreen();
 
@@ -1227,6 +1228,7 @@ class ClubProfileScreen extends Screen
 
 	insertClubPlayerInterest()
 	{
+		console.log('ClubProfileScreen::insertCluubPlayerInterest()');
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/insert_club_player_interest.php?" + this.getStandardParameters() + '&screen_person_id=' + this.getPersonId() + '&club_id=' + this.getClubId());
                 screen.ajax();

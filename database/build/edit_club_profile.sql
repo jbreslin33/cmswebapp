@@ -47,7 +47,6 @@ BEGIN
 END;
 $$;
 
-
 CREATE OR REPLACE PROCEDURE p_check_for_non_member_status(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
@@ -147,6 +146,59 @@ BEGIN
 END;
 $$;
 
+
+CREATE OR REPLACE PROCEDURE p_check_for_player_non_member_status_excluding(p_person_id int, INOUT x int, ex int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+found_club_person_id club_persons.id%TYPE;
+
+found_club_player_interest_id club_players_interest.id%TYPE;
+found_club_player_lead_id club_players_lead.id%TYPE;
+found_club_player_prospect_id club_players_prospect.id%TYPE;
+found_club_player_potential_id club_players_potential.id%TYPE;
+
+BEGIN
+        x := -101;
+        
+	select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+	IF found_club_person_id > 0 THEN
+
+		IF ex != 1 THEN
+			select id into found_club_player_interest_id from club_players_interest where club_person_id = found_club_person_id;
+			IF found_club_player_interest_id > 0 THEN
+				x := -102;
+			END IF;
+		END IF;
+
+		IF ex != 2 THEN
+			select id into found_club_player_lead_id from club_players_lead where club_person_id = found_club_person_id;
+			IF found_club_player_lead_id > 0 THEN
+				x := -102;
+			END IF;
+		END IF;
+		
+		IF ex != 3 THEN
+			select id into found_club_player_prospect_id from club_players_prospect where club_person_id = found_club_person_id;
+			IF found_club_player_prospect_id > 0 THEN
+				x := -102;
+			END IF;
+		END IF;
+		
+		IF ex != 4 THEN
+			select id into found_club_player_potential_id from club_players_potential where club_person_id = found_club_person_id;
+			IF found_club_player_potential_id > 0 THEN
+				x := -102;
+			END IF;
+		END IF;
+	END IF;
+END;
+$$;
+
+
+
 CREATE OR REPLACE FUNCTION f_insert_club_player(p_family_id int, p_person_id int, p_screen_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
@@ -201,39 +253,55 @@ DECLARE
         json_result text;
 BEGIN
 
-        IF p_screen_person_id is NULL THEN
-        ELSE
-                CALL p_insert_club_players_interest(p_screen_person_id, x);
+        IF p_screen_person_id > 0 THEN
 
-                IF x > 0 THEN
-                        result_set = CONCAT
-                        (
-                                j_select_persons(p_family_id),
-                                ',',
-                                j_select_messages(null),
-                                ',',
-                                j_select_codes(-101),
-                                ',',
-                                j_select_club_players_interest_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_players_lead_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_players_prospect_id(p_screen_person_id, p_club_id),
-                                ',',
-                                j_select_club_players_potential_id(p_screen_person_id, p_club_id)
-                        );
-                END IF;
+		CALL p_check_for_player_non_member_status_excluding(p_screen_person_id, x, 1);
 
-                IF x = -102 THEN
-                        result_set = CONCAT
+		IF x = -102 THEN --checking for non members
+
+                	result_set = CONCAT
                         (
-                                j_select_persons(p_family_id),
+                        	j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is already a member at the club. You must remove from them all roles of the club before adding them as a club player lead.'),
+                                j_select_messages('This person is already listed as a lead, prospective or potential player. You must remove from them all those roles before adding them as an interested club player.'),
                                 ',',
                                 j_select_codes(x)
                         );
-                END IF;
+
+		ELSE --checking for members
+			
+			CALL p_insert_club_players_interest(p_screen_person_id, x);
+
+                	IF x > 0 THEN
+                        	result_set = CONCAT
+                        	(
+                                	j_select_persons(p_family_id),
+                                	',',
+                                	j_select_messages(null),
+                                	',',
+                                	j_select_codes(-101),
+                                	',',
+                                	j_select_club_players_interest_id(p_screen_person_id, p_club_id),
+                                	',',
+                                	j_select_club_players_lead_id(p_screen_person_id, p_club_id),
+                                	',',
+                                	j_select_club_players_prospect_id(p_screen_person_id, p_club_id),
+                                	',',
+                                	j_select_club_players_potential_id(p_screen_person_id, p_club_id)
+                        	);
+                	END IF;
+
+                	IF x = -102 THEN
+                        	result_set = CONCAT
+                        	(
+                                	j_select_persons(p_family_id),
+                                	',',
+                                	j_select_messages('This person is already a member at the club. You must remove from them all roles of the club before adding them as an interested club player.'),
+                                	',',
+                                	j_select_codes(x)
+                        	);
+                	END IF;
+		END IF;
 
         END IF;
 
@@ -334,8 +402,6 @@ BEGIN
                 END IF;
 
         END IF;
-
-	--RAISE LOG 'f_insert_club_player_prospect result: %', result_set;
 
 RETURN result_set;
 END;
@@ -1622,6 +1688,10 @@ BEGIN
 	x := -101;
 
 	CALL p_check_for_member_status(p_person_id, x); --check for non member status
+	RAISE LOG 'p_insert_club_players_interest member x: %', x;
+	CALL p_check_for_player_non_member_status_excluding(p_person_id, x, 1);
+	RAISE LOG 'p_insert_club_players_interest exclude x: %', x;
+
 
 	IF x = -102 THEN --we have non member so do not do insert into club_players
 
@@ -2736,7 +2806,6 @@ DECLARE
         found_club_administrator_id club_administrators.id%TYPE;
 
 BEGIN
-	--RAISE LOG 'f_club_person_profile p_screen_person_id: %', p_screen_person_id;
         select club_administrators.id into found_club_administrator_id from club_administrators join club_persons on club_persons.id=club_administrators.club_person_id where club_persons.person_id = p_person_id;
         IF found_club_administrator_id > 0 THEN
                 result_set = CONCAT
@@ -2800,13 +2869,10 @@ BEGIN
                 );
         END IF;
 	
-	--RAISE LOG 'f_club_person_profile result: %', result_set;
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
-
---email_id, person_id, screen_person_id, team_id, club_id
 CREATE OR REPLACE FUNCTION f_insert_team_player(p_family_id int, p_person_id int, p_screen_person_id int, p_team_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
@@ -2829,23 +2895,9 @@ BEGIN
                         	',',
                         	j_select_codes(x),
                         	',',
-                        	j_select_club_teams(p_club_id),
-                        	',',
                         	j_select_club_players_id(p_screen_person_id, p_club_id),
                         	',',
-                        	j_select_club_parents_id(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_club_coaches_id(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_club_managers_id(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_team_club_players(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_team_club_parents(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_team_club_coaches(p_screen_person_id, p_club_id),
-                        	',',
-                        	j_select_team_club_managers(p_screen_person_id, p_club_id)
+                        	j_select_team_club_players(p_screen_person_id, p_club_id)
                         );
                 END IF;
 
@@ -2865,6 +2917,55 @@ BEGIN
 RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION f_insert_team_player_interest(p_family_id int, p_person_id int, p_screen_person_id int, p_team_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+        result_set text;
+        DECLARE x int := -111;
+        json_result text;
+BEGIN
+
+        IF p_screen_person_id is NULL THEN
+        ELSE
+                CALL p_insert_team_player_interest(p_screen_person_id, p_team_id, x);
+
+                IF x = -101 THEN
+
+                        result_set = CONCAT
+                        (
+                        	j_select_persons(p_family_id),
+                        	',',
+                        	j_select_messages(null),
+                        	',',
+                        	j_select_codes(x),
+                        	',',
+                        	j_select_club_players_interest_id(p_screen_person_id, p_club_id),
+                        	',',
+                        	j_select_team_club_players_interest(p_screen_person_id, p_club_id)
+                        );
+                END IF;
+
+                IF x = -102 THEN
+                        result_set = CONCAT
+                        (
+                                j_select_persons(p_family_id),
+                                ',',
+                                j_select_messages('This person is a player asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide player.'),
+                                ',',
+                                j_select_codes(x)
+                        );
+                END IF;
+
+        END IF;
+
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 
 CREATE OR REPLACE FUNCTION f_insert_team_parent(p_family_id int, p_person_id int, p_screen_person_id int, p_team_id int, p_club_id int)
 RETURNS text AS $$
@@ -3321,6 +3422,48 @@ BEGIN
 	END IF;
 END;
 $$;
+
+CREATE OR REPLACE PROCEDURE p_insert_team_player_interest(p_person_id int, p_team_id int,INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+        found_club_person_id                   club_persons.id%TYPE;
+        found_club_player_interest_id          club_players_interest.id%TYPE;
+        found_team_club_person_id              team_club_persons.id%TYPE;
+        found_team_club_player_interest_id     team_club_players_interest.id%TYPE;
+        found_player_id                        players.id%TYPE;
+
+BEGIN
+        x := -101;
+
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+        IF found_club_person_id > 0 THEN
+
+                select id into found_player_id from players where person_id = p_person_id;
+                IF found_player_id IS NULL THEN
+                        insert into players (person_id) values (p_person_id) returning id into found_player_id;
+                END IF;
+
+                select id into found_club_player_interest_id from club_players_interest where club_person_id = found_club_person_id;
+                IF found_club_player_interest_id IS NULL THEN
+                        insert into club_players_interest (club_person_id, player_id) values (found_club_person_id, found_player_id) returning id into found_club_player_interest_id;
+                END IF;
+
+                select id into found_team_club_person_id from team_club_persons where club_person_id = found_club_person_id AND team_id = p_team_id;
+                IF found_team_club_person_id IS NULL THEN
+                        insert into team_club_persons (club_person_id, team_id) values (found_club_person_id, p_team_id) returning id into found_team_club_person_id;
+                END IF;
+
+                select id into found_team_club_player_interest_id from team_club_players_interest where club_player_interest_id = found_club_player_interest_id AND team_id = p_team_id;
+                IF found_team_club_player_interest_id IS NULL THEN
+                        insert into team_club_players_interest (club_player_interest_id, team_id) values (found_club_player_interest_id, p_team_id);
+                END IF;
+
+        END IF;
+END;
+$$;
+
 
 CREATE OR REPLACE PROCEDURE p_insert_team_parent(p_person_id int, p_team_id int,INOUT x int)
 LANGUAGE plpgsql
