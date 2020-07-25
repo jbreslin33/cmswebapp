@@ -146,6 +146,49 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE PROCEDURE p_check_for_player_non_member_status(p_person_id int, INOUT x int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+found_club_person_id club_persons.id%TYPE;
+
+found_club_player_interest_id  club_players_interest.id%TYPE;
+found_club_player_lead_id      club_players_lead.id%TYPE;
+found_club_player_prospect_id  club_players_prospect.id%TYPE;
+found_club_player_potential_id club_players_potential.id%TYPE;
+
+BEGIN
+        x := -101;
+        
+	select id into found_club_person_id from club_persons where person_id = p_person_id;
+
+	IF found_club_person_id > 0 THEN
+
+		--player
+       		select id into found_club_player_interest_id from club_players_interest where club_person_id = found_club_person_id;
+		IF found_club_player_interest_id > 0 THEN
+			x := -102;
+		END IF;
+       		
+		select id into found_club_player_lead_id from club_players_lead where club_person_id = found_club_person_id;
+		IF found_club_player_lead_id > 0 THEN
+			x := -102;
+		END IF;
+		
+		select id into found_club_player_prospect_id from club_players_prospect where club_person_id = found_club_person_id;
+		IF found_club_player_prospect_id > 0 THEN
+			x := -102;
+		END IF;
+		
+		select id into found_club_player_potential_id from club_players_potential where club_person_id = found_club_person_id;
+		IF found_club_player_potential_id > 0 THEN
+			x := -102;
+		END IF;
+	END IF;
+END;
+$$;
+
 
 CREATE OR REPLACE PROCEDURE p_check_for_player_non_member_status_excluding(p_person_id int, INOUT x int, ex int)
 LANGUAGE plpgsql
@@ -209,9 +252,12 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
-                CALL p_insert_club_player(p_screen_person_id, x);
+		CALL p_check_for_player_non_member_status(p_screen_person_id,x);
 
                 IF x = -101 THEN
+
+                	CALL p_insert_club_player(p_screen_person_id, x);
+
                         result_set = CONCAT
                         (
                                 j_select_persons(p_family_id),
@@ -231,12 +277,11 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a non-member. You must remove them from the non-member list before adding them aa a club player.'),
+                                j_select_messages('This person is a player non-member. You must remove them from the player non-member list(interest, leads, prospects or potential) before adding them aa a club player.'),
                                 ',',
                                 j_select_codes(x)
                         );
                 END IF;
-
         END IF;
 
 RETURN result_set;
@@ -1648,33 +1693,26 @@ DECLARE
 	found_club_player_id club_players.id%TYPE;
 	found_club_person_id club_persons.id%TYPE;
 BEGIN
-	x := -101;
 
-	CALL p_check_for_non_member_status(p_person_id, x); --check for non member status
+        select id into found_player_id from players where person_id = p_person_id;
 
-	IF x = -102 THEN --we have non member so do not do insert into club_players
+        IF found_player_id IS NULL THEN --if no player than insert one
+        	insert into players (person_id) values (p_person_id) returning id into found_player_id;
+        END IF;
 
-	ELSE --we are free to insert into club_players
-        	select id into found_player_id from players where person_id = p_person_id;
+        select id into found_club_person_id from club_persons where person_id = p_person_id;
 
-        	IF found_player_id IS NULL THEN --if no player than insert one
-              		insert into players (person_id) values (p_person_id) returning id into found_player_id;
-        	END IF;
+       	IF found_club_person_id > 0 THEN --if we have a club person than we can insert into club_players
 
-        	select id into found_club_person_id from club_persons where person_id = p_person_id;
+      		select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
 
-        	IF found_club_person_id > 0 THEN --if we have a club person than we can insert into club_players
-
-               		select id into found_club_player_id from club_players where club_person_id = found_club_person_id;
-
-      			IF found_club_player_id IS NULL THEN
-      				insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id);
-              		END IF;
-       		END IF;
-	
-	END IF;
+		IF found_club_player_id IS NULL THEN
+      			insert into club_players(club_person_id,player_id) values (found_club_person_id, found_player_id) returning id into x;
+              	END IF;
+       	END IF;
 END;
 $$;
+
 
 CREATE OR REPLACE PROCEDURE p_insert_club_players_interest(p_person_id int, INOUT x int)
 LANGUAGE plpgsql
@@ -2883,9 +2921,16 @@ BEGIN
 
         IF p_screen_person_id is NULL THEN
         ELSE
+
+		CALL p_check_for_non_member_status(p_screen_person_id, x);
+
+		IF x > 0 THEN
+
+
+
                 CALL p_insert_team_player(p_screen_person_id, p_team_id, x);
 
-                IF x = -101 THEN
+                IF x > 0 THEN
 
                         result_set = CONCAT
                         (
@@ -2911,6 +2956,10 @@ BEGIN
                                 j_select_codes(x)
                         );
                 END IF;
+		
+		ELSE
+		
+		END IF;
 
         END IF;
 
@@ -3416,7 +3465,7 @@ BEGIN
 
 		select id into found_team_club_player_id from team_club_players where club_player_id = found_club_player_id AND team_id = p_team_id;
 		IF found_team_club_player_id IS NULL THEN
-			insert into team_club_players (club_player_id, team_id) values (found_club_player_id, p_team_id);
+			insert into team_club_players (club_player_id, team_id) values (found_club_player_id, p_team_id) returning id into x;
 		END IF;
 
 	END IF;
