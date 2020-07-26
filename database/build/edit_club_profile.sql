@@ -2917,7 +2917,6 @@ DECLARE
         json_result text;
 BEGIN
 
-
         IF p_screen_person_id > 0 THEN
 
 		CALL p_check_for_player_non_member_status(p_screen_person_id, x);
@@ -2939,18 +2938,18 @@ BEGIN
                                 j_select_team_club_players(p_screen_person_id, p_club_id)
                         );
 			RAISE LOG 'p_insert_team_player result_set: %', result_set;
-		ELSE 
-			IF x = -102 THEN
+		END IF;
+
+		IF x = -102 THEN
 	
-                     		result_set = CONCAT
-                        	(
-                                	j_select_persons(p_family_id),
-                                	',',
-                                	j_select_messages('This person is entered as a non-member. You must remove them from all non-member roles before adding them as a team player.'),
-                                	',',
-                                	j_select_codes(x)
-                        	);
-			END IF;
+              		result_set = CONCAT
+                      	(
+                               	j_select_persons(p_family_id),
+                               	',',
+                               	j_select_messages('This person is entered as a non-member. You must remove them from all non-member roles before adding them as a team player.'),
+                               	',',
+                               	j_select_codes(x)
+                       	);
                 END IF;
 
         END IF;
