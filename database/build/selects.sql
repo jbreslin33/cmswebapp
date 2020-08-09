@@ -875,6 +875,43 @@ RETURN result_set;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION j_select_team_club_players_interest(p_person_id int, p_club_id int)
+RETURNS text AS $$
+DECLARE
+raw_json text;
+result_set text;
+BEGIN
+
+SELECT json_agg(t) INTO raw_json
+        from
+        (
+                select
+                        team_club_players_interest.team_id as team_id,
+                        team_club_players_interest.id as team_club_player_id
+
+                        from
+                                team_club_players_interest
+                join
+                        club_players_interest on club_players_interest.id = team_club_players_interest.club_players_interest_id
+
+                join
+                        club_persons on club_persons.id = club_players_interest.club_person_id
+
+                where
+                        club_persons.person_id = p_person_id AND club_persons.club_id = p_club_id
+        ) t;
+
+        IF raw_json is NULL THEN
+                result_set = CONCAT('"team_club_players": []', raw_json);
+        ELSE
+                result_set = CONCAT('"team_club_players": ', raw_json);
+        END IF;
+RETURN result_set;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 CREATE OR REPLACE FUNCTION j_select_team_club_parents(p_person_id int, p_club_id int)
 RETURNS text AS $$
 DECLARE
