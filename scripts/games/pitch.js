@@ -67,7 +67,7 @@ class Pitch
 
         initializeWebSocket()
         {
-                this.mWebSocket = new WebSocket('ws://127.0.0.1:8080/');
+                this.mWebSocket = new WebSocket('ws://45.79.171.179:8080/');
 
                 this.mWebSocket.onopen = function ()
                 {

@@ -1,2 +1,2 @@
-tail -f /var/log/postgresql/postgresql-11-main.log
+tail -f /var/log/postgresql/postgresql-12-main.log
 
