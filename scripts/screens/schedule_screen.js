@@ -120,6 +120,7 @@ class ScheduleScreen extends Screen
 
 		this.mEventsArray.length = 0;
 
+
 		//make new array containing games and practices together
 		if (this.mJson)
 		{

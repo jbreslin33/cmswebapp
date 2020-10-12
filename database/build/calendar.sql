@@ -23,9 +23,9 @@ BEGIN
                 ',',
 		j_select_practices_players(family_id),
                 ',',
-		j_select_games_player_availability(email_id),
+		j_select_games_player_availability(family_id),
                 ',',
-		j_select_practices_player_availability(email_id),
+		j_select_practices_player_availability(family_id),
                 ',',
 		j_select_all_teams_managed(person_id)
        	);
