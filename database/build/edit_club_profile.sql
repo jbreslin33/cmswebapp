@@ -1289,6 +1289,8 @@ BEGIN
                                 ',',
                                 j_select_codes(x)
                         );
+			RAISE LOG 'f_delete_club_parent result_set: %', result_set;
+			RAISE LOG 'p_family_id: %', p_family_id;
                 END IF;
 
         END IF;
@@ -2963,7 +2965,7 @@ BEGIN
                                 ',',
                                 j_select_team_club_players(p_screen_person_id, p_club_id)
                         );
-			RAISE LOG 'p_insert_team_player result_set: %', result_set;
+			--RAISE LOG 'p_insert_team_player result_set: %', result_set;
 		END IF;
 
 		IF x = -102 THEN
@@ -3041,7 +3043,7 @@ BEGIN
                                 ',',
                                 j_select_team_club_players(p_screen_person_id, p_club_id)
                         );
-                        RAISE LOG 'p_insert_team_player result_set: %', result_set;
+                       	--RAISE LOG 'p_insert_team_player result_set: %', result_set;
                 END IF;
 
         END IF;
@@ -3146,7 +3148,7 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
+                                j_select_messages('This do person is a parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
                                 ',',
                                 j_select_codes(x)
                         );
@@ -3383,11 +3385,13 @@ BEGIN
                         (
                                 j_select_persons(p_family_id),
                                 ',',
-                                j_select_messages('This person is parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
+                                j_select_messages('This yo person is parent asscociated with a team or teams at the club. You must remove them from the team or teams before removing them as a club wide parent.'),
                                 ',',
                                 j_select_codes(x)
                         );
+
                 END IF;
+
 
         END IF;
 
