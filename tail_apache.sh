@@ -1,1 +1,1 @@
-tail -f /var/log/apache2/error.log
+sudo tail -f /var/log/apache2/error.log
