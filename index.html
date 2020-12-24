@@ -883,8 +883,7 @@
 
 		</div>	
 		<!-- END CLUB PROFILE HTML -->	
-		
-		
+
 		<!-------------------------------PERSONS ------------------------------------------------>
 
                 <!-- INSERT PERSON HTML  -->
@@ -902,6 +901,13 @@
                                                         
                                                 <form id="insert_person_screen_form_id" action="#">
 
+                                                        <div id="insert_person_screen_spinner_id">
+                                                                <span class="sr-only">Loading...</span>
+                                                        </div>
+					                
+							<h4><b>Choose Family</b></h4>
+                                                        <select id="insert_person_screen_family_select_id" class="select"> </select>
+
                                                         <input type="text" id="insert_person_screen_first_name_id" placeholder="First Name">
                                                         <input type="text" id="insert_person_screen_middle_name_id" placeholder="Middle Name">
                                                         <input type="text" id="insert_person_screen_last_name_id" placeholder="Last Name">
@@ -909,10 +915,11 @@
                                                         <input type="text" id="insert_person_screen_address_id" placeholder="Address">
 
                                                         <button id="insertpersonscreenbuttonid">Submit</button>
+                                                	
+							<span id='insert_person_screen_message_id'></span>
 
                                                 </form>
 
-                                                <span id='insert_person_screen_message_id'></span>
                                         </div>
                                 </div>
                         </div>
@@ -920,7 +927,7 @@
                         <div class="col-3"> </div>
                 </div>
 
-                <!-- END INSERT PERSON HTML  --
+		<!-- END INSERT PERSON HTML -->
 
 		
 		<!------------------------------- ADMINISTRATION ------------------------------------------------>
