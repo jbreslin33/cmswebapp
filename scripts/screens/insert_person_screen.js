@@ -13,8 +13,6 @@ class InsertPersonScreen extends Screen
                 this.setMessageElement(document.getElementById("insert_person_screen_message_id"));
                 this.setForm(document.getElementById("insert_person_screen_form_id"));
                 this.setSpinner(document.getElementById("insert_person_screen_spinner_id"));
-                this.setFamilySelect(document.getElementById("insert_person_screen_family_select_id"));
-
 
 		this.getForm().addEventListener('submit', function(e)
                 {
@@ -28,64 +26,12 @@ class InsertPersonScreen extends Screen
 
         get()
         {
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_families.php?jwt=" + APPLICATION.getJWT());
-                APPLICATION.getCurrentScreen().ajax();
-        }
-
-        getPersons()
-        {
                 APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?" + this.getStandardParameters());
                 APPLICATION.getCurrentScreen().ajax();
         }
 
-        processFamilies()
-        {
-
-                if (this.mJson.families)
-                {
-                        //load up persons option
-                        var select = this.getFamilySelect();
-                        select.length = 0;
-                        for (var i = 0; i < this.mJson.families.length; i++)
-                        {
-                                var opt = document.createElement('option');
-                                opt.value = this.mJson.families[i].id;
-                                var name = this.mJson.families[i].name + ' Family';
-                                opt.innerHTML = name;
-                                select.appendChild(opt);
-                        }
-                        this.mFamiliesExist = select.length;
-
-                        this.mApplication.getFamilySelect().value = this.getFamilySelect().value;
-
-                        this.getPersons();
-                }
-        }
-/*
-        hit()
-        {
-                var name  = document.getElementById("insert_pitch_screen_name_id").value;
-                document.getElementById("insert_pitch_screen_name_id").value = null;
-
-                if (this.getClubId() > 0 && name.length > 0)
-                {
-                        APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_pitch.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&name=' + name);
-                        APPLICATION.getCurrentScreen().ajax();
-                }
-                else
-                {
-                        this.setMessage("You must select a club and provid a name first","red");
-                }
-
-                //rm all items we got a new json of pitches coming
-                this.removeDivs();
-        }
-	*/
-
-
 	hit()
 	{
-		console.log('hit it');
                 var firstName  = document.getElementById("insert_person_screen_first_name_id").value;
                 var middleName  = document.getElementById("insert_person_screen_middle_name_id").value;
                 var lastName  = document.getElementById("insert_person_screen_last_name_id").value;
