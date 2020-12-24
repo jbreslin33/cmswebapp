@@ -1,6 +1,5 @@
 
 --BEGIN DELETE PERSON
---$result = pg_execute($this->mDatabase->mConnection, "f_delete_person", array( $this->getSenderEmailId(), $this->mPersonId, $delete_person_id));
 CREATE OR REPLACE FUNCTION f_delete_person(int, int, int)
 RETURNS text AS $$
 DECLARE
