@@ -73,7 +73,7 @@ $$ LANGUAGE plpgsql;
 
 
 --BEGIN SELECT PERSON
-CREATE OR REPLACE FUNCTION f_select_person(family_id int)
+CREATE OR REPLACE FUNCTION f_select_persons(family_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
