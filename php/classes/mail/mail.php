@@ -1,6 +1,8 @@
 <?php 
-require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+//require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+//require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 //Load Composer's autoloader
 require '../../../vendor/autoload.php';
