@@ -1,7 +1,7 @@
 
 
 --BEGIN SELECT EVENTS
-CREATE OR REPLACE FUNCTION f_select_events(email_id int, family_id int, person_id int, first_day_of_query date, last_day_of_query date)
+CREATE OR REPLACE FUNCTION f_select_events(family_id int, person_id int, first_day_of_query date, last_day_of_query date)
 RETURNS text AS $$
 DECLARE
         result_set text;
