@@ -80,7 +80,7 @@ DECLARE
 BEGIN
         result_set = CONCAT
         (
-                j_select_persons($2),
+                j_select_persons($1),
                 ',',
                 j_select_messages(null),
                 ',',

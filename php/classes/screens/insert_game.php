@@ -49,25 +49,13 @@ class InsertGame extends Screen
 
 		if ($event_date)
 		{
-			if ($this->getAuthorizationId() > 0)
-			{
-				//prep db
-				$sql = 'select f_insert_game($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)';
-				$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_game", $sql);
-				$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->mFamilyId, $this->mPersonId, $this->mTeamId, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $this->mPitchId, $field_name));
+			//if ($this->getAuthorizationId() > 0)
+			//prep db
+			$sql = 'select f_insert_game($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)';
+			$prepare_result = pg_prepare($this->mDatabase->mConnection, "f_insert_game", $sql);
+			$result = pg_execute($this->mDatabase->mConnection, "f_insert_game", array( $this->mFamilyId, $this->mPersonId, $this->mTeamId, $event_date, $arrival_time, $start_time, $end_time, $address, $coordinates, $this->mPitchId, $field_name));
 			
-				return pg_fetch_result($result, 0);
-			}
-			else
-			{
-                                //prep db
-                                $sql = 'select f_format_result_set($1,$2,$3)';
-                                $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_format_result_set", $sql);
-                                $result = pg_execute($this->mDatabase->mConnection, "f_format_result_set", array( $this->getSenderEmailId(), 'You are in view only mode. You must login to insert a game.', -101));
-
-                                return pg_fetch_result($result, 0);
-
-			}
+			return pg_fetch_result($result, 0);
 		}
         }
 }
