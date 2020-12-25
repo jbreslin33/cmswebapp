@@ -106,8 +106,10 @@ class Screen
                 //lets find evento to delete..
                 for (var i = 0; i < screen.mItemArray.length; i++)
                 {
+			console.log('i:' + i );
                         if (screen.mItemArray[i].mDeleteId == this.getAttribute("id"))
                         {
+				console.log('mWaitListItem:' + i );
                                 screen.mWaitListItem = screen.mItemArray[i];
                         }
                 }

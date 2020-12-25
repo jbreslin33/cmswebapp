@@ -50,13 +50,23 @@ class InsertPersonScreen extends Screen
 		//rm all items we got a new json of teams coming
                 this.removeDivs();
 	}
+/*
+        deleteHit()
+        {
+                super.deleteHit();
+                var screen = APPLICATION.getCurrentScreen();
 
+                screen.setUrl("/php/classes/screens/delete_pitch.php?" + screen.getStandardParameters() + '&pitch_id=' + this.getAttribute("id"));
+                screen.ajax();
+        }
+*/
         deleteHit()
         {
 		super.deleteHit();
                 var screen = APPLICATION.getCurrentScreen();
 
 		screen.setUrl("/php/classes/screens/delete_person.php?" + screen.getStandardParameters() + '&delete_person_id=' + this.getAttribute("id"));
+		console.log('getUrl:' + screen.getUrl());
                 screen.ajax();
         }
 
