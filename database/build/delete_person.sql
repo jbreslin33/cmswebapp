@@ -75,7 +75,7 @@ BEGIN
                                 	',',
                                 	j_select_messages(null),
                                 	',',
-                                	j_select_codes(-101)
+                                	j_select_codes(-103)
                         	);
         		ELSE
                                 result_set = CONCAT

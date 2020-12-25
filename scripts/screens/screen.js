@@ -952,6 +952,7 @@ class Screen
 
 	processDelete()
 	{
+		console.log('Screen::processDelete()');
        		//remove item
 		if (this.mWaitListItem)
 		{
