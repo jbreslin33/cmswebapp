@@ -37,7 +37,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --I can see maybe if there are no emails_persons associated we need to add one
-CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, family_id int, p_person_id int, INOUT x int)
+CREATE OR REPLACE PROCEDURE p_insert_person(first_name TEXT, middle_name TEXT, last_name TEXT, phones TEXT, address TEXT, p_family_id int, p_person_id int, INOUT x int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -71,6 +71,8 @@ BEGIN
 		END LOOP;
 
 	END IF;
+
+	insert into families_persons (family_id, person_id) values (p_family_id, x);
 END;
 
 $$;
