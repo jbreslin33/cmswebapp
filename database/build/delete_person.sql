@@ -71,8 +71,8 @@ BEGIN
         		IF x > 0 THEN
 				result_set = CONCAT
                         	(
-                                	j_select_persons($1),
-                                	',',
+                                	--j_select_persons($1),
+                                	--',',
                                 	j_select_messages(null),
                                 	',',
                                 	j_select_codes(-103)

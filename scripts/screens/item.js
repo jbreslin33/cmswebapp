@@ -22,6 +22,7 @@ class Item
 
         removeDivs()
         {
+		console.log('Item::removeDivs()');
                 for (var x = 0; x < this.mDivArray.length; x++)
                 {
                         this.mDivArray[x].remove();
