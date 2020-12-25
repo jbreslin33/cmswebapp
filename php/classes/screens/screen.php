@@ -126,6 +126,11 @@ class Screen
                 return $payload->authorization_id;
         }
 
+	function getFamilyId()
+	{
+		return $this->mFamilyId;
+	}
+
 	function getResult()
 	{
 	}
