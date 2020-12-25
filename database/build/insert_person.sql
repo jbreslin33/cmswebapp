@@ -1,7 +1,7 @@
 
 
 --BEGIN INSERT PERSON
-CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, email_id int, person_id int)
+CREATE OR REPLACE FUNCTION f_insert_person(TEXT, TEXT, TEXT, TEXT, TEXT, family_id int, person_id int)
 RETURNS text AS $$
 DECLARE
         result_set text;
@@ -13,7 +13,7 @@ BEGIN
         IF x > 0 THEN
 	        result_set = CONCAT
         	(
-                	j_select_persons(email_id),
+                	j_select_persons(family_id),
                 	',',
                 	j_select_messages(null),
                 	',',
@@ -23,7 +23,7 @@ BEGIN
         ELSE
 	        result_set = CONCAT
         	(
-                	j_select_persons(email_id),
+                	j_select_persons(family_id),
                 	',',
                 	j_select_messages('Person not added.'),
                 	',',
