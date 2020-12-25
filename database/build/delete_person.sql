@@ -11,7 +11,7 @@ DECLARE
 	found_team_club_coach_id team_club_coaches.id%TYPE;
 	found_team_club_manager_id team_club_managers.id%TYPE;
 BEGIN
-	select count(*) into total_persons from emails_persons where email_id = $1;
+	select count(*) into total_persons from families_persons where family_id = $1;
 	IF total_persons > 1 THEN
         
 		select team_club_players.id into found_team_club_player_id from team_club_players
@@ -133,6 +133,7 @@ BEGIN
 
 
 	delete from emails_persons where person_id = $1;
+	delete from families_persons where person_id = $1;
 
 	delete from club_persons where person_id = $1;
 

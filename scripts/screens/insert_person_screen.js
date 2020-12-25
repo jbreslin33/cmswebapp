@@ -69,7 +69,7 @@ class InsertPersonScreen extends Screen
                                 for (var i = 0; i < this.mJson.persons.length; i++)
                                 {
                                         var textArray = new Array();
-                                        var item = new Item(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].person_id);
+                                        var item = new Item(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
                                         this.mItemArray.push(item);
                                 }
 
