@@ -181,10 +181,14 @@ class Application
 		//family select
 		this.setFamilySelect(document.getElementById("family_select_id"));
 		this.getFamilySelect().onclick = this.familySelected.bind(this);
+		
 
 		//person select
 		this.setPersonSelect(document.getElementById("person_select_id"));
 		this.getPersonSelect().onclick = this.personSelected.bind(this);
+		
+		//game
+		document.getElementById("choosepersonnavbuttonid").onclick = this.hit.bind(document.getElementById("choosepersonnavbuttonid"));
 
 		//calender
 		document.getElementById("upcomingnavbuttonid").onclick = this.hit.bind(document.getElementById("upcomingnavbuttonid"));
@@ -239,6 +243,11 @@ class Application
 	hit()
 	{
 		APPLICATION.closeNav();	
+		
+		if (this.id == 'choosepersonnavbuttonid')
+		{
+			location.hash = '#choose_person_screen';
+		}
 
 		if (this.id == 'upcomingnavbuttonid')
 		{
@@ -609,7 +618,7 @@ class Application
 	{
                 return this.mCalendarScreenHtml; 
 	}
-
+        
         setRondoScreenHtml(h)
         {
                 this.mRondoScreenHtml = h;
