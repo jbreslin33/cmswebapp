@@ -10,9 +10,9 @@ class Profile extends Screen
 
         function getResult()
         {
-                $sql = 'select f_profile($1,$2)';
+                $sql = 'select f_profile($1)';
                 $prepare_result = pg_prepare($this->mDatabase->mConnection, "f_profile", $sql);
-                $result = pg_execute($this->mDatabase->mConnection, "f_profile", array( $this->getSenderEmailId(), $this->mPersonId));
+                $result = pg_execute($this->mDatabase->mConnection, "f_profile", array( $this->mPersonId));
 
                 return pg_fetch_result($result, 0);
         }

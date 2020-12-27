@@ -76,13 +76,11 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				//this.style.backgroundColor = "red";
 				this.mProfileType = '1'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				//this.style.backgroundColor = "green";
 				this.mProfileType = '1'; 
 				this.mActive = '2'; 
 			}
@@ -91,13 +89,11 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				//this.style.backgroundColor = "red";
 				this.mProfileType = '2'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				//this.style.backgroundColor = "green";
 				this.mProfileType = '2'; 
 				this.mActive = '2'; 
 			}
@@ -106,13 +102,11 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				//this.style.backgroundColor = "red";
 				this.mProfileType = '3'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				//this.style.backgroundColor = "green";
 				this.mProfileType = '3'; 
 				this.mActive = '2'; 
 			}
@@ -121,13 +115,11 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				//this.style.backgroundColor = "red";
 				this.mProfileType = '4'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				//this.style.backgroundColor = "green";
 				this.mProfileType = '4'; 
 				this.mActive = '2'; 
 			}
@@ -136,13 +128,11 @@ class ProfileScreen extends Screen
 		{
 			if (this.style.backgroundColor == "green")
 			{
-				//this.style.backgroundColor = "red";
 				this.mProfileType = '5'; 
 				this.mActive = '1'; 
 			}
 			else
 			{
-				//this.style.backgroundColor = "green";
 				this.mProfileType = '5'; 
 				this.mActive = '2'; 
 			}
@@ -160,10 +150,23 @@ class ProfileScreen extends Screen
 		}
 	}
 
-	updateProfile(personId,profileType,active)
+	updateProfile(personId, profileType, active)
 	{
                 var screen = APPLICATION.getCurrentScreen();
-		screen.setUrl("/php/classes/screens/update_profile.php?jwt=" + APPLICATION.getJWT() + '&profiletype=' + profileType + '&active=' + active + '&person_id=' + personId);
+		if (profileType == 1)
+		{
+			if (active == 1)
+			{
+				console.log('delete');
+				screen.setUrl("/php/classes/screens/delete_player_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+			}
+			else
+			{
+				console.log('insert');
+				screen.setUrl("/php/classes/screens/insert_player_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+			}
+		}
+
                 screen.ajax();
 	}
 
