@@ -1,5 +1,5 @@
 'use strict';
-
+      
 class ChoosePersonScreen extends Screen
 {
 	constructor(application)
@@ -43,15 +43,24 @@ class ChoosePersonScreen extends Screen
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/select_persons.php?" + this.getStandardParameters()); 
                 APPLICATION.getCurrentScreen().ajax();
 	}
+
         personSelected()
         {
-		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+		APPLICATION.setPersonId(this.getPersonSelect().value);
+               
+		if (APPLICATION.getSideScreen())
+                {
+                        APPLICATION.getSideScreen().handleButtons();
+                }
+
+                //change to current state as we switched person so we need to reload screen
+                //APPLICATION.mStateMachine.changeState(APPLICATION.mStateMachine.mCurrentState);
         }
 
 	hit()
 	{
-		//set value of person select
-		this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+		//set id on application for saving
+		this.mApplication.setPersonId(this.getPersonSelect().value);
 
 		//why are we sending to server????
 		//just send jwt authorization
@@ -105,8 +114,19 @@ class ChoosePersonScreen extends Screen
                                 select.appendChild(opt);
                         }
                         this.mFamiliesExist = select.length;
-		
-			this.mApplication.getFamilySelect().value = this.getFamilySelect().value;
+
+			if (this.mApplication.mFamilyId)
+			{
+				this.getFamilySelect().value = this.mApplication.mFamilyId;
+			}
+			else
+			{
+				if (this.mJson.families[0].id)
+				{	
+					this.getFamilySelect().value = this.mJson.families[0].id;
+					this.mApplication.mFamilyId = this.mJson.families[0].id;
+				}
+			}
 
 			this.getPersons();
                 }
@@ -120,14 +140,7 @@ class ChoosePersonScreen extends Screen
 
                         //load up persons option
 			var selectScreen      = this.getPersonSelect();
-			var selectApplication = this.mApplication.getPersonSelect();
-
-                        //lets grab old one first
-                        var v = this.mApplication.getPersonSelect().value;
-
-			selectScreen.length      = 0;
-			selectApplication.length = 0;
-			
+			selectScreen.length   = 0;
 			this.mApplication.mPersonArray.length = 0;			
 
                         for (var i = 0; i < this.mJson.persons.length; i++)
@@ -144,7 +157,6 @@ class ChoosePersonScreen extends Screen
                                	applicationOpt.innerHTML = full_name;
 
                                	selectScreen.appendChild(screenOpt);
-                               	selectApplication.appendChild(applicationOpt);
 
 				//for application
 				this.mApplication.mPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
@@ -153,17 +165,22 @@ class ChoosePersonScreen extends Screen
 			this.mPersonsExist = selectScreen.length;
 		
 			//set value on screen with old one and THEN alos set app with value on this one
+
 		
-			if (v)
+			if (this.mApplication.mPersonId)
 			{
 				//then we have old value so set this one to old and app to old
-				this.getPersonSelect().value = v;
-				this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+				this.getPersonSelect().value = this.mApplication.mPersonId;
 			}
 			else
 			{
+				if (this.mJson.persons[0].id)
+				{
+					this.mApplication.setPersonId(this.mJson.persons[0].id);
+					this.getPersonSelect().value = APPLICATION.getPersonId();
+				}
 				//no old value so just use what is local to set to app
-				this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
+				//this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 			}
 		
 			if (this.mPersonsExist == 0)

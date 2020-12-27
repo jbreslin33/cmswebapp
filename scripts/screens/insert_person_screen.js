@@ -44,11 +44,11 @@ class InsertPersonScreen extends Screen
                 document.getElementById("insert_person_screen_phone_id").value = null;
                 document.getElementById("insert_person_screen_address_id").value = null;
 
-                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_person.php?" + this.getStandardParameters() + "&first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName + "&phone=" + phone + "&address=" + address);
+                APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/insert_person.php?" + APPLICATION.getCurrentScreen().getStandardParameters() + "&first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName + "&phone=" + phone + "&address=" + address);
                 APPLICATION.getCurrentScreen().ajax();
 
 		//rm all items we got a new json of teams coming
-                this.removeDivs();
+                APPLICATION.getCurrentScreen().removeDivs();
 	}
 /*
         deleteHit()
@@ -79,7 +79,7 @@ class InsertPersonScreen extends Screen
                                 for (var i = 0; i < this.mJson.persons.length; i++)
                                 {
                                         var textArray = new Array();
-                                        var item = new Item(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
+                                        var item = new DeleteItem(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
                                         this.mItemArray.push(item);
                                 }
 
@@ -90,6 +90,5 @@ class InsertPersonScreen extends Screen
                         }
                 }
         }
-
 }
 

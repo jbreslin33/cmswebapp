@@ -95,7 +95,7 @@ class InsertPitchScreen extends Screen
                                 for (var i = 0; i < this.mJson.pitches.length; i++)
                                 {
                                         var textArray = new Array();
-                                        var item = new Item(this.mApplication, this.mJson.pitches[i], this.mJson.pitches[i].pitch_name, textArray, this.mJson.pitches[i].pitch_id);
+                                        var item = new DeleteItem(this.mApplication, this.mJson.pitches[i], this.mJson.pitches[i].pitch_name, textArray, this.mJson.pitches[i].pitch_id);
                                         this.mItemArray.push(item);
                                 }
 

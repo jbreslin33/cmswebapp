@@ -87,12 +87,12 @@ class Screen
                 this.setPersonSelect(null);
 
                 //person select
-		/*
+		
 		if (this.getPersonSelect())
 		{
                 	this.getPersonSelect().onchange = this.personSelected.bind(this);
 		}	
-		*/
+		
 
                 //clase modal
                 document.getElementById("calendar_modal_close_button_id").onclick = this.closeModal.bind(this);
@@ -106,10 +106,8 @@ class Screen
                 //lets find evento to delete..
                 for (var i = 0; i < screen.mItemArray.length; i++)
                 {
-			console.log('i:' + i );
-                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id"))
+                        if (screen.mItemArray[i].mId == this.getAttribute("id"))
                         {
-				console.log('mWaitListItem:' + i );
                                 screen.mWaitListItem = screen.mItemArray[i];
                         }
                 }
@@ -513,20 +511,6 @@ class Screen
 	
 	}
 
-	//used to get from selects
-        getPersonId()
-        {
-                var select = this.getPersonSelect();
-                if (select.value == "")
-                {
-                        return 0;
-                }
-                else
-                {
-                        return select.value;
-                }
-        }
-
 	getStandardParameters()
 	{
 		return "jwt=" + APPLICATION.getJWT() + "&family_id=" + APPLICATION.getFamilyId() + "&person_id=" + APPLICATION.getPersonId();
@@ -818,58 +802,12 @@ class Screen
 
         processFamilies()
         {
-
-                if (this.mJson.families)
-                {
-                        //lets grab old one first
-                        var v = this.mApplication.getFamilySelect().value;
-
-                        //load up families option
-                        var select = this.mApplication.getFamilySelect();
-                        select.length = 0;
-                        //this.mApplication.mFamilyArray.length = 0;
-
-                        for (var i = 0; i < this.mJson.families.length; i++)
-                        {
-                                var opt = document.createElement('option');
-                                opt.value = this.mJson.families[i].id;
-                                var name = this.mJson.families[i].name + ' Family';
-                                opt.innerHTML = name;
-                                select.appendChild(opt);
-                        }
-
-                        //lets grab old one first
-                        this.mApplication.getFamilySelect().value = v;
-                }
-        }
-
+        
+	}
 
 	processPersons()
 	{
-		if (this.mJson.persons)
-		{
-           		//lets grab old one first
-                        var v = this.mApplication.getPersonSelect().value;
-
-               		//load up persons option
-               		var select = this.mApplication.getPersonSelect();
-			select.length = 0;
-                        this.mApplication.mPersonArray.length = 0;
-
-               		for (var i = 0; i < this.mJson.persons.length; i++)
-               		{
-               			var opt = document.createElement('option');
-               			opt.value = this.mJson.persons[i].id;
-                       		var full_name = this.mJson.persons[i].first_name + ' ' + this.mJson.persons[i].middle_name + ' ' + this.mJson.persons[i].last_name;
-                        	opt.innerHTML = full_name;
-                       		select.appendChild(opt);
-                                
-				this.mApplication.mPersonArray.push(new Person(this.mJson.persons[i].id, this.mJson.persons[i].first_name, this.mJson.persons[i].middle_name, this.mJson.persons[i].last_name, this.mJson.persons[i].player_id, this.mJson.persons[i].parent_id, this.mJson.persons[i].coach_id, this.mJson.persons[i].manager_id, this.mJson.persons[i].administrator_id));
-               		}
-
-	           	//lets grab old one first
-                        this.mApplication.getPersonSelect().value = v;
-		}
+	
 	}
 
 	processPitches()
@@ -956,6 +894,7 @@ class Screen
        		//remove item
 		if (this.mWaitListItem)
 		{
+			console.log('rm');
                		this.mWaitListItem.removeDivs();
 		}
 	}

@@ -24,6 +24,7 @@ class SideScreen extends Screen
 
 	handleButtons()
 	{
+		console.log('SideScreen::handleButtons()');
 		//set all buttons to none except schedule, logout, persons, edit profile so we can bring them up if role needs them
           	document.getElementById("side_games_id").style.display = "none";
 
@@ -48,8 +49,11 @@ class SideScreen extends Screen
 		//loop throu array
 		for (var i = 0; i < this.mApplication.mPersonArray.length; i++)
 		{
+			console.log('i:' + i);
+			console.log('id:' + APPLICATION.getPersonId());
 			if (this.mApplication.mPersonArray[i].mId == APPLICATION.getPersonId())
 			{
+				console.log('id in loop:' + APPLICATION.getPersonId());
 				var player = this.mApplication.mPersonArray[i].mPlayerId;
 				var family = this.mApplication.mPersonArray[i].mFamilyId;
 				var coach = this.mApplication.mPersonArray[i].mCoachId;

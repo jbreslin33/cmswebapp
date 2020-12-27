@@ -2,7 +2,7 @@
 
 class Item
 {
-        constructor(application, json, titleText, textArray, deleteId)
+        constructor(application, json, titleText, textArray, id)
         {
                 this.mApplication = application;
 		this.mJson = json;
@@ -16,8 +16,8 @@ class Item
                 this.mTitle = null;
 		this.mTitleText = titleText;
 
-                this.mDeleteButtonArray = new Array();
-		this.mDeleteId = deleteId;
+                this.mButton = null;
+		this.mId = id;
         }
 
         removeDivs()
@@ -28,10 +28,7 @@ class Item
                         this.mDivArray[x].remove();
                 }
 
-                for (var b = 0; b < this.mDeleteButtonArray.length; b++)
-                {
-                        this.mDeleteButtonArray[b].remove();
-                }
+                this.mButton.remove();
         }
 
 	makeCard()
@@ -55,27 +52,25 @@ class Item
 	{
                 if (this.mTitleText)
                 {
-			console.log('title if GGG');
                 	this.mTitle = document.createElement('h5');
                         this.mContainerDiv.appendChild(this.mTitle);
                        	this.mTitle.innerHTML = '' + this.mTitleText;
                 }
 	}
 
-	makeDeleteButton()
+	makeButton()
 	{
-		//delete button
-		if (this.mDeleteId)
+		if (this.mId)
 		{
                 	var button = document.createElement("BUTTON");
-                	button.setAttribute("class","delete-button");
-                	button.innerHTML = 'DELETE';
+                	button.setAttribute("class","availability-button");
+                	button.innerHTML = '';
                 	this.mContainerDiv.appendChild(button);
 
-             		button.setAttribute("id", this.mDeleteId);
+             		button.setAttribute("id", this.mId);
 
-                	button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
-              		this.mDeleteButtonArray.push(button);
+                	button.onclick = this.mApplication.getCurrentScreen().hit.bind(button);
+			this.mButton = button;
 		}
 	}
 
@@ -84,6 +79,6 @@ class Item
 		this.makeCard();
 		this.makeContainer();
 		this.makeTitle();
-		this.makeDeleteButton();
+		this.makeButton();
 	}
 }

@@ -39,10 +39,10 @@ class Application
 		this.mRed = "red";
 
 		//family
-		this.mFamilySelect = null;
+		this.mFamilyId = 0;
 
-		//select person
-		this.mPersonSelect = null;
+		//mPersonSelected
+		this.mPersonId = 0;
 
 		//roles
 		this.mPersonArray = new Array();		
@@ -178,15 +178,6 @@ class Application
 		document.getElementById("sidenavopenbuttonid").onclick = this.openNav.bind(this);
 		document.getElementById("sidenavclosebuttonid").onclick = this.closeNav.bind(this);
 
-		//family select
-		this.setFamilySelect(document.getElementById("family_select_id"));
-		this.getFamilySelect().onclick = this.familySelected.bind(this);
-		
-
-		//person select
-		this.setPersonSelect(document.getElementById("person_select_id"));
-		this.getPersonSelect().onclick = this.personSelected.bind(this);
-		
 		//game
 		document.getElementById("choosepersonnavbuttonid").onclick = this.hit.bind(document.getElementById("choosepersonnavbuttonid"));
 
@@ -330,64 +321,25 @@ class Application
                 }
         }
 
-        familySelected()
-        {
-                //this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
-
-                if (this.getSideScreen())
-                {
-                        this.getSideScreen().handleButtons();
-                }
-
-                //change to current state as we switched person so we need to reload screen
-                this.mStateMachine.changeState(this.mStateMachine.mCurrentState);
-
-		//call personSelected????
-        }
-
-
-        personSelected()
-        {
-		//this.setAsideMessage('Welcome ' + this.getPersonSelect().options[this.getPersonSelect().selectedIndex].text, 'white');
-                
-		if (this.getSideScreen())
-                {
-                        this.getSideScreen().handleButtons();
-                }
-
-                //change to current state as we switched person so we need to reload screen
-                this.mStateMachine.changeState(this.mStateMachine.mCurrentState);
-        }
-
         //used to get from selects
         getFamilyId()
         {
-                var select = this.getFamilySelect();
-                if (select.value == "")
-                {
-                        return 0;
-                }
-                else
-                {
-                        return select.value;
-                }
+		return this.mFamilyId;
         }
-
+	setFamilyId(id)
+	{
+		this.mFamilyId = id;
+	}
 
         //used to get from selects
         getPersonId()
         {
-                var select = this.getPersonSelect();
-                if (select.value == "")
-                {
-                        return 0;
-                }
-                else
-                {
-                        return select.value;
-                }
+		return this.mPersonId;
         }
-
+	setPersonId(id)
+	{
+		this.mPersonId = id;
+	}
 
 	setLoggedOutHeaderHtml(e)
 	{
@@ -745,26 +697,6 @@ class Application
 	{
                 return this.mUpdateForgotPasswordScreenHtml;
 	}
-       
-	//family
-	setFamilySelect(select)
-        {
-                this.mFamilySelect = select;
-        }
-        getFamilySelect()
-        {
-                return this.mFamilySelect;
-        }
-
-	//person
-        setPersonSelect(select)
-        {
-                this.mPersonSelect = select;
-        }
-        getPersonSelect()
-        {
-                return this.mPersonSelect;
-        }
        
 	//profile screen
 	setProfileScreenHtml(h)
