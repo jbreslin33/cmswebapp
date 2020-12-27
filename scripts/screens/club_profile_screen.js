@@ -197,10 +197,11 @@ class ClubProfileScreen extends Screen
         
 	getClubPersonProfile()
         {
-		var person_selected_id =  APPLICATION.getCurrentScreen().getPersonId(); 
+		var screen = APPLICATION.getCurrentScreen();
+		var person_selected_id =  screen.getPersonSelect().value; 
 
-		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&screen_person_id=' + person_selected_id);
-                APPLICATION.getCurrentScreen().ajax();
+		screen.setUrl("/php/classes/screens/club_person_profile.php?" + this.getStandardParameters() + '&club_id=' + this.getClubId() + '&screen_person_id=' + person_selected_id);
+                screen.ajax();
         }
 
 	hitClubPlayerButton()
@@ -495,7 +496,7 @@ class ClubProfileScreen extends Screen
                                	}
 				else
 				{
-                               		var id = 'club_player_button_' + this.getPersonId();
+                               		var id = 'club_player_button_' + this.getPersonSelect().value;
                                		this.mClubPlayerButton.setAttribute("id", id);
                               		this.mClubPlayerButton.style.backgroundColor = "red";
 				}
@@ -533,7 +534,7 @@ class ClubProfileScreen extends Screen
 				}
                                 else
                                 {
-                                        var id = 'club_coach_button_0' + this.getPersonId();
+                                        var id = 'club_coach_button_0' + this.getPersonSelect().value;
                                         this.mClubCoachButton.setAttribute("id", id);
                                         this.mClubCoachButton.style.backgroundColor = "red";
                                 }
@@ -552,7 +553,7 @@ class ClubProfileScreen extends Screen
 				}
                                 else
                                	{ 
-                                	var id = 'club_manager_button_0' + this.getPersonId();
+                                	var id = 'club_manager_button_0' + this.getPersonSelect().value;
                                         this.mClubManagerButton.setAttribute("id", id);
                                         this.mClubManagerButton.style.backgroundColor = "red";
                                 }

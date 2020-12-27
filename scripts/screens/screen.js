@@ -516,6 +516,11 @@ class Screen
 		return "jwt=" + APPLICATION.getJWT() + "&family_id=" + APPLICATION.getFamilyId() + "&person_id=" + APPLICATION.getPersonId();
 	}
 
+	getPersonId()
+	{
+		return this.getPersonSelect().value;
+	}
+
 	getClubId()
 	{
                 var select = this.getClubSelect();
