@@ -56,7 +56,7 @@ class ScheduleScreen extends Screen
 		//lets find evento to delete..
                 for (var i = 0; i < screen.mItemArray.length; i++)
                 {
-                        if (screen.mItemArray[i].mDeleteId == this.getAttribute("id") && screen.mItemArray[i].mJson.type == this.getAttribute("type"))
+                        if (screen.mItemArray[i].mId == this.getAttribute("id") && screen.mItemArray[i].mJson.type == this.getAttribute("type"))
                         {
                                 screen.mWaitListItem = screen.mItemArray[i];
                         }

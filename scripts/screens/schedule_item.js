@@ -1,10 +1,10 @@
 'use strict';
 
-class ScheduleItem extends Item 
+class ScheduleItem extends DeleteItem 
 {
-        constructor(application, json, titleText, textArray, deleteId)
+        constructor(application, json, titleText, textArray, id)
         {
-        	super(application, json, titleText, textArray, deleteId);
+        	super(application, json, titleText, textArray, id);
 
 		//for smash
                 this.mGameRosterArray = new Array();
@@ -425,7 +425,6 @@ class ScheduleItem extends Item
                                 }
                         }
 
-			//do we need delete button?
 			if (team_managed_id)
 			{
 			       	var button = document.createElement("BUTTON");
@@ -440,7 +439,8 @@ class ScheduleItem extends Item
 				button.setAttribute("type", type);
 
                                 button.onclick = this.mApplication.getCurrentScreen().deleteHit.bind(button);
-                                this.mDeleteButtonArray.push(button);
+				//this.mButton
+                                //this.mApplication.getCurrentScreen().mButton.push(button);
 			}
 		}// end if (json event)
 	}//end print to screen

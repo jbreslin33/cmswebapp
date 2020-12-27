@@ -28,7 +28,10 @@ class Item
                         this.mDivArray[x].remove();
                 }
 
-                this.mButton.remove();
+		if (this.mButton)
+		{
+                	this.mButton.remove();
+		}
         }
 
 	makeCard()
