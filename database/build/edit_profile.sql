@@ -213,10 +213,10 @@ BEGIN
                         ',',
                         j_select_profiles($1)
                 );
+
         END IF;
+
 RETURN result_set;
-
-
 END;
 $$ LANGUAGE plpgsql;
 
@@ -251,7 +251,6 @@ BEGIN
                                 j_select_profiles($1)
                         );
 
-                        x := -100;
         END IF;
 
 RETURN result_set;
