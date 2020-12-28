@@ -157,15 +157,50 @@ class ProfileScreen extends Screen
 		{
 			if (active == 1)
 			{
-				console.log('delete');
 				screen.setUrl("/php/classes/screens/delete_player_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
 			}
 			else
 			{
-				console.log('insert');
 				screen.setUrl("/php/classes/screens/insert_player_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
 			}
 		}
+
+                if (profileType == 2)
+                {
+                        if (active == 1)
+                        {
+                                screen.setUrl("/php/classes/screens/delete_parent_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+                        }
+                        else
+                        {
+                                screen.setUrl("/php/classes/screens/insert_parent_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+                        }
+                }
+
+		if (profileType == 3)
+                {
+                        if (active == 1)
+                        {
+                                screen.setUrl("/php/classes/screens/delete_coach_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+                        }
+                        else
+                        {
+                                screen.setUrl("/php/classes/screens/insert_coach_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+                        }
+                }
+
+		if (profileType == 4)
+                {
+                        if (active == 1)
+                        {
+                                screen.setUrl("/php/classes/screens/delete_manager_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+                        }
+                        else
+                        {
+                                screen.setUrl("/php/classes/screens/insert_manager_profile.php?jwt=" + APPLICATION.getJWT() + '&person_id=' + personId);
+                        }
+                }
+
 
                 screen.ajax();
 	}
