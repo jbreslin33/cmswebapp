@@ -23,8 +23,6 @@ BEGIN
 			d = 0;
 		        result_set = CONCAT
         		(
-                		j_select_persons($1),
-                		',',
                 		j_select_messages('You do not have permission to delete Person. They are a player on a team. Ask the team manager to remove them from team.'),
                 		',',
                 		j_select_codes(-101)
@@ -40,8 +38,6 @@ BEGIN
                         d = 0;
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
-                                ',',
                                 j_select_messages('You do not have permission to delete Person. They are a coach on a team. Ask the team manager to remove them from team.'),
                                 ',',
                                 j_select_codes(-101)
@@ -57,8 +53,6 @@ BEGIN
                         d = 0;
                         result_set = CONCAT
                         (
-                                j_select_persons($1),
-                                ',',
                                 j_select_messages('You do not have permission to delete Person. They are a manager on a team. Ask the team manager to remove them from team.'),
                                 ',',
                                 j_select_codes(-101)
@@ -71,8 +65,6 @@ BEGIN
         		IF x > 0 THEN
 				result_set = CONCAT
                         	(
-                                	--j_select_persons($1),
-                                	--',',
                                 	j_select_messages(null),
                                 	',',
                                 	j_select_codes(-103)
@@ -80,8 +72,6 @@ BEGIN
         		ELSE
                                 result_set = CONCAT
                                 (
-                                        j_select_persons($1),
-                                        ',',
                                         j_select_messages('Something went wrong.'),
                                         ',',
                                         j_select_codes(-101)
@@ -93,8 +83,6 @@ BEGIN
 	ELSE
                 result_set = CONCAT
                 (
-                	j_select_persons($1),
-                       	',',
                         j_select_messages('Total persons less than 2 so we cannot delete.'),
                         ',',
                         j_select_codes(-101)

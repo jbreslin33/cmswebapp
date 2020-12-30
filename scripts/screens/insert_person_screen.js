@@ -57,6 +57,7 @@ class InsertPersonScreen extends Screen
 
                 var screen = APPLICATION.getCurrentScreen();
 		screen.setUrl("/php/classes/screens/delete_person.php?" + screen.getStandardParameters() + '&delete_person_id=' + this.getAttribute("id"));
+		console.log('getUrl:' + screen.getUrl());
                 screen.ajax();
         }
 
