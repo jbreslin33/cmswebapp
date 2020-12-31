@@ -9,6 +9,7 @@ class ChoosePersonScreen extends Screen
                 location.hash = 'choose_person_screen';
 
                 this.setHtml(document.getElementById("choose_person_screen_html_id"));
+                this.setColSixHtml(document.getElementById("choose_person_screen_col_6_html_id"));
                 this.setMessageElement(document.getElementById("choose_person_screen_message_id"));
                 this.setForm(document.getElementById("choose_person_screen_form_id"));
                 this.setSpinner(document.getElementById("choose_person_screen_spinner_id"));
@@ -133,6 +134,7 @@ class ChoosePersonScreen extends Screen
         }
 
 //you need to set person after processing persons to set whoever was chosen on choose screeen
+	/*
 	processPersons()
         {
                 if (this.mJson.persons)
@@ -189,4 +191,26 @@ class ChoosePersonScreen extends Screen
 			}
 		}
 	}
+*/
+        processPersons()
+        {
+                if (this.mJson)
+                {
+                        if (this.mJson.persons)
+                        {
+                                for (var i = 0; i < this.mJson.persons.length; i++)
+                                {
+                                        var textArray = new Array();
+                                        var item = new DeleteItem(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
+                                        this.mItemArray.push(item);
+                                }
+
+                                for (var i = 0; i < this.mItemArray.length; i++)
+                                {
+                                        this.mItemArray[i].printToScreen();
+                                }
+                        }
+                }
+        }
+
 }
