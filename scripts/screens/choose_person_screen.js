@@ -134,7 +134,6 @@ class ChoosePersonScreen extends Screen
         }
 
 //you need to set person after processing persons to set whoever was chosen on choose screeen
-	/*
 	processPersons()
         {
                 if (this.mJson.persons)
@@ -191,7 +190,7 @@ class ChoosePersonScreen extends Screen
 			}
 		}
 	}
-*/
+	/*
         processPersons()
         {
                 if (this.mJson)
@@ -212,5 +211,6 @@ class ChoosePersonScreen extends Screen
                         }
                 }
         }
+	*/
 
 }
