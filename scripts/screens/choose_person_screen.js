@@ -63,19 +63,25 @@ class ChoosePersonScreen extends Screen
 		//set id on application for saving
 		this.mApplication.setPersonId(this.getPersonSelect().value);
 
-		//why are we sending to server????
-		//just send jwt authorization
 		APPLICATION.getCurrentScreen().setUrl("/php/classes/screens/choose_person.php?" +  this.getStandardParameters());
                 APPLICATION.getCurrentScreen().ajax();
 
 		this.mApplication.mUserSelectedPerson = true;
-
-
-		//this.mApplication.setAsideMessage('Welcome ' + this.mApplication.getPersonSelect().options[this.mApplication.getPersonSelect().selectedIndex].text, 'white');
-
-		//need to call db here as well.....
-
 	}
+
+	hitChoosePerson()
+	{
+		var screen = APPLICATION.getCurrentScreen();
+
+		//set id on application for saving
+		APPLICATION.setPersonId(this.getAttribute('id'));
+
+		screen.setUrl("/php/classes/screens/choose_person.php?" +  screen.getStandardParameters());
+                screen.ajax();
+
+		APPLICATION.mUserSelectedPerson = true;
+	}
+
 	enter()
 	{
    		this.mApplication.showLoggedInHeaderHtml(false);
@@ -185,7 +191,7 @@ class ChoosePersonScreen extends Screen
 			for (var i = 0; i < this.mJson.persons.length; i++)
                         {
                         	var textArray = new Array();
-                                var item = new DeleteItem(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
+                                var item = new ChoosePersonItem(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
                                 this.mItemArray.push(item);
                        	}
 
