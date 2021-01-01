@@ -180,14 +180,19 @@ class ChoosePersonScreen extends Screen
 					this.mApplication.setPersonId(this.mJson.persons[0].id);
 					this.getPersonSelect().value = APPLICATION.getPersonId();
 				}
-				//no old value so just use what is local to set to app
-				//this.mApplication.getPersonSelect().value = this.getPersonSelect().value;
 			}
-		
-			if (this.mPersonsExist == 0)
-			{
-                		//APPLICATION.mStateMachine.changeState(APPLICATION.mINSERT_PERSON_APPLICATION);
-			}
+			
+			for (var i = 0; i < this.mJson.persons.length; i++)
+                        {
+                        	var textArray = new Array();
+                                var item = new DeleteItem(this.mApplication, this.mJson.persons[i], this.mJson.persons[i].first_name, textArray, this.mJson.persons[i].id);
+                                this.mItemArray.push(item);
+                       	}
+
+                        for (var i = 0; i < this.mItemArray.length; i++)
+                        {
+                                this.mItemArray[i].printToScreen();
+                        }
 		}
 	}
 	/*
